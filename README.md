@@ -1,5 +1,3 @@
-############# README ##################
-
 The platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
 ##### INSTALL
