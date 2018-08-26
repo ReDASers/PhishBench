@@ -1,0 +1,16 @@
+acsac_env/
+Dataset_legit_urls/
+Dataset_phish_urls/
+Dataset_all/
+Imbalanced_Dataset.zip
+__pycache__/
+summary.txt
+X_test.pkl
+X_train.pkl
+y_test.pkl
+y_train.pkl
+url_feature_vector_1.txt
+time_stats.txt
+output.txt
+log.txt
+Error_log.txt
