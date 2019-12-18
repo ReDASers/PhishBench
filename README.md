@@ -12,7 +12,7 @@ the List of the commands will be found at end of the file.
 all the modules can be run using the python command like so: "python main.py" or "python update.py"
 
 ## First run update.py
-This will create or update the User_options.py that contains the list of all the features, classifiers, evaluation metrics, and imbalanced dataset options.
+This will create or update the Config_file.ini that contains the list of all the features, classifiers, evaluation metrics, and imbalanced dataset options.
 The values take either "True" or "False" like so:
 ```
 "Confusion_matrix = True" 
