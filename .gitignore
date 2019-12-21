@@ -112,3 +112,5 @@ venv.bak/
 output.txt
 
 summary.txt
+
+.idea/
