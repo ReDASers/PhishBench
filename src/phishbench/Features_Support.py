@@ -829,11 +829,20 @@ def single_url_feature(url, list_features,list_time):
         Features.URL_digit_letter_ratio(url, list_features, list_time)
         Globals.logger.debug("digit_letter_ratio")
 
+        Features.URL_consecutive_numbers(url, list_features, list_time)
+        Globals.logger.debug("consecutive_numbers")
+
         Features.URL_special_char_count(url, list_features, list_time)
         Globals.logger.debug("special_char_count")
 
+        Features.URL_special_pattern(url, list_features, list_time)
+        Globals.logger.debug("special_pattern")
+
         Features.URL_Top_level_domain(url, list_features, list_time)
         Globals.logger.debug("Top_level_domain")
+
+        Features.URL_is_common_TLD(url, list_features, list_time)
+        Globals.logger.debug("is_common_TLD")
 
         Features.URL_number_of_dashes(url, list_features, list_time)
         Globals.logger.debug('URL_number_of_dashes')
@@ -885,6 +894,8 @@ def single_url_feature(url, list_features,list_time):
 
 def single_html_features(soup, html, url, list_features, list_time):
     if Globals.config["HTML_Features"]["html_features"] == "True":
+        Features.HTML_LTree_Features(soup, url, list_features, list_time)
+        Globals.logger.debug("HTML_LTree_Features ")
         Features.HTML_number_of_tags(soup, list_features, list_time)
         Globals.logger.debug("number_of_tags")
 
