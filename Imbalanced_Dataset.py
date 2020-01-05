@@ -29,18 +29,15 @@ from imblearn.over_sampling import SMOTE
 import imblearn
 from sklearn.datasets import load_svmlight_file
 
+from utils import Globals
+
 #import User_options
 import sklearn
 import Evaluation_Metrics
 
-import configparser
-import logging
 #from collections import deque
 
-logger = logging.getLogger('root')
 
-config=configparser.ConfigParser()
-config.read('Config_file.ini')
 ############### imbalanced learning
 #### Condensed Nearest Neighbour
 def CondensedNearestNeighbour(X,y):
@@ -166,68 +163,68 @@ def SMOTEENN(X,y):
 #### 
 def load_imbalanced_dataset(file):
 	X,y = load_svmlight_file(file)
-	if config['Imbalanced Datasets']['CondensedNearestNeighbour'] == "True":
+	if Globals.config['Imbalanced Datasets']['CondensedNearestNeighbour'] == "True":
 		X_res, y_res = CondensedNearestNeighbour(X,y)
-	elif config['Imbalanced Datasets']['EditedNearestNeighbours'] == "True":
+	elif Globals.config['Imbalanced Datasets']['EditedNearestNeighbours'] == "True":
 		X_res, y_res = EditedNearestNeighbours(X,y)
-	elif config['Imbalanced Datasets']['RepeatedEditedNearestNeighbour'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RepeatedEditedNearestNeighbour'] == "True":
 		X_res, y_res = RepeatedEditedNearestNeighbour(X,y)
-	elif config['Imbalanced Datasets']['AllKNN'] == "True":
+	elif Globals.config['Imbalanced Datasets']['AllKNN'] == "True":
 		X_res, y_res = AllKNN(X,y)
-	elif config['Imbalanced Datasets']['InstanceHardnessThreshold'] == "True":
+	elif Globals.config['Imbalanced Datasets']['InstanceHardnessThreshold'] == "True":
 		X_res, y_res = InstanceHardnessThreshold(X,y)
-	elif config['Imbalanced Datasets']['NearMiss'] == "True":
+	elif Globals.config['Imbalanced Datasets']['NearMiss'] == "True":
 		X_res, y_res = NearMiss(X,y)
-	elif config['Imbalanced Datasets']['NeighbourhoodCleaningRule'] == "True":
+	elif Globals.config['Imbalanced Datasets']['NeighbourhoodCleaningRule'] == "True":
 		X_res, y_res = NeighbourhoodCleaningRule(X,y)
-	elif config['Imbalanced Datasets']['OneSidedSelection'] == "True":
+	elif Globals.config['Imbalanced Datasets']['OneSidedSelection'] == "True":
 		X_res, y_res = OneSidedSelection(X,y)
-	elif config['Imbalanced Datasets']['RandomUnderSampler'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RandomUnderSampler'] == "True":
 		X_res, y_res = RandomUnderSampler(X,y)
-	elif config['Imbalanced Datasets']['TomekLinks'] == "True":
+	elif Globals.config['Imbalanced Datasets']['TomekLinks'] == "True":
 		X_res, y_res = TomekLinks(X,y)
-	elif config['Imbalanced Datasets']['ADASYN'] == "True":
+	elif Globals.config['Imbalanced Datasets']['ADASYN'] == "True":
 		X_res, y_res = ADASYN(X,y)
-	elif config['Imbalanced Datasets']['RandomOverSampler'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RandomOverSampler'] == "True":
 		X_res, y_res = RandomOverSampler(X,y)
-	elif config['Imbalanced Datasets']['SMOTE'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTE'] == "True":
 		X_res, y_res = SMOTE(X,y)
-	elif config['Imbalanced Datasets']['SMOTENC'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTENC'] == "True":
 		X_res, y_res = SMOTENC(X,y)
 	return X_res, y_res
 
 def Make_Imbalanced_Dataset(X,y):
-	logger.debug("Making imbalanced dataset")
-	if config['Imbalanced Datasets']['CondensedNearestNeighbour'] == "True":
+	Globals.logger.debug("Making imbalanced dataset")
+	if Globals.config['Imbalanced Datasets']['CondensedNearestNeighbour'] == "True":
 		X_res, y_res = CondensedNearestNeighbour(X,y)
-	elif config['Imbalanced Datasets']['EditedNearestNeighbours'] == "True":
+	elif Globals.config['Imbalanced Datasets']['EditedNearestNeighbours'] == "True":
 		X_res, y_res = EditedNearestNeighbours(X,y)
-	elif config['Imbalanced Datasets']['RepeatedEditedNearestNeighbour'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RepeatedEditedNearestNeighbour'] == "True":
 		X_res, y_res = RepeatedEditedNearestNeighbour(X,y)
-	elif config['Imbalanced Datasets']['AllKNN'] == "True":
+	elif Globals.config['Imbalanced Datasets']['AllKNN'] == "True":
 		X_res, y_res = AllKNN(X,y)
-	elif config['Imbalanced Datasets']['InstanceHardnessThreshold'] == "True":
+	elif Globals.config['Imbalanced Datasets']['InstanceHardnessThreshold'] == "True":
 		X_res, y_res = InstanceHardnessThreshold(X,y)
-	elif config['Imbalanced Datasets']['NearMiss'] == "True":
+	elif Globals.config['Imbalanced Datasets']['NearMiss'] == "True":
 		X_res, y_res = NearMiss(X,y)
-	elif config['Imbalanced Datasets']['NeighbourhoodCleaningRule'] == "True":
+	elif Globals.config['Imbalanced Datasets']['NeighbourhoodCleaningRule'] == "True":
 		X_res, y_res = NeighbourhoodCleaningRule(X,y)
-	elif config['Imbalanced Datasets']['OneSidedSelection'] == "True":
+	elif Globals.config['Imbalanced Datasets']['OneSidedSelection'] == "True":
 		X_res, y_res = OneSidedSelection(X,y)
-	elif config['Imbalanced Datasets']['RandomUnderSampler'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RandomUnderSampler'] == "True":
 		X_res, y_res = RandomUnderSampler(X,y)
-	elif config['Imbalanced Datasets']['TomekLinks'] == "True":
+	elif Globals.config['Imbalanced Datasets']['TomekLinks'] == "True":
 		X_res, y_res = TomekLinks(X,y)
-	elif config['Imbalanced Datasets']['ADASYN'] == "True":
+	elif Globals.config['Imbalanced Datasets']['ADASYN'] == "True":
 		X_res, y_res = ADASYN(X,y)
-	elif config['Imbalanced Datasets']['RandomOverSampler'] == "True":
+	elif Globals.config['Imbalanced Datasets']['RandomOverSampler'] == "True":
 		X_res, y_res = RandomOverSampler(X,y)
-	elif config['Imbalanced Datasets']['SMOTE'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTE'] == "True":
 		X_res, y_res = SMOTE(X,y)
-	elif config['Imbalanced Datasets']['SMOTEENN'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTEENN'] == "True":
 		X_res, y_res = SMOTEENN(X,y)
-	elif config['Imbalanced Datasets']['SMOTEBORDERLINE'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTEBORDERLINE'] == "True":
 		X_res, y_res = SMOTEBORDER(X,y)
-	elif config['Imbalanced Datasets']['SMOTENC'] == "True":
+	elif Globals.config['Imbalanced Datasets']['SMOTENC'] == "True":
 		X_res, y_res = SMOTENC(X,y)
 	return X_res, y_res
