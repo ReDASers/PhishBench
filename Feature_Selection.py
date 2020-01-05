@@ -21,10 +21,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.feature_selection import RFE
 import logging
 import math
-logger = logging.getLogger('root')
 
-config=configparser.ConfigParser()
-config.read('Config_file.ini')
+from utils import Globals
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)
 def Feature_Selection(X,y):
@@ -35,7 +33,7 @@ def Feature_Selection(X,y):
 	vec = joblib.load('vectorizer.pkl')
 	res=dict(zip(vec.get_feature_names(),mutual_info_classif(X, y)))
 	#sorted_d = sorted(res.items(), key=lambda x: x[1])
-	logger.debug(res)
+	Globals.logger.debug(res)
 	#return X_Best
 
 
@@ -164,11 +162,11 @@ def Select_Best_Features_Training(X, y, k):
 def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
 	if config["Feature Selection"]["Recursive Feature Elimination"] == "True":
 		X = selection.transform(X)
-		logger.info("X_Shape: {}".format(X.shape))
+		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
 	elif config["Feature Selection"]["Chi-2"] == "True":
 		X = selection.transform(X)
-		logger.info("X_Shape: {}".format(X.shape))
+		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
 	elif config["Feature Selection"]["Information Gain"] == "True":
 		best_features=[]
@@ -187,7 +185,7 @@ def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
 				for j in range(len(feature_list_dict_test)):
 					new_list_dict_features[j][key]=feature_list_dict_test[j][key]
 		X=selection.transform(new_list_dict_features)
-		logger.info("X_Shape: {}".format(X.shape))
+		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
 	elif config["Feature Selection"]["Gini"] == "True":
 		best_features=[]
@@ -206,8 +204,8 @@ def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
 			else:
 				for j in range(len(feature_list_dict_test)):
 					new_list_dict_features[j][key]=feature_list_dict_test[j][key]
-		logger.info(new_list_dict_features)
-		logger.info("new_list_dict_features shape: {}".format(len(new_list_dict_features[0])))
+		Globals.logger.info(new_list_dict_features)
+		Globals.logger.info("new_list_dict_features shape: {}".format(len(new_list_dict_features[0])))
 		X=selection.transform(new_list_dict_features)
 		return X
 
@@ -231,20 +229,20 @@ def load_dataset():
 	try:
 		if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
 			file_feature_training=re.findall(email_training_regex,''.join(os.listdir('.')))[-1]
-			logger.debug("file_feature_training: {}".format(file_feature_training))
+			Globals.logger.debug("file_feature_training: {}".format(file_feature_training))
 			#file_feature_testing=re.findall(email_testing_regex,''.join(os.listdir('.')))[-1]
 
 		if config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
 			file_feature_training=re.findall(link_training_regex,''.join(os.listdir('.')))[-1]
 			#file_feature_testing=re.findall(link_testing_regex,''.join(os.listdir('.')))[-1]
 	except Exception as e:
-		logger.warning("exception: " + str(e))
+		Globals.logger.warning("exception: " + str(e))
 
 	if config["Imbalanced Datasets"]["Load_imbalanced_dataset"] == "True":
 		X, y = Imbalanced_Dataset.load_imbalanced_dataset(file_feature_training)
 		#X_test, y_test=Imbalanced_Dataset.load_imbalanced_dataset(file_feature_testing)
 	else:
-		logger.debug("Imbalanced_Dataset not activated")
+		Globals.logger.debug("Imbalanced_Dataset not activated")
 		X, y = load_svmlight_file(file_feature_training)
 		#X_test, y_test = load_svmlight_file(file_feature_testing)
 	return X, y#, X_test, y_test
