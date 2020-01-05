@@ -2,8 +2,8 @@ import argparse
 import os
 import re
 
+import joblib
 import numpy as np
-from sklearn.externals import joblib
 from sklearn.feature_extraction import DictVectorizer
 
 import Features_Support

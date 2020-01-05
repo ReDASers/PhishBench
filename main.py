@@ -1,8 +1,8 @@
 import os
 import sys
 
+import joblib
 from scipy.sparse import hstack
-from sklearn.externals import joblib
 
 import Feature_Selection
 import Features

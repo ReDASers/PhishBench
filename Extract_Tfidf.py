@@ -2,11 +2,11 @@ import argparse
 import os
 import re
 
+import joblib
 import langdetect
 from bs4 import BeautifulSoup, Comment
 from langdetect import detect
 from scipy.sparse import hstack
-from sklearn.externals import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 import Features_Support

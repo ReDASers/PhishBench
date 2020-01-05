@@ -3,6 +3,7 @@ import os.path
 import re
 import time
 
+import joblib
 import numpy as np
 import sklearn
 from keras import backend as K
@@ -16,7 +17,6 @@ from sklearn.datasets import load_svmlight_file
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RandomizedSearchCV
