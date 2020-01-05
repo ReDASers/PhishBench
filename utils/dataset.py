@@ -1,23 +1,18 @@
+import argparse
+import configparser
+import logging
 import os
 import sys
-from Classifiers import classifiers
-from Classifiers import fit_MNB
+
+import joblib
+from scipy.sparse import hstack
+
+import Feature_Selection
 import Features
 import Features_Support
-import Feature_Selection
 import Imbalanced_Dataset
-from sklearn.externals import joblib
-#import User_options
-import re
-#from Classifiers_test import load_dataset
-import configparser
 import Tfidf
-from scipy.sparse import hstack
-#from collections import deque
-import logging
-import argparse
-from sklearn.datasets import dump_svmlight_file
-
+from Classifiers import classifiers
 
 parser = argparse.ArgumentParser(description='Argument parser')
 parser.add_argument("-v", "--verbose", help="increase output verbosity",

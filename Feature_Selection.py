@@ -1,14 +1,13 @@
-import numpy as np
 import configparser
 import math
 import os
 import re
 import sys
 
+import joblib
 import numpy as np
 import sklearn
 from sklearn.datasets import load_svmlight_file
-from sklearn.externals import joblib
 from sklearn.feature_selection import RFE
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import mutual_info_classif
