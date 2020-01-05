@@ -24,11 +24,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import DesiredCapabilities
 import configparser
 
-logger = logging.getLogger('root')
+from utils import Globals
+
 whois_info = {}
 
-config=configparser.ConfigParser()
-config.read('Config_file.ini')
 
 class HTTPResponse:
     def __init__(self):
@@ -73,13 +72,13 @@ def dns_lookup(domain):
 
 def extract_dns_info(url, list_time):
     dns_lookup_output = ''
-    if config["Network_Features"]["network_features"] == "True":
+    if Globals.config["Network_Features"]["network_features"] == "True":
         try:
             extracted = tldextract.extract(url)
             parsed_url = urlparse(url)
             complete_domain = '{uri.hostname}'.format(uri=parsed_url)
         except Exception as e:
-            logger.warning("Exception: Domain Error: {}".format(e))
+            Globals.logger.warning("Exception: Domain Error: {}".format(e))
             domain=''
             complete_domain=''
 
@@ -106,11 +105,14 @@ def extract_whois(url, list_time):
         complete_domain = '{uri.hostname}'.format(uri=parsed_url)
         domain = "{}.{}".format(extracted.domain, extracted.suffix)
     except Exception as e:
-        logger.warning("Exception: Domain Error: {}".format(e))
+        Globals.logger.warning("Exception: Domain Error: {}".format(e))
         domain=''
         complete_domain=''
 
-    if config["Network_Features"]["network_features"] == "True" and (config["Network_Features"]["creation_date"] == "True" or config["Network_Features"]["expiration_date"] == "True" or config["Network_Features"]["updated_date"] == "True"):
+    if Globals.config["Network_Features"]["network_features"] == "True" and \
+            (Globals.config["Network_Features"]["creation_date"] == "True" or
+             Globals.config["Network_Features"]["expiration_date"] == "True" or
+             Globals.config["Network_Features"]["updated_date"] == "True"):
         if complete_domain:
             try:
                 try:
@@ -124,7 +126,7 @@ def extract_whois(url, list_time):
                     ipwhois = obj.lookup_whois(get_referral=True)
                 list_time['ipwhois_time'] = time.time() - t0
             except Exception as e:
-                logger.warning("Exception: ipwhois Error: {}".format(e))
+                Globals.logger.warning("Exception: ipwhois Error: {}".format(e))
                 IPs=''
                 ipwhois=''
 
@@ -138,7 +140,7 @@ def extract_whois(url, list_time):
                         whois_info[domain] = whois_output
                     time.sleep(5)
                 except Exception as e:
-                    logger.warning("Exception whois: Domain {}. Error: {}".format(domain, e))
+                    Globals.logger.warning("Exception whois: Domain {}. Error: {}".format(domain, e))
                     whois_output=''
                 list_time['whois_time'] = time.time() - t0
             else:
@@ -154,7 +156,7 @@ def download_url(rawurl, list_time):
     html = ''
     Error = 0
     http_response = HTTPResponse()
-    if config["HTML_Features"]["HTML_features"] == "True": 
+    if Globals.config["HTML_Features"]["HTML_features"] == "True":
         headers = requests.utils.default_headers()
 
         headers.update(
@@ -177,11 +179,12 @@ def download_url(rawurl, list_time):
         url = rawurl.strip().rstrip('\n')
         if url == '':
             Error=1
-            logger.warning("Empty URL")
+            Globals.logger.warning("Empty URL")
             return http_response, http_response.html, Error
         try:
             t0 = time.time()
-            browser = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options, desired_capabilities=desired_capabilities)
+            browser = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options,
+                                       desired_capabilities=desired_capabilities)
             browser.set_page_load_timeout(10)
             browser.get(url)
             log = browser.get_log('browser')
@@ -196,19 +199,19 @@ def download_url(rawurl, list_time):
                 match = p.match(log[0]['message'])
                 if match:
                     Error=1
-                    logger.warning("HTTP response code is not OK: {}".format(match.groups()[0]))
+                    Globals.logger.warning("HTTP response code is not OK: {}".format(match.groups()[0]))
                     return http_response, http_response.html, Error
             else:
                 parsed = BeautifulSoup(http_response.html, 'html.parser')
                 language = parsed.find("html").get('lang')
                 if language != None and not language.startswith('en'):
                     Error=1
-                    logger.warning("Website's language is not English")
+                    Globals.logger.warning("Website's language is not English")
                     return http_response, http_response.html, Error
         except Exception as e:
-            logger.warning("Exception HTML: {}. Error :{}".format(url, e))
-            logger.warning("html, content=''")
-            logger.debug(traceback.format_exc())
+            Globals.logger.warning("Exception HTML: {}. Error :{}".format(url, e))
+            Globals.logger.warning("html, content=''")
+            Globals.logger.debug(traceback.format_exc())
             http_response.html = ''
             http_response.url = url
 
