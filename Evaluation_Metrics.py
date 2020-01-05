@@ -1,34 +1,14 @@
-from sklearn import svm
-from sklearn import datasets
-from collections import Counter
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import BaggingClassifier
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_predict, cross_validate
-from sklearn.cluster import KMeans
-from sklearn.metrics import confusion_matrix, accuracy_score, make_scorer
-from imblearn.datasets import make_imbalance
-from imblearn.under_sampling import RandomUnderSampler,CondensedNearestNeighbour
-from imblearn.under_sampling import EditedNearestNeighbours
-from sklearn.datasets import load_svmlight_file
-from imblearn.metrics import geometric_mean_score
-#from imblearn.metrics import Balanced_accuracy_score
-#import User_options
-import sklearn
-import configparser
-#from collections import deque
-import Features
-import tensorflow as tf
-import logging
 
+import sklearn
+import tensorflow as tf
+from imblearn.metrics import geometric_mean_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, make_scorer
+from sklearn.model_selection import cross_validate
+
+import Features
 from utils import Globals
+
 
 def Confusion_matrix(y_test, y_predict):
 		confusion_matrix=sklearn.metrics.confusion_matrix(y_test, y_predict, labels=[0,1])

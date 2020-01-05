@@ -1,19 +1,18 @@
 import os
 import sys
-from Classifiers import classifiers
-from Classifiers import fit_MNB
+
+from scipy.sparse import hstack
+from sklearn.externals import joblib
+
+import Feature_Selection
 import Features
 import Features_Support
-import Feature_Selection
 import Imbalanced_Dataset
-from sklearn.externals import joblib
-import re
 import Tfidf
-from scipy.sparse import hstack
-from sklearn.datasets import dump_svmlight_file
-
+from Classifiers import classifiers
 from utils import Globals
 from utils import user_interaction
+
 
 def load_dataset(load_train=True, load_test=False):
     y_test = None

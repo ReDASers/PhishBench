@@ -1,12 +1,11 @@
-import os
-import sys
-import ast
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.externals import joblib
-import pickle
 import argparse
+import os
 import re
+
 import numpy as np
+from sklearn.externals import joblib
+from sklearn.feature_extraction import DictVectorizer
+
 import Features_Support
 
 # prog = re.compile("('[a-zA-Z0-9_\-\. ]*':\"'[a-zA-Z0-9_\-\. ]*'\")|('[a-zA-Z0-9_\-\. ]*':\"[a-zA-Z0-9_\-\. ]*\")|('[a-zA-Z0-9_\-\. ]*':[0-9\.[0-9]*)|('[a-zA-Z0-9_\-\. ]*':*)")

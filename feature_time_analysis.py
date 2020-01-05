@@ -1,11 +1,4 @@
-import os
-import sys
-from sklearn.externals import joblib
-#import User_options
-import configparser
-import numpy as np
-#from collections import deque
-import logging
+
 import argparse
 import re
 

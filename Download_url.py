@@ -1,28 +1,22 @@
-from urllib.parse import urlparse
+import logging
 import os
-import time
-from urllib.request import urlopen
-import urllib
-import whois
-from Cython.Tempita._tempita import html
-from ipwhois import IPWhois
-from pprint import pprint
+import re
 import socket
+import time
+import traceback
+import urllib
+from urllib.parse import urlparse
+from urllib.request import urlopen
+
 import dns.resolver
 import requests
-import pickle
-import datetime
-from bs4 import BeautifulSoup
-import sys
-import re
-import logging
-import traceback
 import tldextract
-from urllib.parse import urlparse
+import whois
+from bs4 import BeautifulSoup
+from ipwhois import IPWhois
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import DesiredCapabilities
-import configparser
+from selenium.webdriver.chrome.options import Options
 
 from utils import Globals
 

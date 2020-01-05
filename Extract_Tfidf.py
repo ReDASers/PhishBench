@@ -1,16 +1,15 @@
-import os
-import sys
-import ast
-from bs4 import BeautifulSoup, Comment
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.externals import joblib
-import pickle
 import argparse
+import os
 import re
-import Features_Support
-from scipy.sparse import hstack
-from langdetect import detect
+
 import langdetect
+from bs4 import BeautifulSoup, Comment
+from langdetect import detect
+from scipy.sparse import hstack
+from sklearn.externals import joblib
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+
+import Features_Support
 
 # prog = re.compile("('[a-zA-Z0-9_\-\. ]*':\"'[a-zA-Z0-9_\-\. ]*'\")|('[a-zA-Z0-9_\-\. ]*':\"[a-zA-Z0-9_\-\. ]*\")|('[a-zA-Z0-9_\-\. ]*':[0-9\.[0-9]*)|('[a-zA-Z0-9_\-\. ]*':*)")
 

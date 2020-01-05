@@ -1,51 +1,39 @@
-from sklearn import svm
-from sklearn import datasets
-from collections import Counter
-import numpy as np
-from numpy.random import RandomState
-import time
-import matplotlib.pyplot as plt
-from sklearn.utils import resample
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import BaggingClassifier
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_score, train_test_split
-from sklearn.cluster import KMeans
-from sklearn_extensions.extreme_learning_machines.elm import GenELMClassifier
-from sklearn_extensions.extreme_learning_machines.random_layer import RBFRandomLayer, MLPRandomLayer
-from imblearn.datasets import make_imbalance
-from imblearn.under_sampling import RandomUnderSampler,CondensedNearestNeighbour
-from imblearn.under_sampling import EditedNearestNeighbours
-from sklearn.datasets import load_svmlight_file
-from keras.losses import mean_squared_error
-#import User_options
-import sklearn
-from math import pow
-import Evaluation_Metrics
-import Imbalanced_Dataset
-from keras.models import Sequential
-from keras.layers import Dense
-from keras import backend as K
-import tensorflow as tf
-import math
-import os, os.path
-from pathlib import Path
+import os
+import os.path
 import re
-import configparser
-import Features
-import pickle
+import time
+
+import numpy as np
+import sklearn
+from keras import backend as K
+from keras.layers import Dense
+from keras.models import Sequential
+from numpy.random import RandomState
+from scipy.stats import uniform
+from sklearn import svm
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_svmlight_file
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 from sklearn.feature_extraction import DictVectorizer
-import logging
-from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
-from scipy.stats import uniform
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.utils import resample
+from sklearn_extensions.extreme_learning_machines.elm import GenELMClassifier
+from sklearn_extensions.extreme_learning_machines.random_layer import MLPRandomLayer
 
+import Evaluation_Metrics
+import Features
+import Imbalanced_Dataset
 from utils import Globals
+
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)
 

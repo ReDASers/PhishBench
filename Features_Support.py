@@ -1,52 +1,33 @@
-import numpy as np
-import re
-import sys
-import os, os.path
-from itertools import groupby
-import nltk
-from textstat.textstat import textstat
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from sklearn.feature_extraction.text import TfidfVectorizer
-import email as em
-import string
-import math
-from textblob import TextBlob as tb
-from scipy.sparse.csr import csr_matrix
-from urllib.parse import urlparse
-from scipy import stats
-from scipy.sparse import csc_matrix
-from scipy.sparse import isspmatrix_csc
-from scipy.sparse import isspmatrix_csr
-from scipy.spatial import distance
-import tldextract
-import time
-import pandas as pd
-from bs4 import BeautifulSoup
-import pickle
-import json
-#import User_options
-import Download_url
-import Features
-import Tfidf
-import timeit
-from sklearn import preprocessing
-import configparser
-#from collections import deque
-import Features
-from sklearn.feature_extraction import DictVectorizer
-import logging
-import traceback
-import ntpath
 import copy
+import email as em
+import ntpath
+import os
+import os.path
+import pickle
+import re
+import string
+import sys
+import time
+import traceback
+from itertools import groupby
+from urllib.parse import urlparse
 
+import nltk
+import numpy as np
+from bs4 import BeautifulSoup
+from nltk.stem import PorterStemmer
+from scipy import stats
+from scipy.spatial import distance
+from sklearn import preprocessing
+from sklearn.feature_extraction import DictVectorizer
+
+# import User_options
+import Download_url
+# from collections import deque
+import Features
 from utils import Globals
 
 #import user_options
-
-import base64
 
 #from collections import deque
 
