@@ -1,15 +1,10 @@
 from sklearn.feature_extraction.text import CountVectorizer
-from nltk import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
-import Features_Support
-#import User_options
-import Download_url
-import configparser
-#from collections import deque
 
+import Features_Support
 from utils import Globals
+
+
 
 ## Build the corpus from both the datasets
 def build_corpus():

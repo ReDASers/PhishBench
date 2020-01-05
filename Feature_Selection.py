@@ -1,28 +1,23 @@
-from sklearn import svm
-from sklearn import datasets
-from collections import Counter
 import numpy as np
-import matplotlib.pyplot as plt
-import sklearn
-import Imbalanced_Dataset
-from sklearn.feature_selection import mutual_info_classif
-from sklearn.feature_selection import chi2
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.feature_selection import SelectFromModel
-import sys
 import configparser
-import re
+import math
 import os
-import pickle
-from sklearn.externals import joblib
+import re
+import sys
+
+import numpy as np
+import sklearn
 from sklearn.datasets import load_svmlight_file
+from sklearn.externals import joblib
+from sklearn.feature_selection import RFE
+from sklearn.feature_selection import chi2
+from sklearn.feature_selection import mutual_info_classif
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.feature_selection import RFE
-import logging
-import math
 
+import Imbalanced_Dataset
 from utils import Globals
+
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)
 def Feature_Selection(X,y):

@@ -1,62 +1,14 @@
-import numpy as np
-import re
-import sys
-import os, os.path
-from itertools import groupby
-import nltk
-from lxml import html as lxml_html
-from textstat.textstat import textstat
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from sklearn.feature_extraction.text import TfidfVectorizer
-import email as em
-import string
-import math
-from textblob import TextBlob as tb
-from scipy.sparse.csr import csr_matrix
-from urllib.parse import urlparse
-from scipy import stats
-from scipy import sparse
-from scipy.spatial import distance
-import time
-import pandas as pd
-from bs4 import BeautifulSoup
-from slimit import ast
-from slimit.parser import Parser
-from slimit.visitors import nodevisitor
-from urllib.parse import urlparse
-import dns.resolver
-import csv
-import tldextract
+import os.path
 from datetime import datetime
-import whois
-from cryptography.x509.general_name import IPAddress
-import pickle
-import json
+
+import dns.resolver
+from lxml import html as lxml_html
+
 from Features_Support import *
-#import User_options
-import Download_url
-from sklearn.feature_extraction import DictVectorizer
-#import timeit
-from sklearn import preprocessing
-#import base64
-from sklearn.datasets import dump_svmlight_file
-from sklearn.pipeline import Pipeline
-from sklearn.pipeline import FeatureUnion
-from scipy.sparse import hstack
-from pathlib import Path
-from urllib.parse import urlparse
-from urllib import request
-import configparser
-import time
-from sklearn.externals import joblib
-#from collections import deque
-
-import pickle
-
 from utils import Globals
+
+
+# from collections import deque
 ################
 
 
