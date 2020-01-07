@@ -13,7 +13,7 @@ from imblearn.under_sampling import RandomUnderSampler
 from imblearn.under_sampling import TomekLinks
 from sklearn.datasets import load_svmlight_file
 
-from utils import Globals
+from .utils import Globals
 
 
 #import User_options

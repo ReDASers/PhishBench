@@ -14,8 +14,8 @@ from sklearn.feature_selection import mutual_info_classif
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
-import Imbalanced_Dataset
-from utils import Globals
+from . import Imbalanced_Dataset
+from .utils import Globals
 
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)

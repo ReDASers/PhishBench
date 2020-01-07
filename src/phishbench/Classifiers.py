@@ -29,10 +29,10 @@ from sklearn.utils import resample
 from sklearn_extensions.extreme_learning_machines.elm import GenELMClassifier
 from sklearn_extensions.extreme_learning_machines.random_layer import MLPRandomLayer
 
-import Evaluation_Metrics
-import Features
-import Imbalanced_Dataset
-from utils import Globals
+from . import Evaluation_Metrics
+from . import Features
+from . import Imbalanced_Dataset
+from .utils import Globals
 
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)

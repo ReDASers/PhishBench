@@ -4,8 +4,8 @@ from datetime import datetime
 import dns.resolver
 from lxml import html as lxml_html
 
-from Features_Support import *
-from utils import Globals
+from .Features_Support import *
+from .utils import Globals
 
 
 # from collections import deque

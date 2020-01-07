@@ -1,9 +1,8 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-import Features_Support
-from utils import Globals
-
+from . import Features_Support
+from .utils import Globals
 
 
 ## Build the corpus from both the datasets
@@ -22,8 +21,8 @@ def build_corpus():
 
 
 def tfidf_training(corpus):
-	tf= TfidfVectorizer(analyzer='word', ngram_range=(1,1),
-                     min_df = 0, stop_words = 'english', sublinear_tf=True)		
+	tf = TfidfVectorizer(analyzer='word', ngram_range=(1,1),
+                     min_df = 0, stop_words = 'english', sublinear_tf=True)
 	tfidf_matrix = tf.fit_transform(corpus)
 	return tfidf_matrix, tf
 
@@ -51,7 +50,7 @@ def Header_Tokenizer(corpus):
         strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
         tokenizer=None, vocabulary=None)
 	header_tokenizer = cv.fit_transform(corpus)
-	return header_tokenizer	
+	return header_tokenizer
 
 
 if __name__ == '__main__':

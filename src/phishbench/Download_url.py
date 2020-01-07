@@ -18,7 +18,7 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 
-from utils import Globals
+from .utils import Globals
 
 whois_info = {}
 

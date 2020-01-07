@@ -1,6 +1,6 @@
 import argparse
-import logging
 import configparser
+import logging
 
 args = None
 config = configparser.ConfigParser()

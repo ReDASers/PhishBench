@@ -6,7 +6,7 @@ import joblib
 import numpy as np
 from sklearn.feature_extraction import DictVectorizer
 
-import Features_Support
+from . import Features_Support
 
 # prog = re.compile("('[a-zA-Z0-9_\-\. ]*':\"'[a-zA-Z0-9_\-\. ]*'\")|('[a-zA-Z0-9_\-\. ]*':\"[a-zA-Z0-9_\-\. ]*\")|('[a-zA-Z0-9_\-\. ]*':[0-9\.[0-9]*)|('[a-zA-Z0-9_\-\. ]*':*)")
 

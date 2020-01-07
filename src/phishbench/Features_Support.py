@@ -21,11 +21,9 @@ from scipy.spatial import distance
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
-# import User_options
-import Download_url
-# from collections import deque
-import Features
-from utils import Globals
+from . import Download_url
+from . import Features
+from .utils import Globals
 
 #import user_options
 
@@ -38,8 +36,9 @@ PAYLOAD_NOT_FOUND = False # for filtering
 
 ## list of function words: http://www.viviancook.uk/Words/StructureWordsList.htm
 Function_words_list=["a", "about", "above", "after", "again", "against", "ago", "ahead", "all", "almost", "almost", "along", "already", "also", "", "although", "always", "am", "among", "an", "and", "any", "are", "aren't", "around", "as", "at", "away", "backward", "backwards", "be", "because", "before", "behind", "below", "beneath", "beside", "between", "both", "but", "by", "can", "cannot", "can't", "cause", "'cos", "could", "couldn't", "'d", "had", "despite", "did", "didn't", "do", "does", "doesn't", "don't", "down", "during", "each", "either", "even", "ever", "every", "except", "for", "faw", "forward", "from", "frm", "had", "hadn't", "has", "hasn't", "have", "hv", "haven't", "he", "hi", "her", "here", "hers", "herself", "him", "hm", "himself", "his", "how", "however", "I", "if", "in", "inside", "inspite", "instead", "into", "is", "isn't", "it", "its", "itself", "just", "'ll", "will", "shall", "least", "less", "like", "'m", "them", "many", "may", "mayn't", "me", "might", "mightn't", "mine", "more", "most", "much", "must", "mustn't", "my", "myself", "near", "need", "needn't", "needs", "neither", "never", "no", "none", "nor", "not", "now", "of", "off", "often", "on", "once", "only", "onto", "or", "ought", "oughtn't", "our", "ours", "ourselves", "out", "outside", "over", "past", "perhaps", "quite", "'re", "rather", "'s", "", "seldom", "several", "shall", "shan't", "she", "should", "shouldn't", "since", "so", "some", "sometimes", "soon", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "therefore", "these", "they", "this", "those", "though", "", "through", "thus", "till", "to", "together", "too", "towards", "under", "unless", "until", "up", "upon", "us", "used", "usedn't", "usen't", "usually", "'ve", "very", "was", "wasn't", "we", "well", "were", "weren't", "what", "when", "where", "whether", "which", "while", "who", "whom", "whose", "why", "will", "with", "without", "won't", "would", "wouldn't", "yet", "you", "your", "yours", "yourself", "yourselves"]
-''' Returns frequency of function words. Source:  https://stackoverflow.com/questions/5819840/calculate-frequency-of-function-words'''
+
 def get_func_word_freq(words,funct_words):
+    """ Returns frequency of function words. Source:  https://stackoverflow.com/questions/5819840/calculate-frequency-of-function-words"""
     fdist = nltk.FreqDist([funct_word for funct_word in funct_words if funct_word in words])
     funct_freq = {}
     for key,value in fdist.iteritems():
