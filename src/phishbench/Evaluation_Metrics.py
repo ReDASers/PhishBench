@@ -1,4 +1,3 @@
-
 import sklearn
 import tensorflow as tf
 from imblearn.metrics import geometric_mean_score
@@ -6,8 +5,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import confusion_matrix, make_scorer
 from sklearn.model_selection import cross_validate
 
-import Features
-from utils import Globals
+from . import Features
+from .utils import Globals
 
 
 def Confusion_matrix(y_test, y_predict):

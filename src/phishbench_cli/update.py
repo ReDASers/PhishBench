@@ -1,10 +1,10 @@
 import configparser
 import inspect
 
-import Classifiers
-import Evaluation_Metrics
-import Features
-import Imbalanced_Dataset
+import phishbench.Classifiers as Classifiers
+import phishbench.Evaluation_Metrics as Evaluation_Metrics
+import phishbench.Features as Features
+import phishbench.Imbalanced_Dataset as Imbalanced_Dataset
 
 
 def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics):
@@ -144,8 +144,12 @@ def update_list():
 	return list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics
 
 
+def main():
+	# execute only if run as a script
+	list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics = update_list()
+	# update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
+	config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
+
+
 if __name__ == "__main__":
-    # execute only if run as a script
-    list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics = update_list()
-    #update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
-    config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
+	main()
