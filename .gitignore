@@ -114,4 +114,4 @@ output.txt
 summary.txt
 
 .idea/
-.src/phishbench_cli/Data_Dump/
+src/phishbench_cli/Data_Dump/
