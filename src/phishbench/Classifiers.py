@@ -31,45 +31,12 @@ from sklearn_extensions.extreme_learning_machines.random_layer import MLPRandomL
 
 from . import Evaluation_Metrics
 from . import Features
-from . import Imbalanced_Dataset
+from .dataset import Imbalanced_Dataset
 from .utils import Globals
-
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)
 
-
-def load_dataset():
-	email_training_regex=re.compile(r"email_features_training_?\d?.txt")
-	email_testing_regex=re.compile(r"verbose=1email_features_testing_?\d?.txt")
-
-	link_training_regex=re.compile(r"link_features_training_?\d?.txt")
-	link_testing_regex=re.compile(r"link_features_testing_?\d?.txt")
-	try:
-		if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-			file_feature_training=re.findall(email_training_regex,''.join(os.listdir('.')))[-1]
-			file_feature_testing=re.findall(email_testing_regex,''.join(os.listdir('.')))[-1]
-
-		if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-			file_feature_training=re.findall(link_training_regex,''.join(os.listdir('.')))[-1]
-			file_feature_testing=re.findall(link_testing_regex,''.join(os.listdir('.')))[-1]
-	except Exception as e:
-		Globals.logger.error("exception: " + str(e))
-
-	if Globals.config["Imbalanced Datasets"]["Load_imbalanced_dataset"] == "True":
-		X, y = Imbalanced_Dataset.load_imbalanced_dataset(file_feature_training)
-		Globals.logger.debug(file_feature_training)
-		X_test, y_test=Imbalanced_Dataset.load_imbalanced_dataset(file_feature_testing)
-		Globals.logger.debug(file_feature_testing)
-	else:
-		Globals.logger.info("Imbalanced_Dataset not activated")
-		Globals.logger.debug(file_feature_training)
-		Globals.logger.debug(file_feature_testing)
-		X, y = load_svmlight_file(file_feature_training)
-		X_test, y_test = load_svmlight_file(file_feature_testing)
-	return X, y, X_test, y_test
-
 def load_dictionary():
-
 	list_dict_train=joblib.load('list_dict_train.pkl')
 	list_dict_test=joblib.load('list_dict_test.pkl')
 	vec=DictVectorizer()
@@ -88,7 +55,6 @@ def fit_classifier(clf, X, y, X_train_balanced=None, y_train_balanced=None):
 	else:
 		clf.fit(X,y)
 	Globals.logger.info("Training Time = " + str(time.time()-start_time) + "s")
-
 
 
 def SVM(X,y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
@@ -579,8 +545,7 @@ def rank_classifier(eval_clf_dict, metric_str):
 
 def classifiers(X,y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
 	Globals.logger.info("##### Classifiers #####")
-	summary=Features.summary
-	summary.write("\n##############\n\nClassifiers Used:\n")
+	Globals.summary.write("\n##############\n\nClassifiers Used:\n")
 	eval_metrics_per_classifier_dict = {}
 	if Globals.config["Classification"]["load model"] != "True":
 		if X_test is None and Globals.config["Evaluation Metrics"]["cross_val_score"] != "True":
@@ -604,12 +569,12 @@ def classifiers(X,y, X_test, y_test, X_train_balanced=None, y_train_balanced=Non
 			X_test_i, y_test_i = resample(X_test, y_test, random_state=random_state)
 		else:
 			X_test_i, y_test_i = X_test, y_test
-		run_classifier(X, y, X_test_i, y_test_i, X_train_balanced, y_train_balanced, trained_model, eval_metrics_per_classifier_dict, summary)
+		run_classifier(X, y, X_test_i, y_test_i, X_train_balanced, y_train_balanced, trained_model, eval_metrics_per_classifier_dict)
 	Globals.logger.info(eval_metrics_per_classifier_dict)
 	if Globals.config["Classification"]["Rank Classifiers"] == "True":
 		rank_classifier(eval_metrics_per_classifier_dict, Globals.config["Classification"]["rank on metric"])
 
-def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model, eval_metrics_per_classifier_dict, summary):
+def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model, eval_metrics_per_classifier_dict):
 	if Globals.config["Classifiers"]["SVM"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_svm.pkl")
@@ -617,7 +582,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['SVM'] = eval_SVM
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_svm.pkl")
-		summary.write("SVM\n")
+		Globals.summary.write("SVM\n")
 	if Globals.config["Classifiers"]["RandomForest"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_RF.pkl")
@@ -625,7 +590,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['RF'] = eval_RF
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_RF.pkl")
-		summary.write("Random Forest\n")
+		Globals.summary.write("Random Forest\n")
 	if Globals.config["Classifiers"]["DecisionTree"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_DT.pkl")
@@ -633,7 +598,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['Dec_tree'] = eval_DT
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_DT.pkl")
-		summary.write("Decision Tree \n")
+		Globals.summary.write("Decision Tree \n")
 	if Globals.config["Classifiers"]["GaussianNaiveBayes"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_GNB.pkl")
@@ -641,7 +606,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['GNB'] = eval_NB
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_GNB.pkl")
-		summary.write("Gaussian Naive Bayes \n")
+		Globals.summary.write("Gaussian Naive Bayes \n")
 	if Globals.config["Classifiers"]["MultinomialNaiveBayes"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_MNB.pkl")
@@ -649,7 +614,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['MNB'] = eval_MNB
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_MNB.pkl")
-		summary.write("Multinomial Naive Bayes \n")
+		Globals.summary.write("Multinomial Naive Bayes \n")
 	if Globals.config["Classifiers"]["LogisticRegression"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_LR.pkl")
@@ -657,7 +622,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['LR'] = eval_LR
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_LR.pkl")
-		summary.write("Logistic Regression\n")
+		Globals.summary.write("Logistic Regression\n")
 	if Globals.config["Classifiers"]["ELM"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_ELM.pkl")
@@ -665,7 +630,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['ELM'] = eval_elm
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_ELM.pkl")
-		summary.write("ELM\n")
+		Globals.summary.write("ELM\n")
 	if Globals.config["Classifiers"]["kNearestNeighbor"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_KNN.pkl")
@@ -673,7 +638,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['KNN'] = eval_knn
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_KNN.pkl")
-		summary.write("kNearest Neighbor\n")
+		Globals.summary.write("kNearest Neighbor\n")
 	if Globals.config["Classifiers"]["KMeans"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_Kmeans.pkl")
@@ -681,7 +646,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['KMeans'] = eval_kmeans
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_Kmeans.pkl")
-		summary.write("kMeans \n")
+		Globals.summary.write("kMeans \n")
 	if Globals.config["Classifiers"]["Bagging"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_bagging.pkl")
@@ -689,7 +654,7 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['Bagging'] = eval_bagging
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_bagging.pkl")
-		summary.write("Bagging \n")
+		Globals.summary.write("Bagging \n")
 	if Globals.config["Classifiers"]["Boosting"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_boosting.pkl")
@@ -697,13 +662,13 @@ def run_classifier(X,y, X_test, y_test, X_train_balanced, y_train_balanced, trai
 		eval_metrics_per_classifier_dict['Boosting'] = eval_boosting
 		if Globals.config["Classification"]["save model"] == "True" and model is not None:
 			joblib.dump(model, "Data_Dump/Models/model_boosting.pkl")
-		summary.write("Boosting \n")
+		Globals.summary.write("Boosting \n")
 	if Globals.config["Classifiers"]["DNN"] == "True":
 		if Globals.config["Classification"]["load model"] == "True":
 			trained_model = joblib.load("Data_Dump/Models/model_DNN.pkl")
 		eval_dnn = DNN(X,y, X_test, y_test, X_train_balanced, y_train_balanced)
 		eval_metrics_per_classifier_dict['DNN'] = eval_dnn
-		summary.write("DNN \n")
+		Globals.summary.write("DNN \n")
 
 def fit_MNB(X,y):
 	mnb=MultinomialNB(alpha=1.0, fit_prior=True, class_prior=None)

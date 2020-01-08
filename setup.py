@@ -11,4 +11,5 @@ setup(name='PhishBench',
       url='https://github.com/sbaki2/Phishing-Detection',
       packages=find_packages("src"),
       package_dir={"": "src"},
+      package_data={"" : ["chromedriver"]},
       entry_points=entry_points)
