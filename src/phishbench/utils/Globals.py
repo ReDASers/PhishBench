@@ -1,6 +1,6 @@
 import argparse
-import configparser
 import logging
+import configparser
 
 args = None
 config = configparser.ConfigParser()
@@ -22,7 +22,7 @@ def setup_logger():
     global logger
     # create formatter
     # formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s')
-    formatter = logging.Formatter('[%(asctime)s] p%(process)s {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
+    formatter = logging.Formatter('[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
                                   '%m-%d %H:%M:%S')
     # create console handler and set level to debug
     handler = logging.StreamHandler()
@@ -45,4 +45,5 @@ def setup_globals():
     summary = open(config["Summary"]["Path"], 'w')
     setup_logger()
 
-
+def destroy_globals():
+    summary.close()

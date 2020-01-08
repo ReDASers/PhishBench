@@ -14,15 +14,14 @@ from sklearn.feature_selection import mutual_info_classif
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
-from . import Imbalanced_Dataset
+from .dataset import Imbalanced_Dataset
 from .utils import Globals
-
 
 ####### Dataset (features for each item) X and Classess y (phish or legitimate)
 def Feature_Selection(X,y):
-	#if config["Feature_Selection"]["Chi-2"] == "True"
+	#if Globals.config["Feature_Selection"]["Chi-2"] == "True"
 	#	X_Best=SelectKBest(chi2, k=2).fit_transform(X,y)
-	#if config["Feature_Selection"]["Information_Gain"] == "True"
+	#if Globals.config["Feature_Selection"]["Information_Gain"] == "True"
 	#	X_Best=SelectKBest(mutual_info_classif, k=2).fit_transform(X,y)
 	vec = joblib.load('vectorizer.pkl')
 	res=dict(zip(vec.get_feature_names(),mutual_info_classif(X, y)))
@@ -35,26 +34,26 @@ def Feature_Ranking(X, y, k):
 	#RFE
 	if not os.path.exists("Data_Dump/Feature_Ranking"):
 		os.makedirs("Data_Dump/Feature_Ranking")
-	if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
+	if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
 		emails=True
 		urls=False
 		vectorizer=joblib.load("Data_Dump/Emails_Training/vectorizer.pkl")
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 		        vectorizer_tfidf=joblib.load("Data_Dump/Emails_Training/tfidf_vectorizer.pkl")
-	elif config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
+	elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
 		urls=True
 		emails=False
 		vectorizer=joblib.load("Data_Dump/URLs_Training/vectorizer.pkl")
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 		        vectorizer_tfidf=joblib.load("Data_Dump/URLs_Training/tfidf_vectorizer.pkl")
-	if config["Feature Selection"]["Recursive Feature Elimination"] == "True":
+	if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
 		model = LogisticRegression()
 		from sklearn.svm import LinearSVC
 		model = LinearSVC()
 		rfe = RFE(model, k, verbose=2, step=0.005)
 		rfe.fit(X,y)
 		X=rfe.transform(X)
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 			features_list=(vectorizer.get_feature_names())+(vectorizer_tfidf.get_feature_names())
 		else:
 			features_list=(vectorizer.get_feature_names())
@@ -70,10 +69,10 @@ def Feature_Ranking(X, y, k):
 		return X, rfe
 
 	#Chi-2
-	elif config["Feature Selection"]["Chi-2"] == "True":
+	elif Globals.config["Feature Selection"]["Chi-2"] == "True":
 		model= sklearn.feature_selection.SelectKBest(chi2, k)
 		model.fit(X, y)
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 			features_list=(vectorizer.get_feature_names())+(vectorizer_tfidf.get_feature_names())
 		else:
 			features_list=(vectorizer.get_feature_names())
@@ -93,11 +92,11 @@ def Feature_Ranking(X, y, k):
 		return X, model
 
 	# Information Gain
-	elif config["Feature Selection"]["Information Gain"] == "True":
+	elif Globals.config["Feature Selection"]["Information Gain"] == "True":
 		model= sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='entropy'), threshold=-np.inf, max_features=k)
 		model.fit(X,y)
 		# dump Feature Selection in a file
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 			features_list=(vectorizer.get_feature_names())+(vectorizer_tfidf.get_feature_names())
 		else:
 			features_list=(vectorizer.get_feature_names())
@@ -118,10 +117,10 @@ def Feature_Ranking(X, y, k):
 		return X, vectorizer
 
 	#Gini
-	elif config["Feature Selection"]["Gini"] == "True":
+	elif Globals.config["Feature Selection"]["Gini"] == "True":
 		model= sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'), threshold=-np.inf, max_features=k)
 		model.fit(X,y)
-		if config["Feature Selection"]["with Tfidf"]=="True":
+		if Globals.config["Feature Selection"]["with Tfidf"]=="True":
 			features_list=(vectorizer.get_feature_names())+(vectorizer_tfidf.get_feature_names())
 		else:
 			features_list=(vectorizer.get_feature_names())
@@ -154,15 +153,15 @@ def Select_Best_Features_Training(X, y, k):
 
 #<<<<<<< HEAD
 def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
-	if config["Feature Selection"]["Recursive Feature Elimination"] == "True":
+	if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
 		X = selection.transform(X)
 		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
-	elif config["Feature Selection"]["Chi-2"] == "True":
+	elif Globals.config["Feature Selection"]["Chi-2"] == "True":
 		X = selection.transform(X)
 		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
-	elif config["Feature Selection"]["Information Gain"] == "True":
+	elif Globals.config["Feature Selection"]["Information Gain"] == "True":
 		best_features=[]
 		with open("Data_Dump/Feature_Ranking/Feature_ranking_IG.txt", 'r') as f:
 			for line in f.readlines():
@@ -181,7 +180,7 @@ def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
 		X=selection.transform(new_list_dict_features)
 		Globals.logger.info("X_Shape: {}".format(X.shape))
 		return X
-	elif config["Feature Selection"]["Gini"] == "True":
+	elif Globals.config["Feature Selection"]["Gini"] == "True":
 		best_features=[]
 		with open("Data_Dump/Feature_Ranking/Feature_ranking_Gini.txt", 'r') as f:
 			for line in f.readlines():
@@ -189,7 +188,7 @@ def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test ):
 		new_list_dict_features=[]
 		for i in range(k):
 			key=best_features[i]
-			#logger.info("key: {}".format(key))
+			#Globals.logger.info("key: {}".format(key))
 			if "=" in key:
 				key=key.split("=")[0]
 			if i==0:
@@ -221,18 +220,18 @@ def load_dataset():
 	link_training_regex=re.compile(r"link_features_training_?\d?.txt")
 	#link_testing_regex=re.compile(r"link_features_training_?\d?.txt")
 	try:
-		if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
+		if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
 			file_feature_training=re.findall(email_training_regex,''.join(os.listdir('.')))[-1]
 			Globals.logger.debug("file_feature_training: {}".format(file_feature_training))
 			#file_feature_testing=re.findall(email_testing_regex,''.join(os.listdir('.')))[-1]
 
-		if config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
+		if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
 			file_feature_training=re.findall(link_training_regex,''.join(os.listdir('.')))[-1]
 			#file_feature_testing=re.findall(link_testing_regex,''.join(os.listdir('.')))[-1]
 	except Exception as e:
 		Globals.logger.warning("exception: " + str(e))
 
-	if config["Imbalanced Datasets"]["Load_imbalanced_dataset"] == "True":
+	if Globals.config["Imbalanced Datasets"]["Load_imbalanced_dataset"] == "True":
 		X, y = Imbalanced_Dataset.load_imbalanced_dataset(file_feature_training)
 		#X_test, y_test=Imbalanced_Dataset.load_imbalanced_dataset(file_feature_testing)
 	else:

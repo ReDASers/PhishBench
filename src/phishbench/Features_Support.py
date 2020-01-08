@@ -25,20 +25,12 @@ from . import Download_url
 from . import Features
 from .utils import Globals
 
-#import user_options
-
-#from collections import deque
-
-#from bs4 import BeautifulSoup
-
-
 PAYLOAD_NOT_FOUND = False # for filtering
 
 ## list of function words: http://www.viviancook.uk/Words/StructureWordsList.htm
 Function_words_list=["a", "about", "above", "after", "again", "against", "ago", "ahead", "all", "almost", "almost", "along", "already", "also", "", "although", "always", "am", "among", "an", "and", "any", "are", "aren't", "around", "as", "at", "away", "backward", "backwards", "be", "because", "before", "behind", "below", "beneath", "beside", "between", "both", "but", "by", "can", "cannot", "can't", "cause", "'cos", "could", "couldn't", "'d", "had", "despite", "did", "didn't", "do", "does", "doesn't", "don't", "down", "during", "each", "either", "even", "ever", "every", "except", "for", "faw", "forward", "from", "frm", "had", "hadn't", "has", "hasn't", "have", "hv", "haven't", "he", "hi", "her", "here", "hers", "herself", "him", "hm", "himself", "his", "how", "however", "I", "if", "in", "inside", "inspite", "instead", "into", "is", "isn't", "it", "its", "itself", "just", "'ll", "will", "shall", "least", "less", "like", "'m", "them", "many", "may", "mayn't", "me", "might", "mightn't", "mine", "more", "most", "much", "must", "mustn't", "my", "myself", "near", "need", "needn't", "needs", "neither", "never", "no", "none", "nor", "not", "now", "of", "off", "often", "on", "once", "only", "onto", "or", "ought", "oughtn't", "our", "ours", "ourselves", "out", "outside", "over", "past", "perhaps", "quite", "'re", "rather", "'s", "", "seldom", "several", "shall", "shan't", "she", "should", "shouldn't", "since", "so", "some", "sometimes", "soon", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "therefore", "these", "they", "this", "those", "though", "", "through", "thus", "till", "to", "together", "too", "towards", "under", "unless", "until", "up", "upon", "us", "used", "usedn't", "usen't", "usually", "'ve", "very", "was", "wasn't", "we", "well", "were", "weren't", "what", "when", "where", "whether", "which", "while", "who", "whom", "whose", "why", "will", "with", "without", "won't", "would", "wouldn't", "yet", "you", "your", "yours", "yourself", "yourselves"]
-
+''' Returns frequency of function words. Source:  https://stackoverflow.com/questions/5819840/calculate-frequency-of-function-words'''
 def get_func_word_freq(words,funct_words):
-    """ Returns frequency of function words. Source:  https://stackoverflow.com/questions/5819840/calculate-frequency-of-function-words"""
     fdist = nltk.FreqDist([funct_word for funct_word in funct_words if funct_word in words])
     funct_freq = {}
     for key,value in fdist.iteritems():
@@ -642,18 +634,17 @@ def normalizer(Array_Features):
     return Array_Features_normalized
 
 def Preprocessing(X):
-    #summary=open(config["Summary"]["Path"],'w')
-    summary=Features.summary
-    summary.write("\n\n###### List of Preprocessing steps:\n")
+    #Globals.summary.open(Globals.config["Summary"]["Path"],'w')
+    Globals.summary.write("\n\n###### List of Preprocessing steps:\n")
     #Array_Features=Sparse_Matrix_Features.toarray()
     X_array=X.toarray()
     #X_test_array=X_test.toarray()
     #scaled_Array_Features=preprocessing.scale(Sparse_Matrix_Features) # Center data with the mean and then scale it using the std deviation
     #other method that keeps the model for testing
-    #if config["Preprocessing"]["mean_scaling"] == "True":
+    #if Globals.config["Preprocessing"]["mean_scaling"] == "True":
     #    X_train=mean_scaling(X_train)
     #    X_test=mean_scaling(X_test)
-    #    summary.write("\n Scaling using the mean.\n")
+    #    Globals.summary.write("\n Scaling using the mean.\n")
     #    print("Preprocessing: Mean_scaling")
     #    return X_train, X_test
     #    # return the scaler for testing data
@@ -661,21 +652,21 @@ def Preprocessing(X):
     if Globals.config["Preprocessing"]["min_max_scaling"] == "True":
         X=min_max_scaling(X_array)
         #X_test=min_max_scaling(X_test_array)
-        summary.write("\n Scaling using the min and max.\n")
+        Globals.summary.write("\n Scaling using the min and max.\n")
         Globals.logger.info("Preprocessing: min_max_scaling")
         return X
         # use abs value to scale
-    #elif config["Preprocessing"]["abs_scaler"] == "True":
+    #elif Globals.config["Preprocessing"]["abs_scaler"] == "True":
     #    X_train=abs_scaler(X_train)
     #    X_test=abs_scaler(X_test)
-    #    summary.write("\n Scaling using the absolute value.\n")
+    #    Globals.summary.write("\n Scaling using the absolute value.\n")
     #    print("Preprocessing: abs_scaler")
     #    return X_train, X_test
     #    #normalize the data???
-    #elif config["Preprocessing"]["normalize"] == "True":
+    #elif Globals.config["Preprocessing"]["normalize"] == "True":
     #    X_train = normalizer(X_train)
     #    X_test = normalizer(X_test)
-    #    summary.write("\n Normalizing.\n")
+    #    Globals.summary.write("\n Normalizing.\n")
     #    print("Preprocessing: Normalizing")
     #    return X_train, X_test
     else:
@@ -763,8 +754,7 @@ def single_network_features(dns_info, IPS, IP_whois, whois_info, url, list_featu
         Globals.logger.debug('DNS_Info_Exists')
 
 def single_javascript_features(soup, html, list_features, list_time):
-    if Globals.config["HTML_Features"]["HTML_features"] == "True" and \
-            Globals.config["Javascript_Features"]["javascript_features"] == "True":
+    if Globals.config["HTML_Features"]["HTML_features"] == "True" and Globals.config["Javascript_Features"]["javascript_features"] == "True":
         Features.Javascript_number_of_exec(soup, list_features, list_time)
         Globals.logger.debug("number_of_exec")
 
@@ -1015,7 +1005,7 @@ def single_email_features(body_text, body_html, text_Html, test_text, num_attach
         Globals.logger.debug("compare_sender_return")
         Features.Email_Header_compare_sender_domain_message_id_domain(sender_domain , message_id, list_features, list_time)
         #Features.Content_Disposition(cdispo, list_features, list_time)
-        #logger.debug("Content_Disposition")
+        #Globals.logger.debug("Content_Disposition")
         Features.Email_Header_Number_Cc(Cc, list_features, list_time)
         Globals.logger.debug("Number_Cc")
         Features.Email_Header_Number_Bcc(Bcc, list_features, list_time)
@@ -1181,9 +1171,9 @@ def email_url_features(url_All, sender_domain, list_features, list_time):
         Globals.logger.debug("Number_link_sec_port")
     #
     #Features.Number_link_IP(url_All, list_features, list_time)
-    #logger.debug(Number_link_IP)
+    #Globals.logger.debug(Number_link_IP)
     #Features.Number_link_HTTPS(url_All, list_features, list_time)
-    #logger.debug(Number_link_HTTPS)
+    #Globals.logger.debug(Number_link_HTTPS)
     #Features.Number_Domain_Diff_Sender(url_All, sender_domain, list_features, list_time)
     #print(Number_Domain_Diff_Sender)
     #Features.Number_Link_Text(url_All, list_features, list_time)
@@ -1210,7 +1200,7 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
                     if not rawurl:
                         continue
                     Globals.logger.debug("rawurl:" + str(rawurl))
-                    Features.summary.write("URL: {}".format(rawurl))
+                    Features.Globals.summary.write("URL: {}".format(rawurl))
                     t0 = time.time()
                     html, content, Error = Download_url.download_url(rawurl, list_time)
                     IPs, ipwhois, whois_output, domain = Download_url.extract_whois(html.url, list_time)
@@ -1240,7 +1230,7 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
                         #    pickle.dump(list_features,feature_tracking)
                         # with open("Data_Dump/URLs_Training/"+path_leaf(filepath)+"_feature_vector.pkl",'rb') as feature_tracking:
                         #     for i in range(len(list_dict)+1):
-                        #         logger.debug(pickle.load(feature_tracking))
+                        #         Globals.logger.debug(pickle.load(feature_tracking))
                         dump_features(rawurl, str(soup), list_features, features_output, list_dict, list_time, time_dict)
                         #with open(features_output+"_html_content.pkl",'ab') as feature_tracking:
                         #    pickle.dump("URL: "+rawurl, feature_tracking)

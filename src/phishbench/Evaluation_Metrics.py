@@ -8,7 +8,6 @@ from sklearn.model_selection import cross_validate
 from . import Features
 from .utils import Globals
 
-
 def Confusion_matrix(y_test, y_predict):
 		confusion_matrix=sklearn.metrics.confusion_matrix(y_test, y_predict, labels=[0,1])
 		tn, fp, fn, tp=confusion_matrix.ravel()
@@ -90,45 +89,44 @@ def Balanced_accuracy_score(y_test,y_predict):
 		return b_accuracy
 
 def eval_metrics(clf, y_test, y_predict):
-	summary=Features.summary
-	summary.write("\n\nEvaluation metrics used:\n")
-	summary.write("\n\n Supervised metrics:\n")
+	Globals.summary.write("\n\nEvaluation metrics used:\n")
+	Globals.summary.write("\n\n Supervised metrics:\n")
 	eval_metrics_dict = {}
 	if Globals.config["Evaluation Metrics"]["Confusion_matrix"] == "True":
 		cm = Confusion_matrix(y_test, y_predict)
 		eval_metrics_dict['CM'] = cm
-		summary.write("Confusion_matrix\n")
+		Globals.summary.write("Confusion_matrix\n")
 	if Globals.config["Evaluation Metrics"]["Matthews_corrcoef"] == "True":
 		mcc = Matthews_corrcoef(y_test, y_predict)
 		eval_metrics_dict['MCC'] = mcc
-		summary.write("Matthews_corrcoef\n")
+		Globals.summary.write("Matthews_corrcoef\n")
 	if Globals.config["Evaluation Metrics"]["ROC_AUC"] == "True":
 		roc_auc = ROC_AUC(y_test, y_predict)
 		eval_metrics_dict['ROC_AUC'] = roc_auc
-		summary.write("ROC_AUC\n")
+		Globals.summary.write("ROC_AUC\n")
 	if Globals.config["Evaluation Metrics"]["Precision"] == "True":
 		precision = Precision(y_test, y_predict)
 		eval_metrics_dict['Precision'] = precision
-		summary.write("Precision\n")
+		Globals.summary.write("Precision\n")
 	if Globals.config["Evaluation Metrics"]["Recall"] == "True":
 		recall = Recall(y_test, y_predict)
 		eval_metrics_dict['Recall'] = recall
-		summary.write("Recall\n")
+		Globals.summary.write("Recall\n")
 	if Globals.config["Evaluation Metrics"]["F1_score"] == "True":
 		f1_score = F1_score(y_test, y_predict)
 		eval_metrics_dict['F1_score'] = f1_score
-		summary.write("F1_score\n")
-	#if config["Evaluation Metrics"]["Cross_validation"] == "True":
+		Globals.summary.write("F1_score\n")
+	#if Globals.config["Evaluation Metrics"]["Cross_validation"] == "True":
 	#	Cross_validation(clf, X, y)
-	#	summary.write("Cross_validation\n")
+	#	Globals.summary.write("Cross_validation\n")
 	if Globals.config["Evaluation Metrics"]["Geomteric_mean_score"] == "True":
 		gmean = Geomteric_mean_score(y_test,y_predict)
 		eval_metrics_dict['Gmean'] = gmean
-		summary.write("Geomteric_mean_score\n")
+		Globals.summary.write("Geomteric_mean_score\n")
 	if Globals.config["Evaluation Metrics"]["Balanced_accuracy_score"] == "True":
 		accuracy = Balanced_accuracy_score(y_test,y_predict)
 		eval_metrics_dict['accuracy'] = accuracy
-		summary.write("Balanced_accuracy_score\n")
+		Globals.summary.write("Balanced_accuracy_score\n")
 	#	# write results to summary
 	if Globals.config["Classification"]["Attack Features"] == "True":
 		Globals.logger.debug("Original Labels: {}".format(y_test))
@@ -136,20 +134,20 @@ def eval_metrics(clf, y_test, y_predict):
 	return (eval_metrics_dict)
 
 def eval_metrics_cluster(y_test, y_predict):
-	summary=Features.summary
-	summary.write("\n\nEvaluation metrics used:\n")
-	summary.write("\n\n clustering metrics:\n")
+	Globals.summary.Features.summary
+	Globals.summary.write("\n\nEvaluation metrics used:\n")
+	Globals.summary.write("\n\n clustering metrics:\n")
 	eval_metrics_dict_cluster = {}
 	if Globals.config["Evaluation Metrics"]["Homogenity"] == "True":
 		homogeneity_score = Homogenity(y_test, y_predict)
 		eval_metrics_dict_cluster['Homogenity'] = homogeneity_score
-		summary.write("Homogenity\n")
+		Globals.summary.write("Homogenity\n")
 	if Globals.config["Evaluation Metrics"]["Completeness"] == "True":
 		completeness_score = Completeness(y_test, y_predict)
 		eval_metrics_dict_cluster['Completeness'] = completeness_score
-		summary.write("Completeness\n")
+		Globals.summary.write("Completeness\n")
 	if Globals.config["Evaluation Metrics"]["V_measure"] == "True":
 		v_measure_score = V_measure(y_test,y_predict)
 		eval_metrics_dict_cluster['V_measure'] = v_measure_score
-		summary.write("V_measure\n")
+		Globals.summary.write("V_measure\n")
 	return (eval_metrics_dict_cluster)

@@ -1,22 +1,28 @@
+import os
 import os.path
-from datetime import datetime
+import sys
 
+import re
+import string
+import math
+import time
 import dns.resolver
+import tldextract
+import whois
 from lxml import html as lxml_html
+from textstat.textstat import textstat
+from scipy import stats
+from bs4 import BeautifulSoup
+from datetime import datetime
+from urllib.parse import urlparse
 
 from .Features_Support import *
 from .utils import Globals
 
-
-# from collections import deque
-################
-
-
-
 ##### Email Features:
 #### Header Features:
 #def message_id_domain(message_id, list_features, list_time):
-#    if  Globals.config['Features']["message_id_domain"] == "True":
+#    if Globals.config['Features']["message_id_domain"] == "True":
 #    #if User_options.message_id_domain == "True":
 #        start=time.time()
 #        try:
@@ -38,7 +44,7 @@ from .utils import Globals
 #        list_time["message_id_domain"]=ex_time
 #
 #def message_id_left_part(message_id, list_features, list_time):
-#    if  Globals.config['Features']["message_id_left_part"] == "True":
+#    if Globals.config['Features']["message_id_left_part"] == "True":
 #        start=time.time()
 #        try:
 #            if message_id!="None":
@@ -56,7 +62,7 @@ from .utils import Globals
 #        list_time["message_id_left_part"]=ex_time
 
 #def recipient_name(recipient_name, list_features, list_time):
-#    if  Globals.config['Features']["recipient_name"] == "True":
+#    if Globals.config['Features']["recipient_name"] == "True":
 #        start=time.time()
 #        try:
 #            print("recipient_name {}".format(recipient_name))
@@ -70,7 +76,7 @@ from .utils import Globals
 
 
 #def recipient_full_address(recipient_full_address, list_features, list_time):
-#    if  Globals.config["Features"]["recipient_full_address"] == "True":
+#    if Globals.config["Features"]["recipient_full_address"] == "True":
 #        start=time.time()
 #        try:
 #            #print("recipient_full_address type: {}".format(type(recipient_full_address)))
@@ -86,7 +92,7 @@ from .utils import Globals
 #        list_time["recipient_full_address"]=ex_time
 
 #def recipient_domain(recipient_domain, list_features, list_time):
-#    if  Globals.config["Features"]["recipient_domain"] == "True":
+#    if Globals.config["Features"]["recipient_domain"] == "True":
 #        start=time.time()
 #        try:
 #            #print("recipient domain: {}".format(recipient_domain))
@@ -115,7 +121,7 @@ from .utils import Globals
 #        list_time["recipient_domain"]=ex_time
 
 #def sender_name(sender_name, list_features, list_time):
-#    if  Globals.config["Features"]["sender_name"] == "True":
+#    if Globals.config["Features"]["sender_name"] == "True":
 #        start=time.time()
 #        try:
 #            list_features["sender_name"]=sender_name
@@ -128,7 +134,7 @@ from .utils import Globals
 #        list_time["sender_name"]=ex_time
 
 #def sender_domain(sender_domain, list_features, list_time):
-#    if  Globals.config["Features"]["sender_domain"] == "True":
+#    if Globals.config["Features"]["sender_domain"] == "True":
 #        start=time.time()
 #        try:
 #            list_features["sender_domain"]=sender_domain
@@ -141,7 +147,7 @@ from .utils import Globals
 #        list_time["sender_domain"]=ex_time
 #
 #def return_address(return_addr, list_features, list_time):
-#    if  Globals.config["Features"]["return_address"] == "True":
+#    if Globals.config["Features"]["return_address"] == "True":
 #        start=time.time()
 #        try:
 #            list_features["return_address"]=return_addr
@@ -153,7 +159,7 @@ from .utils import Globals
 #        ex_time=end-start
 #        list_time["return_address"]=ex_time
 def Email_Header_Num_Content_type(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_type"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_type"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_type"]=len(content_type_list)
@@ -165,7 +171,7 @@ def Email_Header_Num_Content_type(content_type_list, list_features, list_time):
         list_time["Num_Content_type"]=ex_time
 
 def Email_Header_Num_Charset(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Charset"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Charset"] == "True":
         start=time.time()
         try:
             list_features["Num_Charset"] = len(charset_list)
@@ -177,7 +183,7 @@ def Email_Header_Num_Charset(charset_list, list_features, list_time):
         list_time["Num_Charset"]=ex_time
 
 def Email_Header_Num_Unique_Charset(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Charset"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Charset"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Charset"] = len(set(charset_list))
@@ -190,7 +196,7 @@ def Email_Header_Num_Unique_Charset(charset_list, list_features, list_time):
 
 
 def Email_Header_MIME_Version(MIME_version, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["MIME_Version"] == "True":
+    if Globals.config["Email_Header_Features"]["MIME_Version"] == "True":
         start=time.time()
         try:
             #list_features["Email_Header_MIME_Version"]=MIME_version
@@ -207,7 +213,7 @@ def Email_Header_MIME_Version(MIME_version, list_features, list_time):
         list_time["MIME_Version"]=ex_time
 
 def Email_Header_Num_Unique_Content_type(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Content_type"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Content_type"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Content_type"]=len(set(content_type_list))
@@ -219,7 +225,7 @@ def Email_Header_Num_Unique_Content_type(content_type_list, list_features, list_
         list_time["Num_Unique_Content_type"]=ex_time
 
 def Email_Header_Num_Unique_Content_Disposition(content_disposition_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Content_Disposition"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Content_Disposition"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Content_Disposition"]=len(set(content_disposition_list))
@@ -231,7 +237,7 @@ def Email_Header_Num_Unique_Content_Disposition(content_disposition_list, list_f
         list_time["Num_Unique_Content_Disposition"]=ex_time
 
 def Email_Header_Num_Content_Disposition(content_disposition_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Disposition"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Disposition"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Disposition"]=len(content_disposition_list)
@@ -243,7 +249,7 @@ def Email_Header_Num_Content_Disposition(content_disposition_list, list_features
         list_time["Num_Content_Disposition"]=ex_time
 
 def Email_Header_Num_Content_Type_text_plain(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_text_plain"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_text_plain"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_text_plain"]=content_type_list.count("text/plain")
@@ -256,7 +262,7 @@ def Email_Header_Num_Content_Type_text_plain(content_type_list, list_features, l
 
 
 def Email_Header_Num_Content_Type_text_html(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_text_html"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_text_html"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_text_html"]=content_type_list.count("text/html")
@@ -268,7 +274,7 @@ def Email_Header_Num_Content_Type_text_html(content_type_list, list_features, li
         list_time["Num_Content_Type_text_html"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Encrypted(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Encrypted"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Encrypted"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Encrypted"]=content_type_list.count("multipart/encrypted")
@@ -280,7 +286,7 @@ def Email_Header_Num_Content_Type_Multipart_Encrypted(content_type_list, list_fe
         list_time["Num_Content_Type_Multipart_Encrypted"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Mixed(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Mixed"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Mixed"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Mixed"]=content_type_list.count("multipart/mixed")
@@ -292,7 +298,7 @@ def Email_Header_Num_Content_Type_Multipart_Mixed(content_type_list, list_featur
         list_time["Num_Content_Type_Multipart_Mixed"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_form_data(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_form_data"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_form_data"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_form_data"] = content_type_list.count("multipart/form-data")
@@ -304,7 +310,7 @@ def Email_Header_Num_Content_Type_Multipart_form_data(content_type_list, list_fe
         list_time["Num_Content_Type_Multipart_form_data"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_byterange(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_byterange"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_byterange"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_byterange"] = content_type_list.count("multipart/byterange")
@@ -316,7 +322,7 @@ def Email_Header_Num_Content_Type_Multipart_byterange(content_type_list, list_fe
         list_time["Num_Content_Type_Multipart_byterange"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Parallel(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Parallel"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Parallel"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Parallel"] = content_type_list.count("multipart/parallel")
@@ -328,7 +334,7 @@ def Email_Header_Num_Content_Type_Multipart_Parallel(content_type_list, list_fea
         list_time["Num_Content_Type_Multipart_Parallel"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Report(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Report"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Report"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Report"] = content_type_list.count("multipart/report")
@@ -340,7 +346,7 @@ def Email_Header_Num_Content_Type_Multipart_Report(content_type_list, list_featu
         list_time["Num_Content_Type_Multipart_Report"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Alternative(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Alternative"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Alternative"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Alternative"] = content_type_list.count("multipart/alternative")
@@ -352,7 +358,7 @@ def Email_Header_Num_Content_Type_Multipart_Alternative(content_type_list, list_
         list_time["Num_Content_Type_Multipart_Alternative"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Digest_Num(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Digest_Num"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Digest_Num"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Digest_Num"] = content_type_list.count("multipart/digest")
@@ -364,7 +370,7 @@ def Email_Header_Num_Content_Type_Multipart_Digest_Num(content_type_list, list_f
         list_time["Num_Content_Type_Multipart_Digest_Num"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_Signed_Num(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Signed_Num"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_Signed_Num"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_Signed_Num"] = content_type_list.count("multipart/signed")
@@ -376,7 +382,7 @@ def Email_Header_Num_Content_Type_Multipart_Signed_Num(content_type_list, list_f
         list_time["Num_Content_Type_Multipart_Signed_Num"]=ex_time
 
 def Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced(content_type_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_X_Mixed_Replaced"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Multipart_X_Mixed_Replaced"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Multipart_X_Mixed_Replaced"] = content_type_list.count("multipart/x-mixed-replaced")
@@ -388,7 +394,7 @@ def Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced(content_type_list, 
         list_time["Num_Content_Type_Multipart_X_Mixed_Replaced"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_us_ascii(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_us_ascii"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_us_ascii"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_us_ascii"]=charset_list.count("us_ascii")
@@ -400,7 +406,7 @@ def Email_Header_Num_Content_Type_Charset_us_ascii(charset_list, list_features, 
         list_time["Num_Content_Type_Charset_us_ascii"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_utf_8(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_utf_8"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_utf_8"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_utf_8"]=charset_list.count("utf_8")
@@ -412,7 +418,7 @@ def Email_Header_Num_Content_Type_Charset_utf_8(charset_list, list_features, lis
         list_time["Num_Content_Type_Charset_utf_8"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_utf_7(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_utf_7"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_utf_7"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_utf_7"]=charset_list.count("utf_7")
@@ -424,7 +430,7 @@ def Email_Header_Num_Content_Type_Charset_utf_7(charset_list, list_features, lis
         list_time["Num_Content_Type_Charset_utf_7"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_gb2312(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_gb2312"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_gb2312"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_gb2312"]=charset_list.count("gb2312")
@@ -436,7 +442,7 @@ def Email_Header_Num_Content_Type_Charset_gb2312(charset_list, list_features, li
         list_time["Num_Content_Type_Charset_gb2312"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_shift_jis(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_shift_jis"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_shift_jis"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_shift_jis"]=charset_list.count("shit_jis")
@@ -448,7 +454,7 @@ def Email_Header_Num_Content_Type_Charset_shift_jis(charset_list, list_features,
         list_time["Num_Content_Type_Charset_shift_jis"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_koi(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_koi"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_koi"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_koi"]=charset_list.count("koi")
@@ -460,7 +466,7 @@ def Email_Header_Num_Content_Type_Charset_koi(charset_list, list_features, list_
         list_time["Num_Content_Type_Charset_koi"]=ex_time
 
 def Email_Header_Num_Content_Type_Charset_iso2022_jp(charset_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_iso2022_jp"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Type_Charset_iso2022_jp"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Type_Charset_iso2022_jp"]=charset_list.count("iso2022-jp")
@@ -472,7 +478,7 @@ def Email_Header_Num_Content_Type_Charset_iso2022_jp(charset_list, list_features
         list_time["Num_Content_Type_Charset_iso2022_jp"]=ex_time
 
 def Email_Header_Num_Attachment(num_attachment, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Attachment"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Attachment"] == "True":
         start=time.time()
         try:
             list_features["Num_Attachment"]=num_attachment
@@ -484,7 +490,7 @@ def Email_Header_Num_Attachment(num_attachment, list_features, list_time):
         list_time["Num_Attachment"]=ex_time
 
 def Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Attachment_types"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Attachment_types"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Attachment_types"]=len(set(file_extension_list))
@@ -496,7 +502,7 @@ def Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features,
         list_time["Num_Unique_Attachment_types"]=ex_time
 
 def Email_Header_Num_Content_Transfer_Encoding(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Transfer_Encoding"]=len(Content_Transfer_Encoding_list)
@@ -508,7 +514,7 @@ def Email_Header_Num_Content_Transfer_Encoding(Content_Transfer_Encoding_list, l
         list_time["Num_Content_Transfer_Encoding"]=ex_time
 
 def Email_Header_Num_Unique_Content_Transfer_Encoding(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Content_Transfer_Encoding"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Content_Transfer_Encoding"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Content_Transfer_Encoding"]=len(set(Content_Transfer_Encoding_list))
@@ -521,7 +527,7 @@ def Email_Header_Num_Unique_Content_Transfer_Encoding(Content_Transfer_Encoding_
 
 
 def Email_Header_Num_Content_Transfer_Encoding_7bit(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_7bit"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_7bit"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Transfer_Encoding_7bit"]=Content_Transfer_Encoding_list.count('7bit')
@@ -533,7 +539,7 @@ def Email_Header_Num_Content_Transfer_Encoding_7bit(Content_Transfer_Encoding_li
         list_time["Num_Content_Transfer_Encoding_7bit"]=ex_time
 
 def Email_Header_Num_Content_Transfer_Encoding_8bit(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_8bit"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_8bit"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Transfer_Encoding_8bit"]=Content_Transfer_Encoding_list.count('8bit')
@@ -545,7 +551,7 @@ def Email_Header_Num_Content_Transfer_Encoding_8bit(Content_Transfer_Encoding_li
         list_time["Num_Content_Transfer_Encoding_8bit"]=ex_time
 
 def Email_Header_Num_Content_Transfer_Encoding_binary(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_binary"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_binary"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Transfer_Encoding_binary"]=Content_Transfer_Encoding_list.count('binary')
@@ -557,7 +563,7 @@ def Email_Header_Num_Content_Transfer_Encoding_binary(Content_Transfer_Encoding_
         list_time["Num_Content_Transfer_Encoding_binary"]=ex_time
 
 def Email_Header_Num_Content_Transfer_Encoding_quoted_printable(Content_Transfer_Encoding_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_quoted_printable"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Content_Transfer_Encoding_quoted_printable"] == "True":
         start=time.time()
         try:
             list_features["Num_Content_Transfer_Encoding_quoted_printable"]=Content_Transfer_Encoding_list.count('quoted-printable')
@@ -569,7 +575,7 @@ def Email_Header_Num_Content_Transfer_Encoding_quoted_printable(Content_Transfer
         list_time["Num_Content_Transfer_Encoding_quoted_printable"]=ex_time
 
 def Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Num_Unique_Attachment_types"] == "True":
+    if Globals.config["Email_Header_Features"]["Num_Unique_Attachment_types"] == "True":
         start=time.time()
         try:
             list_features["Num_Unique_Attachment_types"]=len(set(file_extension_list))
@@ -581,7 +587,7 @@ def Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features,
         list_time["Num_Unique_Attachment_types"]=ex_time
 
 def Email_Header_size_in_Bytes(size_in_bytes ,list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["size_in_Bytes"] == "True":
+    if Globals.config["Email_Header_Features"]["size_in_Bytes"] == "True":
         start=time.time()
         try:
             list_features["size_in_Bytes"]=size_in_bytes
@@ -593,7 +599,7 @@ def Email_Header_size_in_Bytes(size_in_bytes ,list_features, list_time):
         list_time["size_in_Bytes"]=ex_time
 
 def Email_Header_return_path(return_addr, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["return_path"] == "True":
+    if Globals.config["Email_Header_Features"]["return_path"] == "True":
         start=time.time()
         try:
             list_features["return_path"]=return_addr
@@ -605,7 +611,7 @@ def Email_Header_return_path(return_addr, list_features, list_time):
         list_time["return_path"]=ex_time
 
 def Email_Header_X_mailer(x_mailer,list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_mailer"] == "True":
+    if Globals.config["Email_Header_Features"]["X_mailer"] == "True":
         start=time.time()
         try:
             list_features["X_mailer"]=x_mailer
@@ -618,7 +624,7 @@ def Email_Header_X_mailer(x_mailer,list_features, list_time):
         list_time["X_mailer"]=ex_time
 
 def Email_Header_X_originating_hostname(x_originating_hostname, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_originating_hostname"] == "True":
+    if Globals.config["Email_Header_Features"]["X_originating_hostname"] == "True":
         start=time.time()
         try:
             list_features["X_originating_hostname"]=x_originating_hostname
@@ -630,7 +636,7 @@ def Email_Header_X_originating_hostname(x_originating_hostname, list_features, l
         list_time["X_originating_hostname"]=ex_time
 
 def Email_Header_X_originating_ip(x_originating_ip, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_originating_ip"] == "True":
+    if Globals.config["Email_Header_Features"]["X_originating_ip"] == "True":
         start=time.time()
         try:
             list_features["X_originating_ip"]=x_originating_ip
@@ -642,7 +648,7 @@ def Email_Header_X_originating_ip(x_originating_ip, list_features, list_time):
         list_time["X_originating_ip"]=ex_time
 
 def Email_Header_X_spam_flag(x_spam_flag, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_spam_flag"] == "True":
+    if Globals.config["Email_Header_Features"]["X_spam_flag"] == "True":
         start=time.time()
         try:
             list_features["X_Spam_flag"]=x_spam_flag
@@ -654,7 +660,7 @@ def Email_Header_X_spam_flag(x_spam_flag, list_features, list_time):
         list_time["X_Spam_flag"]=ex_time
 
 def Email_Header_X_virus_scanned(x_virus_scanned, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_virus_scanned"] == "True":
+    if Globals.config["Email_Header_Features"]["X_virus_scanned"] == "True":
         start=time.time()
         try:
             list_features["X_virus_scanned"]=x_virus_scanned
@@ -666,7 +672,7 @@ def Email_Header_X_virus_scanned(x_virus_scanned, list_features, list_time):
         list_time["X_virus_scanned"]=ex_time
 
 def Email_Header_Received_count(received, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Received_count"] == "True":
+    if Globals.config["Email_Header_Features"]["Received_count"] == "True":
         start=time.time()
         #print("received {}".format(received))
         try:
@@ -684,7 +690,7 @@ def Email_Header_Received_count(received, list_features, list_time):
 
 
 def Email_Header_Authentication_Results_SPF_Pass(authentication_results, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Authentication_Results_SPF_Pass"] == "True":
+    if Globals.config["Email_Header_Features"]["Authentication_Results_SPF_Pass"] == "True":
         start=time.time()
         try:
             if "spf=pass" in authentication_results:
@@ -699,7 +705,7 @@ def Email_Header_Authentication_Results_SPF_Pass(authentication_results, list_fe
         list_time["Authentication_Results_SPF_Pass"]=ex_time
 
 def Email_Header_Authentication_Results_DKIM_Pass(authentication_results, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Authentication_Results_DKIM_Pass"] == "True":
+    if Globals.config["Email_Header_Features"]["Authentication_Results_DKIM_Pass"] == "True":
         start=time.time()
         try:
             if "dkim=pass" in authentication_results:
@@ -716,7 +722,7 @@ def Email_Header_Authentication_Results_DKIM_Pass(authentication_results, list_f
         list_time["Authentication_Results_DKIM_Pass"]=ex_time
 
 def Email_Header_X_Origininal_Authentication_results(x_original_authentication_results, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["X_Origininal_Authentication_results"] == "True":
+    if Globals.config["Email_Header_Features"]["X_Origininal_Authentication_results"] == "True":
         start=time.time()
         try:
             list_features["X_Origininal_Authentication_results"]=x_original_authentication_results
@@ -729,7 +735,7 @@ def Email_Header_X_Origininal_Authentication_results(x_original_authentication_r
         list_time["X_Origininal_Authentication_results"]=ex_time
 
 def Email_Header_Received_SPF(received_spf, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Received_SPF"] == "True":
+    if Globals.config["Email_Header_Features"]["Received_SPF"] == "True":
         start=time.time()
         try:
             list_features["Received_SPF"]=received_spf
@@ -742,7 +748,7 @@ def Email_Header_Received_SPF(received_spf, list_features, list_time):
         list_time["Received_SPF"]=ex_time
 
 def Email_Header_Dkim_Signature_Exists(dkim_signature, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Dkim_Signature_Exists"] == "True":
+    if Globals.config["Email_Header_Features"]["Dkim_Signature_Exists"] == "True":
         start=time.time()
         try:
             #dkim_signature is boolean
@@ -757,7 +763,7 @@ def Email_Header_Dkim_Signature_Exists(dkim_signature, list_features, list_time)
 
 def Email_Header_compare_sender_domain_message_id_domain(sender_domain , message_id, list_features, list_time):
     #global list_features
-    if  Globals.config["Email_Header_Features"]["compare_sender_domain_message_id_domain"] == "True":
+    if Globals.config["Email_Header_Features"]["compare_sender_domain_message_id_domain"] == "True":
         start=time.time()
         try:
             if message_id!="None":
@@ -780,7 +786,7 @@ def Email_Header_compare_sender_domain_message_id_domain(sender_domain , message
 
 
 def Email_Header_compare_sender_return(sender_full_address, return_addr, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["compare_sender_return"] == "True":
+    if Globals.config["Email_Header_Features"]["compare_sender_return"] == "True":
         start=time.time()
         try:
             compare_sender_return=int(bool(sender_full_address==return_addr))
@@ -793,7 +799,7 @@ def Email_Header_compare_sender_return(sender_full_address, return_addr, list_fe
         list_time["compare_sender_return"]=ex_time
 
 def Email_Header_Test_Html(test_Html, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Test_Html"] == "True":
+    if Globals.config["Email_Header_Features"]["Test_Html"] == "True":
         start=time.time()
         try:
             list_features["Test_Html"]=test_Html
@@ -805,7 +811,7 @@ def Email_Header_Test_Html(test_Html, list_features, list_time):
         list_time["Test_Html"]=ex_time
 
 def Email_Header_Test_Text(test_text, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Test_Text"] == "True":
+    if Globals.config["Email_Header_Features"]["Test_Text"] == "True":
         start=time.time()
         try:
             list_features["Test_Text"]=test_text
@@ -818,7 +824,7 @@ def Email_Header_Test_Text(test_text, list_features, list_time):
 
 ##### Email URL features
 def Email_Number_Url(url_All, list_features, list_time):
-    if  Globals.config["Email_URL_Features"]["Number_Url"] == "True":
+    if Globals.config["Email_URL_Features"]["Number_Url"] == "True":
         start=time.time()
         try:
             list_features["Number_Url"]=len(url_All)
@@ -830,7 +836,7 @@ def Email_Number_Url(url_All, list_features, list_time):
         list_time["Number_Url"]=ex_time
 
 def Email_URL_Number_Diff_Domain(url_All, list_features, list_time):
-    if  Globals.config["Email_URL_Features"]["Number_Diff_Domain"] == "True":
+    if Globals.config["Email_URL_Features"]["Number_Diff_Domain"] == "True":
         start=time.time()
         list_Domains=[]
         try:
@@ -849,7 +855,7 @@ def Email_URL_Number_Diff_Domain(url_All, list_features, list_time):
         list_time["Number_Diff_Domain"]=ex_time
 
 def Email_URL_Number_Diff_Subdomain(url_All, list_features, list_time):
-    if  Globals.config["Email_URL_Features"]["Number_Diff_Subdomain"] == "True":
+    if Globals.config["Email_URL_Features"]["Number_Diff_Subdomain"] == "True":
         start=time.time()
         list_Subdomains=[]
         try:
@@ -869,7 +875,7 @@ def Email_URL_Number_Diff_Subdomain(url_All, list_features, list_time):
         list_time["Number_Diff_Subdomain"]=ex_time
 
 def Email_URL_Number_link_at(url_All, list_features, list_time):
-    if  Globals.config["Email_URL_Features"]["Number_link_at"] == "True":
+    if Globals.config["Email_URL_Features"]["Number_link_at"] == "True":
         start=time.time()
         count=0
         try:
@@ -885,7 +891,7 @@ def Email_URL_Number_link_at(url_All, list_features, list_time):
         list_time["Number_link_at"]=ex_time
 
 def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
-    if  Globals.config["Email_URL_Features"]["Number_link_sec_port"] == "True":
+    if Globals.config["Email_URL_Features"]["Number_link_sec_port"] == "True":
         start=time.time()
         count=0
         try:
@@ -903,7 +909,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
 
 #### Body Features:
 def Email_Body_recipient_name_body(body,recipient_name, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["recipient_name_body"] == "True":
+    if Globals.config["Email_Body_Features"]["recipient_name_body"] == "True":
         start=time.time()
         try:
             recipient_name_body= int(bool(recipient_name in body))
@@ -916,7 +922,7 @@ def Email_Body_recipient_name_body(body,recipient_name, list_features, list_time
         list_time["compare_sender_return"]=ex_time
 
 #def html_in_body(body, list_features, list_time):
-#    if  Globals.config["Features"]["html_in_body"] == "True":
+#    if Globals.config["Features"]["html_in_body"] == "True":
 #        start=time.time()
 #        Email_Body_html=re.compile(r'text/html', flags=re.IGNORECASE)
 #        try:
@@ -931,7 +937,7 @@ def Email_Body_recipient_name_body(body,recipient_name, list_features, list_time
 #        #list_features[""]=
 
 def Email_Body_number_of_words_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_of_words_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_of_words_body"] == "True":
         start=time.time()
         try:
             number_of_words_body = len(re.findall(r'\w+', body))
@@ -944,7 +950,7 @@ def Email_Body_number_of_words_body(body, list_features, list_time):
         list_time["number_of_words_body"]=ex_time
 
 def Email_Body_number_of_unique_words_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_of_unique_words_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_of_unique_words_body"] == "True":
         start=time.time()
         if body:
             try:
@@ -960,7 +966,7 @@ def Email_Body_number_of_unique_words_body(body, list_features, list_time):
         list_time["number_of_unique_words_body"]=ex_time
 
 def Email_Body_number_of_characters_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_of_characters_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_of_characters_body"] == "True":
         start=time.time()
         try:
             number_of_characters_body = len(re.findall(r'\w', body))
@@ -973,7 +979,7 @@ def Email_Body_number_of_characters_body(body, list_features, list_time):
         list_time["number_of_characters_body"]=ex_time
 
 def Email_Body_number_of_special_characters_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_of_special_characters_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_of_special_characters_body"] == "True":
         start=time.time()
         try:
             number_of_characters_body = len(re.findall(r'\w', body))
@@ -988,7 +994,7 @@ def Email_Body_number_of_special_characters_body(body, list_features, list_time)
 
 
 def Email_Body_vocab_richness_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["vocab_richness_body"] == "True":
+    if Globals.config["Email_Body_Features"]["vocab_richness_body"] == "True":
         start=time.time()
         try:
             vocab_richness_body=yule(body)
@@ -1002,7 +1008,7 @@ def Email_Body_vocab_richness_body(body, list_features, list_time):
 
 
 def Email_Body_number_of_html_tags_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_of_html_tags_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_of_html_tags_body"] == "True":
         start=time.time()
         try:
             if body:
@@ -1018,7 +1024,7 @@ def Email_Body_number_of_html_tags_body(body, list_features, list_time):
         list_time["number_of_html_tags_body"]=ex_time
 
 def Email_Body_number_unique_chars_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["number_unique_chars_body"] == "True":
+    if Globals.config["Email_Body_Features"]["number_unique_chars_body"] == "True":
         start=time.time()
         try:
             if body:
@@ -1035,7 +1041,7 @@ def Email_Body_number_unique_chars_body(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_greetings_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["greetings_body"] == "True":
+    if Globals.config["Email_Body_Features"]["greetings_body"] == "True":
         start=time.time()
         try:
             if body:
@@ -1053,7 +1059,7 @@ def Email_Body_greetings_body(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_hidden_text(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["hidden_text"] == "True":
+    if Globals.config["Email_Body_Features"]["hidden_text"] == "True":
         start=time.time()
         regex_font_color=re.compile(r'<font +color="#FFFFF[0-9A-F]"',flags=re.DOTALL)
         try:
@@ -1070,7 +1076,7 @@ def Email_Body_hidden_text(body, list_features, list_time):
         list_time["hidden_text"]=ex_time
 
 def Email_Body_count_href_tag(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["count_href_tag"] == "True":
+    if Globals.config["Email_Body_Features"]["count_href_tag"] == "True":
         start=time.time()
         ultimate_regexp =re.compile(r"(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>", flags=re.MULTILINE)
         count_href_tag=0
@@ -1090,7 +1096,7 @@ def Email_Body_count_href_tag(body, list_features, list_time):
         list_time["count_href_tag"]=ex_time
 
 def Email_Body_end_tag_count(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["end_tag_count"] == "True":
+    if Globals.config["Email_Body_Features"]["end_tag_count"] == "True":
         start=time.time()
         ultimate_regexp =re.compile(r"(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>", flags=re.MULTILINE)
         open_tag_count=0
@@ -1112,7 +1118,7 @@ def Email_Body_end_tag_count(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_open_tag_count(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["open_tag_count"] == "True":
+    if Globals.config["Email_Body_Features"]["open_tag_count"] == "True":
         start=time.time()
         ultimate_regexp =re.compile(r"(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>", flags=re.MULTILINE)
         open_tag_count=0
@@ -1135,7 +1141,7 @@ def Email_Body_open_tag_count(body, list_features, list_time):
         list_time["open_tag_count"]=ex_time
 
 def Email_Body_on_mouse_over(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["on_mouse_over"] == "True":
+    if Globals.config["Email_Body_Features"]["on_mouse_over"] == "True":
         start=time.time()
         ultimate_regexp =re.compile(r"(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>", flags=re.MULTILINE)
         on_mouse_over=0
@@ -1156,7 +1162,7 @@ def Email_Body_on_mouse_over(body, list_features, list_time):
         list_time["on_mouse_over"]=ex_time
 
 def Email_Body_blacklisted_words_body(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["blacklisted_words_body"] == "True":
+    if Globals.config["Email_Body_Features"]["blacklisted_words_body"] == "True":
         start=time.time()
         blacklist_body=["urgent", "account", "closing", "act now", "click here", "limitied", "suspension", "your account", "verify your account", "agree", 'bank', 'dear'
                         ,"update", "comfirm", "customer", "client", "Suspend", "restrict", "verify", "login", "ssn", 'username','click','log','inconvenien','alert', 'paypal']        
@@ -1180,7 +1186,7 @@ def Email_Body_blacklisted_words_body(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Header_blacklisted_words_subject(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["blacklisted_words_subject"] == "True":
+    if Globals.config["Email_Header_Features"]["blacklisted_words_subject"] == "True":
         start=time.time()
         blacklist_subject=["urgent", "account", "closing", "act now", "click here", "limitied", "suspension", "your account", "verify your account", "agree", 'bank', 'dear'
                         ,"update", "comfirm", "customer", "client", "Suspend", "restrict", "verify", "login", "ssn", 'username','click','log','inconvenien','alert', 'paypal']        
@@ -1201,7 +1207,7 @@ def Email_Header_blacklisted_words_subject(subject, list_features, list_time):
         list_time["blacklisted_words_subject"]=ex_time
 
 def Email_Header_Number_Cc(cc, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Number_Cc"] == "True":
+    if Globals.config["Email_Header_Features"]["Number_Cc"] == "True":
         start=time.time()
         try:
             if cc:
@@ -1216,7 +1222,7 @@ def Email_Header_Number_Cc(cc, list_features, list_time):
         list_time["Number_Cc"]=ex_time
 
 def Email_Header_Number_Bcc(Bcc, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Number_Bcc"] == "True":
+    if Globals.config["Email_Header_Features"]["Number_Bcc"] == "True":
         start=time.time()
         try:
             if Bcc:
@@ -1231,7 +1237,7 @@ def Email_Header_Number_Bcc(Bcc, list_features, list_time):
         list_time["Number_Bcc"]=ex_time
 
 def Email_Header_Number_To(To, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["Number_To"] == "True":
+    if Globals.config["Email_Header_Features"]["Number_To"] == "True":
         start=time.time()
         try:
             if To:
@@ -1249,7 +1255,7 @@ def Email_Header_Number_To(To, list_features, list_time):
         list_time["Number_To"]=ex_time
 
 def Email_Body_Number_Of_Scripts(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["Number_Of_Scripts"] == "True":
+    if Globals.config["Email_Body_Features"]["Number_Of_Scripts"] == "True":
         start=time.time()
         Number_Of_Scripts=0
         if body:
@@ -1266,7 +1272,7 @@ def Email_Body_Number_Of_Scripts(body, list_features, list_time):
         list_time["Number_Of_Scripts"]=ex_time
 
 def Email_Body_Number_Of_Img_Links(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["Number_Of_Img_Links"] == "True":
+    if Globals.config["Email_Body_Features"]["Number_Of_Img_Links"] == "True":
         start=time.time()
         Number_Of_Img_Links=0
         soup = BeautifulSoup(body, "html.parser")
@@ -1283,7 +1289,7 @@ def Email_Body_Number_Of_Img_Links(body, list_features, list_time):
         list_time["Number_Of_Img_Links"]=ex_time
 
 def Email_Body_Function_Words_Count(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["Function_Words_Count"] == "True":
+    if Globals.config["Email_Body_Features"]["Function_Words_Count"] == "True":
         start=time.time()
         Function_Words_Count=0
         if body:
@@ -1301,7 +1307,7 @@ def Email_Body_Function_Words_Count(body, list_features, list_time):
         list_time["Email_Body_Function_Words_Count"]=ex_time
 # def  bodyTextNotSimSubjectAndMinOneLink()
 # def Email_Body_body_num_func_words(body, list_features, list_time):
-#   if  Globals.config["Email_Body_Features"]["body_num_func_words"] == "True":
+#   if Globals.config["Email_Body_Features"]["body_num_func_words"] == "True":
 #       start=time.time()
 #       body_num_func_words=0
 
@@ -1316,7 +1322,7 @@ def Email_Body_Function_Words_Count(body, list_features, list_time):
 # source for style metrics: https://pypi.python.org/pypi/textstat
 ## Styles metrics:
 def Email_Body_flesh_read_score(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["flesh_read_score"] == "True":
+    if Globals.config["Email_Body_Features"]["flesh_read_score"] == "True":
         start=time.time()
         if body:
             try:
@@ -1333,7 +1339,7 @@ def Email_Body_flesh_read_score(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_smog_index(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["smog_index"] == "True":
+    if Globals.config["Email_Body_Features"]["smog_index"] == "True":
         start=time.time()
         if body:
             try:
@@ -1350,7 +1356,7 @@ def Email_Body_smog_index(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_flesh_kincaid_score(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["flesh_kincaid_score"] == "True":
+    if Globals.config["Email_Body_Features"]["flesh_kincaid_score"] == "True":
         start=time.time()
         if body:
             try:
@@ -1367,7 +1373,7 @@ def Email_Body_flesh_kincaid_score(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_coleman_liau_index(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["coleman_liau_index"] == "True":
+    if Globals.config["Email_Body_Features"]["coleman_liau_index"] == "True":
         start=time.time()
         if body:    
             try:
@@ -1384,7 +1390,7 @@ def Email_Body_coleman_liau_index(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_automated_readability_index(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["automated_readability_index"] == "True":
+    if Globals.config["Email_Body_Features"]["automated_readability_index"] == "True":
         start=time.time()
         if body:    
             try:
@@ -1401,7 +1407,7 @@ def Email_Body_automated_readability_index(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_dale_chall_readability_score(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["dale_chall_readability_score"] == "True":
+    if Globals.config["Email_Body_Features"]["dale_chall_readability_score"] == "True":
         start=time.time()
         if body:
             try:
@@ -1418,7 +1424,7 @@ def Email_Body_dale_chall_readability_score(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_difficult_words(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["difficult_words"] == "True":
+    if Globals.config["Email_Body_Features"]["difficult_words"] == "True":
         start=time.time()
         if body:
             try:
@@ -1434,7 +1440,7 @@ def Email_Body_difficult_words(body, list_features, list_time):
         list_time["difficult_words"]=ex_time
 
 def Email_Body_linsear_score(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["linsear_score"] == "True":
+    if Globals.config["Email_Body_Features"]["linsear_score"] == "True":
         start=time.time()
         if body:
             try:
@@ -1451,7 +1457,7 @@ def Email_Body_linsear_score(body, list_features, list_time):
         #list_features[""]=
 
 def Email_Body_gunning_fog(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["gunning_fog"] == "True":
+    if Globals.config["Email_Body_Features"]["gunning_fog"] == "True":
         start=time.time()
         if body:
             try:
@@ -1467,7 +1473,7 @@ def Email_Body_gunning_fog(body, list_features, list_time):
         list_time["gunning_fog"]=ex_time
 
 def Email_Body_text_standard(body, list_features, list_time):
-    if  Globals.config["Email_Body_Features"]["text_standard"] == "True":
+    if Globals.config["Email_Body_Features"]["text_standard"] == "True":
         start=time.time()
         if body:
             try:
@@ -1484,7 +1490,7 @@ def Email_Body_text_standard(body, list_features, list_time):
 
 #### Extract features from subject
 def Email_Header_number_of_words_subject(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["number_of_words_subject"] == "True":
+    if Globals.config["Email_Header_Features"]["number_of_words_subject"] == "True":
         start=time.time()
         if subject:
             try:
@@ -1501,7 +1507,7 @@ def Email_Header_number_of_words_subject(subject, list_features, list_time):
         list_time["number_of_words_subject"]=ex_time
 
 def Email_Header_number_of_characters_subject(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["number_of_characters_subject"] == "True":
+    if Globals.config["Email_Header_Features"]["number_of_characters_subject"] == "True":
         start=time.time()
         if subject:    
             try:
@@ -1517,7 +1523,7 @@ def Email_Header_number_of_characters_subject(subject, list_features, list_time)
         list_time["number_of_characters_subject"]=ex_time
 
 def Email_Header_number_of_special_characters_subject(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["number_of_special_characters_subject"] == "True":
+    if Globals.config["Email_Header_Features"]["number_of_special_characters_subject"] == "True":
         start=time.time()
         if subject:    
             try:
@@ -1535,7 +1541,7 @@ def Email_Header_number_of_special_characters_subject(subject, list_features, li
     
 
 def Email_Header_binary_fwd(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["binary_fwd"] == "True":
+    if Globals.config["Email_Header_Features"]["binary_fwd"] == "True":
         start=time.time()
         if subject:    
             try:
@@ -1552,7 +1558,7 @@ def Email_Header_binary_fwd(subject, list_features, list_time):
         list_time["binary_fwd"]=ex_time
 
 def Email_Header_binary_re(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["binary_re"] == "True":
+    if Globals.config["Email_Header_Features"]["binary_re"] == "True":
         start=time.time()
         if subject:    
             try:
@@ -1569,7 +1575,7 @@ def Email_Header_binary_re(subject, list_features, list_time):
         list_time["binary_fwd"]=ex_time
 
 def Email_Header_vocab_richness_subject(subject, list_features, list_time):
-    if  Globals.config["Email_Header_Features"]["vocab_richness_subject"] == "True":
+    if Globals.config["Email_Header_Features"]["vocab_richness_subject"] == "True":
         start=time.time()
         if subject:
             try:
@@ -1588,7 +1594,7 @@ def Email_Header_vocab_richness_subject(subject, list_features, list_time):
 
 ############################ HTML features
 def HTML_number_of_tags(soup, list_features, list_time):
-    if  Globals.config["HTML_Features"]["number_of_tags"] == "True":
+    if Globals.config["HTML_Features"]["number_of_tags"] == "True":
         start=time.time()
         number_of_tags=0
         if soup:
@@ -1607,7 +1613,7 @@ def HTML_number_of_tags(soup, list_features, list_time):
 
 def HTML_number_of_head(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_head"] == "True":
+    if Globals.config["HTML_Features"]["number_of_head"] == "True":
         start=time.time()
         number_of_head=0
         if soup:
@@ -1623,7 +1629,7 @@ def HTML_number_of_head(soup, list_features, list_time):
 
 def HTML_number_of_html(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_html"] == "True":
+    if Globals.config["HTML_Features"]["number_of_html"] == "True":
         start=time.time()
         number_of_html=0
         if soup:    
@@ -1639,7 +1645,7 @@ def HTML_number_of_html(soup, list_features, list_time):
 
 def HTML_number_of_body(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_body"] == "True":
+    if Globals.config["HTML_Features"]["number_of_body"] == "True":
         start=time.time()
         number_of_body=0
         if soup:    
@@ -1655,7 +1661,7 @@ def HTML_number_of_body(soup, list_features, list_time):
 
 def HTML_number_of_titles(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_titles"] == "True":
+    if Globals.config["HTML_Features"]["number_of_titles"] == "True":
         start=time.time()
         number_of_titles=0
         if soup:    
@@ -1671,7 +1677,7 @@ def HTML_number_of_titles(soup, list_features, list_time):
 
 def HTML_number_suspicious_content(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_suspicious_content"] == "True":
+    if Globals.config["HTML_Features"]["number_suspicious_content"] == "True":
         start=time.time()
         all_tags = soup.find_all()
         number_suspicious_content = 0
@@ -1691,7 +1697,7 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
 
 def HTML_number_of_iframes(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_iframes"] == "True":
+    if Globals.config["HTML_Features"]["number_of_iframes"] == "True":
         start=time.time()
         number_of_iframes=0
         if soup:    
@@ -1708,7 +1714,7 @@ def HTML_number_of_iframes(soup, list_features, list_time):
 
 def HTML_number_of_input(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_input"] == "True":
+    if Globals.config["HTML_Features"]["number_of_input"] == "True":
         start=time.time()
         number_of_input=0
         if soup:
@@ -1724,7 +1730,7 @@ def HTML_number_of_input(soup, list_features, list_time):
 
 def HTML_number_of_img(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_img"] == "True":
+    if Globals.config["HTML_Features"]["number_of_img"] == "True":
         start=time.time()
         number_of_img=0
         if soup:
@@ -1741,7 +1747,7 @@ def HTML_number_of_img(soup, list_features, list_time):
 
 def HTML_number_of_scripts(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_scripts"] == "True":
+    if Globals.config["HTML_Features"]["number_of_scripts"] == "True":
         start=time.time()
         number_of_scripts=0
         if soup:
@@ -1757,7 +1763,7 @@ def HTML_number_of_scripts(soup, list_features, list_time):
 
 def HTML_number_of_anchor(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_anchor"] == "True":
+    if Globals.config["HTML_Features"]["number_of_anchor"] == "True":
         start=time.time()
         number_of_anchor=0
         if soup:
@@ -1773,7 +1779,7 @@ def HTML_number_of_anchor(soup, list_features, list_time):
 
 def HTML_number_of_embed(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_embed"] == "True":
+    if Globals.config["HTML_Features"]["number_of_embed"] == "True":
         start=time.time()
         number_of_embed=0
         if soup:
@@ -1789,7 +1795,7 @@ def HTML_number_of_embed(soup, list_features, list_time):
 
 def HTML_number_object_tags(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_object_tags"] == "True":
+    if Globals.config["HTML_Features"]["number_object_tags"] == "True":
         start=time.time()
         number_object_tags=0
         if soup:
@@ -1805,7 +1811,7 @@ def HTML_number_object_tags(soup, list_features, list_time):
 
 def HTML_number_of_video(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_video"] == "True":
+    if Globals.config["HTML_Features"]["number_of_video"] == "True":
         start=time.time()
         number_of_video=0
         if soup:
@@ -1821,7 +1827,7 @@ def HTML_number_of_video(soup, list_features, list_time):
 
 def HTML_number_of_audio(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_audio"] == "True":
+    if Globals.config["HTML_Features"]["number_of_audio"] == "True":
         start=time.time()
         number_of_audio=0
         if soup:
@@ -1837,7 +1843,7 @@ def HTML_number_of_audio(soup, list_features, list_time):
 
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
+    if Globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
         start=time.time()
         number_of_hidden_iframe = 0
         if soup:   
@@ -1856,7 +1862,7 @@ def HTML_number_of_hidden_iframe(soup, list_features, list_time):
 
 def HTML_number_of_hidden_div(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_hidden_div"] == "True":
+    if Globals.config["HTML_Features"]["number_of_hidden_div"] == "True":
         start=time.time()
         number_of_hidden_div=0
         if soup:
@@ -1875,7 +1881,7 @@ def HTML_number_of_hidden_div(soup, list_features, list_time):
 
 def HTML_number_of_hidden_object(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["number_of_hidden_object"] == "True":
+    if Globals.config["HTML_Features"]["number_of_hidden_object"] == "True":
         start=time.time()
         number_of_hidden_object = 0
         if soup:    
@@ -1894,7 +1900,7 @@ def HTML_number_of_hidden_object(soup, list_features, list_time):
 
 def HTML_inbound_count(soup, url, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["inbound_count"] == "True":
+    if Globals.config["HTML_Features"]["inbound_count"] == "True":
         start=time.time()
         inbound_count = 0
         if soup:
@@ -1927,7 +1933,7 @@ def HTML_inbound_count(soup, url, list_features, list_time):
 
 def HTML_outbound_count(soup, url, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["outbound_count"] == "True":
+    if Globals.config["HTML_Features"]["outbound_count"] == "True":
         start=time.time()
         outbound_count = 0
         if soup:
@@ -1958,7 +1964,7 @@ def HTML_outbound_count(soup, url, list_features, list_time):
 
 def HTML_inbound_href_count(soup, url, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["inbound_href_count"] == "True":
+    if Globals.config["HTML_Features"]["inbound_href_count"] == "True":
         start=time.time()
         inbound_href_count = 0
         if soup:
@@ -1991,7 +1997,7 @@ def HTML_inbound_href_count(soup, url, list_features, list_time):
 
 def HTML_outbound_href_count(soup, url, list_features, list_time):
     #global list_features
-    if  Globals.config["HTML_Features"]["outbound_href_count"] == "True":
+    if Globals.config["HTML_Features"]["outbound_href_count"] == "True":
         start=time.time()
         outbound_href_count = 0
         if soup:    
@@ -2021,7 +2027,7 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
         list_time["outbound_href_count"]=ex_time
 
 def HTML_Website_content_type(html, list_features, list_time):
-    if  Globals.config["HTML_Features"]["website_content_type"] == "True":
+    if Globals.config["HTML_Features"]["website_content_type"] == "True":
         start=time.time()
         #print(html.headers)
         if html:
@@ -2041,7 +2047,7 @@ def HTML_Website_content_type(html, list_features, list_time):
         list_time["content_type"]=ex_time
 
 def HTML_content_length(html, list_features, list_time):
-    if  Globals.config["HTML_Features"]["content_length"] == "True":
+    if Globals.config["HTML_Features"]["content_length"] == "True":
         start=time.time()
         content_length = 0
         if html:
@@ -2057,7 +2063,7 @@ def HTML_content_length(html, list_features, list_time):
         list_time["content_length"]=ex_time
 
 def HTML_x_powered_by(html, list_features, list_time):
-    if  Globals.config["HTML_Features"]["x_powered_by"] == "True":
+    if Globals.config["HTML_Features"]["x_powered_by"] == "True":
         start=time.time()
         x_powered_by = ''
         if html:
@@ -2074,7 +2080,7 @@ def HTML_x_powered_by(html, list_features, list_time):
         list_time["x_powered_by"]=ex_time
 
 def HTML_URL_Is_Redirect(html, url, list_features, list_time):
-    if  Globals.config["HTML_Features"]["URL_Is_Redirect"]=="True":
+    if Globals.config["HTML_Features"]["URL_Is_Redirect"]=="True":
         start=time.time()
         flag=0
         if html:
@@ -2090,7 +2096,7 @@ def HTML_URL_Is_Redirect(html, url, list_features, list_time):
         list_time["URL_Is_Redirect"]=ex_time
 
 def HTML_Is_Login(html, url, list_features, list_time):
-    if  Globals.config["HTML_Features"]["Is_Login"]=="True":
+    if Globals.config["HTML_Features"]["Is_Login"]=="True":
         start=time.time()
         userfield = passfield = emailfield = None
         _is_login = False
@@ -2120,7 +2126,7 @@ def HTML_Is_Login(html, url, list_features, list_time):
 ############################ URL features
 def URL_url_length(url, list_features, list_time):
     ##global list_features
-    if  Globals.config["URL_Features"]["url_length"] == "True":
+    if Globals.config["URL_Features"]["url_length"] == "True":
         start=time.time()
         url_length=0
         if url:
@@ -2137,7 +2143,7 @@ def URL_url_length(url, list_features, list_time):
 
 def URL_domain_length(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["domain_length"] == "True":
+    if Globals.config["URL_Features"]["domain_length"] == "True":
         start=time.time()
         domain_length=0
         if url:    
@@ -2156,7 +2162,7 @@ def URL_domain_length(url, list_features, list_time):
 ##################################################################################
 def URL_letter_occurence(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["letter_occurence"] == "True":
+    if Globals.config["URL_Features"]["letter_occurence"] == "True":
         start=time.time()
         if url:
             ####
@@ -2184,7 +2190,7 @@ def URL_letter_occurence(url, list_features, list_time):
 
 ##################################################################################
 def URL_char_distance(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["char_distance"] == "True":
+    if Globals.config["URL_Features"]["char_distance"] == "True":
         start=time.time()
         if url:
             count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1))) 
@@ -2204,7 +2210,7 @@ def URL_char_distance(url, list_features, list_time):
 
 ##################################################################################
 def URL_kolmogorov_shmirnov(list_features, list_time):
-    if  Globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
+    if Globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
         start=time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
                  .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
@@ -2232,7 +2238,7 @@ def URL_kolmogorov_shmirnov(list_features, list_time):
         list_time["kolmogorov_shmirnov"]=ex_time
 
 def URL_Kullback_Leibler_Divergence(list_features, list_time):
-    if  Globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
+    if Globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
         start=time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
                  .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
@@ -2255,7 +2261,7 @@ def URL_Kullback_Leibler_Divergence(list_features, list_time):
 
 def URL_english_frequency_distance(list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["english_frequency_distance"] == "True":
+    if Globals.config["URL_Features"]["english_frequency_distance"] == "True":
         start=time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
                  .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
@@ -2280,7 +2286,7 @@ def URL_english_frequency_distance(list_features, list_time):
 
 def URL_num_punctuation(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["num_punctuation"] == "True":
+    if Globals.config["URL_Features"]["num_punctuation"] == "True":
         start=time.time()
         num_punct=0
         if url:
@@ -2297,7 +2303,7 @@ def URL_num_punctuation(url, list_features, list_time):
 
 def URL_has_port(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["has_port"] == "True":
+    if Globals.config["URL_Features"]["has_port"] == "True":
         start=time.time()
         has_port=0
         if url:
@@ -2317,7 +2323,7 @@ def URL_has_port(url, list_features, list_time):
 
 def URL_has_https(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["has_https"] == "True":
+    if Globals.config["URL_Features"]["has_https"] == "True":
         start=time.time()
         has_https=0
         if url:    
@@ -2337,7 +2343,7 @@ def URL_has_https(url, list_features, list_time):
 
 def URL_number_of_digits(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["number_of_digits"] == "True":
+    if Globals.config["URL_Features"]["number_of_digits"] == "True":
         number_of_digits=0
         start=time.time()
         if url:
@@ -2353,7 +2359,7 @@ def URL_number_of_digits(url, list_features, list_time):
 
 def URL_number_of_dots(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["number_of_dots"] == "True":
+    if Globals.config["URL_Features"]["number_of_dots"] == "True":
         start=time.time()
         number_of_dots=0
         if url:
@@ -2369,7 +2375,7 @@ def URL_number_of_dots(url, list_features, list_time):
 
 def URL_number_of_slashes(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["number_of_slashes"] == "True":
+    if Globals.config["URL_Features"]["number_of_slashes"] == "True":
         start=time.time()
         number_of_slashes=0
         if url:
@@ -2385,7 +2391,7 @@ def URL_number_of_slashes(url, list_features, list_time):
 
 def URL_digit_letter_ratio(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["digit_letter_ratio"] == "True":
+    if Globals.config["URL_Features"]["digit_letter_ratio"] == "True":
         start=time.time()
         digit_letter_ratio=0
         if url:
@@ -2404,7 +2410,7 @@ def URL_digit_letter_ratio(url, list_features, list_time):
 
 def URL_special_char_count(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["special_char_count"] == "True":
+    if Globals.config["URL_Features"]["special_char_count"] == "True":
         start=time.time()
         special_char_count=0
         if url:
@@ -2420,7 +2426,7 @@ def URL_special_char_count(url, list_features, list_time):
 
 def URL_Top_level_domain(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["Top_level_domain"] == "True":
+    if Globals.config["URL_Features"]["Top_level_domain"] == "True":
         start=time.time()
         tld=0
         if url:
@@ -2437,7 +2443,7 @@ def URL_Top_level_domain(url, list_features, list_time):
 
 def URL_Is_IP_Addr(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["Is_IP_Addr"] == "True":
+    if Globals.config["URL_Features"]["Is_IP_Addr"] == "True":
         start=time.time()
         Is_IP_Addr=1
         if url:    
@@ -2458,7 +2464,7 @@ def URL_Is_IP_Addr(url, list_features, list_time):
 # Devin's features
 def URL_number_of_dashes(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["number_of_dashes"] == "True":
+    if Globals.config["URL_Features"]["number_of_dashes"] == "True":
         start=time.time()
         number_of_dashes=0
         if url:    
@@ -2474,7 +2480,7 @@ def URL_number_of_dashes(url, list_features, list_time):
 
 def URL_Http_middle_of_URL(url, list_features, list_time):
     #global list_features
-    if  Globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
+    if Globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
         start=time.time()
         Http_middle_of_URL=0
         #regex_http=re.compile(r'')
@@ -2491,7 +2497,7 @@ def URL_Http_middle_of_URL(url, list_features, list_time):
         list_time["Http_middle_of_URL"]=ex_time
 
 def URL_Has_More_than_3_dots(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Has_More_than_3_dots"] == "True":
+    if Globals.config["URL_Features"]["Has_More_than_3_dots"] == "True":
         start=time.time()
         #regex_http=re.compile(r'')
         if url:
@@ -2512,7 +2518,7 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
         list_time["Has_More_than_3_dots"]=ex_time
 
 def URL_Has_at_symbole(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Has_at_symbole"] == "True":
+    if Globals.config["URL_Features"]["Has_at_symbole"] == "True":
         start=time.time()
         flag=0
         if url:
@@ -2529,7 +2535,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
 
 
 def URL_Has_anchor_tag(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
+    if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
         start=time.time()
         regex_anchor=re.compile(r'<\?a>')
         flag=0
@@ -2545,7 +2551,7 @@ def URL_Has_anchor_tag(url, list_features, list_time):
         list_time["Has_anchor_tag"]=ex_time
 
 def URL_Null_in_Domain(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Null_in_Domain"] == "True":
+    if Globals.config["URL_Features"]["Null_in_Domain"] == "True":
         start=time.time()
         regex_null=re.compile(r'null', flags=re.IGNORECASE)
         flag=0
@@ -2561,12 +2567,12 @@ def URL_Null_in_Domain(url, list_features, list_time):
         list_time["Null_in_Domain"]=ex_time
 
 def URL_Token_Count(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Token_Count"] == "True":
+    if Globals.config["URL_Features"]["Token_Count"] == "True":
         start=time.time()
         count=0
         if url:
             try:
-                count=len(url.split( Globals.config["URL_Features"]["URL_token_delimiter"]))
+                count=len(url.split(Globals.config["URL_Features"]["URL_token_delimiter"]))
             except Exception  as e:
                 Globals.logger.warning("Exception: " + str(e))
                 count=-1
@@ -2576,7 +2582,7 @@ def URL_Token_Count(url, list_features, list_time):
         list_time["Token_Count"]=ex_time
 
 def URL_Average_Path_Token_Length(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
+    if Globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
         start=time.time()
         average_token_length=0
         delimiters_regex=re.compile('[=|,|/|?|.|-]')
@@ -2598,7 +2604,7 @@ def URL_Average_Path_Token_Length(url, list_features, list_time):
         list_time["Average_Path_Token_Length"]=ex_time
 
 def URL_Average_Domain_Token_Length(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Average_Domain_Token_Length"] == "True":
+    if Globals.config["URL_Features"]["Average_Domain_Token_Length"] == "True":
         start=time.time()
         average_token_length=0
         if url:
@@ -2606,7 +2612,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
                 parsed_url=urlparse(url)
                 domain='{uri.hostname}'.format(uri=parsed_url)
                 list_len_tokens=[]
-                list_tokens=domain.split( Globals.config["URL_Features"]["URL_token_delimiter"])
+                list_tokens=domain.split(Globals.config["URL_Features"]["URL_token_delimiter"])
                 for token in list_tokens:
                     list_len_tokens.append(len(token))
                 average_token_length= sum(list_len_tokens)/len(list_len_tokens)
@@ -2619,7 +2625,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
         list_time["Average_Domain_Token_Length"]=ex_time
 
 def URL_Longest_Domain_Token(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
+    if Globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
         start=time.time()
         longest_token_len=0
         try:
@@ -2629,7 +2635,7 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
                 parsed_url=urlparse(url)
                 domain='{uri.hostname}'.format(uri=parsed_url)
                 list_len_tokens=[]
-                list_tokens=domain.split( Globals.config["URL_Features"]["URL_token_delimiter"])
+                list_tokens=domain.split(Globals.config["URL_Features"]["URL_token_delimiter"])
                 for token in list_tokens:
                     list_len_tokens.append(len(token))
                 longest_token_len=max(list_len_tokens)
@@ -2643,7 +2649,7 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
         list_time["Longest_Domain_Token"]=ex_time
 
 def URL_Protocol_Port_Match(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Protocol_Port_Match"]=="True":
+    if Globals.config["URL_Features"]["Protocol_Port_Match"]=="True":
         start=time.time()
         match = 1
         if url:
@@ -2666,7 +2672,7 @@ def URL_Protocol_Port_Match(url, list_features, list_time):
         list_time["Protocol_Port_Match"]=ex_time
 
 def URL_Has_WWW_in_Middle(url, list_features, list_time):
-    if  Globals.config["URL_Features"]["Has_WWW_in_Middle"] == "True":
+    if Globals.config["URL_Features"]["Has_WWW_in_Middle"] == "True":
         start=time.time()
         flag=0
         #regex_www=re.compile(r'www')
@@ -2685,7 +2691,7 @@ def URL_Has_WWW_in_Middle(url, list_features, list_time):
         list_time["Has_WWW_in_Middle"]=ex_time
 
 def URL_Has_Hex_Characters(url, list_features, list_time):
-    if  Globals.config['URL_Features']['Has_Hex_Characters']=="True":
+    if Globals.config['URL_Features']['Has_Hex_Characters']=="True":
         start=time.time()
         flag=0
         regex_hex=re.compile(r'%[1-9A-Z][1-9A-Z]')
@@ -2703,7 +2709,7 @@ def URL_Has_Hex_Characters(url, list_features, list_time):
         list_time["Has_Hex_Characters"]=ex_time
 
 def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
-    if  Globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count']=="True":
+    if Globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count']=="True":
         start=time.time()
         flag=0
         regex_2slashes=re.compile(r'//')
@@ -2722,7 +2728,7 @@ def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
         list_time["Double_Slashes_Not_Beginning_Count"]=ex_time
 
 def URL_Brand_In_Url(url, list_features, list_time):
-    if  Globals.config['URL_Features']['Brand_In_Url']=="True":
+    if Globals.config['URL_Features']['Brand_In_Url']=="True":
         start=time.time()
         tokens = re.split('[^a-zA-Z]', url)
         brands = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange', 'dhl', 'dropbox', 'docusign', 'adobe', 'linkedin', 'apple', 'google', 'banquepopulaire', 'alibaba', 'comcast', 'credit', 'agricole', 'yahoo', 'at', 'nbc', 'usaa', 'americanexpress', 'cibc', 'amazon', 'ing', 'bt']
@@ -2732,7 +2738,7 @@ def URL_Brand_In_Url(url, list_features, list_time):
             list_features["Brand_In_URL"] = 0
 
 def URL_Is_Whitelisted(url, list_features, list_time):
-    if  Globals.config['URL_Features']['Is_Whitelisted']=="True":
+    if Globals.config['URL_Features']['Is_Whitelisted']=="True":
         start=time.time()
         domain = tldextract.extract(url).domain
         whitelist = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange', 'dhl', 'dropbox', 'docusign', 'adobe', 'linkedin', 'apple', 'google', 'banquepopulaire', 'alibaba', 'comcast', 'credit', 'agricole', 'yahoo', 'at', 'nbc', 'usaa', 'americanexpress', 'cibc', 'amazon', 'ing', 'bt']
@@ -2753,7 +2759,7 @@ def URL_Is_Whitelisted(url, list_features, list_time):
 
 #def country(whois_info, list_features, list_time):
 #    #global list_features
-#    if  Globals.config["Features"]["country"] == "True":
+#    if Globals.config["Features"]["country"] == "True":
 #        start=time.time()
 #        country = "N/A"
 #        try:
@@ -2769,7 +2775,7 @@ def URL_Is_Whitelisted(url, list_features, list_time):
 # age of domain
 def Network_creation_date(whois_info, list_features, list_time):
     #global list_features
-    if  Globals.config["Network_Features"]["creation_date"] == "True":
+    if Globals.config["Network_Features"]["creation_date"] == "True":
         start=time.time()
         creation_date = 0.0
         if whois_info:
@@ -2793,7 +2799,7 @@ def Network_creation_date(whois_info, list_features, list_time):
 
 def Network_expiration_date(whois_info, list_features, list_time):
     #global list_features
-    if  Globals.config["Network_Features"]["expiration_date"] == "True":
+    if Globals.config["Network_Features"]["expiration_date"] == "True":
         start=time.time()
         expiration_date=0.0
         if whois_info:
@@ -2816,7 +2822,7 @@ def Network_expiration_date(whois_info, list_features, list_time):
         list_time["expiration_date"]=ex_time
 
 def Network_updated_date(whois_info, list_features, list_time):
-    if  Globals.config["Network_Features"]["updated_date"] == "True":
+    if Globals.config["Network_Features"]["updated_date"] == "True":
         start=time.time()
         updated_date = 0.0
         if whois_info:    
@@ -2840,7 +2846,7 @@ def Network_updated_date(whois_info, list_features, list_time):
         list_time["updated_date"]=ex_time
 
 def Network_as_number(IP_whois_list, list_features, list_time):
-    if  Globals.config["Network_Features"]["as_number"] == "True":
+    if Globals.config["Network_Features"]["as_number"] == "True":
         start=time.time()
         as_number = 0
         if IP_whois_list:    
@@ -2856,7 +2862,7 @@ def Network_as_number(IP_whois_list, list_features, list_time):
         list_time["as_number"]=ex_time
 
 def Network_number_name_server(dns_info, list_features, list_time):
-    if  Globals.config["Network_Features"]["number_name_server"] == "True":
+    if Globals.config["Network_Features"]["number_name_server"] == "True":
         start=time.time()
         number_name_server = 0
         if dns_info:    
@@ -2873,7 +2879,7 @@ def Network_number_name_server(dns_info, list_features, list_time):
         list_time["number_name_server"]=ex_time
 
 def Network_DNS_Info_Exists(url, list_features, list_time):
-    if  Globals.config["Network_Features"]["DNS_Info_Exists"]=="True":
+    if Globals.config["Network_Features"]["DNS_Info_Exists"]=="True":
         start=time.time()
         flag=1
         if url:
@@ -2901,7 +2907,7 @@ def Network_DNS_Info_Exists(url, list_features, list_time):
         list_time["DNS_Info_Exists"]=ex_time
 
 def Network_dns_ttl(url, list_features, list_time):
-    if  Globals.config["Network_Features"]["dns_ttl"] == "True":
+    if Globals.config["Network_Features"]["dns_ttl"] == "True":
         start=time.time()
         dns_ttl = 0
         retry_count = 0
@@ -2939,7 +2945,7 @@ def Network_dns_ttl(url, list_features, list_time):
 ############################ Javascript features
 def Javascript_number_of_exec(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_exec"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_exec"] == "True":
         start=time.time()
         number_of_exec=0
         if soup:
@@ -2960,7 +2966,7 @@ def Javascript_number_of_exec(soup, list_features, list_time):
 
 def Javascript_number_of_escape(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_escape"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_escape"] == "True":
         start=time.time()
         number_of_escape=0
         if soup:
@@ -2981,7 +2987,7 @@ def Javascript_number_of_escape(soup, list_features, list_time):
 
 def Javascript_number_of_eval(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_eval"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_eval"] == "True":
         start=time.time()
         number_of_eval=0
         if soup:
@@ -3003,7 +3009,7 @@ def Javascript_number_of_eval(soup, list_features, list_time):
     
 def Javascript_number_of_link(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_link"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_link"] == "True":
         start=time.time()
         number_of_link=0
         if soup:
@@ -3024,7 +3030,7 @@ def Javascript_number_of_link(soup, list_features, list_time):
 
 def Javascript_number_of_unescape(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_unescape"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_unescape"] == "True":
         start=time.time()
         number_of_unescape=0
         scripts = soup.find_all('script')
@@ -3045,7 +3051,7 @@ def Javascript_number_of_unescape(soup, list_features, list_time):
 
 def Javascript_number_of_search(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_search"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_search"] == "True":
         start=time.time()
         number_of_search=0
         if soup:
@@ -3066,7 +3072,7 @@ def Javascript_number_of_search(soup, list_features, list_time):
 
 def Javascript_number_of_setTimeout(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_setTimeout"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_setTimeout"] == "True":
         start=time.time()
         number_of_setTimeout=0
         if soup:
@@ -3087,7 +3093,7 @@ def Javascript_number_of_setTimeout(soup, list_features, list_time):
 
 def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_iframes_in_script"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_iframes_in_script"] == "True":
         start=time.time()
         number_of_iframes_in_script=0
         if soup:
@@ -3107,7 +3113,7 @@ def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
 
 def Javascript_number_of_event_attachment(soup, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["number_of_event_attachment"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_event_attachment"] == "True":
         start=time.time()
         number_of_event_attachment=0
         if soup:
@@ -3129,7 +3135,7 @@ def Javascript_number_of_event_attachment(soup, list_features, list_time):
 
 def Javascript_rightclick_disabled(html, list_features, list_time):
     #global list_features
-    if  Globals.config["Javascript_Features"]["rightclick_disabled"] == "True":
+    if Globals.config["Javascript_Features"]["rightclick_disabled"] == "True":
         start=time.time()
         rightclick_disabled = 0
         if html:
@@ -3147,7 +3153,7 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
         list_time["rightclick_disabled"]=ex_time
 
 def Javascript_number_of_total_suspicious_features(list_features,list_time):
-    if  Globals.config["Javascript_Features"]["number_of_total_suspicious_features"] == "True":
+    if Globals.config["Javascript_Features"]["number_of_total_suspicious_features"] == "True":
         start=time.time()
         number_of_total_suspicious_features=0
         try:
@@ -3162,7 +3168,7 @@ def Javascript_number_of_total_suspicious_features(list_features,list_time):
         list_time["number_of_total_suspicious_features"]=ex_time
 
 def Email_Body_tfidf_emails(list_time):
-    if  Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
+    if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
         start=time.time()
         Tfidf_matrix = Tfidf.tfidf_emails()
         end=time.time()
@@ -3171,7 +3177,7 @@ def Email_Body_tfidf_emails(list_time):
         return Tfidf_matrix
 
 def Email_Header_Header_Tokenizer(list_time):
-    if  Globals.config["Email_Header_Features"]["Header_Tokenizer"] == "True":
+    if Globals.config["Email_Header_Features"]["Header_Tokenizer"] == "True":
         start=time.time()
         header_tokenizer=Tfidf.Header_Tokenizer()
         end=time.time()
@@ -3180,7 +3186,7 @@ def Email_Header_Header_Tokenizer(list_time):
         return header_tokenizer
 
 def HTML_tfidf_websites(list_time):
-    if  Globals.config["HTML_Features"]["tfidf_websites"] == "True":
+    if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
         start=time.time()
         Tfidf_matrix = Tfidf.tfidf_websites()
         end=time.time()
@@ -3254,13 +3260,13 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_dict, 
 
 
 def Extract_Features_Emails_Training():
-    #Globals.summary=open( Globals.config["Globals.summary"]["Path"],'w')
+    #Globals.summary.open(Globals.config["Summary"]["Path"],'w')
     start_time = time.time()
     Globals.logger.info("===============================================================")
     ### Training Features
     Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
-    dataset_path_legit_train= Globals.config["Dataset Path"]["path_legitimate_training"]
-    dataset_path_phish_train= Globals.config["Dataset Path"]["path_phishing_training"]
+    dataset_path_legit_train=Globals.config["Dataset Path"]["path_legitimate_training"]
+    dataset_path_phish_train=Globals.config["Dataset Path"]["path_phishing_training"]
     feature_list_dict_train=[]
     extraction_time_dict_train=[]
     labels_legit_train, data_legit_train=extract_email_features(dataset_path_legit_train, feature_list_dict_train, extraction_time_dict_train)
@@ -3280,11 +3286,11 @@ def Extract_Features_Emails_Training():
     return feature_list_dict_train, labels_train, corpus_train
 
 def Extract_Features_Emails_Testing():
-    #Globals.summary=open( Globals.config["Summary"]["Path"],'w')
+    #Globals.summary.open(Globals.config["Summary"]["Path"],'w')
     start_time = time.time()
     Globals.logger.info("===============================================================")
-    dataset_path_legit_test= Globals.config["Dataset Path"]["path_legitimate_testing"]
-    dataset_path_phish_test= Globals.config["Dataset Path"]["path_phishing_testing"]
+    dataset_path_legit_test=Globals.config["Dataset Path"]["path_legitimate_testing"]
+    dataset_path_phish_test=Globals.config["Dataset Path"]["path_phishing_testing"]
     feature_list_dict_test=[]
     extraction_time_dict_test=[]
     labels_legit_test, data_legit_test=extract_email_features(dataset_path_legit_test, feature_list_dict_test, extraction_time_dict_test)
@@ -3305,14 +3311,14 @@ def Extract_Features_Emails_Testing():
  
 
 def Extract_Features_Urls_Training():
-    #Globals.summary=open( Globals.config["Summary"]["Path"],'w')
-    if  Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
+    #Globals.summary.open(Globals.config["Summary"]["Path"],'w')
+    if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
         start_time = time.time()
         Globals.logger.info("===============================================================")
         Globals.logger.info("===============================================================")
         Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
-        dataset_path_legit_train= Globals.config["Dataset Path"]["path_legitimate_training"]
-        dataset_path_phish_train= Globals.config["Dataset Path"]["path_phishing_training"]
+        dataset_path_legit_train=Globals.config["Dataset Path"]["path_legitimate_training"]
+        dataset_path_phish_train=Globals.config["Dataset Path"]["path_phishing_training"]
         feature_list_dict_train=[]
         feature_list_dict_train2=[]
         extraction_time_dict_train=[]
@@ -3344,8 +3350,8 @@ def Extract_Features_Urls_Training():
 def Extract_Features_Urls_Testing():
     start_time = time.time()
     Globals.logger.info(">>>>> Feature extraction: Testing Set")
-    dataset_path_legit_test= Globals.config["Dataset Path"]["path_legitimate_testing"]
-    dataset_path_phish_test= Globals.config["Dataset Path"]["path_phishing_testing"]
+    dataset_path_legit_test=Globals.config["Dataset Path"]["path_legitimate_testing"]
+    dataset_path_phish_test=Globals.config["Dataset Path"]["path_phishing_testing"]
     feature_list_dict_test=[]
     extraction_time_dict_test=[]
     Bad_URLs_List=[]
