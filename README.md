@@ -127,27 +127,7 @@ def classifier_name():
         print("\n")
 ```
 
-## LIST OF COMMANDS TO INSTALL MODULES
+## COMMAND TO INSTALL MODULES
 ```
-pip install -U scikit-learn or pip install sklearn
-pip install slimit
-pip install tldextract
-pip install whois
-pip install imblearn
-pip install scipy
-pip install bs4
-pip install cryptography
-pip install pandas
-pip install matplotlib
-pip install nltk
-pip install textstat
-pip install textblob
-pip install dnspython
-pip install Cython
-pip install ipwhois
-pip install python-whois
-pip install keras
-pip install tensorflow
-pip install selenium
-pip install html5lib 
+pip install -r requirements.txt
 ```
