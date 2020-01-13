@@ -2160,9 +2160,9 @@ def URL_domain_length(url, list_features, list_time):
         list_time["domain_length"]=ex_time
 
 ##################################################################################
-def URL_letter_occurence(url, list_features, list_time):
+def URL_letter_occurrence(url, list_features, list_time):
     #global list_features
-    if Globals.config["URL_Features"]["letter_occurence"] == "True":
+    if Globals.config["URL_Features"]["letter_occurrence"] == "True":
         start=time.time()
         if url:
             ####
@@ -2172,22 +2172,22 @@ def URL_letter_occurence(url, list_features, list_time):
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 for x in range(26):
-                    list_features["letter_occurence_"+chr(x+ ord('a'))]=-1
+                    list_features["letter_occurrence_"+chr(x+ ord('a'))]=-1
             ####   
             for x in range(26):
                 try:
-                    list_features["letter_occurence_"+chr(x+ ord('a'))]=domain.count(chr(x + ord('a')))
+                    list_features["letter_occurrence_"+chr(x+ ord('a'))]=domain.count(chr(x + ord('a')))
                 except Exception as e:
                     Globals.logger.warning("exception: " + str(e))
-                    list_features["letter_occurence_"+chr(x+ ord('a'))]=-1
+                    list_features["letter_occurrence_"+chr(x+ ord('a'))]=-1
         else:
             for x in range(26):
-                list_features["letter_occurence_"+chr(x+ ord('a'))]=0
+                list_features["letter_occurrence_"+chr(x+ ord('a'))]=0
         end=time.time()
         ex_time=end-start
-        list_time["letter_occurence"]=ex_time
-        #print("letter_occurence >>>>>>>>>>>>>>>>>>: " + str(letter_occurence))
-        #list_features["letter_occurence"]=letter_occurence
+        list_time["letter_occurrence"]=ex_time
+        #print("letter_occurrence >>>>>>>>>>>>>>>>>>: " + str(letter_occurrence))
+        #list_features["letter_occurrence"]=letter_occurrence
 
 ##################################################################################
 def URL_char_distance(url, list_features, list_time):
