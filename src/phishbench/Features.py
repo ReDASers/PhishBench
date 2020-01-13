@@ -2167,6 +2167,7 @@ def URL_letter_occurence(url, list_features, list_time):
         if url:
             ####
             try:
+                parsed_url = urlparse(url)
                 domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url).lower()
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
