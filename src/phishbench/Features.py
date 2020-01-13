@@ -1,9 +1,7 @@
 import os.path
-import os.path
 import statistics
 from datetime import datetime
 
-import dns.resolver
 import dns.resolver
 import tldextract
 from lxml import html as lxml_html
@@ -1613,13 +1611,13 @@ def HTML_LTree_Features(soup, url, list_features, list_time):
                 meta_features = extract_tree_features(meta_link, domain)
                 script_features = extract_tree_features(script_link, domain)
             except Exception as e:
-                logger.warning("exception: " + str(e))
+                Globals.logger.warning("exception: " + str(e))
                 # make all values to -1
                 link_features = img_features = video_features = a_features = meta_features = script_features\
                     = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
         else:
             # make all values to 0
-            logger.warning("empty soup")
+            Globals.logger.warning("empty soup")
         add_features(list_features, link_features, 'link')
         add_features(list_features, img_features, 'img')
         add_features(list_features, video_features, 'video')
@@ -2523,7 +2521,7 @@ def URL_consecutive_numbers(url, list_features, list_time):
                         result += length * length
                         length = 0
             except Exception as e:
-                logger.warning("exception: " + str(e))
+                Globals.logger.warning("exception: " + str(e))
                 result = -1
         list_features["consecutive_numbers"] = result
         end=time.time()
@@ -2556,7 +2554,7 @@ def URL_special_pattern(url, list_features, list_time):
                 if "?gws_rd=ssl" in url:
                     special_count = 1
             except Exception as e:
-                logger.warning("exception: " + str(e))
+                Globals.logger.warning("exception: " + str(e))
                 special_count=-1
         list_features["special_pattern"]=special_count
         end=time.time()
@@ -2597,7 +2595,7 @@ def URL_is_common_TLD(url, list_features, list_time):
                 else:
                     result = 0
             except Exception as e:
-                logger.warning("exception: " + str(e))
+                Globals.logger.warning("exception: " + str(e))
                 result = -1
         list_features["is_common_TLD"] = result
         end = time.time()
