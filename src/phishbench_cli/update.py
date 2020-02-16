@@ -4,20 +4,88 @@ import inspect
 import phishbench.Classifiers as Classifiers
 import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
-import phishbench.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 
 
 def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics):
 	config = configparser.ConfigParser()
 
-	config['Features'] = {}
-	config['Email_Features']={}
-	#C_Features=config['Features']
-	C_Email_Features=config['Email_Features']
+	config['Dataset Path'] = {}
+	C_Dataset = config['Dataset Path']
+	C_Dataset["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
+	C_Dataset["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
+	C_Dataset["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
+	C_Dataset["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
+
+	config['Email or URL feature Extraction'] = {}
+	C_email_url = config['Email or URL feature Extraction']
+	C_email_url["extract_features_emails"] = "False"
+	C_email_url["extract_features_urls"] = "True"
+
+	config['Extraction'] = {}
+	C_extraction = config['Extraction']
+	C_extraction["Feature Extraction"] = "True"
+	C_extraction["Training Dataset"] = "True"
+	C_extraction["Testing Dataset"] = "True"
+
+	config['Features Format'] = {}
+	C_features_format = config['Features Format']
+	C_features_format["Pikle"] = "True"
+	C_features_format["Svmlight format"] = "True"
+
+	config['Preprocessing'] = {}
+	C_Preprocessing = config['Preprocessing']
+	# C_Preprocessing['mean_scaling']= "True"
+	C_Preprocessing['mix_max_scaling'] = "True"
+	# C_Preprocessing['abs_scaler']= "True"
+	# C_Preprocessing['normalize']= "True"
+
+	config["Feature Selection"] = {}
+	C_selection = config["Feature Selection"]
+	C_selection["Select Best Features"] = "True"
+	C_selection["Number of Best Features"] = "80"
+	C_selection["Feature Ranking Only"] = "False"
+	C_selection["Recursive Feature Elimination"] = "False"
+	C_selection["Information Gain"] = "True"
+	C_selection["Gini"] = "False"
+	C_selection["Chi-2"] = "False"
+
+	config['Imbalanced Datasets'] = {}
+	C_Imbalanced = config['Imbalanced Datasets']
+	C_Imbalanced["load_imbalanced_dataset"] = "False"
+	for imbalanced in list_Imbalanced_dataset:
+		C_Imbalanced[imbalanced] = "True"
+
+	config['Classification'] = {}
+	C_classification = config['Classification']
+	C_classification["Running the Classifiers"] = "True"
+	C_classification["Save Models"] = "True"
+
+	config['Classifiers'] = {}
+	C_Classifiers = config['Classifiers']
+	for classifier in list_Classifiers:
+		C_Classifiers[classifier] = "True"
+
+	config['Evaluation Metrics'] = {}
+	C_Metrics = config['Evaluation Metrics']
+	for metric in list_Evaluation_metrics:
+		C_Metrics[metric] = "True"
+
+	config["Summary"] = {}
+	C_summary = config["Summary"]
+	C_summary["Path"] = "summary.txt"
+
+	config['Email_Header_Features']={}
+	header_features = config['Email_Header_Features']
 	for feature in list_Features:
-		if feature.startswith("Email_"):
-			C_Email_Features[feature.replace('Email_','')]="True"
-		#C_Features[feature]="True"
+		if feature.startswith("Email_Header_"):
+			header_features[feature.replace('Email_Header_', '')] = "True"
+
+	config['Email_Body_Features'] = {}
+	body_features = config['Email_Body_Features']
+	for feature in list_Features:
+		if feature.startswith("Email_Body_"):
+			body_features[feature.replace('Email_Body_', '')] = "True"
 
 	config['HTML_Features']={}
 	C_HTML_Features=config['HTML_Features']
@@ -44,73 +112,6 @@ def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evalua
 	for feature in list_Features:
 		if feature.startswith("Javascript_"):
 			C_Javascript_Features[feature.replace('Javascript_','')]="True"
-
-	config['Classifiers']={}
-	C_Classifiers=config['Classifiers']
-	for classifier in list_Classifiers:
-		C_Classifiers[classifier]="True"
-
-	config['Imbalanced Datasets'] = {}
-	C_Imbalanced=config['Imbalanced Datasets']
-	C_Imbalanced["load_imbalanced_dataset"]="False"
-	for imbalanced in list_Imbalanced_dataset:
-		C_Imbalanced[imbalanced]="True"
-
-	config['Evaluation Metrics']={}
-	C_Metrics=config['Evaluation Metrics']
-	for metric in list_Evaluation_metrics:
-		C_Metrics[metric]="True"
-
-	config['Preprocessing']={}
-	C_Preprocessing=config['Preprocessing']
-	#C_Preprocessing['mean_scaling']= "True"
-	C_Preprocessing['mix_max_scaling']= "True"
-	#C_Preprocessing['abs_scaler']= "True"
-	#C_Preprocessing['normalize']= "True"
-	
-
-	config["Feature Selection"]={}
-	C_selection=config["Feature Selection"]
-	C_selection["Select Best Features"]="True"
-	C_selection["Number of Best Features"]="80"
-	C_selection["Feature Ranking Only"]="False"
-	C_selection["Recursive Feature Elimination"]="False"
-	C_selection["Information Gain"]="True"
-	C_selection["Gini"]="False"
-	C_selection["Chi-2"]="False"
-
-	config['Dataset Path']={}
-	C_Dataset=config['Dataset Path']
-	C_Dataset["path_legitimate_training"]="Dataset_all/Dataset_legit_urls"
-	C_Dataset["path_phishing_training"]="Dataset_all/Dataset_phish_urls"
-	C_Dataset["path_legitimate_testing"]="Dataset_all/Dataset_legit_urls"
-	C_Dataset["path_phishing_testing"]="Dataset_all/Dataset_legit_urls"
-
-	config['Email or URL feature Extraction']={}
-	C_email_url=config['Email or URL feature Extraction']
-	C_email_url["extract_features_emails"]="False"
-	C_email_url["extract_features_urls"]="True"
-
-	config['Extraction']={}
-	C_extraction=config['Extraction']
-	C_extraction["Feature Extraction"]="True"
-	C_extraction["Training Dataset"]="True"
-	C_extraction["Testing Dataset"]="True"
-
-	config['Features Format']={}
-	C_features_format=config['Features Format']
-	C_features_format["Pikle"]="True"
-	C_features_format["Svmlight format"]="True"
-
-
-	config['Classification']={}
-	C_classification=config['Classification']
-	C_classification["Running the Classifiers"]="True"
-	C_classification["Save Models"]="True"
-
-	config["Summary"]={}
-	C_summary=config["Summary"]
-	C_summary["Path"]="summary.txt"
 
 	with open('Config_file.ini', 'w') as configfile:
 		config.write(configfile)
