@@ -1,14 +1,15 @@
 The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
-# INSTALLATION
-PhishBench requires Python 3.7 to run. 
+# Installation
+
+PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
 
 To install, clone this repo. Then install dependencies by running 
 
     pip install -r requirements.txt
     pip install .
 
-# HOW TO RUN THE PROGRAM
+# How to run PhishBench
 
 
 ## Make a config file
@@ -17,15 +18,6 @@ First run
     make-phishbench-config
 
 This will create a starter configuration file `Config_file.ini` that dictates the execution of PhishBench.
-
-```
-[Extraction]
-feature extraction = True
-training dataset = True
-testing dataset = False
-BootStrapping = False
-Dump Features txt = False
-```
 
 If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
 
@@ -43,18 +35,6 @@ Features, Classifiers, Evaluation Metrics, and Imbalanced Methods are toggled vi
 Confusion_matrix = True
 Cross_validation = False
 ```
-
-
-
-
-It has the option to choose whether to extract features from emails or from urls: 
-```
-"extract_features_emails = True" 
-and "extract_features_urls = True" 
-``` 
-respectively
-
-Note: In the package that I will upload, the file is already updated, so no need to run it unless you want to add other features or classifiers. If you do, make sure to turn again the values that you previously turned to "False"
 
 ## Run PhishBench
 ```
