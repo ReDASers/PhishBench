@@ -1,12 +1,14 @@
 ############# README ##################
 
-The platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
+The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
-##### INSTALL
-the platform is coded using Python 3.6.4
-the code imports multiple modules, and the user will be asked to download them if they're not installed yet.
-All the modules can be downloaded using the "pip -install" command
-the List of the commands will be found at end of the file.
+##### INSTALLATION
+PhishBench requires Python 3.7 to run. 
+
+To install, clone this repo. Then install dependencies by running 
+
+    pip install -r requirements.txt
+    pip install .
 
 ##### HOW TO RUN THE PROGRAM
 all the modules can be run using the python command like so: "python main.py" or "python update.py"
