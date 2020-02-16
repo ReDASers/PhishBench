@@ -4,20 +4,23 @@ import inspect
 import phishbench.Classifiers as Classifiers
 import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
-import phishbench.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 
 
 def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics):
 	config = configparser.ConfigParser()
 
-	config['Features'] = {}
-	config['Email_Features']={}
-	#C_Features=config['Features']
-	C_Email_Features=config['Email_Features']
+	config['Email_Header_Features']={}
+	header_features = config['Email_Header_Features']
 	for feature in list_Features:
-		if feature.startswith("Email_"):
-			C_Email_Features[feature.replace('Email_','')]="True"
-		#C_Features[feature]="True"
+		if feature.startswith("Email_Header_"):
+			header_features[feature.replace('Email_Header_', '')] = "True"
+
+	config['Email_Body_Features'] = {}
+	body_features = config['Email_Body_Features']
+	for feature in list_Features:
+		if feature.startswith("Email_Body_"):
+			body_features[feature.replace('Email_Body_', '')] = "True"
 
 	config['HTML_Features']={}
 	C_HTML_Features=config['HTML_Features']
@@ -67,7 +70,6 @@ def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evalua
 	C_Preprocessing['mix_max_scaling']= "True"
 	#C_Preprocessing['abs_scaler']= "True"
 	#C_Preprocessing['normalize']= "True"
-	
 
 	config["Feature Selection"]={}
 	C_selection=config["Feature Selection"]
@@ -101,7 +103,6 @@ def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evalua
 	C_features_format=config['Features Format']
 	C_features_format["Pikle"]="True"
 	C_features_format["Svmlight format"]="True"
-
 
 	config['Classification']={}
 	C_classification=config['Classification']
