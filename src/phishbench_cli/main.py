@@ -70,6 +70,7 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             vectorizer=joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
         # Extract features in a dictionnary for each email. return a list of dictionaries
         (feature_list_dict_test, y_test, corpus_test)=Features.Extract_Features_Emails_Testing()
+
         # Tranform the list of dictionaries into a sparse matrix
         X_test=Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
 
@@ -101,7 +102,6 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             joblib.dump(feature_list_dict_test,os.path.join(email_test_dir, "Features.txt"))
         Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
-
     if X_train:
         return X_train, y_train, vectorizer, X_test, y_test
     else:
@@ -120,7 +120,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
         joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
         # Add tfidf if the user marked it as True
-        if config["Email_Features"]["tfidf_emails"] == "True":
+        if Globals.config["Email_Features"]["tfidf_emails"] == "True":
             Globals.logger.info("tfidf_emails_train ######")
             Tfidf_train, tfidf_vectorizer=Tfidf.tfidf_training(corpus_train)
             joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
@@ -147,7 +147,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
 
         # Add tfidf if the user marked it as True
         if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
-            logger.info("Extracting TFIDF features for training websites ###### ######")
+            Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
             Tfidf_train, tfidf_vectorizer=Tfidf.tfidf_training(corpus_train)
             joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
             X_train=hstack([X_train, Tfidf_train])
@@ -227,10 +227,10 @@ def main():
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
                 if flag_training==False:
-                    X_test, y_test = feature_extration_email_test(email_train_dir, email_test_dir, vectorizer)
+                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer)
                 else:
                     # if training was done in another instance of the plaform then load the necessary files
-                    X_test, y_test = feature_extration_email_test(email_train_dir, email_test_dir)
+                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
                     
             else:
                 X_test = None
@@ -261,10 +261,10 @@ def main():
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
                 if flag_training==False:
-                    X_test, y_test = feature_extration_URL_test(url_train_dir, url_test_dir, vectorizer)
+                    X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
                 else:
                     # if training was done in another instance of the plaform then load the necessary files
-                    X_test, y_test = feature_extration_URL_test(url_train_dir, url_test_dir)
+                    X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir)
 
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"]=="True":
@@ -284,7 +284,6 @@ def main():
             else:
                 X_test = None
                 y_test = None
-
 
     if Globals.config["Classification"]["Running the classifiers"]=="True":
         if Feature_extraction==False:
@@ -367,7 +366,7 @@ def main():
                     Globals.logger.info(mask)
                     vectorizer=vectorizer_train.restrict(mask)
                     Globals.logger.info(len(vectorizer.get_feature_names()))
-                #X_train=vectorizer.transform(X_train)
+                # X_train=vectorizer.transform(X_train)
 
         Globals.logger.info("Running the Classifiers....")
         classifiers(X_train, y_train, X_test, y_test)
