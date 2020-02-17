@@ -1,41 +1,62 @@
-############# README ##################
+The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
-The platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
+# Installation
 
-##### INSTALL
-the platform is coded using Python 3.6.4
-the code imports multiple modules, and the user will be asked to download them if they're not installed yet.
-All the modules can be downloaded using the "pip -install" command
-the List of the commands will be found at end of the file.
+PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
 
-##### HOW TO RUN THE PROGRAM
-all the modules can be run using the python command like so: "python main.py" or "python update.py"
+To install, clone this repo. Then install dependencies by running 
 
-## First run update.py
-This will create or update the Config_file.ini that contains the list of all the features, classifiers, evaluation metrics, and imbalanced dataset options.
-The values take either "True" or "False" like so:
+    pip install -r requirements.txt
+    pip install .
+
+# How to run PhishBench
+
+
+## Make a config file
+First run 
+    
+    make-phishbench-config
+
+This will create a starter configuration file `Config_file.ini` that dictates the execution of PhishBench.
+
+If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
+
 ```
-"Confusion_matrix = True" 
-"Cross_validation = False"
+[Dataset Path]
+path_legitimate_training = sample_dataset/legit/
+path_phishing_training = sample_dataset/phish/
+path_legitimate_testing = ../url_2019/legit
+path_phishing_testing = ../url_2019/blank
 ```
-The entries that are "True" will be executed, the "False" will be ignored. 
-It has the option to specify the source of emails and URLs datasets, under  "###### Specify the path for Datasets"
-It has the option to choose whether to extract features from emails or from urls: 
-```"extract_features_emails = True" 
-and "extract_features_urls = True" 
-``` 
-respectively
 
-Note: In the package that I will upload, the file is already updated, so no need to run it unless you want to add other features or classifiers. If you do, make sure to turn again the values that you previously turned to "False"
+Features, Classifiers, Evaluation Metrics, and Imbalanced Methods are toggled via a `True` or `False` like so:
 
-## Run main.py
-main.py will first run the email feature extraction and url feature extraction. Then it will call for the classifiers in the Classifiers module and then run the evaluation metrics.
-The output will show the features being extracted from each file and an error message for each feature if there was an error. The program will not stop if there is an error with a feature extraction.
-When the feature extraction is done, the output will show the name and the results of the evaluation metrics for each classifier
-IMPORTANT: At this moment the program needs to be run twice: Once for the training data, and once for testing data. The only difference is when specifying the path to the dataset in User_options and change the following options at the end of the file: "Training_data=True" and "Testing_data=False"
+```
+Confusion_matrix = True
+Cross_validation = False
+```
+
+## Run PhishBench
+```
+usage: phishbench [-h] [-v] [-o OUTPUT_INPUT_DIR] [-c] [-f CONFIG_FILE]
+
+PhishBench
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         increase output verbosity
+  -o OUTPUT_INPUT_DIR, --output_input_dir OUTPUT_INPUT_DIR
+                        Output/input directory to read features or dump
+                        extracted features
+  -c, --ignore_confirmation
+                        does not wait or user's confirmation
+  -f CONFIG_FILE, --config_file CONFIG_FILE
+                        The config file to use.
+```
 
 
-##### DESCRIPTION OF MODULES
+
+# DESCRIPTION OF MODULES
 ## Features.py
 This module has the definition of all the features that are going to be extracted by the program.
 If the user want to add a feature, they should follow the following template: 
@@ -125,9 +146,4 @@ def classifier_name():
         print("classifier_name >>>>>>>")
         Evaluation_Metrics.eval_metrics(clf, X, y, y_test, y_predict)
         print("\n")
-```
-
-## COMMAND TO INSTALL MODULES
-```
-pip install -r requirements.txt
 ```
