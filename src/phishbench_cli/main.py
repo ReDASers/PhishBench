@@ -5,7 +5,8 @@ import joblib
 from scipy.sparse import hstack
 
 import phishbench.Feature_Selection as Feature_Selection
-import phishbench.Features as Features
+import phishbench.feature_extraction.legacy.url_features as legacy_url
+import phishbench.feature_extraction.legacy.email_features as legacy_email
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
@@ -15,6 +16,7 @@ from phishbench.utils import user_interaction
 from phishbench.dataset import dataset
 
 def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None, selection=None):
+
     # if training was done in another instance of the plaform then load the necessary files
     if not vectorizer:
         X_train=joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
@@ -22,7 +24,7 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
         vectorizer=joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
 
     # Extract features in a dictionnary for each email. return a list of dictionaries
-    (feature_list_dict_test, y_test, corpus_test)=Features.Extract_Features_Urls_Testing()
+    (feature_list_dict_test, y_test, corpus_test) = legacy_url.Extract_Features_Urls_Testing()
     # Tranform the list of dictionaries into a sparse matrix
     X_test=Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
@@ -69,7 +71,7 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             y_train=joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
             vectorizer=joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
         # Extract features in a dictionnary for each email. return a list of dictionaries
-        (feature_list_dict_test, y_test, corpus_test)=Features.Extract_Features_Emails_Testing()
+        (feature_list_dict_test, y_test, corpus_test) = legacy_email.Extract_Features_Emails_Testing()
 
         # Tranform the list of dictionaries into a sparse matrix
         X_test=Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
@@ -112,7 +114,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
         if not os.path.exists(email_train_dir):
             os.makedirs(email_train_dir)
         # Extract features in a dictionnary for each email. return a list of dictionaries
-        (feature_list_dict_train, y_train, corpus_train)=Features.Extract_Features_Emails_Training()
+        (feature_list_dict_train, y_train, corpus_train) = legacy_email.Extract_Features_Emails_Training()
         # Tranform the list of dictionaries into a sparse matrix
         X_train, vectorizer=Features_Support.Vectorization_Training(feature_list_dict_train)
         # Save model for vectorization
@@ -138,7 +140,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
         if not os.path.exists(url_train_dir):
             os.makedirs(url_train_dir)
         # Extract features in a dictionnary for each URL. return a list of dictionaries
-        (feature_list_dict_train, y_train, corpus_train)=Features.Extract_Features_Urls_Training()
+        (feature_list_dict_train, y_train, corpus_train) = legacy_url.Extract_Features_Urls_Training()
         # Tranform the list of dictionaries into a sparse matrix
         X_train, vectorizer=Features_Support.Vectorization_Training(feature_list_dict_train)
         # Dump vectorizer
