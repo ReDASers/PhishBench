@@ -2,26 +2,24 @@ import email
 import os
 from email.message import Message
 from typing import List, Union
+import glob
 
 from .email_input import EmailHeader, EmailBody
 
 
 def enumerate_folder_files(folder_path) -> List[str]:
     """
-    Gets a list of text files in a folder. This method assumes a flat directory structure and dues not
-    look in any sub-folders.
+    Recursively searches a folder for .txt files
     Parameters
     ----------
     folder_path : str
-        The path to the folder to enumerate.
+        The path to the folder to search.
     Returns
     -------
-        A list containing the paths to every text folder in the directory.
+        A list containing the paths to every text enumerate in the directory.
     """
-    # assumes a flat directory structure
-    files = filter(lambda x: x.endswith('.txt'), os.listdir(folder_path))
-    paths = map(lambda x: os.path.join(folder_path, x), files)
-    return list(paths)
+    glob_path = os.path.join(folder_path, "**/*.txt")
+    return glob.glob(glob_path,recursive=True)
 
 
 def read_email_from_file(file_path: str) -> Message:
