@@ -9,6 +9,7 @@ from textstat.textstat import textstat
 
 from .Features_Support import *
 from .utils import Globals
+from . import Tfidf
 
 
 ##### Email Features:
