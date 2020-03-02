@@ -9,6 +9,7 @@ from textstat.textstat import textstat
 
 from .Features_Support import *
 from .utils import Globals
+from . import Tfidf
 
 
 ##### Email Features:
@@ -1561,10 +1562,10 @@ def Email_Header_binary_re(subject, list_features, list_time):
                 Globals.logger.warning("exception: " + str(e))
         else:
             binary_re=0
-        list_features["binary_fwd"]=binary_fwd
+        list_features["binary_re"] = binary_re
         end=time.time()
         ex_time=end-start
-        list_time["binary_fwd"]=ex_time
+        list_time["binary_re"]=ex_time
 
 def Email_Header_vocab_richness_subject(subject, list_features, list_time):
     if Globals.config["Email_Header_Features"]["vocab_richness_subject"] == "True":
