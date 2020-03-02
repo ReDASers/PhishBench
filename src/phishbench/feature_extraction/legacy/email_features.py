@@ -11,11 +11,12 @@ from bs4 import BeautifulSoup
 from phishbench import Features
 from phishbench.Features_Support import Cleaning, read_corpus
 from phishbench.utils import Globals
+from ...input import Input
 
 
 def Extract_Features_Emails_Training():
     # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
-    start_time = time.time()
+
     Globals.logger.info("===============================================================")
     ### Training Features
     Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
@@ -70,9 +71,7 @@ def Extract_Features_Emails_Testing():
 
 
 def extract_email_features(dataset_path, feature_list_dict, extraction_time_dict):
-    data = list()
-    corpus_data = read_corpus(dataset_path)
-    data.extend(corpus_data)
+    corpus_files = Input.enumerate_folder_files(dataset_path)
     features_regex = re.compile(dataset_path + r"_features_?\d?.txt")
     ### for debugging purposes, not used in the pipeline
     try:
@@ -84,82 +83,72 @@ def extract_email_features(dataset_path, feature_list_dict, extraction_time_dict
         features_output = dataset_path + "_feature_vector_error.txt"
         Globals.logger.warning("exception: " + str(e))
     ###
-    corpus = []
-    for filepath in data:
-        dict_features = {}
-        dict_time = {}
+    corpus = Input.read_corpus(corpus_files, "ISO-8859-1")
+    for file_path, file_contents in corpus.items():
+
         Globals.logger.info("===================")
-        Globals.logger.info(filepath)
-        email_features(filepath, dict_features, features_output, feature_list_dict, dict_time, extraction_time_dict,
-                       corpus)
-        Globals.summary.write("filepath: {}\n\n".format(filepath))
+        Globals.logger.info(file_path)
+
+        dict_features, dict_time = email_features(file_contents)
+        dump_features_emails(file_path, dict_features, features_output,
+                             feature_list_dict, dict_time, extraction_time_dict)
+
+        Globals.summary.write("filepath: {}\n\n".format(file_path))
         Globals.summary.write("features extracted for this file:\n")
-        for feature in dict_time.keys():
-            Globals.summary.write("{} \n".format(feature))
-            Globals.summary.write("extraction time: {} \n".format(dict_time[feature]))
+        for feature_name, feature_time in dict_time.items():
+            Globals.summary.write("{} \n".format(feature_name))
+            Globals.summary.write("extraction time: {} \n".format(feature_time))
         Globals.summary.write("\n#######\n")
     count_files = len(feature_list_dict)
-    return count_files, corpus
+    print(count_files)
+    return count_files, list(corpus.values())
 
 
-def email_features(filepath, list_features, features_output, list_dict, list_time, time_dict, corpus):
+def email_features(raw_email):
     try:
-        with open(filepath, 'r', encoding="ISO-8859-1") as f:
-            email = f.read()
-            body_text, body_html, text_Html, test_text, num_attachment, content_disposition_list, content_type_list, \
-            Content_Transfer_Encoding_list, file_extension_list, charset_list, size_in_Bytes = \
-                extract_body(email)
-            Globals.logger.debug("extract_body >>>> Done")
+        body_text, body_html, text_Html, test_text, num_attachment, content_disposition_list, content_type_list, \
+        Content_Transfer_Encoding_list, file_extension_list, charset_list, size_in_Bytes = \
+            extract_body(raw_email)
+        Globals.logger.debug("extract_body >>>> Done")
 
-            url_All = get_url(body_html)
+        url_All = get_url(body_html)
 
-            Globals.logger.debug("extract urls from body >>>> Done")
+        Globals.logger.debug("extract urls from body >>>> Done")
 
-            (subject, sender_full, recipient_full, recipient_name, recipient_full_address, recipient_domain, message_id
-             , sender_name, sender_full_address, sender_domain, return_addr, x_virus_scanned, x_spam_flag,
-             x_originating_ip, x_mailer
-             , x_originating_hostname, dkim_signature, received_spf, x_original_authentication_results,
-             authentication_results
-             , received, Cc, Bcc, To, MIME_version) = extract_header_fields(email)
+        (subject, sender_full, recipient_full, recipient_name, recipient_full_address, recipient_domain, message_id
+         , sender_name, sender_full_address, sender_domain, return_addr, x_virus_scanned, x_spam_flag,
+         x_originating_ip, x_mailer
+         , x_originating_hostname, dkim_signature, received_spf, x_original_authentication_results,
+         authentication_results
+         , received, Cc, Bcc, To, MIME_version) = extract_header_fields(raw_email)
 
-            Globals.logger.debug("extract_header_fields >>>> Done")
-            # header=extract_header(email)
-            single_email_features(body_text, body_html, text_Html, test_text, num_attachment, content_disposition_list,
-                                  content_type_list
-                                  , Content_Transfer_Encoding_list, file_extension_list, charset_list, size_in_Bytes,
-                                  subject, sender_full, recipient_full, str(recipient_name), recipient_full_address,
-                                  recipient_domain, message_id
-                                  , sender_name, sender_full_address, sender_domain, return_addr, x_virus_scanned,
-                                  x_spam_flag, x_originating_ip, x_mailer
-                                  , x_originating_hostname, dkim_signature, received_spf,
-                                  x_original_authentication_results, authentication_results
-                                  , received, Cc, Bcc, To, MIME_version, list_features, list_time)
-            Globals.logger.debug("Email features >>>>>>>>>>> Done")
+        Globals.logger.debug("extract_header_fields >>>> Done")
 
-            # email_url_features(url_All,sender_domain, list_features, list_time)
-            # print("Email Url Features extracted")
-            # print(list_features)
-            corpus.append(body_text)
-            '''
-            if url==[]:
-                link=''
-                single_url_feature(link, list_features, list_time)
-            else:
-                for link in url:
-                    print(link)
-                    single_url_feature(link, list_features, list_time)
-            print("URL features extracted")
-            '''
-            dump_features_emails(filepath, list_features, features_output, list_dict, list_time, time_dict)
+        dict_features, dict_time = single_email_features(body_text, body_html, text_Html, test_text, num_attachment,
+                                                         content_disposition_list, content_type_list,
+                                                         Content_Transfer_Encoding_list, file_extension_list,
+                                                         charset_list, size_in_Bytes, subject, sender_full,
+                                                         recipient_full, str(recipient_name), recipient_full_address,
+                                                         recipient_domain, message_id, sender_name, sender_full_address,
+                                                         sender_domain, return_addr, x_virus_scanned, x_spam_flag,
+                                                         x_originating_ip, x_mailer, x_originating_hostname,
+                                                         dkim_signature, received_spf,
+                                                         x_original_authentication_results, authentication_results,
+                                                         received, Cc, Bcc, To, MIME_version)
+        Globals.logger.debug("Email features >>>>>>>>>>> Done")
+
+        return dict_features, dict_time
 
     except Exception as e:
         Globals.logger.warning("exception: " + str(e))
+        return {}, {}
 
 
 def get_url(body):
     url_regex = re.compile('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
     url = re.findall(url_regex, body)
     return url
+
 
 def extract_header_fields(email):
     # with open(filepath,'r') as f:
@@ -565,198 +554,202 @@ def single_email_features(body_text, body_html, text_Html, test_text, num_attach
                           x_originating_ip, x_mailer
                           , x_originating_hostname, dkim_signature, received_spf, x_original_authentication_results,
                           authentication_results
-                          , received, Cc, Bcc, To, MIME_version, list_features, list_time):
+                          , received, Cc, Bcc, To, MIME_version):
+    dict_features = {}
+    dict_time = {}
     if Globals.config["Email_Features"]["extract header features"] == "True":
-        Features.Email_Header_return_path(return_addr, list_features, list_time)
+        Features.Email_Header_return_path(return_addr, dict_features, dict_time)
         Globals.logger.debug("return_path")
-        Features.Email_Header_X_mailer(x_mailer, list_features, list_time)
+        Features.Email_Header_X_mailer(x_mailer, dict_features, dict_time)
         Globals.logger.debug("X_mailer")
-        Features.Email_Header_X_originating_hostname(x_originating_hostname, list_features, list_time)
+        Features.Email_Header_X_originating_hostname(x_originating_hostname, dict_features, dict_time)
         Globals.logger.debug("X_originating_hostname")
-        Features.Email_Header_X_originating_ip(x_originating_ip, list_features, list_time)
+        Features.Email_Header_X_originating_ip(x_originating_ip, dict_features, dict_time)
         Globals.logger.debug("X_originating_ip")
-        Features.Email_Header_X_spam_flag(x_spam_flag, list_features, list_time)
+        Features.Email_Header_X_spam_flag(x_spam_flag, dict_features, dict_time)
         Globals.logger.debug("X_spam_flag")
-        Features.Email_Header_X_virus_scanned(x_virus_scanned, list_features, list_time)
+        Features.Email_Header_X_virus_scanned(x_virus_scanned, dict_features, dict_time)
         Globals.logger.debug("X_virus_scanned")
-        Features.Email_Header_X_Origininal_Authentication_results(x_original_authentication_results, list_features,
-                                                                  list_time)
+        Features.Email_Header_X_Origininal_Authentication_results(x_original_authentication_results, dict_features,
+                                                                  dict_time)
         Globals.logger.debug("X_Origininal_Authentication_results")
-        Features.Email_Header_Received_SPF(received_spf, list_features, list_time)
+        Features.Email_Header_Received_SPF(received_spf, dict_features, dict_time)
         Globals.logger.debug("Received-SPF")
-        Features.Email_Header_Dkim_Signature_Exists(dkim_signature, list_features, list_time)
+        Features.Email_Header_Dkim_Signature_Exists(dkim_signature, dict_features, dict_time)
         Globals.logger.debug("Dkim_Signature")
-        Features.Email_Header_number_of_words_subject(subject, list_features, list_time)
+        Features.Email_Header_number_of_words_subject(subject, dict_features, dict_time)
         Globals.logger.debug("number_of_words_subject")
-        Features.Email_Header_number_of_characters_subject(subject, list_features, list_time)
+        Features.Email_Header_number_of_characters_subject(subject, dict_features, dict_time)
         Globals.logger.debug("number_of_characters_subject")
-        Features.Email_Header_number_of_special_characters_subject(subject, list_features, list_time)
+        Features.Email_Header_number_of_special_characters_subject(subject, dict_features, dict_time)
         Globals.logger.debug("numer_of_special_characters_subject")
-        Features.Email_Header_binary_fwd(subject, list_features, list_time)
+        Features.Email_Header_binary_fwd(subject, dict_features, dict_time)
         Globals.logger.debug("binary_fwd")
-        Features.Email_Header_vocab_richness_subject(subject, list_features, list_time)
+        Features.Email_Header_vocab_richness_subject(subject, dict_features, dict_time)
         Globals.logger.debug("vocab_richness_subject")
-        Features.Email_Header_compare_sender_return(sender_full_address, return_addr, list_features, list_time)
+        Features.Email_Header_compare_sender_return(sender_full_address, return_addr, dict_features, dict_time)
         Globals.logger.debug("compare_sender_return")
-        Features.Email_Header_compare_sender_domain_message_id_domain(sender_domain, message_id, list_features,
-                                                                      list_time)
+        Features.Email_Header_compare_sender_domain_message_id_domain(sender_domain, message_id, dict_features,
+                                                                      dict_time)
         # Features.Content_Disposition(cdispo, list_features, list_time)
         # Globals.logger.debug("Content_Disposition")
-        Features.Email_Header_Number_Cc(Cc, list_features, list_time)
+        Features.Email_Header_Number_Cc(Cc, dict_features, dict_time)
         Globals.logger.debug("Number_Cc")
-        Features.Email_Header_Number_Bcc(Bcc, list_features, list_time)
+        Features.Email_Header_Number_Bcc(Bcc, dict_features, dict_time)
         Globals.logger.debug("Number_Bcc")
-        Features.Email_Header_Number_To(To, list_features, list_time)
+        Features.Email_Header_Number_To(To, dict_features, dict_time)
         Globals.logger.debug("Number_To")
-        Features.Email_Header_Num_Content_type(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_type(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_type")
-        Features.Email_Header_Num_Charset(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Charset(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Charset")
-        Features.Email_Header_Num_Unique_Charset(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Unique_Charset(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Charset")
-        Features.Email_Header_MIME_Version(MIME_version, list_features, list_time)
+        Features.Email_Header_MIME_Version(MIME_version, dict_features, dict_time)
         Globals.logger.debug("Email_Header_MIME_Version")
-        Features.Email_Header_Num_Unique_Content_type(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Unique_Content_type(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Content_type")
-        Features.Email_Header_Num_Unique_Content_Disposition(content_disposition_list, list_features, list_time)
+        Features.Email_Header_Num_Unique_Content_Disposition(content_disposition_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Content_Disposition")
-        Features.Email_Header_Num_Content_Disposition(content_disposition_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Disposition(content_disposition_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Disposition")
-        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_text_plain")
-        Features.Email_Header_Num_Content_Type_text_html(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_text_html(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_text_html")
-        Features.Email_Header_Num_Content_Disposition(content_disposition_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Disposition(content_disposition_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Disposition")
-        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_text_plain")
-        Features.Email_Header_Num_Content_Type_text_html(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_text_html(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_text_html")
-        Features.Email_Header_Num_Content_Type_Multipart_Encrypted(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Encrypted(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Encrypted")
-        Features.Email_Header_Num_Content_Type_Multipart_Mixed(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Mixed(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Mixed")
-        Features.Email_Header_Num_Content_Type_Multipart_form_data(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_form_data(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_form_data")
-        Features.Email_Header_Num_Content_Type_Multipart_byterange(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_byterange(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_byterange")
-        Features.Email_Header_Num_Content_Type_Multipart_Parallel(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Parallel(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Parallel")
-        Features.Email_Header_Num_Content_Type_Multipart_Report(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Report(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Report")
-        Features.Email_Header_Num_Content_Type_Multipart_Alternative(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Alternative(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Alternative")
-        Features.Email_Header_Num_Content_Type_Multipart_Digest_Num(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Digest_Num(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Digest_Num")
-        Features.Email_Header_Num_Content_Type_Multipart_Signed_Num(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_Signed_Num(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_Signed_Num")
-        Features.Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced(content_type_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced(content_type_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced")
-        Features.Email_Header_Num_Content_Type_Charset_us_ascii(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_us_ascii(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_us_ascii")
-        Features.Email_Header_Num_Content_Type_Charset_utf_8(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_utf_8(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_utf_8")
-        Features.Email_Header_Num_Content_Type_Charset_utf_7(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_utf_7(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_utf_7")
-        Features.Email_Header_Num_Content_Type_Charset_gb2312(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_gb2312(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_gb2312")
-        Features.Email_Header_Num_Content_Type_Charset_shift_jis(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_shift_jis(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_shift_jis")
-        Features.Email_Header_Num_Content_Type_Charset_koi(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_koi(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_koi")
-        Features.Email_Header_Num_Content_Type_Charset_iso2022_jp(charset_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Type_Charset_iso2022_jp(charset_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Type_Charset_iso2022_jp")
-        Features.Email_Header_Num_Attachment(num_attachment, list_features, list_time)
+        Features.Email_Header_Num_Attachment(num_attachment, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Attachment")
-        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features, list_time)
+        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Attachment_types")
-        Features.Email_Header_Num_Content_Transfer_Encoding(Content_Transfer_Encoding_list, list_features, list_time)
+        Features.Email_Header_Num_Content_Transfer_Encoding(Content_Transfer_Encoding_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Transfer_Encoding")
-        Features.Email_Header_Num_Unique_Content_Transfer_Encoding(Content_Transfer_Encoding_list, list_features,
-                                                                   list_time)
+        Features.Email_Header_Num_Unique_Content_Transfer_Encoding(Content_Transfer_Encoding_list, dict_features,
+                                                                   dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Content_Transfer_Encoding")
-        Features.Email_Header_Num_Content_Transfer_Encoding_7bit(Content_Transfer_Encoding_list, list_features,
-                                                                 list_time)
+        Features.Email_Header_Num_Content_Transfer_Encoding_7bit(Content_Transfer_Encoding_list, dict_features,
+                                                                 dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Transfer_Encoding_7bit")
-        Features.Email_Header_Num_Content_Transfer_Encoding_8bit(Content_Transfer_Encoding_list, list_features,
-                                                                 list_time)
+        Features.Email_Header_Num_Content_Transfer_Encoding_8bit(Content_Transfer_Encoding_list, dict_features,
+                                                                 dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Transfer_Encoding_8bit")
-        Features.Email_Header_Num_Content_Transfer_Encoding_binary(Content_Transfer_Encoding_list, list_features,
-                                                                   list_time)
+        Features.Email_Header_Num_Content_Transfer_Encoding_binary(Content_Transfer_Encoding_list, dict_features,
+                                                                   dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Transfer_Encoding_binary")
         Features.Email_Header_Num_Content_Transfer_Encoding_quoted_printable(Content_Transfer_Encoding_list,
-                                                                             list_features, list_time)
+                                                                             dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Content_Transfer_Encoding_quoted_printable")
-        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features, list_time)
+        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, dict_features, dict_time)
         Globals.logger.debug("Email_Header_Num_Unique_Attachment_types")
-        Features.Email_Header_size_in_Bytes(size_in_Bytes, list_features, list_time)
+        Features.Email_Header_size_in_Bytes(size_in_Bytes, dict_features, dict_time)
         Globals.logger.debug("Email_Header_size_in_Bytes")
-        Features.Email_Header_Received_count(received, list_features, list_time)
+        Features.Email_Header_Received_count(received, dict_features, dict_time)
         Globals.logger.debug("Received_count")
-        Features.Email_Header_Authentication_Results_SPF_Pass(authentication_results, list_features, list_time)
+        Features.Email_Header_Authentication_Results_SPF_Pass(authentication_results, dict_features, dict_time)
         Globals.logger.debug("Authentication_Results_SPF_Pass")
-        Features.Email_Header_Authentication_Results_DKIM_Pass(authentication_results, list_features, list_time)
+        Features.Email_Header_Authentication_Results_DKIM_Pass(authentication_results, dict_features, dict_time)
         Globals.logger.debug("Authentication_Results_DKIM_Pass")
-        Features.Email_Header_Test_Html(text_Html, list_features, list_time)
+        Features.Email_Header_Test_Html(text_Html, dict_features, dict_time)
         Globals.logger.debug("Test_Html")
-        Features.Email_Header_Test_Text(test_text, list_features, list_time)
+        Features.Email_Header_Test_Text(test_text, dict_features, dict_time)
         Globals.logger.debug("test_text")
-        Features.Email_Header_blacklisted_words_subject(subject, list_features, list_time)
+        Features.Email_Header_blacklisted_words_subject(subject, dict_features, dict_time)
         Globals.logger.debug("Email_blacklisted_words_subject")
 
     if Globals.config["Email_Features"]["extract body features"] == "True":
-        Features.Email_Body_flesh_read_score(body_text, list_features, list_time)
+        Features.Email_Body_flesh_read_score(body_text, dict_features, dict_time)
         Globals.logger.debug("flesh_read_score")
-        Features.Email_Body_smog_index(body_text, list_features, list_time)
+        Features.Email_Body_smog_index(body_text, dict_features, dict_time)
         Globals.logger.debug("smog_index")
-        Features.Email_Body_flesh_kincaid_score(body_text, list_features, list_time)
+        Features.Email_Body_flesh_kincaid_score(body_text, dict_features, dict_time)
         Globals.logger.debug("flesh_kincaid_score")
-        Features.Email_Body_coleman_liau_index(body_text, list_features, list_time)
+        Features.Email_Body_coleman_liau_index(body_text, dict_features, dict_time)
         Globals.logger.debug("coleman_liau_index")
-        Features.Email_Body_automated_readability_index(body_text, list_features, list_time)
+        Features.Email_Body_automated_readability_index(body_text, dict_features, dict_time)
         Globals.logger.debug("automated_readability_index")
-        Features.Email_Body_dale_chall_readability_score(body_text, list_features, list_time)
+        Features.Email_Body_dale_chall_readability_score(body_text, dict_features, dict_time)
         Globals.logger.debug("dale_chall_readability_score")
-        Features.Email_Body_difficult_words(body_text, list_features, list_time)
+        Features.Email_Body_difficult_words(body_text, dict_features, dict_time)
         Globals.logger.debug("difficult_words")
-        Features.Email_Body_linsear_score(body_text, list_features, list_time)
+        Features.Email_Body_linsear_score(body_text, dict_features, dict_time)
         Globals.logger.debug("linsear_score")
-        Features.Email_Body_gunning_fog(body_text, list_features, list_time)
+        Features.Email_Body_gunning_fog(body_text, dict_features, dict_time)
         Globals.logger.debug("gunning_fog")
         # Features.html_in_body(body, list_features, list_time)
         # print("html_in_body")
-        Features.Email_Body_number_of_words_body(body_text, list_features, list_time)
+        Features.Email_Body_number_of_words_body(body_text, dict_features, dict_time)
         Globals.logger.debug("number_of_words_body")
-        Features.Email_Body_number_of_characters_body(body_text, list_features, list_time)
+        Features.Email_Body_number_of_characters_body(body_text, dict_features, dict_time)
         Globals.logger.debug("number_of_characters_body")
-        Features.Email_Body_number_of_special_characters_body(body_text, list_features, list_time)
+        Features.Email_Body_number_of_special_characters_body(body_text, dict_features, dict_time)
         Globals.logger.debug("number_of_special_characters_body")
-        Features.Email_Body_vocab_richness_body(body_text, list_features, list_time)
+        Features.Email_Body_vocab_richness_body(body_text, dict_features, dict_time)
         Globals.logger.debug("vocab_richness_body")
-        Features.Email_Body_number_of_html_tags_body(body_html, list_features, list_time)
+        Features.Email_Body_number_of_html_tags_body(body_html, dict_features, dict_time)
         Globals.logger.debug("number_of_html_tags_body")
-        Features.Email_Body_number_of_unique_words_body(body_text, list_features, list_time)
+        Features.Email_Body_number_of_unique_words_body(body_text, dict_features, dict_time)
         Globals.logger.debug("number_unique_words_body")
-        Features.Email_Body_number_unique_chars_body(body_text, list_features, list_time)
+        Features.Email_Body_number_unique_chars_body(body_text, dict_features, dict_time)
         Globals.logger.debug("number_unique_chars_body")
-        Features.Email_Body_end_tag_count(body_html, list_features, list_time)
+        Features.Email_Body_end_tag_count(body_html, dict_features, dict_time)
         Globals.logger.debug("end_tag_count")
-        Features.Email_Body_open_tag_count(body_html, list_features, list_time)
+        Features.Email_Body_open_tag_count(body_html, dict_features, dict_time)
         Globals.logger.debug("open_tag_count")
-        Features.Email_Body_recipient_name_body(body_text, recipient_name, list_features, list_time)
+        Features.Email_Body_recipient_name_body(body_text, recipient_name, dict_features, dict_time)
         Globals.logger.debug("recipient_name_body")
-        Features.Email_Body_on_mouse_over(body_html, list_features, list_time)
+        Features.Email_Body_on_mouse_over(body_html, dict_features, dict_time)
         Globals.logger.debug("on_mouse_over")
-        Features.Email_Body_count_href_tag(body_html, list_features, list_time)
+        Features.Email_Body_count_href_tag(body_html, dict_features, dict_time)
         Globals.logger.debug("count_href_tag")
-        Features.Email_Body_Function_Words_Count(body_text, list_features, list_time)
+        Features.Email_Body_Function_Words_Count(body_text, dict_features, dict_time)
         Globals.logger.debug("Email_Body_Function_Words_Count")
-        Features.Email_Body_Number_Of_Img_Links(body_html, list_features, list_time)
+        Features.Email_Body_Number_Of_Img_Links(body_html, dict_features, dict_time)
         Globals.logger.debug("Email_Body_Number_Of_Img_Links")
-        Features.Email_Body_blacklisted_words_body(body_text, list_features, list_time)
+        Features.Email_Body_blacklisted_words_body(body_text, dict_features, dict_time)
         Globals.logger.debug("Email_Body_blacklisted_words_body")
-        Features.Email_Body_Number_Of_Scripts(body_html, list_features, list_time)
+        Features.Email_Body_Number_Of_Scripts(body_html, dict_features, dict_time)
         Globals.logger.debug("Email_Number_Of_Scripts")
+
+    return dict_features, dict_time
 
 
 def email_url_features(url_All, sender_domain, list_features, list_time):

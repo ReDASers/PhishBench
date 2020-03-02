@@ -1,10 +1,11 @@
 import email
 import os
 from email.message import Message
-from typing import List, Union
+from typing import List, Union, Dict
 import glob
 
 from .email_input import EmailHeader, EmailBody
+from..utils import Globals
 
 
 def enumerate_folder_files(folder_path) -> List[str]:
@@ -36,6 +37,28 @@ def read_email_from_file(file_path: str) -> Message:
     """
     with open(file_path, "r", encoding="utf-8") as f:
         return email.message_from_file(f)
+
+
+def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:
+    """
+    Reads a corpus
+    Parameters
+    ----------
+    corpus_files
+    encoding
+
+    Returns
+    -------
+        A dictionary with the file paths as the key and the file contents as the values
+    """
+    corpus = {}
+    for filepath in corpus_files:
+        try:
+            with open(filepath, 'r', encoding=encoding,errors='ignore') as file:
+                corpus[filepath] = file.read()
+        except Exception as e:
+            Globals.logger.warning("exception: %s", e)
+    return corpus
 
 
 def read_dataset_email(folder_path: str) -> Union[List[EmailBody], List[EmailHeader], List[Message], List[str]]:
