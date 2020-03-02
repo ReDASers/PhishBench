@@ -167,7 +167,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
 
 
 def main():
-    Feature_extraction = False  # flag for feature extraction
+    feature_extraction_flag = False  # flag for feature extraction
     flag_training = False
     # Feature dumping and loading methods
     # flag_saving_pickle=Globals.config["Features Format"]["Pikle"]
@@ -204,7 +204,7 @@ def main():
     ################ Feature Extraction ##################
     ######################################################
     elif Globals.config["Extraction"]["Feature Extraction"] == 'True':
-        Feature_extraction = True
+        feature_extraction_flag = True
         ################ Email Feature Extraction ##################
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
@@ -230,11 +230,11 @@ def main():
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
-                if flag_training == False:
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer)
-                else:
+                if flag_training:
                     # if training was done in another instance of the plaform then load the necessary files
                     X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
+                else:
+                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer)
 
             else:
                 X_test = None
@@ -264,11 +264,12 @@ def main():
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
-                if flag_training == False:
-                    X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
-                else:
+                if flag_training:
                     # if training was done in another instance of the plaform then load the necessary files
                     X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir)
+                else:
+                    X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
+
 
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
@@ -291,7 +292,7 @@ def main():
                 y_test = None
 
     if Globals.config["Classification"]["Running the classifiers"] == "True":
-        if Feature_extraction == False:
+        if not feature_extraction_flag:
             if Globals.config["Classification"]["load model"] == "True":
                 X_train, y_train, X_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
                     load_train=False, load_test=True)
@@ -301,51 +302,51 @@ def main():
                     load_train=True, load_test=True)
             if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
                 if Globals.config["Classification"]["load model"] == "False":
-                    """
-                    features_extracted=vectorizer_train.get_feature_names()
-                    #Globals.logger.info(features_extracted)
-                    import numpy as np
-                    if X_train is not None:
-                        Features_training=vectorizer_train.inverse_transform(X_train)
-                    if X_test is not None:
-                        Features_testing=vectorizer_test.inverse_transform(X_test)
-                    mask=[]
-                    #mask.append(0)
-                    #Globals.logger.info("Section: {} ".format(section))
-                    for feature in features_extracted:
-                        feature_name=feature
-                        if "=" in feature:
-                            feature_name=feature.split("=")[0]
-                        if "url_char_distance_" in feature:
-                            feature_name="char_distance"
-                        for section in ["HTML_Features", "URL_Features", "Network_Features", "Javascript_Features"]:
-                            try:
-                                if Globals.config[section][feature_name]=="True":
-                                    if Globals.config[section][section.lower()]=="True":
-                                        mask.append(1)
-                                    else:
-                                        mask.append(0)
-                                else:
-                                    mask.append(0)
-                            except KeyError as e:
-                                pass
-                    Globals.logger.info(len(vectorizer_train.get_feature_names()))
-                    vectorizer_train.restrict(mask)
-                    url_classification_dir =  os.path.join(Globals.args.output_input_dir, "URLs_Classification")
-                    if X_train is not None:
-                        X_train=vectorizer_train.transform(Features_training)
-                        Globals.logger.info(np.shape(X_train))
-                    if X_test is not None:
-                        X_test=vectorizer_train.transform(Features_testing)
-                    if not os.path.exists(url_classification_dir):
-                        os.makedirs(url_classification_dir)
-                    joblib.dump(vectorizer_train, os.path.join(url_classification_dir, "vectorizer_restricted.pkl"))
-                    if X_train is not None:
-                        joblib.dump(X_train, os.path.join(url_classification_dir, "X_train_restricted.pkl"))
-                    if X_test is not None:
-                        joblib.dump(X_test, os.path.join(url_classification_dir, "X_test_restricted.pkl"))
-                    Globals.logger.info(len(vectorizer_train.get_feature_names()))
-                    """
+                    #
+                    # features_extracted=vectorizer_train.get_feature_names()
+                    # #Globals.logger.info(features_extracted)
+                    # import numpy as np
+                    # if X_train is not None:
+                    #     Features_training=vectorizer_train.inverse_transform(X_train)
+                    # if X_test is not None:
+                    #     Features_testing=vectorizer_test.inverse_transform(X_test)
+                    # mask=[]
+                    # #mask.append(0)
+                    # #Globals.logger.info("Section: {} ".format(section))
+                    # for feature in features_extracted:
+                    #     feature_name=feature
+                    #     if "=" in feature:
+                    #         feature_name=feature.split("=")[0]
+                    #     if "url_char_distance_" in feature:
+                    #         feature_name="char_distance"
+                    #     for section in ["HTML_Features", "URL_Features", "Network_Features", "Javascript_Features"]:
+                    #         try:
+                    #             if Globals.config[section][feature_name]=="True":
+                    #                 if Globals.config[section][section.lower()]=="True":
+                    #                     mask.append(1)
+                    #                 else:
+                    #                     mask.append(0)
+                    #             else:
+                    #                 mask.append(0)
+                    #         except KeyError as e:
+                    #             pass
+                    # Globals.logger.info(len(vectorizer_train.get_feature_names()))
+                    # vectorizer_train.restrict(mask)
+                    # url_classification_dir =  os.path.join(Globals.args.output_input_dir, "URLs_Classification")
+                    # if X_train is not None:
+                    #     X_train=vectorizer_train.transform(Features_training)
+                    #     Globals.logger.info(np.shape(X_train))
+                    # if X_test is not None:
+                    #     X_test=vectorizer_train.transform(Features_testing)
+                    # if not os.path.exists(url_classification_dir):
+                    #     os.makedirs(url_classification_dir)
+                    # joblib.dump(vectorizer_train, os.path.join(url_classification_dir, "vectorizer_restricted.pkl"))
+                    # if X_train is not None:
+                    #     joblib.dump(X_train, os.path.join(url_classification_dir, "X_train_restricted.pkl"))
+                    # if X_test is not None:
+                    #     joblib.dump(X_test, os.path.join(url_classification_dir, "X_test_restricted.pkl"))
+                    # Globals.logger.info(len(vectorizer_train.get_feature_names()))
+
                     # exit()
             elif Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
                 if Globals.config["Classification"]["load model"] == "False":
