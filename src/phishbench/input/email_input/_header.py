@@ -1,3 +1,6 @@
+"""
+This is an internal module which handles email headers
+"""
 import email
 import re
 from email.message import Message
@@ -6,11 +9,11 @@ import datetime
 
 from ...utils import Globals
 
-email_address_regex = re.compile(r"<.*@[a-zA-Z0-9.\-_]*", flags=re.MULTILINE | re.IGNORECASE)
-email_address_name_regex = re.compile(r'"?.*"? <?', flags=re.MULTILINE | re.IGNORECASE)
-email_address_domain_regex = re.compile(r"@.*", flags=re.MULTILINE | re.IGNORECASE)
+EMAIL_ADDRESS_REGEX = re.compile(r"<.*@[a-zA-Z0-9.\-_]*", flags=re.MULTILINE | re.IGNORECASE)
+EMAIL_ADDRESS_NAME_REGEX = re.compile(r'"?.*"? <?', flags=re.MULTILINE | re.IGNORECASE)
+EMAIL_ADDRESS_DOMAIN_REGEX = re.compile(r"@.*", flags=re.MULTILINE | re.IGNORECASE)
 
-email_date_format_regex = re.compile(r'((?P<DayName>\w{3}),\s+)?' +
+EMAIL_DATE_FORMAT_REGEX = re.compile(r'((?P<DayName>\w{3}),\s+)?' +
                                      r'(?P<Day>\d{1,2})\s+' +
                                      r'(?P<Month>\w+)\s+' +
                                      r'(?P<Year>\d{4})\s+' +
@@ -19,15 +22,37 @@ email_date_format_regex = re.compile(r'((?P<DayName>\w{3}),\s+)?' +
 
 
 def parse_address_list(raw: str) -> List[str]:
+    """
+    Parses an address-list according to the rfc2822 section 3.4
+    Parameters
+    ----------
+    raw: str
+        The raw address-list
+    Returns
+    -------
+        A list of addresses
+    """
     if not raw:
         return []
     raw = re.sub(r'\s+', ' ', raw)
     return [x.strip() for x in raw.split(',')]
 
 
-def parse_email_date(raw: str):
-    # Parse date format from rfc2822 section-3.3
-    match = email_date_format_regex.match(raw)
+def parse_email_date(raw: str) -> datetime:
+    """
+    Parse date format from rfc2822 section 3.3
+    Parameters
+    ----------
+    raw: str
+        The raw string containing the date
+    Returns
+    -------
+        A datetime object containing the parsed date.
+    """
+    #
+    match = EMAIL_DATE_FORMAT_REGEX.match(raw)
+    if not match:
+        raise ValueError("Invalid date format")
     year = int(match.group('Year'))
     month = match.group('Month')
     day = int(match.group('Day'))
@@ -98,9 +123,12 @@ class EmailHeader:
     mime_version : str
         The value of the MIME-Version header field
     """
-
+    # pylint: disable=too-few-public-methods
+    # pylint: disable=too-many-instance-attributes
     # Adapted from original PhishBench Header extraction code
     def __init__(self, msg: Message):
+        # pylint: disable=too-many-branches
+        # pylint: disable=too-many-statements
         parser = email.parser.HeaderParser()
         msg = parser.parsestr(msg.as_string())
         # Get the raw headers
@@ -114,9 +142,8 @@ class EmailHeader:
                 self.orig_date = parse_email_date(msg['Date'])
             else:
                 self.orig_date = None
-        except Exception as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+        except ValueError as exception:
+            Globals.logger.debug("Exception: %s handled", exception)
             self.orig_date = None
 
         # X-Priority
@@ -126,8 +153,7 @@ class EmailHeader:
             else:
                 self.x_priority = None
         except ValueError as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+            Globals.logger.debug("Exception: %s handled", exception)
             self.x_priority = None
 
         # Subject
@@ -149,30 +175,23 @@ class EmailHeader:
             self.reply_to = []
 
         # Sender
-        try:
-            if msg['Sender']:
-                self.sender_full = msg['Sender']
-            else:
-                # By the Email specification, either the Sender field or From field must be included
-                self.sender_full = msg['From']
-            if re.findall(email_address_name_regex, self.sender_full):
-                self.sender_name = re.findall(email_address_name_regex, self.sender_full)[0] \
-                    .strip('"').strip(' <').strip('"')
-            else:
-                self.sender_name = None
-        except Exception as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+        if msg['Sender']:
+            self.sender_full = msg['Sender']
+        else:
+            # By the Email specification, either the Sender field or From field must be included. If it isn't then
+            # msg['From'] simply returns None
+            self.sender_full = msg['From']
+
+        if self.sender_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full):
+            self.sender_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full)[0] \
+                .strip('"').strip(' <').strip('"')
+        else:
             self.sender_name = None
-        try:
-            if re.findall(email_address_regex, self.sender_full):
-                self.sender_email_address = re.findall(email_address_regex, self.sender_full)[0] \
-                    .strip("<").strip(">")
-            else:
-                self.sender_email_address = None
-        except Exception as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+
+        if self.sender_full and re.findall(EMAIL_ADDRESS_REGEX, self.sender_full):
+            self.sender_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.sender_full)[0] \
+                .strip("<").strip(">")
+        else:
             self.sender_email_address = None
 
         # Recipient
@@ -187,26 +206,16 @@ class EmailHeader:
         else:
             self.recipient_full = None
 
-        try:
-            if self.recipient_full and re.findall(email_address_name_regex, self.recipient_full):
-                self.recipient_name = re.findall(email_address_name_regex, self.recipient_full)[0] \
-                    .strip('"').strip(' <').strip('"')
-            else:
-                self.recipient_name = None
-        except Exception as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+        if self.recipient_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full):
+            self.recipient_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full)[0] \
+                .strip('"').strip(' <').strip('"')
+        else:
             self.recipient_name = None
 
-        try:
-            match = re.findall(email_address_regex, self.recipient_full)
-            if match:
-                self.recipient_email_address = match[0].strip('<').strip('>')
-            else:
-                self.recipient_email_address = None
-        except Exception as exception:
-            Globals.logger.debug("exception: " + str(exception))
-            Globals.logger.debug("Exception handled")
+        if self.recipient_full and re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full):
+            self.recipient_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full)[0]\
+                .strip('<').strip('>')
+        else:
             self.recipient_email_address = None
 
         # CC
