@@ -301,6 +301,7 @@ def run_phishbench():
                     load_train=True, load_test=True)
             if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
                 if Globals.config["Classification"]["load model"] == "False":
+                    pass
                     #
                     # features_extracted=vectorizer_train.get_feature_names()
                     # #Globals.logger.info(features_extracted)
