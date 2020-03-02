@@ -166,7 +166,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
-def main():
+def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
     flag_training = False
     # Feature dumping and loading methods
@@ -269,7 +269,6 @@ def main():
                     X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir)
                 else:
                     X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
-
 
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
@@ -381,7 +380,7 @@ def main():
         Globals.logger.info("Done running the Classifiers!!")
 
 
-if __name__ == "__main__":
+def main():
     # execute only if run as a script
     Globals.setup_globals()
     answer = user_interaction.Confirmation(Globals.args.ignore_confirmation)
@@ -389,8 +388,12 @@ if __name__ == "__main__":
     if answer is True:
         Globals.logger.debug("Running......")
         # sys.stdout= open("log.txt",'w')
-        main()
+        run_phishbench()
         # sys.stdout=original
         Globals.logger.debug("Done!")
     sys.stdout = original
     Globals.destroy_globals()
+
+
+if __name__ == "__main__":
+    main()
