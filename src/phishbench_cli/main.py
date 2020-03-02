@@ -5,15 +5,14 @@ import joblib
 from scipy.sparse import hstack
 
 import phishbench.Feature_Selection as Feature_Selection
-import phishbench.feature_extraction.legacy.url_features as legacy_url
-import phishbench.feature_extraction.legacy.email_features as legacy_email
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
-import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.feature_extraction.legacy.email_features as legacy_email
+import phishbench.feature_extraction.legacy.url_features as legacy_url
 from phishbench.Classifiers import classifiers
+from phishbench.dataset import dataset
 from phishbench.utils import Globals
 from phishbench.utils import user_interaction
-from phishbench.dataset import dataset
 
 
 def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None, selection=None):
