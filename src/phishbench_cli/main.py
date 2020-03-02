@@ -60,8 +60,8 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
 
     if X_train:
         return X_train, y_train, vectorizer, X_test, y_test
-    else:
-        return X_test, y_test
+
+    return X_test, y_test
 
 
 def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
@@ -107,8 +107,8 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
 
     if X_train:
         return X_train, y_train, vectorizer, X_test, y_test
-    else:
-        return X_test, y_test
+
+    return X_test, y_test
 
 
 def feature_extraction_train(email_train_dir, url_train_dir):
