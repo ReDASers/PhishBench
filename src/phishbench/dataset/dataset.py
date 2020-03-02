@@ -1,6 +1,6 @@
 import os
 import sys
-from sklearn.externals import joblib
+import joblib
 import re
 
 sys.path.append('../')
