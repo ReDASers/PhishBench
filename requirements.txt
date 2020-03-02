@@ -25,3 +25,4 @@ langdetect==1.0.7
 scikit_learn==0.22
 sklearn_extensions==0.0.2
 joblib==0.14.1
+html5lib==1.0.1
