@@ -44,6 +44,12 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual('Bob <bob@domain.com>', result[0])
         self.assertEqual('Anna <anna@domain.com>', result[1])
 
+    def test_parse_email_date_bad(self):
+        raw = "BACON!"
+
+        self.assertRaises(ValueError, parse_email_date, raw)
+
+
     def test_parse_email_date(self):
         raw = 'Mon, 14 Apr 2015 16:08:50 +0500'
         date = parse_email_date(raw)
@@ -92,7 +98,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(8, date.minute)
         self.assertEqual(0, date.second)
 
-    def test_Date(self):
+    def test_date(self):
         msg = get_email("Resources/Test Email 1.txt")
         # Date: Mon, 14 Apr 2015 16:08:50 +0000
         header = EmailHeader(msg)
