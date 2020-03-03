@@ -77,7 +77,7 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
         X_test = Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
 
         # Add tfidf if the user marked it as True
-        if Globals.config["Email_Features"]["tfidf_emails"] == "True":
+        if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
             if not tfidf_vectorizer:
                 tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
             Globals.logger.info("tfidf_emails_train ######")
@@ -233,7 +233,7 @@ def run_phishbench():
                     # if training was done in another instance of the plaform then load the necessary files
                     X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
                 else:
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer)
+                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
 
             else:
                 X_test = None

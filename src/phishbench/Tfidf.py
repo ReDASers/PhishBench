@@ -26,8 +26,8 @@ def tfidf_training(corpus):
 	tfidf_matrix = tf.fit_transform(corpus)
 	return tfidf_matrix, tf
 
-def tfidf_testing(corpus):
-	tfidf_matrix = tf.transform(corpus)
+def tfidf_testing(corpus, tidf_vectorizer):
+	tfidf_matrix = tidf_vectorizer.transform(corpus)
 	return tfidf_matrix
 
 def Header_Tokenizer(corpus):
