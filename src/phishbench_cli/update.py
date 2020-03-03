@@ -75,6 +75,10 @@ def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evalua
 	C_summary = config["Summary"]
 	C_summary["Path"] = "summary.txt"
 
+	config['Email_Features'] = {}
+	config['Email_Features']['extract header features'] = "True"
+	config['Email_Features']['extract body features'] = "True"
+
 	config['Email_Header_Features']={}
 	header_features = config['Email_Header_Features']
 	for feature in list_Features:
