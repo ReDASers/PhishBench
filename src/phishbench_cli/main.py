@@ -120,10 +120,10 @@ def feature_extraction_train(email_train_dir, url_train_dir):
         X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
         # Save model for vectorization
         joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
-        joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
+        joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
         # Add tfidf if the user marked it as True
-        if Globals.config["Email_Features"]["tfidf_emails"] == "True":
+        if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
             Globals.logger.info("tfidf_emails_train ######")
             Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
             joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
@@ -134,7 +134,7 @@ def feature_extraction_train(email_train_dir, url_train_dir):
             tfidf_vectorizer = None
 
         X_train = Features_Support.Preprocessing(X_train)
-        joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
+        joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
 
     elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
         # Create directory to store dada

@@ -25,16 +25,20 @@ def setup_logger():
     formatter = logging.Formatter('[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
                                   '%m-%d %H:%M:%S')
     # create console handler and set level to debug
-    handler = logging.StreamHandler()
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.ERROR)
+    file_handler = logging.FileHandler('phishbench.log')
     # add formatter to handler
-    handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
     # create logger
     logger = logging.getLogger('root')
     if args and args.verbose:
         logger.setLevel(level=logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
-    logger.addHandler(handler)
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
 
 def setup_globals():
     global args
