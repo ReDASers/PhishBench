@@ -70,18 +70,18 @@ def Extract_Features_Emails_Testing():
     return feature_list_dict_test, labels_test, corpus_test
 
 
-def extract_email_features(dataset_path, feature_list_dict, extraction_time_dict):
+def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
     corpus_files = Input.enumerate_folder_files(dataset_path)
-    features_regex = re.compile(dataset_path + r"_features_?\d?.txt")
+    # features_regex = re.compile(r"_features_?\d?.txt")
     ### for debugging purposes, not used in the pipeline
-    try:
-        list_files = os.listdir('.')
-        count_feature_files = len(re.findall(features_regex, ''.join(list_files)))
-        Globals.logger.info("Total number of features files: {}".format(count_feature_files))
-        features_output = dataset_path + "_feature_vector_" + str(count_feature_files + 1) + ".txt"
-    except Exception as e:
-        features_output = dataset_path + "_feature_vector_error.txt"
-        Globals.logger.warning("exception: " + str(e))
+    # try:
+    #     list_files = os.listdir(dataset_path)
+    #     count_feature_files = len(re.findall(features_regex, ''.join(list_files)))
+    #     Globals.logger.info("Total number of features files: {}".format(count_feature_files))
+    #     features_output = dataset_path + "_feature_vector_" + str(count_feature_files + 1) + ".txt"
+    # except Exception as e:
+    #     features_output = dataset_path + "_feature_vector_error.txt"
+    #     Globals.logger.warning("exception: " + str(e))
     ###
     corpus = Input.read_corpus(corpus_files, "ISO-8859-1")
     for file_path, file_contents in corpus.items():
@@ -90,8 +90,11 @@ def extract_email_features(dataset_path, feature_list_dict, extraction_time_dict
         Globals.logger.info(file_path)
 
         dict_features, dict_time = email_features(file_contents)
-        dump_features_emails(file_path, dict_features, features_output,
-                             feature_list_dict, dict_time, extraction_time_dict)
+        feature_list_dict.append(dict_features)
+        time_list_dict.append(dict_time)
+
+        # dump_features_emails(file_path, dict_features, features_output,
+        #                      feature_list_dict, dict_time, extraction_time_dict)
 
         Globals.summary.write("filepath: {}\n\n".format(file_path))
         Globals.summary.write("features extracted for this file:\n")
