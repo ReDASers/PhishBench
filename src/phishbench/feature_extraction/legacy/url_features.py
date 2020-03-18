@@ -9,9 +9,9 @@ from bs4 import BeautifulSoup
 
 from . import Download_url
 from ... import Features
-from ...Features_Support import Cleaning, read_corpus
+from ...Features_Support import Cleaning, read_corpus, read_alexa
 from ...utils import Globals
-
+import requests
 
 def Extract_Features_Urls_Testing():
     start_time = time.time()
@@ -83,10 +83,15 @@ def Extract_Features_Urls_Training():
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_dict, Bad_URLs_List):
     data = list()
     corpus_data = read_corpus(dataset_path)
+    alexa_data = {}
+    if Globals.config["HTML_Features"]["ranked_matrix"] == "True":
+        alexa_path = Globals.config["Support Files"]["path_alexa_data"]
+        alexa_data = read_alexa(alexa_path)
     data.extend(corpus_data)
     ## for debugging purposes, not used in the pipeline
     ###
     corpus = []
+    dict_alexa_rank = {}
     for filepath in data:
         # path="Data_Dump/URLs_Backup/"+str(ntpath.normpath(filepath).split('\\'))
         # features_regex=re.compile(path+r"_features_?\d?.txt")
@@ -103,7 +108,7 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_dict, 
         Globals.logger.info("===================")
         Globals.logger.info(filepath)
         # with open("Data_Dump/URLs_Training/features_url_training_legit.pkl",'ab') as feature_tracking:
-        url_features(filepath, dict_features, feature_list_dict, dict_time, extraction_time_dict, corpus, Bad_URLs_List)
+        url_features(filepath, dict_features, feature_list_dict, dict_time, extraction_time_dict, corpus, Bad_URLs_List, alexa_data)
         Globals.summary.write("filepath: {}\n\n".format(filepath))
         Globals.summary.write("features extracted for this file:\n")
         for feature in dict_time.keys():
@@ -114,7 +119,7 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_dict, 
     return count_files, corpus
 
 
-def url_features(filepath, list_features, list_dict, list_time, time_dict, corpus, Bad_URLs_List):
+def url_features(filepath, list_features, list_dict, list_time, time_dict, corpus, Bad_URLs_List, alexa_data):
     times = []
     try:
         with open(filepath, 'r', encoding="ISO-8859-1") as f:
@@ -141,8 +146,10 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
                         url = rawurl.strip().rstrip('\n')
                         if content == '':
                             soup = ''
+                        # TODO content is empty from Download_url method, temporally used this for tetsing features, NEED TO REPLACE NEXT LINE
+                        # content = requests.get(url).text
                         soup = BeautifulSoup(content, 'html5lib')  # content=html.text
-                        single_url_html_features(soup, html, url, list_features, list_time)
+                        single_url_html_features(soup, html, url, alexa_data, list_features, list_time)
                         single_url_feature(url, list_features, list_time)
                         Globals.logger.debug("html_featuers & url_features >>>>>> complete")
                         single_javascript_features(soup, html, list_features, list_time)
@@ -294,10 +301,14 @@ def single_url_feature(url, list_features, list_time):
         Globals.logger.debug("URL_Is_Whitelisted")
 
 
-def single_url_html_features(soup, html, url, list_features, list_time):
+def single_url_html_features(soup, html, url, alexa_data, list_features, list_time):
     if Globals.config["HTML_Features"]["html_features"] == "True":
+        Features.HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time)
+        Globals.logger.debug("ranked_matrix")
+
         Features.HTML_LTree_Features(soup, url, list_features, list_time)
-        Globals.logger.debug("HTML_LTree_Features ")
+        Globals.logger.debug("LTree_Features")
+
         Features.HTML_number_of_tags(soup, list_features, list_time)
         Globals.logger.debug("number_of_tags")
 

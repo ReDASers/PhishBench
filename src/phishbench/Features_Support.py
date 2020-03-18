@@ -1,4 +1,5 @@
 import copy
+import csv
 import email as em
 import ntpath
 import os
@@ -96,7 +97,15 @@ def read_corpus(path):
 ############################
 
 
+############################
 
+def read_alexa(path):
+    reader = csv.DictReader(open(path))
+    result = {}
+    for row in reader:
+        result[row["domain"]] = row["rank"]
+    return result
+############################
 
 
 def On_the_Character_of_Phishing_URLs(url):
