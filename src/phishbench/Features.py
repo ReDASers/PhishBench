@@ -4,6 +4,7 @@ from datetime import datetime
 
 import dns.resolver
 import tldextract
+import statistics
 from lxml import html as lxml_html
 from textstat.textstat import textstat
 
@@ -1588,20 +1589,85 @@ def Email_Header_vocab_richness_subject(subject, list_features, list_time):
 ############################ HTML features
 
 
-# START LTree features
+# START - ranked_matrix
+def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
+    if Globals.config["HTML_Features"]["ranked_matrix"] == "True":
+        start = time.time()
+        domain = url.split("//")[-1].split("/")[0]
+        mean_and_sd = [0, 0]
+        if soup:
+            try:
+                # get links from content
+                all_redirectable_links = []
+                link = tree_get_links(soup, 'link', 'href', '')
+                link += tree_get_links(soup, 'img', 'src', '')
+                link += tree_get_links(soup, 'video', 'src', '')
+                link += tree_get_links(soup, 'a', 'src', '')
+                link += tree_get_links(soup, 'a', 'href', '')
+                link += tree_get_links(soup, 'meta', 'content', '/')
+                link += tree_get_links(soup, 'script', 'src', '')
+                for l in link:
+                    if l.startswith("http"):
+                        all_redirectable_links.append(l)
+                # extract features: size, mean, standard deviation
+                mean_and_sd = extract_features_ranked_matrix(all_redirectable_links, alexa_data)
+            except Exception as e:
+                Globals.logger.warning("exception: " + str(e))
+                # make all values to -1
+                mean_and_sd = [-1, -1]
+        else:
+            # make all values to 0
+            Globals.logger.warning("empty soup")
+        print(mean_and_sd)
+        list_features["ranked_matrix_mean"]=mean_and_sd[0]
+        list_features["ranked_matrix_sd"]=mean_and_sd[1]
+        end=time.time()
+        ex_time=end-start
+        list_time["ranked_matrix"]=ex_time
+
+def extract_features_ranked_matrix(links, alexa_data):
+    results = []
+    for link in links:
+        domain = link.split("//")[-1].split("/")[0]
+        if domain.count(".") > 1:
+            domain = domain.split(".")[-2] + "." + domain.split(".")[-1]
+        if domain in alexa_data:
+            alexa_rank = int(alexa_data[domain])
+            if alexa_rank < 1000:
+                results.append(1)
+            elif alexa_rank < 10000:
+                results.append(2)
+            elif alexa_rank < 100000:
+                results.append(3)
+            elif alexa_rank < 500000:
+                results.append(4)
+            elif alexa_rank < 1000000:
+                results.append(5)
+            elif alexa_rank < 5000000:
+                results.append(6)
+            else:
+                results.append(7)
+        else:
+            results.append(8)
+    mean = round(sum(results) / len(results), 2)
+    sd = round(statistics.stdev(results), 2)
+    return [mean, sd]
+# END - ranked_matrix
+
+# START - LTree features
 def HTML_LTree_Features(soup, url, list_features, list_time):
-    if Globals.config["HTML_Features"]["HTML_LTree_Features"] == "True":
+    if Globals.config["HTML_Features"]["LTree_Features"] == "True":
         start = time.time()
         domain = url.split("//")[-1].split("/")[0]
         link_features = img_features = video_features = a_features = meta_features = script_features = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
         if soup:
             try:
-                features = []
                 # get links from content
                 link_link = tree_get_links(soup, 'link', 'href', '')
                 img_link = tree_get_links(soup, 'img', 'src', '')
                 video_link = tree_get_links(soup, 'video', 'src', '')
                 a_link = tree_get_links(soup, 'a', 'src', '')
+                a_link += tree_get_links(soup, 'a', 'href', '')
                 meta_link = tree_get_links(soup, 'meta', 'content', '/')
                 script_link = tree_get_links(soup, 'script', 'src', '')
                 # extract features: size, mean, standard deviation
@@ -2127,7 +2193,6 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
 def HTML_Website_content_type(html, list_features, list_time):
     if Globals.config["HTML_Features"]["website_content_type"] == "True":
         start=time.time()
-        #print(html.headers)
         if html:
             try:
                 if 'Content-Type' in html.headers:
