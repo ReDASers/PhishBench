@@ -7,52 +7,52 @@ from .utils import Globals
 
 ## Build the corpus from both the datasets
 def build_corpus():
-	data=list()
-	path=Globals.config["Dataset Path"]["path_legit_email"]
-	corpus_data_legit = Features_Support.read_corpus(path)
-	Globals.logger.info("Corpus Data legit: >>>>>>>>>>>>>>> " + str(len(corpus_data_legit)))
-	data.extend(corpus_data_legit)
-	#for path in config["Dataset Path"][""]path_phish_email:
-	path = Globals.config["Dataset Path"]["path_phish_email"]
-	corpus_data_phish = Features_Support.read_corpus(path)
-	Globals.logger.info("Corpus Data phish: >>>>>>>>>>>>>>> " + str(len(corpus_data_phish)))
-	data.extend(corpus_data_phish)
-	return data
+    data = []
+    path=Globals.config["Dataset Path"]["path_legit_email"]
+    corpus_data_legit = Features_Support.read_corpus(path)
+    Globals.logger.info("Corpus Data legit: >>>>>>>>>>>>>>> " + str(len(corpus_data_legit)))
+    data.extend(corpus_data_legit)
+    #for path in config["Dataset Path"][""]path_phish_email:
+    path = Globals.config["Dataset Path"]["path_phish_email"]
+    corpus_data_phish = Features_Support.read_corpus(path)
+    Globals.logger.info("Corpus Data phish: >>>>>>>>>>>>>>> " + str(len(corpus_data_phish)))
+    data.extend(corpus_data_phish)
+    return data
 
 
 def tfidf_training(corpus):
-	tf = TfidfVectorizer(analyzer='word', ngram_range=(1,1),
-                     min_df = 0, stop_words = 'english', sublinear_tf=True)
-	tfidf_matrix = tf.fit_transform(corpus)
-	return tfidf_matrix, tf
+    tf = TfidfVectorizer(analyzer='word', ngram_range=(1,1),
+                         min_df = 0, stop_words = 'english', sublinear_tf=True)
+    tfidf_matrix = tf.fit_transform(corpus)
+    return tfidf_matrix, tf
 
 def tfidf_testing(corpus, tidf_vectorizer):
-	tfidf_matrix = tidf_vectorizer.transform(corpus)
-	return tfidf_matrix
+    tfidf_matrix = tidf_vectorizer.transform(corpus)
+    return tfidf_matrix
 
 def Header_Tokenizer(corpus):
-	# corpus=[]
-	# data=build_corpus()
-	data=corpus
-	#for filepath in data:
-	#	try:
-	#		print(filepath)
-	#		with open(filepath,'r', encoding = "ISO-8859-1") as f:
-	#			email=f.read()
-	#			header=Features_Support.extract_header(email)
-	#			corpus.append(header)
-	#	except Exception as e:
-	#		print("exception: " + str(e))
-	cv= CountVectorizer(analyzer='word', binary=False, decode_error='strict',
-        encoding='utf-8', input='content',
-        lowercase=True, max_df=1.0, max_features=None, min_df=1,
-        ngram_range=(1, 1), preprocessor=None, stop_words='english',
-        strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
-        tokenizer=None, vocabulary=None)
-	header_tokenizer = cv.fit_transform(corpus)
-	return header_tokenizer
+    # corpus=[]
+    # data=build_corpus()
+    data=corpus
+    # for filepath in data:
+    #	try:
+    #		print(filepath)
+    #		with open(filepath,'r', encoding = "ISO-8859-1") as f:
+    #			email=f.read()
+    #			header=Features_Support.extract_header(email)
+    #			corpus.append(header)
+    #	except Exception as e:
+    #		print("exception: " + str(e))
+    cv= CountVectorizer(analyzer='word', binary=False, decode_error='strict',
+                        encoding='utf-8', input='content',
+                        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+                        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+                        strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
+                        tokenizer=None, vocabulary=None)
+    header_tokenizer = cv.fit_transform(corpus)
+    return header_tokenizer
 
 
 if __name__ == '__main__':
-	matrix=tfidf_website()
-	Globals.logger.info(matrix)
+    matrix = tfidf_website()
+    Globals.logger.info(matrix)

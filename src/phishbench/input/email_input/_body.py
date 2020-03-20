@@ -8,8 +8,8 @@ from lxml.html.clean import Cleaner
 
 from ...utils import Globals
 
-hex_regex = re.compile(r"0x[0-9a-f]*?,?", flags=re.IGNORECASE | re.MULTILINE)
-underscore_regex = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)
+HEX_REGEX = re.compile(r"0x[0-9a-f]*?,?", flags=re.IGNORECASE | re.MULTILINE)
+UNDERSCORE_REGEX = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)
 
 
 class EmailBody:
@@ -93,13 +93,13 @@ class EmailBody:
                 Globals.logger.debug("text/plain loop")
                 try:
                     body_text = part.get_payload(decode=True).decode(part.get_content_charset())
-                    body_text = underscore_regex.sub('', body_text)
+                    body_text = UNDERSCORE_REGEX.sub('', body_text)
                     body_text = body_text.strip()
                 except Exception as e:
                     Globals.logger.debug('Exception: {}'.format(e))
                     Globals.logger.debug('Exception Handled')
                     body_text = part.get_payload(decode=False)
-                    body_text = underscore_regex.sub('', body_text)  # decode
+                    body_text = UNDERSCORE_REGEX.sub('', body_text)  # decode
             elif content_type == 'text/html':
                 Globals.logger.debug("text/html loop")
                 try:
@@ -116,8 +116,8 @@ class EmailBody:
                 soup = BeautifulSoup(html, 'html.parser')
                 if body_text == '':
                     body_text = soup.text
-                    body_text = hex_regex.sub('', body_text)
-                    body_text = underscore_regex.sub('', body_text)
+                    body_text = HEX_REGEX.sub('', body_text)
+                    body_text = UNDERSCORE_REGEX.sub('', body_text)
                 body_html = str(soup)
                 is_html = True
             else:

@@ -5,7 +5,7 @@ from typing import List, Union, Dict
 import glob
 
 from .email_input import EmailHeader, EmailBody
-from..utils import Globals
+from ..utils import Globals
 
 
 def enumerate_folder_files(folder_path) -> List[str]:
@@ -20,7 +20,7 @@ def enumerate_folder_files(folder_path) -> List[str]:
         A list containing the paths to every text enumerate in the directory.
     """
     glob_path = os.path.join(folder_path, "**/*.txt")
-    return glob.glob(glob_path,recursive=True)
+    return glob.glob(glob_path, recursive=True)
 
 
 def read_email_from_file(file_path: str) -> Message:
@@ -54,7 +54,7 @@ def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:
     corpus = {}
     for filepath in corpus_files:
         try:
-            with open(filepath, 'r', encoding=encoding,errors='ignore') as file:
+            with open(filepath, 'r', encoding=encoding, errors='ignore') as file:
                 corpus[filepath] = file.read()
         except Exception as e:
             Globals.logger.warning("exception: %s", e)

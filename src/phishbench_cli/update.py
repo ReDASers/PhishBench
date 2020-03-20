@@ -7,154 +7,152 @@ import phishbench.Features as Features
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 
 
-def config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics):
-	config = configparser.ConfigParser()
+def config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
+    config = configparser.ConfigParser()
 
-	config['Dataset Path'] = {}
-	C_Dataset = config['Dataset Path']
-	C_Dataset["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
-	C_Dataset["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
-	C_Dataset["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
-	C_Dataset["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
+    config['Dataset Path'] = {}
+    dataset_section = config['Dataset Path']
+    dataset_section["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
+    dataset_section["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
+    dataset_section["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
+    dataset_section["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
 
-	config['Email or URL feature Extraction'] = {}
-	C_email_url = config['Email or URL feature Extraction']
-	C_email_url["extract_features_emails"] = "False"
-	C_email_url["extract_features_urls"] = "True"
+    config['Email or URL feature Extraction'] = {}
+    proccess_section = config['Email or URL feature Extraction']
+    proccess_section["extract_features_emails"] = "False"
+    proccess_section["extract_features_urls"] = "True"
 
-	config['Extraction'] = {}
-	C_extraction = config['Extraction']
-	C_extraction["Feature Extraction"] = "True"
-	C_extraction["Training Dataset"] = "True"
-	C_extraction["Testing Dataset"] = "True"
+    config['Extraction'] = {}
+    extraction_section = config['Extraction']
+    extraction_section["Feature Extraction"] = "True"
+    extraction_section["Training Dataset"] = "True"
+    extraction_section["Testing Dataset"] = "True"
 
-	config['Features Format'] = {}
-	C_features_format = config['Features Format']
-	C_features_format["Pikle"] = "True"
-	C_features_format["Svmlight format"] = "True"
+    config['Features Format'] = {}
+    features_format_section = config['Features Format']
+    features_format_section["Pikle"] = "True"
+    features_format_section["Svmlight format"] = "True"
 
-	config['Preprocessing'] = {}
-	C_Preprocessing = config['Preprocessing']
-	# C_Preprocessing['mean_scaling']= "True"
-	C_Preprocessing['mix_max_scaling'] = "True"
-	# C_Preprocessing['abs_scaler']= "True"
-	# C_Preprocessing['normalize']= "True"
+    config['Preprocessing'] = {}
+    preprocessing_section = config['Preprocessing']
+    # preprocessing_section['mean_scaling']= "True"
+    preprocessing_section['mix_max_scaling'] = "True"
+    # preprocessing_section['abs_scaler']= "True"
+    # preprocessing_section['normalize']= "True"
 
-	config["Feature Selection"] = {}
-	C_selection = config["Feature Selection"]
-	C_selection["Select Best Features"] = "True"
-	C_selection["Number of Best Features"] = "80"
-	C_selection["Feature Ranking Only"] = "False"
-	C_selection["Recursive Feature Elimination"] = "False"
-	C_selection["Information Gain"] = "True"
-	C_selection["Gini"] = "False"
-	C_selection["Chi-2"] = "False"
+    config["Feature Selection"] = {}
+    feature_selection_section = config["Feature Selection"]
+    feature_selection_section["Select Best Features"] = "True"
+    feature_selection_section["Number of Best Features"] = "80"
+    feature_selection_section["Feature Ranking Only"] = "False"
+    feature_selection_section["Recursive Feature Elimination"] = "False"
+    feature_selection_section["Information Gain"] = "True"
+    feature_selection_section["Gini"] = "False"
+    feature_selection_section["Chi-2"] = "False"
 
-	config['Imbalanced Datasets'] = {}
-	C_Imbalanced = config['Imbalanced Datasets']
-	C_Imbalanced["load_imbalanced_dataset"] = "False"
-	for imbalanced in list_Imbalanced_dataset:
-		C_Imbalanced[imbalanced] = "True"
+    config['Imbalanced Datasets'] = {}
+    imbalanced_section = config['Imbalanced Datasets']
+    imbalanced_section["load_imbalanced_dataset"] = "False"
+    for imbalanced in list_imbalanced_dataset:
+        imbalanced_section[imbalanced] = "True"
 
-	config['Classification'] = {}
-	C_classification = config['Classification']
-	C_classification["Running the Classifiers"] = "True"
-	C_classification["Save Models"] = "True"
+    config['Classification'] = {}
+    classification_section = config['Classification']
+    classification_section["Running the Classifiers"] = "True"
+    classification_section["Save Models"] = "True"
 
-	config['Classifiers'] = {}
-	C_Classifiers = config['Classifiers']
-	for classifier in list_Classifiers:
-		C_Classifiers[classifier] = "True"
+    config['Classifiers'] = {}
+    classifiers_section = config['Classifiers']
+    for classifier in list_classifiers:
+        classifiers_section[classifier] = "True"
 
-	config['Evaluation Metrics'] = {}
-	C_Metrics = config['Evaluation Metrics']
-	for metric in list_Evaluation_metrics:
-		C_Metrics[metric] = "True"
+    config['Evaluation Metrics'] = {}
+    metrics_section = config['Evaluation Metrics']
+    for metric in list_evaluation_metrics:
+        metrics_section[metric] = "True"
 
-	config["Summary"] = {}
-	C_summary = config["Summary"]
-	C_summary["Path"] = "summary.txt"
+    config["Summary"] = {}
+    summary_section = config["Summary"]
+    summary_section["Path"] = "summary.txt"
 
-	config['Email_Features'] = {}
-	config['Email_Features']['extract header features'] = "True"
-	config['Email_Features']['extract body features'] = "True"
+    config['Email_Features'] = {}
+    config['Email_Features']['extract header features'] = "True"
+    config['Email_Features']['extract body features'] = "True"
 
-	config['Email_Header_Features']={}
-	header_features = config['Email_Header_Features']
-	for feature in list_Features:
-		if feature.startswith("Email_Header_"):
-			header_features[feature.replace('Email_Header_', '')] = "True"
+    config['Email_Header_Features'] = {}
+    header_features = config['Email_Header_Features']
+    for feature in list_features:
+        if feature.startswith("Email_Header_"):
+            header_features[feature.replace('Email_Header_', '')] = "True"
 
-	config['Email_Body_Features'] = {}
-	body_features = config['Email_Body_Features']
-	for feature in list_Features:
-		if feature.startswith("Email_Body_"):
-			body_features[feature.replace('Email_Body_', '')] = "True"
+    config['Email_Body_Features'] = {}
+    body_features = config['Email_Body_Features']
+    for feature in list_features:
+        if feature.startswith("Email_Body_"):
+            body_features[feature.replace('Email_Body_', '')] = "True"
 
-	config['HTML_Features']={}
-	C_HTML_Features=config['HTML_Features']
-	for feature in list_Features:
-		if feature.startswith("HTML_"):
-			C_HTML_Features[feature.replace('HTML_','')]="True"
+    config['HTML_Features'] = {}
+    c_html_features = config['HTML_Features']
+    for feature in list_features:
+        if feature.startswith("HTML_"):
+            c_html_features[feature.replace('HTML_', '')] = "True"
 
-	config['URL_Features']={}
-	C_URL_Features=config['URL_Features']	
-	for feature in list_Features:
-		if feature.startswith("URL_"):
-			C_URL_Features[feature.replace('URL_','')]="True"
+    config['URL_Features'] = {}
+    c_url_features = config['URL_Features']
+    for feature in list_features:
+        if feature.startswith("URL_"):
+            c_url_features[feature.replace('URL_', '')] = "True"
 
+    config['Network_Features'] = {}
+    c_network_features = config['Network_Features']
+    for feature in list_features:
+        if feature.startswith("Network_"):
+            c_network_features[feature.replace('Network_', '')] = "True"
 
-	config['Network_Features']={}
-	C_Network_Features=config['Network_Features']
-	for feature in list_Features:
-		if feature.startswith("Network_"):
-			C_Network_Features[feature.replace('Network_','')]="True"
+    config['Javascript_Features'] = {}
+    javascript_features_section = config['Javascript_Features']
+    for feature in list_features:
+        if feature.startswith("Javascript_"):
+            javascript_features_section[feature.replace('Javascript_', '')] = "True"
 
-
-	config['Javascript_Features']={}
-	C_Javascript_Features=config['Javascript_Features']
-	for feature in list_Features:
-		if feature.startswith("Javascript_"):
-			C_Javascript_Features[feature.replace('Javascript_','')]="True"
-
-	with open('Config_file.ini', 'w') as configfile:
-		config.write(configfile)
+    with open('Config_file.ini', 'w') as configfile:
+        config.write(configfile)
 
 
 def update_list():
-	list_Features=[]
-	list_Classifiers=[]
-	list_Evaluation_metrics=[]
-	list_Imbalanced_dataset=[]
-	for a in dir(Features):
-		element=getattr(Features, a)
-		if inspect.isfunction(element):
-			list_Features.append(a)
+    list_features = []
+    list_classifiers = []
+    list_evaluation_metrics = []
+    list_imbalanced_dataset = []
+    for member in dir(Features):
+        element = getattr(Features, member)
+        if inspect.isfunction(element):
+            list_features.append(member)
 
-	for a in dir(Classifiers):
-		element=getattr(Classifiers, a)
-		if inspect.isfunction(element):
-			list_Classifiers.append(a)
+    for member in dir(Classifiers):
+        element = getattr(Classifiers, member)
+        if inspect.isfunction(element):
+            list_classifiers.append(member)
 
-	for a in dir(Imbalanced_Dataset):
-		element=getattr(Imbalanced_Dataset, a)
-		if inspect.isfunction(element):
-			list_Imbalanced_dataset.append(a)
+    for member in dir(Imbalanced_Dataset):
+        element = getattr(Imbalanced_Dataset, member)
+        if inspect.isfunction(element):
+            list_imbalanced_dataset.append(member)
 
-	for a in dir(Evaluation_Metrics):
-		element=getattr(Evaluation_Metrics, a)
-		if inspect.isfunction(element):
-			list_Evaluation_metrics.append(a)
+    for member in dir(Evaluation_Metrics):
+        element = getattr(Evaluation_Metrics, member)
+        if inspect.isfunction(element):
+            list_evaluation_metrics.append(member)
 
-	return list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics
+    return list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics
 
 
 def main():
-	# execute only if run as a script
-	list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics = update_list()
-	# update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
-	config(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
+    # execute only if run as a script
+    list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics = update_list()
+    # update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
+    config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
 
 
 if __name__ == "__main__":
-	main()
+    main()

@@ -29,27 +29,29 @@ class HTTPResponse:
         self.html = ""
         self.url = ""
 
+
 def is_IP_address(domain):
     if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
         return False
     else:
         return True
 
+
 def dns_lookup(domain):
     ids = ['NONE',
-        'A',
-        'NS',
-        'CNAME',
-        'PTR',
-        'MX',
-        'SRV',
-        'IXFR',
-        'AXFR',
-        'HINFO',
-        'TLSA',
-        'URI'
-    ]
-    lists=[]
+           'A',
+           'NS',
+           'CNAME',
+           'PTR',
+           'MX',
+           'SRV',
+           'IXFR',
+           'AXFR',
+           'HINFO',
+           'TLSA',
+           'URI'
+           ]
+    lists = []
     resolver = dns.resolver.Resolver()
     resolver.timeout = 3
     resolver.lifetime = 3
@@ -57,12 +59,13 @@ def dns_lookup(domain):
         try:
             answers = resolver.query(domain, a)
             for rdata in answers:
-                val=a + ' : '+ rdata.to_text()
+                val = a + ' : ' + rdata.to_text()
                 lists.append(val)
 
         except Exception as e:
             pass
     return lists
+
 
 def extract_dns_info(url, list_time):
     dns_lookup_output = ''
@@ -73,24 +76,25 @@ def extract_dns_info(url, list_time):
             complete_domain = '{uri.hostname}'.format(uri=parsed_url)
         except Exception as e:
             Globals.logger.warning("Exception: Domain Error: {}".format(e))
-            domain=''
-            complete_domain=''
+            domain = ''
+            complete_domain = ''
 
         if complete_domain:
             t0 = time.time()
             try:
-                dns_lookup_output=dns_lookup(complete_domain)
+                dns_lookup_output = dns_lookup(complete_domain)
                 list_time['dns_lookup_time'] = time.time() - t0
             except Exception as e:
-                dns_lookup_output=''
+                dns_lookup_output = ''
         else:
-            dns_lookup_output=''
+            dns_lookup_output = ''
 
     return dns_lookup_output
 
-def extract_whois(url, list_time): 
+
+def extract_whois(url, list_time):
     IPs = ''
-    ipwhois = None 
+    ipwhois = None
     whois_output = None
     domain = ''
     try:
@@ -100,8 +104,8 @@ def extract_whois(url, list_time):
         domain = "{}.{}".format(extracted.domain, extracted.suffix)
     except Exception as e:
         Globals.logger.warning("Exception: Domain Error: {}".format(e))
-        domain=''
-        complete_domain=''
+        domain = ''
+        complete_domain = ''
 
     if Globals.config["Network_Features"]["network_features"] == "True" and \
             (Globals.config["Network_Features"]["creation_date"] == "True" or
@@ -112,7 +116,8 @@ def extract_whois(url, list_time):
                 try:
                     IPs = list(map(lambda x: x[4][0], socket.getaddrinfo(complete_domain, 80, type=socket.SOCK_STREAM)))
                 except socket.gaierror:
-                    IPs = list(map(lambda x: x[4][0], socket.getaddrinfo("www." + complete_domain, 80, type=socket.SOCK_STREAM)))
+                    IPs = list(map(lambda x: x[4][0],
+                                   socket.getaddrinfo("www." + complete_domain, 80, type=socket.SOCK_STREAM)))
 
                 t0 = time.time()
                 for ip in IPs:
@@ -121,8 +126,8 @@ def extract_whois(url, list_time):
                 list_time['ipwhois_time'] = time.time() - t0
             except Exception as e:
                 Globals.logger.warning("Exception: ipwhois Error: {}".format(e))
-                IPs=''
-                ipwhois=''
+                IPs = ''
+                ipwhois = ''
 
             if not is_IP_address(complete_domain) and domain:
                 t0 = time.time()
@@ -135,16 +140,17 @@ def extract_whois(url, list_time):
                     time.sleep(5)
                 except Exception as e:
                     Globals.logger.warning("Exception whois: Domain {}. Error: {}".format(domain, e))
-                    whois_output=''
+                    whois_output = ''
                 list_time['whois_time'] = time.time() - t0
             else:
-                whois_output=''
+                whois_output = ''
         else:
-            IPs=''
-            ipwhois=''
-            whois_output=''
+            IPs = ''
+            ipwhois = ''
+            whois_output = ''
 
     return IPs, ipwhois, whois_output, domain
+
 
 def download_url(rawurl, list_time):
     html = ''
@@ -166,13 +172,13 @@ def download_url(rawurl, list_time):
             }
         )
         chrome_options = Options()
-        chrome_options.set_headless() 
+        chrome_options.set_headless()
         desired_capabilities = DesiredCapabilities.CHROME.copy()
-        desired_capabilities['loggingPrefs'] = { 'browser':'ALL' }
+        desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
 
         url = rawurl.strip().rstrip('\n')
         if url == '':
-            Error=1
+            Error = 1
             Globals.logger.warning("Empty URL")
             return http_response, http_response.html, Error
         try:
@@ -185,21 +191,21 @@ def download_url(rawurl, list_time):
             http_response.html = browser.page_source
             http_response.url = browser.current_url
             browser.close()
-            response = requests.head(url, headers = headers, timeout = 20)
+            response = requests.head(url, headers=headers, timeout=20)
             http_response.headers = response.headers
             response.close()
             if log:
                 p = re.compile('.* status of ([0-9]+) .*')
                 match = p.match(log[0]['message'])
                 if match:
-                    Error=1
+                    Error = 1
                     Globals.logger.warning("HTTP response code is not OK: {}".format(match.groups()[0]))
                     return http_response, http_response.html, Error
             else:
                 parsed = BeautifulSoup(http_response.html, 'html.parser')
                 language = parsed.find("html").get('lang')
                 if language != None and not language.startswith('en'):
-                    Error=1
+                    Error = 1
                     Globals.logger.warning("Website's language is not English")
                     return http_response, http_response.html, Error
         except Exception as e:
@@ -216,6 +222,7 @@ def download_url(rawurl, list_time):
 
     return http_response, http_response.html, Error
 
+
 def visible(element):
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
         return False
@@ -223,12 +230,14 @@ def visible(element):
         return False
     return True
 
+
 def download_url_content(rawurl):
     html = urllib.request.urlopen('http://bgr.com/2014/10/15/google-android-5-0-lollipop-release/')
     soup = BeautifulSoup(html, "html5lib")
     data = soup.findAll(text=True)
     result = filter(visible, data)
     return list(result)
+
 
 if __name__ == "__main__":
     data = download_url_content("http://docs.python-requests.org/en/master/user/quickstart/")
