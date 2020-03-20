@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from phishbench import Features
 from phishbench.Features_Support import Cleaning, read_corpus
 from phishbench.utils import Globals
-from ...input import Input
+from ...input import input
 
 
 def Extract_Features_Emails_Training():
@@ -71,7 +71,7 @@ def Extract_Features_Emails_Testing():
 
 
 def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
-    corpus_files = Input.enumerate_folder_files(dataset_path)
+    corpus_files = input.enumerate_folder_files(dataset_path)
     # features_regex = re.compile(r"_features_?\d?.txt")
     ### for debugging purposes, not used in the pipeline
     # try:
@@ -83,7 +83,7 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
     #     features_output = dataset_path + "_feature_vector_error.txt"
     #     Globals.logger.warning("exception: " + str(e))
     ###
-    corpus = Input.read_corpus(corpus_files, "ISO-8859-1")
+    corpus = input.read_corpus(corpus_files, "ISO-8859-1")
     for file_path, file_contents in corpus.items():
 
         Globals.logger.info("===================")
