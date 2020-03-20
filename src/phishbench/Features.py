@@ -1,5 +1,9 @@
 import statistics
 from datetime import datetime
+import time
+
+
+from bs4 import BeautifulSoup
 
 import dns.resolver
 import tldextract
