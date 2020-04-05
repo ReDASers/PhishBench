@@ -7,11 +7,11 @@ import traceback
 
 from bs4 import BeautifulSoup
 
-from . import Download_url
+from ...input.url_input import Download_url
 from ... import Features
 from ...Features_Support import Cleaning, read_corpus, read_alexa
 from ...utils import Globals
-import requests
+
 
 def Extract_Features_Urls_Testing():
     start_time = time.time()
@@ -131,7 +131,7 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
                     Globals.logger.debug("rawurl:" + str(rawurl))
                     Globals.summary.write("URL: {}".format(rawurl))
                     t0 = time.time()
-                    html, content, Error = Download_url.download_url(rawurl, list_time)
+                    html, content, Error = Download_url.download_website(rawurl, list_time)
                     IPs, ipwhois, whois_output, domain = Download_url.extract_whois(html.url, list_time)
                     dns_lookup = Download_url.extract_dns_info(html.url, list_time)
                     if Error == 1:

@@ -1,8 +1,8 @@
 import os.path
 import re
 import time
-from urllib.parse import urlparse
 from collections import namedtuple
+from urllib.parse import urlparse
 
 import dns.resolver
 import requests

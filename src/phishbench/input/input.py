@@ -1,10 +1,12 @@
 import email
+import glob
 import os
+import os.path
 from email.message import Message
 from typing import List, Union, Dict
-import glob
 
 from .email_input import EmailHeader, EmailBody
+from .url_input import URLData
 from ..utils import Globals
 
 
@@ -77,3 +79,20 @@ def read_dataset_email(folder_path: str) -> Union[List[EmailBody], List[EmailHea
     headers = [EmailHeader(msg) for msg in emails]
     bodies = [EmailBody(msg) for msg in emails]
     return bodies, headers, emails, files
+
+
+def read_urls_from_file(file_path: str):
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError("{} not found!".format(file_path))
+    with open(file_path, 'r') as f:
+        lines = f.readlines()
+    return lines
+
+
+def read_dataset_url(folder_path: str, download_url: bool) -> List[URLData]:
+    corpus_files = enumerate_folder_files(folder_path)
+    raw_urls = {}
+    for file_path in corpus_files:
+        raw_urls.extend(read_urls_from_file(file_path))
+        urls = [URLData(url, download_url) for url in raw_urls]
+    return urls

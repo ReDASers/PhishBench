@@ -1,6 +1,6 @@
 import unittest
 
-import phishbench.input.url_input.url_data as url_data
+import phishbench.input.url_input._url_data as url_data
 
 
 class Test(unittest.TestCase):
