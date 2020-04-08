@@ -3236,15 +3236,15 @@ def Network_updated_date(whois_info, list_features, list_time):
         updated_date = 0.0
         if whois_info:
             try:
-                if "last_updated" in whois_info:
-                    dateTime = whois_info.get("last_updated")
-                    if dateTime is not None:
-                        if type(dateTime) is list:
-                            updated_date = dateTime[0].timestamp()
-                        elif type(dateTime) is str:
-                            updated_date = 0.0
+                if "updated_date" in whois_info:
+                    update_date_field = whois_info["updated_date"]
+                    if update_date_field is not None:
+                        if type(update_date_field) is list:
+                            updated_date = update_date_field[0].timestamp()
+                        elif type(update_date_field) is datetime:
+                            updated_date = update_date_field.timestamp()
                         else:
-                            updated_date = dateTime.timestamp()
+                            updated_date = 0.0
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 updated_date = -1
