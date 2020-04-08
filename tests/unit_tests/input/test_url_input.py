@@ -18,7 +18,8 @@ class Test(unittest.TestCase):
         data = url_data.URLData(test_url, download_url=False)
         self.assertIsNone(data.downloaded_website)
         self.assertIsNone(data.dns_results)
-        self.assertIsNone(data.whois_info)
+        self.assertIsNone(data.ip_whois)
+        self.assertIsNone(data.domain_whois)
 
     def test_URLData_domaino(self):
         test_url = 'http://google.com/test?bacon=1'
@@ -45,5 +46,5 @@ class Test(unittest.TestCase):
         test_url = 'http://google.com/test?bacon=1'
         data = url_data.URLData(test_url, download_url=False)
         data.lookup_whois(nameservers=['1.1.1.1'])
-        self.assertTrue(data.whois_info)
-        self.assertEqual('GOOGLE, US', data.whois_info[0]['asn_description'])
+        self.assertIsNotNone(data.domain_whois)
+        self.assertEqual('GOOGLE, US', data.ip_whois[0]['asn_description'])

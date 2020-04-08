@@ -89,10 +89,23 @@ def read_urls_from_file(file_path: str):
     return lines
 
 
-def read_dataset_url(folder_path: str, download_url: bool) -> List[URLData]:
-    corpus_files = enumerate_folder_files(folder_path)
-    raw_urls = {}
+def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
+    if os.path.isdir(dataset_path):
+        corpus_files = enumerate_folder_files(dataset_path)
+    else:
+        corpus_files = [dataset_path]
+    raw_urls = []
     for file_path in corpus_files:
         raw_urls.extend(read_urls_from_file(file_path))
-        urls = [URLData(url, download_url) for url in raw_urls]
-    return urls
+    urls = []
+    bad_url_list = []
+    for url in raw_urls:
+        try:
+            url_obj = URLData(url, download_url)
+            urls.append(url)
+        except Exception:
+            Globals.logger.warning(
+                "This URL has trouble being extracted and will"
+                " not be considered for further processing:{}".format(url))
+            bad_url_list.append(url)
+    return urls, bad_url_list

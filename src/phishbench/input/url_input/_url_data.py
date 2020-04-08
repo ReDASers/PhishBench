@@ -13,6 +13,8 @@ from requests import HTTPError
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
+import whois  # python-whois
+
 
 DNS_QUERY_TYPES = [
     'NONE',
@@ -36,7 +38,7 @@ def is_ip_address(url):
     return bool(IPV4_REGEX.match(url))
 
 
-HTTPResponse = namedtuple('HTTPResponse',"headers html final_url log")
+HTTPResponse = namedtuple('HTTPResponse', "headers html final_url log")
 
 
 class URLData:
@@ -55,7 +57,8 @@ class URLData:
 
         self.downloaded_website = None
         self.dns_results = None
-        self.whois_info = None
+        self.ip_whois = None
+        self.domain_whois = None
         if download_url:
             self.download_website()
             self.lookup_dns()
@@ -85,7 +88,7 @@ class URLData:
                 print("{}: {}".format(type(e).__name__, e))
 
     def lookup_whois(self, nameservers=None):
-        self.whois_info = []
+        self.ip_whois = []
         if is_ip_address(self.domain):
             whois_client = IPWhois(self.domain)
             whois_result = whois_client.lookup_whois(get_referral=True)
@@ -100,10 +103,11 @@ class URLData:
                 whois_client = IPWhois(ip_address)
                 try:
                     whois_result = whois_client.lookup_whois(asn_methods=['dns', 'whois', 'http'], get_referral=True)
-                    self.whois_info.append(whois_result)
+                    self.ip_whois.append(whois_result)
                 except BaseIpwhoisException as e:
                     print("{}: {}".format(type(e).__name__, e))
                     pass
+        self.domain_whois = whois.whois(self.domain)
 
     def download_website(self):
         browser = _setup_browser()
@@ -122,6 +126,9 @@ class URLData:
         response.close()
         browser.close()
         return html_time
+
+    def __str__(self):
+        return self.raw_url
 
 
 def _setup_browser():
