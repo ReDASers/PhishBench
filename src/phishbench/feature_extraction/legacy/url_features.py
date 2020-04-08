@@ -1,6 +1,7 @@
 import ntpath
 import os
 import pickle
+import re
 import time
 import traceback
 
@@ -96,8 +97,8 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         feature_list_dict.append(feature_values)
         extraction_time_list_dict.append(extraction_times)
 
-        print("NORM_PATH: %s" % ntpath.normpath(str(url)).split('\\'))
-        feature_dump_path = "Data_Dump/URLs_Backup/" + '_'.join(ntpath.normpath(str(url)).split(':\\'))
+        norm_path = ntpath.normpath(str(url))
+        feature_dump_path = "Data_Dump/URLs_Backup/" + '_'.join(re.split(r'[:\\]+', norm_path))
         if not os.path.exists("Data_Dump/URLs_Backup"):
             os.makedirs("Data_Dump/URLs_Backup")
         dump_features(url, feature_values, extraction_times, feature_dump_path)
@@ -147,7 +148,6 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
 def dump_features(url, feature_values, extraction_times, features_output_folder):
     Globals.logger.debug("list_features: %d", len(feature_values))
     raw_url = url.raw_url
-    print(features_output_folder)
     with open(features_output_folder + "_feature_vector.pkl", 'ab') as feature_tracking:
         pickle.dump("URL: " + raw_url, feature_tracking)
         pickle.dump(feature_values, feature_tracking)
