@@ -1715,7 +1715,7 @@ def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
         else:
             # make all values to 0
             Globals.logger.warning("empty soup")
-        print(mean_and_sd)
+        # print(mean_and_sd)
         list_features["ranked_matrix_mean"] = mean_and_sd[0]
         list_features["ranked_matrix_sd"] = mean_and_sd[1]
         end = time.time()
