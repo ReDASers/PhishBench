@@ -82,10 +82,11 @@ def Extract_Features_Urls_Training():
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
     download_url_flag = Globals.config['Network_Features'].getboolean('network_features') or \
                         Globals.config['HTML_Features'].getboolean('HTML_features')
-    url_list = pb_input.read_dataset_url(dataset_path, download_url_flag)
-
+    url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
+    bad_url_list.extend(bad_urls)
     alexa_data = {}
-    if Globals.config["HTML_Features"]["ranked_matrix"] == "True":
+    if Globals.config['URL_Feature_Types'].getboolean("HTML") and \
+            Globals.config["HTML_Features"].getboolean("ranked_matrix"):
         alexa_path = Globals.config["Support Files"]["path_alexa_data"]
         alexa_data = read_alexa(alexa_path)
 
@@ -94,7 +95,9 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
         feature_list_dict.append(feature_values)
         extraction_time_list_dict.append(extraction_times)
-        feature_dump_path = "Data_Dump/URLs_Backup/" + '_'.join(ntpath.normpath(str(url)).split('\\'))
+
+        print("NORM_PATH: %s" % ntpath.normpath(str(url)).split('\\'))
+        feature_dump_path = "Data_Dump/URLs_Backup/" + '_'.join(ntpath.normpath(str(url)).split(':\\'))
         if not os.path.exists("Data_Dump/URLs_Backup"):
             os.makedirs("Data_Dump/URLs_Backup")
         dump_features(url, feature_values, extraction_times, feature_dump_path)
@@ -114,22 +117,23 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
         Globals.logger.debug("rawurl: %s", str(url))
         Globals.summary.write("URL: {}".format(url))
 
-        html = url.downloaded_website.html
-        soup = BeautifulSoup(html, 'html5lib')
-
-        if Globals.config["URL_Features"]["url_features"] == "True":
+        feature_types = Globals.config['URL_Feature_Types']
+        if feature_types.getboolean('URL'):
             single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("url_features >>>>>> complete")
-        if Globals.config["Network_Features"].getboolean("network_features"):
+        if feature_types.getboolean("Network"):
             single_network_features(url, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("network_features >>>>>> complete")
-        if Globals.config["HTML_Features"]["html_features"] == "True":
+        if feature_types.getboolean("HTML"):
+            html = url.downloaded_website.html
+            soup = BeautifulSoup(html, 'html5lib')
             single_url_html_features(soup, html, url, alexa_data, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("html_features >>>>>> complete")
-            if Globals.config["Javascript_Features"]["javascript_features"] == "True":
+            if feature_types.getboolean("JavaScript"):
                 single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
                 Globals.logger.debug("javascript feautures >>>>>> complete")
         corpus.append(str(soup))
+
     except Exception as e:
         Globals.logger.warning(traceback.format_exc())
         Globals.logger.warning(e)
@@ -140,31 +144,31 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
     return dict_feature_values, dict_extraction_times
 
 
-def dump_features(url, list_features, list_time, features_output_folder):
-    Globals.logger.debug("list_features: %d", len(list_features))
-
+def dump_features(url, feature_values, extraction_times, features_output_folder):
+    Globals.logger.debug("list_features: %d", len(feature_values))
+    raw_url = url.raw_url
+    print(features_output_folder)
     with open(features_output_folder + "_feature_vector.pkl", 'ab') as feature_tracking:
-        pickle.dump("URL: " + url, feature_tracking)
-        pickle.dump(list_features, feature_tracking)
+        pickle.dump("URL: " + raw_url, feature_tracking)
+        pickle.dump(feature_values, feature_tracking)
     if Globals.config['HTML_Features'].getboolean('HTML_features'):
         with open(features_output_folder + "_html_content.pkl", 'ab') as feature_tracking:
-            pickle.dump("URL: " + url, feature_tracking)
+            pickle.dump("URL: " + raw_url, feature_tracking)
             html = url.downloaded_website.html
             pickle.dump(html, feature_tracking)
 
     with open(features_output_folder + "_feature_vector.txt", 'a+') as f:
-        f.write("URL: " + str(url) + '\n' + str(list_features).replace('{', '').replace('}', '')
+        f.write("URL: " + str(url) + '\n' + str(feature_values).replace('{', '').replace('}', '')
                 .replace(': ', ':').replace(',', '') + '\n\n')
     with open(features_output_folder + "_time_stats.txt", 'a+') as f:
         f.write(
-            "URL: " + str(url) + '\n' + str(list_time).replace('{', '').replace('}', '')
+            "URL: " + str(url) + '\n' + str(extraction_times).replace('{', '').replace('}', '')
             .replace(': ', ':').replace(',', '') + '\n\n')
 
 
 def single_url_feature(raw_url, list_features, list_time):
     Features.URL_url_length(raw_url, list_features, list_time)
     Globals.logger.debug("url_length")
-
     Features.URL_domain_length(raw_url, list_features, list_time)
     Globals.logger.debug("domain_length")
 

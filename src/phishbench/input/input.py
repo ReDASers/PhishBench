@@ -99,13 +99,13 @@ def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
         raw_urls.extend(read_urls_from_file(file_path))
     urls = []
     bad_url_list = []
-    for url in raw_urls:
+    for raw_url in raw_urls:
         try:
-            url_obj = URLData(url, download_url)
-            urls.append(url)
+            url_obj = URLData(raw_url, download_url)
+            urls.append(url_obj)
         except Exception:
             Globals.logger.warning(
                 "This URL has trouble being extracted and will"
-                " not be considered for further processing:{}".format(url))
-            bad_url_list.append(url)
+                " not be considered for further processing:{}".format(raw_url))
+            bad_url_list.append(raw_url)
     return urls, bad_url_list
