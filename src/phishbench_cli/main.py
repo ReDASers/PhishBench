@@ -242,6 +242,8 @@ def run_phishbench():
         ################ URL Feature Extraction ##################
         elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
+                # Extract features in a dictionnary for each url. return a list of dictionaries
+                (feature_list_dict_train, y_train, corpus_train) = legacy_url.Extract_Features_Urls_Training()
                 X_train, y_train, vectorizer, tfidf_vectorizer = feature_extraction_train(None, url_train_dir)
 
                 # Feature Selection
