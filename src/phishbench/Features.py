@@ -1707,7 +1707,7 @@ def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
                     if l.startswith("http"):
                         all_redirectable_links.append(l)
                 # extract features: size, mean, standard deviation
-                mean_and_sd = extract_features_ranked_matrix(all_redirectable_links, alexa_data)
+                mean_and_sd = extract_features_ranked_matrix(all_redirectable_links, alexa_data, domain)
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 # make all values to -1
@@ -1723,34 +1723,39 @@ def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
         list_time["ranked_matrix"] = ex_time
 
 
-def extract_features_ranked_matrix(links, alexa_data):
+def extract_features_ranked_matrix(links, alexa_data, original_domain):
     results = []
     for link in links:
         domain = link.split("//")[-1].split("/")[0]
         if domain.count(".") > 1:
             domain = domain.split(".")[-2] + "." + domain.split(".")[-1]
-        if domain in alexa_data:
-            alexa_rank = int(alexa_data[domain])
-            if alexa_rank < 1000:
-                results.append(1)
-            elif alexa_rank < 10000:
-                results.append(2)
-            elif alexa_rank < 100000:
-                results.append(3)
-            elif alexa_rank < 500000:
-                results.append(4)
-            elif alexa_rank < 1000000:
-                results.append(5)
-            elif alexa_rank < 5000000:
-                results.append(6)
-            else:
-                results.append(7)
-        else:
-            results.append(8)
+            results.append(get_rank(domain, alexa_data))
     mean = round(sum(results) / len(results), 2)
-    sd = round(statistics.stdev(results), 2)
+    original_rank = get_rank(original_domain, alexa_data)
+    sd = round(statistics.stdev(results, xbar=original_rank), 2)
     return [mean, sd]
 
+def get_rank(domain, alexa_data):
+    if domain in alexa_data:
+        alexa_rank = int(alexa_data[domain])
+        if alexa_rank < 1000:
+            alexa_rank = 1
+        elif alexa_rank < 10000:
+            alexa_rank = 2
+        elif alexa_rank < 100000:
+            alexa_rank = 3
+        elif alexa_rank < 500000:
+            alexa_rank = 4
+        elif alexa_rank < 1000000:
+            alexa_rank = 5
+        elif alexa_rank < 5000000:
+            alexa_rank = 6
+        else:
+            alexa_rank = 7
+    else:
+        alexa_rank = 8
+
+    return alexa_rank
 
 # END - ranked_matrix
 
