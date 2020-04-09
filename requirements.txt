@@ -1,8 +1,10 @@
+idna==2.8
 lxml==4.3.4
 tldextract==2.2.2
 requests==2.22.0
 Cython==0.29.14
 pandas==0.24.2
+python-whois==0.7.2
 ipwhois==1.1.0
 matplotlib==3.1.0
 scipy==1.4.1
@@ -15,7 +17,6 @@ nltk==3.4.4
 textstat==0.5.6
 imbalanced_learn==0.6.2
 tensorflow==2.0.0
-whois==0.9.4
 slimit==0.8.1
 DocumentFeatureSelection==1.5
 beautifulsoup4==4.8.2

@@ -149,7 +149,8 @@ def feature_extraction_train(email_train_dir, url_train_dir):
         joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
         # Add tfidf if the user marked it as True
-        if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
+        if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                Globals.config["HTML_Features"].getboolean("tfidf_websites"):
             Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
             Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
             joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))

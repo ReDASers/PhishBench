@@ -1,10 +1,12 @@
 import email
+import glob
 import os
+import os.path
 from email.message import Message
 from typing import List, Union, Dict
-import glob
 
 from .email_input import EmailHeader, EmailBody
+from .url_input import URLData
 from ..utils import Globals
 
 
@@ -77,3 +79,33 @@ def read_dataset_email(folder_path: str) -> Union[List[EmailBody], List[EmailHea
     headers = [EmailHeader(msg) for msg in emails]
     bodies = [EmailBody(msg) for msg in emails]
     return bodies, headers, emails, files
+
+
+def read_urls_from_file(file_path: str):
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError("{} not found!".format(file_path))
+    with open(file_path, 'r') as f:
+        lines = f.readlines()
+    return lines
+
+
+def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
+    if os.path.isdir(dataset_path):
+        corpus_files = enumerate_folder_files(dataset_path)
+    else:
+        corpus_files = [dataset_path]
+    raw_urls = []
+    for file_path in corpus_files:
+        raw_urls.extend(read_urls_from_file(file_path))
+    urls = []
+    bad_url_list = []
+    for raw_url in raw_urls:
+        try:
+            url_obj = URLData(raw_url, download_url)
+            urls.append(url_obj)
+        except Exception:
+            Globals.logger.warning(
+                "This URL has trouble being extracted and will"
+                " not be considered for further processing:{}".format(raw_url))
+            bad_url_list.append(raw_url)
+    return urls, bad_url_list

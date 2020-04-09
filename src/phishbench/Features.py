@@ -3237,14 +3237,14 @@ def Network_updated_date(whois_info, list_features, list_time):
         if whois_info:
             try:
                 if "updated_date" in whois_info:
-                    dateTime = whois_info.get("updated_date")
-                    if dateTime is not None:
-                        if type(dateTime) is list:
-                            updated_date = dateTime[0].timestamp()
-                        elif type(dateTime) is str:
-                            updated_date = 0.0
+                    update_date_field = whois_info["updated_date"]
+                    if update_date_field is not None:
+                        if type(update_date_field) is list:
+                            updated_date = update_date_field[0].timestamp()
+                        elif type(update_date_field) is datetime:
+                            updated_date = update_date_field.timestamp()
                         else:
-                            updated_date = dateTime.timestamp()
+                            updated_date = 0.0
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 updated_date = -1
@@ -3278,9 +3278,8 @@ def Network_number_name_server(dns_info, list_features, list_time):
         number_name_server = 0
         if dns_info:
             try:
-                for val in dns_info:
-                    if 'NS' in val:
-                        number_name_server += 1
+                if 'NS' in dns_info:
+                    number_name_server = len(dns_info['NS'])
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 number_name_server = -1

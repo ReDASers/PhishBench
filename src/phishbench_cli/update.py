@@ -36,19 +36,20 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
     # preprocessing_section['mean_scaling']= "True"
-    preprocessing_section['mix_max_scaling'] = "True"
+    preprocessing_section['min_max_scaling'] = "True"
     # preprocessing_section['abs_scaler']= "True"
     # preprocessing_section['normalize']= "True"
 
     config["Feature Selection"] = {}
     feature_selection_section = config["Feature Selection"]
-    feature_selection_section["Select Best Features"] = "True"
+    feature_selection_section["select best features"] = "True"
     feature_selection_section["Number of Best Features"] = "80"
     feature_selection_section["Feature Ranking Only"] = "False"
     feature_selection_section["Recursive Feature Elimination"] = "False"
     feature_selection_section["Information Gain"] = "True"
     feature_selection_section["Gini"] = "False"
     feature_selection_section["Chi-2"] = "False"
+    feature_selection_section["with Tfidf"] = "False"
 
     config['Imbalanced Datasets'] = {}
     imbalanced_section = config['Imbalanced Datasets']
@@ -75,9 +76,18 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     summary_section = config["Summary"]
     summary_section["Path"] = "summary.txt"
 
+    config["Support Files"] = {}
+    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa"
+
     config['Email_Features'] = {}
-    config['Email_Features']['extract header features'] = "True"
-    config['Email_Features']['extract body features'] = "True"
+    config['Email_Features']['extract header features'] = "False"
+    config['Email_Features']['extract body features'] = "False"
+
+    config['URL_Feature_Types'] = {}
+    config['URL_Feature_Types']['URL'] = "False"
+    config['URL_Feature_Types']['Network'] = "False"
+    config['URL_Feature_Types']['HTML'] = "False"
+    config['URL_Feature_Types']['JavaScript'] = "False"
 
     config['Email_Header_Features'] = {}
     header_features = config['Email_Header_Features']
