@@ -144,10 +144,6 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
                         times.append(time.time() - t0)
                         # include https or http
                         url = rawurl.strip().rstrip('\n')
-                        if content == '':
-                            soup = ''
-                        # TODO content is empty from Download_url method, temporally used this for tetsing features, NEED TO REPLACE NEXT LINE
-                        # content = requests.get(url).text
                         soup = BeautifulSoup(content, 'html5lib')  # content=html.text
                         single_url_html_features(soup, html, url, alexa_data, list_features, list_time)
                         single_url_feature(url, list_features, list_time)
@@ -177,6 +173,7 @@ def url_features(filepath, list_features, list_dict, list_time, time_dict, corpu
 
 
 def dump_features(header, content, list_features, features_output, list_dict, list_time, time_dict):
+    features_output = features_output.replace("..", "")
     Globals.logger.debug("list_features: " + str(len(list_features)))
     list_dict.append(copy.copy(list_features))
     time_dict.append(copy.copy(list_time))
