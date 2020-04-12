@@ -78,7 +78,7 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     summary_section["Path"] = "summary.txt"
 
     config["Support Files"] = {}
-    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa"
+    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
     config['Email_Features'] = {}
     config['Email_Features']['extract header features'] = "False"
