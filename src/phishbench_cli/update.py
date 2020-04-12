@@ -31,8 +31,7 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
 
     config['Features Format'] = {}
     features_format_section = config['Features Format']
-    features_format_section["Pikle"] = "True"
-    features_format_section["Svmlight format"] = "True"
+
 
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
