@@ -27,11 +27,11 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     extraction_section["Feature Extraction"] = "True"
     extraction_section["Training Dataset"] = "True"
     extraction_section["Testing Dataset"] = "True"
+    extraction_section["Dump Features txt"] = "True"
 
     config['Features Format'] = {}
     features_format_section = config['Features Format']
-    features_format_section["Pikle"] = "True"
-    features_format_section["Svmlight format"] = "True"
+
 
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
@@ -61,6 +61,7 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     classification_section = config['Classification']
     classification_section["Running the Classifiers"] = "True"
     classification_section["Save Models"] = "True"
+    classification_section["load Models"] = "False"
 
     config['Classifiers'] = {}
     classifiers_section = config['Classifiers']
@@ -77,7 +78,7 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     summary_section["Path"] = "summary.txt"
 
     config["Support Files"] = {}
-    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa"
+    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
     config['Email_Features'] = {}
     config['Email_Features']['extract header features'] = "False"
