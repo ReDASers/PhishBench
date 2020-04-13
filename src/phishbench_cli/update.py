@@ -29,8 +29,9 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     extraction_section["Testing Dataset"] = "True"
     extraction_section["Dump Features txt"] = "True"
 
-    config['Features Format'] = {}
-    features_format_section = config['Features Format']
+    config['Features Export'] = {}
+    features_format_section = config['Features Export']
+    features_format_section['csv'] = "True"
 
 
     config['Preprocessing'] = {}

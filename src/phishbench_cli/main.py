@@ -3,6 +3,7 @@ import sys
 
 import joblib
 from scipy.sparse import hstack
+import pandas as pd
 
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
@@ -100,8 +101,11 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             os.makedirs(email_test_dir)
         joblib.dump(X_test, os.path.join(email_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
-        if Globals.config["Extraction"]["Dump Features txt"] == "True":
-            joblib.dump(feature_list_dict_test, os.path.join(email_test_dir, "Features.txt"))
+        if Globals.config["Features Export"]["csv"] == "True":
+            export_filename = os.path.join(email_test_dir, "Features.csv")
+            df = pd.DataFrame(feature_list_dict_test)
+            df["is_phish"] = y_train
+            df.to_csv(export_filename, index=None)
         Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     if X_train:
@@ -259,8 +263,11 @@ def run_phishbench():
                 # dump features and labels and vectorizers
                 joblib.dump(X_train, os.path.join(url_train_dir, "X_train.pkl"))
                 joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
-                if Globals.config["Extraction"]["Dump Features txt"] == "True":
-                    joblib.dump(feature_list_dict_train, os.path.join(url_train_dir, "Features.txt"))
+                if Globals.config["Features Export"]["csv"] == "True":
+                    export_filename = os.path.join(url_train_dir, "Features.csv")
+                    df = pd.DataFrame(feature_list_dict_train)
+                    df["is_phish"] = y_train
+                    df.to_csv(export_filename, index=None)
                 # flag to mark if training was done
                 flag_training = True
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
