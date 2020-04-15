@@ -89,7 +89,7 @@ def read_urls_from_file(file_path: str):
     return lines
 
 
-def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
+def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> List[URLData]:
     if os.path.isdir(dataset_path):
         corpus_files = enumerate_folder_files(dataset_path)
     else:
@@ -97,6 +97,10 @@ def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
     raw_urls = []
     for file_path in corpus_files:
         raw_urls.extend(read_urls_from_file(file_path))
+    if remove_dup:
+        old_len = len(raw_urls)
+        raw_urls = list(set(raw_urls))
+        Globals.logger.info("Removed %d duplicates", old_len - len(raw_urls))
     urls = []
     bad_url_list = []
     for raw_url in raw_urls:
@@ -106,6 +110,6 @@ def read_dataset_url(dataset_path: str, download_url: bool) -> List[URLData]:
         except Exception:
             Globals.logger.warning(
                 "This URL has trouble being extracted and will"
-                " not be considered for further processing:{}".format(raw_url))
+                " not be considered for further processing:%s", raw_url)
             bad_url_list.append(raw_url)
     return urls, bad_url_list
