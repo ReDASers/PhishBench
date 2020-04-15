@@ -5,6 +5,10 @@ entry_points = {
                         "make-phishbench-config=phishbench_cli.update:main"]
 }
 
+with open("requirements.txt") as req:
+    reqs = req.readlines()
+
+
 setup(name='PhishBench',
       version='0.1',
       description='A Phishing detection benchmarking framework',
@@ -12,4 +16,5 @@ setup(name='PhishBench',
       packages=find_packages("src"),
       package_dir={"": "src"},
       package_data={"" : ["chromedriver"]},
+      install_requires=reqs,
       entry_points=entry_points)
