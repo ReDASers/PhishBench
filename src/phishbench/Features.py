@@ -2927,7 +2927,6 @@ def URL_Has_at_symbole(url, list_features, list_time):
 def URL_Has_anchor_tag(url, list_features, list_time):
     if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
         start = time.time()
-        regex_anchor = re.compile(r'<\?a>')
         flag = 0
         if url:
             try:
