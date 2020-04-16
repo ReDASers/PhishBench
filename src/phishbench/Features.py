@@ -2872,16 +2872,14 @@ def URL_Http_middle_of_URL(url, list_features, list_time):
     # global list_features
     if Globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
         start = time.time()
-        Http_middle_of_URL = 0
-        # regex_http=re.compile(r'')
-        if url:
-            try:
-                if 'http' in url and url.startswith('http') == False:
-                    Http_middle_of_URL = 1
-            except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
-                Http_middle_of_URL = -1
-        list_features["Http_middle_of_URL"] = Http_middle_of_URL
+        HTTP_REGEX = re.compile(".+http.+")
+        if url and isinstance(url, str):
+            if HTTP_REGEX.match(url):
+                list_features["Http_middle_of_URL"] = 1
+            else:
+                list_features["Http_middle_of_URL"] = 0
+        else:
+            list_features["Http_middle_of_URL"] = -1
         end = time.time()
         ex_time = end - start
         list_time["Http_middle_of_URL"] = ex_time
