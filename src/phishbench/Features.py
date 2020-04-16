@@ -2931,8 +2931,11 @@ def URL_Has_anchor_tag(url, list_features, list_time):
         flag = 0
         if url:
             try:
-                flag = int(bool(re.findall(regex_anchor, url)))
-            except Exception  as e:
+                if '#' in url:
+                    flag = 1
+                else:
+                    flag = 0
+            except Exception as e:
                 Globals.logger.warning("Exception: " + str(e))
                 flag = -1
         list_features["Has_anchor_tag"] = flag
