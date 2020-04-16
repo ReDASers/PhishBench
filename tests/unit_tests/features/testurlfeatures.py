@@ -178,6 +178,14 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["number_of_dashes"], 1, 'incorrect number_of_dashes')
 
+    def test_URL_Http_middle_of_URL_true_no_start(self, config_mock):
+        config_mock['URL_Features']['Http_middle_of_URL'] = "True"
+        test_url = "google.com?https://google.com"
+        list_features = {}
+        list_time = {}
+        Features.URL_Http_middle_of_URL(test_url, list_features, list_time)
+        self.assertEqual(list_features['Http_middle_of_URL'], 1)
+
     def test_URL_Http_middle_of_URL_true(self, config_mock):
         config_mock['URL_Features']['Http_middle_of_URL'] = "True"
         test_url = "http://www.http.google.com"
