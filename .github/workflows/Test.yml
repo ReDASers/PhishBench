@@ -25,10 +25,15 @@ jobs:
     runs-on: windows-latest
     needs: Setup-Windows
     steps:
-    - name: Test with nose
-      run: |
-        pip install --ignore-installed nose
-        nosetests
+    - name: Debug Action
+      uses: hmarr/debug-action@v1.0.0
+    - name: Print Info
+      run: dir 
+    - name: Install Nose
+      run: pip install --ignore-installed nose
+    - name: Test with Nose
+      run:
+        nosetests 
   Lint:
     runs-on: windows-latest
     needs: Setup-Windows
