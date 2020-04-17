@@ -178,15 +178,29 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["number_of_dashes"], 1, 'incorrect number_of_dashes')
 
-    def test_URL_Http_middle_of_URL(self, config_mock):
+    def test_URL_Http_middle_of_URL_true_no_start(self, config_mock):
         config_mock['URL_Features']['Http_middle_of_URL'] = "True"
         test_url = "google.com?https://google.com"
         list_features = {}
         list_time = {}
-
         Features.URL_Http_middle_of_URL(test_url, list_features, list_time)
+        self.assertEqual(list_features['Http_middle_of_URL'], 1)
 
-        self.assertEqual(list_features["Http_middle_of_URL"], 1, 'incorrect Http_middle_of_URL')
+    def test_URL_Http_middle_of_URL_true(self, config_mock):
+        config_mock['URL_Features']['Http_middle_of_URL'] = "True"
+        test_url = "http://www.http.google.com"
+        list_features = {}
+        list_time = {}
+        Features.URL_Http_middle_of_URL(test_url, list_features, list_time)
+        self.assertEqual(list_features['Http_middle_of_URL'], 1)
+
+    def test_URL_Http_middle_of_URL_false(self, config_mock):
+        config_mock['URL_Features']['Http_middle_of_URL'] = "True"
+        test_url = "http://www.google.com"
+        list_features = {}
+        list_time = {}
+        Features.URL_Http_middle_of_URL(test_url, list_features, list_time)
+        self.assertEqual(list_features['Http_middle_of_URL'], 0)
 
     def test_URL_Has_More_than_3_dots(self, config_mock):
         config_mock['URL_Features']['Has_More_than_3_dots'] = "True"
@@ -208,9 +222,19 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["Has_at_symbole"], 1, 'incorrect Has_at_symbole')
 
-    def test_URL_Has_anchor_tag(self, config_mock):
+    def test_URL_Has_anchor_tag_true(self, config_mock):
         config_mock['URL_Features']['Has_anchor_tag'] = "True"
         test_url = "anchor_example2.html#a001"
+        list_features = {}
+        list_time = {}
+
+        Features.URL_Has_anchor_tag(test_url, list_features, list_time)
+
+        self.assertEqual(list_features["Has_anchor_tag"], 1, 'incorrect Has_anchor_tag')
+
+    def test_URL_Has_anchor_tag_false(self, config_mock):
+        config_mock['URL_Features']['Has_anchor_tag'] = "True"
+        test_url = "anchor_example2.html"
         list_features = {}
         list_time = {}
 
@@ -323,3 +347,4 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Is_Whitelisted(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Is_Whitelisted"], 1, 'incorrect Is_Whitelisted')
+

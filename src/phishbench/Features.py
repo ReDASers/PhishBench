@@ -2872,16 +2872,14 @@ def URL_Http_middle_of_URL(url, list_features, list_time):
     # global list_features
     if Globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
         start = time.time()
-        Http_middle_of_URL = 0
-        # regex_http=re.compile(r'')
-        if url:
-            try:
-                if 'http' in url and url.startswith('http') == False:
-                    Http_middle_of_URL = 1
-            except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
-                Http_middle_of_URL = -1
-        list_features["Http_middle_of_URL"] = Http_middle_of_URL
+        HTTP_REGEX = re.compile(".+http.+")
+        if url and isinstance(url, str):
+            if HTTP_REGEX.match(url):
+                list_features["Http_middle_of_URL"] = 1
+            else:
+                list_features["Http_middle_of_URL"] = 0
+        else:
+            list_features["Http_middle_of_URL"] = -1
         end = time.time()
         ex_time = end - start
         list_time["Http_middle_of_URL"] = ex_time
@@ -2929,12 +2927,14 @@ def URL_Has_at_symbole(url, list_features, list_time):
 def URL_Has_anchor_tag(url, list_features, list_time):
     if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
         start = time.time()
-        regex_anchor = re.compile(r'<\?a>')
         flag = 0
         if url:
             try:
-                flag = int(bool(re.findall(regex_anchor, url)))
-            except Exception  as e:
+                if '#' in url:
+                    flag = 1
+                else:
+                    flag = 0
+            except Exception as e:
                 Globals.logger.warning("Exception: " + str(e))
                 flag = -1
         list_features["Has_anchor_tag"] = flag
