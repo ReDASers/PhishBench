@@ -34,8 +34,8 @@ jobs:
     needs: Setup-Windows
     steps:
       - name: GitHub Action for pylint
-        uses: cclauss/GitHub-Action-for-pylint@0.7.0
-        with:
-          args: pylint src/*.py"
+        run: |
+          pip install --ignore-installed pylint
+          pylint src/*.py"
 
 
