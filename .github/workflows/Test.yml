@@ -3,44 +3,46 @@ name: Test
 on: [push]
 
 jobs:
-  Setup-Windows: 
+  Test:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
+
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - uses: actions/cache@v1
-      with:
-        path: c:\hostedtoolcache\windows\python\3.7.5\x64\lib\site-packages
-        key: ${{ runner.os }}-pip_installed-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-  Test:
-    runs-on: windows-latest
-    needs: Setup-Windows
-    steps:
-    - name: Debug Action
-      uses: hmarr/debug-action@v1.0.0
-    - name: Print Info
-      run: dir 
+
     - name: Install Nose
       run: pip install --ignore-installed nose
+
     - name: Test with Nose
-      run:
-        nosetests 
+      run: nosetests 
   Lint:
     runs-on: windows-latest
-    needs: Setup-Windows
     steps:
-      - name: GitHub Action for pylint
-        run: |
-          pip install --ignore-installed pylint
-          pylint src/*.py"
+    - uses: actions/checkout@v1
+
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install pylint
+      run: pip install --ignore-installed pylint
+
+    - name: Run Lint
+      run: pylint .\src 
+
 
 
