@@ -92,7 +92,7 @@ class URLData:
         if is_ip_address(self.domain):
             whois_client = IPWhois(self.domain)
             whois_result = whois_client.lookup_whois(get_referral=True)
-            self.whois_info.append(whois_result)
+            self.ip_whois.append(whois_result)
             return
         elif not self.dns_results:
             self.lookup_dns(nameservers)
