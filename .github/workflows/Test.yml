@@ -42,7 +42,7 @@ jobs:
       run: pip install --ignore-installed pylint
 
     - name: Run Lint
-      run: pylint .\src 
+      run: pylint -j 0 --exit-zero .\src 
 
 
 
