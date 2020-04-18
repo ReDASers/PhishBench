@@ -107,7 +107,10 @@ class URLData:
                 except BaseIpwhoisException as e:
                     print("{}: {}".format(type(e).__name__, e))
                     pass
-        self.domain_whois = whois.whois(self.domain)
+        try:
+            self.domain_whois = whois.whois(self.domain)
+        except ConnectionError:
+            self.domain_whois = whois.whois(self.domain,command=True)
 
     def download_website(self):
         browser = _setup_browser()
