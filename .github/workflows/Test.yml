@@ -4,7 +4,10 @@ on: [push]
 
 jobs:
   Test:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
 
@@ -19,10 +22,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Install Nose
-      run: pip install --ignore-installed nose
+      run: pip install --ignore-installed nose coverage
 
     - name: Test with Nose
-      run: nosetests 
+      run: nosetests --with-coverage
   Lint:
     runs-on: windows-latest
     steps:
