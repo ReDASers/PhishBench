@@ -92,7 +92,7 @@ class URLData:
         if is_ip_address(self.domain):
             whois_client = IPWhois(self.domain)
             whois_result = whois_client.lookup_whois(get_referral=True)
-            self.whois_info.append(whois_result)
+            self.ip_whois.append(whois_result)
             return
         elif not self.dns_results:
             self.lookup_dns(nameservers)
@@ -107,7 +107,10 @@ class URLData:
                 except BaseIpwhoisException as e:
                     print("{}: {}".format(type(e).__name__, e))
                     pass
-        self.domain_whois = whois.whois(self.domain)
+        try:
+            self.domain_whois = whois.whois(self.domain)
+        except ConnectionError:
+            self.domain_whois = whois.whois(self.domain,command=True)
 
     def download_website(self):
         browser = _setup_browser()
