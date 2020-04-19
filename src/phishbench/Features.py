@@ -2960,13 +2960,16 @@ def URL_Null_in_Domain(url, list_features, list_time):
         list_time["Null_in_Domain"] = ex_time
 
 
+# PhishDef: URL Names Say It All
+TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']')
+
 def URL_Token_Count(url, list_features, list_time):
     if Globals.config["URL_Features"]["Token_Count"] == "True":
         start = time.time()
         count = 0
         if url:
             try:
-                count = len(url.split(Globals.config["URL_Features"]["URL_token_delimiter"]))
+                count = len(TOKEN_DELIMITER_REGEX.split(url))
             except Exception  as e:
                 Globals.logger.warning("Exception: " + str(e))
                 count = -1
@@ -2975,17 +2978,16 @@ def URL_Token_Count(url, list_features, list_time):
         ex_time = end - start
         list_time["Token_Count"] = ex_time
 
-
+# Detecting Malicious URLs Using Lexical Analysis
 def URL_Average_Path_Token_Length(url, list_features, list_time):
     if Globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
         start = time.time()
         average_token_length = 0
-        delimiters_regex = re.compile('[=|,|/|?|.|-]')
         if url:
             try:
                 parsed_url = urlparse(url)
                 path = '{uri.path}'.format(uri=parsed_url)
-                list_tokens = re.split(delimiters_regex, path)
+                list_tokens = TOKEN_DELIMITER_REGEX.split(path)
                 list_len_tokens = [0 for x in range(len(list_tokens))]
                 for token in list_tokens:
                     list_len_tokens[list_tokens.index(token)] = len(token)
@@ -3008,7 +3010,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
                 parsed_url = urlparse(url)
                 domain = '{uri.hostname}'.format(uri=parsed_url)
                 list_len_tokens = []
-                list_tokens = domain.split(Globals.config["URL_Features"]["URL_token_delimiter"])
+                list_tokens = TOKEN_DELIMITER_REGEX.split(domain)
                 for token in list_tokens:
                     list_len_tokens.append(len(token))
                 average_token_length = sum(list_len_tokens) / len(list_len_tokens)
@@ -3024,20 +3026,16 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
 def URL_Longest_Domain_Token(url, list_features, list_time):
     if Globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
         start = time.time()
-        longest_token_len = 0
         try:
             if url == '':
                 longest_token_len = 0
             else:
                 parsed_url = urlparse(url)
                 domain = '{uri.hostname}'.format(uri=parsed_url)
-                list_len_tokens = []
-                list_tokens = domain.split(Globals.config["URL_Features"]["URL_token_delimiter"])
-                for token in list_tokens:
-                    list_len_tokens.append(len(token))
+                list_tokens = TOKEN_DELIMITER_REGEX.split(domain)
+                list_len_tokens = [len(x) for x in list_tokens]
                 longest_token_len = max(list_len_tokens)
-
-        except Exception  as e:
+        except Exception as e:
             Globals.logger.warning("Exception: " + str(e))
             longest_token_len = -1
         list_features["Longest_Domain_Token"] = longest_token_len
