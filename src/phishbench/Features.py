@@ -2968,7 +2968,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
 
 
 def URL_Has_anchor_tag(url, list_features, list_time):
-    if Globals.config["URL_Features"]["has_anchor_tag"] == "True":
+    if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
         start = time.time()
         regex_anchor = re.compile(r'<\?a>')
         flag = 0
@@ -2978,10 +2978,10 @@ def URL_Has_anchor_tag(url, list_features, list_time):
             except Exception  as e:
                 Globals.logger.warning("Exception: " + str(e))
                 flag = -1
-        list_features["has_anchor_tag"] = flag
+        list_features["Has_anchor_tag"] = flag
         end = time.time()
         ex_time = end - start
-        list_time["has_anchor_tag"] = ex_time
+        list_time["Has_anchor_tag"] = ex_time
 
 
 def URL_Null_in_Domain(url, list_features, list_time):
