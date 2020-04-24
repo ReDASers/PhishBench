@@ -2442,10 +2442,10 @@ def HTML_Is_Login(html, url, list_features, list_time):
         doc = lxml_html.document_fromstring(html, base_url=url)
         try:
             form_element = doc.xpath('//form')
+            form = None
             if form_element:
                 form = _pick_form(form_element)
-            else:
-                return _is_login
+
             for x in form.inputs:
                 if not isinstance(x, html.InputElement):
                     continue
@@ -2456,7 +2456,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
                     break
         except Exception as ex:
             _is_login = False
-
         list_features['is_login'] = _is_login
         end = time.time()
         ex_time = end - start
@@ -3316,7 +3315,7 @@ def Network_as_number(IP_whois_list, list_features, list_time):
         list_features["as_number"] = int(as_number)
         end = time.time()
         ex_time = end - start
-        list_time["as_number"] = ex_tim1e
+        list_time["as_number"] = ex_time
 
 
 def Network_number_name_server(dns_info, list_features, list_time):
