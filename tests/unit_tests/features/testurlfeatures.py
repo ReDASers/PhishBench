@@ -259,7 +259,7 @@ class TestURLFeatures(unittest.TestCase):
 
         Features.URL_Token_Count('http://te2t-url.com/home.html', list_features, list_time)
 
-        self.assertEqual(3, list_features["Token_Count"], 'incorrect Token_Count')
+        self.assertEqual(6, list_features["Token_Count"], 'incorrect Token_Count')
 
     def test_URL_Average_Path_Token_Length(self, config_mock):
         config_mock['URL_Features']['Average_Path_Token_Length'] = "True"
@@ -277,7 +277,7 @@ class TestURLFeatures(unittest.TestCase):
 
         Features.URL_Average_Domain_Token_Length('http://te2t-url.com/home.html', list_features, list_time)
 
-        self.assertEqual(list_features["Average_Domain_Token_Length"], 11 / 2, 'incorrect Average_Domain_Token_Length')
+        self.assertEqual(list_features["Average_Domain_Token_Length"], 10 / 3, 'incorrect Average_Domain_Token_Length')
 
     def test_URL_Longest_Domain_Token(self, config_mock):
         config_mock['URL_Features']['Longest_Domain_Token'] = "True"
@@ -286,7 +286,7 @@ class TestURLFeatures(unittest.TestCase):
 
         Features.URL_Longest_Domain_Token('http://te2t-url.com/home.html', list_features, list_time)
 
-        self.assertEqual(8, list_features["Longest_Domain_Token"], 'incorrect Longest_Domain_Token')
+        self.assertEqual(4, list_features["Longest_Domain_Token"], 'incorrect Longest_Domain_Token')
 
     def test_URL_Protocol_Port_Match(self, config_mock):
         config_mock['URL_Features']['Protocol_Port_Match'] = "True"

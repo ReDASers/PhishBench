@@ -2961,7 +2961,7 @@ def URL_Null_in_Domain(url, list_features, list_time):
 
 
 # PhishDef: URL Names Say It All
-TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']')
+TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 
 def URL_Token_Count(url, list_features, list_time):
     if Globals.config["URL_Features"]["Token_Count"] == "True":
@@ -2969,7 +2969,8 @@ def URL_Token_Count(url, list_features, list_time):
         count = 0
         if url:
             try:
-                count = len(TOKEN_DELIMITER_REGEX.split(url))
+                tokens = TOKEN_DELIMITER_REGEX.split(url)
+                count = len(tokens)
             except Exception  as e:
                 Globals.logger.warning("Exception: " + str(e))
                 count = -1
