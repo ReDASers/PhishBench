@@ -5,6 +5,7 @@ import time
 
 from bs4 import BeautifulSoup
 
+import requests
 import dns.resolver
 import tldextract
 from lxml import html as lxml_html
@@ -2131,6 +2132,44 @@ def HTML_number_of_audio(soup, list_features, list_time):
         list_time["number_of_audio"] = ex_time
 
 
+def HTML_number_of_hidden_input(soup, list_features, list_time):
+    # global list_features
+    if Globals.config["HTML_Features"]["number_of_hidden_input"] == "True":
+        start = time.time()
+        number_of_hidden_input = 0
+        if soup:
+            try:
+                iframe_tags = soup.find_all('input')
+                for tag in iframe_tags:
+                    if tag.get('type') == "hidden":
+                        number_of_hidden_input+=1
+            except Exception as e:
+                Globals.logger.warning("exception: " + str(e))
+                number_of_hidden_input = -1
+        list_features["number_of_hidden_input"] = number_of_hidden_input
+        end = time.time()
+        ex_time = end - start
+        list_time["number_of_hidden_input"] = ex_time
+
+def HTML_number_of_hidden_svg(soup, list_features, list_time):
+    # global list_features
+    if Globals.config["HTML_Features"]["number_of_hidden_svg"] == "True":
+        start = time.time()
+        number_of_hidden_svg = 0
+        if soup:
+            try:
+                iframe_tags = soup.find_all('svg')
+                for tag in iframe_tags:
+                    if tag.get('aria-hidden') == "true":
+                        number_of_hidden_svg += 1
+            except Exception as e:
+                Globals.logger.warning("exception: " + str(e))
+                number_of_hidden_input = -1
+        list_features["number_of_hidden_svg"] = number_of_hidden_svg
+        end = time.time()
+        ex_time = end - start
+        list_time["number_of_hidden_svg"] = ex_time
+
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     # global list_features
     if Globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
@@ -2776,8 +2815,11 @@ def URL_special_pattern(url, list_features, list_time):
         special_count = 0
         if url:
             try:
-                if "?gws_rd=ssl" in url:
-                    special_count = 1
+                response = requests.get(url)
+                response.history
+                for resp in response.history:
+                    if "?gws_rd=ssl" in resp.url:
+                        special_count = 1
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 special_count = -1
@@ -2927,7 +2969,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
 
 
 def URL_Has_anchor_tag(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
+    if Globals.config["URL_Features"]["has_anchor_tag"] == "True":
         start = time.time()
         regex_anchor = re.compile(r'<\?a>')
         flag = 0
@@ -2937,10 +2979,10 @@ def URL_Has_anchor_tag(url, list_features, list_time):
             except Exception  as e:
                 Globals.logger.warning("Exception: " + str(e))
                 flag = -1
-        list_features["Has_anchor_tag"] = flag
+        list_features["has_anchor_tag"] = flag
         end = time.time()
         ex_time = end - start
-        list_time["Has_anchor_tag"] = ex_time
+        list_time["has_anchor_tag"] = ex_time
 
 
 def URL_Null_in_Domain(url, list_features, list_time):
@@ -3271,10 +3313,10 @@ def Network_as_number(IP_whois_list, list_features, list_time):
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 as_number = -1
-        list_features["as_number"] = as_number
+        list_features["as_number"] = int(as_number)
         end = time.time()
         ex_time = end - start
-        list_time["as_number"] = ex_time
+        list_time["as_number"] = ex_tim1e
 
 
 def Network_number_name_server(dns_info, list_features, list_time):
