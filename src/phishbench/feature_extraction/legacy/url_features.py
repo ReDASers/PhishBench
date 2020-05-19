@@ -6,6 +6,7 @@ import time
 import traceback
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 from ... import Features
 from ...Features_Support import Cleaning, read_alexa
@@ -15,67 +16,60 @@ from ...utils import Globals
 
 
 def Extract_Features_Urls_Testing():
-    start_time = time.time()
-    Globals.logger.info(">>>>> Feature extraction: Testing Set")
+    print(">>>>> Feature extraction: Testing Set")
+
     dataset_path_legit_test = Globals.config["Dataset Path"]["path_legitimate_testing"]
     dataset_path_phish_test = Globals.config["Dataset Path"]["path_phishing_testing"]
     feature_list_dict_test = []
     extraction_time_dict_test = []
     bad_url_list = []
-    labels_legit_test, data_legit_test = extract_url_features(dataset_path_legit_test, feature_list_dict_test,
+
+    num_legit, data_legit_test = extract_url_features(dataset_path_legit_test, feature_list_dict_test,
                                                               extraction_time_dict_test, bad_url_list)
-    labels_all_test, data_phish_test = extract_url_features(dataset_path_phish_test, feature_list_dict_test,
+    num_phish, data_phish_test = extract_url_features(dataset_path_phish_test, feature_list_dict_test,
                                                             extraction_time_dict_test, bad_url_list)
     Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
-    Globals.logger.info(">>>>> Cleaning >>>>")
+    print(">>>>> Cleaning >>>>")
     Globals.logger.debug("feature_list_dict_test: %d", len(feature_list_dict_test))
     Cleaning(feature_list_dict_test)
-    Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
-    # Globals.logger.info("Number of bad URLs in training dataset: {}".format(len(Bad_URLs_List)))
-    labels_test = []
-    for i in range(labels_legit_test):
-        labels_test.append(0)
-    for i in range(labels_all_test - labels_legit_test):
-        labels_test.append(1)
+    print(">>>>> Cleaning >>>>>> Done")
+    print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
+
+    labels_test = ([0] * num_legit) + ([1] * num_phish)
 
     corpus_test = data_legit_test + data_phish_test
-    Globals.logger.info("--- %.2f final count seconds ---", (time.time() - start_time))
+
     return feature_list_dict_test, labels_test, corpus_test
 
 
 def Extract_Features_Urls_Training():
     # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
     if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        Globals.logger.info("===============================================================")
-        Globals.logger.info("===============================================================")
-        Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
+        print("===============================================================")
+        print("===============================================================")
+        print(">>>>> Feature extraction: Training Set >>>>>")
+
         dataset_path_legit_train = Globals.config["Dataset Path"]["path_legitimate_training"]
         dataset_path_phish_train = Globals.config["Dataset Path"]["path_phishing_training"]
         feature_list_dict_train = []
         extraction_time_dict_train = []
         bad_url_list = []
         start_time = time.time()
-        # with open("Data_Dump/URLs_Training/features_url_training_legit.pkl",'ab') as feature_tracking:
-        labels_legit_train, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
+
+        num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
                                                                     extraction_time_dict_train, bad_url_list)
-        labels_all_train, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
+        num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
                                                                   extraction_time_dict_train, bad_url_list)
-        Globals.logger.info("Feature extraction time is: %ds", (time.time() - start_time))
-        Globals.logger.debug(">>>>> Feature extraction: Training Set >>>>> Done ")
+
+        print("Feature extraction time is: %ds", (time.time() - start_time))
+        print(">>>>> Feature extraction: Training Set >>>>> Done ")
         Cleaning(feature_list_dict_train)
-        Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
-        # Globals.logger.info("Number of bad URLs in training dataset: {}".format(len(Bad_URLs_List)))
+        print(">>>>> Cleaning >>>>>> Done")
+        print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
 
-        labels_train = []
-        for i in range(labels_legit_train):
-            labels_train.append(0)
-        for i in range(labels_all_train - labels_legit_train):
-            labels_train.append(1)
-
-        # Globals.logger.info("\nfeature_list_dict_train2: {}\n".format(feature_list_dict_train2))
+        labels_train = ([0] * num_legit) + ([1] * num_phish)
         corpus_train = data_legit_train + data_phish_train
-        #
-        #        #Globals.logger.info("--- %s final count seconds ---" % (time.time() - start_time))
+
         return feature_list_dict_train, labels_train, corpus_train
     return None, None, None
 
@@ -92,7 +86,8 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         alexa_data = read_alexa(alexa_path)
 
     corpus = []
-    for url in url_list:
+    count_files = len(feature_list_dict)
+    for url in tqdm(url_list):
         feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
         feature_list_dict.append(feature_values)
         extraction_time_list_dict.append(extraction_times)
@@ -110,8 +105,7 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
             Globals.summary.write("extraction time: {} \n".format(extraction_time))
         Globals.summary.write("\n#######\n")
 
-    count_files = len(feature_list_dict)
-    return count_files, corpus
+    return len(feature_list_dict) - count_files, corpus
 
 
 def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
