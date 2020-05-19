@@ -1,13 +1,10 @@
 import statistics
-from datetime import datetime
 import time
+from datetime import datetime
 
-
-from bs4 import BeautifulSoup
-
-import requests
 import dns.resolver
 import tldextract
+from bs4 import BeautifulSoup
 from lxml import html as lxml_html
 from textstat.textstat import textstat
 
