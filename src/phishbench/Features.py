@@ -1,12 +1,10 @@
 import statistics
-from datetime import datetime
 import time
-
-
-from bs4 import BeautifulSoup
+from datetime import datetime
 
 import dns.resolver
 import tldextract
+from bs4 import BeautifulSoup
 from lxml import html as lxml_html
 from textstat.textstat import textstat
 
@@ -2130,6 +2128,44 @@ def HTML_number_of_audio(soup, list_features, list_time):
         ex_time = end - start
         list_time["number_of_audio"] = ex_time
 
+
+def HTML_number_of_hidden_input(soup, list_features, list_time):
+    # global list_features
+    if Globals.config["HTML_Features"]["number_of_hidden_input"] == "True":
+        start = time.time()
+        number_of_hidden_input = 0
+        if soup:
+            try:
+                iframe_tags = soup.find_all('input')
+                for tag in iframe_tags:
+                    if tag.get('type') == "hidden":
+                        number_of_hidden_input+=1
+            except Exception as e:
+                Globals.logger.warning("exception: " + str(e))
+                number_of_hidden_input = -1
+        list_features["number_of_hidden_input"] = number_of_hidden_input
+        end = time.time()
+        ex_time = end - start
+        list_time["number_of_hidden_input"] = ex_time
+
+def HTML_number_of_hidden_svg(soup, list_features, list_time):
+    # global list_features
+    if Globals.config["HTML_Features"]["number_of_hidden_svg"] == "True":
+        start = time.time()
+        number_of_hidden_svg = 0
+        if soup:
+            try:
+                iframe_tags = soup.find_all('svg')
+                for tag in iframe_tags:
+                    if tag.get('aria-hidden') == "true":
+                        number_of_hidden_svg += 1
+            except Exception as e:
+                Globals.logger.warning("exception: " + str(e))
+                number_of_hidden_input = -1
+        list_features["number_of_hidden_svg"] = number_of_hidden_svg
+        end = time.time()
+        ex_time = end - start
+        list_time["number_of_hidden_svg"] = ex_time
 
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     # global list_features
