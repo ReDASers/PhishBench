@@ -4,9 +4,9 @@ import os
 import joblib
 import numpy as np
 import sklearn
+from sklearn.svm import LinearSVC
 from sklearn.feature_selection import RFE
 from sklearn.feature_selection import chi2
-from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
 from .utils import Globals
@@ -29,8 +29,6 @@ def Feature_Ranking(X, y, k):
         if Globals.config["Feature Selection"]["with Tfidf"] == "True":
             vectorizer_tfidf = joblib.load("Data_Dump/URLs_Training/tfidf_vectorizer.pkl")
     if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
-        model = LogisticRegression()
-        from sklearn.svm import LinearSVC
         model = LinearSVC()
         rfe = RFE(model, k, verbose=2, step=0.005)
         rfe.fit(X, y)
