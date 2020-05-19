@@ -315,6 +315,12 @@ def single_url_html_features(soup, html, url, alexa_data, list_features, list_ti
     Features.HTML_number_of_audio(soup, list_features, list_time)
     Globals.logger.debug("number_of_audio")
 
+    Features.HTML_number_of_hidden_svg(soup, list_features, list_time)
+    Globals.logger.debug("number_of_hidden_svg")
+
+    Features.HTML_number_of_hidden_input(soup, list_features, list_time)
+    Globals.logger.debug("number_of_hidden_input")
+
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
     Globals.logger.debug("number_of_hidden_iframe")
 
