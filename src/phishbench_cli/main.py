@@ -2,8 +2,8 @@ import os
 import sys
 
 import joblib
-from scipy.sparse import hstack
 import pandas as pd
+from scipy.sparse import hstack
 
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
@@ -196,9 +196,9 @@ def run_phishbench():
             # feature_list_dict_train=vectorizer_train.inverse_transform(X)
 
         Globals.logger.info("Select Best Features ######")
-        k = int(Globals.config["Feature Selection"]["number of best features"])
+        num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
         # X, selection = Feature_Selection.Select_Best_Features_Training(X, y, k)
-        X, selection = Feature_Selection.Feature_Ranking(X, y, k)
+        X, selection = Feature_Selection.Feature_Ranking(X, y, num_best_features)
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             joblib.dump(selection, os.path.join(email_train_dir, "selection.pkl"))
         elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
@@ -218,9 +218,9 @@ def run_phishbench():
                 if Globals.config["Feature Selection"]["select best features"] == "True":
                     # k: Number of Best features
                     Globals.logger.info("Select Best Features ######")
-                    k = int(Globals.config["Feature Selection"]["number of best features"])
+                    num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
                     # X_train, selection = Feature_Selection.Select_Best_Features_Training(X_train, y_train, k)
-                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, k)
+                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
                     # dump selection model
                     joblib.dump(selection, os.path.join(email_train_dir, "selection.pkl"))
                     Globals.logger.info("### Feature Ranking and Selection for Training Done!")
@@ -254,8 +254,8 @@ def run_phishbench():
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
                     # k: Number of Best features
-                    k = int(Globals.config["Feature Selection"]["number of best features"])
-                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, k)
+                    num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
+                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
                     # Dump model
                     joblib.dump(selection, os.path.join(url_train_dir, "selection.pkl"))
                     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed_best_features.pkl"))
@@ -284,8 +284,8 @@ def run_phishbench():
                     if flag_training == False:
                         selection = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
                     # k: Number of Best features
-                    k = int(Globals.config["Feature Selection"]["number of best features"])
-                    X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, k,
+                    num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
+                    X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, num_best_features,
                                                                             feature_list_dict_test)
                     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
