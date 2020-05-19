@@ -6,6 +6,7 @@ import time
 import traceback
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 from ... import Features
 from ...Features_Support import Cleaning, read_alexa
@@ -92,7 +93,7 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         alexa_data = read_alexa(alexa_path)
 
     corpus = []
-    for url in url_list:
+    for url in tqdm(url_list):
         feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
         feature_list_dict.append(feature_values)
         extraction_time_list_dict.append(extraction_times)
