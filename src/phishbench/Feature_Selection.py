@@ -1,36 +1,15 @@
-import configparser
 import math
 import os
-import re
-import sys
 
 import joblib
 import numpy as np
 import sklearn
-from sklearn.datasets import load_svmlight_file
 from sklearn.feature_selection import RFE
 from sklearn.feature_selection import chi2
-from sklearn.feature_selection import mutual_info_classif
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
-from .dataset import Imbalanced_Dataset
 from .utils import Globals
-
-
-####### Dataset (features for each item) X and Classess y (phish or legitimate)
-def Feature_Selection(X, y):
-    # if Globals.config["Feature_Selection"]["Chi-2"] == "True"
-    #	X_Best=SelectKBest(chi2, k=2).fit_transform(X,y)
-    # if Globals.config["Feature_Selection"]["Information_Gain"] == "True"
-    #	X_Best=SelectKBest(mutual_info_classif, k=2).fit_transform(X,y)
-    vec = joblib.load('vectorizer.pkl')
-    res = dict(zip(vec.get_feature_names(), mutual_info_classif(X, y)))
-    # sorted_d = sorted(res.items(), key=lambda x: x[1])
-    Globals.logger.debug(res)
-
-
-# return X_Best
 
 
 def Feature_Ranking(X, y, k):
@@ -147,15 +126,6 @@ def Feature_Ranking(X, y, k):
         return X, vectorizer
 
 
-def Select_Best_Features_Training(X, y, k):
-    selection = sklearn.feature_selection.SelectKBest(chi2, k)
-    selection.fit(X, y)
-    X = selection.transform(X)
-    # Print out the list of best features
-    return X, selection
-
-
-# <<<<<<< HEAD
 def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test):
     if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
         X = selection.transform(X)
@@ -205,55 +175,3 @@ def Select_Best_Features_Testing(X, selection, k, feature_list_dict_test):
         Globals.logger.info("new_list_dict_features shape: {}".format(len(new_list_dict_features[0])))
         X = selection.transform(new_list_dict_features)
         return X
-
-
-# =======
-# def Select_Best_Features_Testing(X, selection):
-#	print (selection)
-#	try:
-#		X = selection.transform(X)
-#	# Print out the list of best features
-#	except AttributeError as e:
-#		print (e)
-#	return X
-# >>>>>>> b62393cd258add9238fd4d2d3d8dc626851086d7
-
-def load_dataset():
-    email_training_regex = re.compile(r"email_features_training_?\d?.txt")
-    # email_testing_regex=re.compile(r"email_features_training_?\d?.txt")
-    link_training_regex = re.compile(r"link_features_training_?\d?.txt")
-    # link_testing_regex=re.compile(r"link_features_training_?\d?.txt")
-    try:
-        if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-            file_feature_training = re.findall(email_training_regex, ''.join(os.listdir('.')))[-1]
-            Globals.logger.debug("file_feature_training: {}".format(file_feature_training))
-        # file_feature_testing=re.findall(email_testing_regex,''.join(os.listdir('.')))[-1]
-
-        if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-            file_feature_training = re.findall(link_training_regex, ''.join(os.listdir('.')))[-1]
-    # file_feature_testing=re.findall(link_testing_regex,''.join(os.listdir('.')))[-1]
-    except Exception as e:
-        Globals.logger.warning("exception: " + str(e))
-
-    if Globals.config["Imbalanced Datasets"]["Load_imbalanced_dataset"] == "True":
-        X, y = Imbalanced_Dataset.load_imbalanced_dataset(file_feature_training)
-    # X_test, y_test=Imbalanced_Dataset.load_imbalanced_dataset(file_feature_testing)
-    else:
-        Globals.logger.debug("Imbalanced_Dataset not activated")
-        X, y = load_svmlight_file(file_feature_training)
-    # X_test, y_test = load_svmlight_file(file_feature_testing)
-    return X, y  # , X_test, y_test
-
-
-def main():
-    X, y = Imbalanced_Dataset.load_imbalanced_dataset("email_features_training_3.txt")
-    Feature_Selection(X, y)
-
-
-if __name__ == '__main__':
-    config = configparser.ConfigParser()
-    config.read('Config_file.ini')
-    original = sys.stdout
-    sys.stdout = open("log.txt", 'w')
-    main()
-    sys.stdout = original
