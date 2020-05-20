@@ -220,7 +220,7 @@ def run_phishbench():
         ################ Email Feature Extraction ##################
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
-                X_train, y_train, vectorizer, tfidf_vectorizer = extract_train_features(email_train_dir, None)
+                X_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir)
 
                 # feature ranking
                 if Globals.config["Feature Selection"]["select best features"] == "True":
@@ -253,7 +253,7 @@ def run_phishbench():
             if Globals.config["Extraction"]["Training Dataset"] == "True":
                 # Extract features in a dictionnary for each url. return a list of dictionaries
                 feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
-                X_train, y_train, vectorizer, tfidf_vectorizer = extract_train_features(None, url_train_dir)
+                X_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir)
 
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
