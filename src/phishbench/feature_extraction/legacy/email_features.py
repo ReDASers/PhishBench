@@ -7,6 +7,7 @@ import sys
 import time
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 from phishbench import Features
 from phishbench.Features_Support import Cleaning, read_corpus
@@ -84,7 +85,7 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
     #     Globals.logger.warning("exception: " + str(e))
     ###
     corpus = input.read_corpus(corpus_files, "ISO-8859-1")
-    for file_path, file_contents in corpus.items():
+    for file_path, file_contents in tqdm(corpus.items()):
 
         Globals.logger.info("===================")
         Globals.logger.info(file_path)
