@@ -9,9 +9,9 @@ import time
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-from phishbench import Features
-from phishbench.Features_Support import Cleaning, read_corpus
-from phishbench.utils import Globals
+from ... import Features
+from ...Features_Support import Cleaning
+from ...utils import Globals
 from ...input import input
 
 
