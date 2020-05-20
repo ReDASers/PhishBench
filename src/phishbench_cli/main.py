@@ -48,7 +48,8 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
             selection = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
         # k: Number of Best features
         k = int(Globals.config["Feature Selection"]["number of best features"])
-        X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, k, feature_list_dict_test)
+        X_test = selection.transform(X_test)
+        Globals.logger.info("X_test Shape: {}".format(X_test.shape))
         joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
     # Dump Testing feature matrix with labels
@@ -94,7 +95,8 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
                 selection = joblib.load(os.path.join(email_train_dir, "selection.pkl"))
             # k: Number of Best features
             k = int(Globals.config["Feature Selection"]["number of best features"])
-            X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, k, feature_list_dict_test)
+            X_test = selection.transform(X_test)
+            Globals.logger.info("X_Shape: {}".format(X_test.shape))
             Globals.logger.info("### Feature Ranking and Selection for Training Done!")
 
         # Dump Testing feature matrix with labels
