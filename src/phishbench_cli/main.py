@@ -234,11 +234,7 @@ def run_phishbench():
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
-                if flag_training:
-                    # if training was done in another instance of the plaform then load the necessary files
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
-                else:
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
+                X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
 
             else:
                 X_test = None
