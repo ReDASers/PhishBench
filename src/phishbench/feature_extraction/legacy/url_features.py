@@ -25,9 +25,9 @@ def Extract_Features_Urls_Testing():
     bad_url_list = []
 
     num_legit, data_legit_test = extract_url_features(dataset_path_legit_test, feature_list_dict_test,
-                                                              extraction_time_dict_test, bad_url_list)
+                                                      extraction_time_dict_test, bad_url_list)
     num_phish, data_phish_test = extract_url_features(dataset_path_phish_test, feature_list_dict_test,
-                                                            extraction_time_dict_test, bad_url_list)
+                                                      extraction_time_dict_test, bad_url_list)
     Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
     print(">>>>> Cleaning >>>>")
     Globals.logger.debug("feature_list_dict_test: %d", len(feature_list_dict_test))
@@ -54,14 +54,12 @@ def Extract_Features_Urls_Training():
         feature_list_dict_train = []
         extraction_time_dict_train = []
         bad_url_list = []
-        start_time = time.time()
 
         num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
-                                                                    extraction_time_dict_train, bad_url_list)
+                                                           extraction_time_dict_train, bad_url_list)
         num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
-                                                                  extraction_time_dict_train, bad_url_list)
+                                                           extraction_time_dict_train, bad_url_list)
 
-        print("Feature extraction time is: %ds", (time.time() - start_time))
         print(">>>>> Feature extraction: Training Set >>>>> Done ")
         Cleaning(feature_list_dict_train)
         print(">>>>> Cleaning >>>>>> Done")
