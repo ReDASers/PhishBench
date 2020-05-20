@@ -360,11 +360,6 @@ def Vectorization_Training(list_dict_features_train):
     return sparse_matrix_features_train, vec
 
 
-def Vectorization_Testing(list_dict_features_test, vec):
-    sparse_matrix_features_test = vec.transform(list_dict_features_test)
-    return sparse_matrix_features_test
-
-
 # sys.setdefaultencoding('utf-8')
 
 # get filename from path

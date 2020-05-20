@@ -76,7 +76,7 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
         feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
         # Tranform the list of dictionaries into a sparse matrix
-        X_test = Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
+        X_test = vectorizer.transform(feature_list_dict_test)
 
         # Add tfidf if the user marked it as True
         if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
