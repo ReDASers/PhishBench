@@ -95,7 +95,7 @@ def Feature_Ranking(features, target, num_features):
             joblib.dump(features, "Data_Dump/Emails_Training/X_train_with_tfidf_IG_{}.pkl".format(num_features))
         if urls:
             joblib.dump(features, "Data_Dump/URLs_Training/X_train_with_tfidf_IG_{}.pkl".format(num_features))
-        return features, vectorizer
+        return features, model
 
     # Gini
     elif Globals.config["Feature Selection"]["Gini"] == "True":
@@ -121,7 +121,7 @@ def Feature_Ranking(features, target, num_features):
             joblib.dump(features, "Data_Dump/Emails_Training/X_train_with_tfidf_Gini_{}.pkl".format(num_features))
         if urls:
             joblib.dump(features, "Data_Dump/URLs_Training/X_train_with_tfidf_Gini_{}.pkl".format(num_features))
-        return features, vectorizer
+        return features, model
 
 
 def Select_Best_Features_Testing(features, selection_algorithm, num_features, feature_list_dict_test):
