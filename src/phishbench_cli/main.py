@@ -24,7 +24,7 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
         vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
 
     # Extract features in a dictionnary for each email. return a list of dictionaries
-    (feature_list_dict_test, y_test, corpus_test) = legacy_url.Extract_Features_Urls_Testing()
+    feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
     # Tranform the list of dictionaries into a sparse matrix
     X_test = vectorizer.transform(feature_list_dict_test)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
@@ -71,8 +71,9 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
             y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
             vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+
         # Extract features in a dictionnary for each email. return a list of dictionaries
-        (feature_list_dict_test, y_test, corpus_test) = legacy_email.Extract_Features_Emails_Testing()
+        feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
         # Tranform the list of dictionaries into a sparse matrix
         X_test = Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
@@ -251,7 +252,7 @@ def run_phishbench():
         elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
                 # Extract features in a dictionnary for each url. return a list of dictionaries
-                (feature_list_dict_train, y_train, corpus_train) = legacy_url.Extract_Features_Urls_Training()
+                feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
                 X_train, y_train, vectorizer, tfidf_vectorizer = extract_train_features(None, url_train_dir)
 
                 # Feature Selection
