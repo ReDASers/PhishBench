@@ -24,9 +24,9 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
         vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
 
     # Extract features in a dictionnary for each email. return a list of dictionaries
-    (feature_list_dict_test, y_test, corpus_test) = legacy_url.Extract_Features_Urls_Testing()
+    feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
     # Tranform the list of dictionaries into a sparse matrix
-    X_test = Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
+    X_test = vectorizer.transform(feature_list_dict_test)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
     # TFIDF
     if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
@@ -71,11 +71,12 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
             X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
             y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
             vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+
         # Extract features in a dictionnary for each email. return a list of dictionaries
-        (feature_list_dict_test, y_test, corpus_test) = legacy_email.Extract_Features_Emails_Testing()
+        feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
         # Tranform the list of dictionaries into a sparse matrix
-        X_test = Features_Support.Vectorization_Testing(feature_list_dict_test, vectorizer)
+        X_test = vectorizer.transform(feature_list_dict_test)
 
         # Add tfidf if the user marked it as True
         if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
@@ -113,61 +114,68 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
 
     return X_test, y_test
 
+def extract_email_train_features(email_train_dir):
+    if not os.path.exists(email_train_dir):
+        os.makedirs(email_train_dir)
+    # Extract features in a dictionnary for each email. return a list of dictionaries
+    feature_list_dict_train, y_train, corpus_train = legacy_email.Extract_Features_Emails_Training()
+    # Tranform the list of dictionaries into a sparse matrix
+    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    # Save model for vectorization
+    joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
+    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
-def feature_extraction_train(email_train_dir, url_train_dir):
-    if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        if not os.path.exists(email_train_dir):
-            os.makedirs(email_train_dir)
-        # Extract features in a dictionnary for each email. return a list of dictionaries
-        (feature_list_dict_train, y_train, corpus_train) = legacy_email.Extract_Features_Emails_Training()
-        # Tranform the list of dictionaries into a sparse matrix
-        X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
-        # Save model for vectorization
-        joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
-        joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
+    # Add tfidf if the user marked it as True
+    if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
+        Globals.logger.info("tfidf_emails_train ######")
+        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
+        X_train = hstack([X_train, Tfidf_train])
+        # Save tfidf vectorizer
+        joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+    else:
+        tfidf_vectorizer = None
 
-        # Add tfidf if the user marked it as True
-        if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
-            Globals.logger.info("tfidf_emails_train ######")
-            Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-            joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
-            X_train = hstack([X_train, Tfidf_train])
-            # Save tfidf vectorizer
-            joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
-        else:
-            tfidf_vectorizer = None
-
-        X_train = Features_Support.Preprocessing(X_train)
-        joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
-
-    elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
-        # Create directory to store dada
-        if not os.path.exists(url_train_dir):
-            os.makedirs(url_train_dir)
-        # Extract features in a dictionnary for each URL. return a list of dictionaries
-        (feature_list_dict_train, y_train, corpus_train) = legacy_url.Extract_Features_Urls_Training()
-        # Tranform the list of dictionaries into a sparse matrix
-        X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
-        # Dump vectorizer
-        joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
-        joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
-
-        # Add tfidf if the user marked it as True
-        if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                Globals.config["HTML_Features"].getboolean("tfidf_websites"):
-            Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
-            Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-            joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
-            X_train = hstack([X_train, Tfidf_train])
-            # dump tfidf vectorizer
-            joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
-        else:
-            tfidf_vectorizer = None
-
-        X_train = Features_Support.Preprocessing(X_train)
-        joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
-
+    X_train = Features_Support.Preprocessing(X_train)
+    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
     return X_train, y_train, vectorizer, tfidf_vectorizer
+
+
+def extract_url_train_features(url_train_dir):
+    # Create directory to store dada
+    if not os.path.exists(url_train_dir):
+        os.makedirs(url_train_dir)
+    # Extract features in a dictionnary for each URL. return a list of dictionaries
+    feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+    # Tranform the list of dictionaries into a sparse matrix
+    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    # Dump vectorizer
+    joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
+    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
+
+    # Add tfidf if the user marked it as True
+    if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+            Globals.config["HTML_Features"].getboolean("tfidf_websites"):
+        Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
+        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
+        X_train = hstack([X_train, Tfidf_train])
+        # dump tfidf vectorizer
+        joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
+    else:
+        tfidf_vectorizer = None
+
+    X_train = Features_Support.Preprocessing(X_train)
+    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
+    return X_train, y_train, vectorizer, tfidf_vectorizer
+
+
+def extract_train_features(email_train_dir, url_train_dir):
+    if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
+        return extract_email_train_features(email_train_dir)
+    elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
+        return extract_url_train_features(url_train_dir)
+    return None, None, None, None
 
 
 def run_phishbench():
@@ -190,7 +198,7 @@ def run_phishbench():
     ######################################################
     if Globals.config["Feature Selection"]["Feature Ranking Only"] == 'True':
         if Globals.config["Extraction"]["feature extraction"] == "True":
-            X, y, vectorizer, tfidf_vectorizer = feature_extraction_train(email_train_dir, url_train_dir)
+            X, y, vectorizer, tfidf_vectorizer = extract_train_features(email_train_dir, url_train_dir)
         else:
             X, y, X_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset()
             # feature_list_dict_train=vectorizer_train.inverse_transform(X)
@@ -212,7 +220,7 @@ def run_phishbench():
         ################ Email Feature Extraction ##################
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
-                X_train, y_train, vectorizer, tfidf_vectorizer = feature_extraction_train(email_train_dir, None)
+                X_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir)
 
                 # feature ranking
                 if Globals.config["Feature Selection"]["select best features"] == "True":
@@ -234,11 +242,7 @@ def run_phishbench():
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
-                if flag_training:
-                    # if training was done in another instance of the plaform then load the necessary files
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
-                else:
-                    X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
+                X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
 
             else:
                 X_test = None
@@ -248,8 +252,8 @@ def run_phishbench():
         elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
             if Globals.config["Extraction"]["Training Dataset"] == "True":
                 # Extract features in a dictionnary for each url. return a list of dictionaries
-                (feature_list_dict_train, y_train, corpus_train) = legacy_url.Extract_Features_Urls_Training()
-                X_train, y_train, vectorizer, tfidf_vectorizer = feature_extraction_train(None, url_train_dir)
+                feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+                X_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir)
 
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
