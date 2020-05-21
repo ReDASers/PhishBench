@@ -128,7 +128,7 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
             if feature_types.getboolean("JavaScript"):
                 single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
                 Globals.logger.debug("javascript feautures >>>>>> complete")
-        corpus.append(str(soup))
+            corpus.append(str(soup))
 
     except Exception as e:
         Globals.logger.warning(traceback.format_exc())
