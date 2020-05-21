@@ -30,6 +30,9 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
     # Tranform the list of dictionaries into a sparse matrix
     X_test = vectorizer.transform(feature_list_dict_test)
+
+    if not os.path.exists(url_test_dir):
+        os.makedirs(url_test_dir)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
     # TFIDF
     if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
