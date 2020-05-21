@@ -298,14 +298,15 @@ def run_phishbench():
                 else:
                     X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
 
-                # Feature Selection
-                if Globals.config["Feature Selection"]["select best features"] == "True":
-                    if flag_training == False:
-                        selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
-                    # k: Number of Best features
-                    num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-                    X_test = selection_model.transform(X_test)
-                    joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
+                # # Feature Selection
+                # if Globals.config["Feature Selection"]["select best features"] == "True":
+                #     if flag_training == False:
+                #         selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
+                #     # k: Number of Best features
+                #     num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
+                #     print(X_test.shape)
+                #     X_test = selection_model.transform(X_test)
+                #     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
                 # Dump Testing feature matrix with labels
                 if not os.path.exists(url_test_dir):
