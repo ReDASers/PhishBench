@@ -16,8 +16,9 @@ from phishbench.utils import Globals
 from phishbench.utils import user_interaction
 
 
-def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None, selection=None):
-    # if training was done in another instance of the plaform then load the necessary files
+def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None,
+                                feature_selection_model=None):
+    # if training was done in another instance then load the necessary files
     if not vectorizer:
         X_train = joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(url_train_dir, "y_train.pkl"))
@@ -44,11 +45,12 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
 
     # Feature Selection
     if Globals.config["Feature Selection"]["select best features"] == "True":
-        if not selection:
-            selection = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
+        if not feature_selection_model:
+            feature_selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
         # k: Number of Best features
         k = int(Globals.config["Feature Selection"]["number of best features"])
-        X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, k, feature_list_dict_test)
+        X_test = feature_selection_model.transform(X_test)
+        Globals.logger.info("X_test Shape: {}".format(X_test.shape))
         joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
     # Dump Testing feature matrix with labels
@@ -94,7 +96,8 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
                 selection = joblib.load(os.path.join(email_train_dir, "selection.pkl"))
             # k: Number of Best features
             k = int(Globals.config["Feature Selection"]["number of best features"])
-            X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, k, feature_list_dict_test)
+            X_test = selection.transform(X_test)
+            Globals.logger.info("X_Shape: {}".format(X_test.shape))
             Globals.logger.info("### Feature Ranking and Selection for Training Done!")
 
         # Dump Testing feature matrix with labels
@@ -145,10 +148,13 @@ def extract_url_train_features(url_train_dir):
     # Create directory to store dada
     if not os.path.exists(url_train_dir):
         os.makedirs(url_train_dir)
+
     # Extract features in a dictionnary for each URL. return a list of dictionaries
     feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+
     # Tranform the list of dictionaries into a sparse matrix
     X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+
     # Dump vectorizer
     joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
@@ -206,11 +212,11 @@ def run_phishbench():
         Globals.logger.info("Select Best Features ######")
         num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
         # X, selection = Feature_Selection.Select_Best_Features_Training(X, y, k)
-        X, selection = Feature_Selection.Feature_Ranking(X, y, num_best_features)
+        X, selection_model = Feature_Selection.Feature_Ranking(X, y, num_best_features)
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-            joblib.dump(selection, os.path.join(email_train_dir, "selection.pkl"))
+            joblib.dump(selection_model, os.path.join(email_train_dir, "selection.pkl"))
         elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
-            joblib.dump(selection, os.path.join(url_train_dir, "selection.pkl"))
+            joblib.dump(selection_model, os.path.join(url_train_dir, "selection.pkl"))
 
     ######################################################
     ################ Feature Extraction ##################
@@ -228,9 +234,9 @@ def run_phishbench():
                     Globals.logger.info("Select Best Features ######")
                     num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
                     # X_train, selection = Feature_Selection.Select_Best_Features_Training(X_train, y_train, k)
-                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
+                    X_train, selection_model = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
                     # dump selection model
-                    joblib.dump(selection, os.path.join(email_train_dir, "selection.pkl"))
+                    joblib.dump(selection_model, os.path.join(email_train_dir, "selection.pkl"))
                     Globals.logger.info("### Feature Ranking and Selection for Training Done!")
 
                 # Save features for training dataset
@@ -259,9 +265,9 @@ def run_phishbench():
                 if Globals.config["Feature Selection"]["select best features"] == "True":
                     # k: Number of Best features
                     num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-                    X_train, selection = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
+                    X_train, selection_model = Feature_Selection.Feature_Ranking(X_train, y_train, num_best_features)
                     # Dump model
-                    joblib.dump(selection, os.path.join(url_train_dir, "selection.pkl"))
+                    joblib.dump(selection_model, os.path.join(url_train_dir, "selection.pkl"))
                     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed_best_features.pkl"))
 
                 # dump features and labels and vectorizers
@@ -286,11 +292,10 @@ def run_phishbench():
                 # Feature Selection
                 if Globals.config["Feature Selection"]["select best features"] == "True":
                     if flag_training == False:
-                        selection = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
+                        selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
                     # k: Number of Best features
                     num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-                    X_test = Feature_Selection.Select_Best_Features_Testing(X_test, selection, num_best_features,
-                                                                            feature_list_dict_test)
+                    X_test = selection_model.transform(X_test)
                     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
                 # Dump Testing feature matrix with labels
