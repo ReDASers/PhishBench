@@ -18,8 +18,10 @@ from phishbench.utils import user_interaction
 
 def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None,
                                 feature_selection_model=None):
+    trained = False
     # if training was done in another instance then load the necessary files
     if not vectorizer:
+        trained = True
         X_train = joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(url_train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
@@ -60,7 +62,7 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
     joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
-    if X_train:
+    if trained:
         return X_train, y_train, vectorizer, X_test, y_test
 
     return X_test, y_test
