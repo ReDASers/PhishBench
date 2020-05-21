@@ -35,7 +35,10 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
         os.makedirs(url_test_dir)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
     # TFIDF
-    if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
+    run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and\
+                Globals.config["HTML_Features"].getboolean("tfidf_websites")
+
+    if run_tfidf:
         if not tfidf_vectorizer:
             tfidf_vectorizer = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
         Globals.logger.info("Extracting TFIDF features for testing websites ######")
