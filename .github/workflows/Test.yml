@@ -19,7 +19,7 @@ jobs:
         whois google.com
       if: runner.os == 'Linux'
 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -40,7 +40,7 @@ jobs:
   Lint:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
