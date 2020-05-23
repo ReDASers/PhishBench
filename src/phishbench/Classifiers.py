@@ -618,7 +618,7 @@ def classifiers(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=No
     Globals.logger.info("##### Classifiers #####")
     Globals.summary.write("\n##############\n\nClassifiers Used:\n")
     eval_metrics_per_classifier_dict = {}
-    if Globals.config["Classification"]["load model"] != "True":
+    if Globals.config["Classification"]["load models"] != "True":
         if X_test is None and Globals.config["Evaluation Metrics"]["cross_validate"] != "True":
             X, X_test, y, y_test = train_test_split(X, y, train_size=0.9, test_size=0.1, random_state=1)
         if Globals.config["Evaluation Metrics"]["cross_validate"] != "True":
@@ -650,95 +650,95 @@ def classifiers(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=No
 def run_classifier(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model,
                    eval_metrics_per_classifier_dict):
     if Globals.config["Classifiers"]["SVM"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_svm.pkl")
         eval_SVM, model = SVM(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['SVM'] = eval_SVM
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_svm.pkl")
         Globals.summary.write("SVM\n")
     if Globals.config["Classifiers"]["RandomForest"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_RF.pkl")
         eval_RF, model = RandomForest(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['RF'] = eval_RF
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_RF.pkl")
         Globals.summary.write("Random Forest\n")
     if Globals.config["Classifiers"]["DecisionTree"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_DT.pkl")
         eval_DT, model = DecisionTree(X, y, X_test, y_test, None, None, trained_model)
         eval_metrics_per_classifier_dict['Dec_tree'] = eval_DT
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_DT.pkl")
         Globals.summary.write("Decision Tree \n")
     if Globals.config["Classifiers"]["GaussianNaiveBayes"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_GNB.pkl")
         eval_NB, model = GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['GNB'] = eval_NB
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_GNB.pkl")
         Globals.summary.write("Gaussian Naive Bayes \n")
     if Globals.config["Classifiers"]["MultinomialNaiveBayes"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_MNB.pkl")
         eval_MNB, model = MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['MNB'] = eval_MNB
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_MNB.pkl")
         Globals.summary.write("Multinomial Naive Bayes \n")
     if Globals.config["Classifiers"]["LogisticRegression"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_LR.pkl")
         eval_LR, model = LogisticRegression(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['LR'] = eval_LR
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_LR.pkl")
         Globals.summary.write("Logistic Regression\n")
     if Globals.config["Classifiers"]["ELM"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_ELM.pkl")
         eval_elm, model = ELM(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['ELM'] = eval_elm
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_ELM.pkl")
         Globals.summary.write("ELM\n")
     if Globals.config["Classifiers"]["kNearestNeighbor"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_KNN.pkl")
         eval_knn, model = kNearestNeighbor(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['KNN'] = eval_knn
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_KNN.pkl")
         Globals.summary.write("kNearest Neighbor\n")
     if Globals.config["Classifiers"]["KMeans"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_Kmeans.pkl")
         eval_kmeans, model = KMeans(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['KMeans'] = eval_kmeans
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_Kmeans.pkl")
         Globals.summary.write("kMeans \n")
     if Globals.config["Classifiers"]["Bagging"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_bagging.pkl")
         eval_bagging, model = Bagging(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['Bagging'] = eval_bagging
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_bagging.pkl")
         Globals.summary.write("Bagging \n")
     if Globals.config["Classifiers"]["Boosting"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_boosting.pkl")
         eval_boosting, model = Boosting(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['Boosting'] = eval_boosting
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_boosting.pkl")
         Globals.summary.write("Boosting \n")
     if Globals.config["Classifiers"]["DNN"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_DNN.pkl")
         eval_dnn = DNN(X, y, X_test, y_test, X_train_balanced, y_train_balanced)
         eval_metrics_per_classifier_dict['DNN'] = eval_dnn
