@@ -115,3 +115,7 @@ summary.txt
 
 .idea/
 .Data_Dump/
+
+tests/integration tests/url_extraction/Data_Dump/
+tests/integration tests/url_extraction/phishbench.log
+tests/integration tests/url_extraction/summary.txt
