@@ -62,7 +62,7 @@ def fit_classifier(clf, X, y, X_train_balanced=None, y_train_balanced=None):
 def SVM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("SVM >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = svm.SVC(C=1.0, cache_size=200, class_weight='balanced', coef0=0.0,
                           decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
                           max_iter=-1, probability=False, random_state=None, shrinking=True,
@@ -112,7 +112,7 @@ def SVM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
 def RandomForest(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("RF >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = RandomForestClassifier(n_estimators=10, criterion='gini', max_depth=None, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto',
                                          max_leaf_nodes=None,
@@ -170,7 +170,7 @@ def RandomForest(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
 def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("DT >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None,
                                          random_state=None, max_leaf_nodes=None,
@@ -224,7 +224,7 @@ def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
 def GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("GNB >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("GaussianNaiveBayes does not support weighted classification")
             return
         clf = GaussianNB(priors=None, var_smoothing=1e-06)
@@ -259,7 +259,7 @@ def GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
 def MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("MNB >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("MultinomialNaiveBayes does not support weighted classification")
             return
         # clf=MultinomialNB(alpha=1.0, fit_prior=True, class_prior=None)
@@ -292,7 +292,7 @@ def MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_b
 def LogisticRegression(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("LR >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = sklearn.linear_model.LogisticRegression(penalty='l2', dual=False, tol=0.0001, C=1.0,
                                                           fit_intercept=True, intercept_scaling=1,
                                                           class_weight='balanced', random_state=None,
@@ -345,7 +345,7 @@ def LogisticRegression(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
 def ELM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("ELM >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
             return
 
@@ -370,7 +370,7 @@ def ELM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
 def kNearestNeighbor(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("KNN >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
             return
 
@@ -408,7 +408,7 @@ def kNearestNeighbor(X, y, X_test, y_test, X_train_balanced=None, y_train_balanc
 def KMeans(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Kmeans >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("KMeans does not support weighted classification")
             return
 
@@ -448,7 +448,7 @@ def KMeans(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, c
 def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Bagging >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             base_classifier = DecisionTreeClassifier(class_weight='balanced')
         else:
             # base_classifier=DecisionTreeClassifier()
@@ -498,7 +498,7 @@ def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, 
 def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Boosting >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             base_classifier = DecisionTreeClassifier(class_weight='balanced')
         else:
             base_classifier = DecisionTreeClassifier()
@@ -540,7 +540,7 @@ def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None,
 
 ############### imbalanced learning
 def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
-    if Globals.config["Classifiers"]["weighted"] == "True":
+    if Globals.config["Classification"]["weighted"] == "True":
         Globals.logger.warn("DNN does not support weighted classification")
         return
     from sklearn.model_selection import StratifiedKFold

@@ -61,6 +61,7 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     config['Classification'] = {}
     classification_section = config['Classification']
     classification_section["Running the Classifiers"] = "True"
+    classification_section["Weighted"] = "True"
     classification_section["Save Models"] = "True"
     classification_section["load Models"] = "False"
     classification_section["rounds"] = "1"
