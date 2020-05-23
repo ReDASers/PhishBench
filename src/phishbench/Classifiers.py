@@ -627,16 +627,15 @@ def classifiers(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=No
     trained_model = None
     if not os.path.exists("Data_Dump/Models"):
         os.makedirs("Data_Dump/Models")
-    if Globals.config["Extraction"]["BootStrapping"] != "False":
-        resampling = int(Globals.config["Extraction"]["BootStrapping"])
-    else:
-        resampling = 1
+    try:
+        num_rounds = int(Globals.config["Classification"]["rounds"])
+    except ValueError:
+        num_rounds = 1
+
     random_state = RandomState(seed=0)
-    for iteration in range(resampling):
-        # if iteration < 607:
-        #	random_state.randint(0, X_test.shape[0], size=(X_test.shape[0],))
-        #	continue
-        if Globals.config["Extraction"]["BootStrapping"] != "False":
+    for iteration in range(num_rounds):
+
+        if num_rounds > 1:
             X_test_i, y_test_i = resample(X_test, y_test, random_state=random_state)
         else:
             X_test_i, y_test_i = X_test, y_test
