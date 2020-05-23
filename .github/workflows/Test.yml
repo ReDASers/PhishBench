@@ -69,9 +69,7 @@ jobs:
     
     - name: Run URL 2-Step test
       run: |
-        cd tests
-        cd "integration tests"
-        cd url_extraction
+        cd "tests/integration tests/url_extraction"
         phishbench -f Train_Extraction.ini -c
         phishbench -f Test_Extraction.ini -c
 
