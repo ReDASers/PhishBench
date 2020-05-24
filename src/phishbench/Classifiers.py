@@ -174,8 +174,7 @@ def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None,
                                          random_state=None, max_leaf_nodes=None,
-                                         min_impurity_decrease=0.0, min_impurity_split=None, class_weight='balanced',
-                                         presort=False)
+                                         min_impurity_decrease=0.0, min_impurity_split=None, class_weight='balanced')
         else:
             """
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2,
@@ -185,7 +184,7 @@ def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=40, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None,
                                          random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0,
-                                         min_impurity_split=None, class_weight=None, presort=False)
+                                         min_impurity_split=None, class_weight=None)
         if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
