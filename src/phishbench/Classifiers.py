@@ -226,7 +226,7 @@ def GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
     if clf is None:
         if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("GaussianNaiveBayes does not support weighted classification")
-            return
+            return None, None
         clf = GaussianNB(priors=None, var_smoothing=1e-06)
         # clf = GaussianNB(priors=None)
         if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
