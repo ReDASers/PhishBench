@@ -455,7 +455,7 @@ def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, 
                                                      min_samples_split=2, min_samples_leaf=1,
                                                      min_weight_fraction_leaf=0.0, max_features=None, random_state=None,
                                                      max_leaf_nodes=None, min_impurity_decrease=0.0,
-                                                     min_impurity_split=None, class_weight=None, presort=False)
+                                                     min_impurity_split=None, class_weight=None)
         """
         clf=BaggingClassifier(base_estimator=base_classifier, n_estimators=10, max_samples=1.0, max_features=1.0,
             bootstrap=True, bootstrap_features=False, oob_score=False, warm_start=False, n_jobs=1, random_state=None,
@@ -500,12 +500,11 @@ def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None,
         if Globals.config["Classification"]["weighted"] == "True":
             base_classifier = DecisionTreeClassifier(class_weight='balanced')
         else:
-            base_classifier = DecisionTreeClassifier()
             base_classifier = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=70,
                                                      min_samples_split=2, min_samples_leaf=1,
                                                      min_weight_fraction_leaf=0.0, max_features=None, random_state=None,
                                                      max_leaf_nodes=None, min_impurity_decrease=0.0,
-                                                     min_impurity_split=None, class_weight=None, presort=False)
+                                                     min_impurity_split=None, class_weight=None)
 
         # clf = AdaBoostClassifier(base_estimator=base_classifier, n_estimators=50, learning_rate=1.0, algorithm='SAMME.R',
         clf = AdaBoostClassifier(base_estimator=base_classifier, n_estimators=100, learning_rate=1.5, algorithm='SAMME',
