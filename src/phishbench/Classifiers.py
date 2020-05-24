@@ -1,7 +1,7 @@
 import os
 import os.path
-import re
 import time
+import sys
 
 import joblib
 import numpy as np
@@ -542,7 +542,7 @@ def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
         Globals.logger.warn("DNN does not support weighted classification")
         return None, None
     from sklearn.model_selection import StratifiedKFold
-    np.set_printoptions(threshold=np.nan)
+    np.set_printoptions(threshold=sys.maxsize)
 
     def model_build(dim):
         Globals.logger.debug("Start Building DNN Model >>>>>>")
