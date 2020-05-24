@@ -62,7 +62,7 @@ def fit_classifier(clf, X, y, X_train_balanced=None, y_train_balanced=None):
 def SVM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("SVM >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = svm.SVC(C=1.0, cache_size=200, class_weight='balanced', coef0=0.0,
                           decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
                           max_iter=-1, probability=False, random_state=None, shrinking=True,
@@ -77,7 +77,7 @@ def SVM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
             from sklearn.svm import LinearSVC
             clf = LinearSVC()
         # clf = LinearSVC(penalty="l1",loss="hinge", dual=True, C=100, multi_class="crammer_singer",class_weight=None)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -112,7 +112,7 @@ def SVM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
 def RandomForest(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("RF >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = RandomForestClassifier(n_estimators=10, criterion='gini', max_depth=None, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto',
                                          max_leaf_nodes=None,
@@ -132,7 +132,7 @@ def RandomForest(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
                                          min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=False,
                                          oob_score=False, n_jobs=-1,
                                          random_state=None, verbose=0, warm_start=False, class_weight=None)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -170,12 +170,11 @@ def RandomForest(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
 def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("DT >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None,
                                          random_state=None, max_leaf_nodes=None,
-                                         min_impurity_decrease=0.0, min_impurity_split=None, class_weight='balanced',
-                                         presort=False)
+                                         min_impurity_decrease=0.0, min_impurity_split=None, class_weight='balanced')
         else:
             """
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2,
@@ -185,8 +184,8 @@ def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
             clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=40, min_samples_split=2,
                                          min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None,
                                          random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0,
-                                         min_impurity_split=None, class_weight=None, presort=False)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+                                         min_impurity_split=None, class_weight=None)
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -224,12 +223,12 @@ def DecisionTree(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=N
 def GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("GNB >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("GaussianNaiveBayes does not support weighted classification")
-            return
+            return None, None
         clf = GaussianNB(priors=None, var_smoothing=1e-06)
         # clf = GaussianNB(priors=None)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -259,12 +258,12 @@ def GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
 def MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("MNB >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("MultinomialNaiveBayes does not support weighted classification")
-            return
+            return None, None
         # clf=MultinomialNB(alpha=1.0, fit_prior=True, class_prior=None)
         clf = MultinomialNB(alpha=0.1, fit_prior=True, class_prior=None)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -292,7 +291,7 @@ def MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_b
 def LogisticRegression(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("LR >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             clf = sklearn.linear_model.LogisticRegression(penalty='l2', dual=False, tol=0.0001, C=1.0,
                                                           fit_intercept=True, intercept_scaling=1,
                                                           class_weight='balanced', random_state=None,
@@ -304,7 +303,7 @@ def LogisticRegression(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
                                                           intercept_scaling=1, class_weight=None, random_state=None,
                                                           solver='sag', max_iter=100, multi_class='ovr', verbose=0,
                                                           warm_start=False, n_jobs=1)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -345,13 +344,13 @@ def LogisticRegression(X, y, X_test, y_test, X_train_balanced=None, y_train_bala
 def ELM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("ELM >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
-            return
+            return None, None
 
         srhl_tanh = MLPRandomLayer(n_hidden=10, activation_func='tanh')
         clf = GenELMClassifier(hidden_layer=srhl_tanh)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -370,13 +369,13 @@ def ELM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
 def kNearestNeighbor(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("KNN >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
-            return
+            return None, None
 
         clf = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2,
                                    metric='minkowski', metric_params=None, n_jobs=-1, )
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             clf.fit(X, y)
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
@@ -408,14 +407,14 @@ def kNearestNeighbor(X, y, X_test, y_test, X_train_balanced=None, y_train_balanc
 def KMeans(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Kmeans >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("KMeans does not support weighted classification")
-            return
+            return None, None
 
         clf = sklearn.cluster.KMeans(n_clusters=2, init='k-means++', n_init=10, max_iter=300, tol=0.0001,
                                      precompute_distances='auto',
                                      verbose=0, random_state=None, copy_x=True, n_jobs=1, algorithm='auto')
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -448,7 +447,7 @@ def KMeans(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, c
 def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Bagging >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             base_classifier = DecisionTreeClassifier(class_weight='balanced')
         else:
             # base_classifier=DecisionTreeClassifier()
@@ -466,7 +465,7 @@ def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, 
                                 bootstrap=False, bootstrap_features=True, oob_score=False, warm_start=False, n_jobs=2,
                                 random_state=None,
                                 verbose=0)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -498,7 +497,7 @@ def Bagging(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, 
 def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=None):
     Globals.logger.info("Boosting >>>>>>>")
     if clf is None:
-        if Globals.config["Classifiers"]["weighted"] == "True":
+        if Globals.config["Classification"]["weighted"] == "True":
             base_classifier = DecisionTreeClassifier(class_weight='balanced')
         else:
             base_classifier = DecisionTreeClassifier()
@@ -511,7 +510,7 @@ def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None,
         # clf = AdaBoostClassifier(base_estimator=base_classifier, n_estimators=50, learning_rate=1.0, algorithm='SAMME.R',
         clf = AdaBoostClassifier(base_estimator=base_classifier, n_estimators=100, learning_rate=1.5, algorithm='SAMME',
                                  random_state=None)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
             score = Evaluation_Metrics.Cross_validation(clf, X, y)
             Globals.logger.info(score)
             return score, None
@@ -540,9 +539,9 @@ def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None,
 
 ############### imbalanced learning
 def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
-    if Globals.config["Classifiers"]["weighted"] == "True":
+    if Globals.config["Classification"]["weighted"] == "True":
         Globals.logger.warn("DNN does not support weighted classification")
-        return
+        return None, None
     from sklearn.model_selection import StratifiedKFold
     np.set_printoptions(threshold=np.nan)
 
@@ -560,7 +559,7 @@ def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
     dim = X.shape[1]
     # Globals.logger.info(X[0].transpose().shape)
     model_dnn = model_build(dim)
-    if Globals.config["Evaluation Metrics"]["cross_val_score"] == "True":
+    if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
         # return -1
         seed = 7
         np.random.seed(seed)
@@ -593,9 +592,11 @@ def HDDT():
 ##To-Do: Add DNN and OLL
 ####
 def rank_classifier(eval_clf_dict, metric_str):
-    """
-
-    """
+    # This code is currently broken. I have commented out the code calling this until it is fixed.
+    # TODO: Re-write classification and fix
+    print()
+    print(metric_str)
+    print()
     dict_metric_str = {}
     sorted_eval_clf_dict = {}
     # create the dictionary with the metric
@@ -618,127 +619,126 @@ def classifiers(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=No
     Globals.logger.info("##### Classifiers #####")
     Globals.summary.write("\n##############\n\nClassifiers Used:\n")
     eval_metrics_per_classifier_dict = {}
-    if Globals.config["Classification"]["load model"] != "True":
-        if X_test is None and Globals.config["Evaluation Metrics"]["cross_val_score"] != "True":
+    if Globals.config["Classification"]["load models"] != "True":
+        if X_test is None and Globals.config["Evaluation Metrics"]["cross_validate"] != "True":
             X, X_test, y, y_test = train_test_split(X, y, train_size=0.9, test_size=0.1, random_state=1)
-        if Globals.config["Evaluation Metrics"]["cross_val_score"] != "True":
+        if Globals.config["Evaluation Metrics"]["cross_validate"] != "True":
             if Globals.config["Imbalanced Datasets"]["make_imbalanced_dataset"] == "True":
                 X_train_balanced, y_train_balanced = Imbalanced_Dataset.Make_Imbalanced_Dataset(X, y)
     trained_model = None
     if not os.path.exists("Data_Dump/Models"):
         os.makedirs("Data_Dump/Models")
-    if Globals.config["Extraction"]["BootStrapping"] != "False":
-        resampling = int(Globals.config["Extraction"]["BootStrapping"])
-    else:
-        resampling = 1
+    try:
+        num_rounds = int(Globals.config["Classification"]["rounds"])
+    except ValueError:
+        num_rounds = 1
+
     random_state = RandomState(seed=0)
-    for iteration in range(resampling):
-        # if iteration < 607:
-        #	random_state.randint(0, X_test.shape[0], size=(X_test.shape[0],))
-        #	continue
-        if Globals.config["Extraction"]["BootStrapping"] != "False":
+    for iteration in range(num_rounds):
+
+        if num_rounds > 1:
             X_test_i, y_test_i = resample(X_test, y_test, random_state=random_state)
         else:
             X_test_i, y_test_i = X_test, y_test
         run_classifier(X, y, X_test_i, y_test_i, X_train_balanced, y_train_balanced, trained_model,
                        eval_metrics_per_classifier_dict)
     Globals.logger.info(eval_metrics_per_classifier_dict)
-    if Globals.config["Classification"]["Rank Classifiers"] == "True":
-        rank_classifier(eval_metrics_per_classifier_dict, Globals.config["Classification"]["rank on metric"])
+    # if Globals.config["Classification"]["Rank Classifiers"] == "True":
+    #     rank_classifier(eval_metrics_per_classifier_dict, Globals.config["Classification"]["rank on metric"])
 
 
 def run_classifier(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model,
                    eval_metrics_per_classifier_dict):
     if Globals.config["Classifiers"]["SVM"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_svm.pkl")
         eval_SVM, model = SVM(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['SVM'] = eval_SVM
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_svm.pkl")
         Globals.summary.write("SVM\n")
     if Globals.config["Classifiers"]["RandomForest"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_RF.pkl")
         eval_RF, model = RandomForest(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['RF'] = eval_RF
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_RF.pkl")
         Globals.summary.write("Random Forest\n")
     if Globals.config["Classifiers"]["DecisionTree"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_DT.pkl")
         eval_DT, model = DecisionTree(X, y, X_test, y_test, None, None, trained_model)
         eval_metrics_per_classifier_dict['Dec_tree'] = eval_DT
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_DT.pkl")
         Globals.summary.write("Decision Tree \n")
     if Globals.config["Classifiers"]["GaussianNaiveBayes"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_GNB.pkl")
         eval_NB, model = GaussianNaiveBayes(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['GNB'] = eval_NB
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_GNB.pkl")
         Globals.summary.write("Gaussian Naive Bayes \n")
     if Globals.config["Classifiers"]["MultinomialNaiveBayes"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_MNB.pkl")
         eval_MNB, model = MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['MNB'] = eval_MNB
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_MNB.pkl")
         Globals.summary.write("Multinomial Naive Bayes \n")
     if Globals.config["Classifiers"]["LogisticRegression"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_LR.pkl")
         eval_LR, model = LogisticRegression(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['LR'] = eval_LR
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_LR.pkl")
         Globals.summary.write("Logistic Regression\n")
     if Globals.config["Classifiers"]["ELM"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_ELM.pkl")
         eval_elm, model = ELM(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['ELM'] = eval_elm
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_ELM.pkl")
         Globals.summary.write("ELM\n")
     if Globals.config["Classifiers"]["kNearestNeighbor"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_KNN.pkl")
         eval_knn, model = kNearestNeighbor(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['KNN'] = eval_knn
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_KNN.pkl")
         Globals.summary.write("kNearest Neighbor\n")
     if Globals.config["Classifiers"]["KMeans"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_Kmeans.pkl")
         eval_kmeans, model = KMeans(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['KMeans'] = eval_kmeans
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_Kmeans.pkl")
         Globals.summary.write("kMeans \n")
     if Globals.config["Classifiers"]["Bagging"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_bagging.pkl")
         eval_bagging, model = Bagging(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['Bagging'] = eval_bagging
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_bagging.pkl")
         Globals.summary.write("Bagging \n")
     if Globals.config["Classifiers"]["Boosting"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_boosting.pkl")
         eval_boosting, model = Boosting(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model)
         eval_metrics_per_classifier_dict['Boosting'] = eval_boosting
-        if Globals.config["Classification"]["save model"] == "True" and model is not None:
+        if Globals.config["Classification"]["save models"] == "True" and model is not None:
             joblib.dump(model, "Data_Dump/Models/model_boosting.pkl")
         Globals.summary.write("Boosting \n")
     if Globals.config["Classifiers"]["DNN"] == "True":
-        if Globals.config["Classification"]["load model"] == "True":
+        if Globals.config["Classification"]["load models"] == "True":
             trained_model = joblib.load("Data_Dump/Models/model_DNN.pkl")
         eval_dnn = DNN(X, y, X_test, y_test, X_train_balanced, y_train_balanced)
         eval_metrics_per_classifier_dict['DNN'] = eval_dnn

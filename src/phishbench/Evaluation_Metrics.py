@@ -119,11 +119,11 @@ def eval_metrics(clf, y_test, y_predict):
     eval_metrics_dict = {}
     if Globals.config["Evaluation Metrics"]["Confusion_matrix"] == "True":
         cm = Confusion_matrix(y_test, y_predict)
-        eval_metrics_dict['CM'] = cm
+        eval_metrics_dict['Confusion_matrix'] = cm
         Globals.summary.write("Confusion_matrix\n")
     if Globals.config["Evaluation Metrics"]["Matthews_corrcoef"] == "True":
         mcc = Matthews_corrcoef(y_test, y_predict)
-        eval_metrics_dict['MCC'] = mcc
+        eval_metrics_dict['Matthews_corrcoef'] = mcc
         Globals.summary.write("Matthews_corrcoef\n")
     if Globals.config["Evaluation Metrics"]["ROC_AUC"] == "True":
         roc_auc = ROC_AUC(y_test, y_predict)
@@ -141,16 +141,13 @@ def eval_metrics(clf, y_test, y_predict):
         f1_score = F1_score(y_test, y_predict)
         eval_metrics_dict['F1_score'] = f1_score
         Globals.summary.write("F1_score\n")
-    # if Globals.config["Evaluation Metrics"]["Cross_validation"] == "True":
-    #	Cross_validation(clf, X, y)
-    #	Globals.summary.write("Cross_validation\n")
     if Globals.config["Evaluation Metrics"]["Geomteric_mean_score"] == "True":
         gmean = Geomteric_mean_score(y_test, y_predict)
-        eval_metrics_dict['Gmean'] = gmean
+        eval_metrics_dict['Geomteric_mean_score'] = gmean
         Globals.summary.write("Geomteric_mean_score\n")
     if Globals.config["Evaluation Metrics"]["Balanced_accuracy_score"] == "True":
         accuracy = Balanced_accuracy_score(y_test, y_predict)
-        eval_metrics_dict['accuracy'] = accuracy
+        eval_metrics_dict['Balanced_accuracy_score'] = accuracy
         Globals.summary.write("Balanced_accuracy_score\n")
     #	# write results to summary
     if Globals.config["Classification"]["Attack Features"] == "True":
