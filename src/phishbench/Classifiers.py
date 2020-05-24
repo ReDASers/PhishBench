@@ -261,7 +261,7 @@ def MultinomialNaiveBayes(X, y, X_test, y_test, X_train_balanced=None, y_train_b
     if clf is None:
         if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("MultinomialNaiveBayes does not support weighted classification")
-            return
+            return None, None
         # clf=MultinomialNB(alpha=1.0, fit_prior=True, class_prior=None)
         clf = MultinomialNB(alpha=0.1, fit_prior=True, class_prior=None)
         if Globals.config["Evaluation Metrics"]["cross_validate"] == "True":
@@ -347,7 +347,7 @@ def ELM(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, clf=
     if clf is None:
         if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
-            return
+            return None, None
 
         srhl_tanh = MLPRandomLayer(n_hidden=10, activation_func='tanh')
         clf = GenELMClassifier(hidden_layer=srhl_tanh)
@@ -372,7 +372,7 @@ def kNearestNeighbor(X, y, X_test, y_test, X_train_balanced=None, y_train_balanc
     if clf is None:
         if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("kNearestNeighbor does not support weighted classification")
-            return
+            return None, None
 
         clf = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2,
                                    metric='minkowski', metric_params=None, n_jobs=-1, )
@@ -410,7 +410,7 @@ def KMeans(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None, c
     if clf is None:
         if Globals.config["Classification"]["weighted"] == "True":
             Globals.logger.warn("KMeans does not support weighted classification")
-            return
+            return None, None
 
         clf = sklearn.cluster.KMeans(n_clusters=2, init='k-means++', n_init=10, max_iter=300, tol=0.0001,
                                      precompute_distances='auto',
@@ -542,7 +542,7 @@ def Boosting(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None,
 def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
     if Globals.config["Classification"]["weighted"] == "True":
         Globals.logger.warn("DNN does not support weighted classification")
-        return
+        return None, None
     from sklearn.model_selection import StratifiedKFold
     np.set_printoptions(threshold=np.nan)
 
