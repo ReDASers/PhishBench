@@ -593,9 +593,11 @@ def HDDT():
 ##To-Do: Add DNN and OLL
 ####
 def rank_classifier(eval_clf_dict, metric_str):
-    """
-
-    """
+    # This code is currently broken. I have commented out the code calling this until it is fixed.
+    # TODO: Re-write classification and fix
+    print()
+    print(metric_str)
+    print()
     dict_metric_str = {}
     sorted_eval_clf_dict = {}
     # create the dictionary with the metric
@@ -642,8 +644,8 @@ def classifiers(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=No
         run_classifier(X, y, X_test_i, y_test_i, X_train_balanced, y_train_balanced, trained_model,
                        eval_metrics_per_classifier_dict)
     Globals.logger.info(eval_metrics_per_classifier_dict)
-    if Globals.config["Classification"]["Rank Classifiers"] == "True":
-        rank_classifier(eval_metrics_per_classifier_dict, Globals.config["Classification"]["rank on metric"])
+    # if Globals.config["Classification"]["Rank Classifiers"] == "True":
+    #     rank_classifier(eval_metrics_per_classifier_dict, Globals.config["Classification"]["rank on metric"])
 
 
 def run_classifier(X, y, X_test, y_test, X_train_balanced, y_train_balanced, trained_model,
