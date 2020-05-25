@@ -2,7 +2,7 @@ import sklearn
 import tensorflow as tf
 from imblearn.metrics import geometric_mean_score
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import confusion_matrix, make_scorer
+from sklearn.metrics import make_scorer
 from sklearn.model_selection import cross_validate
 
 from .utils import Globals
@@ -65,16 +65,20 @@ def F1_score(y_test, y_predict):
 
 # return F1_score
 
-def tn(y_true, y_pred): return confusion_matrix(y_true, y_pred)[0, 0]
+def tn(y_true, y_pred):
+    return confusion_matrix(y_true, y_pred)[0, 0]
 
 
-def tp(y_true, y_pred): return confusion_matrix(y_true, y_pred)[1, 1]
+def tp(y_true, y_pred):
+    return confusion_matrix(y_true, y_pred)[1, 1]
 
 
-def fn(y_true, y_pred): return confusion_matrix(y_true, y_pred)[1, 0]
+def fn(y_true, y_pred):
+    return confusion_matrix(y_true, y_pred)[1, 0]
 
 
-def fp(y_true, y_pred): return confusion_matrix(y_true, y_pred)[0, 1]
+def fp(y_true, y_pred):
+    return confusion_matrix(y_true, y_pred)[0, 1]
 
 
 def Cross_validation(clf, X, y):
