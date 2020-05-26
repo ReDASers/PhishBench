@@ -28,7 +28,7 @@ def Confusion_matrix2(y_test, y_predict):
 def Matthews_corrcoef(y_test, y_predict):
     Mcc = sklearn.metrics.matthews_corrcoef(y_test, y_predict)
     Globals.logger.info("Matthews_CorrCoef: {}".format(Mcc))
-    return (Mcc)
+    return Mcc
 
 
 # return Mcc
@@ -36,7 +36,7 @@ def Matthews_corrcoef(y_test, y_predict):
 def ROC_AUC(y_test, y_predict):
     ROC_AUC = sklearn.metrics.roc_auc_score(y_test, y_predict)
     Globals.logger.info("ROC_AUC: {}".format(ROC_AUC))
-    return (ROC_AUC)
+    return ROC_AUC
 
 
 # return ROC_AUC
@@ -44,7 +44,7 @@ def ROC_AUC(y_test, y_predict):
 def Precision(y_test, y_predict):
     precision = sklearn.metrics.precision_score(y_test, y_predict)
     Globals.logger.info("Precision: {}".format(precision))
-    return (precision)
+    return precision
 
 
 # return precision
@@ -88,21 +88,25 @@ def Cross_validation(clf, X, y):
     # scores = cross_validate(clf, X, y, cv=10, verbose=1, n_jobs=-1,)
     # conf_mat = confusion_matrix(y, y_predict)
     Globals.logger.info("10 fold Cross_Validation: {}".format(cv_results))
+    return cv_results
 
 
 def Homogenity(y_test, y_predict):
     homogenity = sklearn.metrics.homogeneity_score(y_test, y_predict)
     Globals.logger.info("Homogenity: {}".format(homogenity))
+    return homogenity
 
 
 def Completeness(y_test, y_predict):
     completeness = sklearn.metrics.completeness_score(y_test, y_predict)
     Globals.logger.info("Completeness: {}".format(completeness))
+    return completeness
 
 
 def V_measure(y_test, y_predict):
     v_measure = sklearn.metrics.v_measure_score(y_test, y_predict)
     Globals.logger.info("V_measure: {}".format(v_measure))
+    return v_measure
 
 
 def Geomteric_mean_score(y_test, y_predict):
@@ -157,7 +161,7 @@ def eval_metrics(clf, y_test, y_predict):
     if Globals.config["Classification"]["Attack Features"] == "True":
         Globals.logger.debug("Original Labels: {}".format(y_test))
         Globals.logger.debug("New Labels: {}".format(y_predict))
-    return (eval_metrics_dict)
+    return eval_metrics_dict
 
 
 def eval_metrics_cluster(y_test, y_predict):
@@ -177,4 +181,4 @@ def eval_metrics_cluster(y_test, y_predict):
         v_measure_score = V_measure(y_test, y_predict)
         eval_metrics_dict_cluster['V_measure'] = v_measure_score
         Globals.summary.write("V_measure\n")
-    return (eval_metrics_dict_cluster)
+    return eval_metrics_dict_cluster
