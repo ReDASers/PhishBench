@@ -12,17 +12,7 @@ def Confusion_matrix(y_test, y_predict):
     confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_predict, labels=[0, 1])
     tn, fp, fn, tp = confusion_matrix.ravel()
     Globals.logger.info("Confusion Matrix (TN, FP, FN, TP):({}, {}, {}, {})".format(tn, fp, fn, tp))
-    return ([tn, fp, fn, tp])
-
-
-def Confusion_matrix2(y_test, y_predict):
-    sess = tf.Session()
-    with sess.as_default():
-        y_test = y_test.eval()
-        y_predict = y_predict.eval()
-    confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_predict)
-    tn, fp, fn, tp = confusion_matrix.ravel()
-    Globals.logger.info("Confusion Matrix (TN, FP, FN, TP):({}, {}, {}, {})".format(tn, fp, fn, tp))
+    return [tn, fp, fn, tp]
 
 
 def Matthews_corrcoef(y_test, y_predict):
