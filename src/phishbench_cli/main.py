@@ -252,34 +252,16 @@ def run_phishbench():
     url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
     url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
 
-    ######################################################
-    ############## Feature ranking only ##################
-    ######################################################
-    if Globals.config["Feature Selection"]["Feature Ranking Only"] == 'True':
-        if Globals.config["Extraction"]["feature extraction"] == "True":
-            X, y, vectorizer, tfidf_vectorizer = extract_train_features(email_train_dir, url_train_dir)
-        else:
-            X, y, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset()
-            # feature_list_dict_train=vectorizer_train.inverse_transform(X)
-
-        Globals.logger.info("Select Best Features ######")
-        num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-        # X, selection = Feature_Selection.Select_Best_Features_Training(X, y, k)
-        X, selection_model = Feature_Selection.Feature_Ranking(X, y, num_best_features)
-        if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-            joblib.dump(selection_model, os.path.join(email_train_dir, "selection.pkl"))
-        elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
-            joblib.dump(selection_model, os.path.join(url_train_dir, "selection.pkl"))
-
     # Feature Extraction
-    elif Globals.config["Extraction"]["Feature Extraction"] == 'True':
+    if Globals.config["Extraction"]["Feature Extraction"] == 'True':
         feature_extraction_flag = True
-
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
         elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
-
+    else:
+        # TODO: Load dataset
+        pass
     # Feature Selection
     if Globals.config["Feature Selection"].getboolean("select best features"):
         ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
