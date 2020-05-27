@@ -235,13 +235,6 @@ def extract_url_features():
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
 
-    # Create IO directory if doesn't exist
-
-    email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
-    email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
-    url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
-    url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
-
     # Feature Extraction
     if Globals.config["Extraction"]["Feature Extraction"] == 'True':
         feature_extraction_flag = True
