@@ -58,6 +58,7 @@ def extract_url_train_features(url_train_dir):
     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
+
 def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
     # Extract features in a dictionary for each email. return a list of dictionaries
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
@@ -95,7 +96,7 @@ def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
     return x_test, y_test
 
 
-def extract_email_train_features(email_train_dir):
+def extract_email_train_features(email_train_dir, use_tfidf):
     if not os.path.exists(email_train_dir):
         os.makedirs(email_train_dir)
     print("Extracting Training Set")
@@ -110,18 +111,13 @@ def extract_email_train_features(email_train_dir):
     # Tranform the list of dictionaries into a sparse matrix
     x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
 
-    # Save model for vectorization
-    joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
     joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
-    # Add tfidf if the user marked it as True
-    if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
+    if use_tfidf:
         Globals.logger.info("tfidf_emails_train ######")
         tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
         x_train = hstack([x_train, tfidf_train])
-        # Save tfidf vectorizer
-        joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
     else:
         tfidf_vectorizer = None
 
@@ -130,13 +126,9 @@ def extract_email_train_features(email_train_dir):
     return x_train, y_train, vectorizer, tfidf_vectorizer
 
 
-def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None):
-    if not vectorizer:
-        X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
-        y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
-        vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorizer=None):
 
-    # Extract features in a dictionnary for each email. return a list of dictionaries
+    # Extract features in a dictionary for each email. return a list of dictionaries
     feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
     # Export features to csv
@@ -145,50 +137,53 @@ def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
     # Tranform the list of dictionaries into a sparse matrix
-    X_test = vectorizer.transform(feature_list_dict_test)
+    x_test = vectorizer.transform(feature_list_dict_test)
 
     # Add tfidf if the user marked it as True
-    if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
-        if not tfidf_vectorizer:
-            tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+    if tfidf_vectorizer:
         Globals.logger.info("tfidf_emails_train ######")
-        Tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
-        X_test = hstack([X_test, Tfidf_test])
+        tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
+        x_test = hstack([x_test, tfidf_test])
 
     # Use Min_Max_scaling for prepocessing the feature matrix
-    X_test = Features_Support.Preprocessing(X_test)
-
+    x_test = Features_Support.Preprocessing(x_test)
 
     # Dump Testing feature matrix with labels
     if not os.path.exists(email_test_dir):
         os.makedirs(email_test_dir)
-    joblib.dump(X_test, os.path.join(email_test_dir, "X_test.pkl"))
-    joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
 
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
-    if X_train:
-        return X_train, y_train, vectorizer, X_test, y_test
-
-    return X_test, y_test
-
+    return x_test, y_test
 
 
 def extract_email_features():
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+    tfifd_flag = Globals.config['Email_Features'].getboolean('extract body features') \
+                 and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir)
+        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, tfifd_flag)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(email_train_dir, "y_train.pkl"))
-
+        joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
+        if tfidf_vectorizer:
+            joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
         Globals.logger.info("Feature Extraction for training dataset: Done!")
+    else:
+        x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
+        y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
+        vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+        if tfifd_flag:
+            tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
 
     if Globals.config["Extraction"]["Testing Dataset"] == "True":
-        x_test, y_test = extract_email_features_test(email_train_dir, email_test_dir)
+        x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
+        joblib.dump(x_test, os.path.join(email_test_dir, "X_test.pkl"))
+        joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
     else:
         x_test = None
         y_test = None
