@@ -173,12 +173,6 @@ def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None
     return X_test, y_test
 
 
-def extract_train_features(email_train_dir, url_train_dir):
-    if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        return extract_email_train_features(email_train_dir)
-    elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
-        return extract_url_train_features(url_train_dir)
-    return None, None, None, None
 
 def extract_email_features():
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
