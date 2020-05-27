@@ -226,16 +226,25 @@ def extract_url_features():
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
 
-    # Feature Extraction
     if Globals.config["Extraction"]["Feature Extraction"] == 'True':
         feature_extraction_flag = True
-        if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
+        if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
-        elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
+        elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
     else:
-        # TODO: Load dataset
-        pass
+        if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
+            train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
+            test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+        elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+            train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
+            test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
+        x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
+        y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
+        vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
+        x_test = joblib.load(os.path.join(test_dir, "X_test.pkl"))
+        y_test = joblib.load(os.path.join(test_dir, "y_test.pkl"))
+
     # Feature Selection
     if Globals.config["Feature Selection"].getboolean("select best features"):
         ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
