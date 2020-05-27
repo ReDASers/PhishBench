@@ -21,8 +21,9 @@ def export_features_to_csv(feature_list_dict,y,loc):
     df['is_phish'] = y
     df.to_csv(loc, index=None)
 
-def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None,
-                                feature_selection_model=None):
+
+def extract_url_features_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None,
+                              feature_selection_model=None):
     trained = False
     # if training was done in another instance then load the necessary files
     if not vectorizer:
@@ -87,8 +88,8 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
     return X_test, y_test
 
 
-def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
-                                  selection=None):
+def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
+                                selection=None):
     if not vectorizer:
         X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
@@ -280,7 +281,7 @@ def run_phishbench():
                 Globals.logger.info("Feature Extraction for training dataset: Done!")
 
             if Globals.config["Extraction"]["Testing Dataset"] == "True":
-                X_test, y_test = feature_extraction_email_test(email_train_dir, email_test_dir)
+                X_test, y_test = extract_email_features_test(email_train_dir, email_test_dir)
 
             else:
                 X_test = None
@@ -318,9 +319,9 @@ def run_phishbench():
                 if not flag_training:
                     # if training was done in another instance of the plaform then load the necessary files
                     X_train, y_train, vectorizer, X_test, y_test =\
-                        feature_extraction_URL_test(url_train_dir, url_test_dir)
+                        extract_url_features_test(url_train_dir, url_test_dir)
                 else:
-                    X_test, y_test = feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer)
+                    X_test, y_test = extract_url_features_test(url_train_dir, url_test_dir, vectorizer)
 
                 # # Feature Selection
                 # if Globals.config["Feature Selection"]["select best features"] == "True":
