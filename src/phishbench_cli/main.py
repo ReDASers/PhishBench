@@ -22,6 +22,41 @@ def export_features_to_csv(feature_list_dict,y,loc):
     df.to_csv(loc, index=None)
 
 
+def extract_url_train_features(url_train_dir):
+    # Create directory to store dada
+    if not os.path.exists(url_train_dir):
+        os.makedirs(url_train_dir)
+
+    feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(url_train_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_train, y_train, out_path)
+
+    # Tranform the list of dictionaries into a sparse matrix
+    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+
+    # Dump vectorizer
+    joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
+    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
+
+    # Add tfidf if the user marked it as True
+    if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+            Globals.config["HTML_Features"].getboolean("tfidf_websites"):
+        Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
+        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
+        X_train = hstack([X_train, Tfidf_train])
+        # dump tfidf vectorizer
+        joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
+    else:
+        tfidf_vectorizer = None
+
+    X_train = Features_Support.Preprocessing(X_train)
+    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
+    return X_train, y_train, vectorizer, tfidf_vectorizer
+
 def extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vectorizer=None,
                               feature_selection_model=None):
     # Extract features in a dictionnary for each email. return a list of dictionaries
@@ -68,6 +103,40 @@ def extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vec
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return X_test, y_test
+
+
+def extract_email_train_features(email_train_dir):
+    if not os.path.exists(email_train_dir):
+        os.makedirs(email_train_dir)
+    print("Extracting Training Set")
+
+    feature_list_dict_train, y_train, corpus_train = legacy_email.Extract_Features_Emails_Training()
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(email_train_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_train, y_train, out_path)
+
+    # Tranform the list of dictionaries into a sparse matrix
+    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    # Save model for vectorization
+    joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
+    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
+
+    # Add tfidf if the user marked it as True
+    if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
+        Globals.logger.info("tfidf_emails_train ######")
+        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
+        X_train = hstack([X_train, Tfidf_train])
+        # Save tfidf vectorizer
+        joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+    else:
+        tfidf_vectorizer = None
+
+    X_train = Features_Support.Preprocessing(X_train)
+    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
+    return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
 def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
@@ -120,75 +189,6 @@ def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None
         return X_train, y_train, vectorizer, X_test, y_test
 
     return X_test, y_test
-
-def extract_email_train_features(email_train_dir):
-    if not os.path.exists(email_train_dir):
-        os.makedirs(email_train_dir)
-    print("Extracting Training Set")
-
-    feature_list_dict_train, y_train, corpus_train = legacy_email.Extract_Features_Emails_Training()
-
-    # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(email_train_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_train, y_train, out_path)
-
-    # Tranform the list of dictionaries into a sparse matrix
-    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
-    # Save model for vectorization
-    joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
-    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
-
-    # Add tfidf if the user marked it as True
-    if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
-        Globals.logger.info("tfidf_emails_train ######")
-        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-        joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
-        X_train = hstack([X_train, Tfidf_train])
-        # Save tfidf vectorizer
-        joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
-    else:
-        tfidf_vectorizer = None
-
-    X_train = Features_Support.Preprocessing(X_train)
-    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
-    return X_train, y_train, vectorizer, tfidf_vectorizer
-
-
-def extract_url_train_features(url_train_dir):
-    # Create directory to store dada
-    if not os.path.exists(url_train_dir):
-        os.makedirs(url_train_dir)
-
-    feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
-
-    # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(url_train_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_train, y_train, out_path)
-
-    # Tranform the list of dictionaries into a sparse matrix
-    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
-
-    # Dump vectorizer
-    joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
-    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
-
-    # Add tfidf if the user marked it as True
-    if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-            Globals.config["HTML_Features"].getboolean("tfidf_websites"):
-        Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
-        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-        joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
-        X_train = hstack([X_train, Tfidf_train])
-        # dump tfidf vectorizer
-        joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
-    else:
-        tfidf_vectorizer = None
-
-    X_train = Features_Support.Preprocessing(X_train)
-    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
-    return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
 def extract_train_features(email_train_dir, url_train_dir):
