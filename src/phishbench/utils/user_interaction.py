@@ -46,13 +46,14 @@ def Confirmation(ignore_confirmation=False):
     print("Legitimate Dataset (Testing): {}".format(config["Dataset Path"]["path_legitimate_testing"]))
     print("Phishing Dataset (Testing): {}".format(config["Dataset Path"]["path_phishing_testing"]))
 
-    print("\nRun Feature Ranking Only: {}".format(config["Feature Selection"]["Feature Ranking Only"]))
-    if config["Extraction"]["feature extraction"]=="True":
+    if config["Extraction"]["feature extraction"] == "True":
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
         print("\nFeature Extraction for Training Data: {}".format(config["Extraction"]["training dataset"]))
         print("\nFeature Extraction for Testing Data: {}".format(config["Extraction"]["testing dataset"]))
     else:
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
+
+    print("\nFeature Selection: {}".format(config['Feature Selection']['select best features']))
     print("\nRun the classifiers: {}".format(config["Classification"]["Running the classifiers"]))
     print("\n")
     if ignore_confirmation:
