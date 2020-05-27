@@ -579,15 +579,6 @@ def DNN(X, y, X_test, y_test, X_train_balanced=None, y_train_balanced=None):
         eval_metrics_DNN = Evaluation_Metrics.eval_metrics(model_dnn, X, y, y_test, y_predict.round())
         return eval_metrics_DNN
 
-
-def HDDT():
-    # java -cp <path to weka-hddt.jar> weka.classifiers.trees.HTree -U -A -B -t <training file> -T <testing file>
-
-    weka_hddt_path = "weka-hddt-3-7-1.jar"
-    subprocess.call(
-        ['java', '-cp', weka_hhdt_path, 'weka.classifiers.trees.HTree', '-U', '-A' '-B' '-t', y_predict, y_test])
-
-
 ##To-Do: Add DNN and OLL
 ####
 def rank_classifier(eval_clf_dict, metric_str):
