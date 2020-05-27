@@ -116,9 +116,9 @@ def extract_email_train_features(email_train_dir):
     # Add tfidf if the user marked it as True
     if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
         Globals.logger.info("tfidf_emails_train ######")
-        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-        joblib.dump(Tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
-        X_train = hstack([X_train, Tfidf_train])
+        tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
+        X_train = hstack([X_train, tfidf_train])
         # Save tfidf vectorizer
         joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
     else:
