@@ -238,8 +238,12 @@ def run_phishbench():
         x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
-        x_test = joblib.load(os.path.join(test_dir, "X_test.pkl"))
-        y_test = joblib.load(os.path.join(test_dir, "y_test.pkl"))
+        if os.path.exists(os.path.join(test_dir, "X_test.pkl")):
+            x_test = joblib.load(os.path.join(test_dir, "X_test.pkl"))
+            y_test = joblib.load(os.path.join(test_dir, "y_test.pkl"))
+        else:
+            x_test = None
+            y_test = None
 
     # Feature Selection
     if Globals.config["Feature Selection"].getboolean("select best features"):
