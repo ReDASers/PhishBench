@@ -54,12 +54,12 @@ def extract_url_train_features(url_train_dir):
         tfidf_vectorizer = None
 
     X_train = Features_Support.Preprocessing(X_train)
+
     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
-def extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vectorizer=None,
-                              feature_selection_model=None):
-    # Extract features in a dictionnary for each email. return a list of dictionaries
+def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
+    # Extract features in a dictionary for each email. return a list of dictionaries
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
 
     if not os.path.exists(url_test_dir):
@@ -129,8 +129,7 @@ def extract_email_train_features(email_train_dir):
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
-def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
-                                selection=None):
+def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None):
     if not vectorizer:
         X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
@@ -228,7 +227,7 @@ def extract_url_features():
 
     if Globals.config["Extraction"].getboolean("Testing Dataset"):
 
-        x_test, y_test = extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vectorizer)
+        x_test, y_test = extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer)
 
         # Dump Testing feature matrix with labels
         if not os.path.exists(url_test_dir):
