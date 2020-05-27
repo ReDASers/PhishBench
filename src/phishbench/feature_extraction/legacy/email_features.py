@@ -18,7 +18,6 @@ from ...input import input
 def Extract_Features_Emails_Training():
     # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
 
-    Globals.logger.info("===============================================================")
     ### Training Features
     Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
     dataset_path_legit_train = Globals.config["Dataset Path"]["path_legitimate_training"]
@@ -47,7 +46,7 @@ def Extract_Features_Emails_Training():
 def Extract_Features_Emails_Testing():
     # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
     start_time = time.time()
-    Globals.logger.info("===============================================================")
+
     dataset_path_legit_test = Globals.config["Dataset Path"]["path_legitimate_testing"]
     dataset_path_phish_test = Globals.config["Dataset Path"]["path_phishing_testing"]
     feature_list_dict_test = []
@@ -72,6 +71,8 @@ def Extract_Features_Emails_Testing():
 
 
 def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
+    print("Extracting Email features from {}".format(dataset_path))
+    Globals.logger.info("Extracting Email features from {}".format(dataset_path))
     corpus_files = input.enumerate_folder_files(dataset_path)
     # features_regex = re.compile(r"_features_?\d?.txt")
     ### for debugging purposes, not used in the pipeline

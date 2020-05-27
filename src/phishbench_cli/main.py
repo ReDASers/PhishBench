@@ -16,6 +16,11 @@ from phishbench.utils import Globals
 from phishbench.utils import user_interaction
 
 
+def export_features_to_csv(feature_list_dict,y,loc):
+    df = pd.DataFrame(feature_list_dict)
+    df['is_phish'] = y
+    df.to_csv(loc, index=None)
+
 def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tfidf_vectorizer=None,
                                 feature_selection_model=None):
     trained = False
@@ -28,11 +33,19 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
 
     # Extract features in a dictionnary for each email. return a list of dictionaries
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
-    # Tranform the list of dictionaries into a sparse matrix
-    X_test = vectorizer.transform(feature_list_dict_test)
 
     if not os.path.exists(url_test_dir):
         os.makedirs(url_test_dir)
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(url_test_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_test, y_test, out_path)
+
+    # Tranform the list of dictionaries into a sparse matrix
+    X_test = vectorizer.transform(feature_list_dict_test)
+
+
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
     # TFIDF
     run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and\
@@ -76,49 +89,49 @@ def feature_extraction_URL_test(url_train_dir, url_test_dir, vectorizer=None, tf
 
 def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None,
                                   selection=None):
-    if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        if not vectorizer:
-            X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
-            y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
-            vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+    if not vectorizer:
+        X_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
+        y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
+        vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
 
-        # Extract features in a dictionnary for each email. return a list of dictionaries
-        feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
+    # Extract features in a dictionnary for each email. return a list of dictionaries
+    feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
-        # Tranform the list of dictionaries into a sparse matrix
-        X_test = vectorizer.transform(feature_list_dict_test)
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(email_test_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
-        # Add tfidf if the user marked it as True
-        if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
-            if not tfidf_vectorizer:
-                tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
-            Globals.logger.info("tfidf_emails_train ######")
-            Tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
-            X_test = hstack([X_test, Tfidf_test])
+    # Tranform the list of dictionaries into a sparse matrix
+    X_test = vectorizer.transform(feature_list_dict_test)
 
-        # Use Min_Max_scaling for prepocessing the feature matrix
-        X_test = Features_Support.Preprocessing(X_test)
-        # feature ranking
-        if Globals.config["Feature Selection"]["select best features"] == "True":
-            if not selection:
-                selection = joblib.load(os.path.join(email_train_dir, "selection.pkl"))
-            # k: Number of Best features
-            k = int(Globals.config["Feature Selection"]["number of best features"])
-            X_test = selection.transform(X_test)
-            Globals.logger.info("X_Shape: {}".format(X_test.shape))
-            Globals.logger.info("### Feature Ranking and Selection for Training Done!")
+    # Add tfidf if the user marked it as True
+    if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
+        if not tfidf_vectorizer:
+            tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+        Globals.logger.info("tfidf_emails_train ######")
+        Tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
+        X_test = hstack([X_test, Tfidf_test])
 
-        # Dump Testing feature matrix with labels
-        if not os.path.exists(email_test_dir):
-            os.makedirs(email_test_dir)
-        joblib.dump(X_test, os.path.join(email_test_dir, "X_test.pkl"))
-        joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
-        if Globals.config["Features Export"]["csv"] == "True":
-            export_filename = os.path.join(email_test_dir, "Features.csv")
-            df = pd.DataFrame(feature_list_dict_test)
-            df["is_phish"] = y_train
-            df.to_csv(export_filename, index=None)
-        Globals.logger.info("Feature Extraction for testing dataset: Done!")
+    # Use Min_Max_scaling for prepocessing the feature matrix
+    X_test = Features_Support.Preprocessing(X_test)
+    # feature ranking
+    if Globals.config["Feature Selection"]["select best features"] == "True":
+        if not selection:
+            selection = joblib.load(os.path.join(email_train_dir, "selection.pkl"))
+        # k: Number of Best features
+        k = int(Globals.config["Feature Selection"]["number of best features"])
+        X_test = selection.transform(X_test)
+        Globals.logger.info("X_Shape: {}".format(X_test.shape))
+        Globals.logger.info("### Feature Ranking and Selection for Training Done!")
+
+    # Dump Testing feature matrix with labels
+    if not os.path.exists(email_test_dir):
+        os.makedirs(email_test_dir)
+    joblib.dump(X_test, os.path.join(email_test_dir, "X_test.pkl"))
+    joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
+
+    Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     if X_train:
         return X_train, y_train, vectorizer, X_test, y_test
@@ -128,8 +141,15 @@ def feature_extraction_email_test(email_train_dir, email_test_dir, vectorizer=No
 def extract_email_train_features(email_train_dir):
     if not os.path.exists(email_train_dir):
         os.makedirs(email_train_dir)
-    # Extract features in a dictionnary for each email. return a list of dictionaries
+    print("Extracting Training Set")
+
     feature_list_dict_train, y_train, corpus_train = legacy_email.Extract_Features_Emails_Training()
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(email_train_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_train, y_train, out_path)
+
     # Tranform the list of dictionaries into a sparse matrix
     X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
     # Save model for vectorization
@@ -157,8 +177,12 @@ def extract_url_train_features(url_train_dir):
     if not os.path.exists(url_train_dir):
         os.makedirs(url_train_dir)
 
-    # Extract features in a dictionnary for each URL. return a list of dictionaries
     feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(url_train_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
     # Tranform the list of dictionaries into a sparse matrix
     X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
