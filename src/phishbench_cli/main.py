@@ -260,7 +260,7 @@ def run_phishbench():
         if Globals.config["Extraction"]["feature extraction"] == "True":
             X, y, vectorizer, tfidf_vectorizer = extract_train_features(email_train_dir, url_train_dir)
         else:
-            X, y, X_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset()
+            X, y, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset()
             # feature_list_dict_train=vectorizer_train.inverse_transform(X)
 
         Globals.logger.info("Select Best Features ######")
@@ -302,11 +302,11 @@ def run_phishbench():
     if Globals.config["Classification"]["Running the classifiers"] == "True":
         if not feature_extraction_flag:
             if Globals.config["Classification"]["load model"] == "True":
-                X_train, y_train, X_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
+                x_train, y_train, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
                     load_train=False, load_test=True)
                 Globals.logger.info("loading test dataset only")
             else:
-                X_train, y_train, X_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
+                x_train, y_train, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
                     load_train=True, load_test=True)
             if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
                 if Globals.config["Classification"]["load model"] == "False":
@@ -386,7 +386,7 @@ def run_phishbench():
                 # X_train=vectorizer.transform(X_train)
 
         Globals.logger.info("Running the Classifiers....")
-        classifiers(X_train, y_train, X_test, y_test)
+        classifiers(x_train, y_train, x_test, y_test)
         Globals.logger.info("Done running the Classifiers!!")
 
 
