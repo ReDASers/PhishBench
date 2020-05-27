@@ -22,7 +22,7 @@ def export_features_to_csv(feature_list_dict,y,loc):
     df.to_csv(loc, index=None)
 
 
-def extract_url_train_features(url_train_dir):
+def extract_url_train_features(url_train_dir, run_tfidf):
     # Create directory to store dada
     if not os.path.exists(url_train_dir):
         os.makedirs(url_train_dir)
@@ -34,33 +34,27 @@ def extract_url_train_features(url_train_dir):
         out_path = os.path.join(url_train_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
+    # Transform the list of dictionaries into a sparse matrix
     X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
 
-    # Dump vectorizer
-    joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
     joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
-    if Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-            Globals.config["HTML_Features"].getboolean("tfidf_websites"):
+    if run_tfidf:
         Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
         Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
         X_train = hstack([X_train, Tfidf_train])
-        # dump tfidf vectorizer
-        joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
     else:
         tfidf_vectorizer = None
 
     X_train = Features_Support.Preprocessing(X_train)
 
-    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_processed.pkl"))
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
 def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
-    # Extract features in a dictionary for each email. return a list of dictionaries
+
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
 
     if not os.path.exists(url_test_dir):
@@ -86,11 +80,6 @@ def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
     # Use Min_Max_scaling for prepocessing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
 
-    joblib.dump(x_test, os.path.join(url_test_dir, "X_test_processed.pkl"))
-
-    # Dump Testing feature matrix with labels
-    joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
-    joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, y_test
@@ -193,14 +182,18 @@ def extract_email_features():
 def extract_url_features():
     url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
     url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
+    run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                Globals.config["HTML_Features"].getboolean("tfidf_websites")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir)
+        x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir, run_tfidf)
 
         # dump features and labels and vectorizers
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
-
+        joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
+        if tfidf_vectorizer:
+            joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
         Globals.logger.info("Feature Extraction for training dataset: Done!")
     else:
         # if training was done in another instance of the platform then load the necessary files
@@ -208,8 +201,6 @@ def extract_url_features():
         y_train = joblib.load(os.path.join(url_train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
         # TFIDF
-        run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                    Globals.config["HTML_Features"].getboolean("tfidf_websites")
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
         else:
