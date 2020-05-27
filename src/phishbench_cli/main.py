@@ -87,16 +87,6 @@ def extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vec
     X_test = Features_Support.Preprocessing(X_test)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed.pkl"))
 
-    # Feature Selection
-    if Globals.config["Feature Selection"]["select best features"] == "True":
-        if not feature_selection_model:
-            feature_selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
-        # k: Number of Best features
-        k = int(Globals.config["Feature Selection"]["number of best features"])
-        X_test = feature_selection_model.transform(X_test)
-        Globals.logger.info("X_test Shape: {}".format(X_test.shape))
-        joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
-
     # Dump Testing feature matrix with labels
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test.pkl"))
     joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
@@ -167,15 +157,7 @@ def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None
 
     # Use Min_Max_scaling for prepocessing the feature matrix
     X_test = Features_Support.Preprocessing(X_test)
-    # feature ranking
-    if Globals.config["Feature Selection"]["select best features"] == "True":
-        if not selection:
-            selection = joblib.load(os.path.join(email_train_dir, "selection.pkl"))
-        # k: Number of Best features
-        k = int(Globals.config["Feature Selection"]["number of best features"])
-        X_test = selection.transform(X_test)
-        Globals.logger.info("X_Shape: {}".format(X_test.shape))
-        Globals.logger.info("### Feature Ranking and Selection for Training Done!")
+
 
     # Dump Testing feature matrix with labels
     if not os.path.exists(email_test_dir):
@@ -205,16 +187,6 @@ def extract_email_features():
     if Globals.config["Extraction"].getboolean("Training Dataset"):
         x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir)
 
-        # feature ranking
-        if Globals.config["Feature Selection"]["select best features"] == "True":
-            # k: Number of Best features
-            Globals.logger.info("Select Best Features ######")
-            num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-            x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features)
-            # dump selection model
-            joblib.dump(selection_model, os.path.join(email_train_dir, "selection.pkl"))
-            Globals.logger.info("### Feature Ranking and Selection for Training Done!")
-
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(email_train_dir, "y_train.pkl"))
@@ -234,18 +206,7 @@ def extract_url_features():
     url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
-
-
         x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir)
-
-        # Feature Selection
-        if Globals.config["Feature Selection"]["select best features"] == "True":
-            # k: Number of Best features
-            num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-            x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features)
-            # Dump model
-            joblib.dump(selection_model, os.path.join(url_train_dir, "selection.pkl"))
-            joblib.dump(x_train, os.path.join(url_train_dir, "X_train_processed_best_features.pkl"))
 
         # dump features and labels and vectorizers
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
@@ -269,16 +230,6 @@ def extract_url_features():
 
         x_test, y_test = extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vectorizer)
 
-        # # Feature Selection
-        # if Globals.config["Feature Selection"]["select best features"] == "True":
-        #     if flag_training == False:
-        #         selection_model = joblib.load(os.path.join(url_train_dir, "selection.pkl"))
-        #     # k: Number of Best features
-        #     num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-        #     print(X_test.shape)
-        #     X_test = selection_model.transform(X_test)
-        #     joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
-
         # Dump Testing feature matrix with labels
         if not os.path.exists(url_test_dir):
             os.makedirs(url_test_dir)
@@ -291,17 +242,12 @@ def extract_url_features():
         y_test = None
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
 
+
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
-    flag_training = False
-    # Feature dumping and loading methods
-    # flag_saving_pickle=Globals.config["Features Format"]["Pikle"]
-    # flag_saving_svmlight=Globals.config["Features Format"]["Svmlight format"]
 
-    # Create Data Dump directory if doesn't exist
-    ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
-    if not os.path.exists(ranking_dir):
-        os.makedirs(ranking_dir)
+    # Create IO directory if doesn't exist
+
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
     url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
@@ -326,19 +272,33 @@ def run_phishbench():
         elif Globals.config["Email or URL feature Extraction"]["extract_features_URLs"] == "True":
             joblib.dump(selection_model, os.path.join(url_train_dir, "selection.pkl"))
 
-    ######################################################
-    ################ Feature Extraction ##################
-    ######################################################
+    # Feature Extraction
     elif Globals.config["Extraction"]["Feature Extraction"] == 'True':
         feature_extraction_flag = True
 
         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
-
         elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
 
+    # Feature Selection
+    if Globals.config["Feature Selection"].getboolean("select best features"):
+        ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
+        if not os.path.exists(ranking_dir):
+            os.makedirs(ranking_dir)
+        # k: Number of Best features
+        num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
+        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features)
+        # Dump model
+        joblib.dump(selection_model, os.path.join(ranking_dir, "selection.pkl"))
+        joblib.dump(x_train, os.path.join(ranking_dir, "X_train_processed_best_features.pkl"))
 
+        if x_test is not None:
+            x_test = selection_model.transform(x_test)
+            Globals.logger.info("X_test Shape: {}".format(x_test.shape))
+            joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
+
+    # Classification
     if Globals.config["Classification"]["Running the classifiers"] == "True":
         if not feature_extraction_flag:
             if Globals.config["Classification"]["load model"] == "True":
