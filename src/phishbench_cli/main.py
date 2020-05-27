@@ -70,29 +70,29 @@ def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
         out_path = os.path.join(url_test_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
-    X_test = vectorizer.transform(feature_list_dict_test)
+    x_test = vectorizer.transform(feature_list_dict_test)
 
-    joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
+    joblib.dump(x_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
 
     if tfidf_vectorizer:
         Globals.logger.info("Extracting TFIDF features for testing websites ######")
         Tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
         joblib.dump(Tfidf_test, os.path.join(url_test_dir, "tfidf_features.pkl"))
-        X_test = hstack([X_test, Tfidf_test])
+        x_test = hstack([x_test, Tfidf_test])
 
-    joblib.dump(X_test, os.path.join(url_test_dir, "X_test_unprocessed_with_tfidf.pkl"))
+    joblib.dump(x_test, os.path.join(url_test_dir, "X_test_unprocessed_with_tfidf.pkl"))
 
     # Use Min_Max_scaling for prepocessing the feature matrix
-    X_test = Features_Support.Preprocessing(X_test)
-    joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed.pkl"))
+    x_test = Features_Support.Preprocessing(x_test)
+
+    joblib.dump(x_test, os.path.join(url_test_dir, "X_test_processed.pkl"))
 
     # Dump Testing feature matrix with labels
-    joblib.dump(X_test, os.path.join(url_test_dir, "X_test.pkl"))
+    joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
     joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
 
-    return X_test, y_test
+    return x_test, y_test
 
 
 def extract_email_train_features(email_train_dir):
@@ -108,25 +108,26 @@ def extract_email_train_features(email_train_dir):
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
     # Tranform the list of dictionaries into a sparse matrix
-    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+
     # Save model for vectorization
     joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
-    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
+    joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
     if Globals.config["Email_Body_Features"].getboolean("tfidf_emails"):
         Globals.logger.info("tfidf_emails_train ######")
         tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
-        X_train = hstack([X_train, tfidf_train])
+        x_train = hstack([x_train, tfidf_train])
         # Save tfidf vectorizer
         joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
     else:
         tfidf_vectorizer = None
 
-    X_train = Features_Support.Preprocessing(X_train)
-    joblib.dump(X_train, os.path.join(email_train_dir, "X_train_processed.pkl"))
-    return X_train, y_train, vectorizer, tfidf_vectorizer
+    x_train = Features_Support.Preprocessing(x_train)
+
+    return x_train, y_train, vectorizer, tfidf_vectorizer
 
 
 def extract_email_features_test(email_train_dir, email_test_dir, vectorizer=None, tfidf_vectorizer=None):
