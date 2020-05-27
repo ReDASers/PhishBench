@@ -1,6 +1,6 @@
 import os
 import sys
-
+from typing import List, Dict
 import joblib
 import pandas as pd
 from scipy.sparse import hstack
@@ -16,14 +16,45 @@ from phishbench.utils import Globals
 from phishbench.utils import user_interaction
 
 
-def export_features_to_csv(feature_list_dict,y,loc):
-    df = pd.DataFrame(feature_list_dict)
+def export_features_to_csv(features: List[Dict], y: List, file_path: str):
+    """
+    Exports raw features to csv
+    Parameters
+    ----------
+    features : List[Dict]
+        A list of dicts with each dict containing the features of a single data point
+    y : List
+        The labels for each datapoint. This should have the same length as features
+    file_path : str
+        The file to save the csv to
+    """
+    df = pd.DataFrame(features)
     df['is_phish'] = y
-    df.to_csv(loc, index=None)
+    df.to_csv(file_path, index=None)
 
 
-def extract_url_train_features(url_train_dir, run_tfidf):
-    # Create directory to store dada
+def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
+    """
+    Extracts features from the URL training dataset
+
+    Parameters
+    ----------
+    url_train_dir : str
+        The location of the url training dataset
+    run_tfidf : bool
+        Whether or not to run TF-IDF
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
+
     if not os.path.exists(url_train_dir):
         os.makedirs(url_train_dir)
 
@@ -53,8 +84,26 @@ def extract_url_train_features(url_train_dir, run_tfidf):
     return X_train, y_train, vectorizer, tfidf_vectorizer
 
 
-def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
+def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=None):
+    """
+    Extracts features from the URL testing dataset
+    Parameters
+    ----------
+    url_test_dir : str
+        The folder containing the test url dataset
+    vectorizer :
+        The vectorizer used to vectorize the training dataset
+    tfidf_vectorizer :
+        The TF-IDF vectorizer used to extract TF-IDF vectors from the training datset. None if
+        TF-IDF vectors were not extracted
 
+    Returns
+    -------
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test
+        A list containing the dataset labels
+    """
     feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
 
     if not os.path.exists(url_test_dir):
@@ -85,7 +134,27 @@ def extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer=None):
     return x_test, y_test
 
 
-def extract_email_train_features(email_train_dir, use_tfidf):
+def extract_email_train_features(email_train_dir, run_tfidf):
+    """
+    Extracts features from the email training dataset
+
+    Parameters
+    ----------
+    email_train_dir : str
+        The location of the email training dataset
+    run_tfidf : bool
+        Whether or not to run TF-IDF
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
     if not os.path.exists(email_train_dir):
         os.makedirs(email_train_dir)
     print("Extracting Training Set")
@@ -102,7 +171,7 @@ def extract_email_train_features(email_train_dir, use_tfidf):
 
     joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
-    if use_tfidf:
+    if run_tfidf:
         Globals.logger.info("tfidf_emails_train ######")
         tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
@@ -116,7 +185,24 @@ def extract_email_train_features(email_train_dir, use_tfidf):
 
 
 def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorizer=None):
-
+    """
+    Extracts features from the email testing dataset
+    Parameters
+    ----------
+    email_test_dir : str
+        The folder containing the test email dataset
+    vectorizer :
+        The vectorizer used to vectorize the training dataset
+    tfidf_vectorizer :
+        The TF-IDF vectorizer used to extract TF-IDF vectors from the training datset. None if
+        TF-IDF vectors were not extracted
+    Returns
+    -------
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test
+        A list containing the dataset labels
+    """
     # Extract features in a dictionary for each email. return a list of dictionaries
     feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
 
@@ -147,6 +233,24 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
 
 
 def extract_email_features():
+    """
+    Extracts features from a email dataset. If PhishBench is configured to only extract features from a test dataset,
+    this function will automatically load pre-extracted training data from disk.
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test
+        A list containing the dataset labels
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
     tfifd_flag = Globals.config['Email_Features'].getboolean('extract body features') \
@@ -180,6 +284,24 @@ def extract_email_features():
 
 
 def extract_url_features():
+    """
+    Extracts features from a URL dataset. If PhishBench is configured to only extract features from a test dataset,
+    this function will automatically load pre-extracted training data from disk.
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test
+        A list containing the dataset labels
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
     url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
     url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
     run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
