@@ -63,8 +63,6 @@ def extract_url_features_test(url_train_dir, url_test_dir, vectorizer, tfidf_vec
         joblib.dump(X_test, os.path.join(url_test_dir, "X_test_processed_best_features.pkl"))
 
     # Dump Testing feature matrix with labels
-    if not os.path.exists(url_test_dir):
-        os.makedirs(url_test_dir)
     joblib.dump(X_test, os.path.join(url_test_dir, "X_test.pkl"))
     joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
     Globals.logger.info("Feature Extraction for testing dataset: Done!")
