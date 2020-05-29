@@ -285,7 +285,7 @@ class EmailHeader:
         if msg["Authentication-Results"]:
             self.authentication_results = msg["Authentication-Results"]
         else:
-            self.authentication_results = None
+            self.authentication_results = []
 
         # Received
         if msg["Received"]:
