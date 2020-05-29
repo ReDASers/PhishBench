@@ -28,32 +28,15 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
     if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
         selection_model = RFE(LinearSVC(), num_features, verbose=2, step=0.005)
         selection_model.fit(features, target)
-
         res = dict(zip(features_list, selection_model.ranking_))
-        sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
-
-        with open(os.path.join(feature_ranking_folder, "Feature_ranking_rfe.txt"), 'w') as f:
-            for (key, value) in sorted_d:
-                f.write("{}: {}\n".format(key, value))
-
-        outfile_name = "X_train_with_tfidf_RFE_{}.pkl".format(num_features)
+        report_name = "Feature_ranking_rfe.txt"
 
     # Chi-2
     elif Globals.config["Feature Selection"]["Chi-2"] == "True":
         selection_model = sklearn.feature_selection.SelectKBest(chi2, num_features)
         selection_model.fit(features, target)
-
         res = dict(zip(features_list, selection_model.scores_))
-        for key, value in res.items():
-            if math.isnan(res[key]):
-                res[key] = 0
-        sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
-
-        with open(os.path.join(feature_ranking_folder, "Feature_ranking_chi2.txt"), 'w') as f:
-            for (key, value) in sorted_d:
-                f.write("{}: {}\n".format(key, value))
-        features = selection_model.transform(features)
-        outfile_name = "X_train_with_tfidf_Chi2_{}.pkl".format(num_features)
+        report_name = "Feature_ranking_chi2.txt"
 
     # Information Gain
     elif Globals.config["Feature Selection"]["Information Gain"] == "True":
@@ -62,31 +45,23 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
         selection_model.fit(features, target)
         # dump Feature Selection in a file
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
-        for key, value in res.items():
-            if math.isnan(res[key]):
-                res[key] = 0
-        sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
-        with open(os.path.join(feature_ranking_folder, "Feature_ranking_IG.txt"), 'w') as f:
-            for (key, value) in sorted_d:
-                f.write("{}: {}\n".format(key, value))
-
-        outfile_name = "X_train_with_tfidf_IG_{}.pkl".format(num_features)
+        report_name = "Feature_ranking_IG.txt"
 
     # Gini
     elif Globals.config["Feature Selection"]["Gini"] == "True":
         selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'), threshold=-np.inf,
                                                           max_features=num_features)
         selection_model.fit(features, target)
-
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
-        for key, value in res.items():
-            if math.isnan(res[key]):
-                res[key] = 0
-        sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
-        with open(os.path.join(feature_ranking_folder, "Feature_ranking_Gini.txt"), 'w') as f:
-            for (key, value) in sorted_d:
-                f.write("{}: {}\n".format(key, value))
-        outfile_name = "X_train_with_tfidf_Gini_{}.pkl".format(num_features)
+        report_name = "Feature_ranking_Gini.txt"
+
+    for key, value in res.items():
+        if math.isnan(res[key]):
+            res[key] = 0
+    sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
+    with open(os.path.join(feature_ranking_folder, report_name), 'w') as f:
+        for (key, value) in sorted_d:
+            f.write("{}: {}\n".format(key, value))
 
     # create new feature set with the best k features
     features = selection_model.transform(features)
