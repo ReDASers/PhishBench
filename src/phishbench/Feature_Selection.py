@@ -12,38 +12,23 @@ from sklearn.tree import DecisionTreeClassifier
 from .utils import Globals
 
 
-def Feature_Ranking(features, target, num_features):
+def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf=None):
     print('Feature Ranking Started')
 
     feature_ranking_folder = os.path.join(Globals.args.output_input_dir, 'Feature_Ranking')
     if not os.path.exists(feature_ranking_folder):
         os.makedirs(feature_ranking_folder)
-    email_train_dir = os.path.join(Globals.args.output_input_dir, 'Emails_Training')
-    url_train_dir = os.path.join(Globals.args.output_input_dir, 'URLs_Training')
 
-    if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        emails = True
-        urls = False
-        vectorizer = joblib.load(os.path.join(email_train_dir, 'vectorizer.pkl'))
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            vectorizer_tfidf = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
-
-    elif Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        urls = True
-        emails = False
-        vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            vectorizer_tfidf = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
+    if vectorizer_tfidf:
+        features_list = (vectorizer.get_feature_names()) + (vectorizer_tfidf.get_feature_names())
+    else:
+        features_list = (vectorizer.get_feature_names())
 
     # RFE
     if Globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
         selection_model = RFE(LinearSVC(), num_features, verbose=2, step=0.005)
         selection_model.fit(features, target)
 
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            features_list = (vectorizer.get_feature_names()) + (vectorizer_tfidf.get_feature_names())
-        else:
-            features_list = (vectorizer.get_feature_names())
         res = dict(zip(features_list, selection_model.ranking_))
         sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
 
@@ -57,10 +42,7 @@ def Feature_Ranking(features, target, num_features):
     elif Globals.config["Feature Selection"]["Chi-2"] == "True":
         selection_model = sklearn.feature_selection.SelectKBest(chi2, num_features)
         selection_model.fit(features, target)
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            features_list = (vectorizer.get_feature_names()) + (vectorizer_tfidf.get_feature_names())
-        else:
-            features_list = (vectorizer.get_feature_names())
+
         res = dict(zip(features_list, selection_model.scores_))
         for key, value in res.items():
             if math.isnan(res[key]):
@@ -79,10 +61,6 @@ def Feature_Ranking(features, target, num_features):
                                                           threshold=-np.inf, max_features=num_features)
         selection_model.fit(features, target)
         # dump Feature Selection in a file
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            features_list = (vectorizer.get_feature_names()) + (vectorizer_tfidf.get_feature_names())
-        else:
-            features_list = (vectorizer.get_feature_names())
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
         for key, value in res.items():
             if math.isnan(res[key]):
@@ -99,10 +77,7 @@ def Feature_Ranking(features, target, num_features):
         selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'), threshold=-np.inf,
                                                           max_features=num_features)
         selection_model.fit(features, target)
-        if Globals.config["Feature Selection"]["with Tfidf"] == "True":
-            features_list = (vectorizer.get_feature_names()) + (vectorizer_tfidf.get_feature_names())
-        else:
-            features_list = (vectorizer.get_feature_names())
+
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
         for key, value in res.items():
             if math.isnan(res[key]):
@@ -115,10 +90,5 @@ def Feature_Ranking(features, target, num_features):
 
     # create new feature set with the best k features
     features = selection_model.transform(features)
-
-    if emails:
-        joblib.dump(features, os.path.join(email_train_dir, outfile_name))
-    if urls:
-        joblib.dump(features, os.path.join(url_train_dir, outfile_name))
 
     return features, selection_model

@@ -374,7 +374,8 @@ def run_phishbench():
             os.makedirs(ranking_dir)
         # k: Number of Best features
         num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
-        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features)
+        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features,
+                                                                     vectorizer, tfidf_vectorizer)
         # Dump model
         joblib.dump(selection_model, os.path.join(ranking_dir, "selection.pkl"))
         joblib.dump(x_train, os.path.join(ranking_dir, "X_train_processed_best_features.pkl"))
