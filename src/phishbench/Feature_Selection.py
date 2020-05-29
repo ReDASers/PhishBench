@@ -72,10 +72,6 @@ def Feature_Ranking(features, target, num_features):
                 f.write("{}: {}\n".format(key, value))
         features = selection_model.transform(features)
         outfile_name = "X_train_with_tfidf_Chi2_{}.pkl".format(num_features)
-        if emails:
-            joblib.dump(features, os.path.join(email_train_dir, outfile_name))
-        if urls:
-            joblib.dump(features, os.path.join(url_train_dir, outfile_name))
 
     # Information Gain
     elif Globals.config["Feature Selection"]["Information Gain"] == "True":
