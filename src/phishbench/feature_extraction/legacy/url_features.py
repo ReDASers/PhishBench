@@ -162,256 +162,180 @@ def dump_features(url, feature_values, extraction_times, features_output_folder)
 
 
 def single_url_feature(raw_url, list_features, list_time):
+    Globals.logger.debug("Extracting single url features from %s", raw_url)
+
     Features.URL_url_length(raw_url, list_features, list_time)
-    Globals.logger.debug("url_length")
+
     Features.URL_domain_length(raw_url, list_features, list_time)
-    Globals.logger.debug("domain_length")
 
     Features.URL_char_distance(raw_url, list_features, list_time)
-    Globals.logger.debug("url_char_distance")
 
-    Features.URL_kolmogorov_shmirnov(list_features, list_time)
-    Globals.logger.debug("kolmogorov_shmirnov")
+    Features.URL_kolmogorov_shmirnov(raw_url, list_features, list_time)
 
-    Features.URL_Kullback_Leibler_Divergence(list_features, list_time)
-    Globals.logger.debug("Kullback_Leibler_Divergence")
+    Features.URL_Kullback_Leibler_Divergence(raw_url, list_features, list_time)
 
-    Features.URL_english_frequency_distance(list_features, list_time)
-    Globals.logger.debug("english_frequency_distance")
+    Features.URL_english_frequency_distance(raw_url, list_features, list_time)
 
     Features.URL_num_punctuation(raw_url, list_features, list_time)
-    Globals.logger.debug("num_punctuation")
 
     Features.URL_has_port(raw_url, list_features, list_time)
-    Globals.logger.debug("has_port")
 
     Features.URL_has_https(raw_url, list_features, list_time)
-    Globals.logger.debug("has_https")
 
     Features.URL_number_of_digits(raw_url, list_features, list_time)
-    Globals.logger.debug("number_of_digits")
 
     Features.URL_number_of_dots(raw_url, list_features, list_time)
-    Globals.logger.debug("number_of_dots")
 
     Features.URL_number_of_slashes(raw_url, list_features, list_time)
-    Globals.logger.debug("number_of_slashes")
-
-    Features.URL_digit_letter_ratio(raw_url, list_features, list_time)
-    Globals.logger.debug("digit_letter_ratio")
 
     Features.URL_consecutive_numbers(raw_url, list_features, list_time)
-    Globals.logger.debug("consecutive_numbers")
 
     Features.URL_special_char_count(raw_url, list_features, list_time)
-    Globals.logger.debug("special_char_count")
 
     Features.URL_special_pattern(raw_url, list_features, list_time)
-    Globals.logger.debug("special_pattern")
 
     Features.URL_Top_level_domain(raw_url, list_features, list_time)
-    Globals.logger.debug("Top_level_domain")
 
     Features.URL_is_common_TLD(raw_url, list_features, list_time)
-    Globals.logger.debug("is_common_TLD")
 
     Features.URL_number_of_dashes(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_number_of_dashes')
 
     Features.URL_Http_middle_of_URL(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Http_middle_of_URL')
 
     Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Has_More_than_3_dots')
 
     Features.URL_Has_at_symbole(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Has_at_symbole")
 
     Features.URL_Has_anchor_tag(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Has_anchor_tag")
 
     Features.URL_Null_in_Domain(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Null_in_Domain")
 
     Features.URL_Token_Count(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Token_Count")
 
     Features.URL_Average_Path_Token_Length(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Average_Path_Token_Length")
 
     Features.URL_Average_Domain_Token_Length(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Average_Domain_Token_Length")
 
     Features.URL_Longest_Domain_Token(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Longest_Domain_Token')
 
     Features.URL_Protocol_Port_Match(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Protocol_Port_Match')
 
     Features.URL_Has_WWW_in_Middle(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Has_WWW_in_Middle')
 
     Features.URL_Has_Hex_Characters(raw_url, list_features, list_time)
-    Globals.logger.debug('URL_Has_Hex_Characters')
 
     Features.URL_Double_Slashes_Not_Beginning_Count(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Double_Slashes_Not_Beginning_Count")
 
     Features.URL_Brand_In_Url(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Bran_In_URL")
 
     Features.URL_Is_Whitelisted(raw_url, list_features, list_time)
-    Globals.logger.debug("URL_Is_Whitelisted")
+
 
 
 def single_url_html_features(soup, html, url, alexa_data, list_features, list_time):
+    Globals.logger.debug("Extracting single html features from %s", url)
+
     Features.HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time)
-    Globals.logger.debug("ranked_matrix")
 
     Features.HTML_LTree_Features(soup, url, list_features, list_time)
-    Globals.logger.debug("LTree_Features")
 
     Features.HTML_number_of_tags(soup, list_features, list_time)
-    Globals.logger.debug("number_of_tags")
 
     Features.HTML_number_of_head(soup, list_features, list_time)
-    Globals.logger.debug("number_of_head")
 
     Features.HTML_number_of_html(soup, list_features, list_time)
-    Globals.logger.debug("number_of_html")
 
     Features.HTML_number_of_body(soup, list_features, list_time)
-    Globals.logger.debug("number_of_body")
 
     Features.HTML_number_of_titles(soup, list_features, list_time)
-    Globals.logger.debug("number_of_titles")
 
     Features.HTML_number_suspicious_content(soup, list_features, list_time)
-    Globals.logger.debug("number_suspicious_content")
 
     Features.HTML_number_of_iframes(soup, list_features, list_time)
-    Globals.logger.debug("number_of_iframes")
 
     Features.HTML_number_of_input(soup, list_features, list_time)
-    Globals.logger.debug("number_of_input")
 
     Features.HTML_number_of_img(soup, list_features, list_time)
-    Globals.logger.debug("number_of_img")
 
     Features.HTML_number_of_tags(soup, list_features, list_time)
-    Globals.logger.debug("number_of_tags")
 
     Features.HTML_number_of_scripts(soup, list_features, list_time)
-    Globals.logger.debug("number_of_scripts")
 
     Features.HTML_number_of_anchor(soup, list_features, list_time)
-    Globals.logger.debug("number_of_anchor")
 
     Features.HTML_number_of_video(soup, list_features, list_time)
-    Globals.logger.debug("number_of_video")
 
     Features.HTML_number_of_audio(soup, list_features, list_time)
-    Globals.logger.debug("number_of_audio")
 
     Features.HTML_number_of_hidden_svg(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_svg")
 
     Features.HTML_number_of_hidden_input(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_input")
 
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_iframe")
 
     Features.HTML_number_of_hidden_div(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_div")
 
     Features.HTML_number_of_hidden_object(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_object")
 
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
-    Globals.logger.debug("number_of_hidden_iframe")
 
     Features.HTML_inbound_count(soup, url, list_features, list_time)
-    Globals.logger.debug("inbound_count")
 
     Features.HTML_outbound_count(soup, url, list_features, list_time)
-    Globals.logger.debug("outbound_count")
 
     Features.HTML_inbound_href_count(soup, url, list_features, list_time)
-    Globals.logger.debug("inbound_href_count")
 
     Features.HTML_outbound_href_count(soup, url, list_features, list_time)
-    Globals.logger.debug("outbound_href_count")
 
     Features.HTML_Website_content_type(html, list_features, list_time)
-    Globals.logger.debug("content_type")
 
     Features.HTML_content_length(html, list_features, list_time)
-    Globals.logger.debug("content_length")
 
     Features.HTML_x_powered_by(html, list_features, list_time)
-    Globals.logger.debug("x_powered_by")
 
     Features.HTML_URL_Is_Redirect(html, url, list_features, list_time)
-    Globals.logger.debug("URL_Is_Redirect")
 
     Features.HTML_Is_Login(html.html, url, list_features, list_time)
-    Globals.logger.debug("HTML_Is_Login")
 
 
 def single_javascript_features(soup, html, list_features, list_time):
+    Globals.logger.debug("Extracting single javascript features")
+
     Features.Javascript_number_of_exec(soup, list_features, list_time)
-    Globals.logger.debug("number_of_exec")
 
     Features.Javascript_number_of_escape(soup, list_features, list_time)
-    Globals.logger.debug("number_of_escape")
 
     Features.Javascript_number_of_eval(soup, list_features, list_time)
-    Globals.logger.debug("number_of_eval")
 
     Features.Javascript_number_of_link(soup, list_features, list_time)
-    Globals.logger.debug("number_of_link")
 
     Features.Javascript_number_of_unescape(soup, list_features, list_time)
-    Globals.logger.debug("number_of_unescape")
 
     Features.Javascript_number_of_search(soup, list_features, list_time)
-    Globals.logger.debug("number_of_search")
 
     Features.Javascript_number_of_setTimeout(soup, list_features, list_time)
-    Globals.logger.debug("number_of_setTimeout")
 
     Features.Javascript_number_of_iframes_in_script(soup, list_features, list_time)
-    Globals.logger.debug("number_of_iframes_in_script")
 
     Features.Javascript_number_of_event_attachment(soup, list_features, list_time)
-    Globals.logger.debug("number_of_event_attachment")
 
     Features.Javascript_rightclick_disabled(html, list_features, list_time)
-    Globals.logger.debug("rightclick_disabled")
 
     Features.Javascript_number_of_total_suspicious_features(list_features, list_time)
-    Globals.logger.debug("number_of_total_suspicious_features")
 
 
 def single_network_features(url, list_features, list_time):
+    Globals.logger.debug("Extracting network features from %S", url)
     Features.Network_creation_date(url.domain_whois, list_features, list_time)
-    Globals.logger.debug("creation_date")
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)
-    Globals.logger.debug("expiration_date")
 
     Features.Network_updated_date(url.whois_info, list_features, list_time)
-    Globals.logger.debug("updated_date")
 
     Features.Network_as_number(url.ip_whois, list_features, list_time)
-    Globals.logger.debug("as_number")
 
     Features.Network_number_name_server(url.dns_results, list_features, list_time)
-    Globals.logger.debug("number_name_server")
 
     Features.Network_dns_ttl(url.raw_url, list_features, list_time)
-    Globals.logger.debug("dns_ttl")
 
     Features.Network_DNS_Info_Exists(url.raw_url, list_features, list_time)
-    Globals.logger.debug('DNS_Info_Exists')
