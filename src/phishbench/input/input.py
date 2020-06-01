@@ -107,9 +107,8 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
         try:
             url_obj = URLData(raw_url, download_url)
             urls.append(url_obj)
-        except Exception:
+        except Exception as e:
             Globals.logger.warning(
-                "This URL has trouble being extracted and will"
-                " not be considered for further processing:%s", raw_url)
+                "Exception while loading url %s: %s", raw_url, e)
             bad_url_list.append(raw_url)
     return urls, bad_url_list
