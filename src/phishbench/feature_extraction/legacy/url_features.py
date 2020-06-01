@@ -73,8 +73,8 @@ def Extract_Features_Urls_Training():
 
 
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
-    download_url_flag = Globals.config['Network_Features'].getboolean('network_features') or \
-                        Globals.config['HTML_Features'].getboolean('HTML_features')
+    download_url_flag = Globals.config['URL_Feature_Types'].getboolean('Network') or \
+                        Globals.config['URL_Feature_Types'].getboolean('HTML')
     url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
     bad_url_list.extend(bad_urls)
     alexa_data = {}
