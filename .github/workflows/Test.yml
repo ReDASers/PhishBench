@@ -40,7 +40,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        # os: [windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
       fail-fast: false
     steps:
     - name: Install whois
@@ -77,7 +78,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        # os: [windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
       fail-fast: false
     steps:
     - name: Install whois
@@ -109,26 +111,26 @@ jobs:
         cd "tests/integration tests/url_extraction"
         phishbench -f Test_B_1.ini -c
 
-  Lint:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
+  # Lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
+  #   - name: Set up Python 3.7
+  #     uses: actions/setup-python@v1
+  #     with:
+  #       python-version: 3.7
     
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+  #   - name: Install dependencies
+  #     run: |
+  #       python -m pip install --upgrade pip
+  #       pip install -r requirements.txt
 
-    - name: Install pylint
-      run: pip install --ignore-installed pylint
+  #   - name: Install pylint
+  #     run: pip install --ignore-installed pylint
 
-    - name: Run Lint
-      run: pylint -j 0 --exit-zero .\src 
+  #   - name: Run Lint
+  #     run: pylint -j 0 --exit-zero .\src 
 
 
 
