@@ -330,7 +330,7 @@ def single_network_features(url, list_features, list_time):
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)
 
-    Features.Network_updated_date(url.whois_info, list_features, list_time)
+    Features.Network_updated_date(url.domain_whois, list_features, list_time)
 
     Features.Network_as_number(url.ip_whois, list_features, list_time)
 
