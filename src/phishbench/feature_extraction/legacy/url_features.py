@@ -170,13 +170,13 @@ def single_url_feature(raw_url, list_features, list_time):
     Features.URL_char_distance(raw_url, list_features, list_time)
     Globals.logger.debug("url_char_distance")
 
-    Features.URL_kolmogorov_shmirnov(list_features, list_time)
+    Features.URL_kolmogorov_shmirnov(raw_url, list_features, list_time)
     Globals.logger.debug("kolmogorov_shmirnov")
 
-    Features.URL_Kullback_Leibler_Divergence(list_features, list_time)
+    Features.URL_Kullback_Leibler_Divergence(raw_url, list_features, list_time)
     Globals.logger.debug("Kullback_Leibler_Divergence")
 
-    Features.URL_english_frequency_distance(list_features, list_time)
+    Features.URL_english_frequency_distance(raw_url, list_features, list_time)
     Globals.logger.debug("english_frequency_distance")
 
     Features.URL_num_punctuation(raw_url, list_features, list_time)

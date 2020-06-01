@@ -2529,28 +2529,30 @@ def URL_letter_occurrence(url, list_features, list_time):
 
 
 ##################################################################################
-def URL_char_distance(url, list_features, list_time):
+
+def URL_char_distance(url: str, list_features, list_time):
     if Globals.config["URL_Features"]["char_distance"] == "True":
         start = time.time()
         if url:
-            count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
-            for x in range(26):
+            url = url.lower()
+            num_letters = len(re.sub(r'[^\w]', '', url))
+            for x in string.ascii_lowercase:
                 try:
-                    url_char_dist = (url.count(chr(x + ord('a'))) / (count(url, string.ascii_letters)))
-                    list_features["url_char_distance_" + chr(x + ord('a'))] = url_char_dist
+                    url_char_dist = (url.count(x) / num_letters)
+                    list_features["url_char_distance_" + x] = url_char_dist
                 except Exception as e:
                     Globals.logger.warning("exception: " + str(e))
-                    list_features["url_char_distance_" + chr(x + ord('a'))] = -1
+                    list_features["url_char_distance_" + x] = -1
         else:
-            for x in range(26):
-                list_features["url_char_distance_" + chr(x + ord('a'))] = 0
+            for x in string.ascii_lowercase:
+                list_features["url_char_distance_" + x] = 0
         end = time.time()
         ex_time = end - start
         list_time["url_char_distance_"] = ex_time
 
 
 ##################################################################################
-def URL_kolmogorov_shmirnov(list_features, list_time):
+def URL_kolmogorov_shmirnov(url, list_features, list_time):
     if Globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
@@ -2559,16 +2561,9 @@ def URL_kolmogorov_shmirnov(list_features, list_time):
                      .00074]
 
         try:
-            # if list_features.get("url_char_distance") == 0:
-            #    list_features["kolmogorov_shmirnov"]= 0
-            # else:
-            url_char_distance = []
-            for x in range(26):
-                url_char_distance.append(list_features["url_char_distance_" + chr(x + ord('a'))])
-            if any(distance == -1 for distance in url_char_distance):
-                ks = -1
-            else:
-                ks = stats.ks_2samp(url_char_distance, char_dist)
+            num_letters = len(re.sub(r'[^\w]', '', url))
+            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
+            ks = stats.ks_2samp(url_char_distance, char_dist)
         except Exception as e:
             Globals.logger.warning("exception: " + str(e))
             ks = -1
@@ -2581,7 +2576,7 @@ def URL_kolmogorov_shmirnov(list_features, list_time):
         list_time["kolmogorov_shmirnov"] = ex_time
 
 
-def URL_Kullback_Leibler_Divergence(list_features, list_time):
+def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
     if Globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
@@ -2589,13 +2584,9 @@ def URL_Kullback_Leibler_Divergence(list_features, list_time):
                      .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974,
                      .00074]
         try:
-            url_char_distance = []
-            for x in range(26):
-                url_char_distance.append(list_features["url_char_distance_" + chr(x + ord('a'))])
-            if any(distance == -1 for distance in url_char_distance):
-                kl = -1
-            else:
-                kl = stats.entropy(url_char_distance, char_dist)
+            num_letters = len(re.sub(r'[^\w]', '', url))
+            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
+            kl = stats.entropy(url_char_distance, char_dist)
         except Exception as e:
             Globals.logger.warning("exception: " + str(e))
             kl = -1
@@ -2606,7 +2597,7 @@ def URL_Kullback_Leibler_Divergence(list_features, list_time):
         list_time["Kullback_Leibler_Divergence"] = ex_time
 
 
-def URL_english_frequency_distance(list_features, list_time):
+def URL_english_frequency_distance(url, list_features, list_time):
     # global list_features
     if Globals.config["URL_Features"]["english_frequency_distance"] == "True":
         start = time.time()
@@ -2618,13 +2609,9 @@ def URL_english_frequency_distance(list_features, list_time):
             # if list_features.get("url_char_distance") is None:
             #    list_features["edit_distance"]= 0
             # else:
-            url_char_distance = []
-            for x in range(26):
-                url_char_distance.append(list_features["url_char_distance_" + chr(x + ord('a'))])
-            if any(distance == -1 for distance in url_char_distance):
-                ed = -1
-            else:
-                ed = distance.euclidean(url_char_distance, char_dist)
+            num_letters = len(re.sub(r'[^\w]', '', url))
+            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
+            ed = distance.euclidean(url_char_distance, char_dist)
         except Exception as e:
             Globals.logger.warning("exception: " + str(e))
             ed = -1
