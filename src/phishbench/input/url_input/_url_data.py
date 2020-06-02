@@ -4,6 +4,8 @@ import time
 from collections import namedtuple
 from urllib.parse import urlparse
 
+import pathlib
+
 import dns.resolver
 import requests
 from dns.exception import DNSException
@@ -140,7 +142,10 @@ def _setup_browser():
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
 
-    browser = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options,
+    chorme_path = pathlib.Path(__file__).parent.absolute()
+    chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+    print(chrome_path)
+    browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)
     return browser
