@@ -127,7 +127,7 @@ class URLData:
         self.downloaded_website = HTTPResponse(
             log=browser.get_log('browser'),
             html=browser.page_source,
-            url=browser.current_url,
+            final_url=browser.current_url,
             headers=response.headers
         )
         response.close()
