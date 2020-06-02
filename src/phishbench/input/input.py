@@ -109,6 +109,7 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
             urls.append(url_obj)
         except Exception as e:
             Globals.logger.warning(
-                "Exception while loading url %s: %s", raw_url, e)
+                "Exception while loading url %s", raw_url)
+            Globals.logger.exception(e)
             bad_url_list.append(raw_url)
     return urls, bad_url_list
