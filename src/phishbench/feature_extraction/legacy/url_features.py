@@ -54,9 +54,10 @@ def Extract_Features_Urls_Training():
         feature_list_dict_train = []
         extraction_time_dict_train = []
         bad_url_list = []
-
+        print("Extracting Features from legitimate URLs")
         num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
                                                            extraction_time_dict_train, bad_url_list)
+        print("Extracting Features from Phishing URLs")
         num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
                                                            extraction_time_dict_train, bad_url_list)
 
@@ -73,8 +74,8 @@ def Extract_Features_Urls_Training():
 
 
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
-    download_url_flag = Globals.config['Network_Features'].getboolean('network_features') or \
-                        Globals.config['HTML_Features'].getboolean('HTML_features')
+    download_url_flag = Globals.config['URL_Feature_Types'].getboolean('Network') or \
+                        Globals.config['URL_Feature_Types'].getboolean('HTML')
     url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
     bad_url_list.extend(bad_urls)
     alexa_data = {}
@@ -121,18 +122,18 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
             single_network_features(url, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("network_features >>>>>> complete")
         if feature_types.getboolean("HTML"):
-            html = url.downloaded_website.html
-            soup = BeautifulSoup(html, 'html5lib')
-            single_url_html_features(soup, html, url, alexa_data, dict_feature_values, dict_extraction_times)
+            single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("html_features >>>>>> complete")
+            downloaded_website = url.downloaded_website
+            soup = BeautifulSoup(downloaded_website.html, 'html5lib')
             if feature_types.getboolean("JavaScript"):
-                single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
-                Globals.logger.debug("javascript feautures >>>>>> complete")
+                single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
+                Globals.logger.debug("javascript features >>>>>> complete")
             corpus.append(str(soup))
 
     except Exception as e:
         Globals.logger.warning(traceback.format_exc())
-        Globals.logger.warning(e)
+        Globals.logger.exception(e)
         Globals.logger.warning(
             "This URL has trouble being extracted and "
             "will not be considered for further processing: %s", str(url))
@@ -232,12 +233,16 @@ def single_url_feature(raw_url, list_features, list_time):
 
 
 
-def single_url_html_features(soup, html, url, alexa_data, list_features, list_time):
-    Globals.logger.debug("Extracting single html features from %s", url)
+def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
+    raw_url = url.raw_url
+    downloaded_website = url.downloaded_website
+    soup = BeautifulSoup(downloaded_website.html, 'html5lib')
 
-    Features.HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time)
+    Globals.logger.debug("Extracting single html features from %s", raw_url)
 
-    Features.HTML_LTree_Features(soup, url, list_features, list_time)
+    Features.HTML_ranked_matrix(soup, raw_url, alexa_data, list_features, list_time)
+
+    Features.HTML_LTree_Features(soup, raw_url, list_features, list_time)
 
     Features.HTML_number_of_tags(soup, list_features, list_time)
 
@@ -279,23 +284,23 @@ def single_url_html_features(soup, html, url, alexa_data, list_features, list_ti
 
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
 
-    Features.HTML_inbound_count(soup, url, list_features, list_time)
+    Features.HTML_inbound_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_outbound_count(soup, url, list_features, list_time)
+    Features.HTML_outbound_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_inbound_href_count(soup, url, list_features, list_time)
+    Features.HTML_inbound_href_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_outbound_href_count(soup, url, list_features, list_time)
+    Features.HTML_outbound_href_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_Website_content_type(html, list_features, list_time)
+    Features.HTML_Website_content_type(downloaded_website, list_features, list_time)
 
-    Features.HTML_content_length(html, list_features, list_time)
+    Features.HTML_content_length(downloaded_website, list_features, list_time)
 
-    Features.HTML_x_powered_by(html, list_features, list_time)
+    Features.HTML_x_powered_by(downloaded_website, list_features, list_time)
 
-    Features.HTML_URL_Is_Redirect(html, url, list_features, list_time)
+    Features.HTML_URL_Is_Redirect(downloaded_website, raw_url, list_features, list_time)
 
-    Features.HTML_Is_Login(html.html, url, list_features, list_time)
+    Features.HTML_Is_Login(downloaded_website.html, raw_url, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
@@ -330,7 +335,7 @@ def single_network_features(url, list_features, list_time):
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)
 
-    Features.Network_updated_date(url.whois_info, list_features, list_time)
+    Features.Network_updated_date(url.domain_whois, list_features, list_time)
 
     Features.Network_as_number(url.ip_whois, list_features, list_time)
 

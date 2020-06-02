@@ -1,4 +1,6 @@
 import os.path
+import pathlib
+import platform
 import re
 import time
 from collections import namedtuple
@@ -6,6 +8,7 @@ from urllib.parse import urlparse
 
 import dns.resolver
 import requests
+import whois  # python-whois
 from dns.exception import DNSException
 from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
@@ -13,8 +16,6 @@ from requests import HTTPError
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
-import whois  # python-whois
-
 
 DNS_QUERY_TYPES = [
     'NONE',
@@ -115,7 +116,9 @@ class URLData:
     def download_website(self):
         browser = _setup_browser()
         response = requests.head(self.raw_url, headers=_setup_request_headers(), timeout=20)
-        if response.status_code != 200:
+        if response.status_code >= 400:
+            print(response.status_code)
+            print(response.headers)
             raise HTTPError("Status code not OK!")
         start_time = time.time()
         browser.get(self.raw_url)
@@ -123,7 +126,7 @@ class URLData:
         self.downloaded_website = HTTPResponse(
             log=browser.get_log('browser'),
             html=browser.page_source,
-            url=browser.current_url,
+            final_url=browser.current_url,
             headers=response.headers
         )
         response.close()
@@ -139,8 +142,15 @@ def _setup_browser():
     chrome_options.headless = True
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
-
-    browser = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options,
+    chorme_path = pathlib.Path(__file__).parent.absolute()
+    if platform.system() == 'Windows':
+        chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+    elif platform.system() == 'Linux':
+        chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
+    else:
+        chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
+    print(chrome_path)
+    browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)
     return browser

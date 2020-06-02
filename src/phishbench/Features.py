@@ -2420,7 +2420,7 @@ def HTML_URL_Is_Redirect(html, url, list_features, list_time):
         flag = 0
         if html:
             try:
-                if url != html.url:
+                if url != html.final_url:
                     flag = 1
             except Exception as e:
                 Globals.logger.warning("Exception: {}".format(e))
