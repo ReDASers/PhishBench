@@ -87,8 +87,6 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
     ###
     corpus = input.read_corpus(corpus_files, "ISO-8859-1")
     for file_path, file_contents in tqdm(corpus.items()):
-
-        Globals.logger.info("===================")
         Globals.logger.info(file_path)
 
         dict_features, dict_time = email_features(file_contents)
