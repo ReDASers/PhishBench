@@ -54,9 +54,10 @@ def Extract_Features_Urls_Training():
         feature_list_dict_train = []
         extraction_time_dict_train = []
         bad_url_list = []
-
+        print("Extracting Features from legitimate URLs")
         num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
                                                            extraction_time_dict_train, bad_url_list)
+        print("Extracting Features from Phishing URLs")
         num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
                                                            extraction_time_dict_train, bad_url_list)
 
@@ -126,13 +127,13 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
             downloaded_website = url.downloaded_website
             soup = BeautifulSoup(downloaded_website.html, 'html5lib')
             if feature_types.getboolean("JavaScript"):
-                single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
-                Globals.logger.debug("javascript feautures >>>>>> complete")
+                single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
+                Globals.logger.debug("javascript features >>>>>> complete")
             corpus.append(str(soup))
 
     except Exception as e:
         Globals.logger.warning(traceback.format_exc())
-        Globals.logger.warning(e)
+        Globals.logger.exception(e)
         Globals.logger.warning(
             "This URL has trouble being extracted and "
             "will not be considered for further processing: %s", str(url))
