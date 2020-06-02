@@ -121,10 +121,10 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
             single_network_features(url, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("network_features >>>>>> complete")
         if feature_types.getboolean("HTML"):
-            html = url.downloaded_website.html
-            soup = BeautifulSoup(html, 'html5lib')
-            single_url_html_features(soup, html, url.raw_url, alexa_data, dict_feature_values, dict_extraction_times)
+            single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("html_features >>>>>> complete")
+            downloaded_website = url.downloaded_website
+            soup = BeautifulSoup(downloaded_website.html, 'html5lib')
             if feature_types.getboolean("JavaScript"):
                 single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
                 Globals.logger.debug("javascript feautures >>>>>> complete")
@@ -232,7 +232,11 @@ def single_url_feature(raw_url, list_features, list_time):
 
 
 
-def single_url_html_features(soup, html, raw_url, alexa_data, list_features, list_time):
+def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
+    raw_url = url.raw_url
+    downloaded_website = url.downloaded_website
+    soup = BeautifulSoup(downloaded_website.html, 'html5lib')
+
     Globals.logger.debug("Extracting single html features from %s", raw_url)
 
     Features.HTML_ranked_matrix(soup, raw_url, alexa_data, list_features, list_time)
@@ -287,15 +291,15 @@ def single_url_html_features(soup, html, raw_url, alexa_data, list_features, lis
 
     Features.HTML_outbound_href_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_Website_content_type(html, list_features, list_time)
+    Features.HTML_Website_content_type(downloaded_website, list_features, list_time)
 
-    Features.HTML_content_length(html, list_features, list_time)
+    Features.HTML_content_length(downloaded_website, list_features, list_time)
 
-    Features.HTML_x_powered_by(html, list_features, list_time)
+    Features.HTML_x_powered_by(downloaded_website, list_features, list_time)
 
-    Features.HTML_URL_Is_Redirect(html, raw_url, list_features, list_time)
+    Features.HTML_URL_Is_Redirect(downloaded_website, raw_url, list_features, list_time)
 
-    Features.HTML_Is_Login(html.html, raw_url, list_features, list_time)
+    Features.HTML_Is_Login(downloaded_website.html, raw_url, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
