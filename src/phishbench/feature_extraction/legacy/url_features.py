@@ -123,7 +123,7 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
         if feature_types.getboolean("HTML"):
             html = url.downloaded_website.html
             soup = BeautifulSoup(html, 'html5lib')
-            single_url_html_features(soup, html, url, alexa_data, dict_feature_values, dict_extraction_times)
+            single_url_html_features(soup, html, url.raw_url, alexa_data, dict_feature_values, dict_extraction_times)
             Globals.logger.debug("html_features >>>>>> complete")
             if feature_types.getboolean("JavaScript"):
                 single_javascript_features(soup, html, dict_feature_values, dict_extraction_times)
@@ -232,12 +232,12 @@ def single_url_feature(raw_url, list_features, list_time):
 
 
 
-def single_url_html_features(soup, html, url, alexa_data, list_features, list_time):
-    Globals.logger.debug("Extracting single html features from %s", url)
+def single_url_html_features(soup, html, raw_url, alexa_data, list_features, list_time):
+    Globals.logger.debug("Extracting single html features from %s", raw_url)
 
-    Features.HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time)
+    Features.HTML_ranked_matrix(soup, raw_url, alexa_data, list_features, list_time)
 
-    Features.HTML_LTree_Features(soup, url, list_features, list_time)
+    Features.HTML_LTree_Features(soup, raw_url, list_features, list_time)
 
     Features.HTML_number_of_tags(soup, list_features, list_time)
 
@@ -279,13 +279,13 @@ def single_url_html_features(soup, html, url, alexa_data, list_features, list_ti
 
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
 
-    Features.HTML_inbound_count(soup, url, list_features, list_time)
+    Features.HTML_inbound_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_outbound_count(soup, url, list_features, list_time)
+    Features.HTML_outbound_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_inbound_href_count(soup, url, list_features, list_time)
+    Features.HTML_inbound_href_count(soup, raw_url, list_features, list_time)
 
-    Features.HTML_outbound_href_count(soup, url, list_features, list_time)
+    Features.HTML_outbound_href_count(soup, raw_url, list_features, list_time)
 
     Features.HTML_Website_content_type(html, list_features, list_time)
 
@@ -293,9 +293,9 @@ def single_url_html_features(soup, html, url, alexa_data, list_features, list_ti
 
     Features.HTML_x_powered_by(html, list_features, list_time)
 
-    Features.HTML_URL_Is_Redirect(html, url, list_features, list_time)
+    Features.HTML_URL_Is_Redirect(html, raw_url, list_features, list_time)
 
-    Features.HTML_Is_Login(html.html, url, list_features, list_time)
+    Features.HTML_Is_Login(html.html, raw_url, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
