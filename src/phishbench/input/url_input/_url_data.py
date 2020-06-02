@@ -1,13 +1,14 @@
 import os.path
+import pathlib
+import platform
 import re
 import time
 from collections import namedtuple
 from urllib.parse import urlparse
 
-import pathlib
-
 import dns.resolver
 import requests
+import whois  # python-whois
 from dns.exception import DNSException
 from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
@@ -15,8 +16,6 @@ from requests import HTTPError
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
-import whois  # python-whois
-
 
 DNS_QUERY_TYPES = [
     'NONE',
@@ -143,9 +142,13 @@ def _setup_browser():
     chrome_options.headless = True
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
-
     chorme_path = pathlib.Path(__file__).parent.absolute()
-    chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+    if platform.system() == 'Windows':
+        chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+    elif platform.system() == 'Linux':
+        chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
+    else:
+        chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
     print(chrome_path)
     browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
