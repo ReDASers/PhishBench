@@ -220,7 +220,7 @@ def extract_header_fields(email):
 
     try:
         recipient_full = msg['To']
-        if recipient_full == None:
+        if recipient_full is None:
             if msg['Delivered-To']:
                 recipient_full = msg['Delivered-To']
             elif msg['X-Envelope-To']:
@@ -378,7 +378,7 @@ def extract_header_fields(email):
         authentication_results = "None"
 
     try:
-        if msg["Received"] != []:
+        if msg["Received"]:
             received = msg.get_all("Received")
             # print("received: {}".format(received))
         else:
@@ -388,7 +388,7 @@ def extract_header_fields(email):
         received = "None"
 
     try:
-        if msg["Cc"] != []:
+        if msg["Cc"]:
             Cc = msg["Cc"]
         else:
             Cc = "None"
@@ -397,7 +397,7 @@ def extract_header_fields(email):
         Cc = "None"
 
     try:
-        if msg["Bcc"] != []:
+        if msg["Bcc"]:
             Bcc = msg["Bcc"]
         else:
             Bcc = "None"
@@ -406,7 +406,7 @@ def extract_header_fields(email):
         Bcc = "None"
 
     try:
-        if msg["To"] != []:
+        if msg["To"]:
             To = msg["To"]
         else:
             To = "None"
@@ -415,12 +415,12 @@ def extract_header_fields(email):
         To = "None"
 
     try:
-        if msg['MIME-Version'] != []:
+        if msg['MIME-Version']:
             MIME_version = re.findall(r'\d.\d', msg['MIME-Version'])[0]
         else:
             MIME_version = 0
     except Exception as e:
-        Globals.logger.warning("exception: " + str(e))
+        Globals.logger.exception(e)
         MIME_version = "None"
 
     # print(message_id)
