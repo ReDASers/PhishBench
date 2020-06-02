@@ -117,7 +117,9 @@ class URLData:
     def download_website(self):
         browser = _setup_browser()
         response = requests.head(self.raw_url, headers=_setup_request_headers(), timeout=20)
-        if response.status_code != 200:
+        if response.status_code >= 400:
+            print(response.status_code)
+            print(response.headers)
             raise HTTPError("Status code not OK!")
         start_time = time.time()
         browser.get(self.raw_url)
