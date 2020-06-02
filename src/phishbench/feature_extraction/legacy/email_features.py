@@ -492,7 +492,7 @@ def extract_body(email):
             try:
                 body_text = part.get_payload(decode=True).decode(part.get_content_charset())
             except Exception as e:
-                Globals.logger.warning('Exception: {}'.format(e))
+                Globals.logger.exception(e)
                 body_text = part.get_payload(decode=False)  # decode
             # body_text = part.get_payload(decode=False)
             # print("\n\n\n")
