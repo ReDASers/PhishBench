@@ -1,11 +1,16 @@
 import argparse
-import logging
 import configparser
+import logging
+
+# pylint: disable=global-statement
+# pylint: disable=invalid-name
+# pylint: disable=missing-function-docstring
 
 args = None
 config = configparser.ConfigParser()
 logger = logging.getLogger('root')  # type: logging.Logger
 summary = None
+
 
 def setup_parser():
     global args
@@ -18,27 +23,29 @@ def setup_parser():
     parser.add_argument("-f", "--config_file", help="The config file to use.", type=str, default='Default_Config.ini')
     args = parser.parse_args()
 
+
 def setup_logger():
     global logger
-    # create formatter
-    # formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s')
+    logger = logging.getLogger('root')
+
     formatter = logging.Formatter('[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
                                   '%m-%d %H:%M:%S')
-    # create console handler and set level to debug
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.ERROR)
+
+    if args and args.verbose:
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.CRITICAL)
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
+
     file_handler = logging.FileHandler('phishbench.log')
-    # add formatter to handler
-    console_handler.setFormatter(formatter)
     file_handler.setFormatter(formatter)
-    # create logger
-    logger = logging.getLogger('root')
+    logger.addHandler(file_handler)
+
     if args and args.verbose:
         logger.setLevel(level=logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
-    logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
+
 
 def setup_globals():
     global args
@@ -48,6 +55,7 @@ def setup_globals():
     config.read(args.config_file)
     summary = open(config["Summary"]["Path"], 'w')
     setup_logger()
+
 
 def destroy_globals():
     summary.close()
