@@ -20,13 +20,14 @@ class TestNetworkFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["number_name_server"], 4, 'incorrect number_of_tags')
 
-    def test_whois_updated(self, mock_config):
-        mock_config["Network_Features"]["updated_date"] = "True"
-        list_features = {}
-        list_time = {}
-        url_data = URLData('google.com', False)
-        url_data.lookup_whois(nameservers=['1.1.1.1'])
-
-        Features.Network_updated_date(url_data.domain_whois, list_features, list_time)
-        print(list_features["updated_date"])
-        self.assertGreater(list_features["updated_date"], 0,  'incorrect update date')
+    # WHOIS test takes too much time on GitHub Actions
+    # def test_whois_updated(self, mock_config):
+    #     mock_config["Network_Features"]["updated_date"] = "True"
+    #     list_features = {}
+    #     list_time = {}
+    #     url_data = URLData('google.com', False)
+    #     url_data.lookup_whois(nameservers=['1.1.1.1'])
+    #
+    #     Features.Network_updated_date(url_data.domain_whois, list_features, list_time)
+    #     print(list_features["updated_date"])
+    #     self.assertGreater(list_features["updated_date"], 0,  'incorrect update date')
