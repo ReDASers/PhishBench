@@ -81,7 +81,11 @@ class EmailBody:
 
     def __parse_text_part(self, part):
         try:
-            self.text = part.get_payload().strip()
+            if self.text:
+                self.text += '\n'
+                self.text += part.get_payload().strip()
+            else:
+                self.text = part.get_payload().strip()
         except UnicodeError:
             # We failed to decode the part
             self.defects.append(part)

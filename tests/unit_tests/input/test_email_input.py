@@ -7,10 +7,13 @@ from phishbench.input.email_input import EmailHeader, EmailBody
 from phishbench.input.email_input._header import parse_address_list
 from phishbench.input.email_input._header import parse_email_date
 
-
-def get_email(filename):
+def get_relative_path(filename):
     current_loc = path.dirname(path.abspath(__file__))
     loc = path.join(current_loc, filename)
+    return loc
+
+def get_email(filename):
+    loc = get_relative_path(filename)
     with open(loc, 'r') as file:
         return email.message_from_file(file)
 
@@ -266,10 +269,9 @@ class TestEmailHeader(unittest.TestCase):
 class TestEmailBody(unittest.TestCase):
 
     def test_email_body(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/Test Body Email 1.txt")
         body = EmailBody(msg)
-        expected = 'We didn\'t win anything... ' \
-                   'Jennifer won best actress for hunger games and hunger games won best film. ' \
-                   'But she was not there. \n' \
-                   'Matthew Budman\n\nAnnapurna Pictures\n\n310-724-5678\n\nsent from my iPhone.\n\n'
-        self.assertEqual(expected.strip(), body.text.strip())
+        with open(get_relative_path('Resources/test_body_1.txt')) as f:
+            expected = f.read().strip()
+
+        self.assertEqual(expected, body.text.strip())
