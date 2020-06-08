@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from ... import Features
-from ...Features_Support import Cleaning
+from ... import Features_Support
 from ...utils import Globals
 from ...input import input
 
@@ -29,11 +29,8 @@ def Extract_Features_Emails_Training():
     num_phish, phish_corpus = extract_email_features(dataset_path_phish_train, feature_list_dict_train,
                                                                 extraction_time_dict_train)
     Globals.logger.debug(">>>>> Feature extraction: Training Set >>>>> Done ")
+    Features_Support.Cleaning(feature_list_dict_train)
 
-    Globals.logger.info(">>>>> Cleaning >>>>")
-    Globals.logger.debug("feature_list_dict_train{}".format(len(feature_list_dict_train)))
-    Cleaning(feature_list_dict_train)
-    Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
     labels_train = [0] * num_legit + [1] * num_phish
     corpus_train = legit_corpus + phish_corpus
     return feature_list_dict_train, labels_train, corpus_train
@@ -52,10 +49,9 @@ def Extract_Features_Emails_Testing():
     num_phish, phish_corpus = extract_email_features(dataset_path_phish_test, feature_list_dict_test,
                                                               extraction_time_dict_test)
     Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
-    Globals.logger.info(">>>>> Cleaning >>>>")
-    Globals.logger.debug("feature_list_dict_test{}".format(len(feature_list_dict_test)))
-    Cleaning(feature_list_dict_test)
-    Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
+
+    Features_Support.Cleaning(feature_list_dict_test)
+    
     labels_test = [0] * num_legit + [1] * num_phish
     corpus_test = legit_corpus + phish_corpus
     Globals.logger.info("--- %s final count seconds ---" % (time.time() - start_time))
