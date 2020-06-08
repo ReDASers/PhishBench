@@ -15,20 +15,16 @@ from ...utils import Globals
 from ...input import input
 
 
-def Extract_Features_Emails_Training():
-    # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
+def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
+    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_datset_folder,phish_dataset_folder)
 
-    ### Training Features
-    Globals.logger.info(">>>>> Feature extraction: Training Set >>>>>")
-    dataset_path_legit_train = Globals.config["Dataset Path"]["path_legitimate_training"]
-    dataset_path_phish_train = Globals.config["Dataset Path"]["path_phishing_training"]
     feature_list_dict_train = []
     extraction_time_dict_train = []
-    num_legit, legit_corpus = extract_email_features(dataset_path_legit_train, feature_list_dict_train,
-                                                                  extraction_time_dict_train)
-    num_phish, phish_corpus = extract_email_features(dataset_path_phish_train, feature_list_dict_train,
+    num_legit, legit_corpus = extract_email_features(legit_datset_folder, feature_list_dict_train,
+                                                     extraction_time_dict_train)
+    num_phish, phish_corpus = extract_email_features(phish_dataset_folder, feature_list_dict_train,
                                                                 extraction_time_dict_train)
-    Globals.logger.debug(">>>>> Feature extraction: Training Set >>>>> Done ")
+
     Features_Support.Cleaning(feature_list_dict_train)
 
     labels_train = [0] * num_legit + [1] * num_phish
@@ -36,29 +32,22 @@ def Extract_Features_Emails_Training():
     return feature_list_dict_train, labels_train, corpus_train
 
 
-def Extract_Features_Emails_Testing():
-    # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
-    start_time = time.time()
-
-    dataset_path_legit_test = Globals.config["Dataset Path"]["path_legitimate_testing"]
-    dataset_path_phish_test = Globals.config["Dataset Path"]["path_phishing_testing"]
-    feature_list_dict_test = []
-    extraction_time_dict_test = []
-    num_legit, legit_corpus = extract_email_features(dataset_path_legit_test, feature_list_dict_test,
-                                                                extraction_time_dict_test)
-    num_phish, phish_corpus = extract_email_features(dataset_path_phish_test, feature_list_dict_test,
-                                                              extraction_time_dict_test)
-    Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
-
-    Features_Support.Cleaning(feature_list_dict_test)
-    
-    labels_test = [0] * num_legit + [1] * num_phish
-    corpus_test = legit_corpus + phish_corpus
-    Globals.logger.info("--- %s final count seconds ---" % (time.time() - start_time))
-    return feature_list_dict_test, labels_test, corpus_test
-
-
 def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
+    '''
+
+    Parameters
+    ----------
+    dataset_path
+    feature_list_dict
+    time_list_dict
+
+    Returns
+    -------
+    int:
+        The number of additional emails added
+    List[str]:
+        The corpus of email
+    '''
     print("Extracting Email features from {}".format(dataset_path))
     Globals.logger.info("Extracting Email features from {}".format(dataset_path))
     corpus_files = input.enumerate_folder_files(dataset_path)

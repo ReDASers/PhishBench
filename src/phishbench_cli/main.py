@@ -157,9 +157,11 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     """
     if not os.path.exists(email_train_dir):
         os.makedirs(email_train_dir)
-    print("Extracting Training Set")
-
-    feature_list_dict_train, y_train, corpus_train = legacy_email.Extract_Features_Emails_Training()
+    print("Extracting Train Set")
+    Globals.logger.info("Extracting Train Set")
+    legit_path = Globals.config["Dataset Path"]["path_legitimate_training"]
+    phish_path = Globals.config["Dataset Path"]["path_phishing_training"]
+    feature_list_dict_train, y_train, corpus_train = legacy_email.extract_dataset_features(legit_path, phish_path)
 
     # Export features to csv
     if Globals.config['Features Export'].getboolean('csv'):
@@ -204,7 +206,11 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
         A list containing the dataset labels
     """
     # Extract features in a dictionary for each email. return a list of dictionaries
-    feature_list_dict_test, y_test, corpus_test = legacy_email.Extract_Features_Emails_Testing()
+    legit_path = Globals.config["Dataset Path"]["path_legitimate_testing"]
+    phish_path = Globals.config["Dataset Path"]["path_phishing_testing"]
+    print("Extracting Test Set")
+    Globals.loger.info('Extracting Test Set')
+    feature_list_dict_test, y_test, corpus_test = legacy_email.extract_dataset_features(legit_path, phish_path)
 
     # Export features to csv
     if Globals.config['Features Export'].getboolean('csv'):
