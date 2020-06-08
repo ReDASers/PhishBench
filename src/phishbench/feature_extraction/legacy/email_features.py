@@ -16,11 +16,10 @@ from ...input import input
 
 
 def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
-    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_datset_folder,phish_dataset_folder)
+    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_datset_folder, phish_dataset_folder)
 
-    extraction_time_dict_train = []
-    legit_features, legit_corpus = extract_email_features(legit_datset_folder, extraction_time_dict_train)
-    phish_features, phish_corpus = extract_email_features(phish_dataset_folder, extraction_time_dict_train)
+    legit_features, legit_corpus = extract_email_features(legit_datset_folder)
+    phish_features, phish_corpus = extract_email_features(phish_dataset_folder)
 
     feature_list_dict_train = legit_features + phish_features
     Features_Support.Cleaning(feature_list_dict_train)
@@ -30,7 +29,7 @@ def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
     return feature_list_dict_train, labels_train, corpus_train
 
 
-def extract_email_features(dataset_path, time_list_dict):
+def extract_email_features(dataset_path):
     '''
 
     Parameters
@@ -57,7 +56,6 @@ def extract_email_features(dataset_path, time_list_dict):
 
         dict_features, dict_time = email_features(file_contents)
         feature_list_dict.append(dict_features)
-        time_list_dict.append(dict_time)
 
         Globals.summary.write("filepath: {}\n\n".format(file_path))
         Globals.summary.write("features extracted for this file:\n")
