@@ -24,9 +24,9 @@ def Extract_Features_Emails_Training():
     dataset_path_phish_train = Globals.config["Dataset Path"]["path_phishing_training"]
     feature_list_dict_train = []
     extraction_time_dict_train = []
-    labels_legit_train, data_legit_train = extract_email_features(dataset_path_legit_train, feature_list_dict_train,
+    num_legit, legit_corpus = extract_email_features(dataset_path_legit_train, feature_list_dict_train,
                                                                   extraction_time_dict_train)
-    labels_all_train, data_phish_train = extract_email_features(dataset_path_phish_train, feature_list_dict_train,
+    num_phish, phish_corpus = extract_email_features(dataset_path_phish_train, feature_list_dict_train,
                                                                 extraction_time_dict_train)
     Globals.logger.debug(">>>>> Feature extraction: Training Set >>>>> Done ")
 
@@ -34,12 +34,8 @@ def Extract_Features_Emails_Training():
     Globals.logger.debug("feature_list_dict_train{}".format(len(feature_list_dict_train)))
     Cleaning(feature_list_dict_train)
     Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
-    labels_train = []
-    for i in range(labels_legit_train):
-        labels_train.append(0)
-    for i in range(labels_all_train - labels_legit_train):
-        labels_train.append(1)
-    corpus_train = data_legit_train + data_phish_train
+    labels_train = [0] * num_legit + [1] * num_phish
+    corpus_train = legit_corpus + phish_corpus
     return feature_list_dict_train, labels_train, corpus_train
 
 
@@ -51,21 +47,17 @@ def Extract_Features_Emails_Testing():
     dataset_path_phish_test = Globals.config["Dataset Path"]["path_phishing_testing"]
     feature_list_dict_test = []
     extraction_time_dict_test = []
-    labels_legit_test, data_legit_test = extract_email_features(dataset_path_legit_test, feature_list_dict_test,
+    num_legit, legit_corpus = extract_email_features(dataset_path_legit_test, feature_list_dict_test,
                                                                 extraction_time_dict_test)
-    labels_all_test, data_phish_test = extract_email_features(dataset_path_phish_test, feature_list_dict_test,
+    num_phish, phish_corpus = extract_email_features(dataset_path_phish_test, feature_list_dict_test,
                                                               extraction_time_dict_test)
     Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
     Globals.logger.info(">>>>> Cleaning >>>>")
     Globals.logger.debug("feature_list_dict_test{}".format(len(feature_list_dict_test)))
     Cleaning(feature_list_dict_test)
     Globals.logger.debug(">>>>> Cleaning >>>>>> Done")
-    labels_test = []
-    for i in range(labels_legit_test):
-        labels_test.append(0)
-    for i in range(labels_all_test - labels_legit_test):
-        labels_test.append(1)
-    corpus_test = data_legit_test + data_phish_test
+    labels_test = [0] * num_legit + [1] * num_phish
+    corpus_test = legit_corpus + phish_corpus
     Globals.logger.info("--- %s final count seconds ---" % (time.time() - start_time))
     return feature_list_dict_test, labels_test, corpus_test
 
@@ -74,18 +66,8 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
     print("Extracting Email features from {}".format(dataset_path))
     Globals.logger.info("Extracting Email features from {}".format(dataset_path))
     corpus_files = input.enumerate_folder_files(dataset_path)
-    # features_regex = re.compile(r"_features_?\d?.txt")
-    ### for debugging purposes, not used in the pipeline
-    # try:
-    #     list_files = os.listdir(dataset_path)
-    #     count_feature_files = len(re.findall(features_regex, ''.join(list_files)))
-    #     Globals.logger.info("Total number of features files: {}".format(count_feature_files))
-    #     features_output = dataset_path + "_feature_vector_" + str(count_feature_files + 1) + ".txt"
-    # except Exception as e:
-    #     features_output = dataset_path + "_feature_vector_error.txt"
-    #     Globals.logger.warning("exception: " + str(e))
-    ###
     corpus = input.read_corpus(corpus_files, "ISO-8859-1")
+    initial_size = len(feature_list_dict)
     for file_path, file_contents in tqdm(corpus.items()):
         Globals.logger.info(file_path)
 
@@ -102,8 +84,7 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
             Globals.summary.write("{} \n".format(feature_name))
             Globals.summary.write("extraction time: {} \n".format(feature_time))
         Globals.summary.write("\n#######\n")
-    count_files = len(feature_list_dict)
-    print(count_files)
+    count_files = len(feature_list_dict) - initial_size
     return count_files, list(corpus.values())
 
 
