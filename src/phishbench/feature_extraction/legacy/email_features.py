@@ -18,41 +18,40 @@ from ...input import input
 def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
     Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_datset_folder,phish_dataset_folder)
 
-    feature_list_dict_train = []
     extraction_time_dict_train = []
-    num_legit, legit_corpus = extract_email_features(legit_datset_folder, feature_list_dict_train,
-                                                     extraction_time_dict_train)
-    num_phish, phish_corpus = extract_email_features(phish_dataset_folder, feature_list_dict_train,
-                                                                extraction_time_dict_train)
+    legit_features, legit_corpus = extract_email_features(legit_datset_folder, extraction_time_dict_train)
+    phish_features, phish_corpus = extract_email_features(phish_dataset_folder, extraction_time_dict_train)
 
+    feature_list_dict_train = legit_features + phish_features
     Features_Support.Cleaning(feature_list_dict_train)
 
-    labels_train = [0] * num_legit + [1] * num_phish
+    labels_train = [0] * len(legit_features) + [1] * len(phish_features)
     corpus_train = legit_corpus + phish_corpus
     return feature_list_dict_train, labels_train, corpus_train
 
 
-def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
+def extract_email_features(dataset_path, time_list_dict):
     '''
 
     Parameters
     ----------
-    dataset_path
-    feature_list_dict
-    time_list_dict
+    dataset_path:
+        The folder containing the datset
 
     Returns
     -------
-    int:
-        The number of additional emails added
+    List[Dict]:
+        The extracted features
     List[str]:
-        The corpus of email
+        The corpus of emails
     '''
+
+    feature_list_dict = []
     print("Extracting Email features from {}".format(dataset_path))
     Globals.logger.info("Extracting Email features from {}".format(dataset_path))
     corpus_files = input.enumerate_folder_files(dataset_path)
     corpus = input.read_corpus(corpus_files, "ISO-8859-1")
-    initial_size = len(feature_list_dict)
+
     for file_path, file_contents in tqdm(corpus.items()):
         Globals.logger.info(file_path)
 
@@ -60,17 +59,13 @@ def extract_email_features(dataset_path, feature_list_dict, time_list_dict):
         feature_list_dict.append(dict_features)
         time_list_dict.append(dict_time)
 
-        # dump_features_emails(file_path, dict_features, features_output,
-        #                      feature_list_dict, dict_time, extraction_time_dict)
-
         Globals.summary.write("filepath: {}\n\n".format(file_path))
         Globals.summary.write("features extracted for this file:\n")
         for feature_name, feature_time in dict_time.items():
             Globals.summary.write("{} \n".format(feature_name))
             Globals.summary.write("extraction time: {} \n".format(feature_time))
         Globals.summary.write("\n#######\n")
-    count_files = len(feature_list_dict) - initial_size
-    return count_files, list(corpus.values())
+    return feature_list_dict, list(corpus.values())
 
 
 def email_features(raw_email):
