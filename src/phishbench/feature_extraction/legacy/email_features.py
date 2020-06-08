@@ -4,15 +4,14 @@ import os
 import pickle
 import re
 import sys
-import time
 
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from ... import Features
 from ... import Features_Support
-from ...utils import Globals
 from ...input import input
+from ...utils import Globals
 
 
 def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
@@ -63,6 +62,7 @@ def extract_email_features(dataset_path):
             Globals.summary.write("{} \n".format(feature_name))
             Globals.summary.write("extraction time: {} \n".format(feature_time))
         Globals.summary.write("\n#######\n")
+
     return feature_list_dict, list(corpus.values())
 
 

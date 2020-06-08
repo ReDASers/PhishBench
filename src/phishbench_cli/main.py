@@ -1,10 +1,9 @@
 import os
 import sys
 from typing import List, Dict
+
 import joblib
 import pandas as pd
-from scipy.sparse import hstack
-
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
@@ -14,6 +13,7 @@ from phishbench.Classifiers import classifiers
 from phishbench.dataset import dataset
 from phishbench.utils import Globals
 from phishbench.utils import user_interaction
+from scipy.sparse import hstack
 
 
 def export_features_to_csv(features: List[Dict], y: List, file_path: str):
@@ -161,6 +161,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     Globals.logger.info("Extracting Train Set")
     legit_path = Globals.config["Dataset Path"]["path_legitimate_training"]
     phish_path = Globals.config["Dataset Path"]["path_phishing_training"]
+
     feature_list_dict_train, y_train, corpus_train = legacy_email.extract_dataset_features(legit_path, phish_path)
 
     # Export features to csv
