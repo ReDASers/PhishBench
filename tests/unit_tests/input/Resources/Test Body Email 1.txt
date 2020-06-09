@@ -1,0 +1,259 @@
+Received: from postman.dnc.org (192.168.10.251) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server id 14.3.224.2; Wed, 11 May 2016
+ 13:00:13 -0400
+Received: from postman.dnc.org (postman [127.0.0.1])	by postman.dnc.org
+ (Postfix) with ESMTP id 9FFBE23685;	Wed, 11 May 2016 13:00:11 -0400 (EDT)
+X-Original-To: DNCRRMain@press.dnc.org
+Delivered-To: DNCRRMain@press.dnc.org
+Received: from dnchubcas2.dnc.org (dnchubcas2.dnc.org [192.168.185.16])	by
+ postman.dnc.org (Postfix) with ESMTP id DA3F823685;	Wed, 11 May 2016 13:00:09
+ -0400 (EDT)
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+	dnchubcas2.dnc.org ([::1]) with mapi id 14.03.0224.002; Wed, 11 May 2016
+	13:00:11 -0400
+From: DNC Press <DNCPress@dnc.org>
+To: DNC Press <DNCPress@dnc.org>
+Subject: STARTING IN 30 MINUTES at 1:30 PM ET: DNC Chair Debbie Wasserman
+	Schultz hosts press call on the state of the race
+Thread-Topic: STARTING IN 30 MINUTES at 1:30 PM ET: DNC Chair Debbie
+	Wasserman Schultz hosts press call on the state of the race
+Thread-Index: AdGrpm7lIoy1IhMeTXK4/SEzHXz04A==
+Date: Wed, 11 May 2016 17:00:10 +0000
+Message-ID: <95177C1E5B25B04BA6C0175A9C2C27B29BE7C3@dncdag1.dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-originating-ip: [192.168.177.99]
+X-BeenThere: dncrrmain@dnc.org
+X-Mailman-Version: 2.1.12
+Precedence: list
+Reply-To: <rapidresponse@dnc.org>
+Content-Type: multipart/mixed;
+	boundary="===============5327017558951396376=="
+Sender: <dncrrmain-bounces@dnc.org>
+Errors-To: dncrrmain-bounces@dnc.org
+Return-Path: dncrrmain-bounces@dnc.org
+X-MS-Exchange-Organization-AuthSource: dnchubcas2.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--===============5327017558951396376==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_95177C1E5B25B04BA6C0175A9C2C27B29BE7C3dncdag1dncorg_"
+
+--_000_95177C1E5B25B04BA6C0175A9C2C27B29BE7C3dncdag1dncorg_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+For Planning Purposes
+May 11, 2016
+
+Contact: DNC Press - 202-863-8148
+
+*MEDIA ADVISORY*
+TODAY, MAY 11, at 1:30 PM ET: DNC Chair Debbie Wasserman Schultz hosts pres=
+s call on the state of the presidential race
+
+Today, DNC Chair Debbie Wasserman Schultz will host a conference call to di=
+scuss the state of the race, the excitement voters see within the Democrati=
+c primary, and the historic chaos unfolding on the Republican side as a sle=
+w of prominent Republicans have announced they either won't support Trump o=
+r attend the GOP's convention.
+
+WHO: DNC Chair Debbie Wasserman Schultz
+
+WHAT: Press Call on State of the Race
+
+WHEN: TODAY, May 11th at 1:30 PM ET
+
+RSVP: Please email Jenna Price, at PriceJ@dnc.org<mailto:PriceJ@dnc.org> fo=
+r dial-in information
+
+###
+
+--_000_95177C1E5B25B04BA6C0175A9C2C27B29BE7C3dncdag1dncorg_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"Palatino Linotype";
+	panose-1:2 4 5 2 5 5 5 3 3 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-priority:99;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+span.EmailStyle19
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.EmailStyle20
+	{mso-style-type:personal;
+	font-family:"Palatino Linotype","serif";
+	color:windowtext;}
+span.EmailStyle21
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle22
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle23
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle24
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle25
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">For Planning Purposes</span></b><=
+span style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quo=
+t;serif&quot;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">May 11, 2016</span></b><span styl=
+e=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&q=
+uot;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">&nbsp;</span></b><span style=3D"f=
+ont-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">=
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">Contact</span></b><span style=3D"=
+font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;"=
+>: DNC Press &#8211;&nbsp;202-863-8148<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,&quot;serif&quot;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><b><spa=
+n style=3D"font-size:16.0pt;font-family:&quot;Times New Roman&quot;,&quot;s=
+erif&quot;;color:#FB0007">*MEDIA ADVISORY*</span></b><span style=3D"font-si=
+ze:16.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;"><o:p><=
+/o:p></span></p>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><b><u><=
+span style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quo=
+t;serif&quot;;color:red">TODAY, MAY 11, at 1:30 PM ET</span></u></b><b><spa=
+n style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;s=
+erif&quot;;color:black">:
+</span></b><b><span style=3D"font-size:12.0pt;font-family:&quot;Times New R=
+oman&quot;,&quot;serif&quot;">DNC Chair Debbie Wasserman Schultz hosts pres=
+s call on the state of the presidential race<span style=3D"color:#1F497D"><=
+o:p></o:p></span></span></b></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;"><o:p>&nbsp;</o:p></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,&quot;serif&quot;">Today, DNC Chair Debbie Wasserman Sc=
+hultz will host a conference call to discuss the state of the race, the exc=
+itement voters see within the Democratic primary, and the
+ historic chaos unfolding on the Republican side as a slew of prominent Rep=
+ublicans have announced they either won&#8217;t support Trump or attend the=
+ GOP&#8217;s convention.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,&quot;serif&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">WHO</span></b><span style=3D"font=
+-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">: D=
+NC Chair Debbie Wasserman Schultz<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;"><br>
+WHAT</span></b><span style=3D"font-size:12.0pt;font-family:&quot;Times New =
+Roman&quot;,&quot;serif&quot;">:&nbsp;Press Call on State of the Race<o:p><=
+/o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,&quot;serif&quot;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">WHEN</span></b><span style=3D"fon=
+t-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">:&=
+nbsp;<b><u>TODAY, May 11<sup>th</sup> at&nbsp;1:30 PM ET</u></b><o:p></o:p>=
+</span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,&quot;serif&quot;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Times New Roman&quot;,&quot;serif&quot;">RSVP</span></b><span style=3D"fon=
+t-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">:&=
+nbsp;Please email
+<b>Jenna Price</b>,<span style=3D"color:#1F497D"> </span>at&nbsp;<a href=3D=
+"mailto:PriceJ@dnc.org" target=3D"_blank">PriceJ@dnc.org</a>&nbsp;for dial-=
+in&nbsp;information<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,&quot;seri=
+f&quot;">###<span style=3D"color:#1F497D"><o:p></o:p></span></span></p>
+</div>
+</body>
+</html>
+
+--_000_95177C1E5B25B04BA6C0175A9C2C27B29BE7C3dncdag1dncorg_--
+
+--===============5327017558951396376==
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+
+To be automatically unsubscribed from this list, please email: dncrrmain-unsubscribe@dnc.org
+--===============5327017558951396376==--

@@ -5,6 +5,8 @@ import os.path
 from email.message import Message
 from typing import List, Union, Dict
 
+import chardet
+
 from .email_input import EmailHeader, EmailBody
 from .url_input import URLData
 from ..utils import Globals
@@ -27,7 +29,7 @@ def enumerate_folder_files(folder_path) -> List[str]:
 
 def read_email_from_file(file_path: str) -> Message:
     """
-    Reads a email from a text file
+    Reads a email from a file
     Parameters
     ----------
     file_path: str
@@ -37,8 +39,26 @@ def read_email_from_file(file_path: str) -> Message:
     email.message.Message:
         A Message object representing the email.
     """
-    with open(file_path, "r", encoding="utf-8") as f:
-        return email.message_from_file(f)
+    with open(file_path, 'rb') as f:
+        binary_data = f.read()
+        msg = email.message_from_bytes(binary_data)
+    try:
+        for part in msg.walk():
+            if not part.is_multipart():
+                str(part)
+    except (LookupError, KeyError):
+        # LookupError -> No charset
+        # KeyError -> No content transfer encoding
+        encoding = chardet.detect(binary_data)['encoding']
+        if not encoding:
+            encoding = None
+        with open(file_path, 'r', encoding=encoding, errors='ignore') as f:
+            # print('Falling back to string for {}'.format(file_name))
+            text = f.read()
+            msg = email.message_from_string(text)
+    except UnicodeError:
+        pass
+    return msg
 
 
 def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:

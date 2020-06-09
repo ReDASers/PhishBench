@@ -1,10 +1,11 @@
-import os
 import re
 from email.message import Message
 
 import lxml
 from bs4 import BeautifulSoup
 from lxml.html.clean import Cleaner
+import chardet
+from io import StringIO
 
 from ...utils import Globals
 
@@ -38,91 +39,70 @@ class EmailBody:
     """
 
     def __init__(self, msg: Message):
-        body_text, body_html, soup, is_html, num_attachment, content_disposition_list, content_type_list, \
-            content_transfer_encoding_list, file_extension_list, charset_list = EmailBody.extract_body(msg)
-        self.text = body_text
-        self.html = body_html
-        self.is_html = is_html
-        self.num_attachment = num_attachment
-        self.content_disposition_list = content_disposition_list
-        self.content_type_list = content_type_list
-        self.content_transfer_encoding_list = content_transfer_encoding_list
-        self.file_extension_list = file_extension_list
-        self.charset_list = charset_list
+        self.text = None
+        self.html = None
+        self.is_html = False
+        self.content_transfer_encoding_list = []
+        self.charset_list = []
+        self.num_attachment = 0
+        self.content_type_list = []
+        self.content_disposition_list = []
+        self.file_extension_list = []
+        self.defects = []
+        self.raw_msg = msg
+        self.__parse_msg(msg)
 
-    # Copied from original PhishBench code
-    @classmethod
-    def extract_body(cls, msg: Message):
-        """
-        Extracts the body from a Message
-        Parameters
-        ----------
-        msg : email.message.Message
-            the raw email to extract from
-        Returns
-        -------
-
-        """
-        is_html = False
-        body_text = ''
-        body_html = ''
-        soup = None
-        content_type_list = []
-        content_disposition_list = []
-        num_attachment = 0
-        charset_list = []
-        content_transfer_encoding_list = []
-        file_extension_list = []
+    def __parse_msg(self, msg: Message):
         for part in msg.walk():
-            content_type = part.get_content_type()
-            content_type_list.append(content_type)
-            content_disposition = str(part.get_content_disposition())
-            content_disposition_full = str(part.get('Content-Disposition'))
-            filename = re.findall(r'(?!filename=)".*"', content_disposition_full)
-            if filename:
-                file_extension = os.path.splitext(filename[0])[1]
-                file_extension_list.append(file_extension)
-            content_disposition_list.append(content_disposition)
-            if 'attachment' in content_disposition:
-                num_attachment = +1
-            if part.get_content_charset():
-                charset_list.append(part.get_content_charset())
-            c_transfer = str(part.get('Content-Transfer-Encoding'))
-            content_transfer_encoding_list.append(c_transfer)
-            if content_type == 'text/plain':
-                Globals.logger.debug("text/plain loop")
-                try:
-                    body_text = part.get_payload(decode=True).decode(part.get_content_charset())
-                    body_text = UNDERSCORE_REGEX.sub('', body_text)
-                    body_text = body_text.strip()
-                except Exception as e:
-                    Globals.logger.debug('Exception: {}'.format(e))
-                    Globals.logger.debug('Exception Handled')
-                    body_text = part.get_payload(decode=False)
-                    body_text = UNDERSCORE_REGEX.sub('', body_text)  # decode
-            elif content_type == 'text/html':
-                Globals.logger.debug("text/html loop")
-                try:
-                    html = part.get_payload(decode=True).decode(part.get_content_charset())
-                except Exception as e:
-                    Globals.logger.debug('Exception: {}'.format(e))
-                    Globals.logger.debug('Exception Handled')
-                    html = part.get_payload(decode=False)
-                # Strips style and Javascript from html
-                cleaner = Cleaner()
-                cleaner.javascript = True
-                cleaner.style = True
-                html = lxml.html.tostring(cleaner.clean_html(lxml.html.parse(html)))
-                soup = BeautifulSoup(html, 'html.parser')
-                if body_text == '':
-                    body_text = soup.text
-                    body_text = HEX_REGEX.sub('', body_text)
-                    body_text = UNDERSCORE_REGEX.sub('', body_text)
-                body_html = str(soup)
-                is_html = True
-            else:
-                Globals.logger.debug("else loop")
-                body_text = part.get_payload(decode=False)
+            if part.is_multipart():
+                # We're only interested in the leaf nodes of the email tree
+                continue
 
-        return body_text, body_html, soup, is_html, num_attachment, content_disposition_list, \
-            content_type_list, content_transfer_encoding_list, file_extension_list, charset_list
+            content_type = part.get_content_type()
+            self.content_type_list.append(content_type)
+
+            content_disposition = part.get_content_disposition()
+            self.content_disposition_list.append(content_disposition)
+
+            self.content_transfer_encoding_list.append(part.get('Content-Transfer-Encoding'))
+
+            if content_disposition == 'attachment':
+                self.num_attachment += 1
+
+            if part.get_filename():
+                basename, ext = part.get_filename().rsplit('.', maxsplit=1)
+                self.file_extension_list.append(ext)
+
+            if content_type == 'text/plain':
+                self.__parse_text_part(part)
+            elif content_type == 'text/html':
+                self.is_html = True
+                self.__parse_html_part(part)
+
+    def __parse_text_part(self, part):
+        try:
+            if self.text:
+                self.text += '\n'
+                self.text += part.get_payload().strip()
+            else:
+                self.text = part.get_payload().strip()
+        except UnicodeError:
+            # We failed to decode the part
+            self.defects.append(part)
+            raw_data = part.get_payload(decode=False)
+            encoding = chardet.detect(raw_data)['encoding']
+            if not encoding:
+                # Fail to detect encoding
+                encoding = 'utf-8'
+            self.text = raw_data.decode(encoding=encoding, errors='replace')
+
+    def __parse_html_part(self, part):
+        html = part.get_payload()
+        cleaner = Cleaner()
+        cleaner.javascript = True
+        cleaner.style = True
+        self.html = lxml.html.tostring(cleaner.clean_html(lxml.html.parse(StringIO(html))))
+        if not self.text:
+            soup = BeautifulSoup(self.html, 'html.parser')
+            self.text = soup.get_text()
+
