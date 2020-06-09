@@ -3,7 +3,6 @@ from unittest.mock import patch
 
 from phishbench import Features
 from tests.mock_objects import mock_objects
-from ...mock_objects import mock_objects
 
 @patch('phishbench.utils.Globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
