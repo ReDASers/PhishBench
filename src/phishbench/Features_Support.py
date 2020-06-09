@@ -335,6 +335,7 @@ def Preprocessing(X):
 
 
 def Cleaning(dict1):
+    Globals.logger.info("Performing Cleaning on dict of len %d", len(dict1))
     count = 0
     for item in dict1:
         # print(item)
@@ -346,6 +347,7 @@ def Cleaning(dict1):
                 item[key] = -1
                 count += 1
                 Globals.logger.debug("Value of {} changed from {} to {}".format(key, original, item[key]))
+    Globals.logger.info("Finished cleaning")
 
 
 # list_id=list(range(1,len(list_features)+1))
