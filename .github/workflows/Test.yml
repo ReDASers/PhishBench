@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         #os: [windows-latest, ubuntu-latest]
-        os: [Windows]
+        os: [Windows, Linux]
       fail-fast: false
     steps:
     - name: Install whois
@@ -43,7 +43,7 @@ jobs:
     strategy:
       matrix:
         # os: [windows-latest, ubuntu-latest]
-        os: [Windows]
+        os: [Windows, Linux]
       fail-fast: false
     steps:
     - name: Install whois
@@ -82,7 +82,7 @@ jobs:
     strategy:
       matrix:
         # os: [windows-latest, ubuntu-latest]
-        os: [Windows]
+        os: [Windows, Linux]
       fail-fast: false
     steps:
     - name: Install whois
