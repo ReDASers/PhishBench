@@ -21,8 +21,6 @@ def g_mean(y_true, y_pred):
 
 @register_metric(MetricType.PROB, 'ROC_AUC')
 def roc_auc(y_true, y_prob):
-    print(y_true.shape)
-    print(y_prob.shape)
     return sklearn.metrics.roc_auc_score(y_true, y_prob)
 
 
