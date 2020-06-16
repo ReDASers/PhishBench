@@ -1,14 +1,12 @@
 import configparser
 import inspect
 
-# import phishbench.Classifiers as Classifiers
-import phishbench.classification as classification
-from phishbench.classification.core import load_internal_classifiers
-
 import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
+# import phishbench.Classifiers as Classifiers
+import phishbench.classification as classification
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
-
+from phishbench.classification.core import load_internal_classifiers
 
 
 def config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
@@ -35,7 +33,6 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     config['Features Export'] = {}
     features_format_section = config['Features Export']
     features_format_section['csv'] = "True"
-
 
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
@@ -139,7 +136,6 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
 
 def update_list():
     list_features = []
-    list_classifiers = []
     list_evaluation_metrics = []
     list_imbalanced_dataset = []
     for member in dir(Features):
@@ -148,7 +144,6 @@ def update_list():
             list_features.append(member)
 
     list_classifiers = [x.__name__ for x in load_internal_classifiers()]
-
 
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)

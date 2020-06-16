@@ -1,8 +1,8 @@
 import os.path as path
 
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.svm import LinearSVC, SVC
 import joblib
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.svm import SVC
 
 from ..core import BaseClassifier
 
@@ -44,12 +44,13 @@ class SVM(BaseClassifier):
                 'degree': [2, 3, 4, 5, 6]
             },
             {
-                'kernel': ['rbf',  'sigmoid'],
+                'kernel': ['rbf', 'sigmoid'],
                 'C': [0.1, 1, 10, 100],
                 'gamma': [1, 0.1, 0.01, 0.001]
             }
         ]
-        clf = RandomizedSearchCV(SVC(probability=True), param_distributions, n_iter=100, n_jobs=-1, pre_dispatch='n_jobs', cv=3,
+        clf = RandomizedSearchCV(SVC(probability=True), param_distributions, n_iter=100, n_jobs=-1,
+                                 pre_dispatch='n_jobs', cv=3,
                                  error_score=0)
         self.clf = clf.fit(x, y).best_estimator_
         return self.clf.get_params()

@@ -356,6 +356,7 @@ def create_performance_df(scores: List[Dict]):
     columns.insert(0, "classifier")
     return df.reindex(columns=columns)
 
+
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
 
@@ -411,7 +412,7 @@ def run_phishbench():
             metrics['classifier'] = classifier.name
             performance_list_dict.append(metrics)
         classifier_performances = create_performance_df(performance_list_dict)
-        
+
         print(classifier_performances)
         classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
 

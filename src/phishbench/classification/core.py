@@ -1,8 +1,8 @@
-from typing import List
-from ..utils import Globals
 import os
+from typing import List
 
 from .settings import CLASSIFICATION_SECTION
+from ..utils import Globals
 
 
 class BaseClassifier:

@@ -13,6 +13,5 @@ DEFAULT_SETTINGS = {
 def run_classifiers():
     return Globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
 
-
 # def num_rounds() -> int:
 #     return int(Globals.config[CLASSIFICATION_SECTION]["Rounds"])

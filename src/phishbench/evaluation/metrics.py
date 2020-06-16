@@ -1,5 +1,5 @@
-import sklearn.metrics
 import imblearn.metrics
+import sklearn.metrics
 
 from .core import register_metric, MetricType
 
