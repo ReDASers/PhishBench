@@ -29,7 +29,7 @@ class SVM(BaseClassifier):
         return self.clf.predict(x)
 
     def predict_proba(self, x):
-        return self.clf.predict_proba(x)
+        return self.clf.predict_proba(x)[:, 1]
 
     def param_search(self, x, y):
         param_distributions = [

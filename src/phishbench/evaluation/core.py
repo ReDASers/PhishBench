@@ -43,7 +43,7 @@ def load_internal_metrics() -> List[Callable]:
 def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
     metric_funcs: List[Callable] = load_internal_metrics()
     y_pred = classifier.predict(x_test)
-    y_prob = classifier.predict_proba(x_test)[:, 1]
+    y_prob = classifier.predict_proba(x_test)
     print(y_prob.shape)
     metrics = {}
     for metric in metric_funcs:
