@@ -2,7 +2,7 @@ from typing import List
 from ..utils import Globals
 import os
 
-CLASSIFICATION_SECTION = 'Classification'
+from .settings import CLASSIFICATION_SECTION
 
 
 class BaseClassifier:
@@ -24,6 +24,10 @@ class BaseClassifier:
             None
         """
         pass
+
+    # TODO Discuss how to add weighted training
+    # Option 1: Have classifiers that support it perform weighted training in the fit function
+    # Option 2: Have a separate weighted_fit function
 
     def predict(self, x):
         """

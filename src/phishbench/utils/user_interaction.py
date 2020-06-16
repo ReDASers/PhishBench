@@ -2,6 +2,7 @@ import os
 import sys
 
 from .Globals import config
+from  ..classification import settings as classification_setings
 
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
@@ -54,7 +55,7 @@ def Confirmation(ignore_confirmation=False):
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
 
     print("\nFeature Selection: {}".format(config['Feature Selection']['select best features']))
-    print("\nRun the classifiers: {}".format(config["Classification"]["Running the classifiers"]))
+    print("\nRun the classifiers: {}".format(classification_setings.run_classifiers()))
     print("\n")
     if ignore_confirmation:
         answer = True

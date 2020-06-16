@@ -1,10 +1,14 @@
 import configparser
 import inspect
 
-import phishbench.Classifiers as Classifiers
+# import phishbench.Classifiers as Classifiers
+import phishbench.classification as classification
+from phishbench.classification.core import load_internal_classifiers
+
 import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+
 
 
 def config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
@@ -56,15 +60,15 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     for imbalanced in list_imbalanced_dataset:
         imbalanced_section[imbalanced] = "True"
 
-    config['Classification'] = {}
-    classification_section = config['Classification']
-    classification_section["Running the Classifiers"] = "True"
-    classification_section["Weighted"] = "True"
-    classification_section["Save Models"] = "True"
-    classification_section["load Models"] = "False"
-    classification_section["rounds"] = "1"
-    classification_section["Rank Classifiers"] = "True"
-    classification_section['rank on metric'] = list_evaluation_metrics[0]
+    config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
+    # classification_section = config['Classification']
+    # classification_section["Run Classifiers"] = "True"
+    # classification_section["Weighted"] = "True"
+    # classification_section["Save Models"] = "True"
+    # classification_section["load Models"] = "False"
+    # classification_section["rounds"] = "1"
+    # classification_section["Rank Classifiers"] = "True"
+    # classification_section['rank on metric'] = list_evaluation_metrics[0]
 
     config['Classifiers'] = {}
     classifiers_section = config['Classifiers']
@@ -143,10 +147,8 @@ def update_list():
         if inspect.isfunction(element):
             list_features.append(member)
 
-    for member in dir(Classifiers):
-        element = getattr(Classifiers, member)
-        if inspect.isfunction(element):
-            list_classifiers.append(member)
+    list_classifiers = [x.__name__ for x in load_internal_classifiers()]
+
 
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
