@@ -11,19 +11,67 @@ class BaseClassifier:
         self.io_dir = io_dir
 
     def fit(self, x, y):
+        """
+        Trains the classifier
+        Parameters
+        ----------
+        x: array-like or sparse matrix of shape (n,f)
+            Training vectors, where n is the number of samples and f is the number of features.
+        y: array-like of shape (n)
+            Target values, with 0 being legitimate and 1 being phishing
+        Returns
+        -------
+            None
+        """
         pass
 
     def predict(self, x):
+        """
+        Parameters
+        ----------
+        x: array-like or sparse matrix of shape (n,f)
+            Test vectors, where n is the number of samples and f is the number of features
+        Returns
+        -------
+        array-like of shape (n)
+            The predicted class values
+        """
         pass
 
     def predict_proba(self, x):
+        """
+        Parameters
+        ----------
+        x: array-like or sparse matrix of shape (n,f)
+            Test vectors, where n is the number of samples and f is the number of features
+        Returns
+        -------
+        array-like of shape (n)
+            The probability of each test vector being phish
+        """
         pass
 
     def load_model(self):
+        """
+        Loads the model from self.io_dir
+        Returns
+        -------
+            None
+        """
         pass
 
     def save_model(self):
+        """
+        Saves the model to self.io_dir
+        Returns
+        -------
+            None
+        """
         pass
+
+    @property
+    def name(self):
+        return type(self).__name__
 
 
 def load_internal_classifiers():
