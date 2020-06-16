@@ -349,6 +349,13 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
 
 
+def create_performance_df(scores: List[Dict]):
+    df = pd.DataFrame(scores)
+    columns: List = df.columns.tolist()
+    columns.remove("classifier")
+    columns.insert(0, "classifier")
+    return df.reindex(columns=columns)
+
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
 
@@ -375,7 +382,6 @@ def run_phishbench():
             x_test = None
             y_test = None
 
-    print(x_train.shape)
     # Feature Selection
     if Globals.config["Feature Selection"].getboolean("select best features"):
         ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
@@ -397,24 +403,17 @@ def run_phishbench():
     if classification.settings.run_classifiers():
         folder = os.path.join(Globals.args.output_input_dir, "Classifiers")
         print("Training Classifiers")
-        num_rounds = classification.settings.num_rounds()
 
-        classifier_performances = pd.DataFrame()
-        for i in range(num_rounds):
-            classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
-            performance_list_dict = []
-            for classifier in classifiers:
-                metrics = evaluation.evaluate_classifier(classifier, x_test, y_test)
-                metrics['classifier'] = classifier.name
-                performance_list_dict.append(metrics)
-            classifier_performances.append(pd.DataFrame(metrics))
-        classifier_performances.to_csv(os.path.join(folder, "performance.csv"))
-
-
-
-
-
-
+        classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
+        performance_list_dict = []
+        for classifier in classifiers:
+            metrics = evaluation.evaluate_classifier(classifier, x_test, y_test)
+            metrics['classifier'] = classifier.name
+            performance_list_dict.append(metrics)
+        classifier_performances = create_performance_df(performance_list_dict)
+        
+        print(classifier_performances)
+        classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
 
     # Classification
     # if Globals.config["Classification"]["Running the classifiers"] == "True":
