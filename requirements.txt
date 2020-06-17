@@ -2,14 +2,14 @@ idna==2.8
 lxml==4.3.4
 tldextract==2.2.2
 requests==2.23.0
-Cython==0.29.14
+Cython==0.29.19
 python-whois==0.7.2
 ipwhois==1.1.0
 matplotlib==3.1.0
 scipy==1.4.1
 selenium==3.141.0
 cryptography==2.7
-numpy==1.18
+numpy==1.18.5
 textblob==0.15.3
 Keras==2.3.1
 nltk==3.4.4
