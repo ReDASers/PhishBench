@@ -29,6 +29,22 @@ class BaseClassifier:
     # Option 1: Have classifiers that support it perform weighted training in the fit function
     # Option 2: Have a separate weighted_fit function
 
+    def param_search(self, x, y):
+        """
+        Performs parameter search to find the best parameters.
+        Parameters
+        ----------
+        x: array-like or sparse matrix of shape (n,f)
+            Training vectors, where n is the number of samples and f is the number of features.
+        y: array-like of shape (n)
+            Target values, with 0 being legitimate and 1 being phishing
+        Returns
+        -------
+        dict:
+            The best parameters.
+        """
+        pass
+
     def predict(self, x):
         """
         Parameters
