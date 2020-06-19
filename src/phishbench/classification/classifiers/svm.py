@@ -26,9 +26,11 @@ class SVM(BaseClassifier):
         self.clf.fit(x, y)
 
     def predict(self, x):
+        assert self.clf is not None, "Classifier must be trained first"
         return self.clf.predict(x)
 
     def predict_proba(self, x):
+        assert self.clf is not None, "Classifier must be trained first"
         return self.clf.predict_proba(x)[:, 1]
 
     def param_search(self, x, y):
@@ -50,7 +52,7 @@ class SVM(BaseClassifier):
             }
         ]
         clf = RandomizedSearchCV(SVC(probability=True), param_distributions, n_iter=100, n_jobs=-1,
-                                 pre_dispatch='n_jobs', cv=3,
-                                 error_score=0)
+                                 pre_dispatch='n_jobs', cv=3, error_score=0)
+
         self.clf = clf.fit(x, y).best_estimator_
         return self.clf.get_params()
