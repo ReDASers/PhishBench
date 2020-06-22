@@ -1,7 +1,7 @@
 import os
 from typing import List
 
-from .settings import CLASSIFICATION_SECTION
+from . import settings as classification_settings
 from ..utils import Globals
 
 
@@ -108,13 +108,15 @@ def load_classifiers(source) -> List[type]:
 def train_classifiers(x_train, y_train, io_dir):
     if not os.path.isdir(io_dir):
         os.makedirs(io_dir)
-    classifiers: List[type] = load_internal_classifiers()
-    classifiers: List[BaseClassifier] = [x(io_dir) for x in classifiers]
+
+    classifiers: List[BaseClassifier] = [x(io_dir) for x in load_internal_classifiers()]
+
     for classifier in classifiers:
-        if Globals.config[CLASSIFICATION_SECTION].getboolean('load models'):
+        if classification_settings.load_models():
             classifier.load_model()
         else:
             classifier.fit(x_train, y_train)
-        if Globals.config[CLASSIFICATION_SECTION].getboolean('save models'):
+
+        if classification_settings.save_models():
             classifier.save_model()
     return classifiers
