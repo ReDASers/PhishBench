@@ -118,9 +118,12 @@ def train_classifiers(x_train, y_train, io_dir):
     for classifier in classifiers:
         if classification_settings.load_models():
             classifier.load_model()
+        elif classification_settings.weighted_training():
+            classifier.fit_weighted(x_train, y_train)
         else:
             classifier.fit(x_train, y_train)
 
         if classification_settings.save_models():
             classifier.save_model()
+
     return classifiers

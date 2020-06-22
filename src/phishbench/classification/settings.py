@@ -7,7 +7,8 @@ DEFAULT_SETTINGS = {
     "Run Classifiers": "True",
     # "Rounds": "1",
     "load models": "False",
-    "save models": "True"
+    "save models": "True",
+    "weighted": "True"
 }
 
 
@@ -21,6 +22,11 @@ def save_models():
 
 def run_classifiers():
     return Globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
+
+
+def weighted_training():
+    return Globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
+
 
 
 def is_enabled(classifier: type):
