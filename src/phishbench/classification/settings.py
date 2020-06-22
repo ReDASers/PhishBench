@@ -28,7 +28,6 @@ def weighted_training():
     return Globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
 
 
-
 def is_enabled(classifier: type):
     return Globals.config[CLASSIFIERS_SECTION].getboolean(classifier.__name__)
 
