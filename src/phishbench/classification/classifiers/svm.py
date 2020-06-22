@@ -51,8 +51,7 @@ class SVM(BaseClassifier):
                 'gamma': [1, 0.1, 0.01, 0.001]
             }
         ]
-        clf = RandomizedSearchCV(SVC(probability=True), param_distributions, n_iter=100, n_jobs=-1,
-                                 pre_dispatch='n_jobs', cv=3, error_score=0)
-
+        base = SVC(probability=True)
+        clf = RandomizedSearchCV(base, param_distributions, n_iter=100, n_jobs=-1, pre_dispatch='n_jobs')
         self.clf = clf.fit(x, y).best_estimator_
         return self.clf.get_params()

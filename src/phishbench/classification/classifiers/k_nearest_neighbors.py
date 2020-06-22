@@ -25,9 +25,7 @@ class KNN(BaseClassifier):
                                'p': range(1, 5)
                                }
         clf = KNeighborsClassifier()
-        cv_clf = RandomizedSearchCV(clf, param_distributions, n_iter=100, scoring=None, n_jobs=-1,
-                                    iid='warn', refit=True, cv=10, verbose=2, pre_dispatch='2*n_jobs',
-                                    random_state=None, error_score='raise-deprecating', return_train_score='warn')
+        cv_clf = RandomizedSearchCV(clf, param_distributions, n_iter=100, n_jobs=-1, pre_dispatch='2*n_jobs')
         self.clf = cv_clf.fit(x, y).best_estimator_
         return self.clf.get_params()
 

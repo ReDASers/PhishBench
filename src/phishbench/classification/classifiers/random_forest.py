@@ -33,8 +33,7 @@ class RandomForest(BaseClassifier):
         return self.clf.predict_proba(x)[:, 1]
 
     def param_search(self, x, y):
-        param_distributions = [
-            {
+        param_distributions = {
                 'n_estimators': list(range(10, 100, 10)),
                 'max_depth': list(range(10, 100, 10)),
                 "min_samples_split": [2, 5, 10],
@@ -42,9 +41,8 @@ class RandomForest(BaseClassifier):
                 "max_features": ['auto', 'sqrt'],
                 "bootstrap": [True, False]
             }
-        ]
-        clf = RandomizedSearchCV(RandomForestClassifier(), param_distributions, n_iter=100, n_jobs=-1,
-                                 pre_dispatch='n_jobs', cv=3, error_score=0)
+        base_clf = RandomForestClassifier()
+        clf = RandomizedSearchCV(base_clf, param_distributions, n_iter=100, n_jobs=-1, pre_dispatch='2*n_jobs')
 
         self.clf = clf.fit(x, y).best_estimator_
         return self.clf.get_params()
