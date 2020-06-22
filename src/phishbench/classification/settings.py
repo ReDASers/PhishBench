@@ -1,6 +1,7 @@
 from ..utils import Globals
 
 CLASSIFICATION_SECTION = 'Classification'
+CLASSIFIERS_SECTION = 'Classifiers'
 
 DEFAULT_SETTINGS = {
     "Run Classifiers": "True",
@@ -20,6 +21,10 @@ def save_models():
 
 def run_classifiers():
     return Globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
+
+
+def is_enabled(classifier: type):
+    return Globals.config[CLASSIFIERS_SECTION].getboolean(classifier.__name__)
 
 # def num_rounds() -> int:
 #     return int(Globals.config[CLASSIFICATION_SECTION]["Rounds"])

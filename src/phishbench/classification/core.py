@@ -2,7 +2,6 @@ import os
 from typing import List
 
 from . import settings as classification_settings
-from ..utils import Globals
 
 
 class BaseClassifier:
@@ -94,15 +93,20 @@ class BaseClassifier:
         return type(self).__name__
 
 
-def load_internal_classifiers():
+def load_internal_classifiers(filter_classifiers=True):
     from . import classifiers
-    return load_classifiers(classifiers)
+    return load_classifiers(classifiers, filter_classifiers=filter_classifiers)
 
 
-def load_classifiers(source) -> List[type]:
-    attrs = [getattr(source, x) for x in dir(source)]
-    attrs = [x for x in attrs if isinstance(x, type) and issubclass(x, BaseClassifier)]
-    return attrs
+def load_classifiers(source, filter_classifiers=True) -> List[type]:
+    classifiers: List[type] = list()
+    for attr_name in dir(source):
+        attr = getattr(source, attr_name)
+        if isinstance(attr, type) and issubclass(attr, BaseClassifier):
+            classifiers.append(attr)
+    if filter_classifiers:
+        return list(filter(classification_settings.is_enabled, classifiers))
+    return classifiers
 
 
 def train_classifiers(x_train, y_train, io_dir):

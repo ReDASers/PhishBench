@@ -143,7 +143,7 @@ def update_list():
         if inspect.isfunction(element):
             list_features.append(member)
 
-    list_classifiers = [x.__name__ for x in load_internal_classifiers()]
+    list_classifiers = [x.__name__ for x in load_internal_classifiers(filter_classifiers=False)]
 
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
