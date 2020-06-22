@@ -3,6 +3,7 @@ from enum import Enum, unique
 from functools import wraps
 from typing import List, Callable
 
+from . import settings
 from ..classification.core import BaseClassifier
 
 
@@ -13,25 +14,24 @@ class MetricType(Enum):
     CLUSTER = 2
 
 
-def register_metric(type: MetricType, config_name: str):
+def register_metric(metric_type: MetricType, config_name: str):
     def wrapped(fn):
         @wraps(fn)
         def wrapped_f(*args, **kwargs):
             return fn(*args, **kwargs)
 
         wrapped_f.config_name = config_name
-        wrapped_f.metric_type = type
+        wrapped_f.metric_type = metric_type
         return wrapped_f
 
     return wrapped
 
 
-def load_metrics(source, filter=True):
+def load_metrics(source, filter_metrics=True):
     attrs = [getattr(source, x) for x in dir(source)]
     metrics = [x for x in attrs if inspect.isfunction(x) and hasattr(x, 'config_name')]
-    if filter:
-        #: TODO Implement filtering
-        pass
+    if filter_metrics:
+        metrics = [x for x in metrics if settings.is_enabled(x.config_name)]
     return metrics
 
 
