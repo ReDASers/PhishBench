@@ -9,7 +9,7 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.feature_extraction.legacy.email_features as legacy_email
 import phishbench.feature_extraction.legacy.url_features as legacy_url
-from phishbench.Classifiers import classifiers as classifiers_legacy
+# from phishbench.Classifiers import classifiers as classifiers_legacy
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 from phishbench.utils import Globals

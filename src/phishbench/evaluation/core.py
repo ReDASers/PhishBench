@@ -35,9 +35,9 @@ def load_metrics(source, filter_metrics=True):
     return metrics
 
 
-def load_internal_metrics() -> List[Callable]:
+def load_internal_metrics(filter_metrics=True) -> List[Callable]:
     from . import metrics
-    return load_metrics(metrics)
+    return load_metrics(metrics, filter_metrics=filter_metrics)
 
 
 def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
