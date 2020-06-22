@@ -12,11 +12,11 @@ DEFAULT_SETTINGS = {
 
 
 def load_models():
-    return Globals.config[CLASSIFICATION_SECTION].get("load models")
+    return Globals.config[CLASSIFICATION_SECTION].getboolean("load models")
 
 
 def save_models():
-    return Globals.config[CLASSIFICATION_SECTION].get("save models")
+    return Globals.config[CLASSIFICATION_SECTION].getboolean("save models")
 
 
 def run_classifiers():
