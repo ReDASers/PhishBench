@@ -94,6 +94,7 @@ class BaseClassifier:
         -------
             None
         """
+        assert self.clf is not None, "Classifier must be trained first"
         joblib.dump(self.clf, self.model_path)
 
     @property
