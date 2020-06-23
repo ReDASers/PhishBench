@@ -15,7 +15,9 @@ class BaseClassifier:
 
     def fit(self, x, y):
         """
-        Trains the classifier
+        Trains the classifier. If being used as a wrapper for a scikit-learn style classifier, then implementations of
+        this function should store the trained underlying classifier in `self.clf`. Other implementations should
+        also override predict and predict_proba
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
@@ -78,7 +80,7 @@ class BaseClassifier:
 
     def load_model(self):
         """
-        Loads the model from self.io_dir
+        Loads the model from `self.io_dir`
         Returns
         -------
             None
@@ -87,7 +89,7 @@ class BaseClassifier:
 
     def save_model(self):
         """
-        Saves the model to self.io_dir
+        Saves the model to `self.io_dir`
         Returns
         -------
             None
