@@ -1,17 +1,23 @@
 import os
 from typing import List
 
+import joblib
+
 from . import settings as classification_settings
 
 
 class BaseClassifier:
 
-    def __init__(self, io_dir):
+    def __init__(self, io_dir, save_file):
         self.io_dir = io_dir
+        self.model_path: str = os.path.join(self.io_dir, save_file)
+        self.clf = None
 
     def fit(self, x, y):
         """
-        Trains the classifier
+        Trains the classifier. If being used as a wrapper for a scikit-learn style classifier, then implementations of
+        this function should store the trained underlying classifier in `self.clf`. Other implementations should
+        also override predict and predict_proba
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
@@ -55,7 +61,8 @@ class BaseClassifier:
         array-like of shape (n)
             The predicted class values
         """
-        pass
+        assert self.clf is not None, "Classifier must be trained first"
+        return self.clf.predict(x)
 
     def predict_proba(self, x):
         """
@@ -68,25 +75,27 @@ class BaseClassifier:
         array-like of shape (n)
             The probability of each test vector being phish
         """
-        pass
+        assert self.clf is not None, "Classifier must be trained first"
+        return self.clf.predict_proba(x)[:, 1]
 
     def load_model(self):
         """
-        Loads the model from self.io_dir
+        Loads the model from `self.io_dir`
         Returns
         -------
             None
         """
-        pass
+        self.clf = joblib.load(self.model_path)
 
     def save_model(self):
         """
-        Saves the model to self.io_dir
+        Saves the model to `self.io_dir`
         Returns
         -------
             None
         """
-        pass
+        assert self.clf is not None, "Classifier must be trained first"
+        joblib.dump(self.clf, self.model_path)
 
     @property
     def name(self):
