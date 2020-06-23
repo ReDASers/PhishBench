@@ -2,12 +2,12 @@ from os import path
 
 import joblib
 import numpy as np
-from sklearn.model_selection import GridSearchCV
-from sklearn_extensions.extreme_learning_machines import ELMRegressor
 from scipy.special import expit
 from sklearn.base import BaseEstimator, ClassifierMixin
-from sklearn.utils.validation import check_X_y, check_array
 from sklearn.exceptions import NotFittedError
+from sklearn.model_selection import GridSearchCV
+from sklearn.utils.validation import check_X_y, check_array
+from sklearn_extensions.extreme_learning_machines import ELMRegressor
 
 from ..core import BaseClassifier
 
@@ -80,7 +80,6 @@ class ExtremeLearningMachine(BaseClassifier):
         clf = ELMClassifier()
         cv_clf = GridSearchCV(clf, param_grid, n_jobs=-1, pre_dispatch='2*n_jobs')
         self.clf = cv_clf.fit(x, y).best_estimator_
-        #print(cv_clf.cv_results_)
         return self.clf.get_params()
 
     def load_model(self):
