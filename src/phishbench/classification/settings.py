@@ -5,6 +5,7 @@ CLASSIFIERS_SECTION = 'Classifiers'
 
 DEFAULT_SETTINGS = {
     "Run Classifiers": "True",
+    "param search": "True",
     # "Rounds": "1",
     "load models": "False",
     "save models": "True",
@@ -22,6 +23,10 @@ def save_models():
 
 def run_classifiers():
     return Globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
+
+
+def param_search():
+    return Globals.config[CLASSIFICATION_SECTION].getboolean("param search")
 
 
 def weighted_training():

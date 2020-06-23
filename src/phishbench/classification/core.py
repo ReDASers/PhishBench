@@ -120,6 +120,8 @@ def train_classifiers(x_train, y_train, io_dir):
             classifier.load_model()
         elif classification_settings.weighted_training():
             classifier.fit_weighted(x_train, y_train)
+        elif classification_settings.param_search():
+            classifier.param_search(x_train, y_train)
         else:
             classifier.fit(x_train, y_train)
 
