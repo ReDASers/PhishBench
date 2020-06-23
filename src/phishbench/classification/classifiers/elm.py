@@ -68,3 +68,6 @@ class ExtremeLearningMachine(BaseClassifier):
         cv_clf = GridSearchCV(clf, param_grid, n_jobs=-1, pre_dispatch='2*n_jobs')
         self.clf = cv_clf.fit(x, y).best_estimator_
         return self.clf.get_params()
+
+    def predict_proba(self, x):
+        return self.clf.predict_proba(x)
