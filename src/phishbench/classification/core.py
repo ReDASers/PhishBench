@@ -1,13 +1,17 @@
 import os
 from typing import List
 
+import joblib
+
 from . import settings as classification_settings
 
 
 class BaseClassifier:
 
-    def __init__(self, io_dir):
+    def __init__(self, io_dir, save_file):
         self.io_dir = io_dir
+        self.model_path: str = os.path.join(self.io_dir, save_file)
+        self.clf = None
 
     def fit(self, x, y):
         """
@@ -55,7 +59,8 @@ class BaseClassifier:
         array-like of shape (n)
             The predicted class values
         """
-        pass
+        assert self.clf is not None, "Classifier must be trained first"
+        return self.clf.predict(x)
 
     def predict_proba(self, x):
         """
@@ -68,7 +73,8 @@ class BaseClassifier:
         array-like of shape (n)
             The probability of each test vector being phish
         """
-        pass
+        assert self.clf is not None, "Classifier must be trained first"
+        return self.clf.predict_proba(x)[:, 1]
 
     def load_model(self):
         """
@@ -77,7 +83,7 @@ class BaseClassifier:
         -------
             None
         """
-        pass
+        self.clf = joblib.load(self.model_path)
 
     def save_model(self):
         """
@@ -86,7 +92,7 @@ class BaseClassifier:
         -------
             None
         """
-        pass
+        joblib.dump(self.clf, self.model_path)
 
     @property
     def name(self):

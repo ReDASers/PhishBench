@@ -1,6 +1,3 @@
-from os import path
-
-import joblib
 import numpy as np
 from scipy.special import expit
 from sklearn.base import BaseEstimator, ClassifierMixin
@@ -34,8 +31,8 @@ class ELMClassifier(BaseEstimator, ClassifierMixin):
 
     def predict_proba(self, x):
         if not self.elm_:
-            msg = "This {}} instance is not fitted yet. Call 'fit' with "\
-                   "appropriate arguments before using this estimator.".format(type(self).__name__)
+            msg = "This {}} instance is not fitted yet. Call 'fit' with " \
+                  "appropriate arguments before using this estimator.".format(type(self).__name__)
 
             raise NotFittedError(msg)
         x = check_array(x, accept_sparse=True)
@@ -55,23 +52,13 @@ class ELMClassifier(BaseEstimator, ClassifierMixin):
 class ExtremeLearningMachine(BaseClassifier):
 
     def __init__(self, io_dir):
-        super().__init__(io_dir)
-        self.clf = None
-        self.model_path: str = path.join(self.io_dir, "model_svm.pkl")
+        super().__init__(io_dir, "model_elm.pkl")
 
     def fit(self, x, y):
         # Using the standard implementation of sigmoid throws a overflow warning.
         # We use scipy's implementation instead
         self.clf = ELMClassifier()
         self.clf.fit(x, y)
-
-    def predict(self, x):
-        assert self.clf is not None, "Classifier must be trained first"
-        return self.clf.predict(x)
-
-    def predict_proba(self, x):
-        assert self.clf is not None, "Classifier must be trained first"
-        return self.clf.predict_proba(x)
 
     def param_search(self, x, y):
         param_grid = {
@@ -81,10 +68,3 @@ class ExtremeLearningMachine(BaseClassifier):
         cv_clf = GridSearchCV(clf, param_grid, n_jobs=-1, pre_dispatch='2*n_jobs')
         self.clf = cv_clf.fit(x, y).best_estimator_
         return self.clf.get_params()
-
-    def load_model(self):
-        self.clf = joblib.load(self.model_path)
-
-    def save_model(self):
-        if self.clf is not None:
-            joblib.dump(self.clf, self.model_path)

@@ -1,6 +1,3 @@
-import os.path as path
-
-import joblib
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.svm import SVC
 
@@ -10,16 +7,7 @@ from ..core import BaseClassifier
 class SVM(BaseClassifier):
 
     def __init__(self, io_dir):
-        super().__init__(io_dir)
-        self.clf = None
-        self.model_path: str = path.join(self.io_dir, "model_svm.pkl")
-
-    def load_model(self):
-        self.clf = joblib.load(self.model_path)
-
-    def save_model(self):
-        if self.clf is not None:
-            joblib.dump(self.clf, self.model_path)
+        super().__init__(io_dir, "model_svm.pkl")
 
     def fit(self, x, y):
         self.clf = SVC(probability=True)
@@ -28,14 +16,6 @@ class SVM(BaseClassifier):
     def fit_weighted(self, x, y):
         self.clf = SVC(probability=True, class_weight='balanced')
         self.clf.fit(x, y)
-
-    def predict(self, x):
-        assert self.clf is not None, "Classifier must be trained first"
-        return self.clf.predict(x)
-
-    def predict_proba(self, x):
-        assert self.clf is not None, "Classifier must be trained first"
-        return self.clf.predict_proba(x)[:, 1]
 
     def param_search(self, x, y):
         param_distributions = [
