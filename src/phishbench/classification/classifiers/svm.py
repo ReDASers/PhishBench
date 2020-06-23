@@ -25,6 +25,10 @@ class SVM(BaseClassifier):
         self.clf = SVC(probability=True)
         self.clf.fit(x, y)
 
+    def fit_weighted(self, x, y):
+        self.clf = SVC(probability=True, class_weight='balanced')
+        self.clf.fit(x, y)
+
     def predict(self, x):
         assert self.clf is not None, "Classifier must be trained first"
         return self.clf.predict(x)

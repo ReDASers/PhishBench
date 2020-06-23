@@ -24,9 +24,9 @@ class BaseClassifier:
         """
         pass
 
-    # TODO Discuss how to add weighted training
-    # Option 1: Have classifiers that support it perform weighted training in the fit function
-    # Option 2: Have a separate weighted_fit function
+    def fit_weighted(self, x, y):
+        print("{} does not support weighted training. Performing regular training.".format(self.name))
+        self.fit(x, y)
 
     def param_search(self, x, y):
         """
@@ -118,9 +118,12 @@ def train_classifiers(x_train, y_train, io_dir):
     for classifier in classifiers:
         if classification_settings.load_models():
             classifier.load_model()
+        elif classification_settings.weighted_training():
+            classifier.fit_weighted(x_train, y_train)
         else:
             classifier.fit(x_train, y_train)
 
         if classification_settings.save_models():
             classifier.save_model()
+
     return classifiers
