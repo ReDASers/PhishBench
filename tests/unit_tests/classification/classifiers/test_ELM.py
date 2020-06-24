@@ -1,11 +1,9 @@
 import unittest
+
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import brier_score_loss
-from sklearn.utils.estimator_checks import check_estimator
 
 from phishbench.classification.classifiers import ExtremeLearningMachine
-from phishbench.classification.classifiers.elm import ELMClassifier
 
 
 class TestELM(unittest.TestCase):
