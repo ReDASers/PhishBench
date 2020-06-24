@@ -12,6 +12,10 @@ class DecisionTree(BaseClassifier):
         self.clf = DecisionTreeClassifier()
         self.clf.fit(x, y)
 
+    def fit_weighted(self, x, y):
+        self.clf = DecisionTreeClassifier(class_weight='balanced')
+        self.clf.fit(x, y)
+
     def param_search(self, x, y):
         param_grid = {
             "criterion": ['gini', 'entropy'],
