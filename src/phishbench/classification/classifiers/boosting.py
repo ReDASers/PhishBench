@@ -1,4 +1,3 @@
-import numpy as np
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
@@ -21,7 +20,7 @@ class Boosting(BaseClassifier):
 
     def param_search(self, x, y):
         param_grid = {
-            "n_estimators": [int(x) for x in np.linspace(start=10, stop=100, num=10)],
+            "n_estimators": range(0, 110, 10),
             "learning_rate": [0.01, 0.1, 0.25, 1.0, 1.25, 1.5],
             "algorithm": ['SAMME', 'SAMME.R']
         }
