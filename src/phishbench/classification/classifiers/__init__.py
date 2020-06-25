@@ -1,3 +1,4 @@
+from .bagging import Bagging
 from .boosting import Boosting
 from .decision_tree import DecisionTree
 from .elm import ExtremeLearningMachine
