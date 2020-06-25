@@ -9,7 +9,6 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.feature_extraction.legacy.email_features as legacy_email
 import phishbench.feature_extraction.legacy.url_features as legacy_url
-# from phishbench.Classifiers import classifiers as classifiers_legacy
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 from phishbench.utils import Globals
@@ -415,42 +414,6 @@ def run_phishbench():
 
         print(classifier_performances)
         classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
-
-    # Classification
-    # if Globals.config["Classification"]["Running the classifiers"] == "True":
-    #     if not feature_extraction_flag:
-    #         if Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-    #             if Globals.config["Classification"]["load model"] == "False":
-    #                 features_extracted = vectorizer.get_feature_names()
-    #                 Globals.logger.info(len(features_extracted))
-    #                 mask = []
-    #                 for feature_name in features_extracted:
-    #                     if "=" in feature_name:
-    #                         feature_name = feature_name.split("=")[0]
-    #                     if "count_in_body" in feature_name:
-    #                         if Globals.config["Email_Features"]["blacklisted_words_body"] == "True":
-    #                             mask.append(1)
-    #                         else:
-    #                             mask.append(0)
-    #                     elif "count_in_subject" in feature_name:
-    #                         if Globals.config["Email_Features"]["blacklisted_words_subject"] == "True":
-    #                             mask.append(1)
-    #                         else:
-    #                             mask.append(0)
-    #                     else:
-    #                         if Globals.config["Email_Features"][feature_name] == "True":
-    #                             mask.append(1)
-    #                         else:
-    #                             mask.append(0)
-    #                 Globals.logger.info(mask)
-    #                 vectorizer = vectorizer.restrict(mask)
-    #                 Globals.logger.info(len(vectorizer.get_feature_names()))
-    #             # X_train=vectorizer.transform(X_train)
-    #
-    #     Globals.logger.info("Running the Classifiers....")
-    #     classifiers_legacy(x_train, y_train, x_test, y_test)
-    #     Globals.logger.info("Done running the Classifiers!!")
-
 
 def main():
     # execute only if run as a script
