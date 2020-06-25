@@ -54,6 +54,26 @@ def f1_score(y_test, y_predict):
     return sklearn.metrics.f1_score(y_test, y_predict)
 
 
+@register_metric(MetricType.PRED, "tn")
+def tn(y_true, y_pred):
+    return sklearn.metrics.confusion_matrix(y_true, y_pred)[0, 0]
+
+
+@register_metric(MetricType.PRED, "tp")
+def tp(y_true, y_pred):
+    return sklearn.metrics.confusion_matrix(y_true, y_pred)[1, 1]
+
+
+@register_metric(MetricType.PRED, "fn")
+def fn(y_true, y_pred):
+    return sklearn.metrics.confusion_matrix(y_true, y_pred)[1, 0]
+
+
+@register_metric(MetricType.PRED, "fp")
+def fp(y_true, y_pred):
+    return sklearn.metrics.confusion_matrix(y_true, y_pred)[0, 1]
+
+
 @register_metric(MetricType.CLUSTER, "homogenity")
 def homogenity(y_test, y_predict):
     return sklearn.metrics.homogeneity_score(y_test, y_predict)
