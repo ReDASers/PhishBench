@@ -260,11 +260,11 @@ def extract_email_features():
     """
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
-    tfifd_flag = Globals.config['Email_Features'].getboolean('extract body features') \
-                 and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
+    run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') \
+                and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, tfifd_flag)
+        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, run_tfidf)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
@@ -277,7 +277,7 @@ def extract_email_features():
         x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
-        if tfifd_flag:
+        if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
 
     if Globals.config["Extraction"]["Testing Dataset"] == "True":
@@ -369,12 +369,20 @@ def run_phishbench():
         if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
             test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+            run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') and \
+                Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
         elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
             train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
             test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
+            run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                Globals.config["HTML_Features"].getboolean("tfidf_websites")
         x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
+        if run_tfidf:
+            tfidf_vectorizer = joblib.load(os.path.join(train_dir, "tfidf_vectorizer.pkl"))
+        else:
+            tfidf_vectorizer = None
         if os.path.exists(os.path.join(test_dir, "X_test.pkl")):
             x_test = joblib.load(os.path.join(test_dir, "X_test.pkl"))
             y_test = joblib.load(os.path.join(test_dir, "y_test.pkl"))
