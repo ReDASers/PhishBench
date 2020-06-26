@@ -9,8 +9,8 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.feature_extraction.legacy.email_features as legacy_email
 import phishbench.feature_extraction.legacy.url_features as legacy_url
-from phishbench.Classifiers import classifiers
-from phishbench.dataset import dataset
+import phishbench.classification as classification
+import phishbench.evaluation as evaluation
 from phishbench.utils import Globals
 from phishbench.utils import user_interaction
 from scipy.sparse import hstack
@@ -348,6 +348,14 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
 
 
+def create_performance_df(scores: List[Dict]):
+    df = pd.DataFrame(scores)
+    columns: List = df.columns.tolist()
+    columns.remove("classifier")
+    columns.insert(0, "classifier")
+    return df.reindex(columns=columns)
+
+
 def run_phishbench():
     feature_extraction_flag = False  # flag for feature extraction
 
@@ -392,97 +400,20 @@ def run_phishbench():
             Globals.logger.info("X_test Shape: {}".format(x_test.shape))
             joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
 
-    # Classification
-    if Globals.config["Classification"]["Running the classifiers"] == "True":
-        if not feature_extraction_flag:
-            if Globals.config["Classification"]["load model"] == "True":
-                x_train, y_train, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
-                    load_train=False, load_test=True)
-                Globals.logger.info("loading test dataset only")
-            else:
-                x_train, y_train, x_test, y_test, vectorizer_train, vectorizer_test = dataset.load_dataset(
-                    load_train=True, load_test=True)
-            if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-                if Globals.config["Classification"]["load model"] == "False":
-                    pass
-                    #
-                    # features_extracted=vectorizer_train.get_feature_names()
-                    # #Globals.logger.info(features_extracted)
-                    # import numpy as np
-                    # if X_train is not None:
-                    #     Features_training=vectorizer_train.inverse_transform(X_train)
-                    # if X_test is not None:
-                    #     Features_testing=vectorizer_test.inverse_transform(X_test)
-                    # mask=[]
-                    # #mask.append(0)
-                    # #Globals.logger.info("Section: {} ".format(section))
-                    # for feature in features_extracted:
-                    #     feature_name=feature
-                    #     if "=" in feature:
-                    #         feature_name=feature.split("=")[0]
-                    #     if "url_char_distance_" in feature:
-                    #         feature_name="char_distance"
-                    #     for section in ["HTML_Features", "URL_Features", "Network_Features", "Javascript_Features"]:
-                    #         try:
-                    #             if Globals.config[section][feature_name]=="True":
-                    #                 if Globals.config[section][section.lower()]=="True":
-                    #                     mask.append(1)
-                    #                 else:
-                    #                     mask.append(0)
-                    #             else:
-                    #                 mask.append(0)
-                    #         except KeyError as e:
-                    #             pass
-                    # Globals.logger.info(len(vectorizer_train.get_feature_names()))
-                    # vectorizer_train.restrict(mask)
-                    # url_classification_dir =  os.path.join(Globals.args.output_input_dir, "URLs_Classification")
-                    # if X_train is not None:
-                    #     X_train=vectorizer_train.transform(Features_training)
-                    #     Globals.logger.info(np.shape(X_train))
-                    # if X_test is not None:
-                    #     X_test=vectorizer_train.transform(Features_testing)
-                    # if not os.path.exists(url_classification_dir):
-                    #     os.makedirs(url_classification_dir)
-                    # joblib.dump(vectorizer_train, os.path.join(url_classification_dir, "vectorizer_restricted.pkl"))
-                    # if X_train is not None:
-                    #     joblib.dump(X_train, os.path.join(url_classification_dir, "X_train_restricted.pkl"))
-                    # if X_test is not None:
-                    #     joblib.dump(X_test, os.path.join(url_classification_dir, "X_test_restricted.pkl"))
-                    # Globals.logger.info(len(vectorizer_train.get_feature_names()))
+    if classification.settings.run_classifiers():
+        folder = os.path.join(Globals.args.output_input_dir, "Classifiers")
+        print("Training Classifiers")
 
-                    # exit()
-            elif Globals.config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-                if Globals.config["Classification"]["load model"] == "False":
-                    features_extracted = vectorizer_train.get_feature_names()
-                    Globals.logger.info(len(features_extracted))
-                    mask = []
-                    for feature_name in features_extracted:
-                        if "=" in feature_name:
-                            feature_name = feature_name.split("=")[0]
-                        if "count_in_body" in feature_name:
-                            if Globals.config["Email_Features"]["blacklisted_words_body"] == "True":
-                                mask.append(1)
-                            else:
-                                mask.append(0)
-                        elif "count_in_subject" in feature_name:
-                            if Globals.config["Email_Features"]["blacklisted_words_subject"] == "True":
-                                mask.append(1)
-                            else:
-                                mask.append(0)
-                        else:
-                            if Globals.config["Email_Features"][feature_name] == "True":
-                                mask.append(1)
-                            else:
-                                mask.append(0)
-                    Globals.logger.info(mask)
-                    vectorizer = vectorizer_train.restrict(mask)
-                    Globals.logger.info(len(vectorizer.get_feature_names()))
-                # X_train=vectorizer.transform(X_train)
+        classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
+        performance_list_dict = []
+        for classifier in classifiers:
+            metrics = evaluation.evaluate_classifier(classifier, x_test, y_test)
+            metrics['classifier'] = classifier.name
+            performance_list_dict.append(metrics)
+        classifier_performances = create_performance_df(performance_list_dict)
 
-        Globals.logger.info("Running the Classifiers....")
-        classifiers(x_train, y_train, x_test, y_test)
-        Globals.logger.info("Done running the Classifiers!!")
-
+        print(classifier_performances)
+        classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
 
 def main():
     # execute only if run as a script

@@ -1,13 +1,17 @@
 import configparser
 import inspect
 
-import phishbench.Classifiers as Classifiers
-import phishbench.Evaluation_Metrics as Evaluation_Metrics
+# import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
+# import phishbench.Classifiers as Classifiers
+import phishbench.classification as classification
+from phishbench.evaluation.core import load_internal_metrics, register_metric
+from phishbench.evaluation import settings as evaluation_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+from phishbench.classification.core import load_internal_classifiers
 
 
-def config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
+def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
     config = configparser.ConfigParser()
 
     config['Dataset Path'] = {}
@@ -32,7 +36,6 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     features_format_section = config['Features Export']
     features_format_section['csv'] = "True"
 
-
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
     # preprocessing_section['mean_scaling']= "True"
@@ -56,23 +59,23 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
     for imbalanced in list_imbalanced_dataset:
         imbalanced_section[imbalanced] = "True"
 
-    config['Classification'] = {}
-    classification_section = config['Classification']
-    classification_section["Running the Classifiers"] = "True"
-    classification_section["Weighted"] = "True"
-    classification_section["Save Models"] = "True"
-    classification_section["load Models"] = "False"
-    classification_section["rounds"] = "1"
-    classification_section["Rank Classifiers"] = "True"
-    classification_section['rank on metric'] = list_evaluation_metrics[0]
+    config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
+    # classification_section = config['Classification']
+    # classification_section["Run Classifiers"] = "True"
+    # classification_section["Weighted"] = "True"
+    # classification_section["Save Models"] = "True"
+    # classification_section["load Models"] = "False"
+    # classification_section["rounds"] = "1"
+    # classification_section["Rank Classifiers"] = "True"
+    # classification_section['rank on metric'] = list_evaluation_metrics[0]
 
-    config['Classifiers'] = {}
-    classifiers_section = config['Classifiers']
+    config[classification.settings.CLASSIFIERS_SECTION] = {}
+    classifiers_section = config[classification.settings.CLASSIFIERS_SECTION]
     for classifier in list_classifiers:
         classifiers_section[classifier] = "True"
 
-    config['Evaluation Metrics'] = {}
-    metrics_section = config['Evaluation Metrics']
+    config[evaluation_settings.EVALUATION_SECTION] = {}
+    metrics_section = config[evaluation_settings.EVALUATION_SECTION]
     for metric in list_evaluation_metrics:
         metrics_section[metric] = "True"
 
@@ -135,28 +138,20 @@ def config(list_features, list_classifiers, list_imbalanced_dataset, list_evalua
 
 def update_list():
     list_features = []
-    list_classifiers = []
-    list_evaluation_metrics = []
     list_imbalanced_dataset = []
     for member in dir(Features):
         element = getattr(Features, member)
         if inspect.isfunction(element):
             list_features.append(member)
 
-    for member in dir(Classifiers):
-        element = getattr(Classifiers, member)
-        if inspect.isfunction(element):
-            list_classifiers.append(member)
+    list_classifiers = [x.__name__ for x in load_internal_classifiers(filter_classifiers=False)]
 
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
         if inspect.isfunction(element):
             list_imbalanced_dataset.append(member)
 
-    for member in dir(Evaluation_Metrics):
-        element = getattr(Evaluation_Metrics, member)
-        if inspect.isfunction(element):
-            list_evaluation_metrics.append(member)
+    list_evaluation_metrics = [x.config_name for x in load_internal_metrics(filter_metrics=False)]
 
     return list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics
 
@@ -165,7 +160,7 @@ def main():
     # execute only if run as a script
     list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics = update_list()
     # update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
-    config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
+    make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
 
 
 if __name__ == "__main__":
