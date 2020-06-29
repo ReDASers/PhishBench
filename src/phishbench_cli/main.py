@@ -12,7 +12,7 @@ import phishbench.feature_extraction.legacy.url_features as legacy_url
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 from phishbench.utils import Globals
-from phishbench.utils import user_interaction
+from phishbench_cli import user_interaction
 from scipy.sparse import hstack
 
 
@@ -425,8 +425,8 @@ def run_phishbench():
 
 def main():
     # execute only if run as a script
-    Globals.setup_globals()
-    answer = user_interaction.Confirmation(Globals.args.ignore_confirmation)
+    Globals.setup_parser()
+    answer = user_interaction.confirmation(Globals.args.ignore_confirmation)
     original = sys.stdout
     if answer:
         Globals.logger.debug("Running......")

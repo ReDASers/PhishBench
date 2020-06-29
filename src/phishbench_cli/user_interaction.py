@@ -1,8 +1,8 @@
-import os
 import sys
 
-from .Globals import config
-from  ..classification import settings as classification_setings
+from phishbench.classification import settings as classification_setings
+from phishbench.utils.Globals import config
+
 
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
@@ -34,10 +34,12 @@ def query_yes_no(question, default="yes"):
             sys.stdout.write("Please respond with 'yes' or 'no' "
                              "(or 'y' or 'n').\n")
 
-def Confirmation(ignore_confirmation=False):
+
+def confirmation(ignore_confirmation=False):
     print("##### Review of Options:")
     if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        print("extract_features_emails = {}".format(config["Email or URL feature Extraction"]["extract_features_emails"]))
+        print(
+            "extract_features_emails = {}".format(config["Email or URL feature Extraction"]["extract_features_emails"]))
     elif config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
         print("extract_features_urls = {}".format(config["Email or URL feature Extraction"]["extract_features_urls"]))
 
@@ -58,7 +60,5 @@ def Confirmation(ignore_confirmation=False):
     print("\nRun the classifiers: {}".format(classification_setings.run_classifiers()))
     print("\n")
     if ignore_confirmation:
-        answer = True
-    else:
-        answer = query_yes_no("Do you wish to continue?")
-    return answer
+        return True
+    return query_yes_no("Do you wish to continue?")
