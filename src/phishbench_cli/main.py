@@ -4,16 +4,17 @@ from typing import List, Dict
 
 import joblib
 import pandas as pd
+from scipy.sparse import hstack
+
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
-import phishbench.feature_extraction.legacy.email_features as legacy_email
-import phishbench.feature_extraction.legacy.url_features as legacy_url
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
+import phishbench.feature_extraction.legacy.email_features as legacy_email
+import phishbench.feature_extraction.legacy.url_features as legacy_url
 from phishbench.utils import Globals
 from phishbench_cli import user_interaction
-from scipy.sparse import hstack
 
 
 def export_features_to_csv(features: List[Dict], y: List, file_path: str):
@@ -66,22 +67,22 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
     # Transform the list of dictionaries into a sparse matrix
-    X_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
 
-    joblib.dump(X_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
+    joblib.dump(x_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
     if run_tfidf:
         Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
-        Tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-        joblib.dump(Tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
-        X_train = hstack([X_train, Tfidf_train])
+        tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        joblib.dump(tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
+        x_train = hstack([x_train, tfidf_train])
     else:
         tfidf_vectorizer = None
 
-    X_train = Features_Support.Preprocessing(X_train)
+    x_train = Features_Support.Preprocessing(x_train)
 
-    return X_train, y_train, vectorizer, tfidf_vectorizer
+    return x_train, y_train, vectorizer, tfidf_vectorizer
 
 
 def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=None):
@@ -210,7 +211,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     legit_path = Globals.config["Dataset Path"]["path_legitimate_testing"]
     phish_path = Globals.config["Dataset Path"]["path_phishing_testing"]
     print("Extracting Test Set")
-    Globals.loger.info('Extracting Test Set')
+    Globals.logger.info('Extracting Test Set')
     feature_list_dict_test, y_test, corpus_test = legacy_email.extract_dataset_features(legit_path, phish_path)
 
     # Export features to csv
@@ -370,12 +371,12 @@ def run_phishbench():
             train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
             test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
             run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') and \
-                Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
+                        Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
         elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
             train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
             test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
             run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                Globals.config["HTML_Features"].getboolean("tfidf_websites")
+                        Globals.config["HTML_Features"].getboolean("tfidf_websites")
         x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
@@ -405,7 +406,7 @@ def run_phishbench():
 
         if x_test is not None:
             x_test = selection_model.transform(x_test)
-            Globals.logger.info("X_test Shape: {}".format(x_test.shape))
+            Globals.logger.info("X_test Shape: %s", x_test.shape)
             joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
 
     if classification.settings.run_classifiers():
@@ -422,6 +423,7 @@ def run_phishbench():
 
         print(classifier_performances)
         classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
+
 
 def main():
     # execute only if run as a script
