@@ -1,0 +1,55 @@
+name: Lint
+
+on: pull_request
+
+jobs:
+  Lint:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install pylint
+      run: pip install --ignore-installed pylint
+
+    - name: Get file changes
+      id: file_changes
+      uses: dorner/file-changes-action@v1.2.0
+      with:
+        githubToken: ${{ github.token	}}
+        output: 'json'
+
+    - name: Run Pylint
+      id: lint
+      run: |
+        $ChangedFiles = ConvertFrom-Json '${{ steps.file_changes.outputs.files }}' 
+        Write-Output $ChangedFiles
+        $ChangedFiles = $ChangedFiles | Where-Object {$_.EndsWith(".py") }
+        Write-Output $ChangedFiles
+        $output = pylint -j 0 --exit-zero $ChangedFiles
+        Write-Output $output
+        $output = $output -join "`n"
+        $output = $output.Replace("`r","%0D").Replace("`n","%0A")
+        Write-Output "::set-output name=output::$output"
+
+    - uses: thollander/actions-comment-pull-request@master
+      with:
+        GITHUB_TOKEN: ${{ github.token	}}
+        message: |
+          Lint Results:
+          ```
+          ${{ steps.lint.outputs.output }}
+          ```
+        
