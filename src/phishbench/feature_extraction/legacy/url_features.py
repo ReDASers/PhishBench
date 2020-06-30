@@ -325,7 +325,7 @@ def single_javascript_features(soup, html, list_features, list_time):
 
 
 def single_network_features(url, list_features, list_time):
-    Globals.logger.debug("Extracting network features from %S", url)
+    Globals.logger.debug("Extracting network features from %s", url)
     Features.Network_creation_date(url.domain_whois, list_features, list_time)
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)
