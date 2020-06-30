@@ -1,11 +1,9 @@
 import configparser
 import inspect
 
-# import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
-# import phishbench.Classifiers as Classifiers
 import phishbench.classification as classification
-from phishbench.evaluation.core import load_internal_metrics, register_metric
+from phishbench.evaluation.core import load_internal_metrics
 from phishbench.evaluation import settings as evaluation_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 from phishbench.classification.core import load_internal_classifiers
