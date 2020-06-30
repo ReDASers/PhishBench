@@ -8,7 +8,7 @@ import logging
 
 args = None
 config = configparser.ConfigParser()
-logger = logging.getLogger('root')  # type: logging.Logger
+logger: logging.Logger = logging.getLogger('root')
 summary = None
 
 
@@ -22,6 +22,7 @@ def setup_parser():
     parser.add_argument("-c", "--ignore_confirmation", help="does not wait or user's confirmation", action="store_true")
     parser.add_argument("-f", "--config_file", help="The config file to use.", type=str, default='Default_Config.ini')
     args = parser.parse_args()
+    setup_globals(args.config_file)
 
 
 def setup_logger():
@@ -47,15 +48,18 @@ def setup_logger():
         logger.setLevel(logging.INFO)
 
 
-def setup_globals():
+def setup_globals(config_file):
     global args
     global config
     global summary
-    setup_parser()
-    config.read(args.config_file)
+
+    config.read(config_file)
     summary = open(config["Summary"]["Path"], 'w')
     setup_logger()
 
 
 def destroy_globals():
-    summary.close()
+    global summary
+    if summary:
+        summary.close()
+    summary = None
