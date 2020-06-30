@@ -1,8 +1,4 @@
-import ntpath
-import os
 import pickle
-import re
-import time
 import traceback
 
 from bs4 import BeautifulSoup
@@ -232,7 +228,6 @@ def single_url_feature(raw_url, list_features, list_time):
     Features.URL_Is_Whitelisted(raw_url, list_features, list_time)
 
 
-
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
     raw_url = url.raw_url
     downloaded_website = url.downloaded_website
@@ -330,7 +325,7 @@ def single_javascript_features(soup, html, list_features, list_time):
 
 
 def single_network_features(url, list_features, list_time):
-    Globals.logger.debug("Extracting network features from %S", url)
+    Globals.logger.debug("Extracting network features from %s", url)
     Features.Network_creation_date(url.domain_whois, list_features, list_time)
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)

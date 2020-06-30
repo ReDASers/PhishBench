@@ -1,11 +1,9 @@
 import configparser
 import inspect
 
-# import phishbench.Evaluation_Metrics as Evaluation_Metrics
 import phishbench.Features as Features
-# import phishbench.Classifiers as Classifiers
 import phishbench.classification as classification
-from phishbench.evaluation.core import load_internal_metrics, register_metric
+from phishbench.evaluation.core import load_internal_metrics
 from phishbench.evaluation import settings as evaluation_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 from phishbench.classification.core import load_internal_classifiers
@@ -60,14 +58,6 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
         imbalanced_section[imbalanced] = "True"
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
-    # classification_section = config['Classification']
-    # classification_section["Run Classifiers"] = "True"
-    # classification_section["Weighted"] = "True"
-    # classification_section["Save Models"] = "True"
-    # classification_section["load Models"] = "False"
-    # classification_section["rounds"] = "1"
-    # classification_section["Rank Classifiers"] = "True"
-    # classification_section['rank on metric'] = list_evaluation_metrics[0]
 
     config[classification.settings.CLASSIFIERS_SECTION] = {}
     classifiers_section = config[classification.settings.CLASSIFIERS_SECTION]
@@ -159,7 +149,6 @@ def update_list():
 def main():
     # execute only if run as a script
     list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics = update_list()
-    # update_file(list_Features, list_Classifiers, list_Imbalanced_dataset, list_Evaluation_metrics)
     make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
 
 
