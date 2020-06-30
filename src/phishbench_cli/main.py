@@ -121,9 +121,9 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
 
     if tfidf_vectorizer:
         Globals.logger.info("Extracting TFIDF features for testing websites ######")
-        Tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
-        joblib.dump(Tfidf_test, os.path.join(url_test_dir, "tfidf_features.pkl"))
-        x_test = hstack([x_test, Tfidf_test])
+        tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
+        joblib.dump(tfidf_test, os.path.join(url_test_dir, "tfidf_features.pkl"))
+        x_test = hstack([x_test, tfidf_test])
 
     joblib.dump(x_test, os.path.join(url_test_dir, "X_test_unprocessed_with_tfidf.pkl"))
 
