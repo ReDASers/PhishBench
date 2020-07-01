@@ -39,34 +39,31 @@ def Extract_Features_Urls_Testing():
 
 
 def Extract_Features_Urls_Training():
-    # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
-    if Globals.config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        print("===============================================================")
-        print("===============================================================")
-        print(">>>>> Feature extraction: Training Set >>>>>")
+    print("===============================================================")
+    print("===============================================================")
+    print(">>>>> Feature extraction: Training Set >>>>>")
 
-        dataset_path_legit_train = Globals.config["Dataset Path"]["path_legitimate_training"]
-        dataset_path_phish_train = Globals.config["Dataset Path"]["path_phishing_training"]
-        feature_list_dict_train = []
-        extraction_time_dict_train = []
-        bad_url_list = []
-        print("Extracting Features from legitimate URLs")
-        num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
-                                                           extraction_time_dict_train, bad_url_list)
-        print("Extracting Features from Phishing URLs")
-        num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
-                                                           extraction_time_dict_train, bad_url_list)
+    dataset_path_legit_train = Globals.config["Dataset Path"]["path_legitimate_training"]
+    dataset_path_phish_train = Globals.config["Dataset Path"]["path_phishing_training"]
+    feature_list_dict_train = []
+    extraction_time_dict_train = []
+    bad_url_list = []
+    print("Extracting Features from legitimate URLs")
+    num_legit, data_legit_train = extract_url_features(dataset_path_legit_train, feature_list_dict_train,
+                                                       extraction_time_dict_train, bad_url_list)
+    print("Extracting Features from Phishing URLs")
+    num_phish, data_phish_train = extract_url_features(dataset_path_phish_train, feature_list_dict_train,
+                                                       extraction_time_dict_train, bad_url_list)
 
-        print(">>>>> Feature extraction: Training Set >>>>> Done ")
-        Cleaning(feature_list_dict_train)
-        print(">>>>> Cleaning >>>>>> Done")
-        print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
+    print(">>>>> Feature extraction: Training Set >>>>> Done ")
+    Cleaning(feature_list_dict_train)
+    print(">>>>> Cleaning >>>>>> Done")
+    print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
 
-        labels_train = ([0] * num_legit) + ([1] * num_phish)
-        corpus_train = data_legit_train + data_phish_train
+    labels_train = ([0] * num_legit) + ([1] * num_phish)
+    corpus_train = data_legit_train + data_phish_train
 
-        return feature_list_dict_train, labels_train, corpus_train
-    return None, None, None
+    return feature_list_dict_train, labels_train, corpus_train
 
 
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
