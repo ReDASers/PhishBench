@@ -13,7 +13,7 @@ python_whois==0.7.3
 numpy==1.18.5
 lxml==4.3.4
 nltk==3.5
-langdetect==1.0.7
+langdetect==1.0.8
 beautifulsoup4==4.9.1
 dnspython==1.16.0
 DocumentFeatureSelection==1.5
