@@ -6,7 +6,7 @@ requests==2.24.0
 joblib==0.15.1
 selenium==3.141.0
 sklearn_extensions==0.0.2
-textstat==0.5.6
+textstat==0.6.2
 ipwhois==1.1.0
 tqdm==4.47.0
 python_whois==0.7.3
