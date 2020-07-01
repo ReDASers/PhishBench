@@ -7,7 +7,7 @@ from typing import List, Union, Dict
 
 import chardet
 
-from .email_input import EmailHeader, EmailBody
+from .email_input.models import EmailHeader, EmailBody, EmailMessage
 from .url_input import URLData
 from ..utils import Globals
 
@@ -83,7 +83,7 @@ def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:
     return corpus
 
 
-def read_dataset_email(folder_path: str) -> Union[List[EmailBody], List[EmailHeader], List[Message], List[str]]:
+def read_dataset_email(folder_path: str) -> Union[List[EmailMessage], List[Message], List[str]]:
     """
 
     Parameters
@@ -96,9 +96,8 @@ def read_dataset_email(folder_path: str) -> Union[List[EmailBody], List[EmailHea
     """
     files = enumerate_folder_files(folder_path)
     emails = [read_email_from_file(f) for f in files]
-    headers = [EmailHeader(msg) for msg in emails]
-    bodies = [EmailBody(msg) for msg in emails]
-    return bodies, headers, emails, files
+    emails_parsed = [EmailMessage(msg) for msg in emails]
+    return emails_parsed, emails, files
 
 
 def read_urls_from_file(file_path: str):

@@ -7,7 +7,7 @@ from lxml.html.clean import Cleaner
 import chardet
 from io import StringIO
 
-from ...utils import Globals
+from phishbench.utils import Globals
 
 HEX_REGEX = re.compile(r"0x[0-9a-f]*?,?", flags=re.IGNORECASE | re.MULTILINE)
 UNDERSCORE_REGEX = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)

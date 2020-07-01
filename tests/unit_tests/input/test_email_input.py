@@ -1,16 +1,18 @@
 import email
 import unittest
 from os import path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
-from phishbench.input.email_input import EmailHeader, EmailBody
-from phishbench.input.email_input._header import parse_address_list
-from phishbench.input.email_input._header import parse_email_date
+from phishbench.input.email_input.models import EmailHeader, EmailBody
+from phishbench.input.email_input.models._header import parse_address_list
+from phishbench.input.email_input.models._header import parse_email_date
+
 
 def get_relative_path(filename):
     current_loc = path.dirname(path.abspath(__file__))
     loc = path.join(current_loc, filename)
     return loc
+
 
 def get_email(filename):
     loc = get_relative_path(filename)
@@ -51,7 +53,6 @@ class TestEmailHeader(unittest.TestCase):
         raw = "BACON!"
 
         self.assertRaises(ValueError, parse_email_date, raw)
-
 
     def test_parse_email_date(self):
         raw = 'Mon, 14 Apr 2015 16:08:50 +0500'
@@ -172,12 +173,13 @@ class TestEmailHeader(unittest.TestCase):
         header = EmailHeader(msg)
         self.assertEqual(0, len(header.reply_to))
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_reply_to(self, m_mock: MagicMock):
+    def test_reply_to(self):
         msg = get_email("Resources/Test Email 2.txt")
 
-        EmailHeader(msg)
-        m_mock.assert_any_call("\"User\" <user@domain.com>, Bob <user2@domain.com>")
+        header = EmailHeader(msg)
+        self.assertEqual(len(header.reply_to), 2)
+        self.assertEqual(header.reply_to[0], '"User" <user@domain.com>')
+        self.assertEqual(header.reply_to[1], 'Bob <user2@domain.com>')
 
     def test_sender(self):
         msg = get_email("Resources/Test Email 1.txt")
@@ -186,11 +188,13 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual("Matthew Budman", header.sender_name)
         self.assertEqual("matthewb@annapurnapics.com", header.sender_email_address)
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_to(self, a_mock):
+    def test_to(self):
         msg = get_email("Resources/Test Email 2.txt")
-        EmailHeader(msg)
-        a_mock.assert_any_call("\"User\" <user@domain.com>, Bob <user2@domain.com>")
+        header = EmailHeader(msg)
+
+        self.assertEqual(len(header.to), 2)
+        self.assertEqual(header.to[0], '"User" <user@domain.com>')
+        self.assertEqual(header.to[1], 'Bob <user2@domain.com>')
 
     def test_recipient(self):
         msg = get_email("Resources/Test Email 1.txt")
@@ -219,11 +223,13 @@ class TestEmailHeader(unittest.TestCase):
         header = EmailHeader(msg)
         self.assertEqual(0, len(header.cc))
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_bcc(self, m_mock):
+    def test_bcc(self):
         msg = get_email("Resources/Test Email 2.txt")
-        EmailHeader(msg)
-        m_mock.assert_any_call("Anna <anna@domain.com>, Joe <user2@domain.com>,\n Sue <user3@domain.com>")
+        header = EmailHeader(msg)
+
+        self.assertEqual(header.bcc[0], 'Anna <anna@domain.com>')
+        self.assertEqual(header.bcc[1], 'Joe <user2@domain.com>')
+        self.assertEqual(header.bcc[2], 'Sue <user3@domain.com>')
 
     def test_message_id(self):
         msg = get_email("Resources/Test Email 1.txt")
