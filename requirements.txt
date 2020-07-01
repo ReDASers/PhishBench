@@ -1,7 +1,6 @@
 chardet==3.0.4
 scipy==1.5.0
 tldextract==2.2.2
-imbalanced_learn==0.6.2
 pandas==1.0.5
 requests==2.24.0
 joblib==0.14.1
@@ -18,5 +17,5 @@ langdetect==1.0.7
 beautifulsoup4==4.9.1
 dnspython==1.16.0
 DocumentFeatureSelection==1.5
-imblearn==0.0
+imbalanced-learn==0.7.0
 scikit_learn==0.23.1
