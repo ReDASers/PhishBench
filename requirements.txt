@@ -20,4 +20,3 @@ dnspython==1.16.0
 DocumentFeatureSelection==1.5
 imblearn==0.0
 scikit_learn==0.23.1
-python-whois==0.7.2
