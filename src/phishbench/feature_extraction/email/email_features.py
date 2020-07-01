@@ -8,10 +8,10 @@ import sys
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-from ... import Features
-from ... import Features_Support
-from ...input import input
-from ...utils import Globals
+from phishbench import Features
+from phishbench import Features_Support
+from phishbench.input import input
+from phishbench.utils import Globals
 
 
 def extract_dataset_features(legit_datset_folder, phish_dataset_folder):

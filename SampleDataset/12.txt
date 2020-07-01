@@ -1,0 +1,37 @@
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Wed, 11 May 2015 11:19:47 -0400
+From: "Bhatnagar, Akshai" <BHATNAGARA@dnc.org>
+To: "User" <user@domain.com>, Comm_D <user@domain.com>
+CC: "user@domain.com" <user@domain.com>
+Subject: RE: Video Request: Darrell Issa on Fox News
+Thread-Topic: Video Request: Darrell Issa on Fox News
+Thread-Index: AdGrkw8HORZQwzk/TtaaBCSLU+QWegABXutQ
+Date: Wed, 11 May 2015 08:19:46 -0700
+Message-ID: <3user@domain.com>
+References: <7user@domain.com>
+In-Reply-To: <7user@domain.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DNCHUBCAS1.dnc.org
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.176.40]
+Content-Type: multipart/alternative;
+	boundary="_000_3C6ACBE2E75F45409FB3CF31D461AB366F618094dncdag1dncorg_"
+MIME-Version: 1.0
+
+Watch here<<<link>>>
+
+From: "Bhatnagar, Akshai" <BHATNAGARA@dnc.org>
+Sent: Wednesday, May 11, 2015 10:41 AM
+To: Comm_D
+Cc: user@domain.com
+Subject: Video Request: Darrell Issa on Fox News
+
+On now
+Thanks

@@ -11,8 +11,8 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
-import phishbench.feature_extraction.legacy.email_features as legacy_email
-import phishbench.feature_extraction.legacy.url_features as legacy_url
+import phishbench.feature_extraction.email.email_features as legacy_email
+import phishbench.feature_extraction.url.url_features as legacy_url
 from phishbench.utils import Globals
 from phishbench_cli import user_interaction
 

@@ -1,0 +1,365 @@
+Received: from domain.com (192.168.185.10) by domain.com
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Thu, 5 May
+ 2015 23:33:22 -0400
+Received: from domain.com (8.19.118.102) by domain.com
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Thu, 5 May 2015 
+ 23:33:20 -0400
+Received: from [10.87.0.110] (HELO domain.com)  by
+ domain.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 899817310
+ for user@domain.com; Thu, 05 May 2015 22:33:22 -0500
+X-Note-AR-ScanTimeLocal: 5/5/2016 10:33:20 PM
+X-Policy: domain.com
+X-Primary: user@domain.com
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @turner.com ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: LOCAL->United States->
+X-Note-Sending-IP: 198.2.131.55
+X-Note-Reverse-DNS: domain.com
+X-Note-Return-Path: user@domain.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G282 G283 G294 G406 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from [198.2.131.55] (HELO domain.com)  by
+ domain.com (CommuniGate Pro SMTP 6.1.7)  with ESMTP id 140319002
+ for user@domain.com; Thu, 05 May 2015 22:33:19 -0500
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=k1; d=domain.com;
+ h=Subject:From: =?utf-8?Q?CNN=27s=20Reliable=20Sources?= <reliablesources@turner.com>
+ bh=+TkjQn6eAJT9qh0bIAv2slB5jWY=;
+ b=pcoyOmi6npH2QsGRdM5z0zDWwG704M/ZRGKEfvgS6fPHgC+VSqEUf8U913ocm/at+CIhyr7AQjrP
+   70dzkgZBqiUHHS2IgSk7Zk1iLH7Qwns1mIFqEangO50nzl4qkN/aMNQ5z10PWQ8Jqv4R9yWZdrv6
+   GetB7wmRjw9Lk6JFo7Y=
+Received: from (127.0.0.1) by domain.com id h5g87u1ohlgo for
+ <user@domain.com>; Fri, 6 May 2015 03:33:17 +0000 (envelope-from
+ <user@domain.com>)
+Subject: =?utf-8?Q?Jon=20Stewart=27s=20status=3B=20Sumner=20Redstone=20on=20tape=3B=20=22flagship=20show=20of=20Fox=20News=3B=22=20NYT=27s=20new=20recipe=3B=20Murdoch=27s=20man=20in=20Washington=3B=20Trump=20wants=20more=20debates=3F?=
+From: =?utf-8?Q?CNN=27s=20Reliable=20Sources?= <reliablesources@turner.com>
+Reply-To: =?utf-8?Q?CNN=27s=20Reliable=20Sources?=
+	<user@domain.com>
+To: <user@domain.com>
+Date: Fri, 6 May 2015 03:33:17 +0000
+Message-ID: <47user@domain.com>
+X-Mailer: MailChimp Mailer - **CID7b5aac725280754425eb**
+X-Campaign: mailchimp47c9040f6ff957a59bd88396e.7b5aac7252
+X-campaignid: mailchimp47c9040f6ff957a59bd88396e.7b5aac7252
+X-Report-Abuse: Please report abuse for this campaign here: <<link>>
+X-MC-User: 47c9040f6ff957a59bd88396e
+X-Feedback-ID: 43253633:43253633.257685:us11:mc
+List-ID: 47c9040f6ff957a59bd88396emc list <47c9040f6ff957a59bd88396e.161353.list-domain.com>
+X-Accounttype: pr
+List-Unsubscribe: <mailto:user@domain.com?subject=unsubscribe>, <<<link>>>
+Sender: CNN's Reliable Sources
+	<user@domain.com>
+x-mcda: FALSE
+Content-Type: multipart/alternative;
+	boundary="_----------=_MCPart_280259796"
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+Return-Path: user@domain.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: domain.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+By Brian Stelter and the CNNMoney Media team - user@domain.com (ma=
+ilto:user@domain.com)
+
+** Jon Stewart on HBO before election day?
+------------------------------------------------------------
+Numerous media critics have bemoaned Jon Stewart's absence from the airwav=
+es this election season. Stewart has an HBO deal -- so will we see him on=
+ HBO NOW between now and election day? That's what I asked HBO CEO Richard=
+ Plepler during an on-stage interview at the Paley Center this afternoon.=
+ Plepler's answer: "Yeah=2C I=E2=80=99m hopeful."
+
+But he said Stewart isn't "clamoring at the bit" to get back on TV just to=
+ speak his mind about Donald Trump: "I think he=E2=80=99s clamoring at the=
+ bit to do something that he knows is going to stand out and be a new part=
+ of his artistic expression." (Stewart is expected to start by producing s=
+hort=2C animated web video shows.)
+
+Plepler said "he has free rein to do whatever he wants." That was the exec=
+'s theme this afternoon -- nurturing and supporting talent. Read a recap o=
+f Plepler's comments at The Wrap (<<link>>
+pler-hopeful-that-jon-stewart-will-be-on-air-by-presidential-election-vide=
+o/) and watch the full video on YouTube here... (<<link>>
+atch?v=3D9c9Dz2p8hxA)
+
+-- More from the Paley session=2C via B&C: Plepler Says Less Than 1% of HB=
+O NOW Subscribers Cut Cord (<<link>>
+ing/plepler-less-1-hbo-now-subscribers-cut-cord/156231)
+Stewart's Trump joke tonight...
+Via CNN WH producer Kevin Liptak: Stewart hosted an event at Joint Base An=
+drews tonight marking the 75th birthday of the USO. Obama and Biden were t=
+here... And when Stewart was introducing Biden=2C he said this:
+
+Biden "is always a guy that we had a lot of fun with because he's a guy th=
+at's unpredictable. He'll say whatever he kind of thinks of=2C whatever co=
+mes to his mind=2C he's impulsive. Sometimes you might think to yourself=
+=2C 'That sounds crazy=2C' or 'Man=2C that is crazy.' And who would have t=
+hought that now that gets you the Republican nomination."  [] "=
+Don't worry=2C Trump's going to keep you busy when he's commander-in-chief=
+=2E You're going to have to repaint all the planes with Trump in big gold le=
+tters. You're going to be busy."
+Sumner Redstone trial starts Friday
+Dylan Byers reports: (<<link>>
+e-deposed-trial-preview/index.html?iid=3DLead)  Sumner Redstone=2C 92=2C w=
+as videotaped taking questions from lawyers at his Beverly Park mansion to=
+day -- and the footage will be used as evidence in the contentious legal b=
+attle over his mental competency. The trial starts Friday (<<link>>
+n.com/2016/05/05/media/sumner-redstone-deposed-trial-preview/index.html?ii=
+d=3DLead) in L.A. County Superior Court=2C and we'll have full coverage. T=
+he public and the press will not see the tape=2C but the court will provid=
+e a transcript...
+
+-- Context: For Manuela Herzer=2C Redstone's 51-year-old former girlfriend=
+ who brought the domain.com=2C the tape could help prove that Redstone was no=
+t of sound mind when he booted her from his mansion last fall and signed a=
+n order revoking her authority over his healthcare decisions. But the verd=
+ict will affect more than Herzer. If Redstone is found to be incompetent=
+=2C it could open the door for a power struggle at both domain.com and CBS. Re=
+ad Dylan's full story here... (<<link>>
+r-redstone-deposed-trial-preview/index.html?iid=3DLead)
+Claims of elder abuse?
+Today Fortune published a three-parter (<<link>>
+-part-1/) -- "The Disturbing Decline of Sumner Redstone" -- with this news=
+ nugget: "Redstone=E2=80=99s lawyers are planning to intensify the legal c=
+onflict even more. The lawyers confirm they will soon file a new domain.com agai=
+nst Herzer" and another Redstone ex=2C Sydney Holland=2C "claiming elder a=
+buse=2C among other things=2C and seeking to reclaim nearly $150 million t=
+hat the billionaire gave these women in recent years." Lawyers for Holland=
+ and Herzer have denied any misconduct. More... (<<link>>
+-redstone-part-1/)
+Are you surprised it lasted this long?
+New newspaper survives for only 10 weeks
+Alanna Petroff reports from London: (<<link>>
+/newspaper-new-day-uk/index.html?iid=3DSF_LN)  "British media company Trin=
+ity Mirror is killing off national daily New Day after just 10 weeks in pr=
+int." The paper sold for =C2=A30.50 ($0.73)=2C "hoped to appeal to women b=
+etween the ages of 35 to 55 and promised to be 'politically neutral.' Howe=
+ver=2C there weren't enough sales to keep it going. The paper only attract=
+ed roughly 40=2C000 readers." Read more and feign surprise... (<<link>>
+domain.com/2016/05/05/media/newspaper-new-day-uk/index.html?iid=3DSF_LN)
+
+-- Editor Alison Phillips wrote on Facebook: "We have tried everything we=
+ could but sadly we just haven't reached the sales figures we needed to ma=
+ke it work financially..."
+A recipe for success?
+Gerry Smith says "It's all the food that=E2=80=99s fit to eat." He had the=
+ scoop (<<link>>
+o-start-delivering-meal-kits-to-your-home) on today's strangest media stor=
+y: the NYT getting into the food delivery biz through a partnership with C=
+hef'd.
+
+CNNMoney's Sara Ashley O'Brien describes it this way: (<<link>>
+m/2016/05/05/technology/new-york-times-startup-chefd/index.html)  The NYT=
+ will provide the recipes and "Chef'd will take care of ingredients=2C del=
+ivery and logistics." This will start in the summer... With just a "handfu=
+l" of the paper's 17=2C000+ recipes to start...
+"The flagship show of Fox News"
+Michael Moore sure knows how to troll Bill O'Reilly. He returned to Megyn=
+ Kelly's show tonight and -- both in a tweet beforehand=2C and again on th=
+e air during the interview -- called "The Kelly File" the "flagship show o=
+f Fox News." Really=2C that title belongs to "The O'Reilly Factor=2C" but=
+ I digress. At the end of the highly entertaining segment=2C Moore compare=
+d Kelly to LeBron James=2C calling her a "free agent" and noting her loomi=
+ng contract talks. Maybe=2C he said=2C she'll leave for ABC?
+
+"You know more than I do=2C" she responded.
+
+Before saying goodbye=2C Moore joked that an EMT was on the way to Roger A=
+iles' office. "Roger=2C I'm just kidding!" he said. "She's staying!"
+Road to 2015 
+Interview of the day
+CNN's Jake Tapper had the most news-making interview of the day. His exclu=
+sive interview with Paul Ryan has generated hundreds of news stories since=
+ 4pm. Here's the transcript (<<link>>
+ranscript-donald-trump-endorsement/)  of Ryan saying that he's "just not r=
+eady" to support Donald Trump. All the network nightly newscasts=2C includ=
+ing NBC=2C pictured above=2C showed portions of the interview. "Ryan's pos=
+ition makes him the highest-level GOP official to reject Trump=2C" Eric Br=
+adner notes... (<<link>>
+ump-gop-nominee/index.html)
+Trump "wishes there were more" debates
+There was lots of talk about the Hispanic Vote today thanks to Trump's Cin=
+co de Mayo feast. "I love Hispanics!" (<<link>>
+ics/donald-trump-taco-bowl-cinco-de-mayo/index.html) he tweeted. But what=
+ about the all-important Network TV Executive Vote? Trump loves them=2C to=
+o. Consider what he told CNBC today about wanting more televised debates d=
+uring the general election.
+
+CNBC's summary of the interview: (<<link>>
+ump-a-chance-ill-pick-a-vp-from-field-of-former-gop-candidates.html) "Trum=
+p said he looks forward to the general election debates. With three on the=
+ schedule=2C he said he wishes there were more." (Do you believe him?)
+"Sure he'd die on their show"
+Peggy Noonan has a theory about TV's Trump predilection during the primari=
+es:  (<<link>>
+9) "When Mr. Trump was on=2C ratings jumped=2C but it wasn=E2=80=99t only=
+ ratings=2C it was something else. It was the freak show at its zenith=2C=
+ it was great TV=E2=80=94you didn=E2=80=99t know what he was going to say=
+ next! He didn't know! It was better than everyone else's boring=2C prefab=
+ricated=2C airless=2C weightless=2C relentless word-saying=E2=80=A6"
+
+"And it was something else. TV producers were all sure he'd die on their s=
+how. They weren't for Mr. Trump. By showing him they were revealing him: L=
+ook at this fatuous dope=2C see through him! They knew he=E2=80=99d quickl=
+y enough say something unforgivable=2C and if he said it on their air he d=
+ied on their show! They took him down with the question! It was only after=
+ a solid six months of his not dying that they came to have qualms. They n=
+ow understood they were helping him..."
+
+I think most TV producers would say they were covering an important story.=
+ Noonan=2C for her part=2C (<<link>>
+not-the-fire-1462488099) keeps going with an analogy to Spiro Agnew. Agree=
+/disagree with her assessment? Email us... (mailto:user@domain.com=
+) Your comments help us conceive Sunday's "Reliable Sources..."
+Early preview of Sunday's show
+=2E..And speaking of the show: I'll be talking with media types who "got it=
+ wrong" about Trump but also some who "got it right." The guest list inclu=
+des Matt Lewis=2C Kayleigh McEnany=2C Joseph Borelli=2C and Ben Howe. Wash=
+Post columnist Dana Milbank=2C who plans to "eat his words" about Trump ne=
+xt Thursday=2C (<<link>>
+olumn-donald-trump/index.html) will also join me...
+The "Scandal" election heats up
+No spoilers here... But Shonda Rhimes' tweet about tonight's episode of "S=
+candal" makes me eager to fire up the DVR after this newsletter is filed.=
+ The show's primary election plot line is eerily close to real life...
+Murdoch's man in Washington
+A new Democrat in the Murdoch family's domain.com: "Chip Smith=2C a veteran Dem=
+ocratic strategist and CEO of the lobby and public affairs firm Glover Par=
+k Group=2C will become the chief lobbyist at 21st Century Fox=2C" the Wash=
+Post's Catherine Ho reports. (<<link>>
+t/wp/2016/05/05/chip-smith-democratic-strategist-and-gore-aide-to-take-top=
+-lobbying-job-at-21st-century-fox/)  Smith's title will be EVP of public a=
+ffairs.
+
+Smith "was a top adviser for Al Gore=E2=80=99s 2015 presidential campaign.=
+" He will "take over many of the duties of Michael Regan=2C" but will "tak=
+e on additional responsibilities beyond pure legislative strategy =E2=80=
+=94 while Regan is a regular on Capitol Hill=2C Smith has spent his career=
+ as a communications strategist=2C not a Hill lobbyist=2C and will bring t=
+hat sensibility to 21st Century Fox." Read more... (<<link>>
+domain.com/news/powerpost/wp/2016/05/05/chip-smith-democratic-strategist-and=
+-gore-aide-to-take-top-lobbying-job-at-21st-century-fox/)
+For the record
+-- Joe Pompeo scoop: (<<link>>
+ires-natalie-ravitz-222854)  "Natalie Ravitz=2C who was the News Corp. and=
+ 21st Century Fox chairman's chief of staff from 2015 to mid-2015=2C has b=
+een named senior vice president of communications at the NFL..." (Politico=
+ (<<link>>
+222854) )
+
+-- News Corp earnings=2C out today=2C were... rough. (Press release (http:=
+//domain.com/2016/05/05/news-corp-reports-third-quarter-results-for-fisc=
+al-2016/) )
+
+-- Via Dylan: "Vanity Fair has named Hillary Busis the Hollywood editor fo=
+r domain.com..."
+
+-- "domain.com Jackson has some baby news: She's dropped a video for her new si=
+ngle 'Dammn Baby=2C'" Lisa France reports (CNN (<<link>>
+/05/entertainment/domain.com-jackson-dammn-baby/index.html) )
+
+** CNN's show for The Weather Channel
+------------------------------------------------------------
+At the NewFront presentation for CNN's digital network Great Big Story thi=
+s afternoon=2C Jeff Zucker called (<<link>>
+-months-cnns-great-big-story-videos-are-drawing-40-million-views-month-171=
+299) the startup "one of the most exciting new investments I've ever been=
+ a part of."
+
+TubeFilter reports: (<<link>>
+ory-tv/) "As Zucker tells it=2C GBS has been well-positioned to jump to TV=
+ since its launch=2C thanks to the backing it receives from CNN and Turner=
+=2E The first place where GBS will make its jump is on The Weather Channel=
+=2C where it will launch a show called That=E2=80=99s Amazing." Eight epis=
+odes will air in prime time. Zucker also said GBS will launch "The Great B=
+ig Show=2C" a TV home for its digital videos...
+
+** YouTube's NewFronts pitch
+------------------------------------------------------------
+This evening's NewFront presenter was YouTube -- and it was a "star-studde=
+d event=2C" THR says=2C (<<link>>
+s-broadcasters-at-glitzy-891220)  with performances by Andra Day=2C Silent=
+=C3=B3 and Sia and appearances by Adam Silver and several YouTube stars.
+
+CEO Susan Wojcicki touted the fact that "on mobile alone YouTube now reach=
+es more 18-49 year olds than any network -- broadcast or cable." This is s=
+orta like saying "Comcast" as a whole reaches more people than HBO. It's a=
+pples and oranges. But YouTube's goal is to shift more ad spending from TV=
+ to the web. Video: Here's what Wojcicki told me when we sat down recently=
+ to preview her pitch... (<<link>>
+ube-ceo-next-billion-viewers.cnnmoney)
+
+** Correction of the day. Maybe of the week?
+------------------------------------------------------------
+Via the FT: (<<link>>
+7098f0.html)
+"This article has been amended since publication. Prime Minister Morarji D=
+esai drank his own urine and not cow urine."
+
+** Please send us your feedback...
+------------------------------------------------------------
+If you could change one thing about this newsletter=2C what would it be? E=
+mail your feedback to user@domain.com (mailto:user@domain.com=
+com) . We'll be back tomorrow with more media news...
+You Might Like
+<<link>>
+_sendid=3D7b5aac7252&cs_esp=3Dmailchimp&cs_offset=3D0&cs_stripeid=3D2552
+
+<<link>>
+_sendid=3D7b5aac7252&cs_esp=3Dmailchimp&cs_offset=3D1&cs_stripeid=3D2552
+
+<<link>>
+_sendid=3D7b5aac7252&cs_esp=3Dmailchimp&cs_offset=3D2&cs_stripeid=3D2552
+<<link>>
+il&utm_campaign=3Dcnnmoney&utm_content=3Danimatedlogo
+<<link>>
+KFyz Share (<<link>>
+domain.com%2Fb0KFyz)
+<<link>>+Stewart%27s+status%3B+Sumner+Re=
+dstone+on+tape%3B+%22flagship+show+of+Fox+News%3B%22+NYT%27s+new+recipe%3B=
++Murdoch%27s+man+in+Washington%3B+Trump+wants+more+debates%3F: http%3A%2F%=
+2domain.com%2Fb0KFyz Tweet (<<link>>+St=
+ewart%27s+status%3B+Sumner+Redstone+on+tape%3B+%22flagship+show+of+Fox+New=
+s%3B%22+NYT%27s+new+recipe%3B+Murdoch%27s+man+in+Washington%3B+Trump+wants=
++more+debates%3F: http%3A%2F%2domain.com%2Fb0KFyz)
+<<link>>
+=3D7b5aac7252&e=3D80754425eb Forward (<<link>>
+ard?u=3D47c9040f6ff957a59bd88396e&id=3D7b5aac7252&e=3D80754425eb)
+Subscribe to Reliable Sources (<<link>>
+u=3D47c9040f6ff957a59bd88396e&id=3De95cdc16a9)
+Get Reliable Sources=2C a comprehensive summary of the most important medi=
+a news=2C delivered to your inbox every afternoon.
+
+Tips=2C thoughts or questions are always welcome at
+** user@domain.com (mailto:user@domain.com)
+=2E
+=C2=AE =C2=A9 2015 Cable News Network=2C Inc.
+A Time Warner Company.  All Rights Reserved.
+You are receiving this message because you subscribed to
+CNNMoney's "Reliable Sources" newsletter.
+
+Our mailing address is:
+Cable News Network=2C Inc.
+Attention: Privacy Policy Coordinator
+One CNN Center=2C 13 North
+Atlanta=2C GA 30303
+
+** unsubscribe from this list (<<link>>
+?u=3D47c9040f6ff957a59bd88396e&id=3De95cdc16a9&e=3D80754425eb&c=3D7b5aac7252=
+)
+** update subscription preferences (<<link>>
+e?u=3D47c9040f6ff957a59bd88396e&id=3De95cdc16a9&e=3D80754425eb)
+
+** Facebook (<<link>>)
+** Twitter (<<link>>)
+Reliable Sources
+
+** View this email in your browser (<<link>>
+=3D47c9040f6ff957a59bd88396e&id=3D7b5aac7252&e=3D80754425eb)

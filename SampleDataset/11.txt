@@ -1,0 +1,119 @@
+Received: from domain.com (192.168.100.52) by
+ domain.com (192.168.100.51) with Microsoft SMTP Server id
+ 14.3.123.3; Tue, 27 May 2015 18:54:28 +0200
+Received: from mail.hackingteam.it (unknown [192.168.100.50])	by
+ domain.com (Postfix) with ESMTP id E138660390;	Tue, 27 May 2015 
+ 17:42:54 +0100 (BST)
+Received: by mail.hackingteam.it (Postfix)	id 84D34B6603D; Tue, 27 May 2015 
+ 18:54:28 +0200 (CEST)
+Delivered-To: user@domain.com
+Received: from domain.com (domain.com
+ [192.168.100.51])	(using TLSv1 with cipher AES128-SHA (128/128 bits))	(No
+ client certificate requested)	by mail.hackingteam.it (Postfix) with ESMTPS id
+ 767AAB6600D;	Tue, 27 May 2015 18:54:28 +0200 (CEST)
+Received: from domain.com ([fe80::755c:1705:6a98:dcff]) by
+ domain.com ([fe80::755c:1705:6a98:dcff%11]) with mapi id
+ 14.03.0123.003; Tue, 27 May 2015 18:54:27 +0200
+From: Emad Shehata <e.shehata@hackingteam.it>
+To: "User" <user@domain.com>,
+	"'user@domain.com'" <user@domain.com>
+CC: "'user@domain.com'" <user@domain.com>,
+	"'user@domain.com'" <user@domain.com>,
+	"'user@domain.com'" <user@domain.com>
+Subject: R: Re: R: Re: International - Tender: Egypt Cyber War Department -
+ MOD
+Thread-Topic: Re: R: Re: International - Tender: Egypt Cyber War Department
+ - MOD
+Thread-Index: AQHPeOf1sxAm5wVWM0+wz/Ro+T5GkptS3sixgAAFfQ3///HMgIAAEta7gAG97CM=
+Date: Tue, 27 May 2015 16:54:26 +0000
+Message-ID: <user@domain.com>
+In-Reply-To: <user@domain.com>
+Accept-Language: it-IT, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [fe80::755c:1705:6a98:dcff]
+Return-Path: user@domain.com
+X-MS-Exchange-Organization-AuthSource: domain.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 10
+Status: RO
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-603028132_-_-"
+
+Dear Ahmed,
+
+Have you recevied my following e-mail?
+
+If you need anything, just let me know.
+
+Warmest regards 
+
+-- 
+
+Emad Shehata 
+
+Key Account Manager 
+
+Sent from my mobile.
+
+
+
+
+Da: Emad Shehata
+
+Inviato: Monday, May 26, 2015 05:18 PM
+
+A: 'user@domain.com' <user@domain.com>; 'user@domain.com' <user@domain.com>
+
+Cc: 'user@domain.com' <user@domain.com>; 'user@domain.com' <user@domain.com>; 'user@domain.com' <user@domain.com>
+
+Oggetto: R: Re: R: Re: International - Tender: Egypt Cyber War Department - MOD
+
+
+
+
+Dear Ahmed
+
+Thanks for your e-mail.
+
+Can you please let me know the platforms that are you interesting in? Are you interesting as well in all infection vectors?
+
+I suggest to you to have a look on the quotation that I sent to you a couple of hours before and extract from it the information that I need to issue to you the quotation. Otherwise give me until tomorrow afternoon and I will send to you all the requirements
+ to allow me to issue a quotation.
+
+Best regards 
+
+-- 
+
+Emad Shehata 
+
+Key Account Manager 
+
+Sent from my mobile.
+
+
+
+
+Da: Ahmed Mostafa [mailto:user@domain.com]
+
+Inviato: Monday, May 26, 2015 06:11 PM
+
+A: Emad Shehata <user@domain.com> 
+
+Cc: user@domain.com <user@domain.com>; user@domain.com <user@domain.com>; user@domain.com <user@domain.com>
+
+Oggetto: Re: R: Re: International - Tender: Egypt Cyber War Department - MOD
+
+
+
+
+Dear Emad,
+Please send me a quotation for the option of (5 platform, 10 targets). 
+
+Kind Regards,
+Ahmed Mostafa
+
+Sent from my iPhone
+

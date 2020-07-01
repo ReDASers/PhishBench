@@ -4,11 +4,11 @@ import traceback
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-from ... import Features
-from ...Features_Support import Cleaning, read_alexa
-from ...input import input as pb_input
-from ...input.url_input import URLData
-from ...utils import Globals
+from phishbench import Features
+from phishbench.Features_Support import Cleaning, read_alexa
+from phishbench.input import input as pb_input
+from phishbench.input.url_input import URLData
+from phishbench.utils import Globals
 
 
 def Extract_Features_Urls_Testing():
@@ -69,6 +69,7 @@ def Extract_Features_Urls_Training():
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
     download_url_flag = Globals.config['URL_Feature_Types'].getboolean('Network') or \
                         Globals.config['URL_Feature_Types'].getboolean('HTML')
+
     url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
     bad_url_list.extend(bad_urls)
     alexa_data = {}
