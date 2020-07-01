@@ -11,7 +11,7 @@ ipwhois==1.1.0
 tqdm==4.47.0
 python_whois==0.7.3
 numpy==1.18.5
-lxml==4.3.4
+lxml==4.5.1
 nltk==3.5
 langdetect==1.0.8
 beautifulsoup4==4.9.1
