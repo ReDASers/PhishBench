@@ -7,7 +7,7 @@ from typing import List, Union, Dict
 
 import chardet
 
-from .email_input.models import EmailHeader, EmailBody, EmailMessage
+from .email_input.models import EmailMessage
 from .url_input import URLData
 from ..utils import Globals
 

@@ -1,6 +1,7 @@
 import unittest
 
 from phishbench.input.email_input.models import EmailBody
+# pylint: disable=import-error
 from .utils import get_email, get_relative_path
 
 
@@ -11,6 +12,7 @@ class TestEmailBody(unittest.TestCase):
         body = EmailBody(msg)
         with open(get_relative_path('Resources/BodyTests/test_body_1.txt')) as f:
             expected = f.read().strip()
+        # pylint: disable=invalid-name
         self.maxDiff = None
         self.assertEqual(expected, body.text.strip())
 
@@ -21,6 +23,7 @@ class TestEmailBody(unittest.TestCase):
         with open(get_relative_path('Resources/BodyTests/test_body_2.txt')) as f:
             expected = f.read()
 
+        # pylint: disable=invalid-name
         self.maxDiff = None
         print(body.text.strip())
         self.assertEqual(expected, body.text.strip())
@@ -31,6 +34,7 @@ class TestEmailBody(unittest.TestCase):
         with open(get_relative_path('Resources/BodyTests/test_body_3.txt')) as f:
             expected = f.read().strip()
 
+        # pylint: disable=invalid-name
         self.maxDiff = None
         self.assertEqual(expected, body.text.strip())
 
@@ -38,6 +42,7 @@ class TestEmailBody(unittest.TestCase):
         msg = get_email("Resources/BodyTests/test body email 2.txt")
         body = EmailBody(msg)
         print(body.html)
+        # TODO: Finish
 
     def test_email_body_attachment(self):
         msg = get_email("Resources/BodyTests/test body email 2.txt")
