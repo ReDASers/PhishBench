@@ -10,5 +10,5 @@ def get_relative_path(filename):
 
 def get_email(filename):
     loc = get_relative_path(filename)
-    with open(loc, 'r') as file:
-        return email.message_from_file(file)
+    with open(loc, 'rb') as file:
+        return email.message_from_binary_file(file)
