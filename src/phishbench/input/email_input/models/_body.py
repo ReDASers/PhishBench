@@ -1,16 +1,15 @@
 import re
 from email.message import Message
+from io import StringIO
 
+import chardet
 import lxml
 from bs4 import BeautifulSoup
 from lxml.html.clean import Cleaner
-import chardet
-from io import StringIO
-
-from phishbench.utils import Globals
 
 HEX_REGEX = re.compile(r"0x[0-9a-f]*?,?", flags=re.IGNORECASE | re.MULTILINE)
 UNDERSCORE_REGEX = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)
+
 
 def get_charset(part):
     if part.get_charset() is not None:
@@ -18,6 +17,7 @@ def get_charset(part):
     content_type_string = part['Content-Type']
     if 'charset=' in content_type_string:
         return content_type_string.split('charset=')[1]
+
 
 class EmailBody:
     """
@@ -124,4 +124,3 @@ class EmailBody:
         if not self.text:
             soup = BeautifulSoup(self.html, 'html.parser')
             self.text = soup.get_text()
-

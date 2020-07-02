@@ -6,10 +6,6 @@ from .utils import get_email, get_relative_path
 
 class TestEmailBody(unittest.TestCase):
 
-    # def __init__(self):
-    #     super().__init__()
-    #     #self.maxDiff = None
-
     def test_email_body(self):
         msg = get_email("Resources/BodyTests/Test Body Email 1.txt")
         body = EmailBody(msg)
