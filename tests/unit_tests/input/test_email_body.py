@@ -6,7 +6,7 @@ from .utils import get_email, get_relative_path
 
 
 class TestEmailBody(unittest.TestCase):
-
+    # pylint: disable=missing-function-docstring
     def test_email_body(self):
         msg = get_email("Resources/BodyTests/Test Body Email 1.txt")
         body = EmailBody(msg)
@@ -15,6 +15,7 @@ class TestEmailBody(unittest.TestCase):
         # pylint: disable=invalid-name
         self.maxDiff = None
         self.assertEqual(expected, body.text.strip())
+        self.assertIn('us-ascii', body.charset_list)
 
     def test_email_body2(self):
         msg = get_email("Resources/BodyTests/test body email 2.txt")
@@ -25,8 +26,8 @@ class TestEmailBody(unittest.TestCase):
 
         # pylint: disable=invalid-name
         self.maxDiff = None
-        print(body.text.strip())
         self.assertEqual(expected, body.text.strip())
+        self.assertIn('us-ascii', body.charset_list)
 
     def test_email_body3(self):
         msg = get_email("Resources/BodyTests/Test Body Email 3.txt")
@@ -37,6 +38,7 @@ class TestEmailBody(unittest.TestCase):
         # pylint: disable=invalid-name
         self.maxDiff = None
         self.assertEqual(expected, body.text.strip())
+        self.assertIn('iso-8859-1', body.charset_list)
 
     def test_email_html(self):
         msg = get_email("Resources/BodyTests/test body email 2.txt")

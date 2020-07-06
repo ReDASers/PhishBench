@@ -16,7 +16,9 @@ def get_charset(part):
         return part.get_charset()
     content_type_string = part['Content-Type']
     if 'charset=' in content_type_string:
-        return content_type_string.split('charset=')[1]
+        charset = content_type_string.split('charset=')[1]
+        match = re.match(r'"(.+?)"', charset).groups()[0]
+        return match
 
 
 class EmailBody:
@@ -89,8 +91,8 @@ class EmailBody:
         try:
             payload = part.get_payload(decode=True)
             charset = get_charset(part)
-            print(charset)
             if charset is not None:
+                self.charset_list.append(charset)
                 payload = payload.decode(charset).strip()
             else:
                 payload = payload.decode().strip()
@@ -112,8 +114,8 @@ class EmailBody:
 
     def __parse_html_part(self, part):
         charset = get_charset(part)
-        print(charset)
         if charset is None:
+            self.charset_list.append(charset)
             html = part.get_payload(decode=True).decode()
         else:
             html = part.get_payload(decode=True).decode(charset)
