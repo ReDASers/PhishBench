@@ -1,12 +1,15 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+# pylint: disable=import-error
+
 import unittest
 
 from phishbench.input.email_input.models import EmailBody
-# pylint: disable=import-error
 from .utils import get_email, get_relative_path
 
 
 class TestEmailBody(unittest.TestCase):
-    # pylint: disable=missing-function-docstring
     def test_email_body(self):
         msg = get_email("Resources/BodyTests/Test Body Email 1.txt")
         body = EmailBody(msg)
