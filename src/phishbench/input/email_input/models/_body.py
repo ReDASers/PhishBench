@@ -1,16 +1,24 @@
 import re
 from email.message import Message
+from io import StringIO
 
+import chardet
 import lxml
 from bs4 import BeautifulSoup
 from lxml.html.clean import Cleaner
-import chardet
-from io import StringIO
-
-from ...utils import Globals
 
 HEX_REGEX = re.compile(r"0x[0-9a-f]*?,?", flags=re.IGNORECASE | re.MULTILINE)
 UNDERSCORE_REGEX = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)
+
+
+def get_charset(part):
+    if part.get_charset() is not None:
+        return part.get_charset()
+    content_type_string = part['Content-Type']
+    if 'charset=' in content_type_string:
+        charset = content_type_string.split('charset=')[1]
+        match = re.match(r'"(.+?)"', charset).groups()[0]
+        return match
 
 
 class EmailBody:
@@ -81,15 +89,23 @@ class EmailBody:
 
     def __parse_text_part(self, part):
         try:
+            payload = part.get_payload(decode=True)
+            charset = get_charset(part)
+            if charset is not None:
+                self.charset_list.append(charset)
+                payload = payload.decode(charset).strip()
+            else:
+                payload = payload.decode().strip()
             if self.text:
                 self.text += '\n'
-                self.text += part.get_payload().strip()
+                self.text += payload
             else:
-                self.text = part.get_payload().strip()
+                self.text = payload
         except UnicodeError:
+            print("Failed To Decode")
             # We failed to decode the part
             self.defects.append(part)
-            raw_data = part.get_payload(decode=False)
+            raw_data = part.get_payload()
             encoding = chardet.detect(raw_data)['encoding']
             if not encoding:
                 # Fail to detect encoding
@@ -97,7 +113,12 @@ class EmailBody:
             self.text = raw_data.decode(encoding=encoding, errors='replace')
 
     def __parse_html_part(self, part):
-        html = part.get_payload()
+        charset = get_charset(part)
+        if charset is None:
+            self.charset_list.append(charset)
+            html = part.get_payload(decode=True).decode()
+        else:
+            html = part.get_payload(decode=True).decode(charset)
         cleaner = Cleaner()
         cleaner.javascript = True
         cleaner.style = True
@@ -105,4 +126,3 @@ class EmailBody:
         if not self.text:
             soup = BeautifulSoup(self.html, 'html.parser')
             self.text = soup.get_text()
-

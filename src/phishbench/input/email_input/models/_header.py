@@ -7,7 +7,7 @@ from email.message import Message
 from typing import List
 import datetime
 
-from ...utils import Globals
+from phishbench.utils import Globals
 
 EMAIL_ADDRESS_REGEX = re.compile(r"<.*@[a-zA-Z0-9.\-_]*", flags=re.MULTILINE | re.IGNORECASE)
 EMAIL_ADDRESS_NAME_REGEX = re.compile(r'"?.*"? <?', flags=re.MULTILINE | re.IGNORECASE)

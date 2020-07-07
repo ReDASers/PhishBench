@@ -1,22 +1,10 @@
-import email
 import unittest
-from os import path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
-from phishbench.input.email_input import EmailHeader, EmailBody
-from phishbench.input.email_input._header import parse_address_list
-from phishbench.input.email_input._header import parse_email_date
-
-def get_relative_path(filename):
-    current_loc = path.dirname(path.abspath(__file__))
-    loc = path.join(current_loc, filename)
-    return loc
-
-def get_email(filename):
-    loc = get_relative_path(filename)
-    with open(loc, 'r') as file:
-        return email.message_from_file(file)
-
+from phishbench.input.email_input.models import EmailHeader
+from phishbench.input.email_input.models._header import parse_address_list
+from phishbench.input.email_input.models._header import parse_email_date
+from .utils import get_email
 
 class TestEmailHeader(unittest.TestCase):
 
@@ -51,7 +39,6 @@ class TestEmailHeader(unittest.TestCase):
         raw = "BACON!"
 
         self.assertRaises(ValueError, parse_email_date, raw)
-
 
     def test_parse_email_date(self):
         raw = 'Mon, 14 Apr 2015 16:08:50 +0500'
@@ -102,7 +89,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(0, date.second)
 
     def test_date(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         # Date: Mon, 14 Apr 2015 16:08:50 +0000
         header = EmailHeader(msg)
 
@@ -115,7 +102,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(50, date.second)
 
     def test_X_priority(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
 
         header = EmailHeader(msg)
 
@@ -123,7 +110,7 @@ class TestEmailHeader(unittest.TestCase):
 
     @patch('phishbench.utils.Globals.logger.debug')
     def test_X_priority_error(self, l_mock):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         del msg['X-Priority']
         msg['X-Priority'] = "BAD"
 
@@ -133,74 +120,77 @@ class TestEmailHeader(unittest.TestCase):
         l_mock.assert_called()
 
     def test_X_priority_null(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.x_priority)
 
     def test_subject(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual('Re: Is there a reason', header.subject)
 
     def test_subject_empty(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual("", header.subject)
 
     def test_subject_null(self):
-        msg = get_email("Resources/Test Email 3.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 3.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.subject)
 
     def test_return_path(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual("user@domain.com", header.return_path)
 
     def test_return_path_bracket(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual("user@domain.com", header.return_path)
 
     def test_return_path_null(self):
-        msg = get_email("Resources/Test Email 3.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 3.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.return_path)
 
     def test_reply_to_empty(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual(0, len(header.reply_to))
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_reply_to(self, m_mock: MagicMock):
-        msg = get_email("Resources/Test Email 2.txt")
+    def test_reply_to(self):
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
 
-        EmailHeader(msg)
-        m_mock.assert_any_call("\"User\" <user@domain.com>, Bob <user2@domain.com>")
+        header = EmailHeader(msg)
+        self.assertEqual(len(header.reply_to), 2)
+        self.assertEqual(header.reply_to[0], '"User" <user@domain.com>')
+        self.assertEqual(header.reply_to[1], 'Bob <user2@domain.com>')
 
     def test_sender(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual("Matthew Budman <matthewb@annapurnapics.com>", header.sender_full)
         self.assertEqual("Matthew Budman", header.sender_name)
         self.assertEqual("matthewb@annapurnapics.com", header.sender_email_address)
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_to(self, a_mock):
-        msg = get_email("Resources/Test Email 2.txt")
-        EmailHeader(msg)
-        a_mock.assert_any_call("\"User\" <user@domain.com>, Bob <user2@domain.com>")
+    def test_to(self):
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
+        header = EmailHeader(msg)
+
+        self.assertEqual(len(header.to), 2)
+        self.assertEqual(header.to[0], '"User" <user@domain.com>')
+        self.assertEqual(header.to[1], 'Bob <user2@domain.com>')
 
     def test_recipient(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual("\"User\" <user@domain.com>", header.recipient_full)
         self.assertEqual("User", header.recipient_name)
         self.assertEqual("user@domain.com", header.recipient_email_address)
 
     def test_cc(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual(5, len(header.cc))
         self.assertEqual('Charles Roven <user@domain.com>', header.cc[0])
@@ -210,68 +200,59 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual('Ekta Farrar <user@domain.com>', header.cc[4])
 
     def test_cc_empty(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual(0, len(header.cc))
 
     def test_cc_null(self):
-        msg = get_email("Resources/Test Email 3.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 3.txt")
         header = EmailHeader(msg)
         self.assertEqual(0, len(header.cc))
 
-    @patch('phishbench.input.email_input._header.parse_address_list')
-    def test_bcc(self, m_mock):
-        msg = get_email("Resources/Test Email 2.txt")
-        EmailHeader(msg)
-        m_mock.assert_any_call("Anna <anna@domain.com>, Joe <user2@domain.com>,\n Sue <user3@domain.com>")
+    def test_bcc(self):
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
+        header = EmailHeader(msg)
+
+        self.assertEqual(header.bcc[0], 'Anna <anna@domain.com>')
+        self.assertEqual(header.bcc[1], 'Joe <user2@domain.com>')
+        self.assertEqual(header.bcc[2], 'Sue <user3@domain.com>')
 
     def test_message_id(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual("asldfjalsdjf@domain.com", header.message_id)
 
     def test_x_mailer_none(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.x_mailer)
 
     def test_x_mailer(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual("Microsoft Outlook 16.0", header.x_mailer)
 
     def test_dkim_signed(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertTrue(header.dkim_signed)
 
     def test_dkim_unsigned(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertFalse(header.dkim_signed)
 
     def test_received_count(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual(8, len(header.received))
 
     def test_mime_version(self):
-        msg = get_email("Resources/Test Email 1.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertEqual('1.0', header.mime_version)
 
     def test_mime_version_none(self):
-        msg = get_email("Resources/Test Email 2.txt")
+        msg = get_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.mime_version)
-
-
-class TestEmailBody(unittest.TestCase):
-
-    def test_email_body(self):
-        msg = get_email("Resources/Test Body Email 1.txt")
-        body = EmailBody(msg)
-        with open(get_relative_path('Resources/test_body_1.txt')) as f:
-            expected = f.read().strip()
-
-        self.assertEqual(expected, body.text.strip())
