@@ -20,7 +20,7 @@ class Bagging(BaseClassifier):
 
     def param_search(self, x, y):
         param_grid = {
-            "n_estimators": range(0, 110, 10),
+            "n_estimators": range(10, 110, 10),
             "max_features": [1, 10, 50, 100],
             "max_samples": [0.25, 0.5, 0.75, 1.0],
             "bootstrap": [True, False],
