@@ -197,7 +197,7 @@ def email_body_difficult_words(body: EmailBody) -> int: \
         return textstat.difficult_words(body.text)
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_words')
+@register_feature(FeatureType.EMAIL_BODY, 'num_words_body')
 def email_body_num_words(body: EmailBody) -> int:
     return len(re.findall(r'\w+', body.text))
 
