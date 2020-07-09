@@ -13,19 +13,6 @@ from .Features_Support import *
 from .utils import Globals
 
 
-def Email_Header_X_spam_flag(x_spam_flag, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_spam_flag"] == "True":
-        start = time.time()
-        try:
-            list_features["X_Spam_flag"] = x_spam_flag
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_Spam_flag"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["X_Spam_flag"] = ex_time
-
-
 ##### Email URL features
 def Email_Number_Url(url_All, list_features, list_time):
     if Globals.config["Email_URL_Features"]["Number_Url"] == "True":

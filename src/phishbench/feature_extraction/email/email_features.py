@@ -511,7 +511,6 @@ def single_email_features(message: EmailMessage):
     if Globals.config["Email_Features"]["extract header features"] == "True":
         header = message.header
         Globals.logger.debug("Extracting Header Features")
-        Features.Email_Header_X_spam_flag(header.x_spam_flag, dict_features, dict_time)
 
     if Globals.config["Email_Features"]["extract body features"] == "True":
         Globals.logger.debug("Extracting Body features")

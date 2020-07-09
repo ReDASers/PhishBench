@@ -41,6 +41,10 @@ def email_header_x_virus_scanned(header: EmailHeader):
     return header.x_virus_scanned
 
 
+@register_feature(FeatureType.HEADER, 'X_Spam_flag')
+def x_spam_flag(header: EmailHeader):
+    return header.x_spam_flag
+
 @register_feature(FeatureType.HEADER, 'received_count')
 def email_header_received_count(header: EmailHeader):
     if header.received is None:
