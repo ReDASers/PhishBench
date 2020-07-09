@@ -511,117 +511,13 @@ def single_email_features(message: EmailMessage):
     if Globals.config["Email_Features"]["extract header features"] == "True":
         header = message.header
         Globals.logger.debug("Extracting Header Features")
-        Features.Email_Header_return_path(header.return_path, dict_features, dict_time)
-        Features.Email_Header_X_mailer(header.x_mailer, dict_features, dict_time)
-        Features.Email_Header_X_originating_hostname(header.x_originating_hostname, dict_features, dict_time)
-        Features.Email_Header_X_originating_ip(header.x_originating_ip, dict_features, dict_time)
         Features.Email_Header_X_spam_flag(header.x_spam_flag, dict_features, dict_time)
-        Features.Email_Header_X_virus_scanned(header.x_virus_scanned, dict_features, dict_time)
-        Features.Email_Header_X_Origininal_Authentication_results(header.x_original_authentication_results,
-                                                                  dict_features, dict_time)
-
-        Features.Email_Header_Received_SPF(header.received_spf, dict_features, dict_time)
-        Features.Email_Header_Dkim_Signature_Exists(header.dkim_signed, dict_features, dict_time)
-        Features.Email_Header_number_of_words_subject(header.subject, dict_features, dict_time)
-        Features.Email_Header_number_of_characters_subject(header.subject, dict_features, dict_time)
-        Features.Email_Header_number_of_special_characters_subject(header.subject, dict_features, dict_time)
-        Features.Email_Header_binary_fwd(header.subject, dict_features, dict_time)
-        Features.Email_Header_vocab_richness_subject(header.subject, dict_features, dict_time)
-        Features.Email_Header_compare_sender_return(header.sender_email_address, header.return_path,
-                                                    dict_features, dict_time)
-        Features.Email_Header_compare_sender_domain_message_id_domain(header.sender_full, header.message_id,
-                                                                      dict_features, dict_time)
-
-        # Features.Content_Disposition(cdispo, list_features, list_time)
-        # Globals.logger.debug("Content_Disposition")
-        Features.Email_Header_Number_Cc(header.cc, dict_features, dict_time)
-        Features.Email_Header_Number_Bcc(header.bcc, dict_features, dict_time)
-        Features.Email_Header_Number_To(header.to, dict_features, dict_time)
-        Features.Email_Header_MIME_Version(header.mime_version, dict_features, dict_time)
-        Features.Email_Header_Num_Content_type(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Charset(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Charset(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Content_type(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Content_Disposition(content_disposition_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Disposition(content_disposition_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_text_html(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Disposition(content_disposition_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_text_plain(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_text_html(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Encrypted(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Mixed(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_form_data(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_byterange(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Parallel(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Report(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Alternative(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Digest_Num(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_Signed_Num(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Multipart_X_Mixed_Replaced(content_type_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_us_ascii(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_utf_8(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_utf_7(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_gb2312(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_shift_jis(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_koi(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Type_Charset_iso2022_jp(charset_list, dict_features, dict_time)
-        Features.Email_Header_Num_Attachment(num_attachment, dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, dict_features, dict_time)
-        Features.Email_Header_Num_Content_Transfer_Encoding(Content_Transfer_Encoding_list, dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Content_Transfer_Encoding(Content_Transfer_Encoding_list, dict_features,
-                                                                   dict_time)
-        Features.Email_Header_Num_Content_Transfer_Encoding_7bit(Content_Transfer_Encoding_list, dict_features,
-                                                                 dict_time)
-        Features.Email_Header_Num_Content_Transfer_Encoding_8bit(Content_Transfer_Encoding_list, dict_features,
-                                                                 dict_time)
-        Features.Email_Header_Num_Content_Transfer_Encoding_binary(Content_Transfer_Encoding_list, dict_features,
-                                                                   dict_time)
-        Features.Email_Header_Num_Content_Transfer_Encoding_quoted_printable(Content_Transfer_Encoding_list,
-                                                                             dict_features, dict_time)
-        Features.Email_Header_Num_Unique_Attachment_types(file_extension_list, dict_features, dict_time)
-        Features.Email_Header_size_in_Bytes(size_in_Bytes, dict_features, dict_time)
-        Features.Email_Header_Received_count(header.received, dict_features, dict_time)
-        Features.Email_Header_Authentication_Results_SPF_Pass(header.authentication_results, dict_features, dict_time)
-        Features.Email_Header_Authentication_Results_DKIM_Pass(header.authentication_results, dict_features, dict_time)
-        Features.Email_Header_Test_Html(text_Html, dict_features, dict_time)
-        Features.Email_Header_Test_Text(test_text, dict_features, dict_time)
-        Features.Email_Header_blacklisted_words_subject(header.subject, dict_features, dict_time)
 
     if Globals.config["Email_Features"]["extract body features"] == "True":
         Globals.logger.debug("Extracting Body features")
         body = message.body
         body_text = body.text
         body_html = body.html
-
-        Features.Email_Body_flesh_read_score(body_text, dict_features, dict_time)
-        Features.Email_Body_smog_index(body_text, dict_features, dict_time)
-        Features.Email_Body_flesh_kincaid_score(body_text, dict_features, dict_time)
-        Features.Email_Body_coleman_liau_index(body_text, dict_features, dict_time)
-        Features.Email_Body_automated_readability_index(body_text, dict_features, dict_time)
-        Features.Email_Body_dale_chall_readability_score(body_text, dict_features, dict_time)
-        Features.Email_Body_difficult_words(body_text, dict_features, dict_time)
-        Features.Email_Body_linsear_score(body_text, dict_features, dict_time)
-        Features.Email_Body_gunning_fog(body_text, dict_features, dict_time)
-        # Features.html_in_body(body, list_features, list_time)
-        # print("html_in_body")
-        Features.Email_Body_number_of_words_body(body_text, dict_features, dict_time)
-        Features.Email_Body_number_of_characters_body(body_text, dict_features, dict_time)
-        Features.Email_Body_number_of_special_characters_body(body_text, dict_features, dict_time)
-        Features.Email_Body_vocab_richness_body(body_text, dict_features, dict_time)
-        Features.Email_Body_number_of_html_tags_body(body_html, dict_features, dict_time)
-        Features.Email_Body_number_of_unique_words_body(body_text, dict_features, dict_time)
-        Features.Email_Body_number_unique_chars_body(body_text, dict_features, dict_time)
-        Features.Email_Body_end_tag_count(body_html, dict_features, dict_time)
-        Features.Email_Body_open_tag_count(body_html, dict_features, dict_time)
-        Features.Email_Body_recipient_name_body(body_text, header.recipient_name, dict_features, dict_time)
-        Features.Email_Body_on_mouse_over(body_html, dict_features, dict_time)
-        Features.Email_Body_count_href_tag(body_html, dict_features, dict_time)
-        Features.Email_Body_Function_Words_Count(body_text, dict_features, dict_time)
-        Features.Email_Body_Number_Of_Img_Links(body_html, dict_features, dict_time)
-        Features.Email_Body_blacklisted_words_body(body_text, dict_features, dict_time)
-        Features.Email_Body_Number_Of_Scripts(body_html, dict_features, dict_time)
-
     return dict_features, dict_time
 
 
