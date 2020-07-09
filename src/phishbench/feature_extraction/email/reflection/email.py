@@ -39,31 +39,3 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
         dict_feature_times[feature.config_name] = ex_time
 
     return dict_feature_values, dict_feature_times
-
-
-def extract_features_emails(emails: List[EmailMessage]) -> Union[List[Dict], List[Dict]]:
-    """
-    Runs feature extraction on all emails in a folder
-
-    Parameters
-    ----------
-    emails: List[EmailMessage] List of emails to extract features from
-
-    Returns
-    -------
-    feature_dict_list:
-        List[Dict] List of features
-    time_dict_list:
-        List[Dict] List of times for feature extraction
-    """
-    feature_dict_list = list()
-    time_dict_list = list()
-
-    features = load_internal_features()
-
-    for email_msg in emails:
-        feature_values, feature_times = extract_features_from_single_email(features, email_msg)
-        feature_dict_list.append(feature_values)
-        time_dict_list.append(feature_times)
-
-    return feature_dict_list, time_dict_list
