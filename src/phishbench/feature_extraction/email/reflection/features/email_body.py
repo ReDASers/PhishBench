@@ -1,7 +1,7 @@
 import re
 
-from textstat import textstat
 from bs4 import BeautifulSoup
+from textstat import textstat
 
 from . import helpers
 from .. import register_feature, FeatureType
@@ -433,7 +433,4 @@ def email_body_gunning_fog(body: EmailBody):
 def email_body_text_standard(body: EmailBody):
     return textstat.text_standard(body.text)
 
-
 # endregion
-
-

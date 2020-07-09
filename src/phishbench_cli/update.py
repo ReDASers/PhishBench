@@ -3,12 +3,12 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
-from phishbench.evaluation.core import load_internal_metrics
-from phishbench.evaluation import settings as evaluation_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 from phishbench.classification.core import load_internal_classifiers
-from phishbench.feature_extraction.email.reflection import load_internal_features as load_email_features
+from phishbench.evaluation import settings as evaluation_settings
+from phishbench.evaluation.core import load_internal_metrics
 from phishbench.feature_extraction.email.reflection import FeatureType
+from phishbench.feature_extraction.email.reflection import load_internal_features as load_email_features
 
 
 def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):

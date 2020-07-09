@@ -1,5 +1,7 @@
-from nltk.stem import PorterStemmer
 from itertools import groupby
+
+from nltk.stem import PorterStemmer
+
 
 # Vocabulary richness https://swizec.com/blog/measuring-vocabulary-richness-with-python/swizec/2528
 def yule(entry):

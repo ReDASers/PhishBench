@@ -4,9 +4,7 @@ from datetime import datetime
 
 import dns.resolver
 import tldextract
-from bs4 import BeautifulSoup
 from lxml import html as lxml_html
-from textstat.textstat import textstat
 
 from . import Tfidf
 from .Features_Support import *
@@ -101,6 +99,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         ex_time = end - start
         list_time["Number_link_sec_port"] = ex_time
 
+
 # def html_in_body(body, list_features, list_time):
 #    if Globals.config["Features"]["html_in_body"] == "True":
 #        start=time.time()
@@ -184,6 +183,7 @@ def extract_features_ranked_matrix(links, alexa_data, original_domain):
     sd = round(statistics.stdev(results, xbar=original_rank), 2)
     return [mean, sd]
 
+
 def get_rank(domain, alexa_data):
     if domain in alexa_data:
         alexa_rank = int(alexa_data[domain])
@@ -205,6 +205,7 @@ def get_rank(domain, alexa_data):
         alexa_rank = 8
 
     return alexa_rank
+
 
 # END - ranked_matrix
 
@@ -590,7 +591,7 @@ def HTML_number_of_hidden_input(soup, list_features, list_time):
                 iframe_tags = soup.find_all('input')
                 for tag in iframe_tags:
                     if tag.get('type') == "hidden":
-                        number_of_hidden_input+=1
+                        number_of_hidden_input += 1
             except Exception as e:
                 Globals.logger.warning("exception: " + str(e))
                 number_of_hidden_input = -1
@@ -598,6 +599,7 @@ def HTML_number_of_hidden_input(soup, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["number_of_hidden_input"] = ex_time
+
 
 def HTML_number_of_hidden_svg(soup, list_features, list_time):
     # global list_features
@@ -617,6 +619,7 @@ def HTML_number_of_hidden_svg(soup, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["number_of_hidden_svg"] = ex_time
+
 
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     # global list_features
@@ -1437,6 +1440,7 @@ def URL_Null_in_Domain(url, list_features, list_time):
 # PhishDef: URL Names Say It All
 TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 
+
 def URL_Token_Count(url, list_features, list_time):
     if Globals.config["URL_Features"]["Token_Count"] == "True":
         start = time.time()
@@ -1452,6 +1456,7 @@ def URL_Token_Count(url, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Token_Count"] = ex_time
+
 
 # Detecting Malicious URLs Using Lexical Analysis
 def URL_Average_Path_Token_Length(url, list_features, list_time):
@@ -1782,7 +1787,8 @@ def Network_DNS_Info_Exists(url, list_features, list_time):
                     dns_info = resolver.query(domain, 'A')
                     flag = 1
                 except (
-                dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout) as e:
+                        dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers,
+                        dns.resolver.Timeout) as e:
                     Globals.logger.warning("Exception: {}".format(e))
                     flag = 0
             except Exception as e:

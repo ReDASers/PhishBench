@@ -1,12 +1,12 @@
 import re
 import sys
 
+from phishbench.input.email_input.models import EmailHeader
 from . import helpers
 from ...reflection.core import register_feature, FeatureType
-from phishbench.input.email_input.models import EmailHeader
 
 
-@register_feature(FeatureType.HEADER,'mime_version')
+@register_feature(FeatureType.HEADER, 'mime_version')
 def email_header_mime_version(header: EmailHeader):
     return header.mime_version
 
@@ -44,6 +44,7 @@ def email_header_x_virus_scanned(header: EmailHeader):
 @register_feature(FeatureType.HEADER, 'X_Spam_flag')
 def x_spam_flag(header: EmailHeader):
     return header.x_spam_flag
+
 
 @register_feature(FeatureType.HEADER, 'received_count')
 def email_header_received_count(header: EmailHeader):

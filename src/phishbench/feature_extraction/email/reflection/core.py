@@ -69,6 +69,3 @@ def load_features(source, filter_features=True) -> List[Callable]:
                 features = [f for f in features if f.feature_type != feature_type]
         features = [f for f in features if _check_feature(f)]
     return features
-
-
-

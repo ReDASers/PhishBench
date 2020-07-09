@@ -3,7 +3,7 @@ from typing import List, Dict, Callable, Union
 
 from phishbench.input.email_input.models import EmailMessage
 from phishbench.utils import Globals
-from .core import FeatureType, load_internal_features
+from .core import FeatureType
 
 
 def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
