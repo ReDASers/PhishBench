@@ -22,7 +22,7 @@ def email_body_num_content_type(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_type')
 def email_body_num_unique_content_type(body: EmailBody):
-    return len(set(body.charset_list))
+    return len(set(body.content_type_list))
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_text_plain')
@@ -87,7 +87,12 @@ def email_body_num_content_type_multipart_x_mixed_replaced(body: EmailBody):
 
 # endregion
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_disposition')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_disposition')
+def email_body_num_content_disposition(body: EmailBody):
+    return len(body.content_disposition_list)
+
+
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_disposition_unique')
 def email_body_num_unique_content_disposition(body: EmailBody):
     return len(set(body.content_disposition_list))
 
@@ -164,27 +169,27 @@ def email_body_num_content_transfer_encoding(body: EmailBody):
     return len(body.content_transfer_encoding_list)
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_transfer_encoding')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_unique')
 def email_body_num_unique_content_transfer_encoding(body: EmailBody):
     return len(set(body.content_transfer_encoding_list))
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_7bit_content_transfer_encoding')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_7bit')
 def email_body_num_content_transfer_encoding_7bit(body: EmailBody):
     return body.content_transfer_encoding_list.count('7bit')
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_8bit_content_transfer_encoding')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_8bit')
 def email_body_num_content_transfer_encoding_8bit(body: EmailBody):
     return body.content_transfer_encoding_list.count('8bit')
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_binary_content_transfer_encoding')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_binary')
 def email_body_num_content_transfer_encoding_binary(body: EmailBody):
     return body.content_transfer_encoding_list.count('binary')
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_quoted_printable_content_transfer_encoding')
+@register_feature(FeatureType.EMAIL_BODY, 'num_printable_content_transfer_encoding_quoted')
 def email_body_num_content_transfer_encoding_quoted_printable(body: EmailBody):
     return body.content_transfer_encoding_list.count('quoted-printable')
 
@@ -430,9 +435,5 @@ def email_body_text_standard(body: EmailBody):
 
 
 # endregion
-
-
-# region Helper Methods
-
 
 
