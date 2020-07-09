@@ -3,7 +3,7 @@ import sys
 
 from . import helpers
 from ...reflection.core import register_feature, FeatureType
-from phishbench.input.email_input import EmailHeader
+from phishbench.input.email_input.models import EmailHeader
 
 
 @register_feature(FeatureType.HEADER,'mime_version')
@@ -51,17 +51,17 @@ def email_header_received_count(header: EmailHeader):
 @register_feature(FeatureType.HEADER, 'Authentication_Results_SPF_Pass')
 def email_header_authentication_results_spf_pass(header: EmailHeader):
     if "spf=pass" in header.authentication_results:
-        return 1
+        return True
     else:
-        return 0
+        return False
 
 
 @register_feature(FeatureType.HEADER, 'Authentication_Results_DKIM_Pass')
 def email_header_authentication_results_dkim_pass(header: EmailHeader):
     if "dkim=pass" in header.authentication_results:
-        return 1
+        return True
     else:
-        return 0
+        return False
 
 
 @register_feature(FeatureType.HEADER, 'X_Origininal_Authentication_results')
@@ -149,6 +149,7 @@ def email_header_number_of_characters_subject(header: EmailHeader):
 @register_feature(FeatureType.HEADER, "number_of_special_characters_subject")
 def email_header_number_of_special_characters_subject(header: EmailHeader):
     subject = header.subject
+
     if subject is None:
         return 0
 
@@ -173,6 +174,7 @@ def email_header_is_reply(header: EmailHeader):
     return False
 
 
+@register_feature(FeatureType.HEADER, "vocab_richness_subject")
 def email_header_vocab_richness_subject(header: EmailHeader):
     if header.subject:
         return helpers.yule(header.subject)
