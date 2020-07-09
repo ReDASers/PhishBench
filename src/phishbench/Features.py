@@ -191,24 +191,6 @@ def Email_Header_Num_Unique_Charset(charset_list, list_features, list_time):
         list_time["Num_Unique_Charset"] = ex_time
 
 
-def Email_Header_MIME_Version(MIME_version, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["MIME_Version"] == "True":
-        start = time.time()
-        try:
-            # list_features["Email_Header_MIME_Version"]=MIME_version
-            # print("Mime_version: {}".format(MIME_version))
-            if MIME_version != None:
-                list_features["MIME_Version"] = MIME_version
-            else:
-                list_features["MIME_Version"] = 0
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["MIME_Version"] = "N/A"
-        end = time.time()
-        ex_time = end - start
-        list_time["MIME_Version"] = ex_time
-
-
 def Email_Header_Num_Unique_Content_type(content_type_list, list_features, list_time):
     if Globals.config["Email_Header_Features"]["Num_Unique_Content_type"] == "True":
         start = time.time()
@@ -615,72 +597,6 @@ def Email_Header_Num_Unique_Attachment_types(file_extension_list, list_features,
         list_time["Num_Unique_Attachment_types"] = ex_time
 
 
-def Email_Header_size_in_Bytes(size_in_bytes, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["size_in_Bytes"] == "True":
-        start = time.time()
-        try:
-            list_features["size_in_Bytes"] = size_in_bytes
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["size_in_Bytes"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["size_in_Bytes"] = ex_time
-
-
-def Email_Header_return_path(return_addr, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["return_path"] == "True":
-        start = time.time()
-        try:
-            list_features["return_path"] = return_addr
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["return_path"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["return_path"] = ex_time
-
-
-def Email_Header_X_mailer(x_mailer, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_mailer"] == "True":
-        start = time.time()
-        try:
-            list_features["X_mailer"] = x_mailer
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_mailer"] = -1
-        # print("x_mailer >> {}".format(x_mailer))
-        end = time.time()
-        ex_time = end - start
-        list_time["X_mailer"] = ex_time
-
-
-def Email_Header_X_originating_hostname(x_originating_hostname, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_originating_hostname"] == "True":
-        start = time.time()
-        try:
-            list_features["X_originating_hostname"] = x_originating_hostname
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_originating_hostname"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["X_originating_hostname"] = ex_time
-
-
-def Email_Header_X_originating_ip(x_originating_ip, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_originating_ip"] == "True":
-        start = time.time()
-        try:
-            list_features["X_originating_ip"] = x_originating_ip
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_originating_ip"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["X_originating_ip"] = ex_time
-
-
 def Email_Header_X_spam_flag(x_spam_flag, list_features, list_time):
     if Globals.config["Email_Header_Features"]["X_spam_flag"] == "True":
         start = time.time()
@@ -692,151 +608,6 @@ def Email_Header_X_spam_flag(x_spam_flag, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["X_Spam_flag"] = ex_time
-
-
-def Email_Header_X_virus_scanned(x_virus_scanned, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_virus_scanned"] == "True":
-        start = time.time()
-        try:
-            list_features["X_virus_scanned"] = x_virus_scanned
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_virus_scanned"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["X_virus_scanned"] = ex_time
-
-
-def Email_Header_Received_count(received, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Received_count"] == "True":
-        start = time.time()
-        # print("received {}".format(received))
-        try:
-            if received == "None":
-                list_features["Received_count"] = 0
-            else:
-                list_features["Received_count"] = len(received)
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Received_count"] = -1
-        # print("Received count >>>> {}".format(received))
-        end = time.time()
-        ex_time = end - start
-        list_time["Received_count"] = ex_time
-
-
-def Email_Header_Authentication_Results_SPF_Pass(authentication_results, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Authentication_Results_SPF_Pass"] == "True":
-        start = time.time()
-        try:
-            if "spf=pass" in authentication_results:
-                list_features["Authentication_Results_SPF_Pass"] = 1
-            else:
-                list_features["Authentication_Results_SPF_Pass"] = 0
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Authentication_Results_SPF_Pass"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Authentication_Results_SPF_Pass"] = ex_time
-
-
-def Email_Header_Authentication_Results_DKIM_Pass(authentication_results, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Authentication_Results_DKIM_Pass"] == "True":
-        start = time.time()
-        try:
-            if "dkim=pass" in authentication_results:
-                list_features["Authentication_Results_DKIM_Pass"] = 1
-            else:
-                list_features["Authentication_Results_DKIM_Pass"] = 0
-            # list_features["Authentication_Results"]=authentication_results
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            # list_features["Authentication_Results"]="None"
-            list_features["Authentication_Results_DKIM_Pass"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Authentication_Results_DKIM_Pass"] = ex_time
-
-
-def Email_Header_X_Origininal_Authentication_results(x_original_authentication_results, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["X_Origininal_Authentication_results"] == "True":
-        start = time.time()
-        try:
-            list_features["X_Origininal_Authentication_results"] = x_original_authentication_results
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["X_Origininal_Authentication_results"] = -1
-        # print("X_Origininal_Authentication_results >>>> {}".format(x_original_authentication_results))
-        end = time.time()
-        ex_time = end - start
-        list_time["X_Origininal_Authentication_results"] = ex_time
-
-
-def Email_Header_Received_SPF(received_spf, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Received_SPF"] == "True":
-        start = time.time()
-        try:
-            list_features["Received_SPF"] = received_spf
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Received_SPF"] = -1
-        # print("Received_SPF >>>> {}".format(received_spf))
-        end = time.time()
-        ex_time = end - start
-        list_time["Received_SPF"] = ex_time
-
-
-def Email_Header_Dkim_Signature_Exists(dkim_signature, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Dkim_Signature_Exists"] == "True":
-        start = time.time()
-        try:
-            # dkim_signature is boolean
-            list_features["Dkim_Signature_Exists"] = dkim_signature
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Dkim_Signature_Exists"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Dkim_Signature_Exists"] = ex_time
-
-
-def Email_Header_compare_sender_domain_message_id_domain(sender_domain, message_id, list_features, list_time):
-    # global list_features
-    if Globals.config["Email_Header_Features"]["compare_sender_domain_message_id_domain"] == "True":
-        start = time.time()
-        try:
-            if message_id != "None":
-                message_id_domain = message_id.split("@")[1]
-            else:
-                message_id_domain = "None"
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            message_id_domain = "None"
-        if message_id_domain != "None":
-            compare_sender_domain_message_id_domain = int(bool(sender_domain == message_id_domain))
-            list_features["compare_sender_domain_message_id_domain"] = compare_sender_domain_message_id_domain
-        else:
-            compare_sender_domain_message_id_domain = 0
-            list_features["compare_sender_domain_message_id_domain"] = compare_sender_domain_message_id_domain
-            # print("compare_sender_domain_message_id_domain >>>> {}".format(compare_sender_domain_message_id_domain))
-        end = time.time()
-        ex_time = end - start
-        list_time["compare_sender_domain_message_id_domain"] = ex_time
-
-
-def Email_Header_compare_sender_return(sender_full_address, return_addr, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["compare_sender_return"] == "True":
-        start = time.time()
-        try:
-            compare_sender_return = int(bool(sender_full_address == return_addr))
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            compare_sender_return = -1
-        list_features["compare_sender_return"] = compare_sender_return
-        end = time.time()
-        ex_time = end - start
-        list_time["compare_sender_return"] = ex_time
 
 
 def Email_Header_Test_Html(test_Html, list_features, list_time):
@@ -952,22 +723,6 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Number_link_sec_port"] = ex_time
-
-
-#### Body Features:
-def Email_Body_recipient_name_body(body, recipient_name, list_features, list_time):
-    if Globals.config["Email_Body_Features"]["recipient_name_body"] == "True":
-        start = time.time()
-        try:
-            recipient_name_body = int(bool(recipient_name in body))
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            recipient_name_body = -1
-        list_features["recipient_name_body"] = recipient_name_body
-        end = time.time()
-        ex_time = end - start
-        list_time["compare_sender_return"] = ex_time
-
 
 # def html_in_body(body, list_features, list_time):
 #    if Globals.config["Features"]["html_in_body"] == "True":
@@ -1251,30 +1006,6 @@ def Email_Body_blacklisted_words_body(body, list_features, list_time):
         # list_features[""]=
 
 
-def Email_Header_blacklisted_words_subject(subject, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["blacklisted_words_subject"] == "True":
-        start = time.time()
-        blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limitied", "suspension",
-                             "your account", "verify your account", "agree", 'bank', 'dear'
-            , "update", "comfirm", "customer", "client", "Suspend", "restrict", "verify", "login", "ssn", 'username',
-                             'click', 'log', 'inconvenien', 'alert', 'paypal']
-        blacklist_subject_count = []
-        if subject:
-            for word in blacklist_subject:
-                try:
-                    word_count = len(re.findall(word, subject.lower()))
-                    list_features[word + "_count_in_subject"] = word_count
-                except Exception as e:
-                    Globals.logger.warning("exception: " + str(e))
-                    list_features[word + "_count_in_subject"] = -1
-        else:
-            for word in blacklist_subject:
-                list_features[word + "_count_in_subject"] = 0
-        end = time.time()
-        ex_time = end - start
-        list_time["blacklisted_words_subject"] = ex_time
-
-
 def Email_Header_Number_Cc(cc, list_features, list_time):
     if Globals.config["Email_Header_Features"]["Number_Cc"] == "True":
         start = time.time()
@@ -1289,41 +1020,6 @@ def Email_Header_Number_Cc(cc, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Number_Cc"] = ex_time
-
-
-def Email_Header_Number_Bcc(Bcc, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Number_Bcc"] == "True":
-        start = time.time()
-        try:
-            if Bcc:
-                list_features["Number_Bcc"] = len(Bcc)
-            else:
-                list_features["Number_Bcc"] = 0
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Number_Bcc"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Number_Bcc"] = ex_time
-
-
-def Email_Header_Number_To(To, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["Number_To"] == "True":
-        start = time.time()
-        try:
-            if To:
-                if len(To.split(',')) >= len(To.split(';')):
-                    list_features["Number_To"] = len(To.split(','))
-                else:
-                    list_features["Number_To"] = len(To.split(';'))
-            else:
-                list_features["Number_To"] = 0
-        except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
-            list_features["Number_To"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Number_To"] = ex_time
 
 
 def Email_Body_Number_Of_Scripts(body, list_features, list_time):
@@ -1573,61 +1269,6 @@ def Email_Body_text_standard(body, list_features, list_time):
         list_time["text_standard"] = ex_time
 
 
-#### Extract features from subject
-def Email_Header_number_of_words_subject(subject, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["number_of_words_subject"] == "True":
-        start = time.time()
-        if subject:
-            try:
-                Globals.logger.debug("subject: {}".format(subject))
-                number_of_words_subject = len(re.findall(r'\w+', subject))
-            except Exception as e:
-                number_of_words_subject = -1
-                Globals.logger.warning("exception: " + str(e))
-        else:
-            number_of_words_subject = 0
-        list_features["number_of_words_subject"] = number_of_words_subject
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_words_subject"] = ex_time
-
-
-def Email_Header_number_of_characters_subject(subject, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["number_of_characters_subject"] == "True":
-        start = time.time()
-        if subject:
-            try:
-                number_of_characters_subject = len(re.findall(r'\w', subject))
-            except Exception as e:
-                number_of_characters_subject = -1
-                Globals.logger.warning("exception: " + str(e))
-        else:
-            number_of_characters_subject = 0
-        list_features["number_of_characters_subject"] = number_of_characters_subject
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_characters_subject"] = ex_time
-
-
-def Email_Header_number_of_special_characters_subject(subject, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["number_of_special_characters_subject"] == "True":
-        start = time.time()
-        if subject:
-            try:
-                number_of_characters_subject = len(re.findall(r'\w', subject))
-                number_of_special_characters_subject = len(subject) - number_of_characters_subject - len(
-                    re.findall(r' ', subject))
-            except Exception as e:
-                number_of_special_characters_subject = -1
-                Globals.logger.warning("exception: " + str(e))
-        else:
-            number_of_special_characters_subject = 0
-        list_features["number_of_special_characters_subject"] = number_of_special_characters_subject
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_special_characters_subject"] = ex_time
-
-
 def Email_Header_binary_fwd(subject, list_features, list_time):
     if Globals.config["Email_Header_Features"]["binary_fwd"] == "True":
         start = time.time()
@@ -1662,23 +1303,6 @@ def Email_Header_binary_re(subject, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["binary_re"] = ex_time
-
-
-def Email_Header_vocab_richness_subject(subject, list_features, list_time):
-    if Globals.config["Email_Header_Features"]["vocab_richness_subject"] == "True":
-        start = time.time()
-        if subject:
-            try:
-                vocab_richness_subject = yule(subject)
-            except Exception as e:
-                vocab_richness_subject = -1
-                Globals.logger.warning("exception: " + str(e))
-        else:
-            vocab_richness_subject = 0
-        list_features["vocab_richness_subject"] = vocab_richness_subject
-        end = time.time()
-        ex_time = end - start
-        list_time["vocab_richness_subject"] = ex_time
 
 
 ############################ HTML features
