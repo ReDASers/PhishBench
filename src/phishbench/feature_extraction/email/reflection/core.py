@@ -26,9 +26,14 @@ def register_feature(feature_type: FeatureType, config_name: str):
     return wrapped
 
 
-def load_internal_features() -> List[Callable]:
+def load_internal_features(filter_features=True) -> List[Callable]:
+    """
+    Loads internal features
+    :param filter_features: Whether or not to filter the features based on Globals.config.
+    :return: A list containing the internal PhishBench features.
+    """
     from . import features
-    return load_features(features)
+    return load_features(features, filter_features)
 
 
 def _check_feature(feature: Callable) -> bool:
@@ -38,16 +43,15 @@ def _check_feature(feature: Callable) -> bool:
     return Globals.config[feature_type.value].getboolean(feature.config_name)
 
 
-def load_features(source) -> List[Callable]:
+def load_features(source, filter_features=True) -> List[Callable]:
     """
     Loads the PhishBench features from a module
 
     :param source: The module or name of the module to load the features from
-    :feature_type module_name: str
+    :param filter_features: Whether or not to filter the features based on Globals.config.
 
-    :return: A list containing all the features in the module
+    :return: A list containing all the features in the module.
     """
-    print(type(source))
     if isinstance(source, str):
         features_module = importlib.import_module(source)
     elif inspect.ismodule(source):
@@ -58,12 +62,12 @@ def load_features(source) -> List[Callable]:
     features = [getattr(features_module, x) for x in dir(features_module)]
     features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
 
-    # remove disabled features
-    for feature_type in FeatureType:
-        if not Globals.config['Feature Types'].getboolean(feature_type.value):
-            features = [f for f in features if f.feature_type != feature_type]
-    features = [f for f in features if _check_feature(f)]
-    print(features)
+    if filter_features:
+        # remove disabled features
+        for feature_type in FeatureType:
+            if not Globals.config['Feature Types'].getboolean(feature_type.value):
+                features = [f for f in features if f.feature_type != feature_type]
+        features = [f for f in features if _check_feature(f)]
     return features
 
 
