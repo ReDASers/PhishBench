@@ -5,5 +5,7 @@ from ._header import EmailHeader
 class EmailMessage:
 
     def __init__(self, msg):
-        self.body = EmailBody(msg)
-        self.header = EmailHeader(msg)
+        self.raw_message = msg
+        self.body: EmailBody = EmailBody(msg)
+        self.header: EmailHeader = EmailHeader(msg)
+

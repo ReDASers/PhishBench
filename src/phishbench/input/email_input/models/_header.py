@@ -293,8 +293,14 @@ class EmailHeader:
             # print("received: {}".format(received))
         else:
             self.received = []
-        #
+        # MIME version
         if msg['MIME-Version']:
             self.mime_version = msg['MIME-Version']
         else:
             self.mime_version = None
+
+        # X-Spam_flag
+        if msg["X-Spam_flag"]:
+           self.x_spam_flag = True
+        else:
+            self.x_spam_flag = False

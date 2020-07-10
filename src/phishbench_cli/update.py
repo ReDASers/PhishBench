@@ -3,10 +3,12 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
-from phishbench.evaluation.core import load_internal_metrics
-from phishbench.evaluation import settings as evaluation_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 from phishbench.classification.core import load_internal_classifiers
+from phishbench.evaluation import settings as evaluation_settings
+from phishbench.evaluation.core import load_internal_metrics
+from phishbench.feature_extraction.email.reflection import FeatureType
+from phishbench.feature_extraction.email.reflection import load_internal_features as load_email_features
 
 
 def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
@@ -86,17 +88,23 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
     config['URL_Feature_Types']['HTML'] = "False"
     config['URL_Feature_Types']['JavaScript'] = "False"
 
-    config['Email_Header_Features'] = {}
-    header_features = config['Email_Header_Features']
-    for feature in list_features:
-        if feature.startswith("Email_Header_"):
-            header_features[feature.replace('Email_Header_', '')] = "True"
+    reflection_features = load_email_features(filter_features=False)
 
-    config['Email_Body_Features'] = {}
-    body_features = config['Email_Body_Features']
-    for feature in list_features:
-        if feature.startswith("Email_Body_"):
-            body_features[feature.replace('Email_Body_', '')] = "True"
+    config['Email_Header_Features'] = {
+        feature.config_name: "True" for feature in reflection_features if feature.feature_type == FeatureType.HEADER
+    }
+    #  header_features = config['Email_Header_Features']
+    # for feature in list_features:
+    #     if feature.startswith("Email_Header_"):
+    #         header_features[feature.replace('Email_Header_', '')] = "True"
+
+    config['Email_Body_Features'] = {
+        feature.config_name: "True" for feature in reflection_features if feature.feature_type == FeatureType.EMAIL_BODY
+    }
+    # body_features = config['Email_Body_Features']
+    # for feature in list_features:
+    #     if feature.startswith("Email_Body_"):
+    #         body_features[feature.replace('Email_Body_', '')] = "True"
 
     config['HTML_Features'] = {}
     c_html_features = config['HTML_Features']

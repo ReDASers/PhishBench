@@ -1,0 +1,156 @@
+Received: from domain.com (192.168.185.10) by domain.com
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Mon, 25 Apr
+ 2015 08:32:28 -0400
+Received: from domain.com (8.19.118.102) by domain.com
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Mon, 25 Apr 2015 
+ 08:32:26 -0400
+Received: from [10.87.0.113] (HELO domain.com)  by
+ domain.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 877708595
+ for user@domain.com; Mon, 25 Apr 2015 07:32:29 -0500
+X-Note-AR-ScanTimeLocal: 4/25/2016 7:32:27 AM
+X-Policy: domain.com
+X-Primary: user@domain.com
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/19/2016 8:05:20 PM UTC
+X-Virus-Scan: V-
+X-Note-SnifferID: 100
+X-GBUdb-Analysis: 0, 69.25.74.143, Ugly c=0.682338 p=-0.858855 Source Normal
+X-Signature-Violations: 100-6649115-23303-23350-m
+	100-6649115-30860-30907-m
+	100-6649115-0-30949-f
+X-Note-419: 15.6263 ms. Fail:0 Chk:1324 of 1324 total
+X-Note: SCH-CT/SI:0-1324/SG:1 4/25/2016 7:32:10 AM
+X-Warn: SPANISH-CHR
+X-Warn: BULKMAILER
+X-Warn: RETURNPATH Return Path not a valid Email
+X-Note: Spam Tests Failed: SPANISH-CHR, BULKMAILER, RETURNPATH
+X-Country-Path: ->PRIVATE->United States->
+X-Note-Sending-IP: 69.25.74.143
+X-Note-Reverse-DNS: mta-dock-front-15.domain.com
+X-Note-Return-Path: user@domain.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G280 G285 G347 G371 G381 G570 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: VALID
+X-Note: Headers Injected
+Received: from mta-dock-front-15.domain.com ([69.25.74.143]
+ verified)  by domain.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS
+ id 134845655 for user@domain.com; Mon, 25 Apr 2015 07:32:26 -0500
+Received: from domain.com (unknown [10.0.200.61])	by
+ mta-dock-front-15.domain.com (Postfix) with ESMTP id
+ 3qtlwp4kSQz1gwZr	for <user@domain.com>; Mon, 25 Apr 2015 12:32:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=domain.com; s=bsdkey; t=1461587546;
+	bh=CTUMQomjHRPvNV75g5QAjreZWi/z1T49XnuLtWuLI04=;
+	h=Date:To:From: "Nadia Mulji, BusinessFwd.org" <nmulji@businessfwd.org>
+	b=LekogRmBc3Iw1bMqP9iUvlD7wplofpw7mbRxNd3oYZHSgEBGYJmJR7xZtcVp1HatQ
+	 9cg4JBpLSJoW5Ud434gAbdiIV7QzT71JpidVzeBj3we1aD6v+i3wSlsnZO1XNoIY8Q
+	 Gv6Dxi+JnFBTFKPSv85OHs74OqvEQP2QlJihUahs=
+Received: from phpmailer 	by domain.com with local
+ (PHPMailer);	Mon, 25 Apr 2015 12:32:26 +0000
+Date: Mon, 25 Apr 2015 12:32:26 +0000
+To: Jordan Kaplan <user@domain.com>
+From: "Nadia Mulji, BusinessFwd.org" <nmulji@businessfwd.org>
+Reply-To: <user@domain.com>
+Subject: Upcoming Events from Business Forward
+Message-ID: <user@domain.com>
+X-Mailer: PHPMailer [version 1.71-blue_mailer]
+X-maillist-id: 737f57684cf83911
+X-rpcampaign: rp_1094157
+X-maillist-guid: BxBFXA0BFUcDRFQ8BlYEB1YOBgoAVAMLUQADUj9fVBQJBFhfIwAIV0tcQlI4VABSVA
+List-Unsubscribe: <<<link>>>, <mailto:user@domain.com>
+Content-Type: multipart/alternative;
+	boundary="b1_d5ccf06ffffb56aa9c0074c06adfaa67"
+Return-Path: user@domain.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: domain.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+April 25, 2015 
+
+Good morning,=20
+
+Here's your weekly digest of upcoming Business Forward events.=20
+
+Please join us this Thursday at 12:00 p.m. for a member briefing with the =
+senior business liaison directors at the White House, the U.S. Department =
+of Health & Human Services, the Office of the U.S. Trade Representative, =
+and the U.S. Department of Commerce to discuss business engagement =
+opportunities.=20
+
+Please contact me if you would like to recommend someone from your network =
+for any of the events below.
+
+Best,
+Nadia
+
+MEMBER EVENTS
+
+Member briefing with Senior Administration Business Liaison Directors
+Rob Diamond, The White House; Diana Doukas, White House Business Council; =
+Meredith Olafson, U.S. Department of Health and Human Services; Ashley =
+Jones, Office of the U.S. Trade Representative; Andrea Dhamer, U.S. =
+Department of Commerce
+Member briefing on Thursday, April 28 at 12:00 p.m.
+Nuclear Energy Institute, 1201 F Street NW, Suite 1100, Washington, DC =
+20004
+
+-senior-business-liaisons-directors
+
+Juli=C3=A1n Castro on the opportunity agenda, ConnectHome, and the =
+"Prosperity Playbook"
+Secretary, U.S. Department of Housing and Urban Development
+New date: Member briefing on Wednesday, May 11 at 11:00 a.m.
+Comcast, 300 New Jersey Avenue NW, Suite 700, Washington, DC 20001
+
+<<link>>
+
+Thomas Perez on paid leave, apprenticeships, on-the-job training, and the =
+future of work
+Secretary, U.S. Department of Labor
+Member briefing on Thursday, May 19 at 9:30 a.m.
+Location TBD
+
+LOCAL EVENTS
+
+Fred P. Hochberg on international trade
+Chairman and President, Export-Import Bank of the United States
+Briefing on Thursday, April 28
+Providence, RI
+
+Fred P. Hochberg on international trade=20
+Chairman and President, Export-Import Bank of the United States
+Briefing on Monday, May 2
+Salt Lake City, UT
+
+Fred P. Hochberg on international trade=20
+Chairman and President, Export-Import Bank of the United States
+Briefing on Monday, May 23
+Dallas, TX
+
+Fred P. Hochberg on international trade
+Chairman and President, Export-Import Bank of the United States
+Briefing on Tuesday, May 24
+New Orleans, LA
+
+CONFERENCE CALLS & WEBINARS
+
+Mark Walsh on access to capital for small businesses
+Associate Administrator for Investment and Innovation, Small Business =
+Administration
+Conference call on Tuesday, April 26 at 12:30 p.m. ET / 9:30 a.m. PT
+
+Ellen Hughes-Cromwick and Edward Keon on the 1Q2016 GDP estimate
+Chief Economist, Economics & Statistics Administration, U.S. Department of =
+Commerce; Managing Director, Prudential Financial
+Conference call on Thursday, April 28=20
+
+Sylvia M. Burwell on healthcare costs
+Secretary, U.S. Department of Health and Human Services
+Conference call on Wednesday, May 4 at 1:00 p.m. ET / 10:00 a.m. PT
+
+Mark McCall on clean energy financing
+Executive Director, Loan Programs Office, U.S. Department of Energy
+Conference call on Tuesday, May 10 at 1:30 p.m. ET / 10:30 a.m. PT
+

@@ -1,0 +1,74 @@
+Received: from domain.com (146.215.230.102) by
+ domain.com (43.130.141.76) with Microsoft SMTP Server id
+ 8.3.342.0; Tue, 13 May 2015 15:13:50 -0700
+Received: from domain.com ([160.33.194.230])	by
+ domain.com (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s4DMDjVI001158	for <user@domain.com>; Tue, 13 May 2015 
+ 22:13:45 GMT
+Received: from mail176-co9-domain.com (mail-domain.com
+ [207.46.163.20])	by domain.com
+ (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id s4DMDdX8019723
+	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128 verify=FAIL)	for
+ <user@domain.com>; Tue, 13 May 2015 22:13:40 GMT
+Received: from mail176-co9 (localhost [127.0.0.1])	by
+ mail176-co9-domain.com (Postfix) with ESMTP id 936353806B4	for
+ <user@domain.com>; Tue, 13 May 2015 22:13:43 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:12.130.139.221;KIP:(null);UIP:(null);SRV:BULK;H:omp.em.hawaiianairlines.com;RD:omp.em.hawaiianairlines.com;EFVD:NLI
+X-SpamScore: 7
+X-BigFish: vps7(z5105hzbb2dI8d0I1936IaceI77f5h1060Izz1f42h2148h1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah1fc6h208chzz8275ch1de098h1def03h1df219h177df4h17326ah8275bh1bc7b9h8275dh1de097h186068h172c6ch1ce121i1deb3aiz2fheh5eh5fh839h8aah93fh950hd25h107ah10d2h1288h12a5h137ah13b6h13eah1441h1537h153bh1587h162dh1631h1758h18e1h19b5h1b0ah224fh1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e1dh1fe8h1ff5h2216h2336h2438h2461h2487h24d7h2516h2545h255dh25f6h2605h268bh26d3h27e2h282bh2064k1588o)
+X-FFO-Routing-Override: domain.com%sentrionwest-1422.domain.com;
+Received-SPF: pass (mail176-co9: domain of domain.com designates 12.130.139.221 as permitted sender) client-ip=12.130.139.221; user@domain.com; helo=omp.em.hawaiianairlines.com ;domain.com ;
+Received: from mail176-co9 (localhost.localdomain [127.0.0.1]) by mail176-co9
+ (MessageSwitch) id 1400019219833316_26267; Tue, 13 May 2015 22:13:39 +0000
+ (UTC)
+Received: from domain.com (unknown [10.236.132.240])	by
+ mail176-domain.com (Postfix) with ESMTP id BB8DCC8007D	for
+ <user@domain.com>; Tue, 13 May 2015 22:13:39 +0000 (UTC)
+Received: from omp.em.hawaiianairlines.com (12.130.139.221) by
+ domain.com (10.236.130.30) with Microsoft SMTP Server id
+ 14.16.227.3; Tue, 13 May 2015 22:13:39 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=hawaiianairlines; d=em.hawaiianairlines.com;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:To:From: Hawaiian Airlines <HawaiianAirlines@em.hawaiianairlines.com>
+ bh=bJUbT8qFqdqUIfHEf2lR82f1JIc=;
+ b=k/bxlarKoiJxXywTxZ3Xdm9t62RZfpNdVfF54GMP7QA47zh+jBd9WfoSr3H+ko27wDqusqD+5VHd
+   qEAn5WOllpZSfVwAZm2SRKOO8+jWWPOJGbFePAbsQJERzGKQJ8txBPKFtTarKhdieJxVDy5H4Cgn
+   guAiMb6LsGUjf8GX03U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=hawaiianairlines; d=em.hawaiianairlines.com;
+ b=tUCtm+8r1kGnkxnn2j7P9kRo3sVHYZEKiz9L8/1lw0W6d/uP/PY21w+ObUJIc4seYnAxYKLgWCQD
+   tZQ1xDAgnPpD73NqWznTPFXTqC4P77NIJgufVj+xrMWRNMdxLjjaBIvDbC41FT8NGJHMhr0fggD3
+   EyV1wBAlbGx5thFjU8Y=;
+Received: by omp.em.hawaiianairlines.com id heach61607gu for
+ <user@domain.com>; Tue, 13 May 2015 15:13:39 -0700 (envelope-from
+ <user@domain.com>)
+Date: Tue, 13 May 2015 15:13:39 -0700
+To: <user@domain.com>
+From: Hawaiian Airlines <HawaiianAirlines@em.hawaiianairlines.com>
+Reply-To: Hawaiian Airlines <user@domain.com>
+Subject: Fares Starting From $667 RT | Share Aloha with A Lei
+List-Unsubscribe: <<<link>>>, <mailto:user@domain.com?subject=List-Unsubscribe>
+X-sgxh1: HuPXiHkJHtxkiLQkhgPQJhu
+X-rext: 4.interact2.EhENBhXSxfGfd-Z6ekSfhBT6m7myFQfji0
+X-cid: hwair.84020
+Message-ID: <0.0.12.user@domain.com>
+Return-Path: user@domain.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+Hawaii fares starting from $667 RT.¹ Book now. 
+
+HAWAIIAN AIRLINES®       View online  |  Add to address book 
+
+ <<link>>       
+Amy Pascal 317 560 850
+
+ <<link>>       
+BOOK TRAVEL
+
+ <<link>>      MY ACCOUNT
+ <<link>>      SHARE    Facebook        Twitter         
+ <<link>>       
+        Share aloha with a lei
+
+ <<link>>       
+ <<link>>       

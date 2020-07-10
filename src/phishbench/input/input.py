@@ -83,21 +83,20 @@ def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:
     return corpus
 
 
-def read_dataset_email(folder_path: str) -> Union[List[EmailMessage], List[Message], List[str]]:
+def read_dataset_email(folder_path: str) -> Union[List[EmailMessage], List[str]]:
     """
 
     Parameters
     ----------
     folder_path
-
+    The folder to read emails from.
     Returns
     -------
 
     """
     files = enumerate_folder_files(folder_path)
-    emails = [read_email_from_file(f) for f in files]
-    emails_parsed = [EmailMessage(msg) for msg in emails]
-    return emails_parsed, emails, files
+    emails_parsed = [EmailMessage(read_email_from_file(f)) for f in files]
+    return emails_parsed, files
 
 
 def read_urls_from_file(file_path: str):
