@@ -5,9 +5,10 @@ import email
 import re
 from email.message import Message
 from typing import List
-import datetime
+from datetime import datetime
 
 from phishbench.utils import Globals
+from .date_parse import parse_email_datetime
 
 EMAIL_ADDRESS_REGEX = re.compile(r"<.*@[a-zA-Z0-9.\-_]*", flags=re.MULTILINE | re.IGNORECASE)
 EMAIL_ADDRESS_NAME_REGEX = re.compile(r'"?.*"? <?', flags=re.MULTILINE | re.IGNORECASE)
@@ -36,37 +37,6 @@ def parse_address_list(raw: str) -> List[str]:
         return []
     raw = re.sub(r'\s+', ' ', raw)
     return [x.strip() for x in raw.split(',')]
-
-
-def parse_email_date(raw: str) -> datetime:
-    """
-    Parse date format from rfc2822 section 3.3
-    Parameters
-    ----------
-    raw: str
-        The raw string containing the date
-    Returns
-    -------
-        A datetime object containing the parsed date.
-    """
-    #
-    match = EMAIL_DATE_FORMAT_REGEX.match(raw)
-    if not match:
-        raise ValueError("Invalid date format")
-    year = int(match.group('Year'))
-    month = match.group('Month')
-    day = int(match.group('Day'))
-    time = match.group('time')
-    if len(time) == 5:
-        time = time + ":00"
-    date_string = "%4d %s %2d %s" % (year, month, day, time)
-    zone = match.group('zone')
-    if zone:
-        date_string = date_string + " " + zone
-        format_string = '%Y %b %d %H:%M:%S %z'
-    else:
-        format_string = '%Y %b %d %H:%M:%S'
-    return datetime.datetime.strptime(date_string, format_string)
 
 
 class EmailHeader:
@@ -139,7 +109,7 @@ class EmailHeader:
         # orig-date
         try:
             if msg['Date']:
-                self.orig_date = parse_email_date(msg['Date'])
+                self.orig_date: datetime = parse_email_datetime(msg['Date'])
             else:
                 self.orig_date = None
         except ValueError as exception:
@@ -301,6 +271,6 @@ class EmailHeader:
 
         # X-Spam_flag
         if msg["X-Spam_flag"]:
-           self.x_spam_flag = True
+            self.x_spam_flag = True
         else:
             self.x_spam_flag = False

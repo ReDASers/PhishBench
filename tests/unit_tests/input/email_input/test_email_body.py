@@ -6,7 +6,7 @@
 import unittest
 
 from phishbench.input.email_input.models import EmailBody
-from .utils import get_email, get_relative_path
+from tests.unit_tests.input.email_input.utils import get_email, get_relative_path
 
 
 class TestEmailBody(unittest.TestCase):
