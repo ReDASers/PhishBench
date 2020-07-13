@@ -3,8 +3,8 @@ from unittest.mock import patch
 
 from phishbench.input.email_input.models import EmailHeader
 from phishbench.input.email_input.models._header import parse_address_list
-from phishbench.input.email_input.models._header import parse_email_date
-from .utils import get_email
+from tests.unit_tests.input.email_input.utils import get_email
+
 
 class TestEmailHeader(unittest.TestCase):
 
@@ -34,59 +34,6 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertEqual('Bob <bob@domain.com>', result[0])
         self.assertEqual('Anna <anna@domain.com>', result[1])
-
-    def test_parse_email_date_bad(self):
-        raw = "BACON!"
-
-        self.assertRaises(ValueError, parse_email_date, raw)
-
-    def test_parse_email_date(self):
-        raw = 'Mon, 14 Apr 2015 16:08:50 +0500'
-        date = parse_email_date(raw)
-
-        self.assertEqual(2015, date.year)
-        self.assertEqual(14, date.day)
-        self.assertEqual(4, date.month)
-        self.assertEqual(16, date.hour)
-        self.assertEqual(8, date.minute)
-        self.assertEqual(50, date.second)
-        self.assertEqual("UTC+05:00", str(date.tzinfo))
-
-    def test_parse_email_date_no_zone(self):
-        raw = 'Mon, 14 Apr 2015 16:08:50'
-
-        date = parse_email_date(raw)
-
-        self.assertEqual(2015, date.year)
-        self.assertEqual(14, date.day)
-        self.assertEqual(4, date.month)
-        self.assertEqual(16, date.hour)
-        self.assertEqual(8, date.minute)
-        self.assertEqual(50, date.second)
-
-    def test_parse_email_date_no_name(self):
-        raw = '14 Apr 2015 16:08:50'
-
-        date = parse_email_date(raw)
-
-        self.assertEqual(2015, date.year)
-        self.assertEqual(14, date.day)
-        self.assertEqual(4, date.month)
-        self.assertEqual(16, date.hour)
-        self.assertEqual(8, date.minute)
-        self.assertEqual(50, date.second)
-
-    def test_parse_email_date_short_time(self):
-        raw = 'Mon, 14 Apr 2015 16:08'
-
-        date = parse_email_date(raw)
-
-        self.assertEqual(2015, date.year)
-        self.assertEqual(14, date.day)
-        self.assertEqual(4, date.month)
-        self.assertEqual(16, date.hour)
-        self.assertEqual(8, date.minute)
-        self.assertEqual(0, date.second)
 
     def test_date(self):
         msg = get_email("Resources/HeaderTests/Test Email 1.txt")
