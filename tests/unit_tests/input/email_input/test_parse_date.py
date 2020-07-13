@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 from phishbench.input.email_input.models.date_parse import parse_date, parse_time, parse_email_datetime
 

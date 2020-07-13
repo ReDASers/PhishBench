@@ -5,7 +5,7 @@ import email
 import re
 from email.message import Message
 from typing import List
-import datetime
+from datetime import datetime
 
 from phishbench.utils import Globals
 from .date_parse import parse_email_datetime
@@ -109,7 +109,7 @@ class EmailHeader:
         # orig-date
         try:
             if msg['Date']:
-                self.orig_date = parse_email_datetime(msg['Date'])
+                self.orig_date: datetime = parse_email_datetime(msg['Date'])
             else:
                 self.orig_date = None
         except ValueError as exception:

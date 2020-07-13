@@ -46,8 +46,7 @@ def parse_timezone(time_str: str):
             time_zone = timezone(offset)
         time_str = consume_space(time_str[match.end():])
         return time_zone, time_str
-    else:
-        return None, time_str
+    return None, time_str
 
 
 def parse_date(date_str: str):
