@@ -1,1 +1,1 @@
-from .models.date_parse import parse_date
+from .models.date_parse import parse_email_datetime

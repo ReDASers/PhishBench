@@ -271,6 +271,6 @@ class EmailHeader:
 
         # X-Spam_flag
         if msg["X-Spam_flag"]:
-           self.x_spam_flag = True
+            self.x_spam_flag = True
         else:
             self.x_spam_flag = False

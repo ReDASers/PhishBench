@@ -34,7 +34,7 @@ def parse_timezone(time_str: str):
     if match:
         if match.group() == 'GMT':
             offset = timedelta()
-            tz = timezone(offset)
+            time_zone = timezone(offset)
         else:
             group = match.groups()
             # print(group)
@@ -43,9 +43,9 @@ def parse_timezone(time_str: str):
             tz_mins = group[1] + group[3]
             tz_mins = int(tz_mins)
             offset = timedelta(hours=tz_hour, minutes=tz_mins)
-            tz = timezone(offset)
+            time_zone = timezone(offset)
         time_str = consume_space(time_str[match.end():])
-        return tz, time_str
+        return time_zone, time_str
     else:
         return None, time_str
 
@@ -81,8 +81,8 @@ def parse_email_datetime(date_str: str):
 
     day, month, year, date_str = parse_date(date_str)
     hour, mins, secs, date_str = parse_time(date_str)
-    tz, date_str = parse_timezone(date_str)
+    time_zone, date_str = parse_timezone(date_str)
 
-    result = datetime(year=year, month=month, day=day, hour=hour, minute=mins, second=secs, tzinfo=tz)
+    result = datetime(year=year, month=month, day=day, hour=hour, minute=mins, second=secs, tzinfo=time_zone)
 
     return result
