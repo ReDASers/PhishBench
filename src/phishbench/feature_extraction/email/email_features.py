@@ -7,10 +7,10 @@ from phishbench.utils import Globals
 from . import reflection
 
 
-def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
-    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_datset_folder, phish_dataset_folder)
+def extract_dataset_features(legit_dataset_folder, phish_dataset_folder):
+    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_dataset_folder, phish_dataset_folder)
 
-    legit_features, legit_corpus = extract_email_features(legit_datset_folder)
+    legit_features, legit_corpus = extract_email_features(legit_dataset_folder)
     phish_features, phish_corpus = extract_email_features(phish_dataset_folder)
 
     feature_list_dict_train = legit_features + phish_features
