@@ -14,7 +14,6 @@ def extract_dataset_features(legit_datset_folder, phish_dataset_folder):
     phish_features, phish_corpus = extract_email_features(phish_dataset_folder)
 
     feature_list_dict_train = legit_features + phish_features
-    Features_Support.Cleaning(feature_list_dict_train)
 
     labels_train = [0] * len(legit_features) + [1] * len(phish_features)
     corpus_train = legit_corpus + phish_corpus

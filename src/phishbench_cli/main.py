@@ -11,7 +11,7 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
-import phishbench.feature_extraction.email.email_features as legacy_email
+import phishbench.feature_extraction.email.email_features as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
 from phishbench.utils import Globals
 from phishbench_cli import user_interaction
@@ -163,7 +163,8 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     legit_path = Globals.config["Dataset Path"]["path_legitimate_training"]
     phish_path = Globals.config["Dataset Path"]["path_phishing_training"]
 
-    feature_list_dict_train, y_train, corpus_train = legacy_email.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_dataset_features(legit_path, phish_path)
+    Features_Support.Cleaning(feature_list_dict_train)
 
     # Export features to csv
     if Globals.config['Features Export'].getboolean('csv'):
@@ -210,9 +211,11 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     # Extract features in a dictionary for each email. return a list of dictionaries
     legit_path = Globals.config["Dataset Path"]["path_legitimate_testing"]
     phish_path = Globals.config["Dataset Path"]["path_phishing_testing"]
+
     print("Extracting Test Set")
     Globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = legacy_email.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_dataset_features(legit_path, phish_path)
+    Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv
     if Globals.config['Features Export'].getboolean('csv'):
