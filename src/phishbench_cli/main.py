@@ -204,7 +204,7 @@ def extract_url_features():
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
         joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
-        if x_unlabeled:
+        if len(x_unlabeled) > 0:
             joblib.dump(x_unlabeled, os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
