@@ -345,9 +345,6 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     return x_test, y_test
 
 
-
-
-
 def extract_email_features():
     """
     Extracts features from a email dataset. If PhishBench is configured to only extract features from a test dataset,
@@ -397,9 +394,6 @@ def extract_email_features():
         x_test = None
         y_test = None
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
-
-
-
 
 
 def create_performance_df(scores: List[Dict]):
