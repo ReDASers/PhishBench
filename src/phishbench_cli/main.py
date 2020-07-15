@@ -171,6 +171,72 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     return x_test, y_test
 
 
+def extract_url_features():
+    """
+    Extracts features from a URL dataset. If PhishBench is configured to only extract features from a test dataset,
+    this function will automatically load pre-extracted training data from disk.
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test
+        A list containing the dataset labels
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
+    url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
+    url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
+    url_unlabeled_dir = os.path.join(Globals.args.output_input_dir, "URLs_Unlabeled")
+    run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                Globals.config["HTML_Features"].getboolean("tfidf_websites")
+
+    if Globals.config["Extraction"].getboolean("Training Dataset"):
+        x_train, y_train, x_unlabeled, vectorizer, tfidf_vectorizer = \
+            extract_url_train_features(url_train_dir, url_unlabeled_dir, run_tfidf)
+
+        # dump features and labels and vectorizers
+        joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
+        joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
+        joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
+        if x_unlabeled:
+            joblib.dump(x_unlabeled, os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
+        if tfidf_vectorizer:
+            joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
+        Globals.logger.info("Feature Extraction for training dataset: Done!")
+    else:
+        # if training was done in another instance of the platform then load the necessary files
+        x_train = joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
+        y_train = joblib.load(os.path.join(url_train_dir, "y_train.pkl"))
+        vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
+        if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
+            x_unlabeled = joblib.load(os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
+        else:
+            x_unlabeled = []
+        # TFIDF
+        if run_tfidf:
+            tfidf_vectorizer = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
+        else:
+            tfidf_vectorizer = None
+
+    if Globals.config["Extraction"].getboolean("Testing Dataset"):
+
+        x_test, y_test = extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer)
+
+        joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
+        joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
+        Globals.logger.info("Feature Extraction for testing dataset: Done!")
+    else:
+        x_test = None
+        y_test = None
+    return x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer
+
+
 def extract_email_train_features(email_train_dir, run_tfidf):
     """
     Extracts features from the email training dataset
@@ -335,70 +401,7 @@ def extract_email_features():
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
 
 
-def extract_url_features():
-    """
-    Extracts features from a URL dataset. If PhishBench is configured to only extract features from a test dataset,
-    this function will automatically load pre-extracted training data from disk.
-    Returns
-    -------
-    X_train:
-        A scipy sparse matrix containing the extracted features
-    y_train:
-        A list containing the labels for the extracted dataset
-    x_test:
-        A scipy sparse matrix containing the extracted features
-    y_test
-        A list containing the dataset labels
-    vectorizer:
-        The sklearn vectorizer for the features
-    tfidf_vectorizer:
-        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
-    """
-    url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
-    url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
-    url_unlabeled_dir = os.path.join(Globals.args.output_input_dir, "URLs_Unlabeled")
-    run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                Globals.config["HTML_Features"].getboolean("tfidf_websites")
 
-    if Globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, x_unlabeled, vectorizer, tfidf_vectorizer = \
-            extract_url_train_features(url_train_dir, url_unlabeled_dir, run_tfidf)
-
-        # dump features and labels and vectorizers
-        joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
-        joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
-        joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
-        if x_unlabeled:
-            joblib.dump(x_unlabeled, os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
-        if tfidf_vectorizer:
-            joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
-        Globals.logger.info("Feature Extraction for training dataset: Done!")
-    else:
-        # if training was done in another instance of the platform then load the necessary files
-        x_train = joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
-        y_train = joblib.load(os.path.join(url_train_dir, "y_train.pkl"))
-        vectorizer = joblib.load(os.path.join(url_train_dir, "vectorizer.pkl"))
-        if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
-            x_unlabeled = joblib.load(os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
-        else:
-            x_unlabeled = []
-        # TFIDF
-        if run_tfidf:
-            tfidf_vectorizer = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
-        else:
-            tfidf_vectorizer = None
-
-    if Globals.config["Extraction"].getboolean("Testing Dataset"):
-
-        x_test, y_test = extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer)
-
-        joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
-        joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
-        Globals.logger.info("Feature Extraction for testing dataset: Done!")
-    else:
-        x_test = None
-        y_test = None
-    return x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer
 
 
 def create_performance_df(scores: List[Dict]):
@@ -470,7 +473,7 @@ def run_phishbench():
     if Globals.config["Extraction"].getboolean("Feature Extraction"):
         if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
-        elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+        else:
             x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer = extract_url_features()
     else:
         x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer = load_dataset()
