@@ -16,10 +16,11 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     config['Dataset Path'] = {}
     dataset_section = config['Dataset Path']
-    dataset_section["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
-    dataset_section["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
+    dataset_section["path_legitimate_training"] = "Dataset_all/Dataset_train_legit"
+    dataset_section["path_phishing_training"] = "Dataset_all/Dataset_train_phish"
+    dataset_section["path_legitimate_testing"] = "Dataset_all/Dataset_test_legit"
+    dataset_section["path_phishing_testing"] = "Dataset_all/Dataset_test_phish"
+    dataset_section["path_data_unlabeled"] = "Dataset_all/Dataset_unlabeled"
 
     config['Email or URL feature Extraction'] = {}
     proccess_section = config['Email or URL feature Extraction']
@@ -31,6 +32,7 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
     extraction_section["Feature Extraction"] = "True"
     extraction_section["Training Dataset"] = "True"
     extraction_section["Testing Dataset"] = "True"
+    extraction_section["Unlabeled Dataset"] = "True"
 
     config['Features Export'] = {}
     features_format_section = config['Features Export']
