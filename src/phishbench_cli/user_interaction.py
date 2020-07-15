@@ -2,6 +2,7 @@ import sys
 
 from phishbench.classification import settings as classification_setings
 from phishbench.utils.Globals import config
+from phishbench import dataset
 
 
 def query_yes_no(question, default="yes"):
@@ -38,16 +39,15 @@ def query_yes_no(question, default="yes"):
 def confirmation(ignore_confirmation=False):
     print("##### Review of Options:")
     if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        print(
-            "extract_features_emails = {}".format(config["Email or URL feature Extraction"]["extract_features_emails"]))
+        print("Running Email Mode")
     elif config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        print("extract_features_urls = {}".format(config["Email or URL feature Extraction"]["extract_features_urls"]))
+        print("Running URL Mode")
 
     print("###Paths to datasets:")
-    print("Legitimate Dataset (Training): {}".format(config["Dataset Path"]["path_legitimate_training"]))
-    print("Phishing Dataset (Training):: {}".format(config["Dataset Path"]["path_phishing_training"]))
-    print("Legitimate Dataset (Testing): {}".format(config["Dataset Path"]["path_legitimate_testing"]))
-    print("Phishing Dataset (Testing): {}".format(config["Dataset Path"]["path_phishing_testing"]))
+    print("Legitimate Dataset (Training): {}".format(dataset.train_legit_path()))
+    print("Phishing Dataset (Training):: {}".format(dataset.train_phish_path()))
+    print("Legitimate Dataset (Testing): {}".format(dataset.test_legit_path()))
+    print("Phishing Dataset (Testing): {}".format(dataset.test_phish_path()))
 
     if config["Extraction"]["feature extraction"] == "True":
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
