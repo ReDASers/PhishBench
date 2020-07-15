@@ -3,6 +3,7 @@ import sys
 from typing import List, Dict
 
 import joblib
+import numpy as np
 import pandas as pd
 from scipy.sparse import hstack
 
@@ -85,7 +86,6 @@ def extract_url_train_features(url_train_dir: str, url_unlabeled_dir: str, run_t
 
     x_train = x[0:n_labeled]
     x_unlabeled = x[n_labeled:]
-
     joblib.dump(x_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
@@ -204,7 +204,7 @@ def extract_url_features():
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(url_train_dir, "y_train.pkl"))
         joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
-        if len(x_unlabeled) > 0:
+        if x_unlabeled.shape[0] > 0:
             joblib.dump(x_unlabeled, os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
@@ -217,7 +217,7 @@ def extract_url_features():
         if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
             x_unlabeled = joblib.load(os.path.join(url_unlabeled_dir, "x_unlabeled.pkl"))
         else:
-            x_unlabeled = []
+            x_unlabeled = np.empty(shape=(0, x_train.shape[1]))
         # TFIDF
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
@@ -345,9 +345,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     return x_test, y_test
 
 
-def extract_email_features_unlabeled(output_dir, vectorizer=None, tfidf_vectorizer=None):
-    # TODO: Implement this
-    pass
+
 
 
 def extract_email_features():
