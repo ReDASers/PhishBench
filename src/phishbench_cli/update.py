@@ -27,6 +27,7 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
     extraction_section["Feature Extraction"] = "True"
     extraction_section["Training Dataset"] = "True"
     extraction_section["Testing Dataset"] = "True"
+    extraction_section["Unlabeled Dataset"] = "True"
 
     config['Features Export'] = {}
     features_format_section = config['Features Export']
