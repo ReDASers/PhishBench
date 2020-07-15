@@ -22,7 +22,7 @@ def extract_dataset_features(legit_dataset_folder, phish_dataset_folder):
 def extract_email_features(dataset_path):
     """
     :param dataset_path:
-        The folder containing the datset
+        The folder containing the dataset
     :return:
     List[Dict]:
         The extracted features
