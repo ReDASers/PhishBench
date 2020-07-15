@@ -13,7 +13,7 @@ To install, clone this repo. Then install dependencies by running
 
 
 ## Make a config file
-First run 
+First create a config file by running 
     
     make-phishbench-config
 
