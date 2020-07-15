@@ -435,7 +435,7 @@ def load_dataset():
     if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
         x_unlabeled = joblib.load(os.path.join(unlabeled_dir, "x_unlabeled.pkl"))
     else:
-        x_unlabeled = []
+        x_unlabeled = np.empty(shape=(0, x_train.shape[1]))
 
     if run_tfidf:
         tfidf_vectorizer = joblib.load(os.path.join(train_dir, "tfidf_vectorizer.pkl"))
