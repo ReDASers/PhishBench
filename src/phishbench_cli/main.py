@@ -31,7 +31,7 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
         The file to save the csv to
     """
     df = pd.DataFrame(features)
-    if y:
+    if len(y) > 0:
         df['is_phish'] = y
     df.to_csv(file_path, index=None)
 
