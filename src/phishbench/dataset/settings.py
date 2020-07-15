@@ -7,6 +7,7 @@ DEFAULT_SETTINGS = {
     "path_phish_train": "dataset/phish_train",
     "path_legit_test": "dataset/legit_test",
     "path_phish_test": "dataset/phish_test",
+    "path_unlabeled": "dataset/unlabeled"
 }
 
 
@@ -24,3 +25,7 @@ def test_legit_path():
 
 def test_phish_path():
     return phishbench_globals.config[DATASET_PATH_SECTION]['path_phish_test']
+
+
+def unlabeled_path():
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_unlabeled']
