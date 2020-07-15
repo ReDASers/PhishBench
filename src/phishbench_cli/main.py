@@ -31,7 +31,8 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
         The file to save the csv to
     """
     df = pd.DataFrame(features)
-    df['is_phish'] = y
+    if y:
+        df['is_phish'] = y
     df.to_csv(file_path, index=None)
 
 
@@ -84,6 +85,34 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
     x_train = Features_Support.Preprocessing(x_train)
 
     return x_train, y_train, vectorizer, tfidf_vectorizer
+
+
+def extract_url_features_unlabeled(output_dir: str, vectorizer, tfidf_vectorizer=None):
+    features = []
+    dataset_path = dataset.unlabeled_path()
+    _, corpus = legacy_url.extract_url_features(dataset_path, features, [], [])
+    Features_Support.Cleaning(features)
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # Export features to csv
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(output_dir, 'features.csv')
+        export_features_to_csv(features, [], out_path)
+
+    x = vectorizer.transform(features)
+    joblib.dump(x, os.path.join(output_dir, "X_unlabeled_unprocessed.pkl"))
+
+    if tfidf_vectorizer:
+        Globals.logger.info("Extracting TFIDF features for testing websites ######")
+        tfidf = Tfidf.tfidf_testing(corpus, tfidf_vectorizer)
+        joblib.dump(tfidf, os.path.join(output_dir, "tfidf_features.pkl"))
+        x = hstack([x, tfidf])
+
+    joblib.dump(x, os.path.join(output_dir, "X_unlabeled_unprocessed_with_tfidf.pkl"))
+    Features_Support.Preprocessing(x)
+    return x
 
 
 def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=None):
@@ -242,6 +271,11 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, y_test
+
+
+def extract_email_features_unlabeled(output_dir, vectorizer=None, tfidf_vectorizer=None):
+    # TODO: Implement this
+    pass
 
 
 def extract_email_features():
