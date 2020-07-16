@@ -1,5 +1,5 @@
 """
-This module contains code for email feature extraction. 
+This module contains code for email feature extraction.
 """
 from typing import List, Callable
 
@@ -59,7 +59,6 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     corpus = [msg.body.text for msg in emails]
 
     return feature_dict_list, corpus
-
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
