@@ -86,7 +86,10 @@ def extract_url_train_features(url_train_dir: str, url_unlabeled_dir: str, run_t
 
     x_train = x[0:n_labeled]
     x_unlabeled = x[n_labeled:]
+
     joblib.dump(x_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
+    if len(unlabeled_corpus) > 0:
+        joblib.dump(x_unlabeled, os.path.join(url_unlabeled_dir, "X_unlabeled_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
     if run_tfidf:
@@ -94,7 +97,11 @@ def extract_url_train_features(url_train_dir: str, url_unlabeled_dir: str, run_t
         tfidf, tfidf_vectorizer = Tfidf.tfidf_training(corpus)
         tfidf_train = tfidf[0:n_labeled]
         tfidf_unlabeled = tfidf[n_labeled:]
+        assert len(unlabeled_corpus) == tfidf_unlabeled.shape[0]
         joblib.dump(tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
+        if len(unlabeled_corpus) > 0:
+            joblib.dump(tfidf_train, os.path.join(url_unlabeled_dir, "tfidf_features.pkl"))
+
         x_train = hstack([x_train, tfidf_train])
         x_unlabeled = hstack([x_unlabeled, tfidf_unlabeled])
     else:
@@ -237,14 +244,16 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer
 
 
-def extract_email_train_features(email_train_dir, run_tfidf):
+def extract_email_train_features(labeled_output_dir: str, unlabeled_output_dir: str, run_tfidf: bool):
     """
     Extracts features from the email training dataset
 
     Parameters
     ----------
-    email_train_dir : str
-        The location of the email training dataset
+    labeled_output_dir : str
+        The folder to output pickled objects for labeled datasets
+    unlabeled_output_dir: str
+        The folder to output pickled objects for the unlabeled dataset
     run_tfidf : bool
         Whether or not to run TF-IDF
     Returns
@@ -258,37 +267,77 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    if not os.path.exists(email_train_dir):
-        os.makedirs(email_train_dir)
+    if not os.path.exists(labeled_output_dir):
+        os.makedirs(labeled_output_dir)
+
     print("Extracting Train Set")
     Globals.logger.info("Extracting Train Set")
+    # Extract labeled data
     legit_path = dataset.train_legit_path()
     phish_path = dataset.train_phish_path()
 
-    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_train)
 
     # Export features to csv
     if Globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(email_train_dir, 'features.csv')
+        out_path = os.path.join(labeled_output_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
-    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
+        unlabeled_features, unlabeled_corpus = extract_email_features_unlabeled(dataset.unlabeled_path())
+    else:
+        unlabeled_features = []
+        unlabeled_corpus = []
 
-    joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
+    n_labeled = len(feature_list_dict_train)
+    features = feature_list_dict_train + unlabeled_features
+    corpus = corpus_train + unlabeled_corpus
+
+    # Transform the list of dictionaries into a sparse matrix
+    x, vectorizer = Features_Support.Vectorization_Training(features)
+    x = Features_Support.Preprocessing(x)
+    x_train = x[0:n_labeled]
+    x_unlabeled = x[n_labeled:]
+
+    joblib.dump(x_train, os.path.join(labeled_output_dir, "X_train_unprocessed.pkl"))
+    if len(unlabeled_corpus) > 0:
+        joblib.dump(x_unlabeled, os.path.join(unlabeled_output_dir, "X_unlabeled_unprocessed.pkl"))
 
     if run_tfidf:
         Globals.logger.info("tfidf_emails_train ######")
-        tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
-        joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
+        tfidf, tfidf_vectorizer = Tfidf.tfidf_training(corpus)
+        tfidf_train = tfidf[0:n_labeled]
+        tfidf_unlabeled = tfidf[n_labeled:]
+        assert tfidf_unlabeled.shape[0] == len(unlabeled_corpus)
+
+        joblib.dump(tfidf_train, os.path.join(labeled_output_dir, "tfidf_features.pkl"))
+        if len(unlabeled_corpus) > 0:
+            joblib.dump(tfidf_unlabeled, os.path.join(unlabeled_output_dir, "tfidf_features"))
+
         x_train = hstack([x_train, tfidf_train])
+        x_unlabeled = hstack([x_unlabeled, tfidf_unlabeled])
     else:
         tfidf_vectorizer = None
 
-    x_train = Features_Support.Preprocessing(x_train)
+    return x_train, y_train, x_unlabeled, vectorizer, tfidf_vectorizer
 
-    return x_train, y_train, vectorizer, tfidf_vectorizer
+
+def extract_email_features_unlabeled(output_dir: str):
+    unlabeled_path = dataset.unlabeled_path()
+    features, corpus = email_extraction.extract_unlabeled_dataset(unlabeled_path)
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+        # Export features to csv
+
+    if Globals.config['Features Export'].getboolean('csv'):
+        out_path = os.path.join(output_dir, 'features.csv')
+        export_features_to_csv(features, [], out_path)
+
+    Features_Support.Cleaning(features)
+
+    return features, corpus
 
 
 def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorizer=None):
@@ -316,7 +365,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
 
     print("Extracting Test Set")
     Globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv
@@ -366,11 +415,13 @@ def extract_email_features():
     """
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+    email_unlabeled_dir = os.path.join(Globals.args.output_input_dir, "Emails_Unlabeled")
     run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') \
                 and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, run_tfidf)
+        x_train, y_train, x_unlabeled, vectorizer, tfidf_vectorizer = \
+            extract_email_train_features(email_train_dir, email_unlabeled_dir, run_tfidf)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
@@ -378,6 +429,8 @@ def extract_email_features():
         joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+        if x_unlabeled.shape[0] > 0:
+            joblib.dump(x_unlabeled, os.path.join(email_unlabeled_dir, 'x_unlabeled.pkl'))
         Globals.logger.info("Feature Extraction for training dataset: Done!")
     else:
         x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
@@ -385,6 +438,8 @@ def extract_email_features():
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+        if Globals.config['Extraction'].getboolean("Unlabeled Dataset"):
+            x_unlabeled = joblib.load(os.path.join(email_unlabeled_dir, 'x_unlabeled.pkl'))
 
     if Globals.config["Extraction"]["Testing Dataset"] == "True":
         x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
@@ -393,7 +448,7 @@ def extract_email_features():
     else:
         x_test = None
         y_test = None
-    return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
+    return x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer
 
 
 def create_performance_df(scores: List[Dict]):
@@ -464,7 +519,7 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 def run_phishbench():
     if Globals.config["Extraction"].getboolean("Feature Extraction"):
         if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
+            x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer = extract_email_features()
         else:
             x_train, y_train, x_test, y_test, x_unlabeled, vectorizer, tfidf_vectorizer = extract_url_features()
     else:
