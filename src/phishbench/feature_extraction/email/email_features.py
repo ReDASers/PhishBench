@@ -1,14 +1,23 @@
-import re
+"""
+This module contains code for email feature extraction. 
+"""
 from typing import List, Callable
 
 from . import reflection
-from ... import Features
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import Globals
 
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
+    """
+    Extracts features from a dataset of emails split in two folders
+    :param legit_dataset_folder:
+        The folder containing emails of the phishing class
+    :param phish_dataset_folder:
+        The folder containing emails of the legitimate class
+    :return:
+    """
     features = reflection.load_internal_features()
     print("Loaded {} features".format(len(features)))
 
@@ -52,16 +61,16 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     return feature_dict_list, corpus
 
 
-def get_url(body):
-    url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
-    url = re.findall(url_regex, body)
-    return url
-
-
-def email_url_features(url_list, list_features, list_time):
-    if Globals.config["Email_Features"]["extract body features"] == "True":
-        Globals.logger.debug("Extracting email URL features")
-        # Features.Email_URL_Number_Url(url_All, list_features, list_time)
-        Features.Email_URL_Number_Diff_Domain(url_list, list_features, list_time)
-        Features.Email_URL_Number_link_at(url_list, list_features, list_time)
-        Features.Email_URL_Number_link_sec_port(url_list, list_features, list_time)
+# def get_url(body):
+#     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
+#     url = re.findall(url_regex, body)
+#     return url
+#
+#
+# def email_url_features(url_list, list_features, list_time):
+#     if Globals.config["Email_Features"]["extract body features"] == "True":
+#         Globals.logger.debug("Extracting email URL features")
+#         # Features.Email_URL_Number_Url(url_All, list_features, list_time)
+#         Features.Email_URL_Number_Diff_Domain(url_list, list_features, list_time)
+#         Features.Email_URL_Number_link_at(url_list, list_features, list_time)
+#         Features.Email_URL_Number_link_sec_port(url_list, list_features, list_time)
