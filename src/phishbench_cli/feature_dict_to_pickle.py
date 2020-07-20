@@ -6,7 +6,7 @@ import joblib
 import numpy as np
 from sklearn.feature_extraction import DictVectorizer
 
-from . import Features_Support
+from phishbench import Features_Support
 
 
 prog = re.compile(
