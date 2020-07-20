@@ -12,7 +12,7 @@ def read_urls_from_file(f: Union[TextIOBase, str]) -> List[str]:
     :return: A list of urls
     """
     close = False
-    if f is str:
+    if isinstance(f, str):
         f = open(f, 'r')
         close = True
 
