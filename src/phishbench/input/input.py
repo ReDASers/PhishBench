@@ -3,12 +3,13 @@ import glob
 import os
 import os.path
 from email.message import Message
-from typing import List, Union, Dict
+from typing import List, Tuple
 
 import chardet
 
 from .email_input.models import EmailMessage
 from .url_input import URLData
+from .url_input.url_io import read_urls_from_file
 from ..utils import Globals
 
 
@@ -61,29 +62,7 @@ def read_email_from_file(file_path: str) -> Message:
     return msg
 
 
-def read_corpus(corpus_files, encoding='utf-8') -> Dict[str, str]:
-    """
-    Reads a corpus
-    Parameters
-    ----------
-    corpus_files
-    encoding
-
-    Returns
-    -------
-        A dictionary with the file paths as the key and the file contents as the values
-    """
-    corpus = {}
-    for filepath in corpus_files:
-        try:
-            with open(filepath, 'r', encoding=encoding, errors='ignore') as file:
-                corpus[filepath] = file.read()
-        except Exception as e:
-            Globals.logger.warning("exception: %s", e)
-    return corpus
-
-
-def read_dataset_email(folder_path: str) -> Union[List[EmailMessage], List[str]]:
+def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:
     """
 
     Parameters
@@ -99,26 +78,44 @@ def read_dataset_email(folder_path: str) -> Union[List[EmailMessage], List[str]]
     return emails_parsed, files
 
 
-def read_urls_from_file(file_path: str):
-    if not os.path.isfile(file_path):
-        raise FileNotFoundError("{} not found!".format(file_path))
-    with open(file_path, 'r') as f:
-        lines = f.readlines()
-    return lines
+def remove_duplicates(values: List):
+    """
+    Removes duplicates from a list
+    :param values: The list to remove duplicates from
+    :return: A new list without duplicates.
+    """
+    old_len = len(values)
+    clean = list(set(values))
+    Globals.logger.info("Removed %d duplicates", old_len - len(clean))
+    return clean
 
 
-def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> List[URLData]:
+def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> Tuple[List[URLData], List[str]]:
+    """
+    Reads in a dataset of URLs from dataset_path
+    :param dataset_path: The location of the dataset to read from. This can either be a folder or a file.
+    :param download_url: Whether or not to download the urls
+    :param remove_dup: Whether or not to remove duplicates.
+    :return: A list of URLData objects representing the dataset
+    """
+    if not dataset_path:
+        raise ValueError("dataset_path must be provided!")
+
     if os.path.isdir(dataset_path):
         corpus_files = enumerate_folder_files(dataset_path)
-    else:
+    elif os.path.exists(dataset_path):
+        # dataset_path is a file
         corpus_files = [dataset_path]
+    else:
+        raise ValueError("{} does not exist.".format(dataset_path))
+
     raw_urls = []
     for file_path in corpus_files:
         raw_urls.extend(read_urls_from_file(file_path))
+
     if remove_dup:
-        old_len = len(raw_urls)
-        raw_urls = list(set(raw_urls))
-        Globals.logger.info("Removed %d duplicates", old_len - len(raw_urls))
+        raw_urls = remove_duplicates(raw_urls)
+
     urls = []
     bad_url_list = []
     for raw_url in raw_urls:
@@ -130,4 +127,5 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
                 "Exception while loading url %s", raw_url)
             Globals.logger.exception(e)
             bad_url_list.append(raw_url)
+
     return urls, bad_url_list
