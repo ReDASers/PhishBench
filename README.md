@@ -114,36 +114,3 @@ single_url_feature()
 single_html_features()
 single_email_features()
 ```
-
-## Evaluation_Metrics.py:
-The modules have all the code for the evaluation metrics.
-If the user wants to add a metric, then they should follow this template:
-```
-def metric(y_test, y_predict):
-    if User_options.metric is True:
-        code
-        print("metric")
-        print(result)
-```
-and then add the function call in one of the following functions depending on the type of the metric:
-```
-eval_metrics()
-eval_metrics_cluster()
-```
-
-## Classifiers.py
-This module contains all the classifier that can be run by the platform.
-If the user wants to add their own classifier, than they should use the following template:
-
-```
-def classifier_name():
-    if User_options.classifier_name is True:
-        X,y=load_dataset("feature_vector_extract.txt")
-        X_test, y_test = load_dataset("feature_vector_extract_test.txt")
-        clf = classifier code
-        clf.fit(X,y)
-        y_predict=clf.predict(X_test)
-        print("classifier_name >>>>>>>")
-        Evaluation_Metrics.eval_metrics(clf, X, y, y_test, y_predict)
-        print("\n")
-```
