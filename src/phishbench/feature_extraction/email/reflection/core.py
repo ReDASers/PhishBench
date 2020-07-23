@@ -4,7 +4,8 @@ from enum import Enum, unique
 from functools import wraps
 from typing import List, Callable
 
-from phishbench.utils import Globals
+from .. import settings
+from ....utils import Globals
 
 
 @unique
@@ -65,7 +66,7 @@ def load_features(source, filter_features=True) -> List[Callable]:
     if filter_features:
         # remove disabled features
         for feature_type in FeatureType:
-            if not Globals.config['Feature Types'].getboolean(feature_type.value):
+            if not settings.feature_type_enabled(feature_type):
                 features = [f for f in features if f.feature_type != feature_type]
         features = [f for f in features if _check_feature(f)]
     return features
