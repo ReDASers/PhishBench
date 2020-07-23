@@ -8,6 +8,8 @@ from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import Globals
 
+from tqdm import tqdm
+
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
     """
@@ -52,7 +54,7 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     """
     feature_dict_list = list()
 
-    for email_msg in emails:
+    for email_msg in tqdm(emails):
         feature_values, _ = reflection.extract_features_from_single_email(features, email_msg)
         feature_dict_list.append(feature_values)
 
