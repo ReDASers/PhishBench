@@ -3,6 +3,7 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
+import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.feature_extraction.email as email_extraction
 from phishbench.classification.core import load_internal_classifiers
@@ -14,12 +15,7 @@ from phishbench.feature_extraction.email.reflection import load_internal_feature
 def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
     config = configparser.ConfigParser()
 
-    config['Dataset Path'] = {}
-    dataset_section = config['Dataset Path']
-    dataset_section["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
-    dataset_section["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
+    config[dataset_settings.DATASET_PATH_SECTION] = dataset_settings.DEFAULT_SETTINGS
 
     config['Email or URL feature Extraction'] = {}
     proccess_section = config['Email or URL feature Extraction']
