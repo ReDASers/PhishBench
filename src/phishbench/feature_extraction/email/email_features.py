@@ -3,12 +3,12 @@ This module contains code for email feature extraction.
 """
 from typing import List, Callable
 
+from tqdm import tqdm
+
 from . import reflection
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import Globals
-
-from tqdm import tqdm
 
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):

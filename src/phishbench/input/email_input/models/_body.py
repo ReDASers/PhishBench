@@ -121,7 +121,7 @@ class EmailBody:
 
             if part.get_filename():
                 if '.' in part.get_filename():
-                    basename, ext = part.get_filename().rsplit('.', maxsplit=1)
+                    _, ext = part.get_filename().rsplit('.', maxsplit=1)
                     self.file_extension_list.append(ext)
                 else:
                     self.file_extension_list.append(None)

@@ -23,5 +23,3 @@ def get_email_text(filename):
     with open(loc, 'r', encoding=encoding) as file:
         contents = file.read()
     return email.message_from_string(contents)
-
-
