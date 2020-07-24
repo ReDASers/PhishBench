@@ -1,0 +1,159 @@
+   Hi everyone
+   I have been through the ideas and offer a few (aptly non organised) comments. First Phil is
+   away and will not be able to comment until later.
+   First, the project needs more explicit focus. The call will focused on natural variability
+   . We are offering a detailed analysis of the variability of climate in the Alpine Region
+   that focuses on CLIVAR timescales - basically very high resolution and not extending much
+   beyond a few centuries. The project incorporates instrumental , model and palaeodata . The
+   inter-relationships between these will be studied to gain an understanding of the nature
+   and mechanisms of the climate variability - but is this enough. I feel it needs to be
+   linked with a strong element of understanding the range of social/economic impacts of this
+   variability.
+   Perhaps looking at aspects such as avalanches, forest damage, floods, tourism etc.? I
+   merely put this out as a straw man . I feel the EC are putting a lot of emphasis on this
+   aspect of research and incorporating research and researchers in these or similar areas
+   will be a big plus.
+   As for the specific points in the brainstorming document -
+   The Dendro aspect :
+   I think it is essential to update the Alpine tree-ring chronologies that are available .
+   This is because they are a proven asset but many questions regarding tree-productivity (in
+   relation to observed 20th century climate variability) simply can not be addressed without
+   doing this. Many were collected over 20 years ago. The additional data would then allow new
+   processing techniques to be employed and vital questions concerning the changing responses
+   of tree-growth to explored. The most efficient way to do this is to involve several groups
+   working in the Alps , (Thank you for sending the Thesis by Giorgio Strumia which is
+   certainly a very impressive piece of work) I would think Rupert Wimmer's group and the
+   Birmensdorf group would be ideal (Fritz Schweingruber has retired but Jan Esper has joined
+   them in his place - I can ask them to be involved but this depends on what the group here
+   think are the priorities and how much we see as the overall budget and institutional
+   allocations). I should say here that I think we would require money for a single person who
+   could , if it is  agreed, work on aspects of tree-ring processing and relationships with
+   climate in association with the other tree-ring groups, but also work with the climate and
+   model data , especially with a view to exploring the statistical inter-relationships and
+   dynamical associations between the different climate data sets. There is also the French
+   tree-ring group at Marseille? Perhaps though not all need to partners - ALSO I am thinking
+   of putting together a European Tree-ring project (or suggesting it as part of a large
+   European integrated proxy study of Holocene variability) so if this happened there could be
+   a link between it (involving some of the groups mentioned) and this proposal. The Swiss
+   might be interested to produce selected site tree-ring density/updating which I think would
+   be very valuable and I will speak to them without commitment as you ask.
+   As for some of the climate analysis possibilities mentioned, I very much like the ideas of
+   detailed ,local climate comparisons with the larger CRU (and CRUder!) data. We are very
+   interested in the association between time dependence in the relationships between
+   circulation changes and changes in Temp. and Prec. Also changes in the nature of climate
+   seasonality , and also extreme events (frost frequency , drought, intense rainfall). The
+   detailed analyses of these characteristics also compliments the interpretational work on
+   the tree-ring and glacier mass balance (and socio economic foci) data.
+   As for the glacier work - is not a huge effort already going into this? I think it is
+   important but does it fit as well ? The work proposed would have to be distinguished from
+   other ongoing efforts - though I do like the idea of linking the geomorphological evidence
+   of past glacier change (moraines , pro-glacial sediment data?) with reconstructed glacier
+   volume changes , where the reconstructions are based on new long instrumental data , and
+   palaeodata (temp. and precip.) used to drive a model of the glacier volume.  Our German (or
+   Julie) colleagues can point to such work based on GCM output . My colleague here (Sarah
+   Raper) has also done this sort of work but using a very simple model to estimate past
+   Storglaciaren (in Sweden) volume changes  and her results imply that these models must be
+   forward driven and not based on simple regression analysis using temperature and
+   precipitation to estimate past mass balance.
+   The future aspects of the discussion are important - and it is true that the previous EC
+   call dealt with modelling and scenarios of future changes. Here, I believe the use of
+   models should be strictly limited to understanding natural /current variability and change.
+   There is no benefit in going for a 2 year project - I strongly urge 3. I also would find a
+   meeting difficult. I am away from 17-29 July, and 11-25 August, and in meetings during
+   7-10th July and 26-31st August.
+   Phil will be back here next week and will no doubt comment in more detail on the
+   instrumental analysis aspects then.
+   Very best wishes to all
+   Keith
+   At 05:13 PM 6/25/01 +0200, Dr. Reinhard Böhm wrote:
+
+     Friends,
+
+     As announced last Friday, we want to open a first round of brainstorming about the
+     contents of our project. We have collected what we have received from You so far and
+     have it mixed with our own ideas (file Brainstorming-1.doc). It does not have a nice
+     structure and there are still a number of question marks, as You will see.
+     Please add things where you think something is missing and please feel free to tell us
+     which points make no sense, or are too ambitious or simply too much work.
+     Please consider also the "how to do it" (state of the art methods, new approaches to
+     solve problems, other data than those mentioned, other topics.....).
+     Please try also to find Your position in the project, tell us what You would prefer to
+     do....
+     Please try to consider whether we would have to include other groups in terms of
+     scientific potential and/or in terms of data (For example: Keith Briffa you mentioned
+     Fritz Schweingruber as the leading data holder of Alpine tree-ring data. Do you think we
+     should ask him to join us, or could You use his data also without him being a contractor
+     of the project? In case You want him in the project could we kindly ask you to contact
+     him, being much more familiar with him and with the tree-ring topic than we are?)
+
+     We would be glad to receive a very short answer from everybody within this week, because
+     from June 30th to July 15th all the three of us will not be at the institute.
+     For more detailed considerations and answers You have more time, it would be nice to be
+     able to study them after our return by mid of July. But please use also the
+     possibilities to contact  the other groups - the sooner we integrate to a group the
+     better it is.
+
+     Our time-table for the rest of the time until October:
+
+     July 16th to August 14th: We are at the institute, hoping to bring the project into a
+     near to final version what concerns the scientific content
+
+     August 15th to August 28th: Ice core conference at Kangerlussuaq (Greenland)
+
+     August 29th to September 17th: We are at the institute most of the time. We hope this
+     will be the time to elaborate the EU-shaped complete version.
+
+     September 18th to September 22nd: Big events going on in Vienna which may cut down our
+     time for the project (150th anniversary of our institute, Climate conference DACH-2001
+     (in German))
+
+     September 24th to October: Time reserved for all the things that could not be done yet
+     in spite of our time table
+
+     Could each of You please inform us about Your time table during summer and autumn?
+
+
+     A question to all of You: How do You think about one 2-days meeting this Summer or in
+     early September? What place do You prefer? If it is Austria we would have two low cost
+     possibilities: 1): at our institute  and 2) (more adventurous): At the
+     Sonnblick-observatory (You do not have to have Alpinistic experience, we have a private
+     cable car going up)
+
+     Some remaining questions:
+
+     Should we try a 2-years or a 3-years project?
+
+     Can everybody live with roughly 300.000 Euro (This would result into somewhere between
+     1.5 and two millions, which we heard is a magnitude preferred by the commission). Please
+     consider not only the sum of money but also how to spend it and how to fill it with a
+     reasonable equivalent in work amount.
+
+     What is your feeling about the "Climate variability atlas of the Alps"? Is it good to
+     have one main deliverable like that or should we better produce a number of smaller
+     things?
+
+
+     One last technical remark:  Please send your comments and mails not only to Vienna, but
+     also to the other groups (or at least to those You believe would be interested in what
+     You write). I do not think this would spoil too much our mail boxes and it has the
+     advantage to include the whole intellectual power of our group into the construction
+     phase of the proposal.
+
+
+     Looking forward to Your replies, ideas, time tables and anything else
+
+
+     With best regards
+
+
+
+     Reinhard
+
+
+
+
+
+   --
+   Dr. Keith Briffa, Climatic Research Unit, University of East Anglia,
+   Norwich, NR4 7TJ, United Kingdom
+   Phone: +44-1603-593909    Fax: +44-1603-507784

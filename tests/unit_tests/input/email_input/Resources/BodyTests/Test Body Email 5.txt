@@ -1,0 +1,704 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by DNCHUBCAS1.dnc.org
+ (192.168.185.12) with Microsoft SMTP Server (TLS) id 14.3.224.2; Sun, 22 May
+ 2016 16:59:58 -0400
+From: Microsoft Outlook
+	<MicrosoftExchange329e71ec88ae4615bbc36ab6ce41109e@dnc.org>
+To: <KaplanJ@dnc.org>
+Date: Sun, 22 May 2016 16:59:48 -0400
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="01d2f401-c3ff-477e-9fa6-f05c93c77a18"
+Content-Language: en-US
+Message-ID: <9d776879-6063-4119-85ea-c4acf49e058e@dncedge1.dnc.org>
+In-Reply-To: <6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org>
+References: <132a28c20bb2cd9d1e6090e78a15464c@dnc.queue.bluestatedigital.com>,<EAA2C2C0-91A6-4AD2-8BA2-4FFA3FFB5F2D@dnc.org>,<5DA1214D-069F-4F9A-838B-29F3A3428D36@dnc.org>,<6E884879-E685-464C-A807-526C7452B557@dnc.org>,<7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+ <6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org>
+Thread-Topic: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Index: AQHRsrcSjsPSVFQ/CkKz/dLep+C68Z/CS++AgAAA3wCAABOcgIAAMRQA//+9+E2AAyTdTQ==
+Subject: Undeliverable: Re: Contribution: NY436a - DLC Allred Dinner / Jan
+ Warner / 5,000.00 USD
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 05
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+Return-Path: <>
+X-MS-Exchange-Organization-SCL: -1
+MIME-Version: 1.0
+
+--01d2f401-c3ff-477e-9fa6-f05c93c77a18
+Content-Type: multipart/alternative; differences=Content-Type;
+	boundary="29095944-2141-480d-94d6-d3e635abf73d"
+
+--29095944-2141-480d-94d6-d3e635abf73d
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Delivery has failed to these recipients or groups:
+
+Contribution (postmaster@finance.democrats.org)<mailto:postmaster@finance.d=
+emocrats.org>
+The server has tried to deliver this message, without success, and has stop=
+ped trying. Please try sending this message again. If the problem continues=
+, contact your helpdesk.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: dncedge1.dnc.org
+
+postmaster@finance.democrats.org
+#550 4.4.7 QUEUE.Expired; message expired ##
+
+Original message headers:
+
+Received: from DNCHUBCAS1.dnc.org (192.168.185.12) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server (TLS) id 14.3.224.2; Fri, 20 M=
+ay
+ 2016 16:59:01 -0400
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Fri, 20 May 2016 16:59:06 -0400
+From: "Kaplan, Jordan" <KaplanJ@dnc.org>
+To: "Vaughn, Jordan" <VaughnJ@dnc.org>
+CC: "Marshall, Maxwell" <MarshallM@dnc.org>, Claire Olszewski
+        <OlszewskiC@dnc.org>, "Cox, Clayton" <CoxC@dnc.org>, Contribution
+        <postmaster@finance.democrats.org>, "Comer, Scott" <ComerS@dnc.org>=
+,
+        "Marquez, Karina" <MarquezK@dnc.org>
+Subject: Re: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Topic: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Index: AQHRsrcSjsPSVFQ/CkKz/dLep+C68Z/CS++AgAAA3wCAABOcgIAAMRQA//+9+=
+E0=3D
+Date: Fri, 20 May 2016 20:59:05 +0000
+Message-ID: <6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org>
+References: <132a28c20bb2cd9d1e6090e78a15464c@dnc.queue.bluestatedigital.co=
+m>,<EAA2C2C0-91A6-4AD2-8BA2-4FFA3FFB5F2D@dnc.org>,<5DA1214D-069F-4F9A-838B-=
+29F3A3428D36@dnc.org>,<6E884879-E685-464C-A807-526C7452B557@dnc.org>,<7A6F3=
+129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+In-Reply-To: <7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+        boundary=3D"_000_6C924E5B463F42338C213A110989B1C7dncorg_"
+MIME-Version: 1.0
+Return-Path: KaplanJ@dnc.org
+
+
+--29095944-2141-480d-94d6-d3e635abf73d
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+></head><body>
+<p><b><font color=3D"#000066" size=3D"3" face=3D"Arial">Delivery has failed=
+ to these recipients or groups:</font></b></p>
+<font color=3D"#000000" size=3D"2" face=3D"Tahoma"><p><a href=3D"mailto:pos=
+tmaster@finance.democrats.org">Contribution (postmaster@finance.democrats.o=
+rg)</a><br>
+The server has tried to deliver this message, without success, and has stop=
+ped trying. Please try sending this message again. If the problem continues=
+, contact your helpdesk.<br>
+</p>
+</font>
+<br><br><br><br><br><br>
+<font color=3D"#808080" size=3D"2" face=3D"Tahoma"><p><b>Diagnostic informa=
+tion for administrators:</b></p>
+<p>Generating server: dncedge1.dnc.org</p>
+<p>postmaster@finance.democrats.org<br>
+ #550 4.4.7 QUEUE.Expired; message expired ##</p>
+<p>Original message headers:</p>
+<pre>Received: from DNCHUBCAS1.dnc.org (192.168.185.12) by dncwebmail.dnc.o=
+rg
+ (192.168.10.221) with Microsoft SMTP Server (TLS) id 14.3.224.2; Fri, 20 M=
+ay
+ 2016 16:59:01 -0400
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Fri, 20 May 2016 16:59:06 -0400
+From: &quot;Kaplan, Jordan&quot; &lt;KaplanJ@dnc.org&gt;
+To: &quot;Vaughn, Jordan&quot; &lt;VaughnJ@dnc.org&gt;
+CC: &quot;Marshall, Maxwell&quot; &lt;MarshallM@dnc.org&gt;, Claire Olszews=
+ki
+	&lt;OlszewskiC@dnc.org&gt;, &quot;Cox, Clayton&quot; &lt;CoxC@dnc.org&gt;,=
+ Contribution
+	&lt;postmaster@finance.democrats.org&gt;, &quot;Comer, Scott&quot; &lt;Com=
+erS@dnc.org&gt;,
+	&quot;Marquez, Karina&quot; &lt;MarquezK@dnc.org&gt;
+Subject: Re: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Topic: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Index: AQHRsrcSjsPSVFQ/CkKz/dLep&#43;C68Z/CS&#43;&#43;AgAAA3wCAABOcg=
+IAAMRQA//&#43;9&#43;E0=3D
+Date: Fri, 20 May 2016 20:59:05 &#43;0000
+Message-ID: &lt;6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org&gt;
+References: &lt;132a28c20bb2cd9d1e6090e78a15464c@dnc.queue.bluestatedigital=
+.com&gt;,&lt;EAA2C2C0-91A6-4AD2-8BA2-4FFA3FFB5F2D@dnc.org&gt;,&lt;5DA1214D-=
+069F-4F9A-838B-29F3A3428D36@dnc.org&gt;,&lt;6E884879-E685-464C-A807-526C745=
+2B557@dnc.org&gt;,&lt;7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org&gt;
+In-Reply-To: &lt;7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+	boundary=3D&quot;_000_6C924E5B463F42338C213A110989B1C7dncorg_&quot;
+MIME-Version: 1.0
+Return-Path: KaplanJ@dnc.org
+</pre>
+</font>
+</body>
+</html>=
+
+--29095944-2141-480d-94d6-d3e635abf73d--
+
+--01d2f401-c3ff-477e-9fa6-f05c93c77a18
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns;dncedge1.dnc.org
+Received-From-MTA: dns;DNCHUBCAS1.dnc.org
+Arrival-Date: Fri, 20 May 2016 20:59:01 +0000
+
+Final-Recipient: rfc822;postmaster@finance.democrats.org
+Action: failed
+Status: 4.4.7
+Diagnostic-Code: smtp;550 4.4.7 QUEUE.Expired; message expired
+X-Display-Name: Contribution
+
+
+--01d2f401-c3ff-477e-9fa6-f05c93c77a18
+Content-Type: message/rfc822
+
+Received: from DNCHUBCAS1.dnc.org (192.168.185.12) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server (TLS) id 14.3.224.2; Fri, 20 May
+ 2016 16:59:01 -0400
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Fri, 20 May 2016 16:59:06 -0400
+From: "Kaplan, Jordan" <KaplanJ@dnc.org>
+To: "Vaughn, Jordan" <VaughnJ@dnc.org>
+CC: "Marshall, Maxwell" <MarshallM@dnc.org>, Claire Olszewski
+	<OlszewskiC@dnc.org>, "Cox, Clayton" <CoxC@dnc.org>, Contribution
+	<postmaster@finance.democrats.org>, "Comer, Scott" <ComerS@dnc.org>,
+	"Marquez, Karina" <MarquezK@dnc.org>
+Subject: Re: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Topic: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Index: AQHRsrcSjsPSVFQ/CkKz/dLep+C68Z/CS++AgAAA3wCAABOcgIAAMRQA//+9+E0=
+Date: Fri, 20 May 2016 20:59:05 +0000
+Message-ID: <6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org>
+References: <132a28c20bb2cd9d1e6090e78a15464c@dnc.queue.bluestatedigital.com>,<EAA2C2C0-91A6-4AD2-8BA2-4FFA3FFB5F2D@dnc.org>,<5DA1214D-069F-4F9A-838B-29F3A3428D36@dnc.org>,<6E884879-E685-464C-A807-526C7452B557@dnc.org>,<7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+In-Reply-To: <7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+	boundary="_000_6C924E5B463F42338C213A110989B1C7dncorg_"
+Return-Path: KaplanJ@dnc.org
+MIME-Version: 1.0
+
+--_000_6C924E5B463F42338C213A110989B1C7dncorg_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Look who finally chimes in.
+
+Jordan Kaplan
+National Finance Director
+Democratic National Committee
+(202) 488-5002 (o) | (312) 339-0224 (c)
+kaplanj@dnc.org<mailto:kaplanj@dnc.org>
+
+
+On May 20, 2016, at 4:55 PM, Vaughn, Jordan <VaughnJ@dnc.org<mailto:VaughnJ=
+@dnc.org>> wrote:
+
+#werk
+
+Jordan C. Vaughn
+National AALC Finance Director
+Democratic National Committee
+(202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%20797-2=
+215> (c)
+VaughnJ@dnc.org<mailto:VaughnJ@dnc.org>
+
+On May 20, 2016, at 11:59 AM, Marshall, Maxwell <MarshallM@dnc.org<mailto:M=
+arshallM@dnc.org>> wrote:
+
+Amazing
+
+Max Marshall
+Southern Finance Director
+Democratic National Committee
+
+On May 20, 2016, at 12:49 PM, Claire Olszewski <OlszewskiC@dnc.org<mailto:O=
+lszewskiC@dnc.org>> wrote:
+
+There she is!
+
+Sent from my iPhone
+
+On May 20, 2016, at 12:46 PM, Cox, Clayton <CoxC@dnc.org<mailto:CoxC@dnc.or=
+g>> wrote:
+
+Bang bang!
+
+Sent from my iPhone
+
+On May 20, 2016, at 11:45 AM, Contribution <postmaster@finance.democrats.or=
+g<mailto:postmaster@finance.democrats.org>> wrote:
+
+CONTRIBUTION DATA
+-----------------
+                   Page: NY436a - DLC Allred Dinner
+                   Type: One-time
+      Number of Tickets: 2
+          Ticket Amount: $5,000.00
+            Ticket Info: 2 x Co-Host Tickets.
+Additional Contribution Amount: 0
+           Total Amount: $5,000.00
+             First Name: Jan
+              Last Name: Warner
+                Address: 222 E 71st. St. 6B
+                         New York, NY 10021
+                  Phone: 9178535184
+                  Email: eyeseepic@aol.com<mailto:eyeseepic@aol.com>
+               Employer: None
+       Employer Address:
+                         ,
+             Occupation: writer
+           Payment Type: American Express
+              Account #: 2009
+          Transaction #: 15760563
+              User Id #:
+       Contribution Key: IICHAZVT68jC1uMbaB
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: "Additional Information")
+Fundraiser code (optional):
+Who encouraged you to make this contribution?: Support for Hillary, meeting=
+ Gloria Allred
+Guest name(s), if contributing for multiple tickets: Donna Zucchi
+
+GENERAL INFORMATION
+-------------------
+   Submit Date: Fri, 20 May 2016 12:44:18 -0400
+        Status: Under Review
+Client IP Address: 66.30.39.87
+Client Browser: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/=
+601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/537.86.3
+
+
+--_000_6C924E5B463F42338C213A110989B1C7dncorg_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body dir=3D"auto">
+<div>Look who finally chimes in. &nbsp;<br>
+<br>
+<span style=3D"background-color: rgba(255, 255, 255, 0);">Jordan Kaplan&nbs=
+p;</span>
+<div><span style=3D"background-color: rgba(255, 255, 255, 0);">National Fin=
+ance Director</span></div>
+<div><span style=3D"background-color: rgba(255, 255, 255, 0);">Democratic N=
+ational Committee&nbsp;</span></div>
+<div>(202) 488-5002 (o) | (312) 339-0224 (c)</div>
+<div><a href=3D"mailto:kaplanj@dnc.org">kaplanj@dnc.org</a></div>
+<div><br>
+</div>
+</div>
+<div><br>
+On May 20, 2016, at 4:55 PM, Vaughn, Jordan &lt;<a href=3D"mailto:VaughnJ@d=
+nc.org">VaughnJ@dnc.org</a>&gt; wrote:<br>
+<br>
+</div>
+<blockquote type=3D"cite">
+<div>
+<div>#werk<br>
+<br>
+<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt;"><span style=3D"b=
+ackground-color: rgba(255, 255, 255, 0);">Jordan C. Vaughn<o:p></o:p></span=
+></p>
+<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt;"><span style=3D"b=
+ackground-color: rgba(255, 255, 255, 0);">National AALC Finance Director<o:=
+p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt;"><span style=3D"b=
+ackground-color: rgba(255, 255, 255, 0);">Democratic National Committee<o:p=
+></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt;"><font color=3D"#=
+000000"><span style=3D"background-color: rgba(255, 255, 255, 0);"><a href=
+=3D"tel:(202)%20488-5089" x-apple-data-detectors=3D"true" x-apple-data-dete=
+ctors-type=3D"telephone" x-apple-data-detectors-result=3D"0/1">(202)
+ 488-5089</a>&nbsp;(o) |&nbsp;<a href=3D"tel:(407)%20797-2215" x-apple-data=
+-detectors=3D"true" x-apple-data-detectors-type=3D"telephone" x-apple-data-=
+detectors-result=3D"0/2">(407) 797-2215</a>&nbsp;(c)<o:p></o:p></span></fon=
+t></p>
+<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt;"><a href=3D"mailt=
+o:VaughnJ@dnc.org" x-apple-data-detectors=3D"true" x-apple-data-detectors-t=
+ype=3D"link" x-apple-data-detectors-result=3D"0/3" style=3D"background-colo=
+r: rgba(255, 255, 255, 0);"><font color=3D"#000000">VaughnJ@dnc.org</font><=
+/a></p>
+</div>
+<div><br>
+On May 20, 2016, at 11:59 AM, Marshall, Maxwell &lt;<a href=3D"mailto:Marsh=
+allM@dnc.org">MarshallM@dnc.org</a>&gt; wrote:<br>
+<br>
+</div>
+<blockquote type=3D"cite">
+<div><span>Amazing </span><br>
+<span></span><br>
+<span>Max Marshall </span><br>
+<span>Southern Finance Director</span><br>
+<span>Democratic National Committee</span><br>
+<span></span><br>
+<blockquote type=3D"cite"><span>On May 20, 2016, at 12:49 PM, Claire Olszew=
+ski &lt;<a href=3D"mailto:OlszewskiC@dnc.org">OlszewskiC@dnc.org</a>&gt; wr=
+ote:</span><br>
+</blockquote>
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+<blockquote type=3D"cite"><span>There she is!</span><br>
+</blockquote>
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+<blockquote type=3D"cite"><span>Sent from my iPhone</span><br>
+</blockquote>
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>On May 20, 2016, at 12:46 PM, Cox, Clayton =
+&lt;<a href=3D"mailto:CoxC@dnc.org">CoxC@dnc.org</a>&gt; wrote:</span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Bang bang!</span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Sent from my iPhone</span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>On May 20, 2016, at 11:45 AM, Contribution =
+&lt;<a href=3D"mailto:postmaster@finance.democrats.org">postmaster@finance.=
+democrats.org</a>&gt; wrote:</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>CONTRIBUTION DATA</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>-----------------</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page=
+: NY436a - DLC Allred Dinner</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type=
+: One-time</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number =
+of Tickets: 2</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;Ticket Amount: $5,000.00</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ticket Info: 2 x Co-Host Tickets.</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Additional Contribution Amount: 0</span><br=
+>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;Total Amount: $5,000.00</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First Name: Jan</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name: Warner</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address: 222 E 71st. S=
+t. 6B</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New York, NY 10021</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone: 917=
+8535184</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: <a =
+href=3D"mailto:eyeseepic@aol.com">
+eyeseepic@aol.com</a></span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Employer: None</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=
+mployer Address: </span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, &nbsp;</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Occupation: writer</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;Payment Type: American Express</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account #: 2009</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;Transaction #: 15760563</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Id #: </span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C=
+ontribution Key: IICHAZVT68jC1uMbaB</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>CUSTOM FIELD DATA</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>------------------------------</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>(Section header: &quot;Additional Informati=
+on&quot;)</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Fundraiser code (optional): </span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Who encouraged you to make this contributio=
+n?: Support for Hillary, meeting Gloria Allred</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Guest name(s), if contributing for multiple=
+ tickets: Donna Zucchi</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>GENERAL INFORMATION</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>-------------------</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;Submit Date: Fri, 20 May =
+2016 12:44:18 -0400</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;Status: Under Review</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Client IP Address: 66.30.39.87</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span>Client Browser: Mozilla/5.0 (Macintosh; Int=
+el Mac OS X 10_9_5) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 S=
+afari/537.86.3</span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote type=3D"cite">
+<blockquote type=3D"cite">
+<blockquote type=3D"cite"><span></span><br>
+</blockquote>
+</blockquote>
+</blockquote>
+</div>
+</blockquote>
+</div>
+</blockquote>
+</body>
+</html>
+
+--_000_6C924E5B463F42338C213A110989B1C7dncorg_--
+
+--01d2f401-c3ff-477e-9fa6-f05c93c77a18--

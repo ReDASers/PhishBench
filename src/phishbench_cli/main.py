@@ -10,8 +10,9 @@ import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
+import phishbench.dataset as dataset
 import phishbench.evaluation as evaluation
-import phishbench.feature_extraction.email.email_features as email_extraction
+import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
 from phishbench.utils import Globals
 from phishbench_cli import user_interaction
@@ -160,10 +161,10 @@ def extract_email_train_features(email_train_dir, run_tfidf):
         os.makedirs(email_train_dir)
     print("Extracting Train Set")
     Globals.logger.info("Extracting Train Set")
-    legit_path = Globals.config["Dataset Path"]["path_legitimate_training"]
-    phish_path = Globals.config["Dataset Path"]["path_phishing_training"]
+    legit_path = dataset.train_legit_path()
+    phish_path = dataset.train_phish_path()
 
-    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_train)
 
     # Export features to csv
@@ -209,12 +210,12 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
         A list containing the dataset labels
     """
     # Extract features in a dictionary for each email. return a list of dictionaries
-    legit_path = Globals.config["Dataset Path"]["path_legitimate_testing"]
-    phish_path = Globals.config["Dataset Path"]["path_phishing_testing"]
+    legit_path = dataset.test_legit_path()
+    phish_path = dataset.test_phish_path()
 
     print("Extracting Test Set")
     Globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv
@@ -231,7 +232,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
         tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
         x_test = hstack([x_test, tfidf_test])
 
-    # Use Min_Max_scaling for prepocessing the feature matrix
+    # Use Min_Max_scaling for pre-processing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
 
     # Dump Testing feature matrix with labels
@@ -264,7 +265,7 @@ def extract_email_features():
     """
     email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
-    run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') \
+    run_tfidf = email_extraction.settings.extract_body_enabled() \
                 and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if Globals.config["Extraction"].getboolean("Training Dataset"):
@@ -283,6 +284,8 @@ def extract_email_features():
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+        else:
+            tfidf_vectorizer = None
 
     if Globals.config["Extraction"]["Testing Dataset"] == "True":
         x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
@@ -366,7 +369,7 @@ def get_config():
         test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
         run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') and \
                     Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
-    elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+    else:
         train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
         test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
         run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
@@ -412,7 +415,7 @@ def run_phishbench():
     if Globals.config["Extraction"].getboolean("Feature Extraction"):
         if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
-        elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+        else:
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()

@@ -1,0 +1,128 @@
+Delivery has failed to these recipients or groups:
+
+Contribution (postmaster@finance.democrats.org)<mailto:postmaster@finance.democrats.org>
+The server has tried to deliver this message, without success, and has stopped trying. Please try sending this message again. If the problem continues, contact your helpdesk.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: dncedge1.dnc.org
+
+postmaster@finance.democrats.org
+#550 4.4.7 QUEUE.Expired; message expired ##
+
+Original message headers:
+
+Received: from DNCHUBCAS1.dnc.org (192.168.185.12) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server (TLS) id 14.3.224.2; Fri, 20 May
+ 2016 16:59:01 -0400
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Fri, 20 May 2016 16:59:06 -0400
+From: "Kaplan, Jordan" <KaplanJ@dnc.org>
+To: "Vaughn, Jordan" <VaughnJ@dnc.org>
+CC: "Marshall, Maxwell" <MarshallM@dnc.org>, Claire Olszewski
+        <OlszewskiC@dnc.org>, "Cox, Clayton" <CoxC@dnc.org>, Contribution
+        <postmaster@finance.democrats.org>, "Comer, Scott" <ComerS@dnc.org>,
+        "Marquez, Karina" <MarquezK@dnc.org>
+Subject: Re: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Topic: Contribution: NY436a - DLC Allred Dinner / Jan Warner /
+ 5,000.00 USD
+Thread-Index: AQHRsrcSjsPSVFQ/CkKz/dLep+C68Z/CS++AgAAA3wCAABOcgIAAMRQA//+9+E0=
+Date: Fri, 20 May 2016 20:59:05 +0000
+Message-ID: <6C924E5B-463F-4233-8C21-3A110989B1C7@dnc.org>
+References: <132a28c20bb2cd9d1e6090e78a15464c@dnc.queue.bluestatedigital.com>,<EAA2C2C0-91A6-4AD2-8BA2-4FFA3FFB5F2D@dnc.org>,<5DA1214D-069F-4F9A-838B-29F3A3428D36@dnc.org>,<6E884879-E685-464C-A807-526C7452B557@dnc.org>,<7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+In-Reply-To: <7A6F3129-929D-4F31-AB93-B1376616B4E2@dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+        boundary="_000_6C924E5B463F42338C213A110989B1C7dncorg_"
+MIME-Version: 1.0
+Return-Path: KaplanJ@dnc.org
+Look who finally chimes in.
+
+Jordan Kaplan
+National Finance Director
+Democratic National Committee
+(202) 488-5002 (o) | (312) 339-0224 (c)
+kaplanj@dnc.org<mailto:kaplanj@dnc.org>
+
+
+On May 20, 2016, at 4:55 PM, Vaughn, Jordan <VaughnJ@dnc.org<mailto:VaughnJ@dnc.org>> wrote:
+
+#werk
+
+Jordan C. Vaughn
+National AALC Finance Director
+Democratic National Committee
+(202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%20797-2215> (c)
+VaughnJ@dnc.org<mailto:VaughnJ@dnc.org>
+
+On May 20, 2016, at 11:59 AM, Marshall, Maxwell <MarshallM@dnc.org<mailto:MarshallM@dnc.org>> wrote:
+
+Amazing
+
+Max Marshall
+Southern Finance Director
+Democratic National Committee
+
+On May 20, 2016, at 12:49 PM, Claire Olszewski <OlszewskiC@dnc.org<mailto:OlszewskiC@dnc.org>> wrote:
+
+There she is!
+
+Sent from my iPhone
+
+On May 20, 2016, at 12:46 PM, Cox, Clayton <CoxC@dnc.org<mailto:CoxC@dnc.org>> wrote:
+
+Bang bang!
+
+Sent from my iPhone
+
+On May 20, 2016, at 11:45 AM, Contribution <postmaster@finance.democrats.org<mailto:postmaster@finance.democrats.org>> wrote:
+
+CONTRIBUTION DATA
+-----------------
+                   Page: NY436a - DLC Allred Dinner
+                   Type: One-time
+      Number of Tickets: 2
+          Ticket Amount: $5,000.00
+            Ticket Info: 2 x Co-Host Tickets.
+Additional Contribution Amount: 0
+           Total Amount: $5,000.00
+             First Name: Jan
+              Last Name: Warner
+                Address: 222 E 71st. St. 6B
+                         New York, NY 10021
+                  Phone: 9178535184
+                  Email: eyeseepic@aol.com<mailto:eyeseepic@aol.com>
+               Employer: None
+       Employer Address:
+                         ,
+             Occupation: writer
+           Payment Type: American Express
+              Account #: 2009
+          Transaction #: 15760563
+              User Id #:
+       Contribution Key: IICHAZVT68jC1uMbaB
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: "Additional Information")
+Fundraiser code (optional):
+Who encouraged you to make this contribution?: Support for Hillary, meeting Gloria Allred
+Guest name(s), if contributing for multiple tickets: Donna Zucchi
+
+GENERAL INFORMATION
+-------------------
+   Submit Date: Fri, 20 May 2016 12:44:18 -0400
+        Status: Under Review
+Client IP Address: 66.30.39.87
+Client Browser: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/537.86.3

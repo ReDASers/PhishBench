@@ -3,23 +3,19 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
+import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.feature_extraction.email as email_extraction
 from phishbench.classification.core import load_internal_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_internal_metrics
-from phishbench.feature_extraction.email.reflection import FeatureType
 from phishbench.feature_extraction.email.reflection import load_internal_features as load_email_features
 
 
 def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
     config = configparser.ConfigParser()
 
-    config['Dataset Path'] = {}
-    dataset_section = config['Dataset Path']
-    dataset_section["path_legitimate_training"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_training"] = "Dataset_all/Dataset_phish_urls"
-    dataset_section["path_legitimate_testing"] = "Dataset_all/Dataset_legit_urls"
-    dataset_section["path_phishing_testing"] = "Dataset_all/Dataset_legit_urls"
+    config[dataset_settings.DATASET_PATH_SECTION] = dataset_settings.DEFAULT_SETTINGS
 
     config['Email or URL feature Extraction'] = {}
     proccess_section = config['Email or URL feature Extraction']
@@ -78,10 +74,8 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
     config["Support Files"] = {}
     config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
-    config['Email_Features'] = {}
-    config['Email_Features']['extract header features'] = "False"
-    config['Email_Features']['extract body features'] = "False"
-
+    config[email_extraction.settings.FEATURE_TYPE_SECTION] = \
+        email_extraction.settings.FEATURE_TYPE_SETTINGS
     config['URL_Feature_Types'] = {}
     config['URL_Feature_Types']['URL'] = "False"
     config['URL_Feature_Types']['Network'] = "False"
@@ -90,21 +84,15 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     reflection_features = load_email_features(filter_features=False)
 
-    config['Email_Header_Features'] = {
-        feature.config_name: "True" for feature in reflection_features if feature.feature_type == FeatureType.HEADER
+    config[email_extraction.FeatureType.EMAIL_BODY.value] = {
+        feature.config_name: "True" for feature in reflection_features if
+        feature.feature_type == email_extraction.FeatureType.HEADER
     }
-    #  header_features = config['Email_Header_Features']
-    # for feature in list_features:
-    #     if feature.startswith("Email_Header_"):
-    #         header_features[feature.replace('Email_Header_', '')] = "True"
 
-    config['Email_Body_Features'] = {
-        feature.config_name: "True" for feature in reflection_features if feature.feature_type == FeatureType.EMAIL_BODY
+    config[email_extraction.FeatureType.HEADER.value] = {
+        feature.config_name: "True" for feature in reflection_features if
+        feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
     }
-    # body_features = config['Email_Body_Features']
-    # for feature in list_features:
-    #     if feature.startswith("Email_Body_"):
-    #         body_features[feature.replace('Email_Body_', '')] = "True"
 
     config['HTML_Features'] = {}
     c_html_features = config['HTML_Features']

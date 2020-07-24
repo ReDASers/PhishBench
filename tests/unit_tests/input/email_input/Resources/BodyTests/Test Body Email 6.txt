@@ -1,0 +1,36 @@
+Message-ID: <25761858.1075840376843.JavaMail.evans@thyme>
+Date: Wed, 30 Jan 2002 12:57:57 -0800 (PST)
+From: daniel.diamond@enron.com
+To: traders.dl-netco@enron.com, traders.dl-netco@enron.com
+Subject: **IMPORTANT** Stack Manager Users
+Cc: david.forster@enron.com, teresa.mandola@enron.com, 
+	jennifer.mcquade@enron.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Bcc: david.forster@enron.com, teresa.mandola@enron.com, 
+	jennifer.mcquade@enron.com
+X-From: Diamond, Daniel </O=ENRON/OU=NA/CN=RECIPIENTS/CN=DDIAMON>
+X-To: DL-NETCO Gas Traders </O=ENRON/OU=NA/CN=RECIPIENTS/CN=DL-NETCOGasTraders>, DL-NETCO Power Traders </O=ENRON/OU=NA/CN=RECIPIENTS/CN=DL-NETCOPowerTraders>
+X-cc: Forster, David </O=ENRON/OU=NA/CN=RECIPIENTS/CN=DFORSTER>, Mandola, Teresa </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Tmandola>, Mcquade, Jennifer </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jmcquad2>
+X-bcc: 
+X-Folder: \ExMerge - Brawner, Sandra F.\Inbox
+X-Origin: BRAWNER-S
+X-FileName: sandra brawner 6-19-02.PST
+
+
+We are in the process of confirming that all traders are set up correctly and ready to trade when the system goes live. 
+
+We need to make sure that your Stack Managers are accessing the correct database. In order to do this, we need to know how you access Stack Manager:
+
+1) Through Terminal Server (the one that opens up a desktop within a desktop and it actually appears that you have two Start buttons). 
+or
+2) By opening the Stack Manager directly from your "native" desktop.
+
+Please reply to this message with either a corresponding "1" or a "2" in the subject field.
+
+If you're not sure which one you have, please contact myself x39673, Teresa Mandola x39807 or Jennifer McQuade x53614 and we'll come by your desk to help you.
+
+Thank you,
+
+Dan Diamond

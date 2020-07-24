@@ -3,6 +3,8 @@ This module contains code for email feature extraction.
 """
 from typing import List, Callable
 
+from tqdm import tqdm
+
 from . import reflection
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
@@ -23,11 +25,11 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
 
     Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_dataset_folder, phish_dataset_folder)
 
-    print("Extracting Email features from %s", legit_dataset_folder)
+    print("Extracting Email features from {}".format(legit_dataset_folder))
     legit_emails = pb_input.read_dataset_email(legit_dataset_folder)
     legit_features, legit_corpus = extract_email_features(legit_emails, features)
 
-    print("Extracting Email features from %s", phish_dataset_folder)
+    print("Extracting Email features from {}".format(phish_dataset_folder))
     phish_emails = pb_input.read_dataset_email(phish_dataset_folder)
     phish_features, phish_corpus = extract_email_features(phish_emails, features)
 
@@ -52,7 +54,7 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     """
     feature_dict_list = list()
 
-    for email_msg in emails:
+    for email_msg in tqdm(emails):
         feature_values, _ = reflection.extract_features_from_single_email(features, email_msg)
         feature_dict_list.append(feature_values)
 
