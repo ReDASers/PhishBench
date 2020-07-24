@@ -62,6 +62,14 @@ class TestEmailBody(unittest.TestCase):
         self.assertIn(None, body.content_transfer_encoding_list)
         self.assertIn(None, body.content_disposition_list)
 
+    def test_email_body5(self):
+        msg = utils.get_binary_email("Resources/BodyTests/Test Body Email 5.txt")
+        body = EmailBody(msg)
+        with open(utils.get_relative_path('Resources/BodyTests/test_body_5.txt')) as f:
+            expected = f.read().strip()
+
+        self.assertEqual(expected,body.text.strip())
+
     def test_email_html(self):
         msg = utils.get_binary_email("Resources/BodyTests/test body email 2.txt")
         body = EmailBody(msg)
