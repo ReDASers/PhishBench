@@ -25,11 +25,11 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
 
     Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_dataset_folder, phish_dataset_folder)
 
-    print("Extracting Email features from %s", legit_dataset_folder)
+    print("Extracting Email features from {}".format(legit_dataset_folder))
     legit_emails = pb_input.read_dataset_email(legit_dataset_folder)
     legit_features, legit_corpus = extract_email_features(legit_emails, features)
 
-    print("Extracting Email features from %s", phish_dataset_folder)
+    print("Extracting Email features from {}".format(phish_dataset_folder))
     phish_emails = pb_input.read_dataset_email(phish_dataset_folder)
     phish_features, phish_corpus = extract_email_features(phish_emails, features)
 
