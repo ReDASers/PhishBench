@@ -84,8 +84,11 @@ class EmailBody:
                 self.num_attachment += 1
 
             if part.get_filename():
-                basename, ext = part.get_filename().rsplit('.', maxsplit=1)
-                self.file_extension_list.append(ext)
+                if '.' in part.get_filename():
+                    basename, ext = part.get_filename().rsplit('.', maxsplit=1)
+                    self.file_extension_list.append(ext)
+                else:
+                    self.file_extension_list.append(None)
 
             if content_type == 'text/plain':
                 self.__parse_text_part(part)

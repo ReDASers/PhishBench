@@ -68,7 +68,7 @@ class TestEmailBody(unittest.TestCase):
         with open(utils.get_relative_path('Resources/BodyTests/test_body_5.txt')) as f:
             expected = f.read().strip()
 
-        self.assertEqual(expected,body.text.strip())
+        self.assertEqual(expected, body.text.strip())
 
     def test_email_html(self):
         msg = utils.get_binary_email("Resources/BodyTests/test body email 2.txt")
@@ -83,6 +83,14 @@ class TestEmailBody(unittest.TestCase):
         self.assertTrue(body.is_html)
         self.assertEqual(1, body.num_attachment)
         self.assertIn('docx', body.file_extension_list)
+
+    def test_attachment_no_filename(self):
+        msg = utils.get_binary_email('Resources/BodyTests/no_filename.txt')
+        body = EmailBody(msg)
+
+        self.assertEqual(1, body.num_attachment)
+        self.assertEqual(1, len(body.file_extension_list))
+        self.assertIn(None, body.file_extension_list)
 
     def test_charset_no_quotes(self):
         msg = utils.get_binary_email("Resources/BodyTests/Test Body Email 6.txt")
