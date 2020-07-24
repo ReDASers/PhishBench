@@ -19,8 +19,11 @@ def get_charset(part):
         return None
     if 'charset=' in content_type_string:
         charset = content_type_string.split('charset=')[1]
-        match = re.match(r'"(.+?)"', charset).groups()[0]
-        return match
+        match = re.match(r'"(.+?)"', charset)
+        if match:
+            return match.groups()[0]
+        # No quotes
+        return charset.split()[0]
     return None
 
 

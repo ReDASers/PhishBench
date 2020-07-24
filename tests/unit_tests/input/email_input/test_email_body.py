@@ -83,3 +83,9 @@ class TestEmailBody(unittest.TestCase):
         self.assertTrue(body.is_html)
         self.assertEqual(1, body.num_attachment)
         self.assertIn('docx', body.file_extension_list)
+
+    def test_charset_no_quotes(self):
+        msg = utils.get_binary_email("Resources/BodyTests/Test Body Email 6.txt")
+        body = EmailBody(msg)
+
+        self.assertIn('us-ascii', body.charset_list)
