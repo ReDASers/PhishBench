@@ -15,10 +15,13 @@ def get_charset(part):
     if part.get_charset() is not None:
         return part.get_charset()
     content_type_string = part['Content-Type']
+    if not content_type_string:
+        return None
     if 'charset=' in content_type_string:
         charset = content_type_string.split('charset=')[1]
         match = re.match(r'"(.+?)"', charset).groups()[0]
         return match
+    return None
 
 
 class EmailBody:
@@ -95,7 +98,9 @@ class EmailBody:
                 self.charset_list.append(charset)
                 payload = payload.decode(charset).strip()
             else:
-                payload = payload.decode().strip()
+                encoding = chardet.detect(payload)['encoding'].lower()
+                self.charset_list.append(encoding)
+                payload = payload.decode(encoding=encoding).strip()
             if self.text:
                 self.text += '\n'
                 self.text += payload
