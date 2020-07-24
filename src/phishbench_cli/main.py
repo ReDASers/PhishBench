@@ -164,7 +164,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     legit_path = dataset.train_legit_path()
     phish_path = dataset.train_phish_path()
 
-    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_train)
 
     # Export features to csv
