@@ -215,7 +215,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
 
     print("Extracting Test Set")
     Globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_dataset_features(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv
@@ -284,6 +284,8 @@ def extract_email_features():
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
+        else:
+            tfidf_vectorizer = None
 
     if Globals.config["Extraction"]["Testing Dataset"] == "True":
         x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
@@ -367,7 +369,7 @@ def get_config():
         test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
         run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') and \
                     Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
-    elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+    else:
         train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
         test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
         run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
@@ -413,7 +415,7 @@ def run_phishbench():
     if Globals.config["Extraction"].getboolean("Feature Extraction"):
         if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
-        elif Globals.config["Email or URL feature Extraction"].getboolean("extract_features_urls"):
+        else:
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
