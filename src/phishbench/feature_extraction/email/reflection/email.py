@@ -16,9 +16,9 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
             feature_value = feature(email_msg.header)
         else:
             raise ValueError('Email Message must have a header!')
-    except Exception as e:
-        print("exception: " + str(e))
-        Globals.logger.error("%s with traceback", e, str(e.__traceback__).replace("\n", " "))
+    except Exception:
+        error_string = "Error extracting {}".format(feature.config_name)
+        Globals.logger.warning(error_string, exc_info=True)
         feature_value = -1
     end = time.process_time()
     ex_time = end - start
