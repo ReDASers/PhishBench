@@ -203,3 +203,16 @@ class TestEmailHeader(unittest.TestCase):
         msg = get_binary_email("Resources/HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.mime_version)
+
+    def test_header_windows(self):
+        msg = get_binary_email("Resources/HeaderTests/Test Email 4.txt")
+        header = EmailHeader(msg)
+        self.assertEqual('Valérie Masson-Delmotte <Valerie.Masson@cea.fr>', header.sender_full)
+        self.assertEqual('Valerie.Masson@cea.fr', header.sender_email_address)
+        self.assertEqual('Valérie Masson-Delmotte', header.sender_name)
+        self.assertIn('Keith Briffa <k.briffa@uea.ac.uk>', header.to)
+        self.assertIn('Jonathan Overpeck <jto@u.arizona.edu>', header.to)
+        self.assertIn('Eystein Jansen <eystein.jansen@geo.uib.no>', header.to)
+        self.assertEqual('Re: IPCC ch9 for information and check.', header.subject)
+        self.assertEqual(1, len(header.reply_to))
+        self.assertIn('Valerie.Masson@cea.fr', header.reply_to)

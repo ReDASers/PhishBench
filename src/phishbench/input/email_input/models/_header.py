@@ -3,9 +3,12 @@ This is an internal module which handles email headers
 """
 import email
 import re
-from email.message import Message
-from typing import List
 from datetime import datetime
+from email.header import Header as RawHeader
+from email.message import Message
+from typing import List, Union
+
+import chardet
 
 from phishbench.utils import Globals
 from .date_parse import parse_email_datetime
@@ -37,6 +40,26 @@ def parse_address_list(raw: str) -> List[str]:
         return []
     raw = re.sub(r'\s+', ' ', raw)
     return [x.strip() for x in raw.split(',')]
+
+
+def decode_header_field(msg: Message, field: str) -> Union[str, None]:
+    """
+    Decodes a header field from a msg object
+    :param msg: The Message object to process
+    :param field: The field to decode
+    :return:
+    """
+    # Recipient
+    if msg[field] is not None:
+        header = msg[field]
+        if isinstance(header, str):
+            # Already parsed
+            return header
+        if isinstance(header, RawHeader):
+            binary = email.header.decode_header(header)[0][0]
+            encoding = chardet.detect(binary)['encoding']
+            return binary.decode(encoding)
+    return None
 
 
 class EmailHeader:
@@ -93,29 +116,58 @@ class EmailHeader:
     mime_version : str
         The value of the MIME-Version header field
     """
+
     # pylint: disable=too-few-public-methods
     # pylint: disable=too-many-instance-attributes
     # Adapted from original PhishBench Header extraction code
     def __init__(self, msg: Message):
         # pylint: disable=too-many-branches
         # pylint: disable=too-many-statements
-        parser = email.parser.HeaderParser()
-        msg = parser.parsestr(msg.as_string())
         # Get the raw headers
         self.header = ''
         for k, i in msg.items():
             self.header = self.header + str(k) + ": " + str(i) + "\n"
 
-        # orig-date
-        try:
-            if msg['Date']:
-                self.orig_date: datetime = parse_email_datetime(msg['Date'])
-            else:
-                self.orig_date = None
-        except ValueError as exception:
-            Globals.logger.debug("Exception: %s handled", exception)
-            self.orig_date = None
+        self.__parse_date(msg)
 
+        self.__parse_subject(msg)
+
+        self.__parse_reply_to(msg)
+
+        self.__parse_sender(msg)
+
+        self.__parse_to(msg)
+
+        self.__parse_recipient(msg)
+
+        self.__parse_cc(msg)
+
+        # Message-Id
+        if msg['Message-ID']:
+            self.message_id = msg['Message-ID'].strip('>').strip('<')
+        else:
+            self.message_id = None
+
+        self.__parse_x_headers(msg)
+
+        # Authentication-Results
+        if msg["Authentication-Results"]:
+            self.authentication_results = msg["Authentication-Results"]
+        else:
+            self.authentication_results = []
+
+        # Received
+        if msg["Received"]:
+            self.received = msg.get_all("Received")
+            # print("received: {}".format(received))
+        else:
+            self.received = []
+
+        self.__parse_mime(msg)
+
+        self.__parse_flags(msg)
+
+    def __parse_x_headers(self, msg):
         # X-Priority
         try:
             if msg['X-Priority']:
@@ -126,103 +178,57 @@ class EmailHeader:
             Globals.logger.debug("Exception: %s handled", exception)
             self.x_priority = None
 
-        # Subject
-        if msg['Subject'] is not None:
-            self.subject = msg['Subject']
-        else:
-            self.subject = None
-
-        # Return-Path
-        if msg['Return-Path']:
-            self.return_path = msg['Return-Path'].strip('>').strip('<')
-        else:
-            self.return_path = None
-
-        # Reply To
-        if msg['Reply-To'] is not None:
-            self.reply_to = parse_address_list(msg['Reply-To'])
-        else:
-            self.reply_to = []
-
-        # Sender
-        if msg['Sender']:
-            self.sender_full = msg['Sender']
-        else:
-            # By the Email specification, either the Sender field or From field must be included. If it isn't then
-            # msg['From'] simply returns None
-            self.sender_full = msg['From']
-
-        if self.sender_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full):
-            self.sender_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full)[0] \
-                .strip('"').strip(' <').strip('"')
-        else:
-            self.sender_name = None
-
-        if self.sender_full and re.findall(EMAIL_ADDRESS_REGEX, self.sender_full):
-            self.sender_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.sender_full)[0] \
-                .strip("<").strip(">")
-        else:
-            self.sender_email_address = None
-
-        # Recipient
-        if msg['To']:
-            self.to = parse_address_list(msg['To'])
-        if msg['Delivered-To']:
-            self.recipient_full = msg['Delivered-To']
-        elif msg['X-Envelope-To']:
-            self.recipient_full = msg['X-Envelope-To']
-        elif len(self.to) > 0:
-            self.recipient_full = self.to[0]
-        else:
-            self.recipient_full = None
-
-        if self.recipient_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full):
-            self.recipient_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full)[0] \
-                .strip('"').strip(' <').strip('"')
-        else:
-            self.recipient_name = None
-
-        if self.recipient_full and re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full):
-            self.recipient_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full)[0]\
-                .strip('<').strip('>')
-        else:
-            self.recipient_email_address = None
-
-        # CC
-        if msg["Cc"]:
-            self.cc = parse_address_list(msg['Cc'])
-        else:
-            self.cc = []
-
-        # Bcc
-        if msg["Bcc"]:
-            self.bcc = parse_address_list(msg["Bcc"])
-        else:
-            self.bcc = []
-
-        # Message-Id
-        if msg['Message-ID']:
-            self.message_id = msg['Message-ID'].strip('>').strip('<')
-        else:
-            self.message_id = None
-
         # X-mailer
         if msg['X-mailer']:
             self.x_mailer = msg['X-mailer']
         else:
             self.x_mailer = None
-
         # X-originating-hostname
         if msg["X-originating-hostname"]:
             self.x_originating_hostname = msg["X-originating-hostname"]
         else:
             self.x_originating_hostname = None
-
         # X-originating-ip
         if msg["X-originating-ip"]:
             self.x_originating_ip = msg["X-originating-ip"]
         else:
             self.x_originating_ip = None
+
+    def __parse_mime(self, msg):
+        # MIME version
+        if msg['MIME-Version']:
+            self.mime_version = msg['MIME-Version']
+        else:
+            self.mime_version = None
+
+    def __parse_subject(self, msg):
+        # Subject
+        if msg['Subject'] is not None:
+            self.subject = decode_header_field(msg, 'Subject')
+        else:
+            self.subject = None
+
+    def __parse_to(self, msg: Message):
+        if not msg['To']:
+            self.to = []
+        to = decode_header_field(msg, 'To')
+        if to:
+            self.to = parse_address_list(to)
+        else:
+            self.to = []
+
+    def __parse_flags(self, msg: Message):
+        # X-Original-Authentication-Results
+        if msg["X-Original-Authentication-Results"]:
+            self.x_original_authentication_results = True
+        else:
+            self.x_original_authentication_results = False
+
+        # X-Spam_flag
+        if msg["X-Spam_flag"]:
+            self.x_spam_flag = True
+        else:
+            self.x_spam_flag = False
 
         # Virus Scanned
         if msg["X-virus-scanned"]:
@@ -244,33 +250,94 @@ class EmailHeader:
             # received_spf="None"
             self.received_spf = False
 
-        #X-Original-Authentication-Results
-        if msg["X-Original-Authentication-Results"]:
-            # x_original_authentication_results = msg["X-Original-Authentication-Results"]
-            self.x_original_authentication_results = True
-        else:
-            self.x_original_authentication_results = False
+    def __parse_date(self, msg):
+        # orig-date
+        try:
+            if msg['Date']:
+                self.orig_date: datetime = parse_email_datetime(msg['Date'])
+            else:
+                self.orig_date = None
+        except ValueError as exception:
+            Globals.logger.debug("Exception: %s handled", exception)
+            self.orig_date = None
 
-        # Authentication-Results
-        if msg["Authentication-Results"]:
-            self.authentication_results = msg["Authentication-Results"]
+    def __parse_sender(self, msg):
+        # Sender
+        if msg['Sender']:
+            self.sender_full = decode_header_field(msg, 'Sender')
         else:
-            self.authentication_results = []
+            # By the Email specification, either the Sender field or From field must be included. If it isn't then
+            # msg['From'] simply returns None
+            self.sender_full = decode_header_field(msg, 'From')
 
-        # Received
-        if msg["Received"]:
-            self.received = msg.get_all("Received")
-            # print("received: {}".format(received))
+        if self.sender_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full):
+            self.sender_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.sender_full)[0] \
+                .strip('"').strip(' <').strip('"')
         else:
-            self.received = []
-        # MIME version
-        if msg['MIME-Version']:
-            self.mime_version = msg['MIME-Version']
-        else:
-            self.mime_version = None
+            self.sender_name = None
 
-        # X-Spam_flag
-        if msg["X-Spam_flag"]:
-            self.x_spam_flag = True
+        if self.sender_full and re.findall(EMAIL_ADDRESS_REGEX, self.sender_full):
+            self.sender_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.sender_full)[0] \
+                .strip("<").strip(">")
         else:
-            self.x_spam_flag = False
+            self.sender_email_address = None
+
+    def __parse_recipient(self, msg):
+        if msg['Delivered-To']:
+            self.recipient_full = decode_header_field(msg, 'Delivered-To')
+        elif msg['X-Envelope-To']:
+            self.recipient_full = decode_header_field(msg, 'X-Envelope-To')
+        elif len(self.to) > 0:
+            self.recipient_full = self.to[0]
+        else:
+            self.recipient_full = None
+
+        if self.recipient_full and re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full):
+            self.recipient_name = re.findall(EMAIL_ADDRESS_NAME_REGEX, self.recipient_full)[0] \
+                .strip('"').strip(' <').strip('"')
+        else:
+            self.recipient_name = None
+
+        if self.recipient_full and re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full):
+            self.recipient_email_address = re.findall(EMAIL_ADDRESS_REGEX, self.recipient_full)[0] \
+                .strip('<').strip('>')
+        else:
+            self.recipient_email_address = None
+
+    def __parse_cc(self, msg):
+        # CC
+        if msg["Cc"]:
+            cc = decode_header_field(msg, 'Cc')
+            if cc:
+                self.cc = parse_address_list(cc)
+            else:
+                self.cc = []
+        else:
+            self.cc = []
+
+        # BCC
+        if msg["Bcc"]:
+            cc = decode_header_field(msg, 'Bcc')
+            if cc:
+                self.bcc = parse_address_list(cc)
+            else:
+                self.bcc = []
+        else:
+            self.bcc = []
+
+    def __parse_reply_to(self, msg):
+        # Return-Path
+        if msg['Return-Path']:
+            self.return_path = msg['Return-Path'].strip('>').strip('<')
+        else:
+            self.return_path = None
+
+        # Reply To
+        if msg['Reply-To'] is not None:
+            rt = decode_header_field(msg, 'Reply-To')
+            if rt:
+                self.reply_to = parse_address_list(rt)
+            else:
+                self.reply_to = []
+        else:
+            self.reply_to = []
