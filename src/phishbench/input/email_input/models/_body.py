@@ -93,6 +93,8 @@ class EmailBody:
     def __parse_text_part(self, part):
         try:
             payload = part.get_payload(decode=True)
+            if len(payload) == 0:
+                return
             charset = get_charset(part)
             if charset is not None:
                 self.charset_list.append(charset)
