@@ -12,6 +12,12 @@ UNDERSCORE_REGEX = re.compile(r"_+", flags=re.IGNORECASE | re.MULTILINE | re.DOT
 
 
 def get_charset(part):
+    """
+    Retrieves the declared charset of the part
+    :param part: The part to get the charset from
+    :return:
+    The charset used to encode the part, or None if it is not found
+    """
     if part.get_charset() is not None:
         return part.get_charset()
     content_type_string = part['Content-Type']
@@ -25,6 +31,36 @@ def get_charset(part):
         # No quotes
         return charset.split()[0]
     return None
+
+
+def decode_text_part(part):
+    payload = part.get_payload(decode=True)
+    if len(payload) == 0:
+        return None, None
+    charset = get_charset(part)
+    if charset is not None:
+        # self.charset_list.append(charset)
+        if isinstance(payload, str):
+            # Payload has already been decoded
+            payload = payload.strip()
+        else:
+            try:
+                payload = payload.decode(charset).strip()
+            except UnicodeError:
+                raw_data = part.get_payload()
+                if isinstance(raw_data, str):
+                    payload = raw_data
+                else:
+                    return None, None
+    else:
+        encoding = chardet.detect(payload)['encoding']
+        if encoding:
+            charset = encoding.lower()
+            try:
+                payload = payload.decode(encoding=charset).strip()
+            except UnicodeError:
+                return None, None
+    return payload, charset
 
 
 class EmailBody:
@@ -97,45 +133,26 @@ class EmailBody:
                 self.__parse_html_part(part)
 
     def __parse_text_part(self, part):
-        try:
-            payload = part.get_payload(decode=True)
-            if len(payload) == 0:
-                return
-            charset = get_charset(part)
-            if charset is not None:
-                self.charset_list.append(charset)
-                payload = payload.decode(charset).strip()
-            else:
-                encoding = chardet.detect(payload)['encoding'].lower()
-                self.charset_list.append(encoding)
-                payload = payload.decode(encoding=encoding).strip()
-            if self.text:
-                self.text += '\n'
-                self.text += payload
-            else:
-                self.text = payload
-        except UnicodeError:
-            print("Failed To Decode")
-            # We failed to decode the part
-            self.defects.append(part)
-            raw_data = part.get_payload()
-            encoding = chardet.detect(raw_data)['encoding']
-            if not encoding:
-                # Fail to detect encoding
-                encoding = 'utf-8'
-            self.text = raw_data.decode(encoding=encoding, errors='replace')
+        payload, charset = decode_text_part(part)
+
+        if charset:
+            self.charset_list.append(charset)
+
+        if self.text and payload:
+            self.text += '\n'
+            self.text += payload
+        elif payload:
+            self.text = payload
 
     def __parse_html_part(self, part):
-        charset = get_charset(part)
-        if charset is None:
+        payload, charset = decode_text_part(part)
+        if charset:
             self.charset_list.append(charset)
-            html = part.get_payload(decode=True).decode()
-        else:
-            html = part.get_payload(decode=True).decode(charset)
+
         cleaner = Cleaner()
         cleaner.javascript = True
         cleaner.style = True
-        self.html = lxml.html.tostring(cleaner.clean_html(lxml.html.parse(StringIO(html))))
+        self.html = lxml.html.tostring(cleaner.clean_html(lxml.html.parse(StringIO(payload))))
         if not self.text:
             soup = BeautifulSoup(self.html, 'html.parser')
             self.text = soup.get_text()

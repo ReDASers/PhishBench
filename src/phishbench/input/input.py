@@ -56,7 +56,7 @@ def read_email_from_file(file_path: str) -> Message:
         if not encoding:
             encoding = None
         with open(file_path, 'r', encoding=encoding, errors='ignore') as f:
-            # print('Falling back to string for {}'.format(file_name))
+            # print('Falling back to string for {}'.format(file_path))
             text = f.read()
             msg = email.message_from_string(text)
     except UnicodeError:
