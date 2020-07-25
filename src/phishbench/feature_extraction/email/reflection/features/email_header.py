@@ -86,11 +86,11 @@ def email_header_dkim_signature_exists(header: EmailHeader):
 
 @register_feature(FeatureType.HEADER, 'compare_sender_domain_message_id_domain')
 def email_header_compare_sender_domain_message_id_domain(header: EmailHeader):
-    if header.message_id is not None:
+    if header.message_id is not None and '@' in header.message_id:
         message_id_domain = header.message_id.split("@")[1]
     else:
         message_id_domain = None
-    if header.sender_email_address is not None:
+    if header.sender_email_address is not None and '@' in header.message_id:
         sender_domain = header.sender_email_address.split("@")[1]
     else:
         sender_domain = None
