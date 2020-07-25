@@ -55,18 +55,12 @@ def email_header_received_count(header: EmailHeader):
 
 @register_feature(FeatureType.HEADER, 'Authentication_Results_SPF_Pass')
 def email_header_authentication_results_spf_pass(header: EmailHeader):
-    if "spf=pass" in header.authentication_results:
-        return True
-    else:
-        return False
+    return "spf=pass" in header.authentication_results
 
 
 @register_feature(FeatureType.HEADER, 'Authentication_Results_DKIM_Pass')
 def email_header_authentication_results_dkim_pass(header: EmailHeader):
-    if "dkim=pass" in header.authentication_results:
-        return True
-    else:
-        return False
+    return "dkim=pass" in header.authentication_results
 
 
 @register_feature(FeatureType.HEADER, 'X_Origininal_Authentication_results')
