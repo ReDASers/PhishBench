@@ -31,7 +31,7 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
 
     for feature in features:
         result, ex_time = extract_single_feature_email(feature, email_msg)
-        if isinstance(result, Dict):
+        if isinstance(result, dict):
             temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
             dict_feature_values.update(temp_dict)
         else:
