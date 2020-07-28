@@ -86,12 +86,12 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     config[email_extraction.FeatureType.EMAIL_BODY.value] = {
         feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.HEADER
+        feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
     }
 
     config[email_extraction.FeatureType.HEADER.value] = {
         feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
+        feature.feature_type == email_extraction.FeatureType.HEADER
     }
 
     config['HTML_Features'] = {}
