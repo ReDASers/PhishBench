@@ -367,7 +367,7 @@ def get_config():
     if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
         train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
         test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
-        run_tfidf = Globals.config['Email_Features'].getboolean('extract body features') and \
+        run_tfidf = email_extraction.settings.extract_body_enabled() and \
                     Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
     else:
         train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
