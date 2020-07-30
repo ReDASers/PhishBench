@@ -27,8 +27,9 @@ def setup_parser():
 
 def setup_logger():
     global logger
-    logger = logging.getLogger('root')
+    logging.captureWarnings(True)
 
+    logger = logging.getLogger('root')
     formatter = logging.Formatter('[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
                                   '%m-%d %H:%M:%S')
 
