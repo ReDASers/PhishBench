@@ -169,6 +169,8 @@ class EmailBody:
 
     def __parse_html_part(self, part):
         payload, charset = decode_text_part(part)
+        if not payload or len(payload) == 0:
+            return
         if charset:
             self.charset_list.append(charset)
 
