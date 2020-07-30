@@ -5,7 +5,7 @@
 
 import unittest
 
-from phishbench.input.email_input.models import _body as body
+from phishbench.input.email_input.models._body import clean_html
 from phishbench.input.email_input.models import EmailBody
 import tests.unit_tests.input.email_input.utils as utils
 
@@ -75,7 +75,7 @@ class TestEmailBody(unittest.TestCase):
         self.maxDiff = None
         with open(utils.get_relative_path('Resources/BodyTests/html_dirty.html')) as f:
             html = f.read()
-        cleaned = body.clean_html(html)
+        cleaned = clean_html(html)
 
         with open(utils.get_relative_path('Resources/BodyTests/html_clean.html')) as f:
             expected = f.read()
