@@ -5,6 +5,7 @@
 
 import unittest
 
+from phishbench.input.email_input.models import _body as body
 from phishbench.input.email_input.models import EmailBody
 import tests.unit_tests.input.email_input.utils as utils
 
@@ -69,6 +70,16 @@ class TestEmailBody(unittest.TestCase):
             expected = f.read().strip()
 
         self.assertEqual(expected, body.text.strip())
+
+    def test_clean_html(self):
+        self.maxDiff = None
+        with open(utils.get_relative_path('Resources/BodyTests/html_dirty.html')) as f:
+            html = f.read()
+        cleaned = body.clean_html(html)
+
+        with open(utils.get_relative_path('Resources/BodyTests/html_clean.html')) as f:
+            expected = f.read()
+        self.assertEqual(cleaned, expected)
 
     def test_email_html(self):
         msg = utils.get_binary_email("Resources/BodyTests/test body email 2.txt")
