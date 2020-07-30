@@ -1,9 +1,7 @@
 import re
 from email.message import Message
-from io import StringIO
 
 import chardet
-import lxml.html as html
 from bs4 import BeautifulSoup
 from lxml.html.clean import Cleaner
 
@@ -83,7 +81,6 @@ def clean_html(raw_html: str):
 
     cleaned = cleaner.clean_html(raw_html)
     return cleaned
-    # return cleaned
 
 
 class EmailBody:
@@ -116,6 +113,7 @@ class EmailBody:
     def __init__(self, msg: Message):
         self.text = None
         self.html = None
+        self.raw_html = None
         self.is_html = False
         self.content_transfer_encoding_list = []
         self.charset_list = []
