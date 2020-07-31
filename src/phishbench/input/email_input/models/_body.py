@@ -44,23 +44,7 @@ def __detect_charset(payload: bytes):
     return None, None
 
 
-def decode_text_part(part):
-    payload = part.get_payload(decode=True)
-
-    if len(payload) == 0:
-        return None, None
-
-    charset = get_charset(part)
-
-    if charset is None:
-        return __detect_charset(payload)
-        # self.charset_list.append(charset)
-
-    if isinstance(payload, str):
-        # Payload has already been decoded
-        payload = payload.strip()
-        return payload, charset
-
+def __decode_payload(part, payload, charset):
     try:
         payload = payload.decode(charset).strip()
         return payload, charset
@@ -75,6 +59,25 @@ def decode_text_part(part):
         return __detect_charset(payload)
 
     return None, None
+
+
+def decode_text_part(part):
+    payload = part.get_payload(decode=True)
+
+    if len(payload) == 0:
+        return None, None
+
+    charset = get_charset(part)
+
+    if charset is None:
+        return __detect_charset(payload)
+
+    if isinstance(payload, str):
+        # Payload has already been decoded
+        payload = payload.strip()
+        return payload, charset
+
+    return __decode_payload(part, payload, charset)
 
 
 def clean_html(raw_html: str):

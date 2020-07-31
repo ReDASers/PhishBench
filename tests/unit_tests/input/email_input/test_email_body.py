@@ -125,5 +125,5 @@ class TestEmailBody(unittest.TestCase):
     def test_charset_unknown(self):
         msg = utils.get_email_text("Resources/BodyTests/Test Body Email 7.txt")
         body = EmailBody(msg)
-        print(body.text)
-        print(body.html)
+
+        self.assertIn('iso-5636-2', body.charset_list)
