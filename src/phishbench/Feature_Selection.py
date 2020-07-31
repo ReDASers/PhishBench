@@ -14,7 +14,8 @@ from .utils import phishbench_globals
 
 def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf=None):
     print('Feature Ranking Started')
-
+    
+    num_features = min(num_features, features.shape[1])
     feature_ranking_folder = os.path.join(phishbench_globals.args.output_input_dir, 'Feature_Ranking')
     if not os.path.exists(feature_ranking_folder):
         os.makedirs(feature_ranking_folder)
