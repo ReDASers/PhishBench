@@ -19,9 +19,12 @@ class Bagging(BaseClassifier):
         self.clf.fit(x, y)
 
     def param_search(self, x, y):
+        n_features = x.shape[1]
+        max_features = [1, 10, 20, 40, 50, 100]
+        max_features = [x for x in max_features if x <= n_features]
         param_grid = {
             "n_estimators": range(10, 110, 10),
-            "max_features": [1, 10, 50, 100],
+            "max_features": max_features,
             "max_samples": [0.25, 0.5, 0.75, 1.0],
             "bootstrap": [True, False],
             "bootstrap_features": [True, False]
