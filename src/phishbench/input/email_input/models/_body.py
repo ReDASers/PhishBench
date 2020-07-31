@@ -1,9 +1,7 @@
 import re
 from email.message import Message
-from io import StringIO
 
 import chardet
-import lxml
 from bs4 import BeautifulSoup
 from lxml.html.clean import Cleaner
 
@@ -63,6 +61,28 @@ def decode_text_part(part):
     return payload, charset
 
 
+def clean_html(raw_html: str):
+    cleaner = Cleaner()
+    # We only want to remove javascript and style
+    cleaner.javascript = True
+    cleaner.scripts = True
+    cleaner.style = True
+    cleaner.comments = False
+    cleaner.links = False
+    cleaner.meta = False
+    cleaner.page_structure = False
+    cleaner.safe_attrs_only = False
+    cleaner.remove_unknown_tags = False
+    cleaner.annoying_tags = False
+    cleaner.embedded = False
+    cleaner.frames = False
+    cleaner.forms = False
+    cleaner.processing_instructions = False
+
+    cleaned = cleaner.clean_html(raw_html)
+    return cleaned
+
+
 class EmailBody:
     """
     A class representing the body of an email.
@@ -70,8 +90,10 @@ class EmailBody:
     ----------
     text : str
         The raw text of the email.
+    raw_html : str
+        The uncleaned html of the email.
     html : str
-        The cleaned html of the email.
+        The cleaned html of the email. Cleaning removes scripts and style from the html.
     is_html : bool
         Whether or not the email is html
     num_attachment: int
@@ -91,6 +113,7 @@ class EmailBody:
     def __init__(self, msg: Message):
         self.text = None
         self.html = None
+        self.raw_html = None
         self.is_html = False
         self.content_transfer_encoding_list = []
         self.charset_list = []
@@ -149,10 +172,8 @@ class EmailBody:
         if charset:
             self.charset_list.append(charset)
 
-        cleaner = Cleaner()
-        cleaner.javascript = True
-        cleaner.style = True
-        self.html = lxml.html.tostring(cleaner.clean_html(lxml.html.parse(StringIO(payload))))
+        self.raw_html = payload
+        self.html = clean_html(payload)
         if not self.text:
             soup = BeautifulSoup(self.html, 'html.parser')
             self.text = soup.get_text()
