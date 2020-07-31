@@ -27,38 +27,54 @@ def get_charset(part):
         if match:
             return match.groups()[0]
         # No quotes
-        return charset.split()[0]
+        if charset:
+            return charset.split()[0]
     return None
+
+
+def __detect_charset(payload: bytes):
+    encoding = chardet.detect(payload)['encoding']
+    if encoding:
+        charset = encoding.lower()
+        try:
+            payload = payload.decode(encoding=charset).strip()
+        except UnicodeError:
+            return None, None
+        return payload, charset
+    return None, None
 
 
 def decode_text_part(part):
     payload = part.get_payload(decode=True)
+
     if len(payload) == 0:
         return None, None
+
     charset = get_charset(part)
-    if charset is not None:
+
+    if charset is None:
+        return __detect_charset(payload)
         # self.charset_list.append(charset)
-        if isinstance(payload, str):
-            # Payload has already been decoded
-            payload = payload.strip()
-        else:
-            try:
-                payload = payload.decode(charset).strip()
-            except UnicodeError:
-                raw_data = part.get_payload()
-                if isinstance(raw_data, str):
-                    payload = raw_data
-                else:
-                    return None, None
-    else:
-        encoding = chardet.detect(payload)['encoding']
-        if encoding:
-            charset = encoding.lower()
-            try:
-                payload = payload.decode(encoding=charset).strip()
-            except UnicodeError:
-                return None, None
-    return payload, charset
+
+    if isinstance(payload, str):
+        # Payload has already been decoded
+        payload = payload.strip()
+        return payload, charset
+
+    try:
+        payload = payload.decode(charset).strip()
+        return payload, charset
+    except UnicodeError:
+        raw_data = part.get_payload()
+        if isinstance(raw_data, str):
+            return payload, charset
+    except LookupError:
+        raw_data = part.get_payload()
+        if isinstance(raw_data, str):
+            return payload, charset
+        return __detect_charset(payload)
+
+    return None, None
 
 
 def clean_html(raw_html: str):
