@@ -216,3 +216,14 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual('Re: IPCC ch9 for information and check.', header.subject)
         self.assertEqual(1, len(header.reply_to))
         self.assertIn('Valerie.Masson@cea.fr', header.reply_to)
+
+    def test_header_unusual_encoding(self):
+        """
+        Tests for Issue #141
+        :return:
+        """
+        msg = get_binary_email("Resources/HeaderTests/Test Email 5.txt")
+        header = EmailHeader(msg)
+        expected = "'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|" \
+                   "öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†'|öS†@®àblã~Ç-Ë–"
+        self.assertEqual(header.message_id, expected)

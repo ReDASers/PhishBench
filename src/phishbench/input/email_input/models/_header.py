@@ -144,7 +144,7 @@ class EmailHeader:
 
         # Message-Id
         if msg['Message-ID']:
-            self.message_id = msg['Message-ID'].strip('>').strip('<')
+            self.message_id = decode_header_field(msg, 'Message-ID').strip('>').strip('<')
         else:
             self.message_id = None
 
@@ -328,7 +328,7 @@ class EmailHeader:
     def __parse_reply_to(self, msg):
         # Return-Path
         if msg['Return-Path']:
-            self.return_path = msg['Return-Path'].strip('>').strip('<')
+            self.return_path = decode_header_field(msg, 'Return-Path').strip('>').strip('<')
         else:
             self.return_path = None
 
