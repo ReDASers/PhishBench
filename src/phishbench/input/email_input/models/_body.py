@@ -152,7 +152,6 @@ class EmailBody:
             if content_type == 'text/plain':
                 self.__parse_text_part(part)
             elif content_type == 'text/html':
-                self.is_html = True
                 self.__parse_html_part(part)
 
     def __parse_text_part(self, part):
@@ -171,9 +170,9 @@ class EmailBody:
         payload, charset = decode_text_part(part)
         if not payload or len(payload) == 0:
             return
+        self.is_html = True
         if charset:
             self.charset_list.append(charset)
-
         self.raw_html = payload
         self.html = clean_html(payload)
         if not self.text:
