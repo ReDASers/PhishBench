@@ -79,13 +79,13 @@ jobs:
 
     - name: Cleanup
       run: |
-        pwd
-        ls
+        cd "tests/integration tests/url_extraction"
         rm -r Data_Dump
         rm phishbench.log
         rm summary.txt
     
     - name: Run URL 2-Step test
       run: |
+        cd "tests/integration tests/url_extraction"
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
