@@ -8,3 +8,4 @@ from .logistic_regression import LogisticRegression
 from .multinomial_nb import MultinomialNaiveBayes
 from .random_forest import RandomForest
 from .svm import SVM
+from .xgb import XGBoost
