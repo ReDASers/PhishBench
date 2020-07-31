@@ -79,6 +79,8 @@ jobs:
 
     - name: Cleanup
       run: |
+        pwd
+        ls
         rm -r Data_Dump
         rm phishbench.log
         rm summary.txt
