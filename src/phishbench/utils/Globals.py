@@ -22,7 +22,7 @@ def setup_parser():
     parser.add_argument("-c", "--ignore_confirmation", help="does not wait or user's confirmation", action="store_true")
     parser.add_argument("-f", "--config_file", help="The config file to use.", type=str, default='Default_Config.ini')
     args = parser.parse_args()
-    setup_globals(args.config_file)
+    initialize(args.config_file)
 
 
 def setup_logger():
@@ -49,7 +49,7 @@ def setup_logger():
         logger.setLevel(logging.INFO)
 
 
-def setup_globals(config_file):
+def initialize(config_file):
     global args
     global config
     global summary
