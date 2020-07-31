@@ -92,6 +92,14 @@ class TestEmailBody(unittest.TestCase):
             expected = f.read()
         self.assertEqual(body.html, expected)
 
+    def test_empty_html(self):
+        msg = utils.get_binary_email('Resources/BodyTests/empty_html_part.txt')
+        body = EmailBody(msg)
+
+        self.assertIsNone(body.html)
+        self.assertIsNone(body.raw_html)
+        self.assertFalse(body.is_html)
+
     def test_email_body_attachment(self):
         msg = utils.get_binary_email("Resources/BodyTests/test body email 2.txt")
         body = EmailBody(msg)
