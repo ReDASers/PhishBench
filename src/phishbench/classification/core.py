@@ -2,6 +2,7 @@ import os
 from typing import List
 
 import joblib
+from scipy.sparse import issparse
 
 from . import settings as classification_settings
 
@@ -28,7 +29,6 @@ class BaseClassifier:
         -------
             None
         """
-        pass
 
     def fit_weighted(self, x, y):
         print("{} does not support weighted training. Performing regular training.".format(self.name))
@@ -48,7 +48,6 @@ class BaseClassifier:
         dict:
             The best parameters.
         """
-        pass
 
     def predict(self, x):
         """
@@ -119,6 +118,8 @@ def load_classifiers(source, filter_classifiers=True) -> List[type]:
 
 
 def train_classifiers(x_train, y_train, io_dir):
+    if issparse(x_train):
+        x_train = x_train.toarray()
     if not os.path.isdir(io_dir):
         os.makedirs(io_dir)
 

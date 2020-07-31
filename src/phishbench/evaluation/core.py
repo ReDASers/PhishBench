@@ -3,6 +3,8 @@ from enum import Enum, unique
 from functools import wraps
 from typing import List, Callable
 
+from scipy.sparse import issparse
+
 from . import settings
 from ..classification.core import BaseClassifier
 
@@ -15,10 +17,10 @@ class MetricType(Enum):
 
 
 def register_metric(metric_type: MetricType, config_name: str):
-    def wrapped(fn):
-        @wraps(fn)
+    def wrapped(function):
+        @wraps(function)
         def wrapped_f(*args, **kwargs):
-            return fn(*args, **kwargs)
+            return function(*args, **kwargs)
 
         wrapped_f.config_name = config_name
         wrapped_f.metric_type = metric_type
@@ -41,6 +43,8 @@ def load_internal_metrics(filter_metrics=True) -> List[Callable]:
 
 
 def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
+    if issparse(x_test):
+        x_test = x_test.toarray()
     metric_funcs: List[Callable] = load_internal_metrics()
     y_pred = classifier.predict(x_test)
     y_prob = classifier.predict_proba(x_test)
