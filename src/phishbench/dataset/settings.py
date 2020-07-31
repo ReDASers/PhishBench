@@ -1,4 +1,4 @@
-from ..utils import Globals
+from ..utils import phishbench_globals
 
 DATASET_PATH_SECTION = 'Dataset Path'
 
@@ -11,16 +11,16 @@ DEFAULT_SETTINGS = {
 
 
 def train_legit_path():
-    return Globals.config[DATASET_PATH_SECTION]['path_legit_train']
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_legit_train']
 
 
 def train_phish_path():
-    return Globals.config[DATASET_PATH_SECTION]['path_phish_train']
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_phish_train']
 
 
 def test_legit_path():
-    return Globals.config[DATASET_PATH_SECTION]['path_legit_test']
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_legit_test']
 
 
 def test_phish_path():
-    return Globals.config[DATASET_PATH_SECTION]['path_phish_test']
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_phish_test']

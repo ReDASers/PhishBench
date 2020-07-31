@@ -4,7 +4,7 @@ from unittest.mock import patch
 from phishbench import Features
 from tests.mock_objects import mock_objects
 
-@patch('phishbench.utils.Globals.config', new_callable=mock_objects.get_mock_config)
+@patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
 
     def test_HTML_number_of_tags(self, mock_config):

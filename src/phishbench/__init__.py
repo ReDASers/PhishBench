@@ -1,0 +1,1 @@
+from .utils.phishbench_globals import initialize

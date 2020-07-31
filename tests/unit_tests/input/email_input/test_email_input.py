@@ -55,7 +55,7 @@ class TestEmailHeader(unittest.TestCase):
 
         self.assertEqual(1, header.x_priority)
 
-    @patch('phishbench.utils.Globals.logger.debug')
+    @patch('phishbench.utils.phishbench_globals.logger.debug')
     def test_X_priority_error(self, l_mock):
         msg = get_binary_email("Resources/HeaderTests/Test Email 2.txt")
         del msg['X-Priority']

@@ -10,7 +10,7 @@ from typing import List, Union
 
 import chardet
 
-from phishbench.utils import Globals
+from phishbench.utils import phishbench_globals
 from .date_parse import parse_email_datetime
 
 EMAIL_ADDRESS_REGEX = re.compile(r"<.*@[a-zA-Z0-9.\-_]*", flags=re.MULTILINE | re.IGNORECASE)
@@ -175,7 +175,7 @@ class EmailHeader:
             else:
                 self.x_priority = None
         except ValueError as exception:
-            Globals.logger.debug("Exception: %s handled", exception)
+            phishbench_globals.logger.debug("Exception: %s handled", exception)
             self.x_priority = None
 
         # X-mailer
@@ -258,7 +258,7 @@ class EmailHeader:
             else:
                 self.orig_date = None
         except ValueError as exception:
-            Globals.logger.debug("Exception: %s handled", exception)
+            phishbench_globals.logger.debug("Exception: %s handled", exception)
             self.orig_date = None
 
     def __parse_sender(self, msg):

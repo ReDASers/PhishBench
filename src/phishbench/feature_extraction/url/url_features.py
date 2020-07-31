@@ -8,7 +8,7 @@ from phishbench import Features
 from phishbench.Features_Support import Cleaning, read_alexa
 from phishbench.input import input as pb_input
 from phishbench.input.url_input import URLData
-from phishbench.utils import Globals
+from phishbench.utils import phishbench_globals
 from ... import dataset
 
 
@@ -23,9 +23,9 @@ def Extract_Features_Urls_Testing():
                                                       extraction_time_dict_test, bad_url_list)
     num_phish, data_phish_test = extract_url_features(dataset.test_legit_path(), feature_list_dict_test,
                                                       extraction_time_dict_test, bad_url_list)
-    Globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
+    phishbench_globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
     print(">>>>> Cleaning >>>>")
-    Globals.logger.debug("feature_list_dict_test: %d", len(feature_list_dict_test))
+    phishbench_globals.logger.debug("feature_list_dict_test: %d", len(feature_list_dict_test))
     Cleaning(feature_list_dict_test)
     print(">>>>> Cleaning >>>>>> Done")
     print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
@@ -64,15 +64,15 @@ def Extract_Features_Urls_Training():
 
 
 def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
-    download_url_flag = Globals.config['URL_Feature_Types'].getboolean('Network') or \
-                        Globals.config['URL_Feature_Types'].getboolean('HTML')
+    download_url_flag = phishbench_globals.config['URL_Feature_Types'].getboolean('Network') or \
+                        phishbench_globals.config['URL_Feature_Types'].getboolean('HTML')
 
     url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
     bad_url_list.extend(bad_urls)
     alexa_data = {}
-    if Globals.config['URL_Feature_Types'].getboolean("HTML") and \
-            Globals.config["HTML_Features"].getboolean("ranked_matrix"):
-        alexa_path = Globals.config["Support Files"]["path_alexa_data"]
+    if phishbench_globals.config['URL_Feature_Types'].getboolean("HTML") and \
+            phishbench_globals.config["HTML_Features"].getboolean("ranked_matrix"):
+        alexa_path = phishbench_globals.config["Support Files"]["path_alexa_data"]
         alexa_data = read_alexa(alexa_path)
 
     corpus = []
@@ -91,9 +91,9 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         #     os.makedirs("Data_Dump/URLs_Backup")
         # dump_features(url, feature_values, extraction_times, feature_dump_path)
         for feature, extraction_time in extraction_times.items():
-            Globals.summary.write("{} \n".format(feature))
-            Globals.summary.write("extraction time: {} \n".format(extraction_time))
-        Globals.summary.write("\n#######\n")
+            phishbench_globals.summary.write("{} \n".format(feature))
+            phishbench_globals.summary.write("extraction time: {} \n".format(extraction_time))
+        phishbench_globals.summary.write("\n#######\n")
 
     return len(feature_list_dict) - count_files, corpus
 
@@ -102,30 +102,30 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
     dict_feature_values = {}
     dict_extraction_times = {}
     try:
-        Globals.logger.debug("rawurl: %s", str(url))
-        Globals.summary.write("URL: {}".format(url))
+        phishbench_globals.logger.debug("rawurl: %s", str(url))
+        phishbench_globals.summary.write("URL: {}".format(url))
 
-        feature_types = Globals.config['URL_Feature_Types']
+        feature_types = phishbench_globals.config['URL_Feature_Types']
         if feature_types.getboolean('URL'):
             single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
-            Globals.logger.debug("url_features >>>>>> complete")
+            phishbench_globals.logger.debug("url_features >>>>>> complete")
         if feature_types.getboolean("Network"):
             single_network_features(url, dict_feature_values, dict_extraction_times)
-            Globals.logger.debug("network_features >>>>>> complete")
+            phishbench_globals.logger.debug("network_features >>>>>> complete")
         if feature_types.getboolean("HTML"):
             single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
-            Globals.logger.debug("html_features >>>>>> complete")
+            phishbench_globals.logger.debug("html_features >>>>>> complete")
             downloaded_website = url.downloaded_website
             soup = BeautifulSoup(downloaded_website.html, 'html5lib')
             if feature_types.getboolean("JavaScript"):
                 single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
-                Globals.logger.debug("javascript features >>>>>> complete")
+                phishbench_globals.logger.debug("javascript features >>>>>> complete")
             corpus.append(str(soup))
 
     except Exception as e:
-        Globals.logger.warning(traceback.format_exc())
-        Globals.logger.exception(e)
-        Globals.logger.warning(
+        phishbench_globals.logger.warning(traceback.format_exc())
+        phishbench_globals.logger.exception(e)
+        phishbench_globals.logger.warning(
             "This URL has trouble being extracted and "
             "will not be considered for further processing: %s", str(url))
         list_bad_urls.append(str(url))
@@ -133,12 +133,12 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
 
 
 def dump_features(url, feature_values, extraction_times, features_output_folder):
-    Globals.logger.debug("list_features: %d", len(feature_values))
+    phishbench_globals.logger.debug("list_features: %d", len(feature_values))
     raw_url = url.raw_url
     with open(features_output_folder + "_feature_vector.pkl", 'ab') as feature_tracking:
         pickle.dump("URL: " + raw_url, feature_tracking)
         pickle.dump(feature_values, feature_tracking)
-    if Globals.config['HTML_Features'].getboolean('HTML_features'):
+    if phishbench_globals.config['HTML_Features'].getboolean('HTML_features'):
         with open(features_output_folder + "_html_content.pkl", 'ab') as feature_tracking:
             pickle.dump("URL: " + raw_url, feature_tracking)
             html = url.downloaded_website.html
@@ -154,7 +154,7 @@ def dump_features(url, feature_values, extraction_times, features_output_folder)
 
 
 def single_url_feature(raw_url, list_features, list_time):
-    Globals.logger.debug("Extracting single url features from %s", raw_url)
+    phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
 
     Features.URL_url_length(raw_url, list_features, list_time)
 
@@ -228,7 +228,7 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
     downloaded_website = url.downloaded_website
     soup = BeautifulSoup(downloaded_website.html, 'html5lib')
 
-    Globals.logger.debug("Extracting single html features from %s", raw_url)
+    phishbench_globals.logger.debug("Extracting single html features from %s", raw_url)
 
     Features.HTML_ranked_matrix(soup, raw_url, alexa_data, list_features, list_time)
 
@@ -294,7 +294,7 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
-    Globals.logger.debug("Extracting single javascript features")
+    phishbench_globals.logger.debug("Extracting single javascript features")
 
     Features.Javascript_number_of_exec(soup, list_features, list_time)
 
@@ -320,7 +320,7 @@ def single_javascript_features(soup, html, list_features, list_time):
 
 
 def single_network_features(url, list_features, list_time):
-    Globals.logger.debug("Extracting network features from %s", url)
+    phishbench_globals.logger.debug("Extracting network features from %s", url)
     Features.Network_creation_date(url.domain_whois, list_features, list_time)
 
     Features.Network_expiration_date(url.domain_whois, list_features, list_time)
