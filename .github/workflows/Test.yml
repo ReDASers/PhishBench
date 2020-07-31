@@ -38,7 +38,7 @@ jobs:
     - name: Test with Nose
       run: nosetests --with-coverage --cover-package phishbench
   
-  Integration-Test-A:
+  Integration-Tests:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -50,6 +50,7 @@ jobs:
       run: |
         sudo apt-get install whois
       if: runner.os == 'Linux'
+
     - name: Test whois
       run: |
         whois google.com
@@ -70,47 +71,21 @@ jobs:
     - name: Install phishbench
       run: | 
         pip install .
+
+    - name: Run URL 1-Step test
+      run: |
+        cd "tests/integration tests/url_extraction"
+        phishbench -f Test_B_1.ini -c
+
+    - name: Cleanup
+      run: |
+        cd "tests/integration tests/url_extraction"
+        rm -r Data_Dump
+        rm phishbench.log
+        rm summary.txt
     
     - name: Run URL 2-Step test
       run: |
         cd "tests/integration tests/url_extraction"
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
-
-  Integration-Test-B:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # os: [windows-latest, ubuntu-latest]
-        os: [Windows, Linux]
-      fail-fast: false
-    steps:
-    - name: Install whois
-      run: |
-        sudo apt-get install whois
-      if: runner.os == 'Linux'
-    - name: Test whois
-      run: |
-        whois google.com
-      if: runner.os == 'Linux'
-    
-    - uses: actions/checkout@v2
-    
-    # - name: Set up Python 3.7
-    #   uses: actions/setup-python@v1
-    #   with:
-    #     python-version: 3.7
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        
-    - name: Install phishbench
-      run: | 
-        pip install .
-    
-    - name: Run URL 1-Step test
-      run: |
-        cd "tests/integration tests/url_extraction"
-        phishbench -f Test_B_1.ini -c
