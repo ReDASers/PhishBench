@@ -1,12 +1,11 @@
 import math
 import os
 
-import joblib
 import numpy as np
 import sklearn
-from sklearn.svm import LinearSVC
 from sklearn.feature_selection import RFE
 from sklearn.feature_selection import chi2
+from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
 
 from .utils import phishbench_globals
@@ -14,7 +13,7 @@ from .utils import phishbench_globals
 
 def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf=None):
     print('Feature Ranking Started')
-    
+
     num_features = min(num_features, features.shape[1])
     feature_ranking_folder = os.path.join(phishbench_globals.args.output_input_dir, 'Feature_Ranking')
     if not os.path.exists(feature_ranking_folder):
@@ -42,7 +41,7 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
     # Information Gain
     elif phishbench_globals.config["Feature Selection"]["Information Gain"] == "True":
         selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='entropy'),
-                                                          threshold=-np.inf, max_features=num_features)
+                                                                    threshold=-np.inf, max_features=num_features)
         selection_model.fit(features, target)
         # dump Feature Selection in a file
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
@@ -50,8 +49,9 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
 
     # Gini
     elif phishbench_globals.config["Feature Selection"]["Gini"] == "True":
-        selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'), threshold=-np.inf,
-                                                          max_features=num_features)
+        selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'),
+                                                                    threshold=-np.inf,
+                                                                    max_features=num_features)
         selection_model.fit(features, target)
         res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
         report_name = "Feature_ranking_Gini.txt"
