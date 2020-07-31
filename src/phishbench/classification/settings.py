@@ -1,4 +1,4 @@
-from ..utils import Globals
+from ..utils import globals
 
 CLASSIFICATION_SECTION = 'Classification'
 CLASSIFIERS_SECTION = 'Classifiers'
@@ -14,27 +14,27 @@ DEFAULT_SETTINGS = {
 
 
 def load_models():
-    return Globals.config[CLASSIFICATION_SECTION].getboolean("load models")
+    return globals.config[CLASSIFICATION_SECTION].getboolean("load models")
 
 
 def save_models():
-    return Globals.config[CLASSIFICATION_SECTION].getboolean("save models")
+    return globals.config[CLASSIFICATION_SECTION].getboolean("save models")
 
 
 def run_classifiers():
-    return Globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
+    return globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
 
 
 def param_search():
-    return Globals.config[CLASSIFICATION_SECTION].getboolean("param search")
+    return globals.config[CLASSIFICATION_SECTION].getboolean("param search")
 
 
 def weighted_training():
-    return Globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
+    return globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
 
 
 def is_enabled(classifier: type):
-    return Globals.config[CLASSIFIERS_SECTION].getboolean(classifier.__name__)
+    return globals.config[CLASSIFIERS_SECTION].getboolean(classifier.__name__)
 
 # def num_rounds() -> int:
 #     return int(Globals.config[CLASSIFICATION_SECTION]["Rounds"])

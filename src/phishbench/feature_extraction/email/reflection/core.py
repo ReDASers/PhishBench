@@ -5,7 +5,7 @@ from functools import wraps
 from typing import List, Callable
 
 from .. import settings
-from ....utils import Globals
+from ....utils import globals
 
 
 @unique
@@ -39,9 +39,9 @@ def load_internal_features(filter_features=True) -> List[Callable]:
 
 def _check_feature(feature: Callable) -> bool:
     feature_type: FeatureType = feature.feature_type
-    if feature_type.value not in Globals.config:
+    if feature_type.value not in globals.config:
         return False
-    return Globals.config[feature_type.value].getboolean(feature.config_name)
+    return globals.config[feature_type.value].getboolean(feature.config_name)
 
 
 def load_features(source, filter_features=True) -> List[Callable]:

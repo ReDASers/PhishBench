@@ -8,17 +8,17 @@ from lxml import html as lxml_html
 
 from . import Tfidf
 from .Features_Support import *
-from .utils import Globals
+from .utils import globals
 
 
 ##### Email URL features
 def Email_Number_Url(url_All, list_features, list_time):
-    if Globals.config["Email_URL_Features"]["Number_Url"] == "True":
+    if globals.config["Email_URL_Features"]["Number_Url"] == "True":
         start = time.time()
         try:
             list_features["Number_Url"] = len(url_All)
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             list_features["Number_Url"] = -1
         end = time.time()
         ex_time = end - start
@@ -26,7 +26,7 @@ def Email_Number_Url(url_All, list_features, list_time):
 
 
 def Email_URL_Number_Diff_Domain(url_All, list_features, list_time):
-    if Globals.config["Email_URL_Features"]["Number_Diff_Domain"] == "True":
+    if globals.config["Email_URL_Features"]["Number_Diff_Domain"] == "True":
         start = time.time()
         list_Domains = []
         try:
@@ -38,7 +38,7 @@ def Email_URL_Number_Diff_Domain(url_All, list_features, list_time):
                 #    list_Domains.append(domain)
             list_features["Number_Diff_Domain"] = len(set(list_Domains))
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             list_features["Number_Diff_Domain"] = -1
         end = time.time()
         ex_time = end - start
@@ -46,7 +46,7 @@ def Email_URL_Number_Diff_Domain(url_All, list_features, list_time):
 
 
 def Email_URL_Number_Diff_Subdomain(url_All, list_features, list_time):
-    if Globals.config["Email_URL_Features"]["Number_Diff_Subdomain"] == "True":
+    if globals.config["Email_URL_Features"]["Number_Diff_Subdomain"] == "True":
         start = time.time()
         list_Subdomains = []
         try:
@@ -59,7 +59,7 @@ def Email_URL_Number_Diff_Subdomain(url_All, list_features, list_time):
                 #    list_Domains.append(domain)
             list_features["Number_Diff_Subdomain"] = len(set(list_Subdomains))
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             list_features["Number_Diff_Subdomain"] = -1
         end = time.time()
         ex_time = end - start
@@ -67,7 +67,7 @@ def Email_URL_Number_Diff_Subdomain(url_All, list_features, list_time):
 
 
 def Email_URL_Number_link_at(url_All, list_features, list_time):
-    if Globals.config["Email_URL_Features"]["Number_link_at"] == "True":
+    if globals.config["Email_URL_Features"]["Number_link_at"] == "True":
         start = time.time()
         count = 0
         try:
@@ -76,7 +76,7 @@ def Email_URL_Number_link_at(url_All, list_features, list_time):
                     count += 1
                     list_features["Number_link_at"] = count
         except Exception  as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             list_features["Number_link_at"] = -1
         end = time.time()
         ex_time = end - start
@@ -84,7 +84,7 @@ def Email_URL_Number_link_at(url_All, list_features, list_time):
 
 
 def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
-    if Globals.config["Email_URL_Features"]["Number_link_sec_port"] == "True":
+    if globals.config["Email_URL_Features"]["Number_link_sec_port"] == "True":
         start = time.time()
         count = 0
         try:
@@ -93,7 +93,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
                     count += 1
                     list_features["Number_link_sec_port"] = count
         except Exception  as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             list_features["Number_link_sec_port"] = -1
         end = time.time()
         ex_time = end - start
@@ -136,7 +136,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
 
 # START - ranked_matrix
 def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
-    if Globals.config["HTML_Features"]["ranked_matrix"] == "True":
+    if globals.config["HTML_Features"]["ranked_matrix"] == "True":
         start = time.time()
         domain = url.split("//")[-1].split("/")[0]
         mean_and_sd = [0, 0]
@@ -157,12 +157,12 @@ def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
                 # extract features: size, mean, standard deviation
                 mean_and_sd = extract_features_ranked_matrix(all_redirectable_links, alexa_data, domain)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 # make all values to -1
                 mean_and_sd = [-1, -1]
         else:
             # make all values to 0
-            Globals.logger.warning("empty soup")
+            globals.logger.warning("empty soup")
         print(mean_and_sd)
         list_features["ranked_matrix_mean"] = mean_and_sd[0]
         list_features["ranked_matrix_sd"] = mean_and_sd[1]
@@ -211,7 +211,7 @@ def get_rank(domain, alexa_data):
 
 # START - LTree features
 def HTML_LTree_Features(soup, url, list_features, list_time):
-    if Globals.config["HTML_Features"]["LTree_Features"] == "True":
+    if globals.config["HTML_Features"]["LTree_Features"] == "True":
         start = time.time()
         domain = url.split("//")[-1].split("/")[0]
         link_features = img_features = video_features = a_features = meta_features = script_features = [[0, 0, 0],
@@ -237,13 +237,13 @@ def HTML_LTree_Features(soup, url, list_features, list_time):
                 meta_features = extract_tree_features(meta_link, domain)
                 script_features = extract_tree_features(script_link, domain)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 # make all values to -1
                 link_features = img_features = video_features = a_features = meta_features = script_features \
                     = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
         else:
             # make all values to 0
-            Globals.logger.warning("empty soup")
+            globals.logger.warning("empty soup")
         add_features(list_features, link_features, 'link')
         add_features(list_features, img_features, 'img')
         add_features(list_features, video_features, 'video')
@@ -320,7 +320,7 @@ def add_features(list_features, features, tag):
 # END LTree features
 
 def HTML_number_of_tags(soup, list_features, list_time):
-    if Globals.config["HTML_Features"]["number_of_tags"] == "True":
+    if globals.config["HTML_Features"]["number_of_tags"] == "True":
         start = time.time()
         number_of_tags = 0
         if soup:
@@ -328,7 +328,7 @@ def HTML_number_of_tags(soup, list_features, list_time):
                 all_tags = soup.find_all()
                 number_of_tags = len(all_tags)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_tags = -1
         else:
             number_of_tags = 0
@@ -340,14 +340,14 @@ def HTML_number_of_tags(soup, list_features, list_time):
 
 def HTML_number_of_head(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_head"] == "True":
+    if globals.config["HTML_Features"]["number_of_head"] == "True":
         start = time.time()
         number_of_head = 0
         if soup:
             try:
                 number_of_head = len(soup.find_all('head'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_head = -1
         list_features["number_of_head"] = number_of_head
         end = time.time()
@@ -357,14 +357,14 @@ def HTML_number_of_head(soup, list_features, list_time):
 
 def HTML_number_of_html(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_html"] == "True":
+    if globals.config["HTML_Features"]["number_of_html"] == "True":
         start = time.time()
         number_of_html = 0
         if soup:
             try:
                 number_of_html = len(soup.find_all('html'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_html = -1
         list_features["number_of_html"] = number_of_html
         end = time.time()
@@ -374,14 +374,14 @@ def HTML_number_of_html(soup, list_features, list_time):
 
 def HTML_number_of_body(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_body"] == "True":
+    if globals.config["HTML_Features"]["number_of_body"] == "True":
         start = time.time()
         number_of_body = 0
         if soup:
             try:
                 number_of_body = len(soup.find_all('body'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_body = -1
         list_features["number_of_body"] = number_of_body
         end = time.time()
@@ -391,14 +391,14 @@ def HTML_number_of_body(soup, list_features, list_time):
 
 def HTML_number_of_titles(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_titles"] == "True":
+    if globals.config["HTML_Features"]["number_of_titles"] == "True":
         start = time.time()
         number_of_titles = 0
         if soup:
             try:
                 number_of_titles = len(soup.find_all('title'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_titles = -1
         list_features["number_of_titles"] = number_of_titles
         end = time.time()
@@ -408,7 +408,7 @@ def HTML_number_of_titles(soup, list_features, list_time):
 
 def HTML_number_suspicious_content(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_suspicious_content"] == "True":
+    if globals.config["HTML_Features"]["number_suspicious_content"] == "True":
         start = time.time()
         all_tags = soup.find_all()
         number_suspicious_content = 0
@@ -419,7 +419,7 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
                     if len(str_tag) > 128 and (str_tag.count(' ') / len(str_tag) < 0.05):
                         number_suspicious_content = number_suspicious_content + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_suspicious_content = -1
         list_features["number_suspicious_content"] = number_suspicious_content
         end = time.time()
@@ -429,7 +429,7 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
 
 def HTML_number_of_iframes(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_iframes"] == "True":
+    if globals.config["HTML_Features"]["number_of_iframes"] == "True":
         start = time.time()
         number_of_iframes = 0
         if soup:
@@ -437,7 +437,7 @@ def HTML_number_of_iframes(soup, list_features, list_time):
                 iframe_tags = soup.find_all('iframe')
                 number_of_iframes = len(iframe_tags)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_iframes = -1
         list_features["number_of_iframes"] = number_of_iframes
         end = time.time()
@@ -447,14 +447,14 @@ def HTML_number_of_iframes(soup, list_features, list_time):
 
 def HTML_number_of_input(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_input"] == "True":
+    if globals.config["HTML_Features"]["number_of_input"] == "True":
         start = time.time()
         number_of_input = 0
         if soup:
             try:
                 number_of_input = len(soup.find_all('input'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_input = -1
         list_features["number_of_input"] = number_of_input
         end = time.time()
@@ -464,14 +464,14 @@ def HTML_number_of_input(soup, list_features, list_time):
 
 def HTML_number_of_img(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_img"] == "True":
+    if globals.config["HTML_Features"]["number_of_img"] == "True":
         start = time.time()
         number_of_img = 0
         if soup:
             try:
                 number_of_img = len(soup.find_all('img'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_img = -1
         list_features["number_of_img"] = number_of_img
         end = time.time()
@@ -481,14 +481,14 @@ def HTML_number_of_img(soup, list_features, list_time):
 
 def HTML_number_of_scripts(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_scripts"] == "True":
+    if globals.config["HTML_Features"]["number_of_scripts"] == "True":
         start = time.time()
         number_of_scripts = 0
         if soup:
             try:
                 number_of_scripts = len(soup.find_all('script'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_scripts = -1
         list_features["number_of_scripts"] = number_of_scripts
         end = time.time()
@@ -498,14 +498,14 @@ def HTML_number_of_scripts(soup, list_features, list_time):
 
 def HTML_number_of_anchor(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_anchor"] == "True":
+    if globals.config["HTML_Features"]["number_of_anchor"] == "True":
         start = time.time()
         number_of_anchor = 0
         if soup:
             try:
                 number_of_anchor = len(soup.find_all('a'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_anchor = -1
         list_features["number_of_anchor"] = number_of_anchor
         end = time.time()
@@ -515,14 +515,14 @@ def HTML_number_of_anchor(soup, list_features, list_time):
 
 def HTML_number_of_embed(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_embed"] == "True":
+    if globals.config["HTML_Features"]["number_of_embed"] == "True":
         start = time.time()
         number_of_embed = 0
         if soup:
             try:
                 number_of_embed = len(soup.find_all('embed'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_embed = -1
         list_features["number_of_embed"] = number_of_embed
         end = time.time()
@@ -532,14 +532,14 @@ def HTML_number_of_embed(soup, list_features, list_time):
 
 def HTML_number_object_tags(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_object_tags"] == "True":
+    if globals.config["HTML_Features"]["number_object_tags"] == "True":
         start = time.time()
         number_object_tags = 0
         if soup:
             try:
                 object_tags = len(soup.find_all('object'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_object_tags = -1
         list_features["number_object_tags"] = number_object_tags
         end = time.time()
@@ -549,14 +549,14 @@ def HTML_number_object_tags(soup, list_features, list_time):
 
 def HTML_number_of_video(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_video"] == "True":
+    if globals.config["HTML_Features"]["number_of_video"] == "True":
         start = time.time()
         number_of_video = 0
         if soup:
             try:
                 number_of_video = len(soup.find_all('video'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_video = -1
         list_features["number_of_video"] = number_of_video
         end = time.time()
@@ -566,14 +566,14 @@ def HTML_number_of_video(soup, list_features, list_time):
 
 def HTML_number_of_audio(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_audio"] == "True":
+    if globals.config["HTML_Features"]["number_of_audio"] == "True":
         start = time.time()
         number_of_audio = 0
         if soup:
             try:
                 number_of_audio = len(soup.find_all('audio'))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_audio = -1
         list_features["number_of_audio"] = number_of_audio
         end = time.time()
@@ -583,7 +583,7 @@ def HTML_number_of_audio(soup, list_features, list_time):
 
 def HTML_number_of_hidden_input(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_hidden_input"] == "True":
+    if globals.config["HTML_Features"]["number_of_hidden_input"] == "True":
         start = time.time()
         number_of_hidden_input = 0
         if soup:
@@ -593,7 +593,7 @@ def HTML_number_of_hidden_input(soup, list_features, list_time):
                     if tag.get('type') == "hidden":
                         number_of_hidden_input += 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_hidden_input = -1
         list_features["number_of_hidden_input"] = number_of_hidden_input
         end = time.time()
@@ -603,7 +603,7 @@ def HTML_number_of_hidden_input(soup, list_features, list_time):
 
 def HTML_number_of_hidden_svg(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_hidden_svg"] == "True":
+    if globals.config["HTML_Features"]["number_of_hidden_svg"] == "True":
         start = time.time()
         number_of_hidden_svg = 0
         if soup:
@@ -613,7 +613,7 @@ def HTML_number_of_hidden_svg(soup, list_features, list_time):
                     if tag.get('aria-hidden') == "true":
                         number_of_hidden_svg += 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_hidden_input = -1
         list_features["number_of_hidden_svg"] = number_of_hidden_svg
         end = time.time()
@@ -623,7 +623,7 @@ def HTML_number_of_hidden_svg(soup, list_features, list_time):
 
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
+    if globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
         start = time.time()
         number_of_hidden_iframe = 0
         if soup:
@@ -633,7 +633,7 @@ def HTML_number_of_hidden_iframe(soup, list_features, list_time):
                     if tag.get('height') == 0 or tag.get('width') == 0:
                         number_of_hidden_iframe = number_of_hidden_iframe + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_hidden_iframe = -1
         list_features["number_of_hidden_iframe"] = number_of_hidden_iframe
         end = time.time()
@@ -643,7 +643,7 @@ def HTML_number_of_hidden_iframe(soup, list_features, list_time):
 
 def HTML_number_of_hidden_div(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_hidden_div"] == "True":
+    if globals.config["HTML_Features"]["number_of_hidden_div"] == "True":
         start = time.time()
         number_of_hidden_div = 0
         if soup:
@@ -653,7 +653,7 @@ def HTML_number_of_hidden_div(soup, list_features, list_time):
                     if tag.get('height') == 0 or tag.get('width') == 0:
                         number_of_hidden_div = number_of_hidden_div + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_hidden_div = -1
         list_features["number_of_hidden_div"] = number_of_hidden_div
         end = time.time()
@@ -663,7 +663,7 @@ def HTML_number_of_hidden_div(soup, list_features, list_time):
 
 def HTML_number_of_hidden_object(soup, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["number_of_hidden_object"] == "True":
+    if globals.config["HTML_Features"]["number_of_hidden_object"] == "True":
         start = time.time()
         number_of_hidden_object = 0
         if soup:
@@ -673,7 +673,7 @@ def HTML_number_of_hidden_object(soup, list_features, list_time):
                     if tag.get('height') == 0 or tag.get('width') == 0:
                         number_of_hidden_object = number_of_hidden_object + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_hidden_object = -1
         list_features["number_of_hidden_object"] = number_of_hidden_object
         end = time.time()
@@ -683,7 +683,7 @@ def HTML_number_of_hidden_object(soup, list_features, list_time):
 
 def HTML_inbound_count(soup, url, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["inbound_count"] == "True":
+    if globals.config["HTML_Features"]["inbound_count"] == "True":
         start = time.time()
         inbound_count = 0
         if soup:
@@ -707,7 +707,7 @@ def HTML_inbound_count(soup, url, list_features, list_time):
                         else:
                             inbound_count = inbound_count + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 inbound_count = -1
         list_features["inbound_count"] = inbound_count
         end = time.time()
@@ -717,7 +717,7 @@ def HTML_inbound_count(soup, url, list_features, list_time):
 
 def HTML_outbound_count(soup, url, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["outbound_count"] == "True":
+    if globals.config["HTML_Features"]["outbound_count"] == "True":
         start = time.time()
         outbound_count = 0
         if soup:
@@ -739,7 +739,7 @@ def HTML_outbound_count(soup, url, list_features, list_time):
                             if filtered_link != local_domain:
                                 outbound_count = outbound_count + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 outbound_count = -1
         list_features["outbound_count"] = outbound_count
         end = time.time()
@@ -749,7 +749,7 @@ def HTML_outbound_count(soup, url, list_features, list_time):
 
 def HTML_inbound_href_count(soup, url, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["inbound_href_count"] == "True":
+    if globals.config["HTML_Features"]["inbound_href_count"] == "True":
         start = time.time()
         inbound_href_count = 0
         if soup:
@@ -773,7 +773,7 @@ def HTML_inbound_href_count(soup, url, list_features, list_time):
                         else:
                             inbound_href_count = inbound_href_count + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 inbound_href_count = -1
         list_features["inbound_href_count"] = inbound_href_count
         end = time.time()
@@ -783,7 +783,7 @@ def HTML_inbound_href_count(soup, url, list_features, list_time):
 
 def HTML_outbound_href_count(soup, url, list_features, list_time):
     # global list_features
-    if Globals.config["HTML_Features"]["outbound_href_count"] == "True":
+    if globals.config["HTML_Features"]["outbound_href_count"] == "True":
         start = time.time()
         outbound_href_count = 0
         if soup:
@@ -805,7 +805,7 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
                             if filtered_link != local_domain:
                                 outbound_href_count = outbound_href_count + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 outbound_href_count = -1
         list_features["outbound_href_count"] = outbound_href_count
         end = time.time()
@@ -814,7 +814,7 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
 
 
 def HTML_Website_content_type(html, list_features, list_time):
-    if Globals.config["HTML_Features"]["website_content_type"] == "True":
+    if globals.config["HTML_Features"]["website_content_type"] == "True":
         start = time.time()
         if html:
             try:
@@ -823,7 +823,7 @@ def HTML_Website_content_type(html, list_features, list_time):
                 else:
                     content_type = 'text/html'
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 content_type = "N/A"
         else:
             content_type = ''
@@ -834,7 +834,7 @@ def HTML_Website_content_type(html, list_features, list_time):
 
 
 def HTML_content_length(html, list_features, list_time):
-    if Globals.config["HTML_Features"]["content_length"] == "True":
+    if globals.config["HTML_Features"]["content_length"] == "True":
         start = time.time()
         content_length = 0
         if html:
@@ -842,7 +842,7 @@ def HTML_content_length(html, list_features, list_time):
                 if 'Content-Length' in html.headers:
                     content_length = html.headers['Content-Length']
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 content_length = -1
         list_features["content_length"] = int(content_length)
         end = time.time()
@@ -851,7 +851,7 @@ def HTML_content_length(html, list_features, list_time):
 
 
 def HTML_x_powered_by(html, list_features, list_time):
-    if Globals.config["HTML_Features"]["x_powered_by"] == "True":
+    if globals.config["HTML_Features"]["x_powered_by"] == "True":
         start = time.time()
         x_powered_by = ''
         if html:
@@ -860,7 +860,7 @@ def HTML_x_powered_by(html, list_features, list_time):
                     # x_powered_by = html.headers['X-Powered-By']
                     x_powered_by = html.headers["X-Powered-By"]
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 x_powered_by = "N/A"
         list_features["x_powered_by"] = x_powered_by
         end = time.time()
@@ -869,7 +869,7 @@ def HTML_x_powered_by(html, list_features, list_time):
 
 
 def HTML_URL_Is_Redirect(html, url, list_features, list_time):
-    if Globals.config["HTML_Features"]["URL_Is_Redirect"] == "True":
+    if globals.config["HTML_Features"]["URL_Is_Redirect"] == "True":
         start = time.time()
         flag = 0
         if html:
@@ -877,7 +877,7 @@ def HTML_URL_Is_Redirect(html, url, list_features, list_time):
                 if url != html.final_url:
                     flag = 1
             except Exception as e:
-                Globals.logger.warning("Exception: {}".format(e))
+                globals.logger.warning("Exception: {}".format(e))
                 flag = -1
         list_features["URL_Is_Redirect"] = flag
         end = time.time()
@@ -886,7 +886,7 @@ def HTML_URL_Is_Redirect(html, url, list_features, list_time):
 
 
 def HTML_Is_Login(html, url, list_features, list_time):
-    if Globals.config["HTML_Features"]["Is_Login"] == "True":
+    if globals.config["HTML_Features"]["Is_Login"] == "True":
         start = time.time()
         userfield = passfield = emailfield = None
         _is_login = False
@@ -917,14 +917,14 @@ def HTML_Is_Login(html, url, list_features, list_time):
 ############################ URL features
 def URL_url_length(url, list_features, list_time):
     ##global list_features
-    if Globals.config["URL_Features"]["url_length"] == "True":
+    if globals.config["URL_Features"]["url_length"] == "True":
         start = time.time()
         url_length = 0
         if url:
             try:
                 url_length = len(url)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 url_length = -1
         list_features["url_length"] = url_length
         end = time.time()
@@ -934,7 +934,7 @@ def URL_url_length(url, list_features, list_time):
 
 def URL_domain_length(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["domain_length"] == "True":
+    if globals.config["URL_Features"]["domain_length"] == "True":
         start = time.time()
         domain_length = 0
         if url:
@@ -943,7 +943,7 @@ def URL_domain_length(url, list_features, list_time):
                 domain = parsed_url.hostname
                 domain_length = len(domain)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 domain_length = -1
         list_features["domain_length"] = domain_length
         end = time.time()
@@ -954,7 +954,7 @@ def URL_domain_length(url, list_features, list_time):
 ##################################################################################
 def URL_letter_occurrence(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["letter_occurrence"] == "True":
+    if globals.config["URL_Features"]["letter_occurrence"] == "True":
         start = time.time()
         if url:
             ####
@@ -962,7 +962,7 @@ def URL_letter_occurrence(url, list_features, list_time):
                 parsed_url = urlparse(url)
                 domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url).lower()
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 for x in range(26):
                     list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
             ####
@@ -970,7 +970,7 @@ def URL_letter_occurrence(url, list_features, list_time):
                 try:
                     list_features["letter_occurrence_" + chr(x + ord('a'))] = domain.count(chr(x + ord('a')))
                 except Exception as e:
-                    Globals.logger.warning("exception: " + str(e))
+                    globals.logger.warning("exception: " + str(e))
                     list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
         else:
             for x in range(26):
@@ -985,7 +985,7 @@ def URL_letter_occurrence(url, list_features, list_time):
 ##################################################################################
 
 def URL_char_distance(url: str, list_features, list_time):
-    if Globals.config["URL_Features"]["char_distance"] == "True":
+    if globals.config["URL_Features"]["char_distance"] == "True":
         start = time.time()
         if url:
             url = url.lower()
@@ -995,7 +995,7 @@ def URL_char_distance(url: str, list_features, list_time):
                     url_char_dist = (url.count(x) / num_letters)
                     list_features["url_char_distance_" + x] = url_char_dist
                 except Exception as e:
-                    Globals.logger.warning("exception: " + str(e))
+                    globals.logger.warning("exception: " + str(e))
                     list_features["url_char_distance_" + x] = -1
         else:
             for x in string.ascii_lowercase:
@@ -1007,7 +1007,7 @@ def URL_char_distance(url: str, list_features, list_time):
 
 ##################################################################################
 def URL_kolmogorov_shmirnov(url, list_features, list_time):
-    if Globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
+    if globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1019,7 +1019,7 @@ def URL_kolmogorov_shmirnov(url, list_features, list_time):
             url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
             ks = stats.ks_2samp(url_char_distance, char_dist)
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             ks = -1
         if ks == -1:
             list_features["kolmogorov_shmirnov"] = ks
@@ -1031,7 +1031,7 @@ def URL_kolmogorov_shmirnov(url, list_features, list_time):
 
 
 def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
+    if globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1042,9 +1042,9 @@ def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
             url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
             kl = stats.entropy(url_char_distance, char_dist)
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             kl = -1
-        Globals.logger.debug("KL: >>>> {}".format(kl))
+        globals.logger.debug("KL: >>>> {}".format(kl))
         list_features["Kullback_Leibler_Divergence"] = kl
         end = time.time()
         ex_time = end - start
@@ -1053,7 +1053,7 @@ def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
 
 def URL_english_frequency_distance(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["english_frequency_distance"] == "True":
+    if globals.config["URL_Features"]["english_frequency_distance"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1067,7 +1067,7 @@ def URL_english_frequency_distance(url, list_features, list_time):
             url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
             ed = distance.euclidean(url_char_distance, char_dist)
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             ed = -1
         list_features["edit_distance"] = ed
         end = time.time()
@@ -1077,7 +1077,7 @@ def URL_english_frequency_distance(url, list_features, list_time):
 
 def URL_num_punctuation(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["num_punctuation"] == "True":
+    if globals.config["URL_Features"]["num_punctuation"] == "True":
         start = time.time()
         num_punct = 0
         if url:
@@ -1085,7 +1085,7 @@ def URL_num_punctuation(url, list_features, list_time):
                 count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
                 num_punct = count(url, string.punctuation)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 num_punct = -1
         list_features["num_punctuation"] = num_punct
         end = time.time()
@@ -1095,7 +1095,7 @@ def URL_num_punctuation(url, list_features, list_time):
 
 def URL_has_port(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["has_port"] == "True":
+    if globals.config["URL_Features"]["has_port"] == "True":
         start = time.time()
         has_port = 0
         if url:
@@ -1106,7 +1106,7 @@ def URL_has_port(url, list_features, list_time):
                 if port_number == 'None':
                     has_port = 0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 has_port = -1
         list_features["has_port"] = has_port
         end = time.time()
@@ -1116,7 +1116,7 @@ def URL_has_port(url, list_features, list_time):
 
 def URL_has_https(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["has_https"] == "True":
+    if globals.config["URL_Features"]["has_https"] == "True":
         start = time.time()
         has_https = 0
         if url:
@@ -1127,7 +1127,7 @@ def URL_has_https(url, list_features, list_time):
                 if domain.startswith("https:"):
                     has_https = 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 has_https = -1
         list_features["has_https"] = has_https
         end = time.time()
@@ -1137,14 +1137,14 @@ def URL_has_https(url, list_features, list_time):
 
 def URL_number_of_digits(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["number_of_digits"] == "True":
+    if globals.config["URL_Features"]["number_of_digits"] == "True":
         number_of_digits = 0
         start = time.time()
         if url:
             try:
                 number_of_digits = sum(c.isdigit() for c in url)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_digits = -1
         list_features["number_of_digits"] = number_of_digits
         end = time.time()
@@ -1154,14 +1154,14 @@ def URL_number_of_digits(url, list_features, list_time):
 
 def URL_number_of_dots(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["number_of_dots"] == "True":
+    if globals.config["URL_Features"]["number_of_dots"] == "True":
         start = time.time()
         number_of_dots = 0
         if url:
             try:
                 number_of_dots = url.count('.')
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_dots = -1
         list_features["number_of_dots"] = number_of_dots
         end = time.time()
@@ -1171,14 +1171,14 @@ def URL_number_of_dots(url, list_features, list_time):
 
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["number_of_slashes"] == "True":
+    if globals.config["URL_Features"]["number_of_slashes"] == "True":
         start = time.time()
         number_of_slashes = 0
         if url:
             try:
                 number_of_slashes = url.count('/')
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_slashes = -1
         list_features["number_of_slashes"] = number_of_slashes
         end = time.time()
@@ -1188,7 +1188,7 @@ def URL_number_of_slashes(url, list_features, list_time):
 
 def URL_digit_letter_ratio(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["digit_letter_ratio"] == "True":
+    if globals.config["URL_Features"]["digit_letter_ratio"] == "True":
         start = time.time()
         digit_letter_ratio = 0
         if url:
@@ -1198,7 +1198,7 @@ def URL_digit_letter_ratio(url, list_features, list_time):
                 digit_letter_ratio = number_of_digits / letters
                 list_features["digit_letter_ratio"] = digit_letter_ratio
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 list_features["digit_letter_ratio"] = -1
         list_features["digit_letter_ratio"] = digit_letter_ratio
         end = time.time()
@@ -1208,7 +1208,7 @@ def URL_digit_letter_ratio(url, list_features, list_time):
 
 def URL_consecutive_numbers(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["consecutive_numbers"] == "True":
+    if globals.config["URL_Features"]["consecutive_numbers"] == "True":
         start = time.time()
         result = 0
         if url:
@@ -1221,7 +1221,7 @@ def URL_consecutive_numbers(url, list_features, list_time):
                         result += length * length
                         length = 0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 result = -1
         list_features["consecutive_numbers"] = result
         end = time.time()
@@ -1231,14 +1231,14 @@ def URL_consecutive_numbers(url, list_features, list_time):
 
 def URL_special_char_count(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["special_char_count"] == "True":
+    if globals.config["URL_Features"]["special_char_count"] == "True":
         start = time.time()
         special_char_count = 0
         if url:
             try:
                 special_char_count = url.count('@') + url.count('-')
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 special_char_count = -1
         list_features["special_char_count"] = special_char_count
         end = time.time()
@@ -1248,7 +1248,7 @@ def URL_special_char_count(url, list_features, list_time):
 
 def URL_special_pattern(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["special_pattern"] == "True":
+    if globals.config["URL_Features"]["special_pattern"] == "True":
         start = time.time()
         special_count = 0
         if url:
@@ -1256,7 +1256,7 @@ def URL_special_pattern(url, list_features, list_time):
                 if "?gws_rd=ssl" in url:
                     special_count = 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 special_count = -1
         list_features["special_pattern"] = special_count
         end = time.time()
@@ -1266,7 +1266,7 @@ def URL_special_pattern(url, list_features, list_time):
 
 def URL_Top_level_domain(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["Top_level_domain"] == "True":
+    if globals.config["URL_Features"]["Top_level_domain"] == "True":
         start = time.time()
         tld = 0
         if url:
@@ -1274,7 +1274,7 @@ def URL_Top_level_domain(url, list_features, list_time):
                 extracted = tldextract.extract(url)
                 tld = "{}".format(extracted.suffix)
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 tld = -1
         list_features["Top_level_domain"] = tld
         end = time.time()
@@ -1284,7 +1284,7 @@ def URL_Top_level_domain(url, list_features, list_time):
 
 def URL_is_common_TLD(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["is_common_TLD"] == "True":
+    if globals.config["URL_Features"]["is_common_TLD"] == "True":
         common_TLD_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
         result = 0
         start = time.time()
@@ -1298,7 +1298,7 @@ def URL_is_common_TLD(url, list_features, list_time):
                 else:
                     result = 0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 result = -1
         list_features["is_common_TLD"] = result
         end = time.time()
@@ -1308,7 +1308,7 @@ def URL_is_common_TLD(url, list_features, list_time):
 
 def URL_Is_IP_Addr(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["Is_IP_Addr"] == "True":
+    if globals.config["URL_Features"]["Is_IP_Addr"] == "True":
         start = time.time()
         Is_IP_Addr = 1
         if url:
@@ -1318,7 +1318,7 @@ def URL_Is_IP_Addr(url, list_features, list_time):
                 if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
                     Is_IP_Addr = 0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 Is_IP_Addr = -1
 
         list_features["Is_IP_Addr"] = Is_IP_Addr
@@ -1330,14 +1330,14 @@ def URL_Is_IP_Addr(url, list_features, list_time):
 # Devin's features
 def URL_number_of_dashes(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["number_of_dashes"] == "True":
+    if globals.config["URL_Features"]["number_of_dashes"] == "True":
         start = time.time()
         number_of_dashes = 0
         if url:
             try:
                 number_of_dashes = url.count('-')
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_dashes = -1
         list_features["number_of_dashes"] = number_of_dashes
         end = time.time()
@@ -1347,7 +1347,7 @@ def URL_number_of_dashes(url, list_features, list_time):
 
 def URL_Http_middle_of_URL(url, list_features, list_time):
     # global list_features
-    if Globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
+    if globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
         start = time.time()
         HTTP_REGEX = re.compile(".+http.+")
         if url and isinstance(url, str):
@@ -1363,7 +1363,7 @@ def URL_Http_middle_of_URL(url, list_features, list_time):
 
 
 def URL_Has_More_than_3_dots(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Has_More_than_3_dots"] == "True":
+    if globals.config["URL_Features"]["Has_More_than_3_dots"] == "True":
         start = time.time()
         # regex_http=re.compile(r'')
         if url:
@@ -1375,7 +1375,7 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
                 else:
                     list_features["Has_More_than_3_dots"] = 0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 list_features["Has_More_than_3_dots"] = -1
         else:
             list_features["Has_More_than_3_dots"] = 0
@@ -1385,7 +1385,7 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
 
 
 def URL_Has_at_symbole(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Has_at_symbole"] == "True":
+    if globals.config["URL_Features"]["Has_at_symbole"] == "True":
         start = time.time()
         flag = 0
         if url:
@@ -1393,7 +1393,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
                 if "@" in url:
                     flag = 1
             except Exception  as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 flag = -1
         list_features["Has_at_symbole"] = flag
         end = time.time()
@@ -1402,7 +1402,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
 
 
 def URL_Has_anchor_tag(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Has_anchor_tag"] == "True":
+    if globals.config["URL_Features"]["Has_anchor_tag"] == "True":
         start = time.time()
         flag = 0
         if url:
@@ -1412,7 +1412,7 @@ def URL_Has_anchor_tag(url, list_features, list_time):
                 else:
                     flag = 0
             except Exception as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 flag = -1
         list_features["Has_anchor_tag"] = flag
         end = time.time()
@@ -1421,7 +1421,7 @@ def URL_Has_anchor_tag(url, list_features, list_time):
 
 
 def URL_Null_in_Domain(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Null_in_Domain"] == "True":
+    if globals.config["URL_Features"]["Null_in_Domain"] == "True":
         start = time.time()
         regex_null = re.compile(r'null', flags=re.IGNORECASE)
         flag = 0
@@ -1429,7 +1429,7 @@ def URL_Null_in_Domain(url, list_features, list_time):
             try:
                 flag = int(bool(re.findall(regex_null, url)))
             except Exception  as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 flag = -1
         list_features["Null_in_Domain"] = flag
         end = time.time()
@@ -1442,7 +1442,7 @@ TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 
 
 def URL_Token_Count(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Token_Count"] == "True":
+    if globals.config["URL_Features"]["Token_Count"] == "True":
         start = time.time()
         count = 0
         if url:
@@ -1450,7 +1450,7 @@ def URL_Token_Count(url, list_features, list_time):
                 tokens = TOKEN_DELIMITER_REGEX.split(url)
                 count = len(tokens)
             except Exception  as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 count = -1
         list_features["Token_Count"] = count
         end = time.time()
@@ -1460,7 +1460,7 @@ def URL_Token_Count(url, list_features, list_time):
 
 # Detecting Malicious URLs Using Lexical Analysis
 def URL_Average_Path_Token_Length(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
+    if globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
         start = time.time()
         average_token_length = 0
         if url:
@@ -1473,7 +1473,7 @@ def URL_Average_Path_Token_Length(url, list_features, list_time):
                     list_len_tokens[list_tokens.index(token)] = len(token)
                 average_token_length = sum(list_len_tokens) / len(list_len_tokens)
             except Exception  as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 average_token_length = -1
         list_features["Average_Path_Token_Length"] = average_token_length
         end = time.time()
@@ -1482,7 +1482,7 @@ def URL_Average_Path_Token_Length(url, list_features, list_time):
 
 
 def URL_Average_Domain_Token_Length(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Average_Domain_Token_Length"] == "True":
+    if globals.config["URL_Features"]["Average_Domain_Token_Length"] == "True":
         start = time.time()
         average_token_length = 0
         if url:
@@ -1495,7 +1495,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
                     list_len_tokens.append(len(token))
                 average_token_length = sum(list_len_tokens) / len(list_len_tokens)
             except Exception  as e:
-                Globals.logger.warning("Exception: " + str(e))
+                globals.logger.warning("Exception: " + str(e))
                 average_token_length = -1
         list_features["Average_Domain_Token_Length"] = average_token_length
         end = time.time()
@@ -1504,7 +1504,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
 
 
 def URL_Longest_Domain_Token(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
+    if globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
         start = time.time()
         try:
             if url == '':
@@ -1516,7 +1516,7 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
                 list_len_tokens = [len(x) for x in list_tokens]
                 longest_token_len = max(list_len_tokens)
         except Exception as e:
-            Globals.logger.warning("Exception: " + str(e))
+            globals.logger.warning("Exception: " + str(e))
             longest_token_len = -1
         list_features["Longest_Domain_Token"] = longest_token_len
         end = time.time()
@@ -1525,7 +1525,7 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
 
 
 def URL_Protocol_Port_Match(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Protocol_Port_Match"] == "True":
+    if globals.config["URL_Features"]["Protocol_Port_Match"] == "True":
         start = time.time()
         match = 1
         if url:
@@ -1541,7 +1541,7 @@ def URL_Protocol_Port_Match(url, list_features, list_time):
                     match = 0
                 list_features["Protocol_Port_Match"] = match
             except Exception as e:
-                Globals.logger.warning("Exception: {}".format(e))
+                globals.logger.warning("Exception: {}".format(e))
                 match = -1
         else:
             match = 0
@@ -1552,7 +1552,7 @@ def URL_Protocol_Port_Match(url, list_features, list_time):
 
 
 def URL_Has_WWW_in_Middle(url, list_features, list_time):
-    if Globals.config["URL_Features"]["Has_WWW_in_Middle"] == "True":
+    if globals.config["URL_Features"]["Has_WWW_in_Middle"] == "True":
         start = time.time()
         flag = 0
         # regex_www=re.compile(r'www')
@@ -1563,7 +1563,7 @@ def URL_Has_WWW_in_Middle(url, list_features, list_time):
                 if 'www' in domain and domain.startswith('www') == False:
                     flag = 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 flag = -1
         list_features["Has_WWW_in_Middle"] = flag
         end = time.time()
@@ -1572,7 +1572,7 @@ def URL_Has_WWW_in_Middle(url, list_features, list_time):
 
 
 def URL_Has_Hex_Characters(url, list_features, list_time):
-    if Globals.config['URL_Features']['Has_Hex_Characters'] == "True":
+    if globals.config['URL_Features']['Has_Hex_Characters'] == "True":
         start = time.time()
         flag = 0
         regex_hex = re.compile(r'%[1-9A-Z][1-9A-Z]')
@@ -1582,7 +1582,7 @@ def URL_Has_Hex_Characters(url, list_features, list_time):
                 # domain = '{uri.netloc}'.format(uri=parsed_url).lower()
                 flag = int((bool(re.findall(regex_hex, url))))
             except Exception as e:
-                Globals.logger.warning("Exception: {}".format(e))
+                globals.logger.warning("Exception: {}".format(e))
                 flag = -1
         list_features["Has_Hex_Characters"] = flag
         end = time.time()
@@ -1591,7 +1591,7 @@ def URL_Has_Hex_Characters(url, list_features, list_time):
 
 
 def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
-    if Globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count'] == "True":
+    if globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count'] == "True":
         start = time.time()
         flag = 0
         regex_2slashes = re.compile(r'//')
@@ -1602,7 +1602,7 @@ def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
                 flag = int((bool(re.findall(regex_2slashes, path))))
                 list_features["Double_Slashes_Not_Beginning_Count"] = flag
             except Exception as e:
-                Globals.logger.warning("Exception: {}".format(e))
+                globals.logger.warning("Exception: {}".format(e))
                 flag = -1
         list_features["Double_Slashes_Not_Beginning_Count"] = flag
         end = time.time()
@@ -1611,7 +1611,7 @@ def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
 
 
 def URL_Brand_In_Url(url, list_features, list_time):
-    if Globals.config['URL_Features']['Brand_In_Url'] == "True":
+    if globals.config['URL_Features']['Brand_In_Url'] == "True":
         start = time.time()
         tokens = re.split('[^a-zA-Z]', url)
         brands = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange', 'dhl',
@@ -1625,7 +1625,7 @@ def URL_Brand_In_Url(url, list_features, list_time):
 
 
 def URL_Is_Whitelisted(url, list_features, list_time):
-    if Globals.config['URL_Features']['Is_Whitelisted'] == "True":
+    if globals.config['URL_Features']['Is_Whitelisted'] == "True":
         start = time.time()
         domain = tldextract.extract(url).domain
         whitelist = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange',
@@ -1665,7 +1665,7 @@ def URL_Is_Whitelisted(url, list_features, list_time):
 # age of domain
 def Network_creation_date(whois_info, list_features, list_time):
     # global list_features
-    if Globals.config["Network_Features"]["creation_date"] == "True":
+    if globals.config["Network_Features"]["creation_date"] == "True":
         start = time.time()
         creation_date = 0.0
         if whois_info:
@@ -1680,7 +1680,7 @@ def Network_creation_date(whois_info, list_features, list_time):
                         else:
                             creation_date = dateTime.timestamp()
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 creation_date = -1
         list_features["creation_date"] = creation_date
         end = time.time()
@@ -1690,7 +1690,7 @@ def Network_creation_date(whois_info, list_features, list_time):
 
 def Network_expiration_date(whois_info, list_features, list_time):
     # global list_features
-    if Globals.config["Network_Features"]["expiration_date"] == "True":
+    if globals.config["Network_Features"]["expiration_date"] == "True":
         start = time.time()
         expiration_date = 0.0
         if whois_info:
@@ -1705,7 +1705,7 @@ def Network_expiration_date(whois_info, list_features, list_time):
                         else:
                             expiration_date = dateTime.timestamp()
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 expiration_date = -1
         list_features["expiration_date"] = expiration_date
         end = time.time()
@@ -1714,7 +1714,7 @@ def Network_expiration_date(whois_info, list_features, list_time):
 
 
 def Network_updated_date(whois_info, list_features, list_time):
-    if Globals.config["Network_Features"]["updated_date"] == "True":
+    if globals.config["Network_Features"]["updated_date"] == "True":
         start = time.time()
         updated_date = 0.0
         if whois_info:
@@ -1729,7 +1729,7 @@ def Network_updated_date(whois_info, list_features, list_time):
                         else:
                             updated_date = 0.0
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 updated_date = -1
         list_features["updated_date"] = updated_date
         # print("----Update_date: {}".format(updated_date))
@@ -1739,7 +1739,7 @@ def Network_updated_date(whois_info, list_features, list_time):
 
 
 def Network_as_number(IP_whois_list, list_features, list_time):
-    if Globals.config["Network_Features"]["as_number"] == "True":
+    if globals.config["Network_Features"]["as_number"] == "True":
         start = time.time()
         as_number = 0
         if IP_whois_list:
@@ -1747,7 +1747,7 @@ def Network_as_number(IP_whois_list, list_features, list_time):
                 if 'asn' in IP_whois_list:
                     as_number = IP_whois_list['asn']
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 as_number = -1
         list_features["as_number"] = as_number
         end = time.time()
@@ -1756,7 +1756,7 @@ def Network_as_number(IP_whois_list, list_features, list_time):
 
 
 def Network_number_name_server(dns_info, list_features, list_time):
-    if Globals.config["Network_Features"]["number_name_server"] == "True":
+    if globals.config["Network_Features"]["number_name_server"] == "True":
         start = time.time()
         number_name_server = 0
         if dns_info:
@@ -1764,7 +1764,7 @@ def Network_number_name_server(dns_info, list_features, list_time):
                 if 'NS' in dns_info:
                     number_name_server = len(dns_info['NS'])
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_name_server = -1
         list_features["number_name_server"] = number_name_server
         end = time.time()
@@ -1773,7 +1773,7 @@ def Network_number_name_server(dns_info, list_features, list_time):
 
 
 def Network_DNS_Info_Exists(url, list_features, list_time):
-    if Globals.config["Network_Features"]["DNS_Info_Exists"] == "True":
+    if globals.config["Network_Features"]["DNS_Info_Exists"] == "True":
         start = time.time()
         flag = 1
         if url:
@@ -1789,12 +1789,12 @@ def Network_DNS_Info_Exists(url, list_features, list_time):
                 except (
                         dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers,
                         dns.resolver.Timeout) as e:
-                    Globals.logger.warning("Exception: {}".format(e))
+                    globals.logger.warning("Exception: {}".format(e))
                     flag = 0
             except Exception as e:
-                Globals.logger.warning("Exception: {}".format(e))
+                globals.logger.warning("Exception: {}".format(e))
                 flag = -1
-                Globals.logger.debug(list_features["DNS_Info_Exists"])
+                globals.logger.debug(list_features["DNS_Info_Exists"])
         else:
             flag = 0
         list_features["DNS_Info_Exists"] = flag
@@ -1804,7 +1804,7 @@ def Network_DNS_Info_Exists(url, list_features, list_time):
 
 
 def Network_dns_ttl(url, list_features, list_time):
-    if Globals.config["Network_Features"]["dns_ttl"] == "True":
+    if globals.config["Network_Features"]["dns_ttl"] == "True":
         start = time.time()
         dns_ttl = 0
         retry_count = 0
@@ -1813,7 +1813,7 @@ def Network_dns_ttl(url, list_features, list_time):
                 parsed_url = urlparse(url)
                 domain = parsed_url.hostname
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 dns_ttl = -1
             try:
                 while True:
@@ -1826,12 +1826,12 @@ def Network_dns_ttl(url, list_features, list_time):
                         retry_count = retry_count + 1
                         continue
                     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers) as e:
-                        Globals.logger.warning("Exception: {}".format(e))
+                        globals.logger.warning("Exception: {}".format(e))
                         dns_ttl = 0
                         break
                     break
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 dns_ttl = -1
         list_features["dns_ttl"] = dns_ttl
         end = time.time()
@@ -1842,7 +1842,7 @@ def Network_dns_ttl(url, list_features, list_time):
 ############################ Javascript features
 def Javascript_number_of_exec(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_exec"] == "True":
+    if globals.config["Javascript_Features"]["number_of_exec"] == "True":
         start = time.time()
         number_of_exec = 0
         if soup:
@@ -1854,7 +1854,7 @@ def Javascript_number_of_exec(soup, list_features, list_time):
                         if 'exec(' in script_text:
                             number_of_exec = number_of_exec + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_exec = -1
         list_features["number_of_exec"] = number_of_exec
         end = time.time()
@@ -1864,7 +1864,7 @@ def Javascript_number_of_exec(soup, list_features, list_time):
 
 def Javascript_number_of_escape(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_escape"] == "True":
+    if globals.config["Javascript_Features"]["number_of_escape"] == "True":
         start = time.time()
         number_of_escape = 0
         if soup:
@@ -1876,7 +1876,7 @@ def Javascript_number_of_escape(soup, list_features, list_time):
                         if 'escape(' in script_text:
                             number_of_escape = number_of_escape + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_escape = -1
         list_features["number_of_escape"] = number_of_escape
         end = time.time()
@@ -1886,7 +1886,7 @@ def Javascript_number_of_escape(soup, list_features, list_time):
 
 def Javascript_number_of_eval(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_eval"] == "True":
+    if globals.config["Javascript_Features"]["number_of_eval"] == "True":
         start = time.time()
         number_of_eval = 0
         if soup:
@@ -1898,7 +1898,7 @@ def Javascript_number_of_eval(soup, list_features, list_time):
                         if 'eval(' in script_text:
                             number_of_eval = number_of_eval + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_eval = -1
         list_features["number_of_eval"] = number_of_eval
         end = time.time()
@@ -1908,7 +1908,7 @@ def Javascript_number_of_eval(soup, list_features, list_time):
 
 def Javascript_number_of_link(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_link"] == "True":
+    if globals.config["Javascript_Features"]["number_of_link"] == "True":
         start = time.time()
         number_of_link = 0
         if soup:
@@ -1920,7 +1920,7 @@ def Javascript_number_of_link(soup, list_features, list_time):
                         if 'link(' in script_text:
                             number_of_link = number_of_link + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_link = -1
         list_features["number_of_link"] = number_of_link
         end = time.time()
@@ -1930,7 +1930,7 @@ def Javascript_number_of_link(soup, list_features, list_time):
 
 def Javascript_number_of_unescape(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_unescape"] == "True":
+    if globals.config["Javascript_Features"]["number_of_unescape"] == "True":
         start = time.time()
         number_of_unescape = 0
         scripts = soup.find_all('script')
@@ -1942,7 +1942,7 @@ def Javascript_number_of_unescape(soup, list_features, list_time):
                         if 'unescape(' in script_text:
                             number_of_unescape = number_of_unescape + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_unescape = -1
         list_features["number_of_unescape"] = number_of_unescape
         end = time.time()
@@ -1952,7 +1952,7 @@ def Javascript_number_of_unescape(soup, list_features, list_time):
 
 def Javascript_number_of_search(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_search"] == "True":
+    if globals.config["Javascript_Features"]["number_of_search"] == "True":
         start = time.time()
         number_of_search = 0
         if soup:
@@ -1964,7 +1964,7 @@ def Javascript_number_of_search(soup, list_features, list_time):
                         if 'search(' in script_text:
                             number_of_search = number_of_search + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_search = -1
         list_features["number_of_search"] = number_of_search
         end = time.time()
@@ -1974,7 +1974,7 @@ def Javascript_number_of_search(soup, list_features, list_time):
 
 def Javascript_number_of_setTimeout(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_setTimeout"] == "True":
+    if globals.config["Javascript_Features"]["number_of_setTimeout"] == "True":
         start = time.time()
         number_of_setTimeout = 0
         if soup:
@@ -1986,7 +1986,7 @@ def Javascript_number_of_setTimeout(soup, list_features, list_time):
                         if 'setTimeout(' in script_text:
                             number_of_setTimeout = number_of_setTimeout + 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_setTimeout = -1
         list_features["number_of_setTimeout"] = number_of_setTimeout
         end = time.time()
@@ -1996,7 +1996,7 @@ def Javascript_number_of_setTimeout(soup, list_features, list_time):
 
 def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_iframes_in_script"] == "True":
+    if globals.config["Javascript_Features"]["number_of_iframes_in_script"] == "True":
         start = time.time()
         number_of_iframes_in_script = 0
         if soup:
@@ -2007,7 +2007,7 @@ def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
                         script_text = str(script)
                         number_of_iframes_in_script = number_of_iframes_in_script + script_text.count("iframe")
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_iframes_in_script = -1
         list_features["number_of_iframes_in_script"] = number_of_iframes_in_script
         end = time.time()
@@ -2017,7 +2017,7 @@ def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
 
 def Javascript_number_of_event_attachment(soup, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["number_of_event_attachment"] == "True":
+    if globals.config["Javascript_Features"]["number_of_event_attachment"] == "True":
         start = time.time()
         number_of_event_attachment = 0
         if soup:
@@ -2030,7 +2030,7 @@ def Javascript_number_of_event_attachment(soup, list_features, list_time):
                             "(?:addEventListener|attachEvent|dispatchEvent|fireEvent)\('(?:error|load|beforeunload|unload)'",
                             script_text.replace(" ", "")))
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 number_of_event_attachment = -1
         list_features["number_of_event_attachment"] = number_of_event_attachment
         end = time.time()
@@ -2040,7 +2040,7 @@ def Javascript_number_of_event_attachment(soup, list_features, list_time):
 
 def Javascript_rightclick_disabled(html, list_features, list_time):
     # global list_features
-    if Globals.config["Javascript_Features"]["rightclick_disabled"] == "True":
+    if globals.config["Javascript_Features"]["rightclick_disabled"] == "True":
         start = time.time()
         rightclick_disabled = 0
         if html:
@@ -2050,7 +2050,7 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
                 if 'addEventListener(\'contextmenu\'' in html.html.lower():
                     rightclick_disabled = 1
             except Exception as e:
-                Globals.logger.warning("exception: " + str(e))
+                globals.logger.warning("exception: " + str(e))
                 rightclick_disabled = -1
         list_features["rightclick_disabled"] = rightclick_disabled
         end = time.time()
@@ -2059,7 +2059,7 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
 
 
 def Javascript_number_of_total_suspicious_features(list_features, list_time):
-    if Globals.config["Javascript_Features"]["number_of_total_suspicious_features"] == "True":
+    if globals.config["Javascript_Features"]["number_of_total_suspicious_features"] == "True":
         start = time.time()
         number_of_total_suspicious_features = 0
         try:
@@ -2073,7 +2073,7 @@ def Javascript_number_of_total_suspicious_features(list_features, list_time):
                                                       "number_of_event_attachment"] + list_features[
                                                       "number_of_setTimeout"]
         except Exception as e:
-            Globals.logger.warning("exception: " + str(e))
+            globals.logger.warning("exception: " + str(e))
             number_of_total_suspicious_features = -1
         list_features["number_of_total_suspicious_features"] = number_of_total_suspicious_features
         end = time.time()
@@ -2082,7 +2082,7 @@ def Javascript_number_of_total_suspicious_features(list_features, list_time):
 
 
 def Email_Body_tfidf_emails(list_time):
-    if Globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
+    if globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
         start = time.time()
         Tfidf_matrix = Tfidf.tfidf_emails()
         end = time.time()
@@ -2092,7 +2092,7 @@ def Email_Body_tfidf_emails(list_time):
 
 
 def Email_Header_Header_Tokenizer(list_time):
-    if Globals.config["Email_Header_Features"]["Header_Tokenizer"] == "True":
+    if globals.config["Email_Header_Features"]["Header_Tokenizer"] == "True":
         start = time.time()
         header_tokenizer = Tfidf.Header_Tokenizer()
         end = time.time()
@@ -2102,7 +2102,7 @@ def Email_Header_Header_Tokenizer(list_time):
 
 
 def HTML_tfidf_websites(list_time):
-    if Globals.config["HTML_Features"]["tfidf_websites"] == "True":
+    if globals.config["HTML_Features"]["tfidf_websites"] == "True":
         start = time.time()
         Tfidf_matrix = Tfidf.tfidf_websites()
         end = time.time()

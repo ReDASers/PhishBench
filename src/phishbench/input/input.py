@@ -12,7 +12,7 @@ from tqdm import tqdm
 from .email_input.models import EmailMessage
 from .url_input import URLData
 from .url_input.url_io import read_urls_from_file
-from ..utils import Globals
+from ..utils import globals
 
 
 def enumerate_folder_files(folder_path) -> List[str]:
@@ -96,7 +96,7 @@ def remove_duplicates(values: List):
     """
     old_len = len(values)
     clean = list(set(values))
-    Globals.logger.info("Removed %d duplicates", old_len - len(clean))
+    globals.logger.info("Removed %d duplicates", old_len - len(clean))
     return clean
 
 
@@ -133,9 +133,9 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
             url_obj = URLData(raw_url, download_url)
             urls.append(url_obj)
         except Exception as e:
-            Globals.logger.warning(
+            globals.logger.warning(
                 "Exception while loading url %s", raw_url)
-            Globals.logger.exception(e)
+            globals.logger.exception(e)
             bad_url_list.append(raw_url)
 
     return urls, bad_url_list

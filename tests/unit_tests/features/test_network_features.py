@@ -5,7 +5,7 @@ from phishbench import Features
 from phishbench.input.url_input import URLData
 from tests.mock_objects import mock_objects
 
-@patch('phishbench.utils.Globals.config', new_callable=mock_objects.get_mock_config)
+@patch('phishbench.utils.globals.config', new_callable=mock_objects.get_mock_config)
 class TestNetworkFeatures(unittest.TestCase):
 
     def test_Network_number_name_server(self, mock_config):

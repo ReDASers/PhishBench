@@ -1,7 +1,7 @@
 import sys
 
 from phishbench.classification import settings as classification_setings
-from phishbench.utils.Globals import config
+from phishbench.utils.globals import config
 from phishbench import dataset
 
 

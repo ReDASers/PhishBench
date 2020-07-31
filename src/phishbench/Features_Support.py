@@ -15,7 +15,7 @@ from scipy.spatial import distance
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
-from .utils import Globals
+from .utils import globals
 
 PAYLOAD_NOT_FOUND = False  # for filtering
 
@@ -293,7 +293,7 @@ def normalizer(Array_Features):
 
 def Preprocessing(X):
     # Globals.summary.open(Globals.config["Summary"]["Path"],'w')
-    Globals.summary.write("\n\n###### List of Preprocessing steps:\n")
+    globals.summary.write("\n\n###### List of Preprocessing steps:\n")
     # Array_Features=Sparse_Matrix_Features.toarray()
     X_array = X.toarray()
     # X_test_array=X_test.toarray()
@@ -309,11 +309,11 @@ def Preprocessing(X):
     #    # return the scaler for testing data
     #    # Use min max to scale data because it's robust to very small
     #    # standard deviations of features and preserving zero
-    if Globals.config["Preprocessing"]["min_max_scaling"] == "True":
+    if globals.config["Preprocessing"]["min_max_scaling"] == "True":
         X = min_max_scaling(X_array)
         # X_test=min_max_scaling(X_test_array)
-        Globals.summary.write("\n Scaling using the min and max.\n")
-        Globals.logger.info("Preprocessing: min_max_scaling")
+        globals.summary.write("\n Scaling using the min and max.\n")
+        globals.logger.info("Preprocessing: min_max_scaling")
         return X
         # use abs value to scale
     # elif Globals.config["Preprocessing"]["abs_scaler"] == "True":
@@ -335,7 +335,7 @@ def Preprocessing(X):
 
 
 def Cleaning(dict1):
-    Globals.logger.info("Performing Cleaning on dict of len %d", len(dict1))
+    globals.logger.info("Performing Cleaning on dict of len %d", len(dict1))
     count = 0
     for item in dict1:
         # print(item)
@@ -346,8 +346,8 @@ def Cleaning(dict1):
                 original = item[key]
                 item[key] = -1
                 count += 1
-                Globals.logger.debug("Value of {} changed from {} to {}".format(key, original, item[key]))
-    Globals.logger.info("Finished cleaning")
+                globals.logger.debug("Value of {} changed from {} to {}".format(key, original, item[key]))
+    globals.logger.info("Finished cleaning")
 
 
 # list_id=list(range(1,len(list_features)+1))

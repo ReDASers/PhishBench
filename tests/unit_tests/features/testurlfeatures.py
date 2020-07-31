@@ -5,7 +5,7 @@ from phishbench import Features
 from tests.mock_objects import mock_objects
 
 
-@patch('phishbench.utils.Globals.config', new_callable=mock_objects.get_mock_config)
+@patch('phishbench.utils.globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
 
     def test_URL_url_length(self, config_mock):

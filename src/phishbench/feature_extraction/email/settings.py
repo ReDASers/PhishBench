@@ -1,5 +1,5 @@
 from .reflection.core import FeatureType
-from ...utils import Globals
+from ...utils import globals
 
 FEATURE_TYPE_SECTION = 'Email_Feature_Types'
 
@@ -9,7 +9,7 @@ FEATURE_TYPE_SETTINGS = {
 
 
 def feature_type_enabled(feature_type: FeatureType) -> bool:
-    return Globals.config[FEATURE_TYPE_SECTION].getboolean(feature_type.value)
+    return globals.config[FEATURE_TYPE_SECTION].getboolean(feature_type.value)
 
 
 def extract_body_enabled():

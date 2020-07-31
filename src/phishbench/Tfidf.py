@@ -2,20 +2,20 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from . import Features_Support
-from .utils import Globals
+from .utils import globals
 
 
 ## Build the corpus from both the datasets
 def build_corpus():
     data = []
-    path = Globals.config["Dataset Path"]["path_legit_email"]
+    path = globals.config["Dataset Path"]["path_legit_email"]
     corpus_data_legit = Features_Support.read_corpus(path)
-    Globals.logger.info("Corpus Data legit: >>>>>>>>>>>>>>> " + str(len(corpus_data_legit)))
+    globals.logger.info("Corpus Data legit: >>>>>>>>>>>>>>> " + str(len(corpus_data_legit)))
     data.extend(corpus_data_legit)
     # for path in config["Dataset Path"][""]path_phish_email:
-    path = Globals.config["Dataset Path"]["path_phish_email"]
+    path = globals.config["Dataset Path"]["path_phish_email"]
     corpus_data_phish = Features_Support.read_corpus(path)
-    Globals.logger.info("Corpus Data phish: >>>>>>>>>>>>>>> " + str(len(corpus_data_phish)))
+    globals.logger.info("Corpus Data phish: >>>>>>>>>>>>>>> " + str(len(corpus_data_phish)))
     data.extend(corpus_data_phish)
     return data
 
@@ -57,4 +57,4 @@ def Header_Tokenizer(corpus):
 
 if __name__ == '__main__':
     matrix = tfidf_website()
-    Globals.logger.info(matrix)
+    globals.logger.info(matrix)

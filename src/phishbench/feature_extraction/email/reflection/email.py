@@ -2,12 +2,12 @@ import time
 from typing import List, Dict, Callable, Union
 
 from phishbench.input.email_input.models import EmailMessage
-from phishbench.utils import Globals
+from phishbench.utils import globals
 from .core import FeatureType
 
 
 def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
-    Globals.logger.debug(feature.config_name)
+    globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
         if feature.feature_type == FeatureType.EMAIL_BODY:
@@ -18,7 +18,7 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
             raise ValueError('Email Message must have a header!')
     except Exception:
         error_string = "Error extracting {}".format(feature.config_name)
-        Globals.logger.warning(error_string, exc_info=True)
+        globals.logger.warning(error_string, exc_info=True)
         feature_value = -1
     end = time.process_time()
     ex_time = end - start

@@ -1,1 +1,1 @@
-from .utils.Globals import initialize
+from .utils.globals import initialize

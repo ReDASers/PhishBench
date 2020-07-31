@@ -8,7 +8,7 @@ from tqdm import tqdm
 from . import reflection
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
-from ...utils import Globals
+from ...utils import globals
 
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
@@ -23,7 +23,7 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
     features = reflection.load_internal_features()
     print("Loaded {} features".format(len(features)))
 
-    Globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_dataset_folder, phish_dataset_folder)
+    globals.logger.info("Extracting email features. Legit: %s Phish: %s", legit_dataset_folder, phish_dataset_folder)
 
     print("Extracting Email features from {}".format(legit_dataset_folder))
     legit_emails, _ = pb_input.read_dataset_email(legit_dataset_folder)

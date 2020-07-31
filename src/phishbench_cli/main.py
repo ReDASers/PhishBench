@@ -14,7 +14,7 @@ import phishbench.dataset as dataset
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
-from phishbench.utils import Globals
+from phishbench.utils import globals
 from phishbench_cli import user_interaction
 
 
@@ -63,7 +63,7 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
     feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
 
     # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
+    if globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(url_train_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
@@ -74,7 +74,7 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
 
     # Add tfidf if the user marked it as True
     if run_tfidf:
-        Globals.logger.info("Extracting TFIDF features for training websites ###### ######")
+        globals.logger.info("Extracting TFIDF features for training websites ###### ######")
         tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
         x_train = hstack([x_train, tfidf_train])
@@ -112,7 +112,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
         os.makedirs(url_test_dir)
 
     # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
+    if globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(url_test_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
@@ -121,7 +121,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     joblib.dump(x_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
 
     if tfidf_vectorizer:
-        Globals.logger.info("Extracting TFIDF features for testing websites ######")
+        globals.logger.info("Extracting TFIDF features for testing websites ######")
         tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
         joblib.dump(tfidf_test, os.path.join(url_test_dir, "tfidf_features.pkl"))
         x_test = hstack([x_test, tfidf_test])
@@ -131,7 +131,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     # Use Min_Max_scaling for prepocessing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
 
-    Globals.logger.info("Feature Extraction for testing dataset: Done!")
+    globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, y_test
 
@@ -160,7 +160,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     if not os.path.exists(email_train_dir):
         os.makedirs(email_train_dir)
     print("Extracting Train Set")
-    Globals.logger.info("Extracting Train Set")
+    globals.logger.info("Extracting Train Set")
     legit_path = dataset.train_legit_path()
     phish_path = dataset.train_phish_path()
 
@@ -168,7 +168,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     Features_Support.Cleaning(feature_list_dict_train)
 
     # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
+    if globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(email_train_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
@@ -178,7 +178,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
     if run_tfidf:
-        Globals.logger.info("tfidf_emails_train ######")
+        globals.logger.info("tfidf_emails_train ######")
         tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
         joblib.dump(tfidf_train, os.path.join(email_train_dir, "tfidf_features.pkl"))
         x_train = hstack([x_train, tfidf_train])
@@ -214,12 +214,12 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     phish_path = dataset.test_phish_path()
 
     print("Extracting Test Set")
-    Globals.logger.info('Extracting Test Set')
+    globals.logger.info('Extracting Test Set')
     feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv
-    if Globals.config['Features Export'].getboolean('csv'):
+    if globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(email_test_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
@@ -228,7 +228,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
 
     # Add tfidf if the user marked it as True
     if tfidf_vectorizer:
-        Globals.logger.info("tfidf_emails_train ######")
+        globals.logger.info("tfidf_emails_train ######")
         tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
         x_test = hstack([x_test, tfidf_test])
 
@@ -239,7 +239,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     if not os.path.exists(email_test_dir):
         os.makedirs(email_test_dir)
 
-    Globals.logger.info("Feature Extraction for testing dataset: Done!")
+    globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, y_test
 
@@ -263,12 +263,12 @@ def extract_email_features():
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    email_train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
-    email_test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+    email_train_dir = os.path.join(globals.args.output_input_dir, "Emails_Training")
+    email_test_dir = os.path.join(globals.args.output_input_dir, "Emails_Testing")
     run_tfidf = email_extraction.settings.extract_body_enabled() \
-                and Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
+                and globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
-    if Globals.config["Extraction"].getboolean("Training Dataset"):
+    if globals.config["Extraction"].getboolean("Training Dataset"):
         x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, run_tfidf)
 
         # Save features for training dataset
@@ -277,7 +277,7 @@ def extract_email_features():
         joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
-        Globals.logger.info("Feature Extraction for training dataset: Done!")
+        globals.logger.info("Feature Extraction for training dataset: Done!")
     else:
         x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
@@ -287,7 +287,7 @@ def extract_email_features():
         else:
             tfidf_vectorizer = None
 
-    if Globals.config["Extraction"]["Testing Dataset"] == "True":
+    if globals.config["Extraction"]["Testing Dataset"] == "True":
         x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
         joblib.dump(x_test, os.path.join(email_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
@@ -316,12 +316,12 @@ def extract_url_features():
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    url_train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
-    url_test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
-    run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                Globals.config["HTML_Features"].getboolean("tfidf_websites")
+    url_train_dir = os.path.join(globals.args.output_input_dir, "URLs_Training")
+    url_test_dir = os.path.join(globals.args.output_input_dir, "URLs_Testing")
+    run_tfidf = globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                globals.config["HTML_Features"].getboolean("tfidf_websites")
 
-    if Globals.config["Extraction"].getboolean("Training Dataset"):
+    if globals.config["Extraction"].getboolean("Training Dataset"):
         x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir, run_tfidf)
 
         # dump features and labels and vectorizers
@@ -330,7 +330,7 @@ def extract_url_features():
         joblib.dump(vectorizer, os.path.join(url_train_dir, "vectorizer.pkl"))
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(url_train_dir, "tfidf_vectorizer.pkl"))
-        Globals.logger.info("Feature Extraction for training dataset: Done!")
+        globals.logger.info("Feature Extraction for training dataset: Done!")
     else:
         # if training was done in another instance of the platform then load the necessary files
         x_train = joblib.load(os.path.join(url_train_dir, "X_train.pkl"))
@@ -342,13 +342,13 @@ def extract_url_features():
         else:
             tfidf_vectorizer = None
 
-    if Globals.config["Extraction"].getboolean("Testing Dataset"):
+    if globals.config["Extraction"].getboolean("Testing Dataset"):
 
         x_test, y_test = extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer)
 
         joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
-        Globals.logger.info("Feature Extraction for testing dataset: Done!")
+        globals.logger.info("Feature Extraction for testing dataset: Done!")
     else:
         x_test = None
         y_test = None
@@ -364,16 +364,16 @@ def create_performance_df(scores: List[Dict]):
 
 
 def get_config():
-    if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
-        train_dir = os.path.join(Globals.args.output_input_dir, "Emails_Training")
-        test_dir = os.path.join(Globals.args.output_input_dir, "Emails_Testing")
+    if globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
+        train_dir = os.path.join(globals.args.output_input_dir, "Emails_Training")
+        test_dir = os.path.join(globals.args.output_input_dir, "Emails_Testing")
         run_tfidf = email_extraction.settings.extract_body_enabled() and \
-                    Globals.config["Email_Body_Features"].getboolean("tfidf_emails")
+                    globals.config["Email_Body_Features"].getboolean("tfidf_emails")
     else:
-        train_dir = os.path.join(Globals.args.output_input_dir, "URLs_Training")
-        test_dir = os.path.join(Globals.args.output_input_dir, "URLs_Testing")
-        run_tfidf = Globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                    Globals.config["HTML_Features"].getboolean("tfidf_websites")
+        train_dir = os.path.join(globals.args.output_input_dir, "URLs_Training")
+        test_dir = os.path.join(globals.args.output_input_dir, "URLs_Testing")
+        run_tfidf = globals.config["URL_Feature_Types"].getboolean("HTML") and \
+                    globals.config["HTML_Features"].getboolean("tfidf_websites")
     return train_dir, test_dir, run_tfidf
 
 
@@ -396,7 +396,7 @@ def load_dataset():
 
 
 def run_classifiers(x_train, y_train, x_test, y_test):
-    folder = os.path.join(Globals.args.output_input_dir, "Classifiers")
+    folder = os.path.join(globals.args.output_input_dir, "Classifiers")
     print("Training Classifiers")
 
     classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
@@ -412,8 +412,8 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 
 
 def run_phishbench():
-    if Globals.config["Extraction"].getboolean("Feature Extraction"):
-        if Globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
+    if globals.config["Extraction"].getboolean("Feature Extraction"):
+        if globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
         else:
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
@@ -421,12 +421,12 @@ def run_phishbench():
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
 
     # Feature Selection
-    if Globals.config["Feature Selection"].getboolean("select best features"):
-        ranking_dir = os.path.join(Globals.args.output_input_dir, "Feature_Ranking")
+    if globals.config["Feature Selection"].getboolean("select best features"):
+        ranking_dir = os.path.join(globals.args.output_input_dir, "Feature_Ranking")
         if not os.path.exists(ranking_dir):
             os.makedirs(ranking_dir)
         # k: Number of Best features
-        num_best_features = int(Globals.config["Feature Selection"]["number of best features"])
+        num_best_features = int(globals.config["Feature Selection"]["number of best features"])
         x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features,
                                                                      vectorizer, tfidf_vectorizer)
         # Dump model
@@ -435,7 +435,7 @@ def run_phishbench():
 
         if x_test is not None:
             x_test = selection_model.transform(x_test)
-            Globals.logger.info("X_test Shape: %s", x_test.shape)
+            globals.logger.info("X_test Shape: %s", x_test.shape)
             joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
 
     if classification.settings.run_classifiers():
@@ -444,15 +444,15 @@ def run_phishbench():
 
 def main():
     # execute only if run as a script
-    Globals.setup_parser()
-    answer = user_interaction.confirmation(Globals.args.ignore_confirmation)
+    globals.setup_parser()
+    answer = user_interaction.confirmation(globals.args.ignore_confirmation)
     original = sys.stdout
     if answer:
-        Globals.logger.debug("Running......")
+        globals.logger.debug("Running......")
         run_phishbench()
-        Globals.logger.debug("Done!")
+        globals.logger.debug("Done!")
     sys.stdout = original
-    Globals.destroy_globals()
+    globals.destroy_globals()
 
 
 if __name__ == "__main__":
