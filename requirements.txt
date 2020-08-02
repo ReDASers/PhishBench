@@ -1,16 +1,15 @@
 chardet==3.0.4
-scipy==1.5.0
 tldextract==2.2.2
 pandas==1.0.5
 requests==2.24.0
 joblib==0.15.1
 selenium==3.141.0
 sklearn_extensions==0.0.2
+tensorflow==2.3.0
 textstat==0.6.2
 ipwhois==1.1.0
 tqdm==4.47.0
 python_whois==0.7.3
-numpy==1.19.0
 lxml==4.5.1
 nltk==3.5
 langdetect==1.0.8
@@ -20,3 +19,6 @@ DocumentFeatureSelection==1.5
 imbalanced-learn==0.7.0
 scikit_learn==0.23.1
 xgboost==1.1.1
+# Versions required by tensorflow
+numpy==1.18.5
+scipy==1.4.1
