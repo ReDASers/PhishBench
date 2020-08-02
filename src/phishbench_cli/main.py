@@ -209,7 +209,10 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     y_test
         A list containing the dataset labels
     """
-    # Extract features in a dictionary for each email. return a list of dictionaries
+
+    if not os.path.isdir(email_test_dir):
+        os.makedirs(email_test_dir)
+
     legit_path = dataset.test_legit_path()
     phish_path = dataset.test_phish_path()
 
