@@ -31,7 +31,7 @@ class FeedForwardNN(BaseClassifier):
 
     def predict_proba(self, x):
         if not self.clf:
-            msg = "This {}} instance is not fitted yet. Call 'fit' with " \
+            msg = "This {} instance is not fitted yet. Call 'fit' with " \
                   "appropriate arguments before using this estimator.".format(type(self).__name__)
 
             raise NotFittedError(msg)
