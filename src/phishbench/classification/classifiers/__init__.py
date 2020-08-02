@@ -9,3 +9,4 @@ from .multinomial_nb import MultinomialNaiveBayes
 from .random_forest import RandomForest
 from .svm import SVM
 from .xgb import XGBoost
+from .feedforward_neural_network import FeedForwardNN
