@@ -24,6 +24,7 @@ class FeedForwardNN(BaseClassifier):
         super().__init__(io_dir, "FeedForwardNN.h5")
 
     def fit(self, x, y):
+        y = np.array(y)
         n_features = x.shape[1]
         self.clf = _build_model(n_features)
         early_stopping = keras.callbacks.EarlyStopping(patience=3)
