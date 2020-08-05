@@ -15,6 +15,7 @@ class TestELM(unittest.TestCase):
 
         # Here, we're primarily concerned that the output is correctly formatted and not wildly inaccurate
         y_pred = elm.predict(data.data)
+        self.assertEqual(len(y_pred.shape), 1)
         self.assertTrue(all(map(lambda x: x in [0, 1], y_pred)))
         self.assertTrue(accuracy_score(data.target, y_pred) > 0.5)
 

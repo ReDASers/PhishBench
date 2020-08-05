@@ -48,6 +48,8 @@ class BaseClassifier:
         dict:
             The best parameters.
         """
+        print("{} does not support parameter search. Performing regular training.".format(self.name))
+        self.fit(x, y)
 
     def predict(self, x):
         """
