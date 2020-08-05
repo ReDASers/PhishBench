@@ -1,3 +1,6 @@
+"""
+The test for `phishbench.classification.classifiers.FeedForwardNN`
+"""
 import unittest
 
 from sklearn.datasets import load_breast_cancer
@@ -9,6 +12,14 @@ from phishbench.classification.classifiers import FeedForwardNN
 class TestFFNN(unittest.TestCase):
 
     def test_predict(self):
+        """
+        Tests the `FeedForwardNN.predict` to make sure that
+
+        1. It returns a 1 dimensional vector
+        2. All predictions are either 0 or 1
+        3. It's better than random chance.
+
+        """
         x, y = load_breast_cancer(return_X_y=True)
         clf = FeedForwardNN('test')
         clf.fit(x, y)
@@ -20,6 +31,13 @@ class TestFFNN(unittest.TestCase):
         self.assertTrue(accuracy_score(y, y_pred) > 0.5)
 
     def test_predict_proba(self):
+        """
+        Tests the `FeedForwardNN.predict_proba` function to make sure that
+
+        1. It returns at 1d vector
+        2. All probabilities are between 0 and 1
+
+        """
         x, y = load_breast_cancer(return_X_y=True)
         clf = FeedForwardNN('test')
         clf.fit(x, y)
