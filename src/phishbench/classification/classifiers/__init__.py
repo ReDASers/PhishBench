@@ -1,3 +1,6 @@
+"""
+The `phishbench.classification.classifiers` module contains the built-in classifiers of PhishBench
+"""
 from .bagging import Bagging
 from .boosting import Boosting
 from .decision_tree import DecisionTree
