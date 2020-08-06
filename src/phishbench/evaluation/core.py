@@ -4,6 +4,7 @@ from functools import wraps
 from typing import List, Callable
 
 from scipy.sparse import issparse
+import pandas as pd
 
 from . import settings
 from ..classification.core import BaseClassifier
@@ -43,6 +44,21 @@ def load_internal_metrics(filter_metrics=True) -> List[Callable]:
 
 
 def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
+    """
+    Evaluates a single classifier
+    Parameters
+    ----------
+    classifier
+        The classifier to evaluate.
+    x_test
+        The test features to evaluate with
+    y_test
+        The test labels to evaluate with
+
+    Returns
+    -------
+        A dictionary containing the name of the metric and the corresponding scores
+    """
     if issparse(x_test):
         x_test = x_test.toarray()
     metric_funcs: List[Callable] = load_internal_metrics()
@@ -54,5 +70,34 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
             metrics[metric.config_name] = metric(y_test, y_pred)
         else:
             metrics[metric.config_name] = metric(y_test, y_prob)
-
     return metrics
+
+
+def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test):
+    """
+    Evaluates a set of classifiers
+    Parameters
+    ----------
+    classifiers
+        The classifiers to evaluate
+    x_test
+        The test features to evaluate with
+    y_test
+        The test labels to evaluate with
+
+    Returns
+    -------
+    A pandas `DataFrame` containing the metrics of the classifiers
+    """
+    performance_list_dict = []
+    for classifier in classifiers:
+        metrics = evaluate_classifier(classifier, x_test, y_test)
+        metrics['classifier'] = classifier.name
+        performance_list_dict.append(metrics)
+
+    # Create DataFrame
+    df = pd.DataFrame(performance_list_dict)
+    columns: List = df.columns.tolist()
+    columns.remove("classifier")
+    columns.insert(0, "classifier")
+    return df.reindex(columns=columns)
