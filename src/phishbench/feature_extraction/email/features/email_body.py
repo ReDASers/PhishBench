@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 from textstat import textstat
 
 from . import helpers
-from .. import register_feature, FeatureType
-from .....input.email_input.models import EmailBody
+from ..reflection import register_feature, FeatureType
+from ....input.email_input.models import EmailBody
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'is_html')
