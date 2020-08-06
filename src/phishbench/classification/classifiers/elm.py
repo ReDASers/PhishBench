@@ -13,7 +13,7 @@ def relu(x):
     return x * (x > 0)
 
 
-class ELMClassifier(BaseEstimator, ClassifierMixin):
+class _ELMClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self, activation='relu'):
         self.activation = activation
 
@@ -57,14 +57,14 @@ class ExtremeLearningMachine(BaseClassifier):
     def fit(self, x, y):
         # Using the standard implementation of sigmoid throws a overflow warning.
         # We use scipy's implementation instead
-        self.clf = ELMClassifier()
+        self.clf = _ELMClassifier()
         self.clf.fit(x, y)
 
     def param_search(self, x, y):
         param_grid = {
             'activation': ['sigmoid', 'tanh', 'relu']
         }
-        clf = ELMClassifier()
+        clf = _ELMClassifier()
         cv_clf = GridSearchCV(clf, param_grid, n_jobs=-1, pre_dispatch='2*n_jobs')
         self.clf = cv_clf.fit(x, y).best_estimator_
         return self.clf.get_params()
