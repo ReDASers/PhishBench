@@ -358,14 +358,6 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer
 
 
-def create_performance_df(scores: List[Dict]):
-    df = pd.DataFrame(scores)
-    columns: List = df.columns.tolist()
-    columns.remove("classifier")
-    columns.insert(0, "classifier")
-    return df.reindex(columns=columns)
-
-
 def get_config():
     if phishbench_globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
@@ -403,12 +395,7 @@ def run_classifiers(x_train, y_train, x_test, y_test):
     print("Training Classifiers")
 
     classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
-    performance_list_dict = []
-    for classifier in classifiers:
-        metrics = evaluation.evaluate_classifier(classifier, x_test, y_test)
-        metrics['classifier'] = classifier.name
-        performance_list_dict.append(metrics)
-    classifier_performances = create_performance_df(performance_list_dict)
+    classifier_performances = evaluation.evaluate_classifiers(classifiers, x_test, y_test)
 
     print(classifier_performances)
     classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
