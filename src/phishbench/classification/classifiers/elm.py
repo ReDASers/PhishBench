@@ -1,5 +1,8 @@
+"""
+This module contains an implementation of the extreme learning machine algorithm.
+"""
 import numpy as np
-from scipy.special import expit
+from scipy.special import expit # pylint: disable=no-name-in-module
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.exceptions import NotFittedError
 from sklearn.model_selection import GridSearchCV
@@ -9,34 +12,35 @@ from sklearn_extensions.extreme_learning_machines import ELMRegressor
 from ..core import BaseClassifier
 
 
-def relu(x):
+def _relu(x):
     return x * (x > 0)
 
 
 class _ELMClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self, activation='relu'):
         self.activation = activation
+        self.elm_regressor = None
 
     def fit(self, x, y):
         x, y = check_X_y(x, y)
         if self.activation == 'sigmoid':
             activation = expit
         elif self.activation == 'relu':
-            activation = relu
+            activation = _relu
         else:
             activation = self.activation
-        self.elm_ = ELMRegressor(activation_func=activation)
-        self.elm_.fit(x, y)
+        self.elm_regressor = ELMRegressor(activation_func=activation)
+        self.elm_regressor.fit(x, y)
         return self
 
     def predict_proba(self, x):
-        if not self.elm_:
-            msg = "This {}} instance is not fitted yet. Call 'fit' with " \
+        if not self.elm_regressor:
+            msg = "This {} instance is not fitted yet. Call 'fit' with " \
                   "appropriate arguments before using this estimator.".format(type(self).__name__)
 
             raise NotFittedError(msg)
         x = check_array(x, accept_sparse=True)
-        prob_pos = self.elm_.predict(x)
+        prob_pos = self.elm_regressor.predict(x)
         # Ensures that probabilities are between 0 and 1
         prob_pos = np.clip(prob_pos, 0, 1)
         return prob_pos
@@ -50,7 +54,9 @@ class _ELMClassifier(BaseEstimator, ClassifierMixin):
 
 
 class ExtremeLearningMachine(BaseClassifier):
-
+    """
+    The built in Extreme Learning Machine classifier
+    """
     def __init__(self, io_dir):
         super().__init__(io_dir, "model_elm.pkl")
 
