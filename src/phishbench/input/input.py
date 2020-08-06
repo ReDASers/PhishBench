@@ -37,9 +37,10 @@ def read_email_from_file(file_path: str) -> Message:
     ----------
     file_path: str
         The path of the email to read
+
     Returns
     -------
-    email.message.Message:
+    msg: email.message.Message
         A Message object representing the email.
     """
     with open(file_path, 'rb') as f:
@@ -69,23 +70,30 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
 
     Parameters
     ----------
-    folder_path
-    The folder to read emails from.
+    folder_path : str
+        The path to the folder you want to read
+
     Returns
     -------
+    emails: List[EmailMessage]
+        The parsed emails
 
+    files: List[str]
+        The paths of the files loaded
     """
     files = enumerate_folder_files(folder_path)
+    loaded_files = []
     emails_parsed = []
     for f in tqdm(files):
         try:
             msg = EmailMessage(read_email_from_file(f))
             emails_parsed.append(msg)
+            loaded_files.append(f)
         except Exception:
             print("\n", f)
             traceback.print_exc()
 
-    return emails_parsed, files
+    return emails_parsed, loaded_files
 
 
 def remove_duplicates(values: List):
