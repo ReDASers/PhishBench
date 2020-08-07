@@ -146,12 +146,12 @@ class EmailBody:
 
     def __parse_msg(self, msg: Message):
         for part in msg.walk():
+            content_type = part.get_content_type()
+            self.content_type_list.append(content_type)
+
             if part.is_multipart():
                 # We're only interested in the leaf nodes of the email tree
                 continue
-
-            content_type = part.get_content_type()
-            self.content_type_list.append(content_type)
 
             content_disposition = part.get_content_disposition()
             self.content_disposition_list.append(content_disposition)
@@ -172,6 +172,9 @@ class EmailBody:
                 self.__parse_text_part(part)
             elif content_type == 'text/html':
                 self.__parse_html_part(part)
+            elif content_type.startswith('multipart'):
+                # we have a multipart leaf like IWSPA dataset
+                self.__parse_text_part(part)
 
     def __parse_text_part(self, part):
         payload, charset = decode_text_part(part)
