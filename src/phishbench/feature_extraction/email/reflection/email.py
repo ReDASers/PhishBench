@@ -1,8 +1,8 @@
 import time
 from typing import List, Dict, Callable, Union
 
-from phishbench.input.email_input.models import EmailMessage
-from phishbench.utils import phishbench_globals
+from ....input.email_input.models import EmailMessage
+from ....utils import phishbench_globals
 from .core import FeatureType
 
 

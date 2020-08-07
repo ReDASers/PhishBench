@@ -1,9 +1,8 @@
 import unittest
 
-from ....sample_emails import utils
-
+from phishbench.feature_extraction.email.features import email_header
 from phishbench.input.email_input.models import EmailHeader
-from phishbench.feature_extraction.email.reflection.features import email_header
+from ....sample_emails import utils # pylint: disable=import-error
 
 
 class TestHeaderFeatures(unittest.TestCase):
