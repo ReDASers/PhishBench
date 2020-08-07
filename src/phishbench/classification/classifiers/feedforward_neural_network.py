@@ -27,8 +27,8 @@ class FeedForwardNN(BaseClassifier):
         y = np.array(y)
         n_features = x.shape[1]
         self.clf = _build_model(n_features)
-        early_stopping = keras.callbacks.EarlyStopping(patience=3)
-        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=0, callbacks=[early_stopping])
+        early_stopping = keras.callbacks.EarlyStopping(monitor='loss', patience=10, min_delta=.001)
+        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=1, callbacks=[early_stopping])
 
     def predict_proba(self, x):
         if not self.clf:
