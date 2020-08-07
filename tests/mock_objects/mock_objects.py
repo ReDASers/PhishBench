@@ -27,7 +27,6 @@ def get_mock_config() -> ConfigParser:
 
 
 def get_soup(filename) -> BeautifulSoup:
-    print('GETTING SOUP')
     current_file_folder = pathlib.Path(__file__).parent.absolute()
     test_file = os.path.join(current_file_folder, 'mock_webpages', filename)
     with open(test_file) as f:
