@@ -147,14 +147,9 @@ def email_header_number_of_characters_subject(header: EmailHeader):
 
 @register_feature(FeatureType.HEADER, "number_of_special_characters_subject")
 def email_header_number_of_special_characters_subject(header: EmailHeader):
-    subject = header.subject
-
-    if subject is None:
-        return 0
-
-    num_char = len(subject)
-    num_space = len(re.findall(r' ', subject))
-    return len(subject) - num_char - num_space
+    if header.subject:
+        return len(re.findall(r'_|[^\w\s]', header.subject))
+    return 0
 
 
 @register_feature(FeatureType.HEADER, "is_forward")
