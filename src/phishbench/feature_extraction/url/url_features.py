@@ -59,43 +59,38 @@ def extract_url_features(urls: List[URLData], bad_url_list):
 
     corpus = []
     for url in tqdm(urls):
-        feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
-        feature_list_dict.append(feature_values)
-
+        try:
+            feature_values, _ = url_features(url, corpus, alexa_data)
+            feature_list_dict.append(feature_values)
+        except Exception:
+            error_string = "Error extracting features from {}".format(url.raw_url)
+            phishbench_globals.logger.warning(error_string, exc_info=True)
+            bad_url_list.append(url.raw_url)
     return feature_list_dict, corpus
 
 
-def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
-    dict_feature_values = {}
-    dict_extraction_times = {}
-    try:
-        phishbench_globals.logger.debug("rawurl: %s", str(url))
-        phishbench_globals.summary.write("URL: {}".format(url))
+def url_features(url: URLData, corpus, alexa_data):
+    dict_feature_values = dict()
+    dict_extraction_times = dict()
+    phishbench_globals.logger.debug("rawurl: %s", str(url))
 
-        feature_types = phishbench_globals.config['URL_Feature_Types']
-        if feature_types.getboolean('URL'):
-            single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
-            phishbench_globals.logger.debug("url_features >>>>>> complete")
-        if feature_types.getboolean("Network"):
-            single_network_features(url, dict_feature_values, dict_extraction_times)
-            phishbench_globals.logger.debug("network_features >>>>>> complete")
-        if feature_types.getboolean("HTML"):
-            single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
-            phishbench_globals.logger.debug("html_features >>>>>> complete")
-            downloaded_website = url.downloaded_website
-            soup = BeautifulSoup(downloaded_website.html, 'html5lib')
-            if feature_types.getboolean("JavaScript"):
-                single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
-                phishbench_globals.logger.debug("javascript features >>>>>> complete")
-            corpus.append(str(soup))
+    feature_types = phishbench_globals.config['URL_Feature_Types']
+    if feature_types.getboolean('URL'):
+        single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
+        phishbench_globals.logger.debug("url_features >>>>>> complete")
+    if feature_types.getboolean("Network"):
+        single_network_features(url, dict_feature_values, dict_extraction_times)
+        phishbench_globals.logger.debug("network_features >>>>>> complete")
+    if feature_types.getboolean("HTML"):
+        single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
+        phishbench_globals.logger.debug("html_features >>>>>> complete")
+        downloaded_website = url.downloaded_website
+        soup = BeautifulSoup(downloaded_website.html, 'html5lib')
+        if feature_types.getboolean("JavaScript"):
+            single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
+            phishbench_globals.logger.debug("javascript features >>>>>> complete")
+        corpus.append(str(soup))
 
-    except Exception as e:
-        phishbench_globals.logger.warning(traceback.format_exc())
-        phishbench_globals.logger.exception(e)
-        phishbench_globals.logger.warning(
-            "This URL has trouble being extracted and "
-            "will not be considered for further processing: %s", str(url))
-        list_bad_urls.append(str(url))
     return dict_feature_values, dict_extraction_times
 
 
