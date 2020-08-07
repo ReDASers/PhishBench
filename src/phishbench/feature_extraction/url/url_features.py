@@ -119,27 +119,6 @@ def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
     return dict_feature_values, dict_extraction_times
 
 
-def dump_features(url, feature_values, extraction_times, features_output_folder):
-    phishbench_globals.logger.debug("list_features: %d", len(feature_values))
-    raw_url = url.raw_url
-    with open(features_output_folder + "_feature_vector.pkl", 'ab') as feature_tracking:
-        pickle.dump("URL: " + raw_url, feature_tracking)
-        pickle.dump(feature_values, feature_tracking)
-    if phishbench_globals.config['HTML_Features'].getboolean('HTML_features'):
-        with open(features_output_folder + "_html_content.pkl", 'ab') as feature_tracking:
-            pickle.dump("URL: " + raw_url, feature_tracking)
-            html = url.downloaded_website.html
-            pickle.dump(html, feature_tracking)
-
-    with open(features_output_folder + "_feature_vector.txt", 'a+') as f:
-        f.write("URL: " + str(url) + '\n' + str(feature_values).replace('{', '').replace('}', '')
-                .replace(': ', ':').replace(',', '') + '\n\n')
-    with open(features_output_folder + "_time_stats.txt", 'a+') as f:
-        f.write(
-            "URL: " + str(url) + '\n' + str(extraction_times).replace('{', '').replace('}', '')
-            .replace(': ', ':').replace(',', '') + '\n\n')
-
-
 def single_url_feature(raw_url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
 
