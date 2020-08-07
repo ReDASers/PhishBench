@@ -219,11 +219,9 @@ def number_of_characters_body(body: EmailBody) -> int:
 
 @register_feature(FeatureType.EMAIL_BODY, 'number_of_special_characters_body')
 def number_of_special_characters_body(body: EmailBody) -> int:
-    if body.text is None:
-        return 0
-    number_of_characters_body = len(re.findall(r'\w', body.text))
-    number_of_spaces = len(re.findall(r' ', body.text))
-    return len(body.text) - number_of_characters_body - number_of_spaces
+    if body.text:
+        len(re.findall(r'_|[^\w\s]', body.text))
+    return 0
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'vocab_richness_body')
