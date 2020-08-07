@@ -31,7 +31,7 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
     print("Extracting features")
     legit_features, legit_corpus = extract_email_features(legit_emails, features)
 
-    print("Loading emails from{}".format(phish_dataset_folder))
+    print("Loading emails from {}".format(phish_dataset_folder))
     phish_emails, _ = pb_input.read_dataset_email(phish_dataset_folder)
     print("Extracting features")
     phish_features, phish_corpus = extract_email_features(phish_emails, features)
