@@ -91,6 +91,7 @@ def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test):
     """
     performance_list_dict = []
     for classifier in classifiers:
+        print("Evaluating {}.".format(classifier.name))
         metrics = evaluate_classifier(classifier, x_test, y_test)
         metrics['classifier'] = classifier.name
         performance_list_dict.append(metrics)
