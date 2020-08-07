@@ -284,6 +284,7 @@ def num_end_tag(body: EmailBody) -> int:
     for match in re.finditer(ultimate_regexp, body.text):
         if repr(match.group()).startswith("'</"):
             count += 1
+    return count
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'num_open_tag')
