@@ -1,5 +1,5 @@
-import pickle
 import traceback
+from typing import List
 
 from bs4 import BeautifulSoup
 from tqdm import tqdm
@@ -13,58 +13,43 @@ from ... import dataset
 
 
 def Extract_Features_Urls_Testing():
-    print(">>>>> Feature extraction: URL Testing Set")
-
-    feature_list_dict_test = []
-    bad_url_list = []
-
-    num_legit, data_legit_test = extract_url_features(dataset.test_legit_path(), bad_url_list)
-
-    num_phish, data_phish_test = extract_url_features(dataset.test_legit_path(), bad_url_list)
-
-    phishbench_globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
-    print(">>>>> Cleaning >>>>")
-    phishbench_globals.logger.debug("feature_list_dict_test: %d", len(feature_list_dict_test))
-    Cleaning(feature_list_dict_test)
-    print(">>>>> Cleaning >>>>>> Done")
-    print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
-
-    labels_test = ([0] * num_legit) + ([1] * num_phish)
-
-    corpus_test = data_legit_test + data_phish_test
-
-    return feature_list_dict_test, labels_test, corpus_test
+    features, labels, corpus = extract_labeled_dataset(dataset.test_legit_path(), dataset.test_phish_path())
+    print("Cleaning features")
+    Cleaning(features)
+    return features, labels, corpus
 
 
 def Extract_Features_Urls_Training():
-    print(">>>>> Feature extraction: URL Training Set >>>>>")
-
-    bad_url_list = []
-    print("Extracting Features from legitimate URLs")
-    legit_features, legit_corpus = extract_url_features(dataset.train_legit_path(), bad_url_list)
-
-    print("Extracting Features from Phishing URLs")
-    phish_features, phish_corpus = extract_url_features(dataset.train_legit_path(), bad_url_list)
-
+    features, labels, corpus = extract_labeled_dataset(dataset.train_legit_path(), dataset.train_phish_path())
     print("Cleaning features")
-    feature_list_dict_train = legit_features + phish_features
-    Cleaning(feature_list_dict_train)
-    print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
-
-    labels_train = ([0] * len(legit_features)) + ([1] * len(phish_features))
-    corpus_train = legit_corpus + phish_corpus
-    feature_list_dict_train = legit_features + phish_features
-    return feature_list_dict_train, labels_train, corpus_train
+    Cleaning(features)
+    return features, labels, corpus
 
 
-def extract_url_features(dataset_path, bad_url_list):
+def extract_labeled_dataset(legit_path, phish_path):
     download_url_flag = phishbench_globals.config['URL_Feature_Types'].getboolean('Network') or \
                         phishbench_globals.config['URL_Feature_Types'].getboolean('HTML')
+    bad_url_list = []
 
-    feature_list_dict = list()
-
-    url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
+    print("Extracting Features from {}".format(legit_path))
+    legit_urls, bad_urls = pb_input.read_dataset_url(legit_path, download_url_flag)
     bad_url_list.extend(bad_urls)
+    legit_features, legit_corpus = extract_url_features(legit_urls, bad_url_list)
+
+    print("Extracting Features from {}".format(phish_path))
+    phish_urls, bad_urls = pb_input.read_dataset_url(phish_path, download_url_flag)
+    bad_url_list.extend(bad_urls)
+    phish_features, phish_corpus = extract_url_features(phish_urls, bad_url_list)
+
+    features = legit_features + phish_features
+    labels = ([0] * len(legit_features)) + ([1] * len(phish_features))
+    corpus = legit_corpus + phish_corpus
+
+    return features, labels, corpus
+
+
+def extract_url_features(urls: List[URLData], bad_url_list):
+    feature_list_dict = list()
 
     alexa_data = {}
     if phishbench_globals.config['URL_Feature_Types'].getboolean("HTML") and \
@@ -73,7 +58,7 @@ def extract_url_features(dataset_path, bad_url_list):
         alexa_data = read_alexa(alexa_path)
 
     corpus = []
-    for url in tqdm(url_list):
+    for url in tqdm(urls):
         feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
         feature_list_dict.append(feature_values)
 
