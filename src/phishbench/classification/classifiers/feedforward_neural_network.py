@@ -1,3 +1,6 @@
+"""
+This module contains a built-in feed-forward network classifier
+"""
 import numpy as np
 import tensorflow.keras as keras
 from sklearn.exceptions import NotFittedError
@@ -19,16 +22,33 @@ def _build_model(n_features):
 
 
 class FeedForwardNN(BaseClassifier):
+    """
+    A FeedForward neural network
 
-    def __init__(self, io_dir):
+    Attributes
+    ----------
+    verbosity: int
+        The verbosity mode (0 = silent, 1 = progress bar, 2 = one line per epoch)
+    """
+    def __init__(self, io_dir, verbosity=0):
+        """
+
+        Parameters
+        ----------
+        io_dir
+        verbosity: int
+            The verbosity mode (0 = silent, 1 = progress bar, 2 = one line per epoch)
+            By default, this is 0
+        """
         super().__init__(io_dir, "FeedForwardNN.h5")
+        self.verbosity = verbosity
 
     def fit(self, x, y):
         y = np.array(y)
         n_features = x.shape[1]
         self.clf = _build_model(n_features)
         early_stopping = keras.callbacks.EarlyStopping(monitor='loss', patience=10, min_delta=.001)
-        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=1, callbacks=[early_stopping])
+        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=self.verbosity, callbacks=[early_stopping])
 
     def predict_proba(self, x):
         if not self.clf:
