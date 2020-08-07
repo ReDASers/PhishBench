@@ -194,13 +194,7 @@ def num_content_transfer_encoding_quoted_printable(body: EmailBody):
     return body.content_transfer_encoding_list.count('quoted-printable')
 
 
-# # endregion
-
-
-@register_feature(FeatureType.EMAIL_BODY, 'difficult_words')
-def difficult_words(body: EmailBody) -> int: \
-        return textstat.difficult_words(body.text)
-
+# endregion
 
 @register_feature(FeatureType.EMAIL_BODY, 'num_words_body')
 def num_words(body: EmailBody) -> int:
