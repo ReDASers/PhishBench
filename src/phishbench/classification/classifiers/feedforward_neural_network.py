@@ -20,15 +20,16 @@ def _build_model(n_features):
 
 class FeedForwardNN(BaseClassifier):
 
-    def __init__(self, io_dir):
+    def __init__(self, io_dir, verbosity=0):
         super().__init__(io_dir, "FeedForwardNN.h5")
+        self.verbosity = verbosity
 
     def fit(self, x, y):
         y = np.array(y)
         n_features = x.shape[1]
         self.clf = _build_model(n_features)
         early_stopping = keras.callbacks.EarlyStopping(monitor='loss', patience=10, min_delta=.001)
-        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=1, callbacks=[early_stopping])
+        self.clf.fit(x, y, epochs=150, batch_size=100, verbose=self.verbosity, callbacks=[early_stopping])
 
     def predict_proba(self, x):
         if not self.clf:
