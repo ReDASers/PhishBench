@@ -22,8 +22,24 @@ def _build_model(n_features):
 
 
 class FeedForwardNN(BaseClassifier):
+    """
+    A FeedForward neural network
 
+    Attributes
+    ----------
+    verbosity: int
+        The verbosity mode (0 = silent, 1 = progress bar, 2 = one line per epoch)
+    """
     def __init__(self, io_dir, verbosity=0):
+        """
+
+        Parameters
+        ----------
+        io_dir
+        verbosity: int
+            The verbosity mode (0 = silent, 1 = progress bar, 2 = one line per epoch)
+            By default, this is 0
+        """
         super().__init__(io_dir, "FeedForwardNN.h5")
         self.verbosity = verbosity
 
