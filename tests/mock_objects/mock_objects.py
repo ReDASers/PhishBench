@@ -1,7 +1,8 @@
-from configparser import ConfigParser
-from bs4 import BeautifulSoup
-import pathlib
 import os
+import pathlib
+from configparser import ConfigParser
+
+from bs4 import BeautifulSoup
 
 
 def get_mock_config() -> ConfigParser:

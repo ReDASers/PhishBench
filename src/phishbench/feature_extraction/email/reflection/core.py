@@ -23,12 +23,13 @@ def register_feature(feature_type: FeatureType, config_name: str):
         The type of feature
     config_name
         The name of the feature in the config file
-        
+
     """
-    def wrapped(fn):
-        @wraps(fn)
+
+    def wrapped(feature_function):
+        @wraps(feature_function)
         def wrapped_f(*args, **kwargs):
-            return fn(*args, **kwargs)
+            return feature_function(*args, **kwargs)
 
         wrapped_f.config_name = config_name
         wrapped_f.feature_type = feature_type
