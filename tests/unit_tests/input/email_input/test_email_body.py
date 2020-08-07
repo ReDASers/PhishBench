@@ -127,3 +127,10 @@ class TestEmailBody(unittest.TestCase):
         body = EmailBody(msg)
 
         self.assertIn('iso-5636-2', body.charset_list)
+
+    def test_multipart_root(self):
+        msg = utils.get_email_text('BodyTests/Test_No_CT.txt')
+        body = EmailBody(msg)
+
+        expected = 'Ok. I am here til 6. Just let me know. No stress.'
+        self.assertEqual(body.text.strip(), expected)
