@@ -1,11 +1,14 @@
 """
 This module contains code for email feature extraction.
 """
-from typing import List, Callable
+import time
+from typing import List, Callable, Dict, Tuple
 
 from tqdm import tqdm
 
 from . import reflection
+from . import features as internal_features
+from .reflection import FeatureType
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
@@ -20,7 +23,7 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
         The folder containing emails of the legitimate class
     :return:
     """
-    features = reflection.load_internal_features()
+    features = load_internal_features()
     print("Loaded {} features".format(len(features)))
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
@@ -58,12 +61,94 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     feature_dict_list = list()
 
     for email_msg in tqdm(emails):
-        feature_values, _ = reflection.extract_features_from_single_email(features, email_msg)
+        feature_values, _ = extract_features_from_single_email(features, email_msg)
         feature_dict_list.append(feature_values)
 
     corpus = [msg.body.text for msg in emails]
 
     return feature_dict_list, corpus
+
+
+def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
+    """
+    Extracts a single feature from a single email
+    Parameters
+    ----------
+    feature
+        The feature to extract
+    email_msg: EmailMessage
+        The email to extract the feature from
+
+    Returns
+    -------
+    feature_value
+        The value of the feature
+    ex_time: float
+        The time to extract the feature
+    """
+    phishbench_globals.logger.debug(feature.config_name)
+    start = time.process_time()
+    try:
+        if feature.feature_type == FeatureType.EMAIL_BODY:
+            feature_value = feature(email_msg.body)
+        elif email_msg.header is not None:
+            feature_value = feature(email_msg.header)
+        else:
+            raise ValueError('Email Message must have a header!')
+    except Exception:
+        error_string = "Error extracting {}".format(feature.config_name)
+        phishbench_globals.logger.warning(error_string, exc_info=True)
+        feature_value = -1
+    end = time.process_time()
+    ex_time = end - start
+    return feature_value, ex_time
+
+
+def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
+    """
+    Extracts multiple features from a single email
+    Parameters
+    ----------
+    features: List
+        The features to extract
+    email_msg: EmailMessage
+        The email to extract the features from
+
+    Returns
+    -------
+    feature_values: Dict
+        The extracted feature values
+    extraction_times: Dict
+        The time it took to extract each feature
+    """
+    dict_feature_values = dict()
+    dict_feature_times = dict()
+
+    for feature in features:
+        result, ex_time = extract_single_feature_email(feature, email_msg)
+        if isinstance(result, dict):
+            temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
+            dict_feature_values.update(temp_dict)
+        else:
+            dict_feature_values[feature.config_name] = result
+        dict_feature_times[feature.config_name] = ex_time
+
+    return dict_feature_values, dict_feature_times
+
+
+def load_internal_features(filter_features=True) -> List[Callable]:
+    """
+    Loads built-in email features
+
+    Parameters
+    ----------
+    filter_features: bool
+        Whether or not to filter the features
+    Returns
+    -------
+
+    """
+    return reflection.load_features(internal_features, filter_features)
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
