@@ -34,7 +34,7 @@ class LogisticRegression(BaseClassifier):
                 "C": [1.0, 0.5, .025]
             },
             {
-                "solver": ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
+                "solver": ['newton-cg', 'lbfgs', 'sag', 'saga'],
                 "penalty": ['none']
             },
             {
