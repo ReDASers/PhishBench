@@ -81,17 +81,6 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         extraction_time_list_dict.append(extraction_times)
 
         # This code causes PhishBench to crash with certain URLs.
-        # See Issue #46 on GitHub
-        # TODO: Rewrite in a way that doesn't cause PhishBench to crash due to invalid paths
-        # norm_path = ntpath.normpath(str(url))
-        # feature_dump_path = "Data_Dump/URLs_Backup/" + '_'.join(re.split(r'[:\\]+', norm_path))
-        # if not os.path.exists("Data_Dump/URLs_Backup"):
-        #     os.makedirs("Data_Dump/URLs_Backup")
-        # dump_features(url, feature_values, extraction_times, feature_dump_path)
-        for feature, extraction_time in extraction_times.items():
-            phishbench_globals.summary.write("{} \n".format(feature))
-            phishbench_globals.summary.write("extraction time: {} \n".format(extraction_time))
-        phishbench_globals.summary.write("\n#######\n")
 
     return len(feature_list_dict) - count_files, corpus
 
