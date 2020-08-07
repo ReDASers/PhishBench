@@ -19,9 +19,9 @@ def Extract_Features_Urls_Testing():
     extraction_time_dict_test = []
     bad_url_list = []
 
-    num_legit, data_legit_test = extract_url_features(dataset.test_legit_path(), feature_list_dict_test,
+    num_legit, data_legit_test = extract_url_features(dataset.test_legit_path(),
                                                       extraction_time_dict_test, bad_url_list)
-    num_phish, data_phish_test = extract_url_features(dataset.test_legit_path(), feature_list_dict_test,
+    num_phish, data_phish_test = extract_url_features(dataset.test_legit_path(), 
                                                       extraction_time_dict_test, bad_url_list)
     phishbench_globals.logger.debug(">>>>> Feature extraction: Testing Set >>>>> Done ")
     print(">>>>> Cleaning >>>>")
