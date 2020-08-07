@@ -5,7 +5,7 @@ import chardet
 
 def get_relative_path(filename):
     current_loc = path.dirname(path.abspath(__file__))
-    loc = path.join(current_loc, filename)
+    loc = path.join(current_loc, "Resources", filename)
     return loc
 
 
