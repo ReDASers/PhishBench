@@ -1,3 +1,6 @@
+"""
+This module contains the built-in email body features.
+"""
 import re
 
 from bs4 import BeautifulSoup
