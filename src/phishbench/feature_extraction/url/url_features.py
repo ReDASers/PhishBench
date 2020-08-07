@@ -40,33 +40,35 @@ def Extract_Features_Urls_Testing():
 def Extract_Features_Urls_Training():
     print(">>>>> Feature extraction: URL Training Set >>>>>")
 
-    feature_list_dict_train = []
     extraction_time_dict_train = []
     bad_url_list = []
     print("Extracting Features from legitimate URLs")
-    num_legit, data_legit_train = extract_url_features(dataset.train_legit_path(), feature_list_dict_train,
+    legit_features, legit_corpus = extract_url_features(dataset.train_legit_path(),
                                                        extraction_time_dict_train, bad_url_list)
     print("Extracting Features from Phishing URLs")
-    num_phish, data_phish_train = extract_url_features(dataset.train_legit_path(), feature_list_dict_train,
+    phish_features, phish_corpus = extract_url_features(dataset.train_legit_path(),
                                                        extraction_time_dict_train, bad_url_list)
 
-    print(">>>>> Feature extraction: Training Set >>>>> Done ")
+    print("Cleaning features")
+    feature_list_dict_train = legit_features + phish_features
     Cleaning(feature_list_dict_train)
-    print(">>>>> Cleaning >>>>>> Done")
     print("Number of bad URLs in training dataset: {}".format(len(bad_url_list)))
 
-    labels_train = ([0] * num_legit) + ([1] * num_phish)
-    corpus_train = data_legit_train + data_phish_train
-
+    labels_train = ([0] * len(legit_features)) + ([1] * len(phish_features))
+    corpus_train = legit_corpus + phish_corpus
+    feature_list_dict_train = legit_features + phish_features
     return feature_list_dict_train, labels_train, corpus_train
 
 
-def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_dict, bad_url_list):
+def extract_url_features(dataset_path, extraction_time_list_dict, bad_url_list):
     download_url_flag = phishbench_globals.config['URL_Feature_Types'].getboolean('Network') or \
                         phishbench_globals.config['URL_Feature_Types'].getboolean('HTML')
 
+    feature_list_dict = list()
+
     url_list, bad_urls = pb_input.read_dataset_url(dataset_path, download_url_flag)
     bad_url_list.extend(bad_urls)
+
     alexa_data = {}
     if phishbench_globals.config['URL_Feature_Types'].getboolean("HTML") and \
             phishbench_globals.config["HTML_Features"].getboolean("ranked_matrix"):
@@ -74,15 +76,12 @@ def extract_url_features(dataset_path, feature_list_dict, extraction_time_list_d
         alexa_data = read_alexa(alexa_path)
 
     corpus = []
-    count_files = len(feature_list_dict)
     for url in tqdm(url_list):
         feature_values, extraction_times = url_features(url, corpus, alexa_data, bad_url_list)
         feature_list_dict.append(feature_values)
         extraction_time_list_dict.append(extraction_times)
 
-        # This code causes PhishBench to crash with certain URLs.
-
-    return len(feature_list_dict) - count_files, corpus
+    return feature_list_dict, corpus
 
 
 def url_features(url: URLData, corpus, alexa_data, list_bad_urls):
