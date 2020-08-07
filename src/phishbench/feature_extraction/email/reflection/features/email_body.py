@@ -431,6 +431,6 @@ def email_body_gunning_fog(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'text_standard')
 def email_body_text_standard(body: EmailBody):
-    return textstat.text_standard(body.text)
+    return textstat.text_standard(body.text, float_output=True)
 
 # endregion
