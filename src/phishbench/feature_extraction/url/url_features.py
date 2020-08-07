@@ -13,7 +13,7 @@ from ... import dataset
 
 
 def Extract_Features_Urls_Testing():
-    print(">>>>> Feature extraction: Testing Set")
+    print(">>>>> Feature extraction: URL Testing Set")
 
     feature_list_dict_test = []
     extraction_time_dict_test = []
@@ -38,9 +38,7 @@ def Extract_Features_Urls_Testing():
 
 
 def Extract_Features_Urls_Training():
-    print("===============================================================")
-    print("===============================================================")
-    print(">>>>> Feature extraction: Training Set >>>>>")
+    print(">>>>> Feature extraction: URL Training Set >>>>>")
 
     feature_list_dict_train = []
     extraction_time_dict_train = []
