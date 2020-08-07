@@ -12,5 +12,5 @@ class TestHeaderFeatures(unittest.TestCase):
         msg = utils.get_binary_email('HeaderTests/Test Email 1.txt')
         header = EmailHeader(msg)
         header.subject = 'asdf%sl$$ sd*_sdlfj'
-        result = email_header.email_header_number_of_special_characters_subject(header)
+        result = email_header.number_of_special_characters_subject(header)
         self.assertEqual(result, 5)
