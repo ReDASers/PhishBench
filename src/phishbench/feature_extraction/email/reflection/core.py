@@ -15,26 +15,27 @@ class FeatureType(Enum):
 
 
 def register_feature(feature_type: FeatureType, config_name: str):
-    def wrapped(fn):
-        @wraps(fn)
+    """
+    Registers a feature for use in Phishbench
+    Parameters
+    ----------
+    feature_type: FeatureType
+        The type of feature
+    config_name
+        The name of the feature in the config file
+
+    """
+
+    def wrapped(feature_function):
+        @wraps(feature_function)
         def wrapped_f(*args, **kwargs):
-            return fn(*args, **kwargs)
+            return feature_function(*args, **kwargs)
 
         wrapped_f.config_name = config_name
         wrapped_f.feature_type = feature_type
         return wrapped_f
 
     return wrapped
-
-
-def load_internal_features(filter_features=True) -> List[Callable]:
-    """
-    Loads internal features
-    :param filter_features: Whether or not to filter the features based on Globals.config.
-    :return: A list containing the internal PhishBench features.
-    """
-    from . import features
-    return load_features(features, filter_features)
 
 
 def _check_feature(feature: Callable) -> bool:
@@ -59,6 +60,7 @@ def load_features(source, filter_features=True) -> List[Callable]:
         features_module = source
     else:
         raise ValueError("source must be a module or string")
+
     # loads all features from module
     features = [getattr(features_module, x) for x in dir(features_module)]
     features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
