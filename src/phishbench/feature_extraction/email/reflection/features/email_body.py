@@ -263,55 +263,55 @@ def hidden_text(body: EmailBody):
     return regex_font_color.search(body.text) is not None
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'count_href_tag')
-def count_href_tag(body: EmailBody) -> int:
+@register_feature(FeatureType.EMAIL_BODY, 'num_href_tag')
+def num_href_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
     ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
                                  flags=re.MULTILINE)
-    count_href_tag = 0
+    count = 0
     for match in re.finditer(ultimate_regexp, body.text):
         if repr(match.group()).startswith("'<a"):
-            count_href_tag += 1
-    return count_href_tag
+            count += 1
+    return count
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'end_tag_count')
-def end_tag_count(body: EmailBody) -> int:
+@register_feature(FeatureType.EMAIL_BODY, 'num_end_tag')
+def num_end_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
     ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
                                  flags=re.MULTILINE)
-    end_tag_count = 0
+    count = 0
     for match in re.finditer(ultimate_regexp, body.text):
         if repr(match.group()).startswith("'</"):
-            end_tag_count += 1
+            count += 1
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'open_tag_count')
-def open_tag_count(body: EmailBody) -> int:
+@register_feature(FeatureType.EMAIL_BODY, 'num_open_tag')
+def num_open_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
     ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
                                  flags=re.MULTILINE)
-    open_tag_count = 0
+    count = 0
     for match in re.finditer(ultimate_regexp, body.text):
         if not repr(match.group()).startswith("'</"):
-            open_tag_count += 1
-    return open_tag_count
+            count += 1
+    return count
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'on_mouse_over')
-def on_mouse_over(body: EmailBody) -> int:
+@register_feature(FeatureType.EMAIL_BODY, 'num_on_mouse_over')
+def num_on_mouse_over(body: EmailBody) -> int:
     if body.text is None:
         return 0
     ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
                                  flags=re.MULTILINE)
-    on_mouse_over = 0
+    count = 0
     for match in re.finditer(ultimate_regexp, body.text):
         if repr(match.group()).startswith("'<a onmouseover"):
-            on_mouse_over += 1
-    return on_mouse_over
+            count += 1
+    return count
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'blacklisted_words_body')
