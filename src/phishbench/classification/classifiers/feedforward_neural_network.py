@@ -1,3 +1,6 @@
+"""
+This module contains a built-in feed-forward network classifier
+"""
 import numpy as np
 import tensorflow.keras as keras
 from sklearn.exceptions import NotFittedError
