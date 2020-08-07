@@ -1,5 +1,7 @@
 The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
+![Test](https://github.com/ReDASers/Phishing-Detection/workflows/Test/badge.svg)
+
 # Installation
 
 PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
