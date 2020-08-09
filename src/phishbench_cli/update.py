@@ -12,7 +12,7 @@ from phishbench.evaluation.core import load_internal_metrics
 from phishbench.feature_extraction.email.email_features import load_internal_features as load_email_features
 
 
-def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
+def make_config(list_features, list_imbalanced_dataset):
     config = configparser.ConfigParser()
 
     config[dataset_settings.DATASET_PATH_SECTION] = dataset_settings.DEFAULT_SETTINGS
@@ -57,15 +57,13 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
-    config[classification.settings.CLASSIFIERS_SECTION] = {}
-    classifiers_section = config[classification.settings.CLASSIFIERS_SECTION]
-    for classifier in list_classifiers:
-        classifiers_section[classifier] = "True"
+    config[classification.settings.CLASSIFIERS_SECTION] = {
+        x.__name__: "True" for x in load_internal_classifiers(filter_classifiers=False)
+    }
 
-    config[evaluation_settings.EVALUATION_SECTION] = {}
-    metrics_section = config[evaluation_settings.EVALUATION_SECTION]
-    for metric in list_evaluation_metrics:
-        metrics_section[metric] = "True"
+    config[evaluation_settings.EVALUATION_SECTION] = {
+        x.config_name: "True" for x in load_internal_metrics(filter_metrics=False)
+    }
 
     config["Summary"] = {}
     summary_section = config["Summary"]
@@ -130,22 +128,18 @@ def update_list():
         if inspect.isfunction(element):
             list_features.append(member)
 
-    list_classifiers = [x.__name__ for x in load_internal_classifiers(filter_classifiers=False)]
-
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
         if inspect.isfunction(element):
             list_imbalanced_dataset.append(member)
 
-    list_evaluation_metrics = [x.config_name for x in load_internal_metrics(filter_metrics=False)]
-
-    return list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics
+    return list_features, list_imbalanced_dataset
 
 
 def main():
     # execute only if run as a script
-    list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics = update_list()
-    make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
+    list_features, list_imbalanced_dataset = update_list()
+    make_config(list_features, list_imbalanced_dataset)
 
 
 if __name__ == "__main__":
