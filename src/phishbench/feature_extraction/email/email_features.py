@@ -151,7 +151,7 @@ def load_internal_features(filter_features=True) -> List[Callable]:
         A list of feature functions
     """
     modules = load_local_modules()
-    #modules.append(internal_features)
+    modules.append(internal_features)
     loaded_features = [reflection.load_features(module, filter_features) for module in modules]
     features = list(itertools.chain.from_iterable(loaded_features))
     return features
