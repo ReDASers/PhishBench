@@ -45,24 +45,25 @@ def _check_feature(feature: Callable) -> bool:
     return phishbench_globals.config[feature_type.value].getboolean(feature.config_name)
 
 
-def load_features(source, filter_features=True) -> List[Callable]:
+def load_features(features_module, filter_features=True) -> List[Callable]:
     """
-    Loads the PhishBench features from a module
+    Loads features from a module
+    Parameters
+    ----------
+    features_module: ModuleType
+        The module to import features from
+    filter_features: bool
+        Whether or not to load features based on `phishbench.utils.phishbench_globals.config`
 
-    :param source: The module or name of the module to load the features from
-    :param filter_features: Whether or not to filter the features based on Globals.config.
-
-    :return: A list containing all the features in the module.
+    Returns
+    -------
+    A list of features in the module.
     """
-    if isinstance(source, str):
-        features_module = importlib.import_module(source)
-    elif inspect.ismodule(source):
-        features_module = source
-    else:
+    if not inspect.ismodule(features_module):
         raise ValueError("source must be a module or string")
-
     # loads all features from module
     features = [getattr(features_module, x) for x in dir(features_module)]
+
     features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
 
     if filter_features:
