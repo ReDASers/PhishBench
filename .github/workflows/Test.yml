@@ -89,3 +89,7 @@ jobs:
         cd "tests/integration tests/url_extraction"
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
+
+    - name: Test Generate Config
+      run: make-phishbench-config
+        
