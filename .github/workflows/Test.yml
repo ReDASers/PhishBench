@@ -90,6 +90,11 @@ jobs:
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
 
+    - name: Run Email 1-Step test
+      run: |
+        cd "tests/integration tests/email_extraction"
+        phishbench -f Test_A.ini -c
+
     - name: Test Generate Config
       run: make-phishbench-config
         

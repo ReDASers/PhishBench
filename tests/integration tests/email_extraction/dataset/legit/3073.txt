@@ -1,0 +1,290 @@
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Fri, 20 May 2016 17:02:15 -0400
+From: "Crystal, Andy" <CrystalA@dnc.org>
+To: "Freundlich, Christina" <FreundlichC@dnc.org>, "Reif, Eric"
+	<ReifE@dnc.org>, EMail-Vetting_D <EMail-Vetting_D@dnc.org>
+Subject: RE: For approval: Factivists for 5/21
+Thread-Topic: For approval: Factivists for 5/21
+Thread-Index: AQHRstS05lwChHb0M0y5Y9ki2vRNUp/CTobwgAABBJA=
+Date: Fri, 20 May 2016 14:02:15 -0700
+Message-ID: <F0691438AC417845A6BA92342CE019776ECE4092@dncdag1.dnc.org>
+References: <D364E91E.83A5C%reife@dnc.org>
+ <AAEA4E36C4D7A2449432CA66AA1738995462C8A0@dncdag1.dnc.org>
+In-Reply-To: <AAEA4E36C4D7A2449432CA66AA1738995462C8A0@dncdag1.dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DNCHUBCAS1.dnc.org
+X-MS-Has-Attach:
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+	boundary="_000_F0691438AC417845A6BA92342CE019776ECE4092dncdag1dncorg_"
+MIME-Version: 1.0
+
+--_000_F0691438AC417845A6BA92342CE019776ECE4092dncdag1dncorg_
+Content-Type: text/plain; charset="us-ascii"
+
+One small ed
+
+From: Freundlich, Christina
+Sent: Friday, May 20, 2016 4:57 PM
+To: Reif, Eric; EMail-Vetting_D
+Subject: RE: For approval: Factivists for 5/21
+
+Ok
+
+From: Reif, Eric
+Sent: Friday, May 20, 2016 4:18 PM
+To: EMail-Vetting_D
+Subject: For approval: Factivists for 5/21
+
+Hi all - We'll send this out to Factivists tomorrow. Let me know if you have any flags.
+
+Sender: 2016 DNC Factivists
+Subject:
+
+Hey there, NAME -
+
+After another week of getting used to the idea of Donald Trump as their party's presumptive nominee, Republicans are now trying to convince the rest of us that there's nothing out of the ordinary about Trump's candidacy and that supporting him is business as usual.
+
+We'll be blunt: There is noting nothing typical about Donald Trump or the campaign he's running.
+
+Typical candidates are held to certain standards of decency. Not Trump.
+
+https://twitter.com/TheDemocrats/status/732214342020648960
+
+Typical candidates are expected to release their tax returns or risk facing serious questions from the press and voters. Not Trump.
+
+https://twitter.com/TheDemocrats/status/732264686054473728
+
+Typical candidates understand there are certain lines we don't cross as Americans. Not Trump.
+
+https://twitter.com/TheDemocrats/status/732303206265573378
+
+Donald Trump is a uniquely dangerous candidate, and we can't forget that.
+
+https://twitter.com/TheDemocrats/status/733306339947089921
+
+As President Obama put it:
+
+https://twitter.com/TheDemocrats/status/733692814253535234
+
+As Factivists, it's our job to get the word out about just how high the stakes are this November and how important it is that we elect Democrats to stop Trump and his fellow Republicans. So please retweet and help us spread the facts.
+
+Thanks for playing your part, NAME. Talk to you next week.
+
+2016 DNC Factivists
+
+
+--_000_F0691438AC417845A6BA92342CE019776ECE4092dncdag1dncorg_
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<meta name="Generator" content="Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-priority:99;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.EmailStyle17
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang="EN-US" link="blue" vlink="purple">
+<div class="WordSection1">
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D">One small ed<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in 0in 0in">
+<p class="MsoNormal"><b><span style="font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style="font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Freundlich, Christina
+<br>
+<b>Sent:</b> Friday, May 20, 2016 4:57 PM<br>
+<b>To:</b> Reif, Eric; EMail-Vetting_D<br>
+<b>Subject:</b> RE: For approval: Factivists for 5/21<o:p></o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D">Ok
+<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in 0in 0in">
+<p class="MsoNormal"><b><span style="font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style="font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Reif, Eric
+<br>
+<b>Sent:</b> Friday, May 20, 2016 4:18 PM<br>
+<b>To:</b> EMail-Vetting_D<br>
+<b>Subject:</b> For approval: Factivists for 5/21<o:p></o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Hi all &#8212; We&#8217;ll send this out to Factivists tomorrow. Let me know if you have any flags.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Sender: 2016 DNC Factivists<o:p></o:p></span></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Subject:&nbsp;</span><span style="color:black"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Hey there, NAME&nbsp;</span><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">&#8212;</span><span style="color:black"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="color:black">After another week of getting used to the idea of Donald Trump as their party&#8217;s presumptive nominee, Republicans are now trying to convince the rest of us that there&#8217;s nothing out of the ordinary about Trump&#8217;s
+ candidacy and that supporting him is business as usual.&nbsp;<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="color:black">We&#8217;ll be blunt: There is <s>noting</s>
+</span><span style="color:#1F497D;background:aqua;mso-highlight:aqua">nothing</span><span style="color:#1F497D">
+</span><span style="color:black">typical about Donald Trump or the campaign he&#8217;s running.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="color:black">Typical candidates are held to certain standards of decency. Not Trump.&nbsp;<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><a href="https://twitter.com/TheDemocrats/status/732214342020648960">https://twitter.com/TheDemocrats/status/732214342020648960</a><o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Typical candidates are expected to release their tax returns or risk facing serious questions from the press and voters. Not Trump.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><a href="https://twitter.com/TheDemocrats/status/732264686054473728">https://twitter.com/TheDemocrats/status/732264686054473728</a><o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Typical candidates understand there are certain lines we don&#8217;t cross as Americans. Not Trump.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><a href="https://twitter.com/TheDemocrats/status/732303206265573378">https://twitter.com/TheDemocrats/status/732303206265573378</a><o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Donald Trump is a uniquely dangerous candidate, and we can&#8217;t forget that.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><a href="https://twitter.com/TheDemocrats/status/733306339947089921">https://twitter.com/TheDemocrats/status/733306339947089921</a><o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">As President Obama put it:&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><a href="https://twitter.com/TheDemocrats/status/733692814253535234">https://twitter.com/TheDemocrats/status/733692814253535234</a><o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">As Factivists, it&#8217;s our job to get the word out about just how high the stakes are this November and how important it is that we elect Democrats to stop Trump
+ and his fellow Republicans. So please retweet and help us spread the facts.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">Thanks for playing your part, NAME. Talk to you next week.<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black">2016 DNC Factivists&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_F0691438AC417845A6BA92342CE019776ECE4092dncdag1dncorg_--
