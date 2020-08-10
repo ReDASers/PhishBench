@@ -1,0 +1,134 @@
+ online-team@ebay.com  Fri Jun 17 12:53:48 2005
+Return-Path: <online-team@ebay.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id 327DD536EC3
+	for <username@login.domain.com>; Fri, 17 Jun 2005 12:53:48 -0400 (EDT)
+Received: from 10.0.2.3 (unknown [61.54.102.94])
+	by mail1.domain.com (Postfix) with SMTP id D2A6C85A556
+	for <username@domain.com>; Fri, 17 Jun 2005 12:53:44 -0400 (EDT)
+Received: from [61.228.126.112] by 10.0.2.3 id FF46236r7423; Fri, 17 Jun 2005 11:43:31 -0600
+Message-ID: <p4wb-6z--38h724-97x79r4$p@d4bk6>
+From: "eBay Support Team" <online-team@ebay.com>
+Reply-To: "eBay Support Team" <online-team@ebay.com>
+To: username@domain.com
+Subject: Information about your eBay account. conformation code zfliichgep
+Date: Fri, 17 Jun 05 11:43:31 GMT
+X-Mailer: wolchok v.5.
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="B1F3__64_5_"
+X-Priority: 3
+X-MSMail-Priority: Normal
+Status: RO
+X-Status: 
+X-Keywords:                 
+X-UID: 8
+
+
+--B1F3__64_5_
+Content-Type: text/html;
+Content-Transfer-Encoding: quoted-printable
+
+<DIV><DIV><DIV><DIV><DIV><DIV><DIV><DIV><DIV><DIV><DIV><DIV><A href=3D"htt=
+p://pages.ebay.com/" target=3D_blank> <IMG alt=3D"Register for eBay"
+src=3D=
+"http://pics.ebay.com/aw/pics/register/HeaderRegister_387x40.gif"
+border=3D=
+0 width=3D387 height=3D40></A><DIV><FONT face=3DArial size=3D2><TABLE cell=
+Spacing=3D0 cellPadding=3D0 width=3D600 border=3D0><TBODY><TR><TD
+colSpan=3D=
+2><IMG height=3D10 alt=3D" " src=3D"http://pics.ebay.com/aw/pics/spacer.gi=
+f" width=3D1></TD></TR><TR><TD bgColor=3D#ffcc00 colSpan=3D2><IMG
+height=3D=
+2 alt=3D" " src=3D"http://pics.ebay.com/aw/pics/spacer.gif" width=3D1></TD=
+></TR><TR bgColor=3D#ffe580><TD width=3D25><IMG height=3D3 alt=3D"" src=3D=
+"http://pics.ebay.com/aw/pics/sitewide/leftLine_16x3.gif" width=3D16 align=
+=3Dmiddle></TD><TD vAlign=3Dcenter width=3D575><TABLE cellSpacing=3D0 cell=
+Padding=3D1 width=3D"100%" border=3D0><TBODY><TR><TD vAlign=3Dcenter noWra=
+p><B>Dear valued customer</B></TD><TD vAlign=3Dcenter noWrap align=3Dright=
+><A href=3D"http://pages.ebay.com/help/new/signin.html" target=3D_blank on=
+filtered=3D"return openHelpWindow(this.href);"><IMG height=3D14 src=3D"htt=
+p://pics.ebay.com/aw/pics/listings/questionMark_14x14.gif" width=3D14 bord=
+er=3D0></A><IMG height=3D1 alt=3D" " src=3D"http://pics.ebay.com/aw/pics/s=
+pacer.gif" width=3D4><FONT face=3D"Arial, Helvetica, sans-serif" size=3D2>=
+<A href=3D"http://pages.ebay.com/help/new/signin.html" target=3D_blank onf=
+iltered=3D"return openHelpWindow(this.href);">Need Help?</A></FONT><IMG he=
+ight=3D1 alt=3D" " src=3D"http://pics.ebay.com/aw/pics/spacer.gif"
+width=3D=
+2></TD></TR></TBODY></TABLE></TD></TR><TR><TD bgColor=3D#ffcc00 colSpan=3D=
+2><IMG height=3D2 alt=3D" " src=3D"http://pics.ebay.com/aw/pics/spacer.gif=
+" width=3D1></TD></TR></TBODY></TABLE></FONT><DIV></DIV><DIV><FONT face=3D=
+Arial size=3D2></FONT></DIV><DIV><FONT face=3DArial size=3D2><DIV><B><FONT=
+ face=3DArial size=3D2><DIV><DIV style=3D"width: 605; height: 224"><B><FON=
+T face=3Darial> We regret to inform you that your eBay account could be su=
+spended if you don't re-update your account information. To resolve this p=
+roblems please </FONT> <A target=3D"_blank" href=3D"http://confirm-ebaymai=
+n.com/?eBaylSAPI.dll&VerifyRegistration"><FONT face=3Darial color=3D#0000f=
+f>click here</FONT></a></B><FONT face=3Darial> and re-enter your account i=
+nformation. If your problems could not be resolved your account will be su=
+spended for a period of 3-4 days, after this period your account will be t=
+erminated.<br><BR>For the User Agreement, Section 9, we may immediately is=
+sue a warning, temporarily suspend, indefinitely suspend or terminate your=
+ membership and refuse to provide our services to you if we believe that y=
+our actions may cause financial loss or legal liability for you, our users=
+ or us. We may also take these actions if we are unable to verify or authe=
+nticate any information you provide to us.<br><BR>Due to the suspension of=
+ this account, please be advised you are prohibited from using eBay in any=
+ way. This includes the registering of a new account. Please note that thi=
+s suspension does not relieve you of your agreed-upon obligation to pay an=
+y fees you may owe to eBay.</FONT></DIV><B></B></DIV><B></B></FONT></B></D=
+IV><B><FONT face=3DArial size=3D2><B></B></FONT></B></FONT></DIV><FONT fac=
+e=3DArial size=3D2><B><FONT face=3DArial size=3D2><B></B></FONT></B></FONT=
+></DIV><DIV><FONT face=3DArial size=3D2><B><FONT face=3DArial size=3D2><B>=
+<DIV></DIV><DIV></DIV><DIV><BR><FONT face=3Darial>Regards,Safeharbor Depar=
+tment eBay, Inc</FONT></B></DIV></FONT></B><FONT size=3D2></FONT><B></B><D=
+IV><B><FONT face=3Darial size=3D2>The eBay team.</FONT></B></DIV><DIV><FON=
+T face=3Darial><FONT size=3D2></FONT><B></B></FONT></DIV><DIV><B><FONT fac=
+e=3Darial size=3D2>This is an automatic message. Please do not reply.</FON=
+T></B></DIV><DIV><FONT face=3DArial size=3D2></FONT><B></B></DIV><DIV><B><=
+BR><TABLE cellSpacing=3D0 cellPadding=3D0 width=3D599 bgColor=3D#ffcc00 bo=
+rder=3D0><TBODY><TR><TD height=3D2><IMG height=3D2 src=3D"http://pics.ebay=
+com/aw/pics/spacer.gif" width=3D2></TD></TR></TBODY></TABLE><CURSIVE
+src=3D=
+"http://include.ebay.com/aw/pics/js/stats/ss.js"></SCRIPT><IMG height=3D1 =
+width=3D1 border=3D0 name=3Ds_i_ebay> <CURSIVE src=3D"http://include.ebay.=
+com/aw/pics/js/stats/ss2.js"></SCRIPT><P><TABLE cellSpacing=3D0 cellPaddin=
+g=3D0 width=3D600 border=3D0><TBODY><TR><TD colSpan=3D2><BR><HR align=3Dce=
+nter width=3D500><BR><DIV align=3Dcenter><FONT face=3D"Arial, Verdana, Hel=
+vetica, sans-serif" size=3D2><A href=3D"http://pages.ebay.com/community/in=
+dex.html?ssPageName=3Df:f:ann:US" target=3D_blank>Announcements</A>   |   =
+<A href=3D"http://cgi4.ebay.com/aw-cgi/eBayISAPI.dll?RegisterShow&ssPageNa=
+me=3Df:f:reg:US" target=3D_blank>Register</A>   |   <A href=3D"http://page=
+s.ebay.com/help/confidence/hub.html?ssPageName=3Df:f:stips:US" target=3D_b=
+lank>Safe Trading Tips</A>   |   <A href=3D"http://pages.ebay.com/help/pol=
+icies/hub.html?ssPageName=3Df:f:policy:US" target=3D_blank>Policies</A>   =
+|   <A href=3D"http://pages.ebay.com/help/new/feedback.html" target=3D_bla=
+nk onfiltered=3D"return openHelpWindow(this.href);">Feedback Forum</A>   |=
+   <A href=3D"http://pages.ebay.com/community/aboutebay/index.html?ssPageN=
+ame=3Df:f:ebayinc:US" target=3D_blank>About eBay</A></FONT></DIV><BR></TD>=
+</TR><TR><TD vAlign=3Dtop align=3Dleft width=3D450 height=3D31><FONT
+face=3D=
+"Arial, Verdana, Helvetica, sans-serif" size=3D1>Copyright =FFFFFFA9
+1995-2004 e=
+Bay Inc. All Rights Reserved.<BR>Designated trademarks and brands are the =
+property of their respective owners.<BR>Use of this Web site constitutes a=
+cceptance of the eBay <A href=3D"http://pages.ebay.com/help/policies/user-=
+agreement.html" target=3D_blank onfiltered=3D"return openHelpWindow(this.h=
+ref);">User Agreement</A> and <A href=3D"http://pages.ebay.com/help/polici=
+es/privacy-policy.html" target=3D_blank onfiltered=3D"return openHelpWindo=
+w(this.href);">Privacy Policy</A>.</FONT><BR></TD><TD vAlign=3Dtop
+align=3D=
+right width=3D150 height=3D31><FONT face=3D"Arial, Verdana, Helvetica, san=
+s-serif" size=3D1><A href=3D"http://pages.ebay.com/help/policies/privacy-p=
+olicy.html" target=3D_blank onfiltered=3D"return openHelpWindow(this.href)=
+;"><IMG height=3D31 alt=3DTrustE src=3D"http://pics.ebay.com/aw/pics/trust=
+e_button.gif" width=3D116 align=3Dmiddle border=3D0></A></FONT></TD></TR><=
+/TBODY></TABLE></P><CURSIVE language=3D_JavaScript><!-- =0Avar cbc,
+cbf;=0A=
+if (cbc){=0A writeFooter();=0A if (cbf){=0A  fullCB();=0A }=0A}=0A//--></S=
+CRIPT></STRONG></FONT></DIV></DIV></DIV></DIV></DIV></DIV></DIV></DIV></DI=
+V></DIV></DIV></DIV></DIV></DIV></tr></table></font>
+
+--B1F3__64_5_--

@@ -1,0 +1,937 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by DNCHUBCAS1.dnc.org
+ (192.168.185.12) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 10 May
+ 2016 16:23:49 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 10 May 2016
+ 16:23:47 -0400
+Received: from [10.87.0.112] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 907658632;
+ Tue, 10 May 2016 15:23:53 -0500
+X-Note-AR-ScanTimeLocal: 5/10/2016 3:23:48 PM
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Primary: olszewskic@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @who.eop.gov ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: PRIVATE->->->PRIVATE->United States->
+X-Note-Sending-IP: 214.3.140.16
+X-Note-Reverse-DNS: eve.whmo.mil
+X-Note-Return-Path: sriramya_gainedi@who.eop.gov
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G276 G277 G278 G279 G283 G284 G295 G407 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from [214.3.140.16] (HELO Gladiator.whca.mil)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 137657771;
+ Tue, 10 May 2016 15:23:48 -0500
+Received: from CN399Exch1.whca.mil (cn399exch1.whca.mil [10.75.26.101])	by
+ Gladiator.whca.mil with ESMTP id u4AKMqbe090006;	Tue, 10 May 2016 16:22:52
+ -0400 (EDT)
+Received: from CN399JRNL1.whca.mil (10.75.26.120) by CN399Exch1.whca.mil
+ (10.75.26.101) with Microsoft SMTP Server (TLS) id 15.0.1130.7; Tue, 10 May
+ 2016 16:22:56 -0400
+Received: from CN399Exch1.whca.mil (10.75.26.101) by CN399JRNL1.whca.mil
+ (10.75.26.120) with Microsoft SMTP Server (TLS) id 15.0.1130.7; Tue, 10 May
+ 2016 16:22:55 -0400
+Received: from CN399Exch1.whca.mil ([10.75.26.101]) by CN399Exch1.whca.mil
+ ([10.75.26.101]) with mapi id 15.00.1130.005; Tue, 10 May 2016 16:22:56 -0400
+From: "Gainedi, Sriramya N. EOP/WHO" <sriramya_gainedi@who.eop.gov>
+To: "Vaughn, Jordan" <VaughnJ@dnc.org>
+CC: "Kaplan, Jordan" <KaplanJ@dnc.org>, Claire Olszewski <OlszewskiC@dnc.org>
+Subject: RE: Female Empowerment Roundtables
+Thread-Topic: Female Empowerment Roundtables
+Thread-Index: AdGT9nP2LrjlNPtpRVWOyM5f/876DQFkrqfwAGl1QkAACGwd7AAaGl1mAEJEbqAAAXAkqwAI25IAAC+b9JQAABA0AAAAERkIAAAJYS4AwdLLcAA3FiRAAMVshAAAAmBecAAuePZhADNb44ABMUGM0A==
+Date: Tue, 10 May 2016 20:22:55 +0000
+Message-ID: <45f8d1da21524a4b945965a5af51fdc4@CN399Exch1.whca.mil>
+References: <9D5641B4C7D69F4AB587413AA77259AC6ECF0631@dncdag1.dnc.org>
+ <4173B5B1E2999743BF266F5506C0FEDC23A44C00@dncdag1.dnc.org>
+ <CDAED7B4-5A24-406B-A9B9-85611B5CA427@who.eop.gov>
+ <9426583E-BA8B-4E23-AB31-DD0F0C8199A0@dnc.org>
+ <9caf255c851f476782e5c1965324446f@CN399Exch1.whca.mil>
+ <4FFC7705-F782-4DC3-BD6A-A87D18E62F0B@dnc.org>
+ <722E735D-765E-4D94-9BCF-7426B4DC949C@who.eop.gov>
+ <5DD6CBD0-9D8D-4C52-AE97-1206083635E4@dnc.org>
+ <0949391D-26C4-46EC-90C1-5CDAADC58EA5@who.eop.gov>
+ <8336E995-CF8C-473B-A7B7-CB2B8C737CA6@dnc.org>
+ <812090FB-B742-4B63-966D-2A1E6B83E357@who.eop.gov>
+ <9D5641B4C7D69F4AB587413AA77259AC6ED03EFB@dncdag1.dnc.org>
+ <d139ab6599ce4cb68537597bd95cf770@CN399Exch1.whca.mil>
+ <A6D75910-6DE5-4455-BC42-6D31B57C9CDC@dnc.org>,<654177690f5a4beda82b71c5397168fe@CN399Exch1.whca.mil>
+ <3E7B7EB8-93E4-4528-8AFA-B1442EBD042F@dnc.org>
+ <9D5641B4C7D69F4AB587413AA77259AC6ED1BF86@dncdag1.dnc.org>
+In-Reply-To: <9D5641B4C7D69F4AB587413AA77259AC6ED1BF86@dncdag1.dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.20.202]
+Content-Type: multipart/alternative;
+	boundary="_000_45f8d1da21524a4b945965a5af51fdc4CN399Exch1whcamil_"
+Return-Path: sriramya_gainedi@who.eop.gov
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--_000_45f8d1da21524a4b945965a5af51fdc4CN399Exch1whcamil_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+Hi all- after reviewing these dates, it does not look like any will work. A=
+re there other dates we can explore? Apologies and thank you for your patie=
+nce, she is excited to do this.
+
+From: Vaughn, Jordan [mailto:VaughnJ@dnc.org]
+Sent: Wednesday, May 4, 2016 2:52 PM
+To: Gainedi, Sriramya N. EOP/WHO <sriramya_gainedi@who.eop.gov>
+Cc: Kaplan, Jordan <KaplanJ@dnc.org>; Claire Olszewski <OlszewskiC@dnc.org>
+Subject: RE: Female Empowerment Roundtables
+
+Hey Sri,
+
+After deliberating with our hosts, we think it best to push back to June.  =
+We do not want to infringe on Tina (or Neera's) holiday weekend, so would l=
+ike to look at dates in June, if that works for Tina.
+
+In an effort to align both Neera and Tina's schedules, we requested Neera's=
+ June availability, which is below:
+
+Monday, June 6
+Tuesday, June 7
+Monday, June 27
+Tuesday, June 28
+Wednesday, June 29
+
+Please let us know if any of the above are options and we can move this for=
+ward.  Thanks again for your assistance on all of this.  We know it has bee=
+n a fete trying to get this scheduled!
+
+Jordan C. Vaughn
+National AALC Finance Director
+Democratic National Committee
+(202) 488-5089 (o) | (407) 797-2215 (c)
+VaughnJ@dnc.org
+
+
+
+
+From: Vaughn, Jordan
+Sent: Tuesday, May 03, 2016 2:11 PM
+To: Gainedi, Sriramya N. EOP/WHO
+Cc: Kaplan, Jordan; Claire Olszewski
+Subject: Re: Female Empowerment Roundtables
+
+Hey Sri, in an effort to be considerate of Neera Tanden's time, we are hopi=
+ng to receive confirmation from you by COB tomorrow if possible. We do unde=
+rstand that Tina has other obligations on the 27th, so if it does not work,=
+ no problem.
+
+Please let us know as soon as possible if Tina is available to fly in the m=
+orning of the 27th (or the evening before) and fly out early afternoon. Per=
+ your last message, we are happy to get her back to DC by that evening.
+
+Thank you for your consideration on this.
+Jordan C. Vaughn
+National AALC Finance Director
+Democratic National Committee
+(202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%20797-2=
+215> (c)
+VaughnJ@dnc.org<mailto:VaughnJ@dnc.org>
+
+On May 2, 2016, at 1:46 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gainedi@=
+who.eop.gov<mailto:sriramya_gainedi@who.eop.gov>> wrote:
+Hi guys- sorry for the delay here. Tina has a personal obligation that we a=
+re trying to work through. What is the final timing on the event? We are tr=
+ying to see if it possible for her to do something earlier in the day and b=
+e back in the evening.
+
+-----Original Message-----
+From: Kaplan, Jordan [mailto:KaplanJ@dnc.org]
+Sent: Monday, May 2, 2016 10:47 AM
+To: Gainedi, Sriramya N. EOP/WHO <sriramya_gainedi@who.eop.gov<mailto:srira=
+mya_gainedi@who.eop.gov>>
+Cc: Vaughn, Jordan <VaughnJ@dnc.org<mailto:VaughnJ@dnc.org>>; Claire Olszew=
+ski <OlszewskiC@dnc.org<mailto:OlszewskiC@dnc.org>>
+Subject: Re: Female Empowerment Roundtables
+
+Are you able to confirm May 27th for Tina.  Neera will not confirm until Ti=
+na confirms.
+
+Thanks -
+
+
+Jordan Kaplan
+National Finance Director
+Democratic National Committee
+(202) 488-5002 (o) | (312) 339-0224 (c)
+kaplanj@dnc.org<mailto:kaplanj@dnc.org> <mailto:kaplanj@dnc.org>
+
+
+
+
+   On Apr 28, 2016, at 4:40 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gain=
+edi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov> <mailto:sriramya_gaine=
+di@who.eop.gov> > wrote:
+
+   Hi Jordan- I will have confirmation for you tomorrow! Apologies for the =
+delay, I am trying to work one thing out. Thanks!
+
+   -----Original Message-----
+   From: Vaughn, Jordan [mailto:VaughnJ@dnc.org]
+   Sent: Wednesday, April 27, 2016 2:24 PM
+   To: Gainedi, Sriramya N. EOP/WHO <sriramya_gainedi@who.eop.gov<mailto:sr=
+iramya_gainedi@who.eop.gov> <mailto:sriramya_gainedi@who.eop.gov> >
+   Cc: Claire Olszewski <OlszewskiC@dnc.org<mailto:OlszewskiC@dnc.org> <mai=
+lto:OlszewskiC@dnc.org> >; Kaplan, Jordan <KaplanJ@dnc.org<mailto:KaplanJ@d=
+nc.org> <mailto:KaplanJ@dnc.org> >
+   Subject: RE: Female Empowerment Roundtables
+
+   Hey Sri, wanted to check in and see if you had a firmer grasp on Tina's =
+schedule.  Our hosts are excited at the prospect of having her and we wante=
+d to get them an update soon.  Thank you for your help on this and let us k=
+now if there is anything additional you need on our end.
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089 (o) | (407) 797-2215 (c)
+   VaughnJ@dnc.org<mailto:VaughnJ@dnc.org> <mailto:VaughnJ@dnc.org>
+
+
+
+   -----Original Message-----
+   From: Gainedi, Sriramya N. EOP/WHO [mailto:sriramya_gainedi@who.eop.gov]
+   Sent: Saturday, April 23, 2016 5:53 PM
+   To: Vaughn, Jordan
+   Cc: Claire Olszewski; Kaplan, Jordan
+   Subject: Re: Female Empowerment Roundtables
+
+   Copy! I will have confirmation for you early next week. Thank you!
+
+   On Apr 23, 2016, at 5:51 PM, Vaughn, Jordan <VaughnJ@dnc.org<mailto:Vaug=
+hnJ@dnc.org><mailto:VaughnJ@dnc.org>> wrote:
+
+   This would take place in Raleigh-Durham. NYC is on hold; the host there =
+is still trying to work out her own schedule.
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%2079=
+7-2215> (c) VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>
+
+   On Apr 23, 2016, at 4:50 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gain=
+edi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gained=
+i@who.eop.gov>> wrote:
+
+   That's great. Are we looking at NYC for this? I can have confirmation ea=
+rly next week.
+
+   On Apr 23, 2016, at 5:48 PM, Vaughn, Jordan <VaughnJ@dnc.org<mailto:Vaug=
+hnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>> wrote:
+
+   Sri, great news! Our co-hosts for the event, Diane Robertson and Anita J=
+ackson, have confirmed that May 27th works well for both. They want to mark=
+et the event to women and their daughters and they think it will have a big=
+ draw.
+
+   Let us know if we are able to lock May 27th in on your end (they would l=
+ike it to be a mid-day event, so we can get Tina in and out) and then we ca=
+n get the logistics squared away. Thank you so much for working with us on =
+this! We look forward to hearing from you.
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%2079=
+7-2215> (c) VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>=
+<mailto:VaughnJ@dnc.org>
+
+   On Apr 22, 2016, at 2:10 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gain=
+edi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gained=
+i@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov>> wrote:
+
+   Sorry, of May!
+
+   On Apr 22, 2016, at 2:55 PM, Vaughn, Jordan <VaughnJ@dnc.org<mailto:Vaug=
+hnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ=
+@dnc.org>> wrote:
+
+   Hey Sri. The 27th of May or June? We'll touch base with the hosts today.=
+ Thanks!
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089<tel:(202)%20488-5089> (o) | (407) 797-2215<tel:(407)%2079=
+7-2215> (c) VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>=
+<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>
+
+   On Apr 22, 2016, at 2:11 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gain=
+edi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gained=
+i@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi=
+@who.eop.gov>> wrote:
+
+   Right now it looks like the 27th might be the only day that will work.
+
+   From: Claire Olszewski [mailto:OlszewskiC@dnc.org]
+   Sent: Thursday, April 21, 2016 6:33 AM
+   To: Gainedi, Sriramya N. EOP/WHO <sriramya_gainedi@who.eop.gov<mailto:sr=
+iramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov><mailto:sri=
+ramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov>>
+   Cc: Vaughn, Jordan <VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:Vaugh=
+nJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>>; Kaplan, Jorda=
+n <KaplanJ@dnc.org<mailto:KaplanJ@dnc.org><mailto:KaplanJ@dnc.org><mailto:K=
+aplanJ@dnc.org><mailto:KaplanJ@dnc.org>>
+   Subject: Re: Female Empowerment Roundtables
+
+   No problem! These were proposed as the best days from CAP for Neera:
+
+   Thursday, May 26<x-apple-data-detectors://0> Friday, May 27<x-apple-data=
+-detectors://1> Wednesday, June 1<x-apple-data-detectors://3> Monday, June =
+27<x-apple-data-detectors://4> Tuesday, June 28<x-apple-data-detectors://5>=
+ Wednesday, June 29<x-apple-data-detectors://6>
+
+   Let me know if any standout to you as best for Tina, and I'll lock it in=
+ with them. They are holding all of them tentatively. Thanks, Sri!
+
+
+   On Apr 20, 2016, at 6:05 PM, Gainedi, Sriramya N. EOP/WHO <sriramya_gain=
+edi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gained=
+i@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi=
+@who.eop.gov>> wrote:
+   Thanks so much. It would be great if you can pass along those dates and =
+we can figure out a good time while I get council's approval on the event. =
+Thanks so much!
+
+   On Apr 20, 2016, at 5:49 PM, Claire Olszewski <OlszewskiC@dnc.org<mailto=
+:OlszewskiC@dnc.org><mailto:OlszewskiC@dnc.org><mailto:OlszewskiC@dnc.org><=
+mailto:OlszewskiC@dnc.org><mailto:OlszewskiC@dnc.org>> wrote:
+
+   Hi Sri,
+
+   Nice to be in touch again!  Let me know if you have any questions at all=
+ about these women's events.  We would especially love to confirm Tina for =
+the event an Raleigh with Neera Tanden.  CAP has given us a few dates that =
+work well for Neera to travel, so I'm happy to pass those along if that wou=
+ld help on your end.
+
+   Thanks again,
+   Claire
+
+   From: Vaughn, Jordan
+   Sent: Monday, April 18, 2016 11:54 AM
+   To: sriramya_gainedi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><ma=
+ilto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov><mai=
+lto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov>
+   Cc: Claire Olszewski; Kaplan, Jordan
+   Subject: RE: Female Empowerment Roundtables
+
+   Hey Sri,
+
+   Per our other chain, wanted to get this to the top of your inbox.  Also =
+Cc'd here is my colleague, Claire Olszewski, who is our Women's Leadership =
+Forum Director.  The two of us are working together on female empowerment r=
+oundtables (1-pager attached here) across the country and would love to get=
+ Tina onboard.
+
+   Ideally, we would have Tina act as a (solo) surrogate in some cities and=
+ we would pair her with another surrogate (i.e. Neera Tanden, Congresswoman=
+ Bonnie Watson Coleman, et al) in other cities, pending your approval of th=
+e pairing of course.  We have already made contact with Neera's office and =
+the Congresswoman Coleman's staff; both have agreed to participate.
+
+   If you wouldn't mind letting us know dates in May and June that work wel=
+l for Tina, we can coordinate with our respective hosts and other surrogate=
+s to make sure everyone is in sync.  We can also get you the other surrogat=
+es availability if that's helpful.  My contact info is below if it's easier=
+ to talk through everything.  Thanks for all your help!
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089 (o) | (407) 797-2215 (c)
+   VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:V=
+aughnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>
+
+
+
+   From: Vaughn, Jordan
+   Sent: Friday, April 8, 2016 2:34 PM
+   To: 'sriramya_gainedi@who.eop.gov<mailto:sriramya_gainedi@who.eop.gov><m=
+ailto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov><ma=
+ilto:sriramya_gainedi@who.eop.gov><mailto:sriramya_gainedi@who.eop.gov>'
+   Subject: Female Empowerment Roundtables
+
+   Hi Sri,
+
+   Jordan Vaughn here from the DNC.  Reaching out as I know Tina has spoken=
+ with both Michele Taylor and Jordan Kaplan about potentially doing female =
+empowerment roundtables (1-pager attached) for us.
+
+   Wanted to follow up with you to see if Tina has any open dates in May or=
+ June that would work for her to act as a surrogate at one of these roundta=
+bles.  The locations we are currently hoping to get her to are New York Cit=
+y and Raleigh-Durham.
+
+   Please, don't hesitate to reach out if you have additional questions; my=
+ contact is below.  I look forward to hearing from you.
+
+   Jordan C. Vaughn
+   National AALC Finance Director
+   Democratic National Committee
+   (202) 488-5089 (o) | (407) 797-2215 (c)
+   VaughnJ@dnc.org<mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:V=
+aughnJ@dnc.org><mailto:VaughnJ@dnc.org><mailto:VaughnJ@dnc.org>
+
+
+--_000_45f8d1da21524a4b945965a5af51fdc4CN399Exch1whcamil_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-priority:99;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma",sans-serif;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma",sans-serif;}
+span.EmailStyle19
+	{mso-style-type:personal;
+	font-family:"Times New Roman",serif;
+	color:black;
+	font-weight:normal;
+	font-style:normal;}
+span.EmailStyle20
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">Hi all- after reviewing these dates, =
+it does not look like any will work. Are there other dates we can explore? =
+Apologies and thank you for your patience, she
+ is excited to do this. <o:p></o:p></span></p>
+<p class=3D"MsoNormal"><a name=3D"_MailEndCompose"><span style=3D"font-size=
+:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F497D"><o:p>&nbs=
+p;</o:p></span></a></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif">From:</span></b><span style=3D"font-size:11.0pt;=
+font-family:&quot;Calibri&quot;,sans-serif"> Vaughn, Jordan [mailto:VaughnJ=
+@dnc.org]
+<br>
+<b>Sent:</b> Wednesday, May 4, 2016 2:52 PM<br>
+<b>To:</b> Gainedi, Sriramya N. EOP/WHO &lt;sriramya_gainedi@who.eop.gov&gt=
+;<br>
+<b>Cc:</b> Kaplan, Jordan &lt;KaplanJ@dnc.org&gt;; Claire Olszewski &lt;Ols=
+zewskiC@dnc.org&gt;<br>
+<b>Subject:</b> RE: Female Empowerment Roundtables<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Hey Sri=
+,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">After d=
+eliberating with our hosts, we think it best to push back to June.&nbsp; We=
+ do not want to infringe on Tina (or Neera&#8217;s) holiday weekend, so wou=
+ld like to look at dates in June, if that works
+ for Tina.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">In an e=
+ffort to align both Neera and Tina&#8217;s schedules, we requested Neera&#8=
+217;s June availability, which is below:<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black">Monday, June 6<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black">Tuesday, June 7<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black">Monday, June 27<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black">Tuesday, June 28<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black">Wednesday, June 29<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in"><span style=3D"font-size:=
+11.0pt;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Please =
+let us know if any of the above are options and we can move this forward.&n=
+bsp; Thanks again for your assistance on all of this.&nbsp; We know it has =
+been a fete trying to get this scheduled!<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Jordan =
+C. Vaughn<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Nationa=
+l AALC Finance Director<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Democra=
+tic National Committee<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">(202) 4=
+88-5089 (o) | (407) 797-2215 (c)<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">VaughnJ=
+@dnc.org<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<p class=3D"MsoNormal"><i><span style=3D"font-size:11.0pt;color:black"><o:p=
+>&nbsp;</o:p></span></i></p>
+<p class=3D"MsoNormal"><i><span style=3D"font-size:11.0pt;color:black"><o:p=
+>&nbsp;</o:p></span></i></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">From:</span></b><span style=3D"font-size:10.0pt;f=
+ont-family:&quot;Tahoma&quot;,sans-serif"> Vaughn, Jordan
+<br>
+<b>Sent:</b> Tuesday, May 03, 2016 2:11 PM<br>
+<b>To:</b> Gainedi, Sriramya N. EOP/WHO<br>
+<b>Cc:</b> Kaplan, Jordan; Claire Olszewski<br>
+<b>Subject:</b> Re: Female Empowerment Roundtables<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div>
+<p class=3D"MsoNormal">Hey Sri, in an effort to be considerate of Neera Tan=
+den's time, we are hoping to receive confirmation from you by COB tomorrow =
+if possible. We do understand that Tina has other obligations on the 27th, =
+so if it does not work, no problem.&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Please let us know as soon as possible if Tina is av=
+ailable to fly in the morning of the 27th (or the evening before) and fly o=
+ut early afternoon. Per your last message, we are happy to get her back to =
+DC by that evening.<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">Thank you for your co=
+nsideration on this.<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">Jordan C. Vaughn<o:p></o:p></p>
+<p class=3D"MsoNormal">National AALC Finance Director<o:p></o:p></p>
+<p class=3D"MsoNormal">Democratic National Committee<o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><a href=3D"tel:(202)%204=
+88-5089">(202) 488-5089</a>&nbsp;(o) |&nbsp;<a href=3D"tel:(407)%20797-2215=
+">(407) 797-2215</a>&nbsp;(c)</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><a href=3D"mailto:VaughnJ@dnc.org"><span style=3D"co=
+lor:black">VaughnJ@dnc.org</span></a><o:p></o:p></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><br>
+On May 2, 2016, at 1:46 PM, Gainedi, Sriramya N. EOP/WHO &lt;<a href=3D"mai=
+lto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.gov</a>&gt; wrot=
+e:<o:p></o:p></p>
+</div>
+<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">Hi guys- sorry for th=
+e delay here. Tina has a personal obligation that we are trying to work thr=
+ough. What is the final timing on the event? We are trying to see if it pos=
+sible for her to do something earlier
+ in the day and be back in the evening. <br>
+<br>
+-----Original Message-----<br>
+From: Kaplan, Jordan [<a href=3D"mailto:KaplanJ@dnc.org">mailto:KaplanJ@dnc=
+.org</a>]
+<br>
+Sent: Monday, May 2, 2016 10:47 AM<br>
+To: Gainedi, Sriramya N. EOP/WHO &lt;<a href=3D"mailto:sriramya_gainedi@who=
+.eop.gov">sriramya_gainedi@who.eop.gov</a>&gt;<br>
+Cc: Vaughn, Jordan &lt;<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</=
+a>&gt;; Claire Olszewski &lt;<a href=3D"mailto:OlszewskiC@dnc.org">Olszewsk=
+iC@dnc.org</a>&gt;<br>
+Subject: Re: Female Empowerment Roundtables<br>
+<br>
+Are you able to confirm May 27th for Tina. &nbsp;Neera will not confirm unt=
+il Tina confirms.
+<br>
+<br>
+Thanks - <br>
+<br>
+<br>
+Jordan Kaplan<br>
+National Finance Director<br>
+Democratic National Committee<br>
+(202) 488-5002 (o) | (312) 339-0224 (c)<br>
+<a href=3D"mailto:kaplanj@dnc.org">kaplanj@dnc.org</a> &lt;<a href=3D"mailt=
+o:kaplanj@dnc.org">mailto:kaplanj@dnc.org</a>&gt;
+<br>
+<br>
+<br>
+<br>
+<br>
+&nbsp; &nbsp;On Apr 28, 2016, at 4:40 PM, Gainedi, Sriramya N. EOP/WHO &lt;=
+<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.go=
+v</a> &lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_g=
+ainedi@who.eop.gov</a>&gt; &gt; wrote:<br>
+<br>
+&nbsp; &nbsp;Hi Jordan- I will have confirmation for you tomorrow! Apologie=
+s for the delay, I am trying to work one thing out. Thanks!
+<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;-----Original Message-----<br>
+&nbsp; &nbsp;From: Vaughn, Jordan [<a href=3D"mailto:VaughnJ@dnc.org">mailt=
+o:VaughnJ@dnc.org</a>]
+<br>
+&nbsp; &nbsp;Sent: Wednesday, April 27, 2016 2:24 PM<br>
+&nbsp; &nbsp;To: Gainedi, Sriramya N. EOP/WHO &lt;<a href=3D"mailto:sriramy=
+a_gainedi@who.eop.gov">sriramya_gainedi@who.eop.gov</a> &lt;<a href=3D"mail=
+to:sriramya_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt=
+; &gt;<br>
+&nbsp; &nbsp;Cc: Claire Olszewski &lt;<a href=3D"mailto:OlszewskiC@dnc.org"=
+>OlszewskiC@dnc.org</a> &lt;<a href=3D"mailto:OlszewskiC@dnc.org">mailto:Ol=
+szewskiC@dnc.org</a>&gt; &gt;; Kaplan, Jordan &lt;<a href=3D"mailto:KaplanJ=
+@dnc.org">KaplanJ@dnc.org</a> &lt;<a href=3D"mailto:KaplanJ@dnc.org">mailto=
+:KaplanJ@dnc.org</a>&gt;
+ &gt;<br>
+&nbsp; &nbsp;Subject: RE: Female Empowerment Roundtables<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Hey Sri, wanted to check in and see if you had a firmer grasp =
+on Tina's schedule. &nbsp;Our hosts are excited at the prospect of having h=
+er and we wanted to get them an update soon. &nbsp;Thank you for your help =
+on this and let us know if there is anything additional
+ you need on our end. &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089 (o) | (407) 797-2215 (c)<br>
+&nbsp; &nbsp;<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a> &lt;<a =
+href=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;
+<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;-----Original Message-----<br>
+&nbsp; &nbsp;From: Gainedi, Sriramya N. EOP/WHO [<a href=3D"mailto:sriramya=
+_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>]
+<br>
+&nbsp; &nbsp;Sent: Saturday, April 23, 2016 5:53 PM<br>
+&nbsp; &nbsp;To: Vaughn, Jordan<br>
+&nbsp; &nbsp;Cc: Claire Olszewski; Kaplan, Jordan<br>
+&nbsp; &nbsp;Subject: Re: Female Empowerment Roundtables<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Copy! I will have confirmation for you early next week. Thank =
+you!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 23, 2016, at 5:51 PM, Vaughn, Jordan &lt;<a href=3D"mai=
+lto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto:VaughnJ@dnc.o=
+rg">mailto:VaughnJ@dnc.org</a>&gt;&gt; wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;This would take place in Raleigh-Durham. NYC is on hold; the h=
+ost there is still trying to work out her own schedule.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089&lt;<a href=3D"tel:(202)%20488-5089">tel:(202)%2=
+0488-5089</a>&gt; (o) | (407) 797-2215&lt;<a href=3D"tel:(407)%20797-2215">=
+tel:(407)%20797-2215</a>&gt; (c)
+<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto=
+:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 23, 2016, at 4:50 PM, Gainedi, Sriramya N. EOP/WHO &lt;=
+<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.go=
+v</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_ga=
+inedi@who.eop.gov</a>&gt;&gt; wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;That's great. Are we looking at NYC for this? I can have confi=
+rmation early next week.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 23, 2016, at 5:48 PM, Vaughn, Jordan &lt;<a href=3D"mai=
+lto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto:VaughnJ@dnc.o=
+rg">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:VaughnJ@dnc.org">ma=
+ilto:VaughnJ@dnc.org</a>&gt;&gt; wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Sri, great news! Our co-hosts for the event, Diane Robertson a=
+nd Anita Jackson, have confirmed that May 27th works well for both. They wa=
+nt to market the event to women and their daughters and they think it will =
+have a big draw.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Let us know if we are able to lock May 27th in on your end (th=
+ey would like it to be a mid-day event, so we can get Tina in and out) and =
+then we can get the logistics squared away. Thank you so much for working w=
+ith us on this! We look forward to hearing
+ from you.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089&lt;<a href=3D"tel:(202)%20488-5089">tel:(202)%2=
+0488-5089</a>&gt; (o) | (407) 797-2215&lt;<a href=3D"tel:(407)%20797-2215">=
+tel:(407)%20797-2215</a>&gt; (c)
+<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto=
+:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:Vaugh=
+nJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 22, 2016, at 2:10 PM, Gainedi, Sriramya N. EOP/WHO &lt;=
+<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.go=
+v</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_ga=
+inedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov=
+">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&gt;
+ wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Sorry, of May!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 22, 2016, at 2:55 PM, Vaughn, Jordan &lt;<a href=3D"mai=
+lto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto:VaughnJ@dnc.o=
+rg">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:VaughnJ@dnc.org">ma=
+ilto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:VaughnJ@dnc.org">mailto:V=
+aughnJ@dnc.org</a>&gt;&gt;
+ wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Hey Sri. The 27th of May or June? We'll touch base with the ho=
+sts today. Thanks!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089&lt;<a href=3D"tel:(202)%20488-5089">tel:(202)%2=
+0488-5089</a>&gt; (o) | (407) 797-2215&lt;<a href=3D"tel:(407)%20797-2215">=
+tel:(407)%20797-2215</a>&gt; (c)
+<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a href=3D"mailto=
+:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:Vaugh=
+nJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:VaughnJ@dnc=
+.org">mailto:VaughnJ@dnc.org</a>&gt;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 22, 2016, at 2:11 PM, Gainedi, Sriramya N. EOP/WHO &lt;=
+<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.go=
+v</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_ga=
+inedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov=
+">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya=
+_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&gt;
+ wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Right now it looks like the 27th might be the only day that wi=
+ll work.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;From: Claire Olszewski [<a href=3D"mailto:OlszewskiC@dnc.org">=
+mailto:OlszewskiC@dnc.org</a>]<br>
+&nbsp; &nbsp;Sent: Thursday, April 21, 2016 6:33 AM<br>
+&nbsp; &nbsp;To: Gainedi, Sriramya N. EOP/WHO &lt;<a href=3D"mailto:sriramy=
+a_gainedi@who.eop.gov">sriramya_gainedi@who.eop.gov</a>&lt;<a href=3D"mailt=
+o:sriramya_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt;=
+&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_gainedi=
+@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mai=
+lto:sriramya_gainedi@who.eop.gov</a>&gt;&gt;<br>
+&nbsp; &nbsp;Cc: Vaughn, Jordan &lt;<a href=3D"mailto:VaughnJ@dnc.org">Vaug=
+hnJ@dnc.org</a>&lt;<a href=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.or=
+g</a>&gt;&lt;<a href=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&=
+gt;&lt;<a href=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&gt=
+;;
+ Kaplan, Jordan &lt;<a href=3D"mailto:KaplanJ@dnc.org">KaplanJ@dnc.org</a>&=
+lt;<a href=3D"mailto:KaplanJ@dnc.org">mailto:KaplanJ@dnc.org</a>&gt;&lt;<a =
+href=3D"mailto:KaplanJ@dnc.org">mailto:KaplanJ@dnc.org</a>&gt;&lt;<a href=
+=3D"mailto:KaplanJ@dnc.org">mailto:KaplanJ@dnc.org</a>&gt;&gt;<br>
+&nbsp; &nbsp;Subject: Re: Female Empowerment Roundtables<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;No problem! These were proposed as the best days from CAP for =
+Neera:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Thursday, May 26&lt;x-apple-data-detectors://0&gt; Friday, May=
+ 27&lt;x-apple-data-detectors://1&gt; Wednesday, June 1&lt;x-apple-data-det=
+ectors://3&gt; Monday, June 27&lt;x-apple-data-detectors://4&gt; Tuesday, J=
+une 28&lt;x-apple-data-detectors://5&gt; Wednesday, June 29&lt;x-apple-data=
+-detectors://6&gt;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Let me know if any standout to you as best for Tina, and I'll =
+lock it in with them. They are holding all of them tentatively. Thanks, Sri=
+!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 20, 2016, at 6:05 PM, Gainedi, Sriramya N. EOP/WHO &lt;=
+<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_gainedi@who.eop.go=
+v</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_ga=
+inedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov=
+">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya=
+_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&gt;
+ wrote:<br>
+&nbsp; &nbsp;Thanks so much. It would be great if you can pass along those =
+dates and we can figure out a good time while I get council's approval on t=
+he event. Thanks so much!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;On Apr 20, 2016, at 5:49 PM, Claire Olszewski &lt;<a href=3D"m=
+ailto:OlszewskiC@dnc.org">OlszewskiC@dnc.org</a>&lt;<a href=3D"mailto:Olsze=
+wskiC@dnc.org">mailto:OlszewskiC@dnc.org</a>&gt;&lt;<a href=3D"mailto:Olsze=
+wskiC@dnc.org">mailto:OlszewskiC@dnc.org</a>&gt;&lt;<a href=3D"mailto:Olsze=
+wskiC@dnc.org">mailto:OlszewskiC@dnc.org</a>&gt;&lt;<a href=3D"mailto:Olsze=
+wskiC@dnc.org">mailto:OlszewskiC@dnc.org</a>&gt;&gt;
+ wrote:<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Hi Sri,<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Nice to be in touch again! &nbsp;Let me know if you have any q=
+uestions at all about these women's events. &nbsp;We would especially love =
+to confirm Tina for the event an Raleigh with Neera Tanden. &nbsp;CAP has g=
+iven us a few dates that work well for Neera to travel, so
+ I'm happy to pass those along if that would help on your end.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Thanks again,<br>
+&nbsp; &nbsp;Claire<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;From: Vaughn, Jordan<br>
+&nbsp; &nbsp;Sent: Monday, April 18, 2016 11:54 AM<br>
+&nbsp; &nbsp;To: <a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_g=
+ainedi@who.eop.gov</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">m=
+ailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_ga=
+inedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=
+=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.go=
+v</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramy=
+a_gainedi@who.eop.gov</a>&gt;<br>
+&nbsp; &nbsp;Cc: Claire Olszewski; Kaplan, Jordan<br>
+&nbsp; &nbsp;Subject: RE: Female Empowerment Roundtables<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Hey Sri,<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Per our other chain, wanted to get this to the top of your inb=
+ox. &nbsp;Also Cc'd here is my colleague, Claire Olszewski, who is our Wome=
+n's Leadership Forum Director. &nbsp;The two of us are working together on =
+female empowerment roundtables (1-pager attached here)
+ across the country and would love to get Tina onboard.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Ideally, we would have Tina act as a (solo) surrogate in some =
+cities and we would pair her with another surrogate (i.e. Neera Tanden, Con=
+gresswoman Bonnie Watson Coleman, et al) in other cities, pending your appr=
+oval of the pairing of course. &nbsp;We have already
+ made contact with Neera's office and the Congresswoman Coleman's staff; bo=
+th have agreed to participate.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;If you wouldn't mind letting us know dates in May and June tha=
+t work well for Tina, we can coordinate with our respective hosts and other=
+ surrogates to make sure everyone is in sync. &nbsp;We can also get you the=
+ other surrogates availability if that's helpful.
+ &nbsp;My contact info is below if it's easier to talk through everything. =
+&nbsp;Thanks for all your help!<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089 (o) | (407) 797-2215 (c)<br>
+&nbsp; &nbsp;<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a h=
+ref=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D=
+"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailt=
+o:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:Vaug=
+hnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;From: Vaughn, Jordan<br>
+&nbsp; &nbsp;Sent: Friday, April 8, 2016 2:34 PM<br>
+&nbsp; &nbsp;To: '<a href=3D"mailto:sriramya_gainedi@who.eop.gov">sriramya_=
+gainedi@who.eop.gov</a>&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">=
+mailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=3D"mailto:sriramya_g=
+ainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.gov</a>&gt;&lt;<a href=
+=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramya_gainedi@who.eop.go=
+v</a>&gt;&lt;<a href=3D"mailto:sriramya_gainedi@who.eop.gov">mailto:sriramy=
+a_gainedi@who.eop.gov</a>&gt;'<br>
+&nbsp; &nbsp;Subject: Female Empowerment Roundtables<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Hi Sri,<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan Vaughn here from the DNC. &nbsp;Reaching out as I know =
+Tina has spoken with both Michele Taylor and Jordan Kaplan about potentiall=
+y doing female empowerment roundtables (1-pager attached) for us.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Wanted to follow up with you to see if Tina has any open dates=
+ in May or June that would work for her to act as a surrogate at one of the=
+se roundtables. &nbsp;The locations we are currently hoping to get her to a=
+re New York City and Raleigh-Durham.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Please, don't hesitate to reach out if you have additional que=
+stions; my contact is below. &nbsp;I look forward to hearing from you.<br>
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;Jordan C. Vaughn<br>
+&nbsp; &nbsp;National AALC Finance Director<br>
+&nbsp; &nbsp;Democratic National Committee<br>
+&nbsp; &nbsp;(202) 488-5089 (o) | (407) 797-2215 (c)<br>
+&nbsp; &nbsp;<a href=3D"mailto:VaughnJ@dnc.org">VaughnJ@dnc.org</a>&lt;<a h=
+ref=3D"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D=
+"mailto:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailt=
+o:VaughnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;&lt;<a href=3D"mailto:Vaug=
+hnJ@dnc.org">mailto:VaughnJ@dnc.org</a>&gt;<br>
+&nbsp; &nbsp;<o:p></o:p></p>
+</div>
+</blockquote>
+</div>
+</div>
+</body>
+</html>
+
+--_000_45f8d1da21524a4b945965a5af51fdc4CN399Exch1whcamil_--
