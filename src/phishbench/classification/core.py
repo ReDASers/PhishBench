@@ -119,7 +119,24 @@ def load_classifiers(source, filter_classifiers=True) -> List[type]:
     return classifiers
 
 
-def train_classifiers(x_train, y_train, io_dir):
+def train_classifiers(x_train, y_train, io_dir, verbose=1):
+    """
+    Train classifiers on the provided data
+    Parameters
+    ----------
+    x_train
+        The training features
+    y_train
+        The training labels
+    io_dir
+        The folder to interact with
+    verbose
+        Whether or not to print progress info to stdout.
+        `0` prints nothing. `1` prints the classifiers being trained
+    Returns
+    -------
+        A list of trained classifiers
+    """
     if issparse(x_train):
         x_train = x_train.toarray()
     if not os.path.isdir(io_dir):
@@ -128,7 +145,8 @@ def train_classifiers(x_train, y_train, io_dir):
     classifiers: List[BaseClassifier] = [x(io_dir) for x in load_internal_classifiers()]
 
     for classifier in classifiers:
-        print("Training {}.".format(classifier.name))
+        if verbose > 0:
+            print("Training {}.".format(classifier.name))
         if classification_settings.load_models():
             classifier.load_model()
         elif classification_settings.weighted_training():

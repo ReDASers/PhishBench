@@ -73,7 +73,7 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
     return metrics
 
 
-def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test):
+def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verbose=1):
     """
     Evaluates a set of classifiers
     Parameters
@@ -84,14 +84,17 @@ def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test):
         The test features to evaluate with
     y_test
         The test labels to evaluate with
-
+    verbose: bool
+        Whether or not to print progress to stdout.
+        `0` prints nothing. `1` prints the classifiers being trained
     Returns
     -------
     A pandas `DataFrame` containing the metrics of the classifiers
     """
     performance_list_dict = []
     for classifier in classifiers:
-        print("Evaluating {}.".format(classifier.name))
+        if verbose:
+            print("Evaluating {}.".format(classifier.name))
         metrics = evaluate_classifier(classifier, x_test, y_test)
         metrics['classifier'] = classifier.name
         performance_list_dict.append(metrics)
