@@ -119,7 +119,7 @@ def load_classifiers(source, filter_classifiers=True) -> List[type]:
     return classifiers
 
 
-def train_classifiers(x_train, y_train, io_dir):
+def train_classifiers(x_train, y_train, io_dir, verbose=True):
     if issparse(x_train):
         x_train = x_train.toarray()
     if not os.path.isdir(io_dir):
@@ -128,7 +128,8 @@ def train_classifiers(x_train, y_train, io_dir):
     classifiers: List[BaseClassifier] = [x(io_dir) for x in load_internal_classifiers()]
 
     for classifier in classifiers:
-        print("Training {}.".format(classifier.name))
+        if verbose:
+            print("Training {}.".format(classifier.name))
         if classification_settings.load_models():
             classifier.load_model()
         elif classification_settings.weighted_training():
