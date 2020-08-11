@@ -1,10 +1,13 @@
+import itertools
 import os
 from typing import List
 
 import joblib
 from scipy.sparse import issparse
 
+from . import classifiers
 from . import settings as classification_settings
+from ..utils.reflection_utils import load_local_modules
 
 
 class BaseClassifier:
@@ -104,19 +107,45 @@ class BaseClassifier:
 
 
 def load_internal_classifiers(filter_classifiers=True):
-    from . import classifiers
-    return load_classifiers(classifiers, filter_classifiers=filter_classifiers)
+    """
+    Loads internal classifiers and classifiers from the working directory
+    Parameters
+    ----------
+    filter_classifiers: bool
+        Whether or not to use the config to filter the classifiers
+
+    Returns
+    -------
+        A list of classifiers
+    """
+    modules = load_local_modules()
+    modules.append(classifiers)
+    loaded_classifiers = [load_classifiers_from_module(module, filter_classifiers) for module in modules]
+    loaded = list(itertools.chain.from_iterable(loaded_classifiers))
+    return loaded
 
 
-def load_classifiers(source, filter_classifiers=True) -> List[type]:
-    classifiers: List[type] = list()
+def load_classifiers_from_module(source, filter_classifiers=True) -> List[type]:
+    """
+    Loads classifiers from a module
+    Parameters
+    ----------
+    source
+        The module to load the classifiers from
+    filter_classifiers
+        Whether or not to use the config to filter the classifiers
+    Returns
+    -------
+        A list of classifiers
+    """
+    module_classifiers: List[type] = list()
     for attr_name in dir(source):
         attr = getattr(source, attr_name)
         if isinstance(attr, type) and issubclass(attr, BaseClassifier):
-            classifiers.append(attr)
+            module_classifiers.append(attr)
     if filter_classifiers:
-        return list(filter(classification_settings.is_enabled, classifiers))
-    return classifiers
+        return list(filter(classification_settings.is_enabled, module_classifiers))
+    return module_classifiers
 
 
 def train_classifiers(x_train, y_train, io_dir, verbose=1):
