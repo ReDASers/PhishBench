@@ -6,7 +6,7 @@ import tensorflow.keras as keras
 from sklearn.exceptions import NotFittedError
 from sklearn.utils import check_array
 
-from ..core import BaseClassifier
+from ..base_classifier import BaseClassifier
 
 
 def _build_model(n_features):
