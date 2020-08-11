@@ -1,7 +1,7 @@
 import imblearn.metrics
 import sklearn.metrics
 
-from .core import register_metric, MetricType
+from .reflection import register_metric, MetricType
 
 
 @register_metric(MetricType.PRED, 'accuracy')
