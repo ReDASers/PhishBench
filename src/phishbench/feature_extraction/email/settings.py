@@ -3,8 +3,8 @@ from ...utils import phishbench_globals
 
 FEATURE_TYPE_SECTION = 'Email_Feature_Types'
 
-FEATURE_TYPE_SETTINGS = {
-    feature_type.value: "True" for feature_type in FeatureType
+EMAIL_TYPE_SETTINGS = {
+    feature_type.value: "True" for feature_type in FeatureType if feature_type.value.startswith('Email')
 }
 
 

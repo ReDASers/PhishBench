@@ -74,7 +74,7 @@ def make_config(list_features, list_imbalanced_dataset):
     config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
     config[email_extraction.settings.FEATURE_TYPE_SECTION] = \
-        email_extraction.settings.FEATURE_TYPE_SETTINGS
+        email_extraction.settings.EMAIL_TYPE_SETTINGS
     config['URL_Feature_Types'] = {}
     config['URL_Feature_Types']['URL'] = "False"
     config['URL_Feature_Types']['Network'] = "False"
