@@ -31,10 +31,10 @@ def load_features_from_module(features_module, filter_features=True) -> List[Cal
         raise ValueError("source must be a module or string")
     # loads all features from module
     features = [getattr(features_module, x) for x in dir(features_module)]
-
     features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
-    enabled_types = [feat_type for feat_type in FeatureType if settings.feature_type_enabled(feat_type)]
-    print(enabled_types)
+
     if filter_features:
+        enabled_types = [feat_type for feat_type in FeatureType if settings.feature_type_enabled(feat_type)]
         features = [f for f in features if f.feature_type in enabled_types and _check_feature(f)]
+
     return features
