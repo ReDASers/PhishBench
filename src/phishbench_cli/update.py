@@ -83,15 +83,11 @@ def make_config(list_features, list_imbalanced_dataset):
 
     reflection_features = load_email_features(filter_features=False)
 
-    config[email_extraction.FeatureType.EMAIL_BODY.value] = {
-        feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == FeatureType.EMAIL_BODY
-    }
-
-    config[email_extraction.FeatureType.EMAIL_HEADER.value] = {
-        feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == FeatureType.EMAIL_HEADER
-    }
+    for feature_type in FeatureType:
+        config[feature_type.value] = {
+            feature.config_name: "True" for feature in reflection_features if
+            feature.feature_type == feature_type
+        }
 
     config['HTML_Features'] = {}
     c_html_features = config['HTML_Features']
