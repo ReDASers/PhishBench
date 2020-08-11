@@ -12,6 +12,7 @@ import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.dataset as dataset
 import phishbench.evaluation as evaluation
+from phishbench.feature_extraction import settings as extraction_settings
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
 from phishbench.utils import phishbench_globals
@@ -326,7 +327,7 @@ def extract_email_features():
     """
     email_train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
-    run_tfidf = email_extraction.settings.extract_body_enabled() \
+    run_tfidf = extraction_settings.extract_body_enabled() \
                 and phishbench_globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
@@ -362,7 +363,7 @@ def get_config():
     if phishbench_globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
-        run_tfidf = email_extraction.settings.extract_body_enabled() and \
+        run_tfidf = extraction_settings.extract_body_enabled() and \
                     phishbench_globals.config["Email_Body_Features"].getboolean("tfidf_emails")
     else:
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Training")

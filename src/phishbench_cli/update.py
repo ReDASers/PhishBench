@@ -5,10 +5,10 @@ import phishbench.Features as Features
 import phishbench.classification as classification
 import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
-import phishbench.feature_extraction.email as email_extraction
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
+from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.feature_extraction.email.email_features import load_features as load_email_features
 from phishbench.feature_extraction.reflection import FeatureType
 
@@ -73,8 +73,8 @@ def make_config(list_features, list_imbalanced_dataset):
     config["Support Files"] = {}
     config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
-    config[email_extraction.settings.FEATURE_TYPE_SECTION] = \
-        email_extraction.settings.EMAIL_TYPE_SETTINGS
+    config[extraction_settings.FEATURE_TYPE_SECTION] = \
+        extraction_settings.EMAIL_TYPE_SETTINGS
     config['URL_Feature_Types'] = {}
     config['URL_Feature_Types']['URL'] = "False"
     config['URL_Feature_Types']['Network'] = "False"
