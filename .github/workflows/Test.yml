@@ -96,5 +96,7 @@ jobs:
         phishbench -f Test_A.ini -c
 
     - name: Test Generate Config
-      run: make-phishbench-config
+      run: |
+        cd "tests/integration tests/make-config"
+        make-phishbench-config
         
