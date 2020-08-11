@@ -1,5 +1,5 @@
-from phishbench.feature_extraction.reflection import FeatureType
-from phishbench.utils import phishbench_globals
+from .reflection import FeatureType
+from ..utils import phishbench_globals
 
 EMAIL_TYPE_SECTION = 'Email_Feature_Types'
 

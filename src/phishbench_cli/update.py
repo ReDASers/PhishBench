@@ -3,14 +3,14 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
-import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.dataset.settings as dataset_settings
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction import settings as extraction_settings
-from phishbench.feature_extraction.email.email_features import load_features as load_email_features
 from phishbench.feature_extraction.reflection import FeatureType
+from phishbench.feature_extraction.reflection import load_features
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -81,7 +81,7 @@ def make_config(list_features, list_imbalanced_dataset):
     config['URL_Feature_Types']['HTML'] = "False"
     config['URL_Feature_Types']['JavaScript'] = "False"
 
-    reflection_features = load_email_features(filter_features=False)
+    reflection_features = load_features(filter_features=None)
 
     for feature_type in FeatureType:
         config[feature_type.value] = {

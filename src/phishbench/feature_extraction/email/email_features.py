@@ -1,19 +1,16 @@
 """
 This module contains code for email feature extraction.
 """
-import itertools
 import time
 from typing import List, Callable, Dict, Tuple
 
 from tqdm import tqdm
 
-from . import features as internal_features
-from . import reflection
-from ..reflection import FeatureType
+from . import features as local_features
+from ..reflection import FeatureType, load_features
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
-from ...utils.reflection_utils import load_local_modules
 
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
@@ -25,7 +22,7 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
         The folder containing emails of the legitimate class
     :return:
     """
-    features = load_features()
+    features = load_features(local_features, 'Email')
     print("Loaded {} features".format(len(features)))
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
@@ -136,25 +133,6 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
         dict_feature_times[feature.config_name] = ex_time
 
     return dict_feature_values, dict_feature_times
-
-
-def load_features(filter_features=True) -> List[Callable]:
-    """
-    Loads email features
-
-    Parameters
-    ----------
-    filter_features: bool
-        Whether or not to filter the features
-    Returns
-    -------
-        A list of feature functions
-    """
-    modules = load_local_modules()
-    modules.append(internal_features)
-    loaded_features = [reflection.load_features_from_module(module, filter_features) for module in modules]
-    features = list(itertools.chain.from_iterable(loaded_features))
-    return features
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
