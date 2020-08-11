@@ -17,4 +17,4 @@ def extract_body_enabled():
 
 
 def extract_header_enabled():
-    return feature_type_enabled(FeatureType.HEADER)
+    return feature_type_enabled(FeatureType.EMAIL_HEADER)

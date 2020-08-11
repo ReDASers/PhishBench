@@ -1,4 +1,3 @@
-import importlib
 import inspect
 from enum import Enum, unique
 from functools import wraps
@@ -11,7 +10,7 @@ from ....utils import phishbench_globals
 @unique
 class FeatureType(Enum):
     EMAIL_BODY = "Email_Body_Features"
-    HEADER = "Email_Header_Features"
+    EMAIL_HEADER = "Email_Header_Features"
 
 
 def register_feature(feature_type: FeatureType, config_name: str):

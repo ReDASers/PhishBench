@@ -87,9 +87,9 @@ def make_config(list_features, list_imbalanced_dataset):
         feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
     }
 
-    config[email_extraction.FeatureType.HEADER.value] = {
+    config[email_extraction.FeatureType.EMAIL_HEADER.value] = {
         feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.HEADER
+        feature.feature_type == email_extraction.FeatureType.EMAIL_HEADER
     }
 
     config['HTML_Features'] = {}
