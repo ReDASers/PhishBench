@@ -7,6 +7,8 @@ DEFAULT_SETTINGS = {
     "path_phish_train": "dataset/phish_train",
     "path_legit_test": "dataset/legit_test",
     "path_phish_test": "dataset/phish_test",
+    "path_modified_legit_text": "dataset/modified_legit_text",
+    "path_modified_phish_text": "dataset/modified_phish_text",
 }
 
 
@@ -24,3 +26,11 @@ def test_legit_path():
 
 def test_phish_path():
     return phishbench_globals.config[DATASET_PATH_SECTION]['path_phish_test']
+
+
+def legit_path_adv():
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_modified_legit_text']
+
+
+def phish_path_adv():
+    return phishbench_globals.config[DATASET_PATH_SECTION]['path_modified_phish_text']

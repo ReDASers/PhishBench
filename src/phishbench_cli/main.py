@@ -276,7 +276,9 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
 
     print("Extracting Test Set")
     phishbench_globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path,
+        phishbench_globals.config["Adversarial Example"].getboolean("adversarial_example_legit"),
+        phishbench_globals.config["Adversarial Example"].getboolean("adversarial_example_phish"))
     Features_Support.Cleaning(feature_list_dict_test)
 
     # Export features to csv

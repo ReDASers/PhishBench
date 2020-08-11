@@ -16,7 +16,7 @@ from ...utils import phishbench_globals
 from ...utils.reflection_utils import load_local_modules
 
 
-def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
+def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder, adv_legit = False, adv_phish = False):
     """
     Extracts features from a dataset of emails split in two folders
     :param legit_dataset_folder:
@@ -32,12 +32,12 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
                                    legit_dataset_folder, phish_dataset_folder)
 
     print("Loading emails from {}".format(legit_dataset_folder))
-    legit_emails, _ = pb_input.read_dataset_email(legit_dataset_folder)
+    legit_emails, _ = pb_input.read_dataset_email(legit_dataset_folder, adv_legit = adv_legit)
     print("Extracting features")
     legit_features, legit_corpus = extract_email_features(legit_emails, features)
 
     print("Loading emails from {}".format(phish_dataset_folder))
-    phish_emails, _ = pb_input.read_dataset_email(phish_dataset_folder)
+    phish_emails, _ = pb_input.read_dataset_email(phish_dataset_folder, adv_phish = adv_phish)
     print("Extracting features")
     phish_features, phish_corpus = extract_email_features(phish_emails, features)
 

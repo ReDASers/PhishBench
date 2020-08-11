@@ -48,6 +48,8 @@ def confirmation(ignore_confirmation=False):
     print("Phishing Dataset (Training):: {}".format(dataset.train_phish_path()))
     print("Legitimate Dataset (Testing): {}".format(dataset.test_legit_path()))
     print("Phishing Dataset (Testing): {}".format(dataset.test_phish_path()))
+    print("Adversarial Legitimate Dataset: {}".format(dataset.legit_path_adv()))
+    print("Adversarial Phishing Dataset: {}".format(dataset.phish_path_adv()))
 
     if config["Extraction"]["feature extraction"] == "True":
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))

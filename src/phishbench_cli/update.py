@@ -18,6 +18,11 @@ def make_config(list_features, list_imbalanced_dataset):
 
     config[dataset_settings.DATASET_PATH_SECTION] = dataset_settings.DEFAULT_SETTINGS
 
+    config['Adversarial Example'] = {}
+    adversarial_section = config['Adversarial Example']
+    adversarial_section["adversarial_example_legit"] = "False"
+    adversarial_section["adversarial_example_phish"] = "False"
+
     config['Email or URL feature Extraction'] = {}
     proccess_section = config['Email or URL feature Extraction']
     proccess_section["extract_features_emails"] = "False"

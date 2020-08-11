@@ -13,7 +13,7 @@ from .email_input.models import EmailMessage
 from .url_input import URLData
 from .url_input.url_io import read_urls_from_file
 from ..utils import phishbench_globals
-
+from .. import dataset
 
 def enumerate_folder_files(folder_path) -> List[str]:
     """
@@ -65,7 +65,7 @@ def read_email_from_file(file_path: str) -> Message:
     return msg
 
 
-def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:
+def read_dataset_email(folder_path: str, adv_legit = False, adv_phish = False) -> Tuple[List[EmailMessage], List[str]]:
     """
 
     Parameters
@@ -87,6 +87,19 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     for f in tqdm(files):
         try:
             msg = EmailMessage(read_email_from_file(f))
+            # Change body text if email is adversarial example
+            if adv_legit:
+                try:
+                    new_text = change_text(os.path.join(dataset.legit_path_adv(), os.path.basename(f)))
+                    msg.body.text = new_text
+                except FileNotFoundError:
+                    pass
+            if adv_phish:
+                try:
+                    new_text = change_text(os.path.join(dataset.phish_path_adv(), os.path.basename(f)))
+                    msg.body.text = new_text
+                except FileNotFoundError:
+                    pass
             emails_parsed.append(msg)
             loaded_files.append(f)
         except Exception:
@@ -95,6 +108,9 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
 
     return emails_parsed, loaded_files
 
+# Gets advesarial text from corresponding file
+def change_text(file):
+    return open(file, "r").read()
 
 def remove_duplicates(values: List):
     """
