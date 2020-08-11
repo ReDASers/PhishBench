@@ -20,7 +20,7 @@ def load_metrics_from_module(source, filter_metrics=True):
     return metrics
 
 
-def load_internal_metrics(filter_metrics=True) -> List[Callable]:
+def load_metrics(filter_metrics=True) -> List[Callable]:
     modules = load_local_modules()
     modules.append(internal_metrics)
     loaded_features = [load_metrics_from_module(module, filter_metrics) for module in modules]
@@ -46,7 +46,7 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
     """
     if issparse(x_test):
         x_test = x_test.toarray()
-    metric_funcs: List[Callable] = load_internal_metrics()
+    metric_funcs: List[Callable] = load_metrics()
     y_pred = classifier.predict(x_test)
     y_prob = classifier.predict_proba(x_test)
     metrics = {}

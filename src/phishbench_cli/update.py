@@ -8,7 +8,7 @@ import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.feature_extraction.email as email_extraction
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
-from phishbench.evaluation.core import load_internal_metrics
+from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction.email.email_features import load_internal_features as load_email_features
 
 
@@ -62,7 +62,7 @@ def make_config(list_features, list_imbalanced_dataset):
     }
 
     config[evaluation_settings.EVALUATION_SECTION] = {
-        x.config_name: "True" for x in load_internal_metrics(filter_metrics=False)
+        x.config_name: "True" for x in load_metrics(filter_metrics=False)
     }
 
     config["Summary"] = {}
