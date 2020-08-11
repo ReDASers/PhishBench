@@ -1,7 +1,7 @@
 from phishbench.feature_extraction.reflection import FeatureType
 from phishbench.utils import phishbench_globals
 
-FEATURE_TYPE_SECTION = 'Email_Feature_Types'
+EMAIL_TYPE_SECTION = 'Email_Feature_Types'
 
 EMAIL_TYPE_SETTINGS = {
     feature_type.value: "True" for feature_type in FeatureType if feature_type.value.startswith('Email')
@@ -9,7 +9,7 @@ EMAIL_TYPE_SETTINGS = {
 
 
 def feature_type_enabled(feature_type: FeatureType) -> bool:
-    return phishbench_globals.config[FEATURE_TYPE_SECTION].getboolean(feature_type.value)
+    return phishbench_globals.config[EMAIL_TYPE_SECTION].getboolean(feature_type.value)
 
 
 def extract_body_enabled():
