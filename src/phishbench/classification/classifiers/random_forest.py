@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
 
-from ..core import BaseClassifier
+from ..base_classifier import BaseClassifier
 
 
 class RandomForest(BaseClassifier):

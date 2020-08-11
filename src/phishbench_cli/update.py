@@ -6,13 +6,14 @@ import phishbench.classification as classification
 import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.feature_extraction.email as email_extraction
-from phishbench.classification.core import load_internal_classifiers
+from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
-from phishbench.evaluation.core import load_internal_metrics
-from phishbench.feature_extraction.email.email_features import load_internal_features as load_email_features
+from phishbench.evaluation.core import load_metrics
+from phishbench.feature_extraction.email.email_features import load_features as load_email_features
+from phishbench.feature_extraction.reflection import FeatureType
 
 
-def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics):
+def make_config(list_features, list_imbalanced_dataset):
     config = configparser.ConfigParser()
 
     config[dataset_settings.DATASET_PATH_SECTION] = dataset_settings.DEFAULT_SETTINGS
@@ -57,15 +58,13 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
-    config[classification.settings.CLASSIFIERS_SECTION] = {}
-    classifiers_section = config[classification.settings.CLASSIFIERS_SECTION]
-    for classifier in list_classifiers:
-        classifiers_section[classifier] = "True"
+    config[classification.settings.CLASSIFIERS_SECTION] = {
+        x.__name__: "True" for x in load_classifiers(filter_classifiers=False)
+    }
 
-    config[evaluation_settings.EVALUATION_SECTION] = {}
-    metrics_section = config[evaluation_settings.EVALUATION_SECTION]
-    for metric in list_evaluation_metrics:
-        metrics_section[metric] = "True"
+    config[evaluation_settings.EVALUATION_SECTION] = {
+        x.config_name: "True" for x in load_metrics(filter_metrics=False)
+    }
 
     config["Summary"] = {}
     summary_section = config["Summary"]
@@ -84,15 +83,11 @@ def make_config(list_features, list_classifiers, list_imbalanced_dataset, list_e
 
     reflection_features = load_email_features(filter_features=False)
 
-    config[email_extraction.FeatureType.EMAIL_BODY.value] = {
-        feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
-    }
-
-    config[email_extraction.FeatureType.HEADER.value] = {
-        feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.HEADER
-    }
+    for feature_type in FeatureType:
+        config[feature_type.value] = {
+            feature.config_name: "True" for feature in reflection_features if
+            feature.feature_type == feature_type
+        }
 
     config['HTML_Features'] = {}
     c_html_features = config['HTML_Features']
@@ -130,22 +125,18 @@ def update_list():
         if inspect.isfunction(element):
             list_features.append(member)
 
-    list_classifiers = [x.__name__ for x in load_internal_classifiers(filter_classifiers=False)]
-
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
         if inspect.isfunction(element):
             list_imbalanced_dataset.append(member)
 
-    list_evaluation_metrics = [x.config_name for x in load_internal_metrics(filter_metrics=False)]
-
-    return list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics
+    return list_features, list_imbalanced_dataset
 
 
 def main():
     # execute only if run as a script
-    list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics = update_list()
-    make_config(list_features, list_classifiers, list_imbalanced_dataset, list_evaluation_metrics)
+    list_features, list_imbalanced_dataset = update_list()
+    make_config(list_features, list_imbalanced_dataset)
 
 
 if __name__ == "__main__":

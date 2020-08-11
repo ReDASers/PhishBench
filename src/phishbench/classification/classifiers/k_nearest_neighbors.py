@@ -1,7 +1,7 @@
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 
-from ..core import BaseClassifier
+from ..base_classifier import BaseClassifier
 
 
 class KNN(BaseClassifier):

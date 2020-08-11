@@ -2,7 +2,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.utils.class_weight import compute_sample_weight
 from xgboost import XGBClassifier
 
-from ..core import BaseClassifier
+from ..base_classifier import BaseClassifier
 
 
 class XGBoost(BaseClassifier):

@@ -1,7 +1,7 @@
 import imblearn.metrics
 import sklearn.metrics
 
-from .core import register_metric, MetricType
+from .reflection import register_metric, MetricType
 
 
 @register_metric(MetricType.PRED, 'accuracy')
@@ -55,22 +55,22 @@ def f1_score(y_test, y_predict):
 
 
 @register_metric(MetricType.PRED, "tn")
-def tn(y_true, y_pred):
+def true_negative(y_true, y_pred):
     return sklearn.metrics.confusion_matrix(y_true, y_pred)[0, 0]
 
 
 @register_metric(MetricType.PRED, "tp")
-def tp(y_true, y_pred):
+def true_positive(y_true, y_pred):
     return sklearn.metrics.confusion_matrix(y_true, y_pred)[1, 1]
 
 
 @register_metric(MetricType.PRED, "fn")
-def fn(y_true, y_pred):
+def false_negative(y_true, y_pred):
     return sklearn.metrics.confusion_matrix(y_true, y_pred)[1, 0]
 
 
 @register_metric(MetricType.PRED, "fp")
-def fp(y_true, y_pred):
+def false_positive(y_true, y_pred):
     return sklearn.metrics.confusion_matrix(y_true, y_pred)[0, 1]
 
 

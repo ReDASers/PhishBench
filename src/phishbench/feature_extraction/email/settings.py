@@ -1,4 +1,4 @@
-from .reflection.core import FeatureType
+from ..reflection import FeatureType
 from ...utils import phishbench_globals
 
 FEATURE_TYPE_SECTION = 'Email_Feature_Types'
@@ -17,4 +17,4 @@ def extract_body_enabled():
 
 
 def extract_header_enabled():
-    return feature_type_enabled(FeatureType.HEADER)
+    return feature_type_enabled(FeatureType.EMAIL_HEADER)

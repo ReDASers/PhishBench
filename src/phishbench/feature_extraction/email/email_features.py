@@ -1,6 +1,7 @@
 """
 This module contains code for email feature extraction.
 """
+import itertools
 import time
 from typing import List, Callable, Dict, Tuple
 
@@ -8,10 +9,11 @@ from tqdm import tqdm
 
 from . import reflection
 from . import features as internal_features
-from .reflection import FeatureType
+from ..reflection import FeatureType
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
+from ...utils.reflection_utils import load_local_modules
 
 
 def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
@@ -23,7 +25,7 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
         The folder containing emails of the legitimate class
     :return:
     """
-    features = load_internal_features()
+    features = load_features()
     print("Loaded {} features".format(len(features)))
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
@@ -136,9 +138,9 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
     return dict_feature_values, dict_feature_times
 
 
-def load_internal_features(filter_features=True) -> List[Callable]:
+def load_features(filter_features=True) -> List[Callable]:
     """
-    Loads built-in email features
+    Loads email features
 
     Parameters
     ----------
@@ -146,9 +148,13 @@ def load_internal_features(filter_features=True) -> List[Callable]:
         Whether or not to filter the features
     Returns
     -------
-
+        A list of feature functions
     """
-    return reflection.load_features(internal_features, filter_features)
+    modules = load_local_modules()
+    modules.append(internal_features)
+    loaded_features = [reflection.load_features_from_module(module, filter_features) for module in modules]
+    features = list(itertools.chain.from_iterable(loaded_features))
+    return features
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)

@@ -1,7 +1,7 @@
 from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import GaussianNB
 
-from ..core import BaseClassifier
+from ..base_classifier import BaseClassifier
 
 
 class GaussianNaiveBayes(BaseClassifier):
