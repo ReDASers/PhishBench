@@ -10,7 +10,7 @@ from .base_classifier import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
 
 
-def load_internal_classifiers(filter_classifiers=True):
+def load_classifiers(filter_classifiers=True):
     """
     Loads internal classifiers and classifiers from the working directory
     Parameters
@@ -75,7 +75,7 @@ def train_classifiers(x_train, y_train, io_dir, verbose=1):
     if not os.path.isdir(io_dir):
         os.makedirs(io_dir)
 
-    classifiers: List[BaseClassifier] = [x(io_dir) for x in load_internal_classifiers()]
+    classifiers: List[BaseClassifier] = [x(io_dir) for x in load_classifiers()]
 
     for classifier in classifiers:
         if verbose > 0:
