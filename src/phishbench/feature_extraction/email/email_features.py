@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from . import reflection
 from . import features as internal_features
-from .reflection import FeatureType
+from ..reflection import FeatureType
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals

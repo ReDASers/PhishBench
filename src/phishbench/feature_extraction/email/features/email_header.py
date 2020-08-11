@@ -3,7 +3,7 @@ import sys
 
 from ....input.email_input.models import EmailHeader
 from . import helpers
-from ..reflection.core import register_feature, FeatureType
+from ...reflection import register_feature, FeatureType
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'mime_version')

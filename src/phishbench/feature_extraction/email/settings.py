@@ -1,4 +1,4 @@
-from .reflection.core import FeatureType
+from ..reflection import FeatureType
 from ...utils import phishbench_globals
 
 FEATURE_TYPE_SECTION = 'Email_Feature_Types'
