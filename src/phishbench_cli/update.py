@@ -10,6 +10,7 @@ from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction.email.email_features import load_features as load_email_features
+from phishbench.feature_extraction.reflection import FeatureType
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -84,12 +85,12 @@ def make_config(list_features, list_imbalanced_dataset):
 
     config[email_extraction.FeatureType.EMAIL_BODY.value] = {
         feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.EMAIL_BODY
+        feature.feature_type == FeatureType.EMAIL_BODY
     }
 
     config[email_extraction.FeatureType.EMAIL_HEADER.value] = {
         feature.config_name: "True" for feature in reflection_features if
-        feature.feature_type == email_extraction.FeatureType.EMAIL_HEADER
+        feature.feature_type == FeatureType.EMAIL_HEADER
     }
 
     config['HTML_Features'] = {}
