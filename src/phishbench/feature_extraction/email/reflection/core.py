@@ -45,7 +45,7 @@ def _check_feature(feature: Callable) -> bool:
     return phishbench_globals.config[feature_type.value].getboolean(feature.config_name)
 
 
-def load_features(features_module, filter_features=True) -> List[Callable]:
+def load_features_from_module(features_module, filter_features=True) -> List[Callable]:
     """
     Loads features from a module
     Parameters
