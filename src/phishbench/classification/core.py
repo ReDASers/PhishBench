@@ -4,7 +4,7 @@ from typing import List
 
 from scipy.sparse import issparse
 
-from . import classifiers
+from . import classifiers as internal_classifiers
 from . import settings as classification_settings
 from .base_classifier import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
@@ -23,7 +23,7 @@ def load_classifiers(filter_classifiers=True):
         A list of classifiers
     """
     modules = load_local_modules()
-    modules.append(classifiers)
+    modules.append(internal_classifiers)
     loaded_classifiers = [load_classifiers_from_module(module, filter_classifiers) for module in modules]
     loaded = list(itertools.chain.from_iterable(loaded_classifiers))
     return loaded
