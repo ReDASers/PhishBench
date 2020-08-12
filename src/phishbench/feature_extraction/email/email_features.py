@@ -68,6 +68,38 @@ def extract_email_features(emails: List[EmailMessage], features: List[Callable])
     return feature_dict_list, corpus
 
 
+def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
+    """
+    Extracts multiple features from a single email
+    Parameters
+    ----------
+    features: List
+        The features to extract
+    email_msg: EmailMessage
+        The email to extract the features from
+
+    Returns
+    -------
+    feature_values: Dict
+        The extracted feature values
+    extraction_times: Dict
+        The time it took to extract each feature
+    """
+    dict_feature_values = dict()
+    dict_feature_times = dict()
+
+    for feature in features:
+        result, ex_time = extract_single_feature_email(feature, email_msg)
+        if isinstance(result, dict):
+            temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
+            dict_feature_values.update(temp_dict)
+        else:
+            dict_feature_values[feature.config_name] = result
+        dict_feature_times[feature.config_name] = ex_time
+
+    return dict_feature_values, dict_feature_times
+
+
 def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     """
     Extracts a single feature from a single email
@@ -102,37 +134,6 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     ex_time = end - start
     return feature_value, ex_time
 
-
-def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
-    """
-    Extracts multiple features from a single email
-    Parameters
-    ----------
-    features: List
-        The features to extract
-    email_msg: EmailMessage
-        The email to extract the features from
-
-    Returns
-    -------
-    feature_values: Dict
-        The extracted feature values
-    extraction_times: Dict
-        The time it took to extract each feature
-    """
-    dict_feature_values = dict()
-    dict_feature_times = dict()
-
-    for feature in features:
-        result, ex_time = extract_single_feature_email(feature, email_msg)
-        if isinstance(result, dict):
-            temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
-            dict_feature_values.update(temp_dict)
-        else:
-            dict_feature_values[feature.config_name] = result
-        dict_feature_times[feature.config_name] = ex_time
-
-    return dict_feature_values, dict_feature_times
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
