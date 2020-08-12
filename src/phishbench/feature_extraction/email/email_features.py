@@ -7,8 +7,8 @@ from typing import List, Callable, Dict, Tuple
 
 from tqdm import tqdm
 
-from . import reflection
 from . import features as internal_features
+from . import reflection
 from ..reflection import FeatureType
 from ...input import input as pb_input
 from ...input.email_input.models import EmailMessage
