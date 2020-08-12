@@ -9,8 +9,8 @@ from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction import settings as extraction_settings
-from phishbench.feature_extraction.reflection import FeatureType
-from phishbench.feature_extraction.reflection import load_features
+from phishbench.feature_extraction.reflection import load_features, FeatureType
+from phishbench.feature_extraction.email import features as internal_email_features
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -78,7 +78,7 @@ def make_config(list_features, list_imbalanced_dataset):
 
     config[extraction_settings.URL_TYPE_SECTION] = extraction_settings.URL_TYPE_SETTINGS
 
-    reflection_features = load_features(filter_features=None)
+    reflection_features = load_features(internal_features=internal_email_features, filter_features=None)
 
     for feature_type in FeatureType:
         print(feature_type.value)
