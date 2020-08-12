@@ -48,8 +48,6 @@ def x_spam_flag(header: EmailHeader):
 
 @register_feature(FeatureType.EMAIL_HEADER, 'received_count')
 def received_count(header: EmailHeader):
-    if header.received is None:
-        return 0
     return len(header.received)
 
 
