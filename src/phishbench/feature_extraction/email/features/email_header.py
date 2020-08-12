@@ -1,9 +1,9 @@
 import re
 import sys
 
-from ....input.email_input.models import EmailHeader
 from . import helpers
 from ...reflection import register_feature, FeatureType
+from ....input.email_input.models import EmailHeader
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'mime_version')

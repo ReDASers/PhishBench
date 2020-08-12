@@ -3,12 +3,12 @@ from typing import List
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-from phishbench import Features
-from phishbench.Features_Support import Cleaning, read_alexa
-from phishbench.input import input as pb_input
-from phishbench.input.url_input import URLData
-from phishbench.utils import phishbench_globals
+from ... import Features
 from ... import dataset
+from ...Features_Support import Cleaning, read_alexa
+from ...input import URLData
+from ...input import input as pb_input
+from ...utils import phishbench_globals
 
 
 def Extract_Features_Urls_Testing():

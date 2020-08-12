@@ -1,8 +1,8 @@
 import inspect
 from typing import List, Callable
 
-from ..reflection import FeatureType
 from . import settings
+from ..reflection import FeatureType
 from ...utils import phishbench_globals
 
 
