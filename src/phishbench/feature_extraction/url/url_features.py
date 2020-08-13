@@ -1,18 +1,18 @@
-from datetime import time
+import time
 from typing import List, Callable, Tuple, Dict
 
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
+from . import features as internal_features
+from .. import settings
+from ..reflection import load_features, FeatureType
 from ... import Features
+from ... import dataset
 from ...Features_Support import Cleaning, read_alexa
 from ...input import input as pb_input
 from ...input.url_input import URLData
 from ...utils import phishbench_globals
-from ..reflection import load_features, FeatureType
-from ... import dataset
-from .. import settings
-from . import features as internal_features
 
 
 def Extract_Features_Urls_Testing():
@@ -52,7 +52,7 @@ def extract_labeled_dataset(legit_path, phish_path):
 
 
 def extract_url_features(urls: List[URLData], bad_url_list):
-    features = load_features(filter_features='URL')
+    features = load_features(filter_features='URL', internal_features=internal_features)
     feature_list_dict = list()
 
     alexa_data = {}
@@ -152,7 +152,7 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
-        feature(url)
+        feature_value = feature(url)
     except Exception:
         error_string = "Error extracting {}".format(feature.config_name)
         phishbench_globals.logger.warning(error_string, exc_info=True)
@@ -160,7 +160,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
 
 
 def single_url_feature(raw_url, list_features, list_time):
