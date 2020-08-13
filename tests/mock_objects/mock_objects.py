@@ -4,15 +4,15 @@ from configparser import ConfigParser
 
 from bs4 import BeautifulSoup
 
+from phishbench.feature_extraction.reflection import FeatureType
+
 
 def get_mock_config() -> ConfigParser:
     config = ConfigParser()
     config['Features'] = {}
-    config['HTML_Features'] = {}
-    config['URL_Features'] = {}
-    config['URL_Features']['url_token_delimiter'] = '.'
-    config['Network_Features'] = {}
-    config['Javascript_Features'] = {}
+    for ftype in FeatureType:
+        config[ftype.value] = {}
+
     config['Classifiers'] = {}
     config['Imbalanced Datasets'] = {}
     config['Evaluation Metrics'] = {}

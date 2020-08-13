@@ -4,8 +4,12 @@ from functools import wraps
 
 @unique
 class FeatureType(Enum):
-    EMAIL_BODY = "Email_Body_Features"
-    EMAIL_HEADER = "Email_Header_Features"
+    EMAIL_BODY = 'Email_Body_Features'
+    EMAIL_HEADER = 'Email_Header_Features'
+    URL_RAW = 'URL_Features'
+    URL_NETWORK = 'URL_Network_Features'
+    URL_WEBSITE = 'URL_HTML_Features'
+    URL_WEBSITE_JAVASCRIPT = 'URL_Javascript_Features'
 
 
 def register_feature(feature_type: FeatureType, config_name: str):

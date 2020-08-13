@@ -2,6 +2,8 @@ import unittest
 from unittest.mock import patch
 
 from phishbench import Features
+import phishbench.feature_extraction.url.features as url_features
+from phishbench.input import URLData
 from tests.mock_objects import mock_objects
 
 
@@ -9,22 +11,20 @@ from tests.mock_objects import mock_objects
 class TestURLFeatures(unittest.TestCase):
 
     def test_URL_url_length(self, config_mock):
-        config_mock['URL_Features']['url_length'] = 'True'
-        list_features = {}
-        list_time = {}
+        test_url = 'http://te2t-url.com/home.html'
+        test_url = URLData(test_url, download_url=False)
 
-        Features.URL_url_length('http://te2t-url.com/home.html', list_features, list_time)
+        result = url_features.url_length(test_url)
 
-        self.assertEqual(29, list_features["url_length"], 'incorrect url_length')
+        self.assertEqual(result, 29)
 
     def test_URL_domain_length(self, config_mock):
-        config_mock['URL_Features']["domain_length"] = "True"
-        list_features = {}
-        list_time = {}
+        test_url = 'http://www.google.com/index.html'
+        test_url = URLData(test_url, download_url=False)
 
-        Features.URL_domain_length('http://te2t-url.com/home.html', list_features, list_time)
+        result = url_features.domain_length(test_url)
 
-        self.assertEqual(12, list_features["domain_length"], 'incorrect domain_length')
+        self.assertEqual(result, 14)
 
     def test_URL_letter_occurrence(self, config_mock):
         config_mock['URL_Features']["letter_occurrence"] = "True"

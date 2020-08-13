@@ -9,6 +9,7 @@ from lxml import html as lxml_html
 from . import Tfidf
 from .Features_Support import *
 from .utils import phishbench_globals
+from .feature_extraction.reflection import FeatureType
 
 
 ##### Email URL features
@@ -100,6 +101,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         list_time["Number_link_sec_port"] = ex_time
 
 
+
 # def html_in_body(body, list_features, list_time):
 #    if Globals.config["Features"]["html_in_body"] == "True":
 #        start=time.time()
@@ -136,7 +138,7 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
 
 # START - ranked_matrix
 def HTML_ranked_matrix(soup, url, alexa_data, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["ranked_matrix"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["ranked_matrix"] == "True":
         start = time.time()
         domain = url.split("//")[-1].split("/")[0]
         mean_and_sd = [0, 0]
@@ -211,7 +213,7 @@ def get_rank(domain, alexa_data):
 
 # START - LTree features
 def HTML_LTree_Features(soup, url, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["LTree_Features"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["LTree_Features"] == "True":
         start = time.time()
         domain = url.split("//")[-1].split("/")[0]
         link_features = img_features = video_features = a_features = meta_features = script_features = [[0, 0, 0],
@@ -320,7 +322,7 @@ def add_features(list_features, features, tag):
 # END LTree features
 
 def HTML_number_of_tags(soup, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["number_of_tags"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_tags"] == "True":
         start = time.time()
         number_of_tags = 0
         if soup:
@@ -340,7 +342,7 @@ def HTML_number_of_tags(soup, list_features, list_time):
 
 def HTML_number_of_head(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_head"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_head"] == "True":
         start = time.time()
         number_of_head = 0
         if soup:
@@ -357,7 +359,7 @@ def HTML_number_of_head(soup, list_features, list_time):
 
 def HTML_number_of_html(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_html"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_html"] == "True":
         start = time.time()
         number_of_html = 0
         if soup:
@@ -374,7 +376,7 @@ def HTML_number_of_html(soup, list_features, list_time):
 
 def HTML_number_of_body(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_body"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_body"] == "True":
         start = time.time()
         number_of_body = 0
         if soup:
@@ -391,7 +393,7 @@ def HTML_number_of_body(soup, list_features, list_time):
 
 def HTML_number_of_titles(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_titles"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_titles"] == "True":
         start = time.time()
         number_of_titles = 0
         if soup:
@@ -408,7 +410,7 @@ def HTML_number_of_titles(soup, list_features, list_time):
 
 def HTML_number_suspicious_content(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_suspicious_content"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_suspicious_content"] == "True":
         start = time.time()
         all_tags = soup.find_all()
         number_suspicious_content = 0
@@ -429,7 +431,7 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
 
 def HTML_number_of_iframes(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_iframes"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_iframes"] == "True":
         start = time.time()
         number_of_iframes = 0
         if soup:
@@ -447,7 +449,7 @@ def HTML_number_of_iframes(soup, list_features, list_time):
 
 def HTML_number_of_input(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_input"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_input"] == "True":
         start = time.time()
         number_of_input = 0
         if soup:
@@ -464,7 +466,7 @@ def HTML_number_of_input(soup, list_features, list_time):
 
 def HTML_number_of_img(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_img"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_img"] == "True":
         start = time.time()
         number_of_img = 0
         if soup:
@@ -481,7 +483,7 @@ def HTML_number_of_img(soup, list_features, list_time):
 
 def HTML_number_of_scripts(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_scripts"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_scripts"] == "True":
         start = time.time()
         number_of_scripts = 0
         if soup:
@@ -498,7 +500,7 @@ def HTML_number_of_scripts(soup, list_features, list_time):
 
 def HTML_number_of_anchor(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_anchor"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_anchor"] == "True":
         start = time.time()
         number_of_anchor = 0
         if soup:
@@ -515,7 +517,7 @@ def HTML_number_of_anchor(soup, list_features, list_time):
 
 def HTML_number_of_embed(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_embed"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_embed"] == "True":
         start = time.time()
         number_of_embed = 0
         if soup:
@@ -532,7 +534,7 @@ def HTML_number_of_embed(soup, list_features, list_time):
 
 def HTML_number_object_tags(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_object_tags"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_object_tags"] == "True":
         start = time.time()
         number_object_tags = 0
         if soup:
@@ -549,7 +551,7 @@ def HTML_number_object_tags(soup, list_features, list_time):
 
 def HTML_number_of_video(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_video"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_video"] == "True":
         start = time.time()
         number_of_video = 0
         if soup:
@@ -566,7 +568,7 @@ def HTML_number_of_video(soup, list_features, list_time):
 
 def HTML_number_of_audio(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_audio"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_audio"] == "True":
         start = time.time()
         number_of_audio = 0
         if soup:
@@ -583,7 +585,7 @@ def HTML_number_of_audio(soup, list_features, list_time):
 
 def HTML_number_of_hidden_input(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_hidden_input"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_input"] == "True":
         start = time.time()
         number_of_hidden_input = 0
         if soup:
@@ -603,7 +605,7 @@ def HTML_number_of_hidden_input(soup, list_features, list_time):
 
 def HTML_number_of_hidden_svg(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_hidden_svg"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_svg"] == "True":
         start = time.time()
         number_of_hidden_svg = 0
         if soup:
@@ -623,7 +625,7 @@ def HTML_number_of_hidden_svg(soup, list_features, list_time):
 
 def HTML_number_of_hidden_iframe(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_hidden_iframe"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_iframe"] == "True":
         start = time.time()
         number_of_hidden_iframe = 0
         if soup:
@@ -643,7 +645,7 @@ def HTML_number_of_hidden_iframe(soup, list_features, list_time):
 
 def HTML_number_of_hidden_div(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_hidden_div"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_div"] == "True":
         start = time.time()
         number_of_hidden_div = 0
         if soup:
@@ -663,7 +665,7 @@ def HTML_number_of_hidden_div(soup, list_features, list_time):
 
 def HTML_number_of_hidden_object(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["number_of_hidden_object"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_object"] == "True":
         start = time.time()
         number_of_hidden_object = 0
         if soup:
@@ -683,7 +685,7 @@ def HTML_number_of_hidden_object(soup, list_features, list_time):
 
 def HTML_inbound_count(soup, url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["inbound_count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["inbound_count"] == "True":
         start = time.time()
         inbound_count = 0
         if soup:
@@ -717,7 +719,7 @@ def HTML_inbound_count(soup, url, list_features, list_time):
 
 def HTML_outbound_count(soup, url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["outbound_count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["outbound_count"] == "True":
         start = time.time()
         outbound_count = 0
         if soup:
@@ -749,7 +751,7 @@ def HTML_outbound_count(soup, url, list_features, list_time):
 
 def HTML_inbound_href_count(soup, url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["inbound_href_count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["inbound_href_count"] == "True":
         start = time.time()
         inbound_href_count = 0
         if soup:
@@ -783,7 +785,7 @@ def HTML_inbound_href_count(soup, url, list_features, list_time):
 
 def HTML_outbound_href_count(soup, url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["HTML_Features"]["outbound_href_count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["outbound_href_count"] == "True":
         start = time.time()
         outbound_href_count = 0
         if soup:
@@ -814,7 +816,7 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
 
 
 def HTML_Website_content_type(html, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["website_content_type"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["website_content_type"] == "True":
         start = time.time()
         if html:
             try:
@@ -834,7 +836,7 @@ def HTML_Website_content_type(html, list_features, list_time):
 
 
 def HTML_content_length(html, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["content_length"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["content_length"] == "True":
         start = time.time()
         content_length = 0
         if html:
@@ -851,7 +853,7 @@ def HTML_content_length(html, list_features, list_time):
 
 
 def HTML_x_powered_by(html, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["x_powered_by"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["x_powered_by"] == "True":
         start = time.time()
         x_powered_by = ''
         if html:
@@ -869,7 +871,7 @@ def HTML_x_powered_by(html, list_features, list_time):
 
 
 def HTML_URL_Is_Redirect(html, url, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["URL_Is_Redirect"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["URL_Is_Redirect"] == "True":
         start = time.time()
         flag = 0
         if html:
@@ -886,7 +888,7 @@ def HTML_URL_Is_Redirect(html, url, list_features, list_time):
 
 
 def HTML_Is_Login(html, url, list_features, list_time):
-    if phishbench_globals.config["HTML_Features"]["Is_Login"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["Is_Login"] == "True":
         start = time.time()
         userfield = passfield = emailfield = None
         _is_login = False
@@ -915,46 +917,11 @@ def HTML_Is_Login(html, url, list_features, list_time):
 
 
 ############################ URL features
-def URL_url_length(url, list_features, list_time):
-    ##global list_features
-    if phishbench_globals.config["URL_Features"]["url_length"] == "True":
-        start = time.time()
-        url_length = 0
-        if url:
-            try:
-                url_length = len(url)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                url_length = -1
-        list_features["url_length"] = url_length
-        end = time.time()
-        ex_time = end - start
-        list_time["url_length"] = ex_time
-
-
-def URL_domain_length(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config["URL_Features"]["domain_length"] == "True":
-        start = time.time()
-        domain_length = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = parsed_url.hostname
-                domain_length = len(domain)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                domain_length = -1
-        list_features["domain_length"] = domain_length
-        end = time.time()
-        ex_time = end - start
-        list_time["domain_length"] = ex_time
-
 
 ##################################################################################
 def URL_letter_occurrence(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["letter_occurrence"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["letter_occurrence"] == "True":
         start = time.time()
         if url:
             ####
@@ -985,7 +952,7 @@ def URL_letter_occurrence(url, list_features, list_time):
 ##################################################################################
 
 def URL_char_distance(url: str, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["char_distance"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["char_distance"] == "True":
         start = time.time()
         if url:
             url = url.lower()
@@ -1007,7 +974,7 @@ def URL_char_distance(url: str, list_features, list_time):
 
 ##################################################################################
 def URL_kolmogorov_shmirnov(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["kolmogorov_shmirnov"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["kolmogorov_shmirnov"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1031,7 +998,7 @@ def URL_kolmogorov_shmirnov(url, list_features, list_time):
 
 
 def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Kullback_Leibler_Divergence"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Kullback_Leibler_Divergence"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1053,7 +1020,7 @@ def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
 
 def URL_english_frequency_distance(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["english_frequency_distance"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["english_frequency_distance"] == "True":
         start = time.time()
         char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
                      .02406,
@@ -1077,7 +1044,7 @@ def URL_english_frequency_distance(url, list_features, list_time):
 
 def URL_num_punctuation(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["num_punctuation"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["num_punctuation"] == "True":
         start = time.time()
         num_punct = 0
         if url:
@@ -1095,7 +1062,7 @@ def URL_num_punctuation(url, list_features, list_time):
 
 def URL_has_port(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["has_port"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["has_port"] == "True":
         start = time.time()
         has_port = 0
         if url:
@@ -1116,7 +1083,7 @@ def URL_has_port(url, list_features, list_time):
 
 def URL_has_https(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["has_https"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["has_https"] == "True":
         start = time.time()
         has_https = 0
         if url:
@@ -1137,7 +1104,7 @@ def URL_has_https(url, list_features, list_time):
 
 def URL_number_of_digits(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["number_of_digits"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_digits"] == "True":
         number_of_digits = 0
         start = time.time()
         if url:
@@ -1154,7 +1121,7 @@ def URL_number_of_digits(url, list_features, list_time):
 
 def URL_number_of_dots(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["number_of_dots"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dots"] == "True":
         start = time.time()
         number_of_dots = 0
         if url:
@@ -1171,7 +1138,7 @@ def URL_number_of_dots(url, list_features, list_time):
 
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["number_of_slashes"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":
         start = time.time()
         number_of_slashes = 0
         if url:
@@ -1188,7 +1155,7 @@ def URL_number_of_slashes(url, list_features, list_time):
 
 def URL_digit_letter_ratio(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["digit_letter_ratio"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["digit_letter_ratio"] == "True":
         start = time.time()
         digit_letter_ratio = 0
         if url:
@@ -1208,7 +1175,7 @@ def URL_digit_letter_ratio(url, list_features, list_time):
 
 def URL_consecutive_numbers(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["consecutive_numbers"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["consecutive_numbers"] == "True":
         start = time.time()
         result = 0
         if url:
@@ -1231,7 +1198,7 @@ def URL_consecutive_numbers(url, list_features, list_time):
 
 def URL_special_char_count(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["special_char_count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["special_char_count"] == "True":
         start = time.time()
         special_char_count = 0
         if url:
@@ -1248,7 +1215,7 @@ def URL_special_char_count(url, list_features, list_time):
 
 def URL_special_pattern(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["special_pattern"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["special_pattern"] == "True":
         start = time.time()
         special_count = 0
         if url:
@@ -1266,7 +1233,7 @@ def URL_special_pattern(url, list_features, list_time):
 
 def URL_Top_level_domain(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["Top_level_domain"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Top_level_domain"] == "True":
         start = time.time()
         tld = 0
         if url:
@@ -1284,7 +1251,7 @@ def URL_Top_level_domain(url, list_features, list_time):
 
 def URL_is_common_TLD(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["is_common_TLD"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["is_common_TLD"] == "True":
         common_TLD_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
         result = 0
         start = time.time()
@@ -1308,7 +1275,7 @@ def URL_is_common_TLD(url, list_features, list_time):
 
 def URL_Is_IP_Addr(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["Is_IP_Addr"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Is_IP_Addr"] == "True":
         start = time.time()
         Is_IP_Addr = 1
         if url:
@@ -1330,7 +1297,7 @@ def URL_Is_IP_Addr(url, list_features, list_time):
 # Devin's features
 def URL_number_of_dashes(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["number_of_dashes"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dashes"] == "True":
         start = time.time()
         number_of_dashes = 0
         if url:
@@ -1347,7 +1314,7 @@ def URL_number_of_dashes(url, list_features, list_time):
 
 def URL_Http_middle_of_URL(url, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["URL_Features"]["Http_middle_of_URL"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Http_middle_of_URL"] == "True":
         start = time.time()
         HTTP_REGEX = re.compile(".+http.+")
         if url and isinstance(url, str):
@@ -1363,7 +1330,7 @@ def URL_Http_middle_of_URL(url, list_features, list_time):
 
 
 def URL_Has_More_than_3_dots(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Has_More_than_3_dots"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_More_than_3_dots"] == "True":
         start = time.time()
         # regex_http=re.compile(r'')
         if url:
@@ -1385,7 +1352,7 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
 
 
 def URL_Has_at_symbole(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Has_at_symbole"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_at_symbole"] == "True":
         start = time.time()
         flag = 0
         if url:
@@ -1402,7 +1369,7 @@ def URL_Has_at_symbole(url, list_features, list_time):
 
 
 def URL_Has_anchor_tag(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Has_anchor_tag"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_anchor_tag"] == "True":
         start = time.time()
         flag = 0
         if url:
@@ -1421,7 +1388,7 @@ def URL_Has_anchor_tag(url, list_features, list_time):
 
 
 def URL_Null_in_Domain(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Null_in_Domain"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Null_in_Domain"] == "True":
         start = time.time()
         regex_null = re.compile(r'null', flags=re.IGNORECASE)
         flag = 0
@@ -1442,7 +1409,7 @@ TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 
 
 def URL_Token_Count(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Token_Count"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Token_Count"] == "True":
         start = time.time()
         count = 0
         if url:
@@ -1460,7 +1427,7 @@ def URL_Token_Count(url, list_features, list_time):
 
 # Detecting Malicious URLs Using Lexical Analysis
 def URL_Average_Path_Token_Length(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Average_Path_Token_Length"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Average_Path_Token_Length"] == "True":
         start = time.time()
         average_token_length = 0
         if url:
@@ -1482,7 +1449,7 @@ def URL_Average_Path_Token_Length(url, list_features, list_time):
 
 
 def URL_Average_Domain_Token_Length(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Average_Domain_Token_Length"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Average_Domain_Token_Length"] == "True":
         start = time.time()
         average_token_length = 0
         if url:
@@ -1504,7 +1471,7 @@ def URL_Average_Domain_Token_Length(url, list_features, list_time):
 
 
 def URL_Longest_Domain_Token(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Longest_Domain_Token"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Longest_Domain_Token"] == "True":
         start = time.time()
         try:
             if url == '':
@@ -1525,7 +1492,7 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
 
 
 def URL_Protocol_Port_Match(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Protocol_Port_Match"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Protocol_Port_Match"] == "True":
         start = time.time()
         match = 1
         if url:
@@ -1552,7 +1519,7 @@ def URL_Protocol_Port_Match(url, list_features, list_time):
 
 
 def URL_Has_WWW_in_Middle(url, list_features, list_time):
-    if phishbench_globals.config["URL_Features"]["Has_WWW_in_Middle"] == "True":
+    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_WWW_in_Middle"] == "True":
         start = time.time()
         flag = 0
         # regex_www=re.compile(r'www')
@@ -1663,9 +1630,11 @@ def URL_Is_Whitelisted(url, list_features, list_time):
 #        list_time["country"]=ex_time
 
 # age of domain
+
+
 def Network_creation_date(whois_info, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Network_Features"]["creation_date"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["creation_date"] == "True":
         start = time.time()
         creation_date = 0.0
         if whois_info:
@@ -1690,7 +1659,7 @@ def Network_creation_date(whois_info, list_features, list_time):
 
 def Network_expiration_date(whois_info, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Network_Features"]["expiration_date"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["expiration_date"] == "True":
         start = time.time()
         expiration_date = 0.0
         if whois_info:
@@ -1714,7 +1683,7 @@ def Network_expiration_date(whois_info, list_features, list_time):
 
 
 def Network_updated_date(whois_info, list_features, list_time):
-    if phishbench_globals.config["Network_Features"]["updated_date"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["updated_date"] == "True":
         start = time.time()
         updated_date = 0.0
         if whois_info:
@@ -1739,7 +1708,7 @@ def Network_updated_date(whois_info, list_features, list_time):
 
 
 def Network_as_number(IP_whois_list, list_features, list_time):
-    if phishbench_globals.config["Network_Features"]["as_number"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["as_number"] == "True":
         start = time.time()
         as_number = 0
         if IP_whois_list:
@@ -1756,7 +1725,7 @@ def Network_as_number(IP_whois_list, list_features, list_time):
 
 
 def Network_number_name_server(dns_info, list_features, list_time):
-    if phishbench_globals.config["Network_Features"]["number_name_server"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["number_name_server"] == "True":
         start = time.time()
         number_name_server = 0
         if dns_info:
@@ -1773,7 +1742,7 @@ def Network_number_name_server(dns_info, list_features, list_time):
 
 
 def Network_DNS_Info_Exists(url, list_features, list_time):
-    if phishbench_globals.config["Network_Features"]["DNS_Info_Exists"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["DNS_Info_Exists"] == "True":
         start = time.time()
         flag = 1
         if url:
@@ -1804,7 +1773,7 @@ def Network_DNS_Info_Exists(url, list_features, list_time):
 
 
 def Network_dns_ttl(url, list_features, list_time):
-    if phishbench_globals.config["Network_Features"]["dns_ttl"] == "True":
+    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["dns_ttl"] == "True":
         start = time.time()
         dns_ttl = 0
         retry_count = 0
@@ -1839,10 +1808,11 @@ def Network_dns_ttl(url, list_features, list_time):
         list_time["dns_ttl"] = ex_time
 
 
+
 ############################ Javascript features
 def Javascript_number_of_exec(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_exec"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_exec"] == "True":
         start = time.time()
         number_of_exec = 0
         if soup:
@@ -1864,7 +1834,7 @@ def Javascript_number_of_exec(soup, list_features, list_time):
 
 def Javascript_number_of_escape(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_escape"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_escape"] == "True":
         start = time.time()
         number_of_escape = 0
         if soup:
@@ -1886,7 +1856,7 @@ def Javascript_number_of_escape(soup, list_features, list_time):
 
 def Javascript_number_of_eval(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_eval"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_eval"] == "True":
         start = time.time()
         number_of_eval = 0
         if soup:
@@ -1908,7 +1878,7 @@ def Javascript_number_of_eval(soup, list_features, list_time):
 
 def Javascript_number_of_link(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_link"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_link"] == "True":
         start = time.time()
         number_of_link = 0
         if soup:
@@ -1930,7 +1900,7 @@ def Javascript_number_of_link(soup, list_features, list_time):
 
 def Javascript_number_of_unescape(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_unescape"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_unescape"] == "True":
         start = time.time()
         number_of_unescape = 0
         scripts = soup.find_all('script')
@@ -1952,7 +1922,7 @@ def Javascript_number_of_unescape(soup, list_features, list_time):
 
 def Javascript_number_of_search(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_search"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_search"] == "True":
         start = time.time()
         number_of_search = 0
         if soup:
@@ -1974,7 +1944,7 @@ def Javascript_number_of_search(soup, list_features, list_time):
 
 def Javascript_number_of_setTimeout(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_setTimeout"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_setTimeout"] == "True":
         start = time.time()
         number_of_setTimeout = 0
         if soup:
@@ -1996,7 +1966,7 @@ def Javascript_number_of_setTimeout(soup, list_features, list_time):
 
 def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_iframes_in_script"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_iframes_in_script"] == "True":
         start = time.time()
         number_of_iframes_in_script = 0
         if soup:
@@ -2017,7 +1987,7 @@ def Javascript_number_of_iframes_in_script(soup, list_features, list_time):
 
 def Javascript_number_of_event_attachment(soup, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["number_of_event_attachment"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_event_attachment"] == "True":
         start = time.time()
         number_of_event_attachment = 0
         if soup:
@@ -2040,7 +2010,7 @@ def Javascript_number_of_event_attachment(soup, list_features, list_time):
 
 def Javascript_rightclick_disabled(html, list_features, list_time):
     # global list_features
-    if phishbench_globals.config["Javascript_Features"]["rightclick_disabled"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["rightclick_disabled"] == "True":
         start = time.time()
         rightclick_disabled = 0
         if html:
@@ -2059,7 +2029,7 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
 
 
 def Javascript_number_of_total_suspicious_features(list_features, list_time):
-    if phishbench_globals.config["Javascript_Features"]["number_of_total_suspicious_features"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_total_suspicious_features"] == "True":
         start = time.time()
         number_of_total_suspicious_features = 0
         try:
@@ -2102,7 +2072,7 @@ def Email_Header_Header_Tokenizer(list_time):
 
 
 def HTML_tfidf_websites(list_time):
-    if phishbench_globals.config["HTML_Features"]["tfidf_websites"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["tfidf_websites"] == "True":
         start = time.time()
         Tfidf_matrix = Tfidf.tfidf_websites()
         end = time.time()

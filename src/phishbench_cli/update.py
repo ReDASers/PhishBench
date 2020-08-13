@@ -3,14 +3,14 @@ import inspect
 
 import phishbench.Features as Features
 import phishbench.classification as classification
-import phishbench.dataset.settings as dataset_settings
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
-import phishbench.feature_extraction.email as email_extraction
+import phishbench.dataset.settings as dataset_settings
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
-from phishbench.feature_extraction.email.email_features import load_features as load_email_features
-from phishbench.feature_extraction.reflection import FeatureType
+from phishbench.feature_extraction import settings as extraction_settings
+from phishbench.feature_extraction.reflection import load_features, FeatureType
+from phishbench.feature_extraction.email import features as internal_email_features
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -73,42 +73,37 @@ def make_config(list_features, list_imbalanced_dataset):
     config["Support Files"] = {}
     config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
 
-    config[email_extraction.settings.FEATURE_TYPE_SECTION] = \
-        email_extraction.settings.FEATURE_TYPE_SETTINGS
-    config['URL_Feature_Types'] = {}
-    config['URL_Feature_Types']['URL'] = "False"
-    config['URL_Feature_Types']['Network'] = "False"
-    config['URL_Feature_Types']['HTML'] = "False"
-    config['URL_Feature_Types']['JavaScript'] = "False"
+    config[extraction_settings.EMAIL_TYPE_SECTION] = \
+        extraction_settings.EMAIL_TYPE_SETTINGS
 
-    reflection_features = load_email_features(filter_features=False)
+    config[extraction_settings.URL_TYPE_SECTION] = extraction_settings.URL_TYPE_SETTINGS
+
+    reflection_features = load_features(internal_features=internal_email_features, filter_features=None)
 
     for feature_type in FeatureType:
+        print(feature_type.value)
         config[feature_type.value] = {
             feature.config_name: "True" for feature in reflection_features if
             feature.feature_type == feature_type
         }
 
-    config['HTML_Features'] = {}
-    c_html_features = config['HTML_Features']
-    for feature in list_features:
-        if feature.startswith("HTML_"):
-            c_html_features[feature.replace('HTML_', '')] = "True"
-
-    config['URL_Features'] = {}
+    config[FeatureType.URL_RAW.value] = {}
     c_url_features = config['URL_Features']
     for feature in list_features:
         if feature.startswith("URL_"):
             c_url_features[feature.replace('URL_', '')] = "True"
 
-    config['Network_Features'] = {}
-    c_network_features = config['Network_Features']
+    c_html_features = config[FeatureType.URL_WEBSITE.value]
+    for feature in list_features:
+        if feature.startswith("HTML_"):
+            c_html_features[feature.replace('HTML_', '')] = "True"
+
+    c_network_features = config[FeatureType.URL_NETWORK.value]
     for feature in list_features:
         if feature.startswith("Network_"):
             c_network_features[feature.replace('Network_', '')] = "True"
 
-    config['Javascript_Features'] = {}
-    javascript_features_section = config['Javascript_Features']
+    javascript_features_section = config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]
     for feature in list_features:
         if feature.startswith("Javascript_"):
             javascript_features_section[feature.replace('Javascript_', '')] = "True"

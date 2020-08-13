@@ -1,13 +1,17 @@
-from typing import List
+import time
+from typing import List, Callable, Tuple, Dict
 
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
+from . import features as internal_features
+from .. import settings
+from ..reflection import load_features, FeatureType
 from ... import Features
 from ... import dataset
 from ...Features_Support import Cleaning, read_alexa
-from ...input import URLData
 from ...input import input as pb_input
+from ...input.url_input import URLData
 from ...utils import phishbench_globals
 
 
@@ -26,8 +30,8 @@ def Extract_Features_Urls_Training():
 
 
 def extract_labeled_dataset(legit_path, phish_path):
-    download_url_flag = phishbench_globals.config['URL_Feature_Types'].getboolean('Network') or \
-                        phishbench_globals.config['URL_Feature_Types'].getboolean('HTML')
+    download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
+                        settings.feature_type_enabled(FeatureType.URL_WEBSITE)
     bad_url_list = []
 
     print("Extracting Features from {}".format(legit_path))
@@ -48,6 +52,7 @@ def extract_labeled_dataset(legit_path, phish_path):
 
 
 def extract_url_features(urls: List[URLData], bad_url_list):
+    features = load_features(filter_features='URL', internal_features=internal_features)
     feature_list_dict = list()
 
     alexa_data = {}
@@ -59,7 +64,7 @@ def extract_url_features(urls: List[URLData], bad_url_list):
     corpus = []
     for url in tqdm(urls):
         try:
-            feature_values, _ = url_features(url, corpus, alexa_data)
+            feature_values, _ = url_features(url, corpus, alexa_data, features)
             feature_list_dict.append(feature_values)
         except Exception:
             error_string = "Error extracting features from {}".format(url.raw_url)
@@ -68,37 +73,97 @@ def extract_url_features(urls: List[URLData], bad_url_list):
     return feature_list_dict, corpus
 
 
-def url_features(url: URLData, corpus, alexa_data):
-    dict_feature_values = dict()
-    dict_extraction_times = dict()
+def url_features(url: URLData, corpus, alexa_data, features):
+    dict_feature_values, dict_extraction_times = extract_features_from_single_url(features, url)
     phishbench_globals.logger.debug("rawurl: %s", str(url))
 
-    feature_types = phishbench_globals.config['URL_Feature_Types']
-    if feature_types.getboolean('URL'):
+    if settings.feature_type_enabled(FeatureType.URL_RAW):
         single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("url_features >>>>>> complete")
-    if feature_types.getboolean("Network"):
+
+    if settings.feature_type_enabled(FeatureType.URL_NETWORK):
         single_network_features(url, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("network_features >>>>>> complete")
-    if feature_types.getboolean("HTML"):
+
+    if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
         single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("html_features >>>>>> complete")
         downloaded_website = url.downloaded_website
         soup = BeautifulSoup(downloaded_website.html, 'html5lib')
-        if feature_types.getboolean("JavaScript"):
+
+        if settings.feature_type_enabled(FeatureType.URL_WEBSITE_JAVASCRIPT):
             single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
             phishbench_globals.logger.debug("javascript features >>>>>> complete")
+
         corpus.append(str(soup))
 
     return dict_feature_values, dict_extraction_times
 
 
+def extract_features_from_single_url(features: List[Callable], url: URLData) -> Tuple[Dict, Dict]:
+    """
+    Extracts multiple features from a single email
+    Parameters
+    ----------
+    features: List
+        The features to extract
+    url: URLData
+        The email to extract the features from
+
+    Returns
+    -------
+    feature_values: Dict
+        The extracted feature values
+    extraction_times: Dict
+        The time it took to extract each feature
+    """
+    dict_feature_values = dict()
+    dict_feature_times = dict()
+
+    for feature in features:
+        result, ex_time = extract_single_feature_url(feature, url)
+        if isinstance(result, dict):
+            temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
+            dict_feature_values.update(temp_dict)
+        else:
+            dict_feature_values[feature.config_name] = result
+        dict_feature_times[feature.config_name] = ex_time
+
+    return dict_feature_values, dict_feature_times
+
+
+def extract_single_feature_url(feature: Callable, url: URLData):
+    """
+    Extracts a single feature from a single email
+    Parameters
+    ----------
+    feature
+        The feature to extract
+    url: URLData
+        The email to extract the feature from
+
+    Returns
+    -------
+    feature_value
+        The value of the feature
+    ex_time: float
+        The time to extract the feature
+    """
+    phishbench_globals.logger.debug(feature.config_name)
+    start = time.process_time()
+    try:
+        feature_value = feature(url)
+    except Exception:
+        error_string = "Error extracting {}".format(feature.config_name)
+        phishbench_globals.logger.warning(error_string, exc_info=True)
+        feature_value = -1
+    end = time.process_time()
+    ex_time = end - start
+    return feature_value, ex_time
+
+
 def single_url_feature(raw_url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
-
-    Features.URL_url_length(raw_url, list_features, list_time)
-
-    Features.URL_domain_length(raw_url, list_features, list_time)
 
     Features.URL_char_distance(raw_url, list_features, list_time)
 
