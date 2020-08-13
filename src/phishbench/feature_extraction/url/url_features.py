@@ -12,6 +12,7 @@ from ...utils import phishbench_globals
 from ..reflection import load_features, FeatureType
 from ... import dataset
 from .. import settings
+from . import features as internal_features
 
 
 def Extract_Features_Urls_Testing():
@@ -164,8 +165,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
 
 def single_url_feature(raw_url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
-
-    Features.URL_url_length(raw_url, list_features, list_time)
 
     Features.URL_domain_length(raw_url, list_features, list_time)
 
