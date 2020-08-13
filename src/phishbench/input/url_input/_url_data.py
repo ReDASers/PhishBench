@@ -83,9 +83,8 @@ class URLData:
                 answers = resolver.query(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
-                print("{}: {}".format(query_type, responses))
             except DNSException as e:
-                print("{}: {}".format(type(e).__name__, e))
+                pass
 
     def lookup_whois(self, nameservers=None):
         self.ip_whois = []
@@ -148,7 +147,6 @@ def _setup_browser():
         chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
     else:
         chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
-    print(chrome_path)
     browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)
