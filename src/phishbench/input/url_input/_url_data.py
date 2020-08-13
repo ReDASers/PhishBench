@@ -104,8 +104,7 @@ class URLData:
                 try:
                     whois_result = whois_client.lookup_whois(asn_methods=['dns', 'whois', 'http'], get_referral=True)
                     self.ip_whois.append(whois_result)
-                except BaseIpwhoisException as e:
-                    print("{}: {}".format(type(e).__name__, e))
+                except BaseIpwhoisException:
                     pass
         try:
             self.domain_whois = whois.whois(self.domain)
