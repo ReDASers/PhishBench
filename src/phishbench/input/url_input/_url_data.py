@@ -115,8 +115,6 @@ class URLData:
         browser = _setup_browser()
         response = requests.head(self.raw_url, headers=_setup_request_headers(), timeout=20)
         if response.status_code >= 400:
-            print(response.status_code)
-            print(response.headers)
             raise HTTPError("Status code not OK!")
         start_time = time.time()
         browser.get(self.raw_url)
@@ -138,6 +136,7 @@ class URLData:
 def _setup_browser():
     chrome_options = Options()
     chrome_options.headless = True
+    chrome_options.add_argument('--log-level=3')
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
     chorme_path = pathlib.Path(__file__).parent.absolute()
