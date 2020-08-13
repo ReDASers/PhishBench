@@ -67,14 +67,13 @@ class URLData:
 
     def lookup_dns(self, nameservers=None):
         if self.downloaded_website:
-            lookup_url = self.downloaded_website.final_url
+            final_parsed = urlparse(self.downloaded_website.final_url)
+            lookup_url = final_parsed.hostname
         else:
             lookup_url = self.domain
-        print("Lookup URL: {}".format(lookup_url))
         resolver = dns.resolver.get_default_resolver()
         if nameservers:
             resolver.nameservers = nameservers
-        print("DNS Nameservers: {}".format(nameservers))
         resolver.timeout = 1
         resolver.lifetime = 3
 
@@ -84,9 +83,8 @@ class URLData:
                 answers = resolver.query(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
-                print("{}: {}".format(query_type, responses))
-            except DNSException as e:
-                print("{}: {}".format(type(e).__name__, e))
+            except DNSException:
+                pass
 
     def lookup_whois(self, nameservers=None):
         self.ip_whois = []
@@ -95,7 +93,8 @@ class URLData:
             whois_result = whois_client.lookup_whois(get_referral=True)
             self.ip_whois.append(whois_result)
             return
-        elif not self.dns_results:
+
+        if not self.dns_results:
             self.lookup_dns(nameservers)
 
         if "A" in self.dns_results:
@@ -105,20 +104,17 @@ class URLData:
                 try:
                     whois_result = whois_client.lookup_whois(asn_methods=['dns', 'whois', 'http'], get_referral=True)
                     self.ip_whois.append(whois_result)
-                except BaseIpwhoisException as e:
-                    print("{}: {}".format(type(e).__name__, e))
+                except BaseIpwhoisException:
                     pass
         try:
             self.domain_whois = whois.whois(self.domain)
         except ConnectionError:
-            self.domain_whois = whois.whois(self.domain,command=True)
+            self.domain_whois = whois.whois(self.domain, command=True)
 
     def download_website(self):
         browser = _setup_browser()
         response = requests.head(self.raw_url, headers=_setup_request_headers(), timeout=20)
         if response.status_code >= 400:
-            print(response.status_code)
-            print(response.headers)
             raise HTTPError("Status code not OK!")
         start_time = time.time()
         browser.get(self.raw_url)
@@ -140,6 +136,7 @@ class URLData:
 def _setup_browser():
     chrome_options = Options()
     chrome_options.headless = True
+    chrome_options.add_argument('--log-level=3')
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
     chorme_path = pathlib.Path(__file__).parent.absolute()
@@ -149,7 +146,6 @@ def _setup_browser():
         chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
     else:
         chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
-    print(chrome_path)
     browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)
