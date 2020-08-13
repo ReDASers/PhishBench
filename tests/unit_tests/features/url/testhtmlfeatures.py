@@ -2,13 +2,14 @@ import unittest
 from unittest.mock import patch
 
 from phishbench import Features
+from phishbench.feature_extraction.reflection import FeatureType
 from tests.mock_objects import mock_objects
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
 
     def test_HTML_number_of_tags(self, mock_config):
-        mock_config["HTML_Features"]["number_of_tags"] = "True"
+        mock_config[FeatureType.URL_WEBSITE.value]["number_of_tags"] = "True"
         list_features = {}
         list_time = {}
 
@@ -17,7 +18,7 @@ class TestHTMLFeatures(unittest.TestCase):
         self.assertEqual(list_features["number_of_tags"], 0, 'incorrect number_of_tags')
 
     def test_HTML_number_of_hidden_svg(self, mock_config):
-        mock_config["HTML_Features"]["number_of_hidden_svg"] = "True"
+        mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_svg"] = "True"
         list_features = {}
         list_time = {}
 
@@ -29,7 +30,7 @@ class TestHTMLFeatures(unittest.TestCase):
 
     def test_HTML_number_of_hidden_input(self, mock_config):
 
-        mock_config["HTML_Features"]["number_of_hidden_input"] = "True"
+        mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_input"] = "True"
         list_features = {}
         list_time = {}
 
