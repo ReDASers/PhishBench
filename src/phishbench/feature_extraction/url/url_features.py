@@ -29,8 +29,8 @@ def Extract_Features_Urls_Training():
 
 
 def extract_labeled_dataset(legit_path, phish_path):
-    download_url_flag = phishbench_globals.config['URL_Feature_Types'].getboolean('Network') or \
-                        phishbench_globals.config['URL_Feature_Types'].getboolean('HTML')
+    download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
+                        settings.feature_type_enabled(FeatureType.URL_WEBSITE)
     bad_url_list = []
 
     print("Extracting Features from {}".format(legit_path))
