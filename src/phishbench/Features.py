@@ -917,24 +917,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
 
 
 ############################ URL features
-def URL_domain_length(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["domain_length"] == "True":
-        start = time.time()
-        domain_length = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = parsed_url.hostname
-                domain_length = len(domain)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                domain_length = -1
-        list_features["domain_length"] = domain_length
-        end = time.time()
-        ex_time = end - start
-        list_time["domain_length"] = ex_time
-
 
 ##################################################################################
 def URL_letter_occurrence(url, list_features, list_time):
