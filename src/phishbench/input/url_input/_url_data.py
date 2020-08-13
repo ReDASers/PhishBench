@@ -66,7 +66,7 @@ class URLData:
             final_parsed = urlparse(self.downloaded_website.final_url)
             lookup_url = final_parsed.hostname
         else:
-            lookup_url = self.domain
+            lookup_url = self.parsed_url.hostname
         resolver = dns.resolver.get_default_resolver()
         if nameservers:
             resolver.nameservers = nameservers
