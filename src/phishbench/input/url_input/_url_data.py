@@ -83,7 +83,7 @@ class URLData:
                 answers = resolver.query(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
-            except DNSException as e:
+            except DNSException:
                 pass
 
     def lookup_whois(self, nameservers=None):
@@ -93,7 +93,8 @@ class URLData:
             whois_result = whois_client.lookup_whois(get_referral=True)
             self.ip_whois.append(whois_result)
             return
-        elif not self.dns_results:
+
+        if not self.dns_results:
             self.lookup_dns(nameservers)
 
         if "A" in self.dns_results:
@@ -109,7 +110,7 @@ class URLData:
         try:
             self.domain_whois = whois.whois(self.domain)
         except ConnectionError:
-            self.domain_whois = whois.whois(self.domain,command=True)
+            self.domain_whois = whois.whois(self.domain, command=True)
 
     def download_website(self):
         browser = _setup_browser()
