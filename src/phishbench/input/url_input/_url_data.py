@@ -67,14 +67,13 @@ class URLData:
 
     def lookup_dns(self, nameservers=None):
         if self.downloaded_website:
-            lookup_url = self.downloaded_website.final_url
+            final_parsed = urlparse(self.downloaded_website.final_url)
+            lookup_url = final_parsed.hostname
         else:
             lookup_url = self.domain
-        print("Lookup URL: {}".format(lookup_url))
         resolver = dns.resolver.get_default_resolver()
         if nameservers:
             resolver.nameservers = nameservers
-        print("DNS Nameservers: {}".format(nameservers))
         resolver.timeout = 1
         resolver.lifetime = 3
 
