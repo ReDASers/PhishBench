@@ -50,11 +50,7 @@ class URLData:
             raise ValueError("URL cannot be empty")
         if not url.startswith("http"):
             url = "http://" + url
-        parsed_url = urlparse(url)
-        self.path = parsed_url.path
-        self.params = parsed_url.params
-        self.query = parsed_url.query
-        self.domain = parsed_url.hostname
+        self.parsed_url = urlparse(url)
 
         self.downloaded_website = None
         self.dns_results = None
