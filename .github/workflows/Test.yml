@@ -2,6 +2,10 @@ name: Test
 
 on: push
 
+defaults:
+    run: 
+        shell: pwsh
+
 jobs:
   Unit-Test:
     runs-on: ${{ matrix.os }}
@@ -72,6 +76,15 @@ jobs:
       run: | 
         pip install .
 
+    - name: Test Generate Config
+      run: |
+        cd "tests/integration tests/make-config"
+        make-phishbench-config -f Test.ini
+        if(-Not (Test-Path Test.ini)){
+            Get-ChildItem 
+            exit 1
+        }
+
     - name: Run URL 1-Step test
       run: |
         cd "tests/integration tests/url_extraction"
@@ -95,8 +108,6 @@ jobs:
         cd "tests/integration tests/email_extraction"
         phishbench -f Test_A.ini -c
 
-    - name: Test Generate Config
-      run: |
-        cd "tests/integration tests/make-config"
-        make-phishbench-config
+    
+
         
