@@ -79,8 +79,8 @@ jobs:
     - name: Test Generate Config
       run: |
         cd "tests/integration tests/make-config"
-        make-phishbench-config
-        if(-Not (Test-Path Config_File.ini)){
+        make-phishbench-config -f Test.ini
+        if(-Not (Test-Path Test.ini)){
             Get-ChildItem 
             exit 1
         }

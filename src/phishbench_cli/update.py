@@ -1,3 +1,4 @@
+import argparse
 import configparser
 import inspect
 
@@ -9,8 +10,8 @@ from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction import settings as extraction_settings
-from phishbench.feature_extraction.reflection import load_features, FeatureType
 from phishbench.feature_extraction.email import features as internal_email_features
+from phishbench.feature_extraction.reflection import load_features, FeatureType
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -107,9 +108,7 @@ def make_config(list_features, list_imbalanced_dataset):
     for feature in list_features:
         if feature.startswith("Javascript_"):
             javascript_features_section[feature.replace('Javascript_', '')] = "True"
-
-    with open('Config_file.ini', 'w') as configfile:
-        config.write(configfile)
+    return config
 
 
 def update_list():
@@ -129,9 +128,20 @@ def update_list():
 
 
 def main():
-    # execute only if run as a script
+    print("Generating Phishbench Config")
+    # The entrypoint of the script
+    parser = argparse.ArgumentParser(description='Argument parser')
+    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+    parser.add_argument("-f", "--config_file", help="The name of the config file to generate.",
+                        type=str, default='Config_file.ini')
+    args = parser.parse_args()
+
     list_features, list_imbalanced_dataset = update_list()
-    make_config(list_features, list_imbalanced_dataset)
+    config = make_config(list_features, list_imbalanced_dataset)
+    
+    print("Saving to ", args.config_file)
+    with open(args.config_file, 'w') as configfile:
+        config.write(configfile)
 
 
 if __name__ == "__main__":
