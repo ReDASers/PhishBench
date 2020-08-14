@@ -76,6 +76,12 @@ jobs:
       run: | 
         pip install .
 
+    - name: Test Generate Config
+      run: |
+        cd "tests/integration tests/make-config"
+        make-phishbench-config
+        Test-Path X.ini
+
     - name: Run URL 1-Step test
       run: |
         cd "tests/integration tests/url_extraction"
@@ -99,8 +105,6 @@ jobs:
         cd "tests/integration tests/email_extraction"
         phishbench -f Test_A.ini -c
 
-    - name: Test Generate Config
-      run: |
-        cd "tests/integration tests/make-config"
-        make-phishbench-config
+    
+
         
