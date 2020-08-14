@@ -138,7 +138,7 @@ def main():
 
     list_features, list_imbalanced_dataset = update_list()
     config = make_config(list_features, list_imbalanced_dataset)
-    
+
     print("Saving to ", args.config_file)
     with open(args.config_file, 'w') as configfile:
         config.write(configfile)
