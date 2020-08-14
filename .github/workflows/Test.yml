@@ -2,6 +2,10 @@ name: Test
 
 on: push
 
+defaults:
+    run: 
+        shell: pwsh
+
 jobs:
   Unit-Test:
     runs-on: ${{ matrix.os }}
