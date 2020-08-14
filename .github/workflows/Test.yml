@@ -80,7 +80,7 @@ jobs:
       run: |
         cd "tests/integration tests/make-config"
         make-phishbench-config
-        if(-Not (Test-Path X.ini)){
+        if(-Not (Test-Path Config_File.ini)){
             exit 1
         }
 
