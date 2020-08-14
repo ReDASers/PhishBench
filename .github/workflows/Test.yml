@@ -80,7 +80,9 @@ jobs:
       run: |
         cd "tests/integration tests/make-config"
         make-phishbench-config
-        Test-Path X.ini
+        if(-Not Test-Path X.ini){
+            exit 1
+        }
 
     - name: Run URL 1-Step test
       run: |
