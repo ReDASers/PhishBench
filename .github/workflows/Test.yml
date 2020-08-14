@@ -81,6 +81,7 @@ jobs:
         cd "tests/integration tests/make-config"
         make-phishbench-config
         if(-Not (Test-Path Config_File.ini)){
+            Get-ChildItem 
             exit 1
         }
 
