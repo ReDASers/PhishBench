@@ -78,22 +78,28 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["has_https"], 1, 'incorrect has_https')
 
     def test_URL_number_of_digits(self, config_mock):
-        config_mock['URL_Features']['number_of_digits'] = "True"
-        list_features = {}
-        list_time = {}
 
-        Features.URL_number_of_digits('http://te2t-url.com/home.html', list_features, list_time)
+        url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.num_digits(url)
 
-        self.assertEqual(list_features["number_of_digits"], 1, 'incorrect number_of_digits')
+        self.assertEqual(result, 1, 'incorrect number_of_digits')
+
+        url = URLData('http://te2t-url.com/home42.html', download_url=False)
+        result = url_features.num_digits(url)
+
+        self.assertEqual(result, 3, 'incorrect number_of_digits')
 
     def test_URL_number_of_dots(self, config_mock):
-        config_mock['URL_Features']['number_of_dots'] = "True"
-        list_features = {}
-        list_time = {}
 
-        Features.URL_number_of_dots('http://te2t-url.com/home.html', list_features, list_time)
+        url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.num_dots(url)
 
-        self.assertEqual(list_features["number_of_dots"], 2, 'incorrect number_of_dots')
+        self.assertEqual(result, 2, 'incorrect number_of_dots')
+
+        url = URLData('http://test.te2t-url.com/home.html', download_url=False)
+        result = url_features.num_dots(url)
+
+        self.assertEqual(result, 3, 'incorrect number_of_dots')
 
     def test_URL_number_of_slashes(self, config_mock):
         config_mock['URL_Features']['number_of_slashes'] = "True"

@@ -1102,40 +1102,6 @@ def URL_has_https(url, list_features, list_time):
         list_time["has_https"] = ex_time
 
 
-def URL_number_of_digits(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_digits"] == "True":
-        number_of_digits = 0
-        start = time.time()
-        if url:
-            try:
-                number_of_digits = sum(c.isdigit() for c in url)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_digits = -1
-        list_features["number_of_digits"] = number_of_digits
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_digits"] = ex_time
-
-
-def URL_number_of_dots(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dots"] == "True":
-        start = time.time()
-        number_of_dots = 0
-        if url:
-            try:
-                number_of_dots = url.count('.')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_dots = -1
-        list_features["number_of_dots"] = number_of_dots
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_dots"] = ex_time
-
-
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":
