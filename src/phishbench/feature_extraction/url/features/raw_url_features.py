@@ -48,3 +48,8 @@ def is_ip_addr(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'has_https')
 def has_https(url: URLData):
     return url.parsed_url.scheme.startswith('https')
+
+
+@register_feature(FeatureType.URL_RAW, 'has_at_symbol')
+def has_at_symbol(url: URLData):
+    return '@' in url.raw_url

@@ -191,8 +191,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
 
-    Features.URL_Has_at_symbole(raw_url, list_features, list_time)
-
     Features.URL_Has_anchor_tag(raw_url, list_features, list_time)
 
     Features.URL_Null_in_Domain(raw_url, list_features, list_time)

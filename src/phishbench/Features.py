@@ -1233,23 +1233,6 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
         list_time["Has_More_than_3_dots"] = ex_time
 
 
-def URL_Has_at_symbole(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_at_symbole"] == "True":
-        start = time.time()
-        flag = 0
-        if url:
-            try:
-                if "@" in url:
-                    flag = 1
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                flag = -1
-        list_features["Has_at_symbole"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_at_symbole"] = ex_time
-
-
 def URL_Has_anchor_tag(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_anchor_tag"] == "True":
         start = time.time()

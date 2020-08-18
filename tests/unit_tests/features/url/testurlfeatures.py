@@ -219,14 +219,11 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["Has_More_than_3_dots"], 1, 'incorrect Http_middle_of_URL')
 
     def test_URL_Has_at_symbole(self, config_mock):
-        config_mock['URL_Features']['Has_at_symbole'] = "True"
         test_url = "http://tech.www.google.com/index.html@http"
-        list_features = {}
-        list_time = {}
 
-        Features.URL_Has_at_symbole(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_at_symbole"], 1, 'incorrect Has_at_symbole')
+        self.assertTrue(url_features.has_at_symbol(URLData(test_url, download_url=False)))
+        test_url = "http://tech.www.google.com/index.html"
+        self.assertFalse(url_features.has_at_symbol(URLData(test_url, download_url=False)))
 
     def test_URL_Has_anchor_tag_true(self, config_mock):
         config_mock['URL_Features']['Has_anchor_tag'] = "True"
