@@ -15,9 +15,20 @@ To install, clone this repo. Then install dependencies by running
 
 
 ## Make a config file
-First create a config file by running 
-    
-    make-phishbench-config
+First create a config file by running `make-phishbench-config`
+
+```
+usage: make-phishbench-config [-h] [-v] [-f CONFIG_FILE]
+
+Argument parser
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         increase output verbosity
+  -f CONFIG_FILE, --config_file CONFIG_FILE
+                        The name of the config file to generate.
+```
+
 
 This will create a starter configuration file `Config_file.ini` that dictates the execution of PhishBench.
 
