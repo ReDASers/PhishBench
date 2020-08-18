@@ -40,5 +40,11 @@ def is_common_tld(url: URLData):
 
 @register_feature(FeatureType.URL_RAW, 'is_ip_addr')
 def is_ip_addr(url: URLData):
+    print(url.parsed_url.hostname)
     match = re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", url.parsed_url.hostname)
     return match is not None
+
+
+@register_feature(FeatureType.URL_RAW, 'has_https')
+def has_https(url: URLData):
+    return url.parsed_url.scheme.startswith('https')

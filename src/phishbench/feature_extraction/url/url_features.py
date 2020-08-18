@@ -177,8 +177,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_has_port(raw_url, list_features, list_time)
 
-    Features.URL_has_https(raw_url, list_features, list_time)
-
     Features.URL_number_of_slashes(raw_url, list_features, list_time)
 
     Features.URL_consecutive_numbers(raw_url, list_features, list_time)

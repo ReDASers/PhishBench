@@ -179,6 +179,14 @@ class TestURLFeatures(unittest.TestCase):
         self.assertFalse(result)
 
 
+    def test_url_has_https(self, config_mock):
+        test_url = URLData('https://google.com', download_url=False)
+        self.assertTrue(url_features.has_https(test_url))
+
+        test_url = URLData('http://google.com', download_url=False)
+        self.assertFalse(url_features.has_https(test_url))
+
+
     def test_URL_number_of_dashes(self, config_mock):
         config_mock['URL_Features']['number_of_dashes'] = "True"
         list_features = {}
