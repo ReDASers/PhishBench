@@ -30,7 +30,7 @@ optional arguments:
 ```
 
 
-This will create a starter configuration file `Config_file.ini` that dictates the execution of PhishBench.
+This will create a starter configuration file that dictates the execution of PhishBench. Then edit the config file to specify your settings.
 
 If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
 
