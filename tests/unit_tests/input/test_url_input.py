@@ -21,21 +21,6 @@ class Test(unittest.TestCase):
         self.assertIsNone(data.ip_whois)
         self.assertIsNone(data.domain_whois)
 
-    def test_URLData_domaino(self):
-        test_url = 'http://google.com/test?bacon=1'
-        data = url_data.URLData(test_url, download_url=False)
-        self.assertEqual('google.com', data.domain)
-
-    def test_URLData_path(self):
-        test_url = 'http://google.com/test?bacon=1'
-        data = url_data.URLData(test_url, download_url=False)
-        self.assertEqual('/test', data.path)
-
-    def test_URLData_query(self):
-        test_url = 'http://google.com/test?bacon=1'
-        data = url_data.URLData(test_url, download_url=False)
-        self.assertEqual('bacon=1', data.query)
-
     def test_lookup_dns(self):
         test_url = 'http://google.com/test?bacon=1'
         data = url_data.URLData(test_url, download_url=False)

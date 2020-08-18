@@ -167,45 +167,17 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_char_distance(raw_url, list_features, list_time)
 
-    Features.URL_kolmogorov_shmirnov(raw_url, list_features, list_time)
-
-    Features.URL_Kullback_Leibler_Divergence(raw_url, list_features, list_time)
-
-    Features.URL_english_frequency_distance(raw_url, list_features, list_time)
-
-    Features.URL_num_punctuation(raw_url, list_features, list_time)
-
-    Features.URL_has_port(raw_url, list_features, list_time)
-
-    Features.URL_has_https(raw_url, list_features, list_time)
-
-    Features.URL_number_of_digits(raw_url, list_features, list_time)
-
-    Features.URL_number_of_dots(raw_url, list_features, list_time)
-
     Features.URL_number_of_slashes(raw_url, list_features, list_time)
 
     Features.URL_consecutive_numbers(raw_url, list_features, list_time)
 
     Features.URL_special_char_count(raw_url, list_features, list_time)
 
-    Features.URL_special_pattern(raw_url, list_features, list_time)
-
     Features.URL_Top_level_domain(raw_url, list_features, list_time)
-
-    Features.URL_is_common_TLD(raw_url, list_features, list_time)
-
-    Features.URL_number_of_dashes(raw_url, list_features, list_time)
-
-    Features.URL_Http_middle_of_URL(raw_url, list_features, list_time)
 
     Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
 
-    Features.URL_Has_at_symbole(raw_url, list_features, list_time)
-
     Features.URL_Has_anchor_tag(raw_url, list_features, list_time)
-
-    Features.URL_Null_in_Domain(raw_url, list_features, list_time)
 
     Features.URL_Token_Count(raw_url, list_features, list_time)
 

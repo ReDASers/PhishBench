@@ -973,167 +973,6 @@ def URL_char_distance(url: str, list_features, list_time):
 
 
 ##################################################################################
-def URL_kolmogorov_shmirnov(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["kolmogorov_shmirnov"] == "True":
-        start = time.time()
-        char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
-                     .02406,
-                     .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974,
-                     .00074]
-
-        try:
-            num_letters = len(re.sub(r'[^\w]', '', url))
-            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
-            ks = stats.ks_2samp(url_char_distance, char_dist)
-        except Exception as e:
-            phishbench_globals.logger.warning("exception: " + str(e))
-            ks = -1
-        if ks == -1:
-            list_features["kolmogorov_shmirnov"] = ks
-        else:
-            list_features["kolmogorov_shmirnov"] = ks[0]
-        end = time.time()
-        ex_time = end - start
-        list_time["kolmogorov_shmirnov"] = ex_time
-
-
-def URL_Kullback_Leibler_Divergence(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Kullback_Leibler_Divergence"] == "True":
-        start = time.time()
-        char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
-                     .02406,
-                     .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974,
-                     .00074]
-        try:
-            num_letters = len(re.sub(r'[^\w]', '', url))
-            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
-            kl = stats.entropy(url_char_distance, char_dist)
-        except Exception as e:
-            phishbench_globals.logger.warning("exception: " + str(e))
-            kl = -1
-        phishbench_globals.logger.debug("KL: >>>> {}".format(kl))
-        list_features["Kullback_Leibler_Divergence"] = kl
-        end = time.time()
-        ex_time = end - start
-        list_time["Kullback_Leibler_Divergence"] = ex_time
-
-
-def URL_english_frequency_distance(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["english_frequency_distance"] == "True":
-        start = time.time()
-        char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
-                     .02406,
-                     .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974,
-                     .00074]
-        try:
-            # if list_features.get("url_char_distance") is None:
-            #    list_features["edit_distance"]= 0
-            # else:
-            num_letters = len(re.sub(r'[^\w]', '', url))
-            url_char_distance = [url.count(x) / num_letters for x in string.ascii_lowercase]
-            ed = distance.euclidean(url_char_distance, char_dist)
-        except Exception as e:
-            phishbench_globals.logger.warning("exception: " + str(e))
-            ed = -1
-        list_features["edit_distance"] = ed
-        end = time.time()
-        ex_time = end - start
-        list_time["edit_distance"] = ex_time
-
-
-def URL_num_punctuation(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["num_punctuation"] == "True":
-        start = time.time()
-        num_punct = 0
-        if url:
-            try:
-                count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
-                num_punct = count(url, string.punctuation)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                num_punct = -1
-        list_features["num_punctuation"] = num_punct
-        end = time.time()
-        ex_time = end - start
-        list_time["num_punctuation"] = ex_time
-
-
-def URL_has_port(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["has_port"] == "True":
-        start = time.time()
-        has_port = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                port_number = '{uri.port}'.format(uri=parsed_url)
-                has_port = 1
-                if port_number == 'None':
-                    has_port = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                has_port = -1
-        list_features["has_port"] = has_port
-        end = time.time()
-        ex_time = end - start
-        list_time["has_port"] = ex_time
-
-
-def URL_has_https(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["has_https"] == "True":
-        start = time.time()
-        has_https = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url)
-                has_https = 0
-                if domain.startswith("https:"):
-                    has_https = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                has_https = -1
-        list_features["has_https"] = has_https
-        end = time.time()
-        ex_time = end - start
-        list_time["has_https"] = ex_time
-
-
-def URL_number_of_digits(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_digits"] == "True":
-        number_of_digits = 0
-        start = time.time()
-        if url:
-            try:
-                number_of_digits = sum(c.isdigit() for c in url)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_digits = -1
-        list_features["number_of_digits"] = number_of_digits
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_digits"] = ex_time
-
-
-def URL_number_of_dots(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dots"] == "True":
-        start = time.time()
-        number_of_dots = 0
-        if url:
-            try:
-                number_of_dots = url.count('.')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_dots = -1
-        list_features["number_of_dots"] = number_of_dots
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_dots"] = ex_time
 
 
 def URL_number_of_slashes(url, list_features, list_time):
@@ -1213,24 +1052,6 @@ def URL_special_char_count(url, list_features, list_time):
         list_time["special_char_count"] = ex_time
 
 
-def URL_special_pattern(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["special_pattern"] == "True":
-        start = time.time()
-        special_count = 0
-        if url:
-            try:
-                if "?gws_rd=ssl" in url:
-                    special_count = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                special_count = -1
-        list_features["special_pattern"] = special_count
-        end = time.time()
-        ex_time = end - start
-        list_time["special_pattern"] = ex_time
-
-
 def URL_Top_level_domain(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Top_level_domain"] == "True":
@@ -1249,86 +1070,7 @@ def URL_Top_level_domain(url, list_features, list_time):
         list_time["Top_level_domain"] = ex_time
 
 
-def URL_is_common_TLD(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["is_common_TLD"] == "True":
-        common_TLD_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
-        result = 0
-        start = time.time()
-        tld = 0
-        if url:
-            try:
-                extracted = tldextract.extract(url)
-                tld = "{}".format(extracted.suffix)
-                if tld in common_TLD_list:
-                    result = 1
-                else:
-                    result = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                result = -1
-        list_features["is_common_TLD"] = result
-        end = time.time()
-        ex_time = end - start
-        list_time["is_common_TLD"] = ex_time
-
-
-def URL_Is_IP_Addr(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Is_IP_Addr"] == "True":
-        start = time.time()
-        Is_IP_Addr = 1
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url)
-                if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
-                    Is_IP_Addr = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                Is_IP_Addr = -1
-
-        list_features["Is_IP_Addr"] = Is_IP_Addr
-        end = time.time()
-        ex_time = end - start
-        list_time["Is_IP_Addr"] = ex_time
-
-
 # Devin's features
-def URL_number_of_dashes(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dashes"] == "True":
-        start = time.time()
-        number_of_dashes = 0
-        if url:
-            try:
-                number_of_dashes = url.count('-')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_dashes = -1
-        list_features["number_of_dashes"] = number_of_dashes
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_dashes"] = ex_time
-
-
-def URL_Http_middle_of_URL(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Http_middle_of_URL"] == "True":
-        start = time.time()
-        HTTP_REGEX = re.compile(".+http.+")
-        if url and isinstance(url, str):
-            if HTTP_REGEX.match(url):
-                list_features["Http_middle_of_URL"] = 1
-            else:
-                list_features["Http_middle_of_URL"] = 0
-        else:
-            list_features["Http_middle_of_URL"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Http_middle_of_URL"] = ex_time
-
-
 def URL_Has_More_than_3_dots(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_More_than_3_dots"] == "True":
         start = time.time()
@@ -1351,23 +1093,6 @@ def URL_Has_More_than_3_dots(url, list_features, list_time):
         list_time["Has_More_than_3_dots"] = ex_time
 
 
-def URL_Has_at_symbole(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_at_symbole"] == "True":
-        start = time.time()
-        flag = 0
-        if url:
-            try:
-                if "@" in url:
-                    flag = 1
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                flag = -1
-        list_features["Has_at_symbole"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_at_symbole"] = ex_time
-
-
 def URL_Has_anchor_tag(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_anchor_tag"] == "True":
         start = time.time()
@@ -1385,23 +1110,6 @@ def URL_Has_anchor_tag(url, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Has_anchor_tag"] = ex_time
-
-
-def URL_Null_in_Domain(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Null_in_Domain"] == "True":
-        start = time.time()
-        regex_null = re.compile(r'null', flags=re.IGNORECASE)
-        flag = 0
-        if url:
-            try:
-                flag = int(bool(re.findall(regex_null, url)))
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                flag = -1
-        list_features["Null_in_Domain"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Null_in_Domain"] = ex_time
 
 
 # PhishDef: URL Names Say It All

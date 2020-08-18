@@ -50,11 +50,7 @@ class URLData:
             raise ValueError("URL cannot be empty")
         if not url.startswith("http"):
             url = "http://" + url
-        parsed_url = urlparse(url)
-        self.path = parsed_url.path
-        self.params = parsed_url.params
-        self.query = parsed_url.query
-        self.domain = parsed_url.hostname
+        self.parsed_url = urlparse(url)
 
         self.downloaded_website = None
         self.dns_results = None
@@ -70,7 +66,7 @@ class URLData:
             final_parsed = urlparse(self.downloaded_website.final_url)
             lookup_url = final_parsed.hostname
         else:
-            lookup_url = self.domain
+            lookup_url = self.parsed_url.hostname
         resolver = dns.resolver.get_default_resolver()
         if nameservers:
             resolver.nameservers = nameservers
@@ -87,9 +83,10 @@ class URLData:
                 pass
 
     def lookup_whois(self, nameservers=None):
+        domain = self.parsed_url.hostname
         self.ip_whois = []
-        if is_ip_address(self.domain):
-            whois_client = IPWhois(self.domain)
+        if is_ip_address(domain):
+            whois_client = IPWhois(domain)
             whois_result = whois_client.lookup_whois(get_referral=True)
             self.ip_whois.append(whois_result)
             return
@@ -107,9 +104,9 @@ class URLData:
                 except BaseIpwhoisException:
                     pass
         try:
-            self.domain_whois = whois.whois(self.domain)
+            self.domain_whois = whois.whois(domain)
         except ConnectionError:
-            self.domain_whois = whois.whois(self.domain, command=True)
+            self.domain_whois = whois.whois(domain, command=True)
 
     def download_website(self):
         browser = _setup_browser()
@@ -139,13 +136,13 @@ def _setup_browser():
     chrome_options.add_argument('--log-level=3')
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
-    chorme_path = pathlib.Path(__file__).parent.absolute()
+    chrome_path = pathlib.Path(__file__).parent.absolute()
     if platform.system() == 'Windows':
-        chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+        chrome_path = os.path.join(chrome_path, 'chromedriver.exe')
     elif platform.system() == 'Linux':
-        chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
+        chrome_path = os.path.join(chrome_path, 'chromedriver_linux')
     else:
-        chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
+        chrome_path = os.path.join(chrome_path, 'chromedriver_mac')
     browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)

@@ -12,6 +12,7 @@ from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.feature_extraction.email import features as internal_email_features
 from phishbench.feature_extraction.reflection import load_features, FeatureType
+from phishbench.feature_extraction.url import features as internal_url_features
 
 
 def make_config(list_features, list_imbalanced_dataset):
@@ -79,7 +80,8 @@ def make_config(list_features, list_imbalanced_dataset):
 
     config[extraction_settings.URL_TYPE_SECTION] = extraction_settings.URL_TYPE_SETTINGS
 
-    reflection_features = load_features(internal_features=internal_email_features, filter_features=None)
+    internal_features = [internal_email_features, internal_url_features]
+    reflection_features = load_features(internal_features=internal_features, filter_features=None)
 
     for feature_type in FeatureType:
         print(feature_type.value)
@@ -88,7 +90,6 @@ def make_config(list_features, list_imbalanced_dataset):
             feature.feature_type == feature_type
         }
 
-    config[FeatureType.URL_RAW.value] = {}
     c_url_features = config['URL_Features']
     for feature in list_features:
         if feature.startswith("URL_"):
