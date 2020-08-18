@@ -49,13 +49,9 @@ class TestURLFeatures(unittest.TestCase):
         pass
 
     def test_URL_num_punctuation(self, config_mock):
-        config_mock['URL_Features']['num_punctuation'] = "True"
-        list_features = {}
-        list_time = {}
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
 
-        Features.URL_num_punctuation('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["num_punctuation"], 7, 'incorrect num_punctuation')
+        self.assertEqual(7, url_features.num_punctuation(test_url), 'incorrect num_punctuation')
 
     def test_URL_has_port(self, config_mock):
         test_url = URLData('http://www.google.com:443', download_url=False)

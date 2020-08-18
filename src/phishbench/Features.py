@@ -1042,24 +1042,6 @@ def URL_english_frequency_distance(url, list_features, list_time):
         list_time["edit_distance"] = ex_time
 
 
-def URL_num_punctuation(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["num_punctuation"] == "True":
-        start = time.time()
-        num_punct = 0
-        if url:
-            try:
-                count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
-                num_punct = count(url, string.punctuation)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                num_punct = -1
-        list_features["num_punctuation"] = num_punct
-        end = time.time()
-        ex_time = end - start
-        list_time["num_punctuation"] = ex_time
-
-
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":

@@ -1,4 +1,5 @@
 import re
+import string
 
 from tldextract import tldextract
 
@@ -74,3 +75,8 @@ def http_in_middle(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'has_port')
 def has_port(url: URLData):
     return url.parsed_url.port is not None
+
+
+@register_feature(FeatureType.URL_RAW, 'num_punctuation')
+def num_punctuation(url: URLData):
+    return sum(x in string.punctuation for x in url.raw_url)
