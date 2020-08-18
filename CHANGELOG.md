@@ -1,6 +1,6 @@
 # Change Log
 
-# PR #180
+# v1.1.3
 
 ## Major Changes
 

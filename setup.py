@@ -9,7 +9,7 @@ with open("requirements.txt") as req:
     reqs = req.readlines()
 
 setup(name='PhishBench',
-      version='0.1.2',
+      version='1.1.3',
       description='A Phishing detection benchmarking framework',
       url='https://github.com/ReDASers/Phishing-Detection',
       packages=find_packages("src"),
