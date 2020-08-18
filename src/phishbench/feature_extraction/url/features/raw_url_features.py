@@ -1,3 +1,5 @@
+from tldextract import tldextract
+
 from ...reflection import FeatureType, register_feature
 from ....input import URLData
 
@@ -25,3 +27,10 @@ def url_length(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'special_pattern')
 def special_pattern(url: URLData):
     return "?gws_rd=ssl" in url.raw_url
+
+
+@register_feature(FeatureType.URL_RAW, 'is_common_tld')
+def is_common_tld(url: URLData):
+    common_tld_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
+    tld = tldextract.extract(url.raw_url).suffix
+    return tld in common_tld_list

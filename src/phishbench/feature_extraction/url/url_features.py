@@ -187,8 +187,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_Top_level_domain(raw_url, list_features, list_time)
 
-    Features.URL_is_common_TLD(raw_url, list_features, list_time)
-
     Features.URL_number_of_dashes(raw_url, list_features, list_time)
 
     Features.URL_Http_middle_of_URL(raw_url, list_features, list_time)

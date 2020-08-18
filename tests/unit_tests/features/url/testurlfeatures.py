@@ -156,14 +156,16 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["Top_level_domain"], 'com', 'incorrect Top_level_domain')
 
-    # def test_URL_is_common_TLD(self, config_mock):
-    #     config_mock['URL_Features']['is_common_TLD'] = "True"
-    #     list_features = {}
-    #     list_time = {}
-    #
-    #     Features.URL_is_common_TLD('http://te2t-url.com/home.html', list_features, list_time)
-    #
-    #     self.assertEqual(list_features["is_common_TLD"], 1, 'incorrect is_common_TLD')
+    def test_URL_is_common_TLD(self, config_mock):
+
+        test_url = URLData('http://www.test.co.uk', download_url=False)
+
+        result = url_features.is_common_tld(test_url)
+        self.assertFalse(result)
+
+        test_url = URLData("http://www.google.com", download_url=False)
+        result = url_features.is_common_tld(test_url)
+        self.assertTrue(result)
 
     def test_URL_Is_IP_Addr(self, config_mock):
         config_mock['URL_Features']['Is_IP_Addr'] = "True"

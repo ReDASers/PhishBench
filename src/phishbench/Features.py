@@ -1197,30 +1197,6 @@ def URL_Top_level_domain(url, list_features, list_time):
         list_time["Top_level_domain"] = ex_time
 
 
-def URL_is_common_TLD(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["is_common_TLD"] == "True":
-        common_TLD_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
-        result = 0
-        start = time.time()
-        tld = 0
-        if url:
-            try:
-                extracted = tldextract.extract(url)
-                tld = "{}".format(extracted.suffix)
-                if tld in common_TLD_list:
-                    result = 1
-                else:
-                    result = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                result = -1
-        list_features["is_common_TLD"] = result
-        end = time.time()
-        ex_time = end - start
-        list_time["is_common_TLD"] = ex_time
-
-
 def URL_Is_IP_Addr(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Is_IP_Addr"] == "True":
