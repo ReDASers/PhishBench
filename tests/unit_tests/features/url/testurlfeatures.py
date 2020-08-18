@@ -318,4 +318,3 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Is_Whitelisted(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Is_Whitelisted"], 1, 'incorrect Is_Whitelisted')
-

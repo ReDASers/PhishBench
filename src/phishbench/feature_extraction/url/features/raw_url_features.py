@@ -1,3 +1,6 @@
+"""
+This module contains the built-in raw url features
+"""
 import re
 import string
 
@@ -85,7 +88,7 @@ def num_punctuation(url: URLData):
 
 
 _CHAR_DIST = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
-             .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
+              .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
 
 
 def _calc_char_dist(text):
@@ -103,8 +106,8 @@ def _calc_char_dist(text):
     counts = [0] * 26
     for x in text:
         counts[int(x-'a')] += 1
-    n = len(text)
-    counts = [x/n for x in counts]
+    num_letters = len(text)
+    counts = [x/num_letters for x in counts]
     return counts
 
 
