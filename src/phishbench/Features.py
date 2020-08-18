@@ -1060,27 +1060,6 @@ def URL_num_punctuation(url, list_features, list_time):
         list_time["num_punctuation"] = ex_time
 
 
-def URL_has_port(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["has_port"] == "True":
-        start = time.time()
-        has_port = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                port_number = '{uri.port}'.format(uri=parsed_url)
-                has_port = 1
-                if port_number == 'None':
-                    has_port = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                has_port = -1
-        list_features["has_port"] = has_port
-        end = time.time()
-        ex_time = end - start
-        list_time["has_port"] = ex_time
-
-
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":

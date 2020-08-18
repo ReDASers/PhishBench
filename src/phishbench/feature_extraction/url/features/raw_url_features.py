@@ -69,3 +69,8 @@ def number_of_dashes(url: URLData):
 def http_in_middle(url: URLData):
     match = re.match(".+http.+", url.raw_url)
     return match is not None
+
+
+@register_feature(FeatureType.URL_RAW, 'has_port')
+def has_port(url: URLData):
+    return url.parsed_url.port is not None
