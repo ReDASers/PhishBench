@@ -167,12 +167,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_char_distance(raw_url, list_features, list_time)
 
-    Features.URL_kolmogorov_shmirnov(raw_url, list_features, list_time)
-
-    Features.URL_Kullback_Leibler_Divergence(raw_url, list_features, list_time)
-
-    Features.URL_english_frequency_distance(raw_url, list_features, list_time)
-
     Features.URL_number_of_slashes(raw_url, list_features, list_time)
 
     Features.URL_consecutive_numbers(raw_url, list_features, list_time)

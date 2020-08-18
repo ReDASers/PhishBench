@@ -1,6 +1,8 @@
 import re
 import string
 
+import scipy.stats
+import scipy.spatial
 from tldextract import tldextract
 
 from ...reflection import FeatureType, register_feature
@@ -80,3 +82,54 @@ def has_port(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'num_punctuation')
 def num_punctuation(url: URLData):
     return sum(x in string.punctuation for x in url.raw_url)
+
+
+_CHAR_DIST = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
+             .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
+
+
+def _calc_char_dist(text):
+    """
+    Computes the character distribution of the English letters in a string
+    Parameters
+    ----------
+    str
+        A string
+    Returns
+    -------
+    A list containing the normalized character counts
+    """
+    text = re.sub(r'[^a-z]', '', text.lower())
+    counts = [0] * 26
+    for x in text:
+        counts[int(x-'a')] += 1
+    n = len(text)
+    counts = [x/n for x in counts]
+    return counts
+
+
+@register_feature(FeatureType.URL_RAW, 'char_dist_kolmogorov_shmirnov')
+def kolmogorov_shmirnov(url: URLData):
+    """
+    The Kolmogorov_Shmirnov statistic between the URL and the English character distribution
+    """
+    url_char_distance = _calc_char_dist(url.raw_url)
+    return scipy.stats.ks_2samp(url_char_distance, _CHAR_DIST)[0]
+
+
+@register_feature(FeatureType.URL_RAW, 'char_dist_kl_divergence')
+def kullback_leibler(url: URLData):
+    """
+        The Kullback_Leibler divergence between the URL and the English character distribution
+    """
+    url_char_distance = _calc_char_dist(url.raw_url)
+    return scipy.stats.entropy(url_char_distance, _CHAR_DIST)
+
+
+@register_feature(FeatureType.URL_RAW, 'char_dist_euclidian_distance')
+def euclidean_distance(url: URLData):
+    """
+        The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
+    """
+    url_char_distance = _calc_char_dist(url.raw_url)
+    return scipy.spatial.distance.euclidean(url_char_distance, _CHAR_DIST)
