@@ -1179,24 +1179,6 @@ def URL_special_char_count(url, list_features, list_time):
         list_time["special_char_count"] = ex_time
 
 
-def URL_special_pattern(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["special_pattern"] == "True":
-        start = time.time()
-        special_count = 0
-        if url:
-            try:
-                if "?gws_rd=ssl" in url:
-                    special_count = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                special_count = -1
-        list_features["special_pattern"] = special_count
-        end = time.time()
-        ex_time = end - start
-        list_time["special_pattern"] = ex_time
-
-
 def URL_Top_level_domain(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Top_level_domain"] == "True":

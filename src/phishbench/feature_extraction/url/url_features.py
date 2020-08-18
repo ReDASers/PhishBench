@@ -185,8 +185,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_special_char_count(raw_url, list_features, list_time)
 
-    Features.URL_special_pattern(raw_url, list_features, list_time)
-
     Features.URL_Top_level_domain(raw_url, list_features, list_time)
 
     Features.URL_is_common_TLD(raw_url, list_features, list_time)

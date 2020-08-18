@@ -20,3 +20,8 @@ def num_dots(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'url_length')
 def url_length(url: URLData):
     return len(url.raw_url)
+
+
+@register_feature(FeatureType.URL_RAW, 'special_pattern')
+def special_pattern(url: URLData):
+    return "?gws_rd=ssl" in url.raw_url

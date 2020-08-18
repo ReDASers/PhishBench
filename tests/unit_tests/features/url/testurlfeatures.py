@@ -16,7 +16,7 @@ class TestURLFeatures(unittest.TestCase):
 
         result = url_features.url_length(test_url)
 
-        self.assertEqual(result, 29)
+        self.assertEqual(29, result)
 
     def test_URL_domain_length(self, config_mock):
         test_url = 'http://www.google.com/index.html'
