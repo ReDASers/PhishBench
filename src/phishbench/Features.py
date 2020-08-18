@@ -1252,23 +1252,6 @@ def URL_Has_anchor_tag(url, list_features, list_time):
         list_time["Has_anchor_tag"] = ex_time
 
 
-def URL_Null_in_Domain(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Null_in_Domain"] == "True":
-        start = time.time()
-        regex_null = re.compile(r'null', flags=re.IGNORECASE)
-        flag = 0
-        if url:
-            try:
-                flag = int(bool(re.findall(regex_null, url)))
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                flag = -1
-        list_features["Null_in_Domain"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Null_in_Domain"] = ex_time
-
-
 # PhishDef: URL Names Say It All
 TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 

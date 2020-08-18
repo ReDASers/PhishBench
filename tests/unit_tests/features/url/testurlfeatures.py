@@ -246,14 +246,13 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["Has_anchor_tag"], 0, 'incorrect Has_anchor_tag')
 
     def test_URL_Null_in_Domain(self, config_mock):
-        config_mock['URL_Features']['Null_in_Domain'] = "True"
-        test_url = "nullfsdf.com"
-        list_features = {}
-        list_time = {}
 
-        Features.URL_Null_in_Domain(test_url, list_features, list_time)
+        test_url = URLData('http://www.test.com/test/null', download_url=False)
+        self.assertFalse(url_features.null_in_domain(test_url))
 
-        self.assertEqual(list_features["Null_in_Domain"], 1, 'incorrect Null_in_Domain')
+        test_url = URLData('http://www.nulltest.com/test', download_url=False)
+        self.assertTrue(url_features.null_in_domain(test_url))
+
 
     def test_URL_Token_Count(self, config_mock):
         config_mock['URL_Features']['Token_Count'] = "True"

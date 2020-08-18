@@ -53,3 +53,8 @@ def has_https(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'has_at_symbol')
 def has_at_symbol(url: URLData):
     return '@' in url.raw_url
+
+
+@register_feature(FeatureType.URL_RAW, 'null_in_domain')
+def null_in_domain(url: URLData):
+    return 'null' in url.parsed_url.hostname.lower()
