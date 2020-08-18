@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import src.phishbench as phishbench
 
 entry_points = {
     "console_scripts": ["phishbench=phishbench_cli.main:main",
@@ -9,7 +10,7 @@ with open("requirements.txt") as req:
     reqs = req.readlines()
 
 setup(name='PhishBench',
-      version='1.1.3',
+      version=phishbench.__version__,
       description='A Phishing detection benchmarking framework',
       url='https://github.com/ReDASers/Phishing-Detection',
       packages=find_packages("src"),
