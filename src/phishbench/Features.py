@@ -1197,27 +1197,6 @@ def URL_Top_level_domain(url, list_features, list_time):
         list_time["Top_level_domain"] = ex_time
 
 
-def URL_Is_IP_Addr(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Is_IP_Addr"] == "True":
-        start = time.time()
-        Is_IP_Addr = 1
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url)
-                if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
-                    Is_IP_Addr = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                Is_IP_Addr = -1
-
-        list_features["Is_IP_Addr"] = Is_IP_Addr
-        end = time.time()
-        ex_time = end - start
-        list_time["Is_IP_Addr"] = ex_time
-
-
 # Devin's features
 def URL_number_of_dashes(url, list_features, list_time):
     # global list_features

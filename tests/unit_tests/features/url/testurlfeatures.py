@@ -168,14 +168,16 @@ class TestURLFeatures(unittest.TestCase):
         self.assertTrue(result)
 
     def test_URL_Is_IP_Addr(self, config_mock):
-        config_mock['URL_Features']['Is_IP_Addr'] = "True"
-        test_url = 'http://192.168.0.1'
-        list_features = {}
-        list_time = {}
+        test_url = URLData('http://192.168.0.1/scripts/test', download_url=False)
 
-        Features.URL_Is_IP_Addr(test_url, list_features, list_time)
+        result = url_features.is_ip_addr(test_url)
+        self.assertTrue(result)
 
-        self.assertEqual(list_features["Is_IP_Addr"], 1, 'incorrect Is_IP_Addr')
+        test_url = URLData('http://www.google.com/scripts/test', download_url=False)
+
+        result = url_features.is_ip_addr(test_url)
+        self.assertFalse(result)
+
 
     def test_URL_number_of_dashes(self, config_mock):
         config_mock['URL_Features']['number_of_dashes'] = "True"
