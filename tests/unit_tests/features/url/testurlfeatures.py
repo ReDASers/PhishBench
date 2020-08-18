@@ -67,16 +67,6 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["has_port"], 1, 'incorrect has_port')
 
-    def test_URL_has_https(self, config_mock):
-        config_mock['URL_Features']['has_https'] = "True"
-        test_url = 'https://www.google.com'
-        list_features = {}
-        list_time = {}
-
-        Features.URL_has_https(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["has_https"], 1, 'incorrect has_https')
-
     def test_URL_number_of_digits(self, config_mock):
 
         url = URLData('http://te2t-url.com/home.html', download_url=False)
@@ -178,14 +168,12 @@ class TestURLFeatures(unittest.TestCase):
         result = url_features.is_ip_addr(test_url)
         self.assertFalse(result)
 
-
     def test_url_has_https(self, config_mock):
         test_url = URLData('https://google.com', download_url=False)
         self.assertTrue(url_features.has_https(test_url))
 
         test_url = URLData('http://google.com', download_url=False)
         self.assertFalse(url_features.has_https(test_url))
-
 
     def test_URL_number_of_dashes(self, config_mock):
         config_mock['URL_Features']['number_of_dashes'] = "True"
