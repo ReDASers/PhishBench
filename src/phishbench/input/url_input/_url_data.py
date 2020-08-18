@@ -136,13 +136,13 @@ def _setup_browser():
     chrome_options.add_argument('--log-level=3')
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
-    chorme_path = pathlib.Path(__file__).parent.absolute()
+    chrome_path = pathlib.Path(__file__).parent.absolute()
     if platform.system() == 'Windows':
-        chrome_path = os.path.join(chorme_path, 'chromedriver.exe')
+        chrome_path = os.path.join(chrome_path, 'chromedriver.exe')
     elif platform.system() == 'Linux':
-        chrome_path = os.path.join(chorme_path, 'chromedriver_linux')
+        chrome_path = os.path.join(chrome_path, 'chromedriver_linux')
     else:
-        chrome_path = os.path.join(chorme_path, 'chromedriver_mac')
+        chrome_path = os.path.join(chrome_path, 'chromedriver_mac')
     browser = webdriver.Chrome(executable_path=chrome_path, chrome_options=chrome_options,
                                desired_capabilities=desired_capabilities)
     browser.set_page_load_timeout(10)
