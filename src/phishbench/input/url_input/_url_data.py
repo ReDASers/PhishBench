@@ -83,9 +83,10 @@ class URLData:
                 pass
 
     def lookup_whois(self, nameservers=None):
+        domain = self.parsed_url.hostname
         self.ip_whois = []
-        if is_ip_address(self.domain):
-            whois_client = IPWhois(self.domain)
+        if is_ip_address(domain):
+            whois_client = IPWhois(domain)
             whois_result = whois_client.lookup_whois(get_referral=True)
             self.ip_whois.append(whois_result)
             return
@@ -103,9 +104,9 @@ class URLData:
                 except BaseIpwhoisException:
                     pass
         try:
-            self.domain_whois = whois.whois(self.domain)
+            self.domain_whois = whois.whois(domain)
         except ConnectionError:
-            self.domain_whois = whois.whois(self.domain, command=True)
+            self.domain_whois = whois.whois(domain, command=True)
 
     def download_website(self):
         browser = _setup_browser()
