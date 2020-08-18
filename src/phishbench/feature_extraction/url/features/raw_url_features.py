@@ -58,3 +58,14 @@ def has_at_symbol(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'null_in_domain')
 def null_in_domain(url: URLData):
     return 'null' in url.parsed_url.hostname.lower()
+
+
+@register_feature(FeatureType.URL_RAW, 'number_of_dashes')
+def number_of_dashes(url: URLData):
+    return url.raw_url.count('-')
+
+
+@register_feature(FeatureType.URL_RAW, 'http_in_middle')
+def http_in_middle(url: URLData):
+    match = re.match(".+http.+", url.raw_url)
+    return match is not None

@@ -1177,40 +1177,6 @@ def URL_Top_level_domain(url, list_features, list_time):
 
 
 # Devin's features
-def URL_number_of_dashes(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_dashes"] == "True":
-        start = time.time()
-        number_of_dashes = 0
-        if url:
-            try:
-                number_of_dashes = url.count('-')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_dashes = -1
-        list_features["number_of_dashes"] = number_of_dashes
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_dashes"] = ex_time
-
-
-def URL_Http_middle_of_URL(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Http_middle_of_URL"] == "True":
-        start = time.time()
-        HTTP_REGEX = re.compile(".+http.+")
-        if url and isinstance(url, str):
-            if HTTP_REGEX.match(url):
-                list_features["Http_middle_of_URL"] = 1
-            else:
-                list_features["Http_middle_of_URL"] = 0
-        else:
-            list_features["Http_middle_of_URL"] = -1
-        end = time.time()
-        ex_time = end - start
-        list_time["Http_middle_of_URL"] = ex_time
-
-
 def URL_Has_More_than_3_dots(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_More_than_3_dots"] == "True":
         start = time.time()
