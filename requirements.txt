@@ -22,3 +22,5 @@ xgboost==1.1.1
 # Versions required by tensorflow
 numpy==1.18.5
 scipy==1.4.1
+# Needed for bs4
+html5lib==1.1
