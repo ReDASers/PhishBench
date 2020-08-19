@@ -86,6 +86,9 @@ def num_punctuation(url: URLData):
     return sum(x in string.punctuation for x in url.raw_url)
 
 
+# region Character Distribution
+
+
 _CHAR_DIST = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
               .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
 
@@ -104,10 +107,21 @@ def _calc_char_dist(text):
     text = re.sub(r'[^a-z]', '', text.lower())
     counts = [0] * 26
     for x in text:
-        counts[int(x-'a')] += 1
+        counts[int(ord(x) - ord('a'))] += 1
     num_letters = len(text)
     counts = [x/num_letters for x in counts]
+    print(counts)
     return counts
+
+
+@register_feature(FeatureType.URL_RAW, 'char_dist')
+def char_dist(url: URLData):
+    """
+    The character distribution of the url
+    """
+    url_char_distance = _calc_char_dist(url.raw_url)
+    return {"char_distribution_{}".format(character): value for
+            value, character in zip(url_char_distance, string.ascii_lowercase)}
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_kolmogorov_shmirnov')
@@ -135,3 +149,6 @@ def euclidean_distance(url: URLData):
     """
     url_char_distance = _calc_char_dist(url.raw_url)
     return scipy.spatial.distance.euclidean(url_char_distance, _CHAR_DIST)
+
+
+# endregion

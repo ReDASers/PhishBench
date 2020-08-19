@@ -949,32 +949,6 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-##################################################################################
-
-def URL_char_distance(url: str, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["char_distance"] == "True":
-        start = time.time()
-        if url:
-            url = url.lower()
-            num_letters = len(re.sub(r'[^\w]', '', url))
-            for x in string.ascii_lowercase:
-                try:
-                    url_char_dist = (url.count(x) / num_letters)
-                    list_features["url_char_distance_" + x] = url_char_dist
-                except Exception as e:
-                    phishbench_globals.logger.warning("exception: " + str(e))
-                    list_features["url_char_distance_" + x] = -1
-        else:
-            for x in string.ascii_lowercase:
-                list_features["url_char_distance_" + x] = 0
-        end = time.time()
-        ex_time = end - start
-        list_time["url_char_distance_"] = ex_time
-
-
-##################################################################################
-
-
 def URL_number_of_slashes(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":
