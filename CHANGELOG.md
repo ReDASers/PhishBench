@@ -1,5 +1,11 @@
 # Change Log
 
+# v1.1.4
+
+## Bug Fixes
+
+* Fixed bug where metric reflection would fail in the presence of custom features. 
+
 # v1.1.3
 
 ## Major Changes
