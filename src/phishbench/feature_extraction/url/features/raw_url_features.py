@@ -169,7 +169,6 @@ def _calc_char_dist(text):
         counts[int(ord(x) - ord('a'))] += 1
     num_letters = len(text)
     counts = [x/num_letters for x in counts]
-    print(counts)
     return counts
 
 
