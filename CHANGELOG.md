@@ -14,6 +14,7 @@
 ## Bug Fixes
 
 * Fixed bug where metric reflection would fail in the presence of custom features. 
+* Fixed `Failed to convert a NumPy array to a Tensor` error in `FeedForwardNetwork` with `int` datatypes
 
 # v1.1.3
 
