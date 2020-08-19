@@ -1,3 +1,6 @@
+"""
+PhishBench is an extendable benchmarking framework for Phishing Detection
+"""
 from .utils.phishbench_globals import initialize
 
 version_info = (1, 1, 4)

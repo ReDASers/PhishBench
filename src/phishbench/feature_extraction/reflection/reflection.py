@@ -76,7 +76,7 @@ def load_features_from_module(features_module, filter_features=None) -> List[Cal
     features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
 
     if filter_features:
-        if not (filter_features in ('Email', 'URL')):
+        if filter_features not in ('Email', 'URL'):
             raise ValueError('filter_features must either be "Email" or "URL"')
         enabled_types = [feat_type for feat_type in FeatureType if settings.feature_type_enabled(feat_type)]
         enabled_types = [feat_type for feat_type in enabled_types if feat_type.value.startswith(filter_features)]
