@@ -928,16 +928,11 @@ def URL_letter_occurrence(url, list_features, list_time):
             try:
                 parsed_url = urlparse(url)
                 domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url).lower()
+                for x in string.ascii_lowercase:
+                    list_features["letter_occurrence_" + x] = domain.count(x)
             except Exception as e:
                 phishbench_globals.logger.warning("exception: " + str(e))
                 for x in range(26):
-                    list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
-            ####
-            for x in range(26):
-                try:
-                    list_features["letter_occurrence_" + chr(x + ord('a'))] = domain.count(chr(x + ord('a')))
-                except Exception as e:
-                    phishbench_globals.logger.warning("exception: " + str(e))
                     list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
         else:
             for x in range(26):
