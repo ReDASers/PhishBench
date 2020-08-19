@@ -44,7 +44,8 @@ class FeedForwardNN(BaseClassifier):
         self.verbosity = verbosity
 
     def fit(self, x, y):
-        y = np.array(y)
+        x = np.array(x).astype(np.float32)
+        y = np.array(y).astype(np.float32)
         n_features = x.shape[1]
         self.clf = _build_model(n_features)
         early_stopping = keras.callbacks.EarlyStopping(monitor='loss', patience=10, min_delta=.001)
