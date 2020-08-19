@@ -37,7 +37,10 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["letter_occurrence_c"], 1, 'incorrect letter_occurrence')
 
     def test_URL_char_distance(self, config_mock):
-        pass
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+
+        result = url_features.char_dist(test_url)
+        self.assertEqual(26, len(result))
 
     def test_URL_kolmogorov_shmirnov(self, config_mock):
         pass
