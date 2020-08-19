@@ -944,23 +944,6 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-def URL_number_of_slashes(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["number_of_slashes"] == "True":
-        start = time.time()
-        number_of_slashes = 0
-        if url:
-            try:
-                number_of_slashes = url.count('/')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_slashes = -1
-        list_features["number_of_slashes"] = number_of_slashes
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_slashes"] = ex_time
-
-
 def URL_digit_letter_ratio(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["digit_letter_ratio"] == "True":

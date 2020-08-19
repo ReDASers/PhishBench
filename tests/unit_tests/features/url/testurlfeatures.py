@@ -86,13 +86,10 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(result, 3, 'incorrect number_of_dots')
 
     def test_URL_number_of_slashes(self, config_mock):
-        config_mock['URL_Features']['number_of_slashes'] = "True"
-        list_features = {}
-        list_time = {}
+        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        result = url_features.number_of_slashes(test_url)
 
-        Features.URL_number_of_slashes('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["number_of_slashes"], 3, 'incorrect number_of_slashes')
+        self.assertEqual(3, result)
 
     def test_URL_digit_letter_ratio(self, config_mock):
         config_mock['URL_Features']['digit_letter_ratio'] = "True"
