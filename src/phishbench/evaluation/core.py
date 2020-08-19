@@ -14,7 +14,7 @@ from . import metrics as internal_metrics
 
 def load_metrics_from_module(source, filter_metrics=True):
     attrs = [getattr(source, x) for x in dir(source)]
-    metrics = [x for x in attrs if inspect.isfunction(x) and hasattr(x, 'config_name')]
+    metrics = [x for x in attrs if inspect.isfunction(x) and hasattr(x, 'metric_type')]
     if filter_metrics:
         metrics = [x for x in metrics if settings.is_enabled(x.config_name)]
     return metrics
