@@ -1,3 +1,6 @@
+"""
+This module contains the core code for evaluating classifiers
+"""
 import inspect
 import itertools
 from typing import List, Callable
@@ -13,6 +16,19 @@ from . import metrics as internal_metrics
 
 
 def load_metrics_from_module(source, filter_metrics=True):
+    """
+    Loads metrics from a module
+    Parameters
+    ----------
+    source: ModuleType
+        The module to import metrics from
+    filter_metrics: Union[str, None]
+        Whether or not to load metrics based on `phishbench.utils.phishbench_globals.config`
+
+    Returns
+    -------
+    A list of metrics in the module.
+    """
     attrs = [getattr(source, x) for x in dir(source)]
     metrics = [x for x in attrs if inspect.isfunction(x) and hasattr(x, 'metric_type')]
     if filter_metrics:
@@ -21,6 +37,17 @@ def load_metrics_from_module(source, filter_metrics=True):
 
 
 def load_metrics(filter_metrics=True) -> List[Callable]:
+    """
+    Loads all metrics
+
+    Parameters
+    ----------
+    filter_metrics: Union[str, None]
+        Whether or not to filter the metrics
+    Returns
+    -------
+        A list of feature functions
+    """
     modules = load_local_modules()
     modules.append(internal_metrics)
     loaded_features = [load_metrics_from_module(module, filter_metrics) for module in modules]

@@ -1,3 +1,6 @@
+"""
+This module contains the core reflection functions for feature extraction.
+"""
 import inspect
 import itertools
 from types import ModuleType
@@ -10,6 +13,17 @@ from ...utils.reflection_utils import load_local_modules
 
 
 def _check_feature(feature: Callable) -> bool:
+    """
+    Checks whether or not a feature is enabled.
+    Parameters
+    ----------
+    feature: Callable
+        The feature to check
+
+    Returns
+    -------
+        `True` if the feature is enabled. `False` otherwise.
+    """
     feature_type: FeatureType = feature.feature_type
     if feature_type.value not in phishbench_globals.config:
         return False
@@ -18,12 +32,12 @@ def _check_feature(feature: Callable) -> bool:
 
 def load_features(internal_features=None, filter_features=None) -> List[Callable]:
     """
-    Loads email features
+    Loads all features
 
     Parameters
     ----------
     internal_features: Union[ModuleType, List]
-        The module or a list of moudles to load internal features from
+        The module or a list of modules to load internal features from
     filter_features: Union[str, None]
         Whether or not to filter the features
     Returns
