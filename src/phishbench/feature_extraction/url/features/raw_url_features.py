@@ -91,6 +91,15 @@ def num_punctuation(url: URLData):
     return sum(x in string.punctuation for x in url.raw_url)
 
 
+@register_feature(FeatureType.URL_RAW, 'digit_letter_ratio')
+def digit_letter_ratio(url: URLData):
+    """
+    Number of digits divided by number of letters
+    """
+    url_num_digits = sum(c.isdigit() for c in url.raw_url)
+    url_num_letters = sum(c.isalpha() for c in url.raw_url)
+    return url_num_digits / url_num_letters
+
 # region Character Distribution
 
 

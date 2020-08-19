@@ -944,26 +944,6 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-def URL_digit_letter_ratio(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["digit_letter_ratio"] == "True":
-        start = time.time()
-        digit_letter_ratio = 0
-        if url:
-            try:
-                number_of_digits = sum(c.isdigit() for c in url)
-                letters = sum(c.isalpha() for c in url)
-                digit_letter_ratio = number_of_digits / letters
-                list_features["digit_letter_ratio"] = digit_letter_ratio
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                list_features["digit_letter_ratio"] = -1
-        list_features["digit_letter_ratio"] = digit_letter_ratio
-        end = time.time()
-        ex_time = end - start
-        list_time["digit_letter_ratio"] = ex_time
-
-
 def URL_consecutive_numbers(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["consecutive_numbers"] == "True":
