@@ -2,6 +2,15 @@
 
 # v1.1.4
 
+## Major Changes
+
+* `url_char_distance` renamed to `url_char_dist`
+    * This feature was originally incorrectly named, as it was a distribution, not distance.
+
+## Minor Changes
+
+* Converted URL features to reflection
+
 ## Bug Fixes
 
 * Fixed bug where metric reflection would fail in the presence of custom features. 

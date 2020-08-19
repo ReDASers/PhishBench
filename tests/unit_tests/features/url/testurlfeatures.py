@@ -37,7 +37,10 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["letter_occurrence_c"], 1, 'incorrect letter_occurrence')
 
     def test_URL_char_distance(self, config_mock):
-        pass
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+
+        result = url_features.char_dist(test_url)
+        self.assertEqual(26, len(result))
 
     def test_URL_kolmogorov_shmirnov(self, config_mock):
         pass
@@ -83,22 +86,16 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(result, 3, 'incorrect number_of_dots')
 
     def test_URL_number_of_slashes(self, config_mock):
-        config_mock['URL_Features']['number_of_slashes'] = "True"
-        list_features = {}
-        list_time = {}
+        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        result = url_features.number_of_slashes(test_url)
 
-        Features.URL_number_of_slashes('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["number_of_slashes"], 3, 'incorrect number_of_slashes')
+        self.assertEqual(3, result)
 
     def test_URL_digit_letter_ratio(self, config_mock):
-        config_mock['URL_Features']['digit_letter_ratio'] = "True"
-        list_features = {}
-        list_time = {}
+        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        result = url_features.digit_letter_ratio(test_url)
 
-        Features.URL_digit_letter_ratio('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["digit_letter_ratio"], 1 / 21, 'incorrect digit_letter_ratio')
+        self.assertEqual(1 / 21, result, 'incorrect digit_letter_ratio')
 
     # def test_URL_consecutive_numbers(self, config_mock):
     #     config_mock['URL_Features']['consecutive_numbers'] = "True"
@@ -221,7 +218,6 @@ class TestURLFeatures(unittest.TestCase):
 
         test_url = URLData('http://www.nulltest.com/test', download_url=False)
         self.assertTrue(url_features.null_in_domain(test_url))
-
 
     def test_URL_Token_Count(self, config_mock):
         config_mock['URL_Features']['Token_Count'] = "True"
