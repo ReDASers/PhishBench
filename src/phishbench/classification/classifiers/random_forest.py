@@ -1,3 +1,6 @@
+"""
+This module contains the RandomForest classifier
+"""
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
 
@@ -5,6 +8,9 @@ from ..base_classifier import BaseClassifier
 
 
 class RandomForest(BaseClassifier):
+    """
+    The Random Forest Classifier. This class wraps the `sklearn.ensemble.RandomForestClassifier`
+    """
     def __init__(self, io_dir):
         super().__init__(io_dir, "model_rf.pkl")
 
