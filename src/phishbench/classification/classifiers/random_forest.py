@@ -9,7 +9,7 @@ class RandomForest(BaseClassifier):
         super().__init__(io_dir, "model_rf.pkl")
 
     def fit(self, x, y):
-        self.clf = RandomForestClassifier()
+        self.clf = RandomForestClassifier(n_jobs=-1)
         self.clf.fit(x, y)
 
     def fit_weighted(self, x, y):
