@@ -10,6 +10,7 @@
 ## Minor Changes
 
 * Converted URL features to reflection
+* Parallelized Random Forest Classifier
 
 ## Bug Fixes
 
