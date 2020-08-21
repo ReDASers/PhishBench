@@ -13,7 +13,7 @@ class RandomForest(BaseClassifier):
         self.clf.fit(x, y)
 
     def fit_weighted(self, x, y):
-        self.clf = RandomForestClassifier(class_weight='balanced_subsample')
+        self.clf = RandomForestClassifier(class_weight='balanced_subsample', n_jobs=-1)
         self.clf.fit(x, y)
 
     def param_search(self, x, y):
