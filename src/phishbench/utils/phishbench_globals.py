@@ -15,15 +15,12 @@ summary = None
 def setup_parser():
     global args
     parser = argparse.ArgumentParser(description='Argument parser')
-    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
-    parser.add_argument("-o", "--output_input_dir",
-                        help="Output/input directory to read features or dump extracted features", type=str,
-                        default="Data_Dump")
-    parser.add_argument("-c", "--ignore_confirmation", help="does not wait or user's confirmation", action="store_true")
+    parser.add_argument("--version", help="Display the PhishBench version number", action="store_true")
     parser.add_argument("-f", "--config_file", help="The config file to use.", type=str, default='Default_Config.ini')
+    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+    parser.add_argument("-o", "--output_input_dir", help="Output/input directory", type=str, default="Data_Dump")
+    parser.add_argument("-c", "--ignore_confirmation", help="does not wait or user's confirmation", action="store_true")
     args = parser.parse_args()
-    initialize(args.config_file)
-
 
 def setup_logger():
     global logger

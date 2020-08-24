@@ -6,6 +6,7 @@ import joblib
 import pandas as pd
 from scipy.sparse import hstack
 
+import phishbench
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
@@ -436,6 +437,10 @@ def run_phishbench():
 def main():
     # execute only if run as a script
     phishbench_globals.setup_parser()
+    if phishbench_globals.args.version:
+        print("PhishBench ", phishbench.__version__)
+        sys.exit(0)
+    phishbench_globals.initialize(phishbench_globals.args.config_file)
     answer = user_interaction.confirmation(phishbench_globals.args.ignore_confirmation)
     original = sys.stdout
     if answer:
