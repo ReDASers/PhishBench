@@ -1,3 +1,6 @@
+"""
+This module contains the global configuration for PhishBench
+"""
 import argparse
 import configparser
 import logging
@@ -13,19 +16,27 @@ summary = None
 
 
 def setup_parser():
+    """
+    Sets up the argument parser
+    """
     global args
-    parser = argparse.ArgumentParser(description='Argument parser')
-    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
-    parser.add_argument("-o", "--output_input_dir",
-                        help="Output/input directory to read features or dump extracted features", type=str,
-                        default="Data_Dump")
-    parser.add_argument("-c", "--ignore_confirmation", help="does not wait or user's confirmation", action="store_true")
-    parser.add_argument("-f", "--config_file", help="The config file to use.", type=str, default='Default_Config.ini')
+    parser = argparse.ArgumentParser(description='PhishBench Basic Experiment Script')
+    parser.add_argument("--version", help="Display the PhishBench version number and exit", action="store_true")
+    parser.add_argument("-f", "--config_file", help="The config file to use", type=str, default='Default_Config.ini')
+    parser.add_argument("-v", "--verbose", help="Increase output verbosity", action="store_true")
+    parser.add_argument("-o", "--output_input_dir", help="Output/input directory", type=str, default="Data_Dump")
+    parser.add_argument("-c", "--ignore_confirmation", help="Do not wait for user's confirmation", action="store_true")
     args = parser.parse_args()
-    initialize(args.config_file)
 
 
-def setup_logger():
+def setup_logger(filename='phishbench.log'):
+    """
+    Sets up the logger
+    Parameters
+    ----------
+    filename: str
+        The path of the file to store the log in
+    """
     global logger
     logging.captureWarnings(True)
 
@@ -39,7 +50,7 @@ def setup_logger():
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
 
-    file_handler = logging.FileHandler('phishbench.log')
+    file_handler = logging.FileHandler(filename)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
@@ -50,6 +61,13 @@ def setup_logger():
 
 
 def initialize(config_file):
+    """
+    Initialize PhishBench with a configuration file.
+    Parameters
+    ----------
+    config_file: str
+        The path of the configuration file to initialize PhishBench with
+    """
     global args
     global config
     global summary

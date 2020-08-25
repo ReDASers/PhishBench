@@ -1,3 +1,8 @@
+"""
+The PhishBench Config Generator
+
+This script generates PhishBench configuration files.
+"""
 import argparse
 import configparser
 import inspect
@@ -129,16 +134,17 @@ def update_list():
 
 
 def main():
-    print("Generating Phishbench Config")
+
     # The entrypoint of the script
-    parser = argparse.ArgumentParser(description='Argument parser')
-    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+    parser = argparse.ArgumentParser(description='PhishBench Config Generator')
+    parser.add_argument("-v", "--verbose", help="Increase output verbosity", action="store_true")
     parser.add_argument("-f", "--config_file", help="The name of the config file to generate.",
                         type=str, default='Config_file.ini')
     args = parser.parse_args()
 
     list_features, list_imbalanced_dataset = update_list()
     config = make_config(list_features, list_imbalanced_dataset)
+    print("Generating PhishBench Config")
 
     print("Saving to ", args.config_file)
     with open(args.config_file, 'w') as configfile:

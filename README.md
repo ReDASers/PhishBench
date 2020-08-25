@@ -19,11 +19,11 @@ First create a config file by running `make-phishbench-config`
 ```
 usage: make-phishbench-config [-h] [-v] [-f CONFIG_FILE]
 
-Argument parser
+PhishBench Config Generator
 
 optional arguments:
   -h, --help            show this help message and exit
-  -v, --verbose         increase output verbosity
+  -v, --verbose         Increase output verbosity
   -f CONFIG_FILE, --config_file CONFIG_FILE
                         The name of the config file to generate.
 ```
@@ -50,20 +50,21 @@ Cross_validation = False
 
 ## Run PhishBench
 ```
-usage: phishbench [-h] [-v] [-o OUTPUT_INPUT_DIR] [-c] [-f CONFIG_FILE]
+usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
+                  [-c]
 
-PhishBench
+PhishBench Basic Experiment Script
 
 optional arguments:
   -h, --help            show this help message and exit
-  -v, --verbose         increase output verbosity
-  -o OUTPUT_INPUT_DIR, --output_input_dir OUTPUT_INPUT_DIR
-                        Output/input directory to read features or dump
-                        extracted features
-  -c, --ignore_confirmation
-                        does not wait or user's confirmation
+  --version             Display the PhishBench version number and exit
   -f CONFIG_FILE, --config_file CONFIG_FILE
-                        The config file to use.
+                        The config file to use
+  -v, --verbose         Increase output verbosity
+  -o OUTPUT_INPUT_DIR, --output_input_dir OUTPUT_INPUT_DIR
+                        Output/input directory
+  -c, --ignore_confirmation
+                        Do not wait for user's confirmation
 ```
 
 
