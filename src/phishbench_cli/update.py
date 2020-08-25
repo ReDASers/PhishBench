@@ -1,3 +1,8 @@
+"""
+The PhishBench Config Generator
+
+This script generates PhishBench configuration files.
+"""
 import argparse
 import configparser
 import inspect
