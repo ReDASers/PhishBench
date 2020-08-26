@@ -43,6 +43,7 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
         try:
             url_obj = URLData(raw_url, download_url)
             urls.append(url_obj)
+        # pylint: disable=broad-except
         except Exception as e:
             phishbench_globals.logger.warning(
                 "Exception while loading url %s", raw_url)

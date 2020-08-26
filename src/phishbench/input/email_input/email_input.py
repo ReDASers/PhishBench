@@ -37,6 +37,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
             msg = EmailMessage(read_email_from_file(f))
             emails_parsed.append(msg)
             loaded_files.append(f)
+        # pylint: disable=broad-except
         except Exception:
             print("\n", f)
             traceback.print_exc()
