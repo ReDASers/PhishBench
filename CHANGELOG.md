@@ -1,5 +1,16 @@
 # Change Log
 
+# v1.2.0
+
+## Major Changes
+
+* Removed the dependency on Selenium and Google Chrome
+* `URLData` model flattened
+    * The downloaded html is now stored in`downloaded_website` instead of `downloaded_website.html` 
+    * The final URL is now stored in `final_url` instead of `downloaded_website.final_url`
+    * The HTTP headers are now stored in `website_headers` instead of `downloaded_website.headers`
+    * Removed `downloaded_website.log`
+
 # v1.1.4
 
 ## Major Changes
