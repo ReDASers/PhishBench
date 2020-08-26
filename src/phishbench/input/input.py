@@ -1,15 +1,15 @@
-import email
 import glob
 import os
 import os.path
-from email.message import Message
+
 from typing import List, Tuple
 import traceback
 
-import chardet
 from tqdm import tqdm
 
+from .email_input import
 from .email_input.models import EmailMessage
+from .email_input import read_email_from_file
 from .url_input import URLData
 from .url_input.url_io import read_urls_from_file
 from ..utils import phishbench_globals
@@ -28,41 +28,6 @@ def enumerate_folder_files(folder_path) -> List[str]:
     """
     glob_path = os.path.join(folder_path, "**/*.txt")
     return glob.glob(glob_path, recursive=True)
-
-
-def read_email_from_file(file_path: str) -> Message:
-    """
-    Reads a email from a file
-    Parameters
-    ----------
-    file_path: str
-        The path of the email to read
-
-    Returns
-    -------
-    msg: email.message.Message
-        A Message object representing the email.
-    """
-    with open(file_path, 'rb') as f:
-        binary_data = f.read()
-        msg = email.message_from_bytes(binary_data)
-    try:
-        for part in msg.walk():
-            if not part.is_multipart():
-                str(part)
-    except (LookupError, KeyError):
-        # LookupError -> No charset
-        # KeyError -> No content transfer encoding
-        encoding = chardet.detect(binary_data)['encoding']
-        if not encoding:
-            encoding = None
-        with open(file_path, 'r', encoding=encoding, errors='ignore') as f:
-            # print('Falling back to string for {}'.format(file_path))
-            text = f.read()
-            msg = email.message_from_string(text)
-    except UnicodeError:
-        pass
-    return msg
 
 
 def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:
