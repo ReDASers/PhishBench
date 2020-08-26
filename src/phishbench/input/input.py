@@ -3,13 +3,7 @@ import os
 import os.path
 
 from typing import List, Tuple
-import traceback
 
-from tqdm import tqdm
-
-from .email_input import
-from .email_input.models import EmailMessage
-from .email_input import read_email_from_file
 from .url_input import URLData
 from .url_input.url_io import read_urls_from_file
 from ..utils import phishbench_globals
@@ -28,37 +22,6 @@ def enumerate_folder_files(folder_path) -> List[str]:
     """
     glob_path = os.path.join(folder_path, "**/*.txt")
     return glob.glob(glob_path, recursive=True)
-
-
-def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:
-    """
-
-    Parameters
-    ----------
-    folder_path : str
-        The path to the folder you want to read
-
-    Returns
-    -------
-    emails: List[EmailMessage]
-        The parsed emails
-
-    files: List[str]
-        The paths of the files loaded
-    """
-    files = enumerate_folder_files(folder_path)
-    loaded_files = []
-    emails_parsed = []
-    for f in tqdm(files):
-        try:
-            msg = EmailMessage(read_email_from_file(f))
-            emails_parsed.append(msg)
-            loaded_files.append(f)
-        except Exception:
-            print("\n", f)
-            traceback.print_exc()
-
-    return emails_parsed, loaded_files
 
 
 def remove_duplicates(values: List):

@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from . import features as local_features
 from ..reflection import FeatureType, load_features
-from ...input import input as pb_input
+from ...input import email_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
 
@@ -29,12 +29,12 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
                                    legit_dataset_folder, phish_dataset_folder)
 
     print("Loading emails from {}".format(legit_dataset_folder))
-    legit_emails, _ = pb_input.read_dataset_email(legit_dataset_folder)
+    legit_emails, _ = email_input.read_dataset_email(legit_dataset_folder)
     print("Extracting features")
     legit_features, legit_corpus = extract_email_features(legit_emails, features)
 
     print("Loading emails from {}".format(phish_dataset_folder))
-    phish_emails, _ = pb_input.read_dataset_email(phish_dataset_folder)
+    phish_emails, _ = email_input.read_dataset_email(phish_dataset_folder)
     print("Extracting features")
     phish_features, phish_corpus = extract_email_features(phish_emails, features)
 
