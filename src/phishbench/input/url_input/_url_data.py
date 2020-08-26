@@ -1,12 +1,9 @@
-import os.path
-import pathlib
-import platform
 import re
 import time
+import urllib.error
+import urllib.request
 from collections import namedtuple
 from urllib.parse import urlparse
-import urllib.request
-import urllib.error
 
 import dns.resolver
 import requests
@@ -26,7 +23,7 @@ DNS_QUERY_TYPES = [
     'SRV',
     'IXFR',
     'AXFR',
-    'HINFO',
+    'HINFO', 
     'TLSA',
     'URI'
 ]
@@ -127,10 +124,6 @@ class URLData:
         if content_type.startswith('text'):
             encoding = encoding.split('=')[1].strip()
             self.downloaded_website = content.decode(encoding)
-
-
-
-
 
     def __str__(self):
         return self.raw_url
