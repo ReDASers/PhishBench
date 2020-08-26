@@ -10,7 +10,7 @@ import chardet
 from tqdm import tqdm
 
 from .models import EmailMessage
-from ..input import enumerate_folder_files
+from ..input_utils import enumerate_folder_files
 
 
 def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:

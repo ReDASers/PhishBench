@@ -1,39 +1,14 @@
-import glob
+"""
+This module handles file IO for URL datasets
+"""
 import os
-import os.path
+from io import TextIOBase
+from typing import Tuple
+from typing import Union, List
 
-from typing import List, Tuple
-
-from .url_input import URLData
-from .url_input.url_io import read_urls_from_file
-from ..utils import phishbench_globals
-
-
-def enumerate_folder_files(folder_path) -> List[str]:
-    """
-    Recursively searches a folder for .txt files
-    Parameters
-    ----------
-    folder_path : str
-        The path to the folder to search.
-    Returns
-    -------
-        A list containing the paths to every text enumerate in the directory.
-    """
-    glob_path = os.path.join(folder_path, "**/*.txt")
-    return glob.glob(glob_path, recursive=True)
-
-
-def remove_duplicates(values: List):
-    """
-    Removes duplicates from a list
-    :param values: The list to remove duplicates from
-    :return: A new list without duplicates.
-    """
-    old_len = len(values)
-    clean = list(set(values))
-    phishbench_globals.logger.info("Removed %d duplicates", old_len - len(clean))
-    return clean
+from ._url_data import URLData
+from ..input_utils import enumerate_folder_files, remove_duplicates
+from ...utils import phishbench_globals
 
 
 def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> Tuple[List[URLData], List[str]]:
@@ -75,3 +50,23 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
             bad_url_list.append(raw_url)
 
     return urls, bad_url_list
+
+
+def read_urls_from_file(f: Union[TextIOBase, str]) -> List[str]:
+    """
+    Reads urls from a text file.
+    :param f: A file-like object to read from or a path to a text file.
+    :return: A list of urls
+    """
+    close = False
+    if isinstance(f, str):
+        f = open(f, 'r')
+        close = True
+
+    lines = f.readlines()
+    lines = [x.strip() for x in lines]
+
+    if close:
+        f.close()
+
+    return lines
