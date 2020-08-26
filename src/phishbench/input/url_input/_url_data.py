@@ -1,9 +1,12 @@
+"""
+This is an internal module containing the implementation of the `URLData` model
+"""
 import re
 import time
 import urllib.error
 import urllib.request
-from collections import namedtuple
-from urllib.parse import urlparse
+from typing import Optional, List, Dict
+from urllib.parse import urlparse, ParseResult
 
 import dns.resolver
 import requests
@@ -12,7 +15,7 @@ from dns.exception import DNSException
 from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
 from requests import HTTPError
-
+from requests.utils import default_headers
 DNS_QUERY_TYPES = [
     'NONE',
     'A',
@@ -32,21 +35,67 @@ IPV4_REGEX = re.compile(r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.)'
 
 
 def is_ip_address(url):
+    """
+    Checks whether or not a URL is an IPv4 address
+    Parameters
+    ----------
+    url: str
+        The url to check
+    Returns
+    -------
+    result: bool
+        Whether or not `str` is an IPv4 address
+    """
     return bool(IPV4_REGEX.match(url))
 
 
+# pylint: disable=too-many-instance-attributes
 class URLData:
+    """
+    A data model representing a URL and its associated website.
+
+    Attributes
+    ----------
+    raw_url: str
+        The raw URL represented by this object
+    parsed_url: ParseResult
+        The parsed URL
+    downloaded_website: str or None
+        The downloaded HTML of the website pointed to by this URL. `None` if the website has not been downloaded.
+    dns_results: Dict[str, List[str]] or None
+        The results of the DNS queries as a dictionary. The key is the query type, and the values are a list of
+        responses. `None` if the DNS information has not been looked up.
+    ip_whois: List[Dict] or None
+        The WHOIS results for each ip associated with this URL. `None` if the WHOIS results have not been looked up.
+    domain_whois: whois.parser.WhoisEntry or None
+        The WHOIS results for the domain. `None` if the WHOIS results have not been looked up.
+    final_url: str, or None
+        The URL of the website downloaded after all redirects have been processed.
+    load_time: float
+        The time in seconds it took to load the website. `-1` if the website was not downloaded.
+    website_headers: http.client.HTTPMessage or None
+        The headers received when downloading the website. `None` if the website was not downloaded.
+    """
 
     def __init__(self, url: str, download_url=True):
-        self.raw_url = url.strip()
+        """
+
+        Parameters
+        ----------
+        url: str
+            The URL represented by this class.
+        download_url: bool, optional
+            Whether or not to download the website `url` points to, along with the DNS and whois info.
+        """
+        self.raw_url: str = url.strip()
         if not self.raw_url:
             raise ValueError("URL cannot be empty")
         if not url.startswith("http"):
             url = "http://" + url
-        self.parsed_url = urlparse(url)
+        self.parsed_url: ParseResult = urlparse(url)
 
-        self.downloaded_website = None
-        self.dns_results = None
+        self.downloaded_website: Optional[str] = None
+        self.dns_results: Optional[Dict[str, List[str]]] = None
         self.ip_whois = None
         self.domain_whois = None
         self.final_url = None
@@ -57,7 +106,16 @@ class URLData:
             self.lookup_dns()
             self.lookup_whois()
 
-    def lookup_dns(self, nameservers=None):
+    def lookup_dns(self, nameservers: Optional[List[str]] = None):
+        """
+        Looks up and stores the DNS information for this URL.
+
+        Parameters
+        ----------
+        nameservers: Optional[List[str]], optional
+            The nameservers to use when looking up the DNS info. If nameservers are not provided, then PhishBench
+            will use the system default nameservers.
+        """
         if self.downloaded_website:
             final_parsed = urlparse(self.final_url)
             lookup_url = final_parsed.hostname
@@ -78,7 +136,15 @@ class URLData:
             except DNSException:
                 pass
 
-    def lookup_whois(self, nameservers=None):
+    def lookup_whois(self, nameservers: Optional[List[str]] = None):
+        """
+        Looks up and stores the whois information for this URL.
+        Parameters
+        ----------
+        nameservers: List[str] or None, optional
+            The nameservers to use when looking up the DNS info. If name servers are not provided, then PhishBench will
+            use the system default nameservers.
+        """
         domain = self.parsed_url.hostname
         self.ip_whois = []
         if is_ip_address(domain):
@@ -105,6 +171,9 @@ class URLData:
             self.domain_whois = whois.whois(domain, command=True)
 
     def download_website(self):
+        """
+        Download the website pointed to by this `URLData`
+        """
         response = requests.head(self.raw_url, headers=_setup_request_headers(), timeout=20)
         if response.status_code >= 400:
             raise HTTPError("Status code not OK!")
@@ -127,7 +196,7 @@ class URLData:
 
 
 def _setup_request_headers():
-    headers = requests.utils.default_headers()
+    headers = default_headers()
     headers.update(
         {
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0',
