@@ -5,6 +5,7 @@ from phishbench import Features
 from phishbench.feature_extraction.reflection import FeatureType
 from tests.mock_objects import mock_objects
 
+
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
 
@@ -29,7 +30,6 @@ class TestHTMLFeatures(unittest.TestCase):
         self.assertEqual(list_features["number_of_hidden_svg"], 1, 'incorrect number_of_svgs')
 
     def test_HTML_number_of_hidden_input(self, mock_config):
-
         mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_input"] = "True"
         list_features = {}
         list_time = {}

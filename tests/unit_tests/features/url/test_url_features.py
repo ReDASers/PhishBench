@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-from phishbench import Features
 import phishbench.feature_extraction.url.features as url_features
+from phishbench import Features
 from phishbench.input import URLData
 from tests.mock_objects import mock_objects
 
@@ -163,7 +163,6 @@ class TestURLFeatures(unittest.TestCase):
         self.assertFalse(url_features.has_https(test_url))
 
     def test_URL_number_of_dashes(self, config_mock):
-
         test_url = URLData('http://te2t-ur--l.com/home.html', download_url=False)
         self.assertEqual(3, url_features.number_of_dashes(test_url), 'incorrect number_of_dashes')
 
@@ -212,7 +211,6 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["Has_anchor_tag"], 0, 'incorrect Has_anchor_tag')
 
     def test_URL_Null_in_Domain(self, config_mock):
-
         test_url = URLData('http://www.test.com/test/null', download_url=False)
         self.assertFalse(url_features.null_in_domain(test_url))
 
