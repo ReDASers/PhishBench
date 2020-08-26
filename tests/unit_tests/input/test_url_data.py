@@ -1,20 +1,35 @@
+"""
+This module tests the `phishbench.input.url_input.URLData` data module
+"""
 import unittest
 from unittest.mock import patch, MagicMock
+from http.client import HTTPMessage
 
 import phishbench.input.url_input._url_data as url_data
 
 
-class Test(unittest.TestCase):
-
+class URLDataTest(unittest.TestCase):
+    """
+    The testcase for the `URLData` model
+    """
     def test_is_ip_address(self):
+        """
+        Tests `url_data.is_ip_address` with an ip address URL
+        """
         test_domain = '192.168.0.1'
         self.assertTrue(url_data.is_ip_address(test_domain))
 
     def test_is_not_ip_address(self):
+        """
+        Tests `url_data.is_ip_address` with an non-ip address URL
+        """
         test_domain = 'google.com'
         self.assertFalse(url_data.is_ip_address(test_domain))
 
     def test_disable_download_url(self):
+        """
+        Tests to ensure that the download_url parameter of the `URLData` constructor works
+        """
         test_url = 'http://google.com'
         data = url_data.URLData(test_url, download_url=False)
         self.assertIsNone(data.downloaded_website)
@@ -23,6 +38,9 @@ class Test(unittest.TestCase):
         self.assertIsNone(data.domain_whois)
 
     def test_download_url(self):
+        """
+        Tests to ensure that downloading websites works
+        """
         test_url = 'http://google.com'
         data = url_data.URLData(test_url, download_url=True)
 
@@ -31,9 +49,13 @@ class Test(unittest.TestCase):
         self.assertIsInstance(data.downloaded_website, str)
         self.assertTrue("google.com" in data.final_url)
         self.assertIsNotNone(data.website_headers)
+        self.assertIsInstance(data.website_headers, HTTPMessage)
 
     @patch('whois.whois')
     def test_download_whois(self, whois_mock: MagicMock):
+        """
+        Tests to ensure that the fetching whois information works
+        """
         test_url = 'http://google.com'
         whois_mock.return_value = {
             "domain_name": 'GOOGLE.COM',
@@ -49,18 +71,18 @@ class Test(unittest.TestCase):
         self.assertEqual("Google LLC", whois_info['org'])
 
         self.assertGreater(len(data.ip_whois), 0)
+        self.assertIsInstance(data.ip_whois, list)
+        for x in data.ip_whois:
+            self.assertIsInstance(x, dict)
         self.assertEqual('GOOGLE, US', data.ip_whois[0]['asn_description'])
 
     def test_lookup_dns(self):
+        """
+        Tests to ensure that looking up DNS information works
+        """
         test_url = 'http://google.com/test?bacon=1'
         data = url_data.URLData(test_url, download_url=False)
         data.lookup_dns(nameservers=['1.1.1.1'])
-        self.assertTrue(data.dns_results)
 
-    # WHOIS test takes too much time on GitHub Actions
-    # def test_lookup_whois(self):
-    #     test_url = 'http://google.com/test?bacon=1'
-    #     data = url_data.URLData(test_url, download_url=False)
-    #     data.lookup_whois(nameservers=['1.1.1.1'])
-    #     self.assertIsNotNone(data.domain_whois)
-    #     self.assertEqual('GOOGLE, US', data.ip_whois[0]['asn_description'])
+        self.assertIsInstance(data.dns_results, dict)
+        self.assertGreater(len(data.dns_results), 0)
