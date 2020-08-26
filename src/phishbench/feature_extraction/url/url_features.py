@@ -222,8 +222,6 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
     Features.HTML_number_of_img(soup, list_features, list_time)
 
-    Features.HTML_number_of_tags(soup, list_features, list_time)
-
     Features.HTML_number_of_scripts(soup, list_features, list_time)
 
     Features.HTML_number_of_anchor(soup, list_features, list_time)
