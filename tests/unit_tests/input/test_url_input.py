@@ -21,6 +21,28 @@ class Test(unittest.TestCase):
         self.assertIsNone(data.ip_whois)
         self.assertIsNone(data.domain_whois)
 
+    def test_download_url(self):
+        test_url = 'http://google.com'
+        data = url_data.URLData(test_url, download_url=True)
+
+        self.assertGreater(data.load_time, 0)
+        self.assertIsNotNone(data.downloaded_website)
+        self.assertIsInstance(data.downloaded_website, str)
+        self.assertTrue("google.com" in data.final_url)
+        self.assertIsNotNone(data.website_headers)
+
+    def test_download_whois(self):
+        test_url = 'http://google.com'
+        data = url_data.URLData(test_url, download_url=False)
+        data.lookup_whois()
+
+        whois_info = data.domain_whois
+
+        self.assertIn("google.com", whois_info['domain_name'])
+        self.assertEqual("Google LLC", whois_info['org'])
+        self.assertGreater(len(data.ip_whois), 0)
+        self.assertEqual('GOOGLE, US', data.ip_whois[0]['asn_description'])
+
     def test_lookup_dns(self):
         test_url = 'http://google.com/test?bacon=1'
         data = url_data.URLData(test_url, download_url=False)
