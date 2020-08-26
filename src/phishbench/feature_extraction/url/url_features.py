@@ -88,11 +88,10 @@ def url_features(url: URLData, corpus, alexa_data, features):
     if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
         single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("html_features >>>>>> complete")
-        downloaded_website = url.downloaded_website
-        soup = BeautifulSoup(downloaded_website.html, 'html5lib')
+        soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
         if settings.feature_type_enabled(FeatureType.URL_WEBSITE_JAVASCRIPT):
-            single_javascript_features(soup, downloaded_website, dict_feature_values, dict_extraction_times)
+            single_javascript_features(soup, url.downloaded_website, dict_feature_values, dict_extraction_times)
             phishbench_globals.logger.debug("javascript features >>>>>> complete")
 
         corpus.append(str(soup))
@@ -197,15 +196,13 @@ def single_url_feature(raw_url, list_features, list_time):
 
 
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
-    raw_url = url.raw_url
-    downloaded_website = url.downloaded_website
-    soup = BeautifulSoup(downloaded_website.html, 'html5lib')
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
-    phishbench_globals.logger.debug("Extracting single html features from %s", raw_url)
+    phishbench_globals.logger.debug("Extracting single html features from %s", url.raw_url)
 
-    Features.HTML_ranked_matrix(soup, raw_url, alexa_data, list_features, list_time)
+    Features.HTML_ranked_matrix(soup, url.raw_url, alexa_data, list_features, list_time)
 
-    Features.HTML_LTree_Features(soup, raw_url, list_features, list_time)
+    Features.HTML_LTree_Features(soup, url.raw_url, list_features, list_time)
 
     Features.HTML_number_of_tags(soup, list_features, list_time)
 
@@ -247,23 +244,25 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
     Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
 
-    Features.HTML_inbound_count(soup, raw_url, list_features, list_time)
+    Features.HTML_inbound_count(soup, url.raw_url, list_features, list_time)
 
-    Features.HTML_outbound_count(soup, raw_url, list_features, list_time)
+    Features.HTML_outbound_count(soup, url.raw_url, list_features, list_time)
 
-    Features.HTML_inbound_href_count(soup, raw_url, list_features, list_time)
+    Features.HTML_inbound_href_count(soup, url.raw_url, list_features, list_time)
 
-    Features.HTML_outbound_href_count(soup, raw_url, list_features, list_time)
+    Features.HTML_outbound_href_count(soup, url.raw_url, list_features, list_time)
 
-    Features.HTML_Website_content_type(downloaded_website, list_features, list_time)
+    #TODO: Reimplement as reflection features
 
-    Features.HTML_content_length(downloaded_website, list_features, list_time)
-
-    Features.HTML_x_powered_by(downloaded_website, list_features, list_time)
-
-    Features.HTML_URL_Is_Redirect(downloaded_website, raw_url, list_features, list_time)
-
-    Features.HTML_Is_Login(downloaded_website.html, raw_url, list_features, list_time)
+    # Features.HTML_Website_content_type(downloaded_website, list_features, list_time)
+    #
+    # Features.HTML_content_length(downloaded_website, list_features, list_time)
+    #
+    # Features.HTML_x_powered_by(downloaded_website, list_features, list_time)
+    #
+    # Features.HTML_URL_Is_Redirect(downloaded_website, raw_url, list_features, list_time)
+    #
+    # Features.HTML_Is_Login(downloaded_website.html, raw_url, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
