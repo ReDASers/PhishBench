@@ -23,7 +23,7 @@ DNS_QUERY_TYPES = [
     'SRV',
     'IXFR',
     'AXFR',
-    'HINFO', 
+    'HINFO',
     'TLSA',
     'URI'
 ]
@@ -33,9 +33,6 @@ IPV4_REGEX = re.compile(r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.)'
 
 def is_ip_address(url):
     return bool(IPV4_REGEX.match(url))
-
-
-HTTPResponse = namedtuple('HTTPResponse', "headers html final_url log")
 
 
 class URLData:
