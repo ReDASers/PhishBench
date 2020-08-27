@@ -3,7 +3,10 @@
 # v1.2.0
 
 ## Major Changes
-
+* Refactored the input module
+    * Moved `read_email_from_file` to `email_input` submodule
+    * Moved `read_url_dataset` to `email_input` submodule
+    * Moved `read_email_dataset` to `url_input` submodule
 * Removed the dependency on Selenium and Google Chrome
 * `URLData` model flattened
     * The downloaded html is now stored in`downloaded_website` instead of `downloaded_website.html` 
