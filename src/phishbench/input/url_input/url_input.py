@@ -14,10 +14,18 @@ from ...utils import phishbench_globals
 def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> Tuple[List[URLData], List[str]]:
     """
     Reads in a dataset of URLs from dataset_path
-    :param dataset_path: The location of the dataset to read from. This can either be a folder or a file.
-    :param download_url: Whether or not to download the urls
-    :param remove_dup: Whether or not to remove duplicates.
-    :return: A list of URLData objects representing the dataset
+    Parameters
+    ----------
+    dataset_path: str
+        The location of the dataset to read from. This can either be a folder or a file.
+    download_url: bool
+        Whether or not to download the websites pointed to by the URLs
+    remove_dup
+        Whether or not to remove duplicates.
+    Returns
+    -------
+    urls: List[URLData]
+        A list of URLData objects representing the dataset
     """
     if not dataset_path:
         raise ValueError("dataset_path must be provided!")
@@ -56,8 +64,14 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
 def read_urls_from_file(f: Union[TextIOBase, str]) -> List[str]:
     """
     Reads urls from a text file.
-    :param f: A file-like object to read from or a path to a text file.
-    :return: A list of urls
+    Parameters
+    ----------
+    f: TextIOBase, str
+        A file-like object to read from or a path to a text file.
+    Returns
+    -------
+    urls: List[str]
+        A list of raw urls
     """
     close = False
     if isinstance(f, str):
