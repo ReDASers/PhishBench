@@ -4,15 +4,15 @@ This module contains the core reflection functions for feature extraction.
 import inspect
 import itertools
 from types import ModuleType
-from typing import List, Callable
+from typing import List
 
-from .reflect import FeatureType
+from .models import FeatureType, FeatureMC
 from .. import settings
 from ...utils import phishbench_globals
 from ...utils.reflection_utils import load_local_modules
 
 
-def _check_feature(feature: Callable) -> bool:
+def _check_feature(feature: FeatureMC) -> bool:
     """
     Checks whether or not a feature is enabled.
     Parameters
@@ -30,7 +30,7 @@ def _check_feature(feature: Callable) -> bool:
     return phishbench_globals.config[feature_type.value].getboolean(feature.config_name)
 
 
-def load_features(internal_features=None, filter_features=None) -> List[Callable]:
+def load_features(internal_features=None, filter_features=None) -> List[FeatureMC]:
     """
     Loads all features
 
@@ -55,7 +55,7 @@ def load_features(internal_features=None, filter_features=None) -> List[Callable
     return features
 
 
-def load_features_from_module(features_module, filter_features=None) -> List[Callable]:
+def load_features_from_module(features_module, filter_features=None) -> List[FeatureMC]:
     """
     Loads features from a module
     Parameters
@@ -73,7 +73,7 @@ def load_features_from_module(features_module, filter_features=None) -> List[Cal
         raise ValueError("source must be a module or string")
     # loads all features from module
     features = [getattr(features_module, x) for x in dir(features_module)]
-    features = [x for x in features if hasattr(x, 'feature_type') and hasattr(x, 'config_name')]
+    features = [x for x in features if isinstance(x, FeatureMC)]
 
     if filter_features:
         if filter_features not in ('Email', 'URL'):
