@@ -22,14 +22,14 @@ class TestLinkTreeFeatures(unittest.TestCase):
         url: URLData = mock_objects.get_mock_object("wikipedia_shortener_urldata")
         expected = mock_objects.get_mock_object('wikipedia-Ltree')
 
-        result = link_tree_features.link_tree(url)
+        result = link_tree_features.link_tree().extract(url)
 
         self.assertDictEqual(expected, result)
 
     def test_ranked_matrix(self):
         url: URLData = mock_objects.get_mock_object("reddit_urldata")
 
-        result = link_tree_features.link_alexa_global_rank(url)
+        result = link_tree_features.link_alexa_global_rank().extract(url)
         expected = {
             'mean': 5.4411764705882355,
             'sd': 3.178083992742128
