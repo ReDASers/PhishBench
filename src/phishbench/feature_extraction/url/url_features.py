@@ -74,6 +74,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
 def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
     """
     Extracts features from a list of URLs
+
     Parameters
     ----------
     urls: List[URLData]
