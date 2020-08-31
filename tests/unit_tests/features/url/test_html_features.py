@@ -26,20 +26,34 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         test_url = mock_objects.get_mock_urldata('microsoft')
         test_url.website_headers['Content-Type'] = 'text/html; encoding=utf-8'
 
-        result = website_features.website_content_type(test_url)
+        result = website_features.content_type_header(test_url)
         self.assertEqual('text/html', result)
 
     def test_content_type_no_encoding(self):
         test_url = mock_objects.get_mock_urldata('microsoft')
         test_url.website_headers['Content-Type'] = 'text/html'
-        result = website_features.website_content_type(test_url)
+        result = website_features.content_type_header(test_url)
         self.assertEqual('text/html', result)
 
     def test_content_length(self):
         test_url = mock_objects.get_mock_urldata('microsoft')
-        
-        result = website_features.header_content_length(test_url)
+
+        result = website_features.content_length_header(test_url)
         self.assertEqual(291, result)
+
+    def test_x_powered_by(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        test_url.website_headers['X-Powered-By'] = "PHP/5.4.0"
+        result = website_features.x_powered_by_header(test_url)
+        self.assertIsInstance(result, str)
+        self.assertEqual(result, "PHP/5.4.0")
+
+    def test_x_powered_by_empty(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_features.x_powered_by_header(test_url)
+        self.assertIsInstance(result, str)
+        self.assertEqual(result, "")
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)

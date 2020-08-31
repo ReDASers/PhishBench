@@ -9,7 +9,7 @@ def is_redirect(url: URLData):
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'website_content_type')
-def website_content_type(url: URLData):
+def content_type_header(url: URLData):
     content_type = url.website_headers['Content-Type']
     if not content_type:
         return "text/html"
@@ -19,8 +19,15 @@ def website_content_type(url: URLData):
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'content_length')
-def header_content_length(url: URLData):
+def content_length_header(url: URLData):
     if'Content-Length' not in url.website_headers:
         return -1
-    content_length = url.website_headers['Content-Length']
-    return int(content_length)
+    header_value = url.website_headers['Content-Length']
+    return int(header_value)
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'x_powered_by')
+def x_powered_by_header(url: URLData):
+    if'X-Powered-By' not in url.website_headers:
+        return ""
+    return url.website_headers['X-Powered-By']

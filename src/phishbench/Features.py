@@ -815,24 +815,6 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
         list_time["outbound_href_count"] = ex_time
 
 
-def HTML_x_powered_by(html, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["x_powered_by"] == "True":
-        start = time.time()
-        x_powered_by = ''
-        if html:
-            try:
-                if 'X-Powered-By' in html.headers:
-                    # x_powered_by = html.headers['X-Powered-By']
-                    x_powered_by = html.headers["X-Powered-By"]
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                x_powered_by = "N/A"
-        list_features["x_powered_by"] = x_powered_by
-        end = time.time()
-        ex_time = end - start
-        list_time["x_powered_by"] = ex_time
-
-
 def HTML_Is_Login(html, url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["Is_Login"] == "True":
         start = time.time()

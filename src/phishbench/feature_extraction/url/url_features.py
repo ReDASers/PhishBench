@@ -252,8 +252,6 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
     #TODO: Reimplement as reflection features
     #
-    # Features.HTML_x_powered_by(downloaded_website, list_features, list_time)
-    #
     # Features.HTML_Is_Login(downloaded_website.html, raw_url, list_features, list_time)
 
 
