@@ -321,25 +321,6 @@ def add_features(list_features, features, tag):
 
 # END LTree features
 
-def HTML_number_of_tags(soup, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_tags"] == "True":
-        start = time.time()
-        number_of_tags = 0
-        if soup:
-            try:
-                all_tags = soup.find_all()
-                number_of_tags = len(all_tags)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_tags = -1
-        else:
-            number_of_tags = 0
-        list_features["number_of_tags"] = number_of_tags
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_tags"] = ex_time
-
-
 def HTML_number_of_head(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_head"] == "True":
@@ -813,78 +794,6 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["outbound_href_count"] = ex_time
-
-
-def HTML_Website_content_type(html, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["website_content_type"] == "True":
-        start = time.time()
-        if html:
-            try:
-                if 'Content-Type' in html.headers:
-                    content_type = html.headers['Content-Type'].split(';')[0]
-                else:
-                    content_type = 'text/html'
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                content_type = "N/A"
-        else:
-            content_type = ''
-        list_features["Website_content_type"] = content_type
-        end = time.time()
-        ex_time = end - start
-        list_time["content_type"] = ex_time
-
-
-def HTML_content_length(html, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["content_length"] == "True":
-        start = time.time()
-        content_length = 0
-        if html:
-            try:
-                if 'Content-Length' in html.headers:
-                    content_length = html.headers['Content-Length']
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                content_length = -1
-        list_features["content_length"] = int(content_length)
-        end = time.time()
-        ex_time = end - start
-        list_time["content_length"] = ex_time
-
-
-def HTML_x_powered_by(html, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["x_powered_by"] == "True":
-        start = time.time()
-        x_powered_by = ''
-        if html:
-            try:
-                if 'X-Powered-By' in html.headers:
-                    # x_powered_by = html.headers['X-Powered-By']
-                    x_powered_by = html.headers["X-Powered-By"]
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                x_powered_by = "N/A"
-        list_features["x_powered_by"] = x_powered_by
-        end = time.time()
-        ex_time = end - start
-        list_time["x_powered_by"] = ex_time
-
-
-def HTML_URL_Is_Redirect(html, url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["URL_Is_Redirect"] == "True":
-        start = time.time()
-        flag = 0
-        if html:
-            try:
-                if url != html.final_url:
-                    flag = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                flag = -1
-        list_features["URL_Is_Redirect"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["URL_Is_Redirect"] = ex_time
 
 
 def HTML_Is_Login(html, url, list_features, list_time):
@@ -1446,7 +1355,6 @@ def Network_dns_ttl(url, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["dns_ttl"] = ex_time
-
 
 
 ############################ Javascript features
