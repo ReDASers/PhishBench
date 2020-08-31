@@ -3,7 +3,26 @@ from unittest.mock import patch
 
 from phishbench import Features
 from phishbench.feature_extraction.reflection import FeatureType
+from phishbench.feature_extraction.url.features import html_features
+from phishbench.input import URLData
 from tests.mock_objects import mock_objects
+
+
+class TestHTMLReflectionFeatures(unittest.TestCase):
+
+    def test_is_redirect_true(self):
+        # redirects to https://en.wikipedia.org/wiki/Eastman_Kodak_Co._v._Image_Technical_Services,_Inc.
+        test_url = URLData('https://bit.ly/2Ef4uAS')
+        result = html_features.is_redirect(test_url)
+        self.assertTrue(result)
+
+    def test_is_redirect_false(self):
+        # redirects to https://en.wikipedia.org/wiki/Eastman_Kodak_Co._v._Image_Technical_Services,_Inc.
+        test_url = URLData('https://example.com/')
+        print(test_url.raw_url)
+        print(test_url.final_url)
+        result = html_features.is_redirect(test_url)
+        self.assertFalse(result)
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
@@ -39,3 +58,4 @@ class TestHTMLFeatures(unittest.TestCase):
         Features.HTML_number_of_hidden_input(soup, list_features, list_time)
 
         self.assertEqual(list_features["number_of_hidden_input"], 1, 'incorrect number_of_inputs')
+

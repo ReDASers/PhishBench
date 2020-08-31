@@ -870,23 +870,6 @@ def HTML_x_powered_by(html, list_features, list_time):
         list_time["x_powered_by"] = ex_time
 
 
-def HTML_URL_Is_Redirect(html, url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["URL_Is_Redirect"] == "True":
-        start = time.time()
-        flag = 0
-        if html:
-            try:
-                if url != html.final_url:
-                    flag = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                flag = -1
-        list_features["URL_Is_Redirect"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["URL_Is_Redirect"] = ex_time
-
-
 def HTML_Is_Login(html, url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["Is_Login"] == "True":
         start = time.time()
@@ -1446,7 +1429,6 @@ def Network_dns_ttl(url, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["dns_ttl"] = ex_time
-
 
 
 ############################ Javascript features
