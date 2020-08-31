@@ -4,7 +4,8 @@ from unittest.mock import patch
 from phishbench import Features
 from phishbench.input.url_input import URLData
 from phishbench.feature_extraction.reflection import FeatureType
-from tests.mock_objects import mock_objects
+from tests import mock_objects
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestNetworkFeatures(unittest.TestCase):

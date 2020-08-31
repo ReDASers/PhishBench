@@ -5,7 +5,7 @@ from phishbench import Features
 from phishbench.feature_extraction.reflection import FeatureType
 from phishbench.feature_extraction.url.features import html_features
 from phishbench.input import URLData
-from tests.mock_objects import mock_objects
+from tests import mock_objects
 
 
 class TestHTMLReflectionFeatures(unittest.TestCase):

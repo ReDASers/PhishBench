@@ -4,7 +4,7 @@ from unittest.mock import patch
 import phishbench.feature_extraction.url.features as url_features
 from phishbench import Features
 from phishbench.input import URLData
-from tests.mock_objects import mock_objects
+from tests import mock_objects
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
