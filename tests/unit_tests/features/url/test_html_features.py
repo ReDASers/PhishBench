@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from phishbench import Features
 from phishbench.feature_extraction.reflection import FeatureType
-from phishbench.feature_extraction.url.features import html_features
+from phishbench.feature_extraction.url.features import website_features
 from tests import mock_objects
 
 
@@ -21,6 +21,19 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         test_url = mock_objects.get_mock_urldata('microsoft')
         result = website_features.is_redirect(test_url)
         self.assertFalse(result)
+
+    def test_content_type_encoding(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        test_url.website_headers['Content-Type'] = 'text/html; encoding=utf-8'
+
+        result = website_features.website_content_type(test_url)
+        self.assertEqual('text/html', result)
+
+    def test_content_type_no_encoding(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        test_url.website_headers['Content-Type'] = 'text/html'
+        result = website_features.website_content_type(test_url)
+        self.assertEqual('text/html', result)
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
