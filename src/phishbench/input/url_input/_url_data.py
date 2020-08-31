@@ -186,7 +186,11 @@ class URLData:
 
         content: bytes = website.read()
         self.website_headers = website.info()
-        content_type, encoding = self.website_headers['Content-Type'].split(';')
+        content_type = self.website_headers['Content-Type']
+        if ';' in content_type:
+            content_type, encoding = content_type.split(';')
+        else:
+            encoding = 'encoding=utf-8'
         if content_type.startswith('text'):
             encoding = encoding.split('=')[1].strip()
             self.downloaded_website = content.decode(encoding)
