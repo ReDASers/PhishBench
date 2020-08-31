@@ -240,8 +240,6 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
     Features.HTML_number_of_hidden_object(soup, list_features, list_time)
 
-    Features.HTML_number_of_hidden_iframe(soup, list_features, list_time)
-
     Features.HTML_inbound_count(soup, url.raw_url, list_features, list_time)
 
     Features.HTML_outbound_count(soup, url.raw_url, list_features, list_time)
