@@ -321,25 +321,6 @@ def add_features(list_features, features, tag):
 
 # END LTree features
 
-def HTML_number_of_tags(soup, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_tags"] == "True":
-        start = time.time()
-        number_of_tags = 0
-        if soup:
-            try:
-                all_tags = soup.find_all()
-                number_of_tags = len(all_tags)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_tags = -1
-        else:
-            number_of_tags = 0
-        list_features["number_of_tags"] = number_of_tags
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_tags"] = ex_time
-
-
 def HTML_number_of_head(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_head"] == "True":

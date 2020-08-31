@@ -8,6 +8,8 @@ def is_redirect(url: URLData):
     return url.raw_url.strip() != url.final_url.strip()
 
 
+
+
 @register_feature(FeatureType.URL_WEBSITE, 'website_content_type')
 def content_type_header(url: URLData):
     content_type = url.website_headers['Content-Type']

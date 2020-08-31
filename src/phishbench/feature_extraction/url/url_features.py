@@ -204,8 +204,6 @@ def single_url_html_features(url: URLData, alexa_data, list_features, list_time)
 
     Features.HTML_LTree_Features(soup, url.raw_url, list_features, list_time)
 
-    Features.HTML_number_of_tags(soup, list_features, list_time)
-
     Features.HTML_number_of_head(soup, list_features, list_time)
 
     Features.HTML_number_of_html(soup, list_features, list_time)

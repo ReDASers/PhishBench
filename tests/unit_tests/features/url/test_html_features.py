@@ -4,6 +4,7 @@ from unittest.mock import patch
 from phishbench import Features
 from phishbench.feature_extraction.reflection import FeatureType
 from phishbench.feature_extraction.url.features import website_features
+from phishbench.feature_extraction.url.features import website_html_features
 from tests import mock_objects
 
 
@@ -46,27 +47,24 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         test_url.website_headers['X-Powered-By'] = "PHP/5.4.0"
         result = website_features.x_powered_by_header(test_url)
         self.assertIsInstance(result, str)
-        self.assertEqual(result, "PHP/5.4.0")
+        self.assertEqual("PHP/5.4.0", result)
 
     def test_x_powered_by_empty(self):
         test_url = mock_objects.get_mock_urldata('microsoft')
 
         result = website_features.x_powered_by_header(test_url)
         self.assertIsInstance(result, str)
-        self.assertEqual(result, "")
+        self.assertEqual("", result)
+
+    def test_number_of_tags(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_tags(test_url)
+        self.assertEqual(6, result)
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
-
-    def test_HTML_number_of_tags(self, mock_config):
-        mock_config[FeatureType.URL_WEBSITE.value]["number_of_tags"] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.HTML_number_of_tags(None, list_features, list_time)
-
-        self.assertEqual(list_features["number_of_tags"], 0, 'incorrect number_of_tags')
 
     def test_HTML_number_of_hidden_svg(self, mock_config):
         mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_svg"] = "True"
