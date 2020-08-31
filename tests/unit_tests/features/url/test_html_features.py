@@ -35,6 +35,12 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_features.website_content_type(test_url)
         self.assertEqual('text/html', result)
 
+    def test_content_length(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        
+        result = website_features.header_content_length(test_url)
+        self.assertEqual(291, result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):

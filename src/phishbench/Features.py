@@ -815,23 +815,6 @@ def HTML_outbound_href_count(soup, url, list_features, list_time):
         list_time["outbound_href_count"] = ex_time
 
 
-def HTML_content_length(html, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["content_length"] == "True":
-        start = time.time()
-        content_length = 0
-        if html:
-            try:
-                if 'Content-Length' in html.headers:
-                    content_length = html.headers['Content-Length']
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                content_length = -1
-        list_features["content_length"] = int(content_length)
-        end = time.time()
-        ex_time = end - start
-        list_time["content_length"] = ex_time
-
-
 def HTML_x_powered_by(html, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["x_powered_by"] == "True":
         start = time.time()
