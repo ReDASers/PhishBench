@@ -8,8 +8,8 @@ from lxml import html as lxml_html
 
 from . import Tfidf
 from .Features_Support import *
-from .utils import phishbench_globals
 from .feature_extraction.reflection import FeatureType
+from .utils import phishbench_globals
 
 
 ##### Email URL features
@@ -99,7 +99,6 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Number_link_sec_port"] = ex_time
-
 
 
 # def html_in_body(body, list_features, list_time):
@@ -1509,7 +1508,8 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
 
 
 def Javascript_number_of_total_suspicious_features(list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_total_suspicious_features"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value][
+        "number_of_total_suspicious_features"] == "True":
         start = time.time()
         number_of_total_suspicious_features = 0
         try:
