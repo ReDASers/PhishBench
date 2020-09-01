@@ -101,3 +101,95 @@ def number_of_embed(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('embed'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_object_tags')
+def number_object_tags(url: URLData):
+    """
+    The number of object tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('object'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_video')
+def number_of_video(url: URLData):
+    """
+    The number of video tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('video'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_audio')
+def number_of_audio(url: URLData):
+    """
+    The number of audio tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('audio'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_object')
+def number_of_hidden_object(url: URLData):
+    """
+    The number of objects of height or width 0
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    object_tags = soup.find_all('object')
+    count = 0
+    for tag in object_tags:
+        if tag.get('height') == 0 or tag.get('width') == 0:
+            count += 1
+    return count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_div')
+def number_of_hidden_div(url: URLData):
+    """
+    The number of div of height or width 0
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    object_tags = soup.find_all('div')
+    count = 0
+    for tag in object_tags:
+        if tag.get('height') == 0 or tag.get('width') == 0:
+            count += 1
+    return count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_input')
+def number_of_hidden_input(url: URLData):
+    """
+    The number of hidden input fields
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    object_tags = soup.find_all('input')
+    hidden = [1 for tag in object_tags if tag.get('type') == "hidden"]
+    return len(hidden)
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_iframe')
+def number_of_hidden_iframe(url: URLData):
+    """
+    The number of iframe of height or width 0
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    object_tags = soup.find_all('iframe')
+    count = 0
+    for tag in object_tags:
+        if tag.get('height') == 0 or tag.get('width') == 0:
+            count += 1
+    return count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_svg')
+def number_of_hidden_svg(url: URLData):
+    """
+    The number of iframe of height or width 0
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    object_tags = soup.find_all('svg')
+    hidden = [1 for tag in object_tags if tag.get('aria-hidden') == "true"]
+    return len(hidden)
+
