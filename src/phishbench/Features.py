@@ -518,11 +518,11 @@ def URL_letter_occurrence(url, list_features, list_time):
                     list_features["letter_occurrence_" + x] = domain.count(x)
             except Exception as e:
                 phishbench_globals.logger.warning("exception: " + str(e))
-                for x in range(26):
-                    list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
+                for x in string.ascii_lowercase:
+                    list_features["letter_occurrence_" + x] = -1
         else:
-            for x in range(26):
-                list_features["letter_occurrence_" + chr(x + ord('a'))] = 0
+            for x in string.ascii_lowercase:
+                list_features["letter_occurrence_" + x] = 0
         end = time.time()
         ex_time = end - start
         list_time["letter_occurrence"] = ex_time
