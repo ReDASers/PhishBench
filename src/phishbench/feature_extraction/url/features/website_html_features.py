@@ -83,3 +83,21 @@ def number_of_script(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('script'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_anchor')
+def number_of_anchor(url: URLData):
+    """
+    The number of anchor (<a>) tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('a'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_embed')
+def number_of_embed(url: URLData):
+    """
+    The number of embed tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('embed'))

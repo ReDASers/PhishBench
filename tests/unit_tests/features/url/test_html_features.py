@@ -116,6 +116,17 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_script(test_url)
         self.assertEqual(6, result)
 
+    def test_number_of_anchor(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_anchor(test_url)
+        self.assertEqual(343, result)
+
+    def test_number_of_embed(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_embed(test_url)
+        self.assertEqual(0, result)
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):

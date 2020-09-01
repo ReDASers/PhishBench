@@ -341,40 +341,6 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
         list_time["number_suspicious_content"] = ex_time
 
 
-def HTML_number_of_anchor(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_anchor"] == "True":
-        start = time.time()
-        number_of_anchor = 0
-        if soup:
-            try:
-                number_of_anchor = len(soup.find_all('a'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_anchor = -1
-        list_features["number_of_anchor"] = number_of_anchor
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_anchor"] = ex_time
-
-
-def HTML_number_of_embed(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_embed"] == "True":
-        start = time.time()
-        number_of_embed = 0
-        if soup:
-            try:
-                number_of_embed = len(soup.find_all('embed'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_embed = -1
-        list_features["number_of_embed"] = number_of_embed
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_embed"] = ex_time
-
-
 def HTML_number_object_tags(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_object_tags"] == "True":
