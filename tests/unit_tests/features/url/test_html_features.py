@@ -1,8 +1,5 @@
 import unittest
-from unittest.mock import patch
 
-from phishbench import Features
-from phishbench.feature_extraction.reflection import FeatureType
 from phishbench.feature_extraction.url.features import website_features
 from phishbench.feature_extraction.url.features import website_html_features
 from tests import mock_objects
@@ -62,29 +59,80 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_tags(test_url)
         self.assertEqual(6, result)
 
+    def test_number_of_head(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
 
-@patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
-class TestHTMLFeatures(unittest.TestCase):
+        result = website_html_features.number_of_head(test_url)
+        self.assertEqual(1, result)
 
-    def test_HTML_number_of_hidden_svg(self, mock_config):
-        mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_svg"] = "True"
-        list_features = {}
-        list_time = {}
+    def test_number_of_html(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
 
-        soup = mock_objects.get_soup('test_1.html')
+        result = website_html_features.number_of_html(test_url)
+        self.assertEqual(1, result)
 
-        Features.HTML_number_of_hidden_svg(soup, list_features, list_time)
+    def test_number_of_body(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
 
-        self.assertEqual(list_features["number_of_hidden_svg"], 1, 'incorrect number_of_svgs')
+        result = website_html_features.number_of_body(test_url)
+        self.assertEqual(1, result)
 
-    def test_HTML_number_of_hidden_input(self, mock_config):
-        mock_config[FeatureType.URL_WEBSITE.value]["number_of_hidden_input"] = "True"
-        list_features = {}
-        list_time = {}
+    def test_number_of_title(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
 
-        soup = mock_objects.get_soup('test_1.html')
+        result = website_html_features.number_of_title(test_url)
+        self.assertEqual(1, result)
 
-        Features.HTML_number_of_hidden_input(soup, list_features, list_time)
+    def test_number_of_iframe_zero(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
 
-        self.assertEqual(list_features["number_of_hidden_input"], 1, 'incorrect number_of_inputs')
+        result = website_html_features.number_of_iframe(test_url)
+        self.assertEqual(0, result)
 
+    def test_number_of_iframe(self):
+        test_url = mock_objects.get_mock_urldata('iframe')
+
+        result = website_html_features.number_of_iframe(test_url)
+        self.assertEqual(3, result)
+
+    def test_number_of_input(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_input(test_url)
+        self.assertEqual(7, result)
+
+    def test_number_of_img(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_img(test_url)
+        self.assertEqual(6, result)
+
+    def test_number_of_scripts(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_script(test_url)
+        self.assertEqual(6, result)
+
+    def test_number_of_anchor(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_anchor(test_url)
+        self.assertEqual(343, result)
+
+    def test_number_of_embed(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_embed(test_url)
+        self.assertEqual(0, result)
+
+    def test_hidden_input(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+        test_url.downloaded_website = mock_objects.get_html("test_1.html")
+        result = website_html_features.number_of_hidden_input(test_url)
+        self.assertEqual(1, result)
+
+    def test_hidden_svg(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+        test_url.downloaded_website = mock_objects.get_html("test_1.html")
+        result = website_html_features.number_of_hidden_svg(test_url)
+        self.assertEqual(1, result)

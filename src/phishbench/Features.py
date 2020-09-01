@@ -8,8 +8,8 @@ from lxml import html as lxml_html
 
 from . import Tfidf
 from .Features_Support import *
-from .utils import phishbench_globals
 from .feature_extraction.reflection import FeatureType
+from .utils import phishbench_globals
 
 
 ##### Email URL features
@@ -99,7 +99,6 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["Number_link_sec_port"] = ex_time
-
 
 
 # def html_in_body(body, list_features, list_time):
@@ -321,74 +320,6 @@ def add_features(list_features, features, tag):
 
 # END LTree features
 
-def HTML_number_of_head(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_head"] == "True":
-        start = time.time()
-        number_of_head = 0
-        if soup:
-            try:
-                number_of_head = len(soup.find_all('head'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_head = -1
-        list_features["number_of_head"] = number_of_head
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_head"] = ex_time
-
-
-def HTML_number_of_html(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_html"] == "True":
-        start = time.time()
-        number_of_html = 0
-        if soup:
-            try:
-                number_of_html = len(soup.find_all('html'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_html = -1
-        list_features["number_of_html"] = number_of_html
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_html"] = ex_time
-
-
-def HTML_number_of_body(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_body"] == "True":
-        start = time.time()
-        number_of_body = 0
-        if soup:
-            try:
-                number_of_body = len(soup.find_all('body'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_body = -1
-        list_features["number_of_body"] = number_of_body
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_body"] = ex_time
-
-
-def HTML_number_of_titles(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_titles"] == "True":
-        start = time.time()
-        number_of_titles = 0
-        if soup:
-            try:
-                number_of_titles = len(soup.find_all('title'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_titles = -1
-        list_features["number_of_titles"] = number_of_titles
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_titles"] = ex_time
-
-
 def HTML_number_suspicious_content(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_suspicious_content"] == "True":
@@ -408,260 +339,6 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
         end = time.time()
         ex_time = end - start
         list_time["number_suspicious_content"] = ex_time
-
-
-def HTML_number_of_iframes(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_iframes"] == "True":
-        start = time.time()
-        number_of_iframes = 0
-        if soup:
-            try:
-                iframe_tags = soup.find_all('iframe')
-                number_of_iframes = len(iframe_tags)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_iframes = -1
-        list_features["number_of_iframes"] = number_of_iframes
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_iframes"] = ex_time
-
-
-def HTML_number_of_input(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_input"] == "True":
-        start = time.time()
-        number_of_input = 0
-        if soup:
-            try:
-                number_of_input = len(soup.find_all('input'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_input = -1
-        list_features["number_of_input"] = number_of_input
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_input"] = ex_time
-
-
-def HTML_number_of_img(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_img"] == "True":
-        start = time.time()
-        number_of_img = 0
-        if soup:
-            try:
-                number_of_img = len(soup.find_all('img'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_img = -1
-        list_features["number_of_img"] = number_of_img
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_img"] = ex_time
-
-
-def HTML_number_of_scripts(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_scripts"] == "True":
-        start = time.time()
-        number_of_scripts = 0
-        if soup:
-            try:
-                number_of_scripts = len(soup.find_all('script'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_scripts = -1
-        list_features["number_of_scripts"] = number_of_scripts
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_scripts"] = ex_time
-
-
-def HTML_number_of_anchor(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_anchor"] == "True":
-        start = time.time()
-        number_of_anchor = 0
-        if soup:
-            try:
-                number_of_anchor = len(soup.find_all('a'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_anchor = -1
-        list_features["number_of_anchor"] = number_of_anchor
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_anchor"] = ex_time
-
-
-def HTML_number_of_embed(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_embed"] == "True":
-        start = time.time()
-        number_of_embed = 0
-        if soup:
-            try:
-                number_of_embed = len(soup.find_all('embed'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_embed = -1
-        list_features["number_of_embed"] = number_of_embed
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_embed"] = ex_time
-
-
-def HTML_number_object_tags(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_object_tags"] == "True":
-        start = time.time()
-        number_object_tags = 0
-        if soup:
-            try:
-                object_tags = len(soup.find_all('object'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_object_tags = -1
-        list_features["number_object_tags"] = number_object_tags
-        end = time.time()
-        ex_time = end - start
-        list_time["number_object_tags"] = ex_time
-
-
-def HTML_number_of_video(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_video"] == "True":
-        start = time.time()
-        number_of_video = 0
-        if soup:
-            try:
-                number_of_video = len(soup.find_all('video'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_video = -1
-        list_features["number_of_video"] = number_of_video
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_video"] = ex_time
-
-
-def HTML_number_of_audio(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_audio"] == "True":
-        start = time.time()
-        number_of_audio = 0
-        if soup:
-            try:
-                number_of_audio = len(soup.find_all('audio'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_audio = -1
-        list_features["number_of_audio"] = number_of_audio
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_audio"] = ex_time
-
-
-def HTML_number_of_hidden_input(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_input"] == "True":
-        start = time.time()
-        number_of_hidden_input = 0
-        if soup:
-            try:
-                iframe_tags = soup.find_all('input')
-                for tag in iframe_tags:
-                    if tag.get('type') == "hidden":
-                        number_of_hidden_input += 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_hidden_input = -1
-        list_features["number_of_hidden_input"] = number_of_hidden_input
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_hidden_input"] = ex_time
-
-
-def HTML_number_of_hidden_svg(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_svg"] == "True":
-        start = time.time()
-        number_of_hidden_svg = 0
-        if soup:
-            try:
-                iframe_tags = soup.find_all('svg')
-                for tag in iframe_tags:
-                    if tag.get('aria-hidden') == "true":
-                        number_of_hidden_svg += 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_hidden_input = -1
-        list_features["number_of_hidden_svg"] = number_of_hidden_svg
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_hidden_svg"] = ex_time
-
-
-def HTML_number_of_hidden_iframe(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_iframe"] == "True":
-        start = time.time()
-        number_of_hidden_iframe = 0
-        if soup:
-            try:
-                iframe_tags = soup.find_all('iframe')
-                for tag in iframe_tags:
-                    if tag.get('height') == 0 or tag.get('width') == 0:
-                        number_of_hidden_iframe = number_of_hidden_iframe + 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_hidden_iframe = -1
-        list_features["number_of_hidden_iframe"] = number_of_hidden_iframe
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_hidden_iframe"] = ex_time
-
-
-def HTML_number_of_hidden_div(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_div"] == "True":
-        start = time.time()
-        number_of_hidden_div = 0
-        if soup:
-            try:
-                tags = soup.find_all('div')
-                for tag in tags:
-                    if tag.get('height') == 0 or tag.get('width') == 0:
-                        number_of_hidden_div = number_of_hidden_div + 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_hidden_div = -1
-        list_features["number_of_hidden_div"] = number_of_hidden_div
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_hidden_div"] = ex_time
-
-
-def HTML_number_of_hidden_object(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_hidden_object"] == "True":
-        start = time.time()
-        number_of_hidden_object = 0
-        if soup:
-            try:
-                object_tags = soup.find_all('object')
-                for tag in object_tags:
-                    if tag.get('height') == 0 or tag.get('width') == 0:
-                        number_of_hidden_object = number_of_hidden_object + 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_hidden_object = -1
-        list_features["number_of_hidden_object"] = number_of_hidden_object
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_hidden_object"] = ex_time
 
 
 def HTML_inbound_count(soup, url, list_features, list_time):
@@ -841,11 +518,11 @@ def URL_letter_occurrence(url, list_features, list_time):
                     list_features["letter_occurrence_" + x] = domain.count(x)
             except Exception as e:
                 phishbench_globals.logger.warning("exception: " + str(e))
-                for x in range(26):
-                    list_features["letter_occurrence_" + chr(x + ord('a'))] = -1
+                for x in string.ascii_lowercase:
+                    list_features["letter_occurrence_" + x] = -1
         else:
-            for x in range(26):
-                list_features["letter_occurrence_" + chr(x + ord('a'))] = 0
+            for x in string.ascii_lowercase:
+                list_features["letter_occurrence_" + x] = 0
         end = time.time()
         ex_time = end - start
         list_time["letter_occurrence"] = ex_time
@@ -1577,7 +1254,8 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
 
 
 def Javascript_number_of_total_suspicious_features(list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_total_suspicious_features"] == "True":
+    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value][
+        "number_of_total_suspicious_features"] == "True":
         start = time.time()
         number_of_total_suspicious_features = 0
         try:

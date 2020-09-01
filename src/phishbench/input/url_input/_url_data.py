@@ -15,7 +15,6 @@ from dns.exception import DNSException
 from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
 from requests import HTTPError
-from requests.utils import default_headers
 from tldextract import tldextract
 
 DNS_QUERY_TYPES = [
@@ -202,17 +201,12 @@ class URLData:
 
 
 def _setup_request_headers():
-    headers = default_headers()
-    headers.update(
-        {
-            'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q = 0.8',
-            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q = 0.7',
-            'Keep-Alive': '300',
-            'Pragma': 'no-cache',
-            'Cache-Control': 'no-cache',
-            'Accept-Language': '*',
-            'Accept-Encoding': 'gzip, deflate'
-        }
-    )
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) '
+                       'AppleWebKit/537.11 (KHTML, like Gecko) '
+                       'Chrome/23.0.1271.64 Safari/537.11',
+         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+         'Accept-Encoding': 'none',
+         'Accept-Language': 'en-US,en;q=0.8',
+         'Connection': 'keep-alive'}
     return headers
