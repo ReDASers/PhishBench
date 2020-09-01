@@ -16,6 +16,8 @@ from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
 from requests import HTTPError
 from requests.utils import default_headers
+from tldextract import tldextract
+
 DNS_QUERY_TYPES = [
     'NONE',
     'A',
@@ -145,7 +147,7 @@ class URLData:
             The nameservers to use when looking up the DNS info. If name servers are not provided, then PhishBench will
             use the system default nameservers.
         """
-        domain = self.parsed_url.hostname
+        domain = ".".join(tldextract.extract(self.raw_url)[-2:])
         self.ip_whois = []
         if is_ip_address(domain):
             whois_client = IPWhois(domain)

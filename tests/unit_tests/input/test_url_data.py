@@ -52,6 +52,22 @@ class URLDataTest(unittest.TestCase):
         self.assertIsInstance(data.website_headers, HTTPMessage)
 
     @patch('whois.whois')
+    def test_download_whois_subdomain(self, whois_mock: MagicMock):
+        """
+        Tests to ensure that the fetching whois information works
+        """
+        # pylint: disable=no-self-use
+        test_url = 'https://foodwishes.blogspot.com/2020/08/garlic-rice-roast-chicken-getting-under.html'
+        whois_mock.return_value = {
+            "domain_name": 'GOOGLE.COM',
+            "org": "Google LLC"
+        }
+        data = url_data.URLData(test_url, download_url=False)
+        data.lookup_whois()
+
+        whois_mock.assert_called_once_with('blogspot.com')
+
+    @patch('whois.whois')
     def test_download_whois(self, whois_mock: MagicMock):
         """
         Tests to ensure that the fetching whois information works

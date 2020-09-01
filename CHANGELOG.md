@@ -13,6 +13,9 @@
     * The final URL is now stored in `final_url` instead of `downloaded_website.final_url`
     * The HTTP headers are now stored in `website_headers` instead of `downloaded_website.headers`
     * Removed `downloaded_website.log`
+    
+## Bug Fixes
+* Fixed looking up whois information with sub-domain urls
 
 # v1.1.4
 
