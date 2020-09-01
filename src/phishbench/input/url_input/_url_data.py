@@ -15,7 +15,6 @@ from dns.exception import DNSException
 from ipwhois import IPWhois
 from ipwhois.exceptions import BaseIpwhoisException
 from requests import HTTPError
-from requests.utils import default_headers
 from tldextract import tldextract
 
 DNS_QUERY_TYPES = [

@@ -192,4 +192,3 @@ def number_of_hidden_svg(url: URLData):
     object_tags = soup.find_all('svg')
     hidden = [1 for tag in object_tags if tag.get('aria-hidden') == "true"]
     return len(hidden)
-
