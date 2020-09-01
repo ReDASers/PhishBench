@@ -47,3 +47,30 @@ def number_of_title(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('title'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_iframe')
+def number_of_iframe(url: URLData):
+    """
+    The number of iframe tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('iframe'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_input')
+def number_of_input(url: URLData):
+    """
+    The number of input tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('input'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_img')
+def number_of_img(url: URLData):
+    """
+    The number of img tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('img'))

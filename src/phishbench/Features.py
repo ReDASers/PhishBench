@@ -341,58 +341,6 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
         list_time["number_suspicious_content"] = ex_time
 
 
-def HTML_number_of_iframes(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_iframes"] == "True":
-        start = time.time()
-        number_of_iframes = 0
-        if soup:
-            try:
-                iframe_tags = soup.find_all('iframe')
-                number_of_iframes = len(iframe_tags)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_iframes = -1
-        list_features["number_of_iframes"] = number_of_iframes
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_iframes"] = ex_time
-
-
-def HTML_number_of_input(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_input"] == "True":
-        start = time.time()
-        number_of_input = 0
-        if soup:
-            try:
-                number_of_input = len(soup.find_all('input'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_input = -1
-        list_features["number_of_input"] = number_of_input
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_input"] = ex_time
-
-
-def HTML_number_of_img(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_img"] == "True":
-        start = time.time()
-        number_of_img = 0
-        if soup:
-            try:
-                number_of_img = len(soup.find_all('img'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_img = -1
-        list_features["number_of_img"] = number_of_img
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_img"] = ex_time
-
-
 def HTML_number_of_scripts(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_scripts"] == "True":

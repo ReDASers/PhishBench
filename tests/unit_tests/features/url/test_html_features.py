@@ -86,6 +86,30 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_title(test_url)
         self.assertEqual(1, result)
 
+    def test_number_of_iframe_zero(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_iframe(test_url)
+        self.assertEqual(0, result)
+
+    def test_number_of_iframe(self):
+        test_url = mock_objects.get_mock_urldata('iframe')
+
+        result = website_html_features.number_of_iframe(test_url)
+        self.assertEqual(3, result)
+
+    def test_number_of_input(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_input(test_url)
+        self.assertEqual(7, result)
+
+    def test_number_of_img(self):
+        test_url = mock_objects.get_mock_urldata('wikipedia_redirect')
+
+        result = website_html_features.number_of_img(test_url)
+        self.assertEqual(6, result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
