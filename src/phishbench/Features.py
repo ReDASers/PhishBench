@@ -341,23 +341,6 @@ def HTML_number_suspicious_content(soup, list_features, list_time):
         list_time["number_suspicious_content"] = ex_time
 
 
-def HTML_number_of_scripts(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_scripts"] == "True":
-        start = time.time()
-        number_of_scripts = 0
-        if soup:
-            try:
-                number_of_scripts = len(soup.find_all('script'))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_scripts = -1
-        list_features["number_of_scripts"] = number_of_scripts
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_scripts"] = ex_time
-
-
 def HTML_number_of_anchor(soup, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_of_anchor"] == "True":

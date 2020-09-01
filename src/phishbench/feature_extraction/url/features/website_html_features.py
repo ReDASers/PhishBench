@@ -74,3 +74,12 @@ def number_of_img(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('img'))
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_scripts')
+def number_of_script(url: URLData):
+    """
+    The number of script tags
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    return len(soup.find_all('script'))
