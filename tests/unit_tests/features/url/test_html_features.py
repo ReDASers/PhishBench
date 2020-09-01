@@ -62,6 +62,30 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_tags(test_url)
         self.assertEqual(6, result)
 
+    def test_number_of_head(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_head(test_url)
+        self.assertEqual(1, result)
+
+    def test_number_of_html(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_html(test_url)
+        self.assertEqual(1, result)
+
+    def test_number_of_body(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_body(test_url)
+        self.assertEqual(1, result)
+
+    def test_number_of_title(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+
+        result = website_html_features.number_of_title(test_url)
+        self.assertEqual(1, result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestHTMLFeatures(unittest.TestCase):
