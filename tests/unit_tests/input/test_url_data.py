@@ -56,6 +56,7 @@ class URLDataTest(unittest.TestCase):
         """
         Tests to ensure that the fetching whois information works
         """
+        # pylint: disable=no-self-use
         test_url = 'https://foodwishes.blogspot.com/2020/08/garlic-rice-roast-chicken-getting-under.html'
         whois_mock.return_value = {
             "domain_name": 'GOOGLE.COM',
