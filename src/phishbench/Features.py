@@ -530,51 +530,6 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-
-
-
-# Devin's features
-def URL_Has_More_than_3_dots(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_More_than_3_dots"] == "True":
-        start = time.time()
-        # regex_http=re.compile(r'')
-        if url:
-            try:
-                url = url.replace('www.', '')
-                count_dots = url.count('.')
-                if count_dots >= 3:
-                    list_features["Has_More_than_3_dots"] = 1
-                else:
-                    list_features["Has_More_than_3_dots"] = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                list_features["Has_More_than_3_dots"] = -1
-        else:
-            list_features["Has_More_than_3_dots"] = 0
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_More_than_3_dots"] = ex_time
-
-
-def URL_Has_anchor_tag(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_anchor_tag"] == "True":
-        start = time.time()
-        flag = 0
-        if url:
-            try:
-                if '#' in url:
-                    flag = 1
-                else:
-                    flag = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                flag = -1
-        list_features["Has_anchor_tag"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_anchor_tag"] = ex_time
-
-
 # PhishDef: URL Names Say It All
 TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
 

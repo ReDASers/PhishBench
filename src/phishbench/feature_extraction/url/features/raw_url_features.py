@@ -236,3 +236,22 @@ def special_char_count(url: URLData):
     """
     return url.raw_url.count('@') + url.raw_url.count('-')
 
+
+# region Devin's features
+
+@register_feature(FeatureType.URL_RAW, 'has_more_than_three_dots')
+def has_more_than_three_dots(url: URLData):
+    """
+    Whether the url without www. has more than three dots
+    """
+    clean_url = url.raw_url.replace('www.', '')
+    return clean_url.count('.') > 3
+
+
+@register_feature(FeatureType.URL_RAW, 'has_anchor_tag')
+def has_anchor_tag(url: URLData):
+    """
+    Whether the url has an anchor tag
+    """
+    return '#' in url.raw_url
+# endregion

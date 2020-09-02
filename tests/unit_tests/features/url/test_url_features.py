@@ -152,7 +152,31 @@ class TestURLReflectionFeatures(unittest.TestCase):
     def test_URL_special_char_count(self):
         test_url = URLData('http://te2t-url.com/h@ome.html', download_url=False)
         result = url_features.special_char_count(test_url)
-        self.assertEqual(2, result, 'incorrect special_char_count')
+        self.assertEqual(2, result)
+
+    def test_URL_Has_More_than_3_dots_true(self):
+        test_url = URLData("http://www.tec.h.google.com/index.html", download_url=False)
+
+        result = url_features.has_more_than_three_dots(test_url)
+        self.assertTrue(result)
+
+    def test_URL_Has_More_than_3_dots_false(self):
+        test_url = URLData("http://www.tech.google.com/index.html", download_url=False)
+
+        result = url_features.has_more_than_three_dots(test_url)
+        self.assertFalse(result)
+
+    def test_URL_Has_anchor_tag_true(self):
+        test_url = URLData("http://www.anchor_example2.com/x.html#a001", download_url=False)
+
+        result = url_features.has_anchor_tag(test_url)
+        self.assertTrue(result)
+
+    def test_URL_Has_anchor_tag_false(self):
+        test_url = URLData("http://www.anchor_example2.com/x.html", download_url=False)
+
+        result = url_features.has_anchor_tag(test_url)
+        self.assertFalse(result)
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
@@ -176,36 +200,6 @@ class TestURLFeatures(unittest.TestCase):
 
     def test_URL_english_frequency_distance(self, config_mock):
         pass
-
-    def test_URL_Has_More_than_3_dots(self, config_mock):
-        config_mock['URL_Features']['Has_More_than_3_dots'] = "True"
-        test_url = "http://tech.www.google.com/index.html"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Has_More_than_3_dots(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_More_than_3_dots"], 1, 'incorrect Http_middle_of_URL')
-
-    def test_URL_Has_anchor_tag_true(self, config_mock):
-        config_mock['URL_Features']['Has_anchor_tag'] = "True"
-        test_url = "anchor_example2.html#a001"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Has_anchor_tag(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_anchor_tag"], 1, 'incorrect Has_anchor_tag')
-
-    def test_URL_Has_anchor_tag_false(self, config_mock):
-        config_mock['URL_Features']['Has_anchor_tag'] = "True"
-        test_url = "anchor_example2.html"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Has_anchor_tag(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_anchor_tag"], 0, 'incorrect Has_anchor_tag')
 
     def test_URL_Token_Count(self, config_mock):
         config_mock['URL_Features']['Token_Count'] = "True"
