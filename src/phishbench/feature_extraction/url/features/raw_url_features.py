@@ -52,6 +52,15 @@ def special_pattern(url: URLData):
     return "?gws_rd=ssl" in url.raw_url
 
 
+@register_feature(FeatureType.URL_RAW, 'top_level_domain')
+def top_level_domain(url: URLData):
+    """
+    The top level domain of the url
+    """
+    tld = tldextract.extract(url.raw_url).suffix
+    return tld
+
+
 @register_feature(FeatureType.URL_RAW, 'is_common_tld')
 def is_common_tld(url: URLData):
     """

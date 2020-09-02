@@ -166,8 +166,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_special_char_count(raw_url, list_features, list_time)
 
-    Features.URL_Top_level_domain(raw_url, list_features, list_time)
-
     Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
 
     Features.URL_Has_anchor_tag(raw_url, list_features, list_time)

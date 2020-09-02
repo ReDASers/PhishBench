@@ -143,6 +143,12 @@ class TestURLReflectionFeatures(unittest.TestCase):
 
         self.assertEqual(38, result, 'incorrect consecutive_numbers')
 
+    def test_URL_Top_level_domain(self):
+        test_url = URLData('http://abc123-45659.com/home22.html', download_url=False)
+        result = url_features.top_level_domain(test_url)
+
+        self.assertEqual('com', result,  'incorrect Top_level_domain')
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -174,15 +180,6 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_special_char_count('http://te2t-url.com/home.html', list_features, list_time)
 
         self.assertEqual(list_features["special_char_count"], 1, 'incorrect special_char_count')
-
-    def test_URL_Top_level_domain(self, config_mock):
-        config_mock['URL_Features']['Top_level_domain'] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Top_level_domain('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["Top_level_domain"], 'com', 'incorrect Top_level_domain')
 
     def test_URL_Has_More_than_3_dots(self, config_mock):
         config_mock['URL_Features']['Has_More_than_3_dots'] = "True"

@@ -547,24 +547,6 @@ def URL_special_char_count(url, list_features, list_time):
         list_time["special_char_count"] = ex_time
 
 
-def URL_Top_level_domain(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Top_level_domain"] == "True":
-        start = time.time()
-        tld = 0
-        if url:
-            try:
-                extracted = tldextract.extract(url)
-                tld = "{}".format(extracted.suffix)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                tld = -1
-        list_features["Top_level_domain"] = tld
-        end = time.time()
-        ex_time = end - start
-        list_time["Top_level_domain"] = ex_time
-
-
 # Devin's features
 def URL_Has_More_than_3_dots(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_More_than_3_dots"] == "True":
