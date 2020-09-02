@@ -65,13 +65,13 @@ class TestURLReflectionFeatures(unittest.TestCase):
         self.assertEqual(result, 3, 'incorrect number_of_dots')
 
     def test_URL_number_of_slashes(self):
-        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        test_url = URLData(r'http://te2t-url.com\\home.html', download_url=False)
         result = url_features.number_of_slashes(test_url)
 
         self.assertEqual(3, result)
 
     def test_URL_digit_letter_ratio(self):
-        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
         result = url_features.digit_letter_ratio(test_url)
 
         self.assertEqual(1 / 21, result, 'incorrect digit_letter_ratio')
@@ -147,7 +147,7 @@ class TestURLReflectionFeatures(unittest.TestCase):
         test_url = URLData('http://abc123-45659.com/home22.html', download_url=False)
         result = url_features.top_level_domain(test_url)
 
-        self.assertEqual('com', result,  'incorrect Top_level_domain')
+        self.assertEqual('com', result, 'incorrect Top_level_domain')
 
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
