@@ -149,6 +149,11 @@ class TestURLReflectionFeatures(unittest.TestCase):
 
         self.assertEqual('com', result, 'incorrect Top_level_domain')
 
+    def test_URL_special_char_count(self):
+        test_url = URLData('http://te2t-url.com/h@ome.html', download_url=False)
+        result = url_features.special_char_count(test_url)
+        self.assertEqual(2, result, 'incorrect special_char_count')
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -171,15 +176,6 @@ class TestURLFeatures(unittest.TestCase):
 
     def test_URL_english_frequency_distance(self, config_mock):
         pass
-
-    def test_URL_special_char_count(self, config_mock):
-        config_mock['URL_Features']['special_char_count'] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_special_char_count('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["special_char_count"], 1, 'incorrect special_char_count')
 
     def test_URL_Has_More_than_3_dots(self, config_mock):
         config_mock['URL_Features']['Has_More_than_3_dots'] = "True"

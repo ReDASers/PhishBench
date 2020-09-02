@@ -164,8 +164,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
 def single_url_feature(raw_url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
 
-    Features.URL_special_char_count(raw_url, list_features, list_time)
-
     Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
 
     Features.URL_Has_anchor_tag(raw_url, list_features, list_time)

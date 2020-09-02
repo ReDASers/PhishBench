@@ -530,21 +530,7 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-def URL_special_char_count(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["special_char_count"] == "True":
-        start = time.time()
-        special_char_count = 0
-        if url:
-            try:
-                special_char_count = url.count('@') + url.count('-')
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                special_char_count = -1
-        list_features["special_char_count"] = special_char_count
-        end = time.time()
-        ex_time = end - start
-        list_time["special_char_count"] = ex_time
+
 
 
 # Devin's features

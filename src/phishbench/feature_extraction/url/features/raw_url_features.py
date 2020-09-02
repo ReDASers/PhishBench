@@ -227,3 +227,12 @@ def consecutive_numbers(url: URLData):
     """
     matches = re.findall(r'\d+', url.raw_url)
     return sum((len(x)**2 for x in matches))
+
+
+@register_feature(FeatureType.URL_RAW, 'special_char_count')
+def special_char_count(url: URLData):
+    """
+    The number of @ or - charcters in the url
+    """
+    return url.raw_url.count('a') + url.raw_url.count('-')
+
