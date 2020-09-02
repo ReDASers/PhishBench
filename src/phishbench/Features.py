@@ -504,31 +504,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
 
 ############################ URL features
 
-##################################################################################
-def URL_letter_occurrence(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["letter_occurrence"] == "True":
-        start = time.time()
-        if url:
-            ####
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url).lower()
-                for x in string.ascii_lowercase:
-                    list_features["letter_occurrence_" + x] = domain.count(x)
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                for x in string.ascii_lowercase:
-                    list_features["letter_occurrence_" + x] = -1
-        else:
-            for x in string.ascii_lowercase:
-                list_features["letter_occurrence_" + x] = 0
-        end = time.time()
-        ex_time = end - start
-        list_time["letter_occurrence"] = ex_time
-        # print("letter_occurrence >>>>>>>>>>>>>>>>>>: " + str(letter_occurrence))
-        # list_features["letter_occurrence"]=letter_occurrence
-
 
 # PhishDef: URL Names Say It All
 TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')

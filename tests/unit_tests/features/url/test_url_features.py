@@ -178,19 +178,18 @@ class TestURLReflectionFeatures(unittest.TestCase):
         result = url_features.has_anchor_tag(test_url)
         self.assertFalse(result)
 
+    def test_URL_letter_occurrence(self):
+
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+
+        result = url_features.domain_letter_occurrence(test_url)
+        self.assertEqual(26, len(result))
+        self.assertEqual(0, result['domain_letter_occurrence_h'])
+        self.assertEqual(2, result['domain_letter_occurrence_t'])
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
-
-    def test_URL_letter_occurrence(self, config_mock):
-        config_mock['URL_Features']["letter_occurrence"] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_letter_occurrence('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["letter_occurrence_t"], 4, 'incorrect letter_occurrence')
-        self.assertEqual(list_features["letter_occurrence_c"], 1, 'incorrect letter_occurrence')
 
     def test_URL_kolmogorov_shmirnov(self, config_mock):
         pass
