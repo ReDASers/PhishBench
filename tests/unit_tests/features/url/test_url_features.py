@@ -7,10 +7,8 @@ from phishbench.input import URLData
 from tests import mock_objects
 
 
-@patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
-class TestURLFeatures(unittest.TestCase):
-
-    def test_URL_url_length(self, config_mock):
+class TestURLReflectionFeatures(unittest.TestCase):
+    def test_URL_url_length(self):
         test_url = 'http://te2t-url.com/home.html'
         test_url = URLData(test_url, download_url=False)
 
@@ -18,13 +16,137 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(29, result)
 
-    def test_URL_domain_length(self, config_mock):
+    def test_URL_domain_length(self):
         test_url = 'http://www.google.com/index.html'
         test_url = URLData(test_url, download_url=False)
 
         result = url_features.domain_length(test_url)
 
         self.assertEqual(result, 14)
+
+    def test_URL_char_distance(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+
+        result = url_features.char_dist(test_url)
+        self.assertEqual(26, len(result))
+
+    def test_URL_num_punctuation(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+
+        self.assertEqual(7, url_features.num_punctuation(test_url), 'incorrect num_punctuation')
+
+    def test_URL_has_port(self):
+        test_url = URLData('http://www.google.com:443', download_url=False)
+        self.assertTrue(url_features.has_port(test_url))
+
+        test_url = URLData('http://www.google.com', download_url=False)
+        self.assertFalse(url_features.has_port(test_url))
+
+    def test_URL_number_of_digits(self):
+        url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.num_digits(url)
+
+        self.assertEqual(result, 1, 'incorrect number_of_digits')
+
+        url = URLData('http://te2t-url.com/home42.html', download_url=False)
+        result = url_features.num_digits(url)
+
+        self.assertEqual(result, 3, 'incorrect number_of_digits')
+
+    def test_URL_number_of_dots(self):
+        url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.num_dots(url)
+
+        self.assertEqual(result, 2, 'incorrect number_of_dots')
+
+        url = URLData('http://test.te2t-url.com/home.html', download_url=False)
+        result = url_features.num_dots(url)
+
+        self.assertEqual(result, 3, 'incorrect number_of_dots')
+
+    def test_URL_number_of_slashes(self):
+        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        result = url_features.number_of_slashes(test_url)
+
+        self.assertEqual(3, result)
+
+    def test_URL_digit_letter_ratio(self):
+        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
+        result = url_features.digit_letter_ratio(test_url)
+
+        self.assertEqual(1 / 21, result, 'incorrect digit_letter_ratio')
+
+    def test_url_is_common_tld(self):
+        test_url = URLData('http://www.test.co.uk', download_url=False)
+
+        result = url_features.is_common_tld(test_url)
+        self.assertFalse(result)
+
+        test_url = URLData("http://www.google.com", download_url=False)
+        result = url_features.is_common_tld(test_url)
+        self.assertTrue(result)
+
+    def test_url_is_ip_addr(self):
+        test_url = URLData('http://192.168.0.1/scripts/test', download_url=False)
+
+        result = url_features.is_ip_addr(test_url)
+        self.assertTrue(result)
+
+        test_url = URLData('http://www.google.com/scripts/test', download_url=False)
+
+        result = url_features.is_ip_addr(test_url)
+        self.assertFalse(result)
+
+    def test_url_has_https(self):
+        test_url = URLData('https://google.com', download_url=False)
+        self.assertTrue(url_features.has_https(test_url))
+
+        test_url = URLData('http://google.com', download_url=False)
+        self.assertFalse(url_features.has_https(test_url))
+
+    def test_URL_number_of_dashes(self):
+        test_url = URLData('http://te2t-ur--l.com/home.html', download_url=False)
+        self.assertEqual(3, url_features.number_of_dashes(test_url), 'incorrect number_of_dashes')
+
+    def test_URL_Http_middle_of_URL_true_no_start(self):
+        test_url = URLData("google.com?https://google.com", download_url=False)
+        self.assertTrue(url_features.http_in_middle(test_url))
+
+        test_url = URLData("http://www.google.com", download_url=False)
+        self.assertFalse(url_features.http_in_middle(test_url))
+
+    def test_URL_Has_at_symbol(self):
+        test_url = "http://tech.www.google.com/index.html@http"
+
+        self.assertTrue(url_features.has_at_symbol(URLData(test_url, download_url=False)))
+        test_url = "http://tech.www.google.com/index.html"
+        self.assertFalse(url_features.has_at_symbol(URLData(test_url, download_url=False)))
+
+    def test_URL_Null_in_Domain(self):
+        test_url = URLData('http://www.test.com/test/null', download_url=False)
+        self.assertFalse(url_features.null_in_domain(test_url))
+
+        test_url = URLData('http://www.nulltest.com/test', download_url=False)
+        self.assertTrue(url_features.null_in_domain(test_url))
+
+    def test_URL_special_pattern(self):
+        test_url = URLData('http://www.test.com/test/null', download_url=False)
+        self.assertFalse(url_features.special_pattern(test_url))
+
+        test_url = URLData('https://www.google.com/?gws_rd=ssl', download_url=False)
+        self.assertTrue(url_features.special_pattern(test_url))
+
+    # def test_URL_consecutive_numbers(self, config_mock):
+    #     config_mock['URL_Features']['consecutive_numbers'] = "True"
+    #     list_features = {}
+    #     list_time = {}
+    #
+    #     Features.URL_consecutive_numbers('http://te2t-url.com/home.html', list_features, list_time)
+    #     self.assertEqual(list_features["consecutive_numbers"], 1, 'incorrect consecutive_numbers')
+
+    
+@patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
+class TestURLFeatures(unittest.TestCase):
 
     def test_URL_letter_occurrence(self, config_mock):
         config_mock['URL_Features']["letter_occurrence"] = "True"
@@ -36,12 +158,6 @@ class TestURLFeatures(unittest.TestCase):
         self.assertEqual(list_features["letter_occurrence_t"], 4, 'incorrect letter_occurrence')
         self.assertEqual(list_features["letter_occurrence_c"], 1, 'incorrect letter_occurrence')
 
-    def test_URL_char_distance(self, config_mock):
-        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
-
-        result = url_features.char_dist(test_url)
-        self.assertEqual(26, len(result))
-
     def test_URL_kolmogorov_shmirnov(self, config_mock):
         pass
 
@@ -50,61 +166,6 @@ class TestURLFeatures(unittest.TestCase):
 
     def test_URL_english_frequency_distance(self, config_mock):
         pass
-
-    def test_URL_num_punctuation(self, config_mock):
-        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
-
-        self.assertEqual(7, url_features.num_punctuation(test_url), 'incorrect num_punctuation')
-
-    def test_URL_has_port(self, config_mock):
-        test_url = URLData('http://www.google.com:443', download_url=False)
-        self.assertTrue(url_features.has_port(test_url))
-
-        test_url = URLData('http://www.google.com', download_url=False)
-        self.assertFalse(url_features.has_port(test_url))
-
-    def test_URL_number_of_digits(self, config_mock):
-        url = URLData('http://te2t-url.com/home.html', download_url=False)
-        result = url_features.num_digits(url)
-
-        self.assertEqual(result, 1, 'incorrect number_of_digits')
-
-        url = URLData('http://te2t-url.com/home42.html', download_url=False)
-        result = url_features.num_digits(url)
-
-        self.assertEqual(result, 3, 'incorrect number_of_digits')
-
-    def test_URL_number_of_dots(self, config_mock):
-        url = URLData('http://te2t-url.com/home.html', download_url=False)
-        result = url_features.num_dots(url)
-
-        self.assertEqual(result, 2, 'incorrect number_of_dots')
-
-        url = URLData('http://test.te2t-url.com/home.html', download_url=False)
-        result = url_features.num_dots(url)
-
-        self.assertEqual(result, 3, 'incorrect number_of_dots')
-
-    def test_URL_number_of_slashes(self, config_mock):
-        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
-        result = url_features.number_of_slashes(test_url)
-
-        self.assertEqual(3, result)
-
-    def test_URL_digit_letter_ratio(self, config_mock):
-        test_url = URLData('http://te2t-url.com\home.html', download_url=False)
-        result = url_features.digit_letter_ratio(test_url)
-
-        self.assertEqual(1 / 21, result, 'incorrect digit_letter_ratio')
-
-    # def test_URL_consecutive_numbers(self, config_mock):
-    #     config_mock['URL_Features']['consecutive_numbers'] = "True"
-    #     list_features = {}
-    #     list_time = {}
-    #
-    #     Features.URL_consecutive_numbers('http://te2t-url.com/home.html', list_features, list_time)
-    #
-    #     self.assertEqual(list_features["consecutive_numbers"], 1, 'incorrect consecutive_numbers')
 
     def test_URL_special_char_count(self, config_mock):
         config_mock['URL_Features']['special_char_count'] = "True"
@@ -115,16 +176,6 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["special_char_count"], 1, 'incorrect special_char_count')
 
-    # def test_URL_special_pattern(self, config_mock):
-    #     config_mock['URL_Features']['special_pattern'] = "True"
-    #     test_url = 'https://www.google.com/?gws_rd=ssl'
-    #     list_features = {}
-    #     list_time = {}
-    #
-    #     Features.URL_special_pattern(test_url, list_features, list_time)
-    #
-    #     self.assertEqual(list_features["special_pattern"], 1, 'incorrect special_pattern')
-
     def test_URL_Top_level_domain(self, config_mock):
         config_mock['URL_Features']['Top_level_domain'] = "True"
         list_features = {}
@@ -133,45 +184,6 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Top_level_domain('http://te2t-url.com/home.html', list_features, list_time)
 
         self.assertEqual(list_features["Top_level_domain"], 'com', 'incorrect Top_level_domain')
-
-    def test_url_is_common_tld(self, config_mock):
-        test_url = URLData('http://www.test.co.uk', download_url=False)
-
-        result = url_features.is_common_tld(test_url)
-        self.assertFalse(result)
-
-        test_url = URLData("http://www.google.com", download_url=False)
-        result = url_features.is_common_tld(test_url)
-        self.assertTrue(result)
-
-    def test_url_is_ip_addr(self, config_mock):
-        test_url = URLData('http://192.168.0.1/scripts/test', download_url=False)
-
-        result = url_features.is_ip_addr(test_url)
-        self.assertTrue(result)
-
-        test_url = URLData('http://www.google.com/scripts/test', download_url=False)
-
-        result = url_features.is_ip_addr(test_url)
-        self.assertFalse(result)
-
-    def test_url_has_https(self, config_mock):
-        test_url = URLData('https://google.com', download_url=False)
-        self.assertTrue(url_features.has_https(test_url))
-
-        test_url = URLData('http://google.com', download_url=False)
-        self.assertFalse(url_features.has_https(test_url))
-
-    def test_URL_number_of_dashes(self, config_mock):
-        test_url = URLData('http://te2t-ur--l.com/home.html', download_url=False)
-        self.assertEqual(3, url_features.number_of_dashes(test_url), 'incorrect number_of_dashes')
-
-    def test_URL_Http_middle_of_URL_true_no_start(self, config_mock):
-        test_url = URLData("google.com?https://google.com", download_url=False)
-        self.assertTrue(url_features.http_in_middle(test_url))
-
-        test_url = URLData("http://www.google.com", download_url=False)
-        self.assertFalse(url_features.http_in_middle(test_url))
 
     def test_URL_Has_More_than_3_dots(self, config_mock):
         config_mock['URL_Features']['Has_More_than_3_dots'] = "True"
@@ -182,13 +194,6 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Has_More_than_3_dots(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Has_More_than_3_dots"], 1, 'incorrect Http_middle_of_URL')
-
-    def test_URL_Has_at_symbole(self, config_mock):
-        test_url = "http://tech.www.google.com/index.html@http"
-
-        self.assertTrue(url_features.has_at_symbol(URLData(test_url, download_url=False)))
-        test_url = "http://tech.www.google.com/index.html"
-        self.assertFalse(url_features.has_at_symbol(URLData(test_url, download_url=False)))
 
     def test_URL_Has_anchor_tag_true(self, config_mock):
         config_mock['URL_Features']['Has_anchor_tag'] = "True"
@@ -209,13 +214,6 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Has_anchor_tag(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Has_anchor_tag"], 0, 'incorrect Has_anchor_tag')
-
-    def test_URL_Null_in_Domain(self, config_mock):
-        test_url = URLData('http://www.test.com/test/null', download_url=False)
-        self.assertFalse(url_features.null_in_domain(test_url))
-
-        test_url = URLData('http://www.nulltest.com/test', download_url=False)
-        self.assertTrue(url_features.null_in_domain(test_url))
 
     def test_URL_Token_Count(self, config_mock):
         config_mock['URL_Features']['Token_Count'] = "True"
