@@ -210,3 +210,11 @@ def euclidean_distance(url: URLData):
 
 
 # endregion
+
+@register_feature(FeatureType.URL_RAW, 'consecutive_numbers')
+def consecutive_numbers(url: URLData):
+    """
+    The sum of squares of the length of substrings that are consecutive numbers
+    """
+    matches = re.findall(r'\d+', url.raw_url)
+    return sum((len(x)**2 for x in matches))

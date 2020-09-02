@@ -136,15 +136,14 @@ class TestURLReflectionFeatures(unittest.TestCase):
         test_url = URLData('https://www.google.com/?gws_rd=ssl', download_url=False)
         self.assertTrue(url_features.special_pattern(test_url))
 
-    # def test_URL_consecutive_numbers(self, config_mock):
-    #     config_mock['URL_Features']['consecutive_numbers'] = "True"
-    #     list_features = {}
-    #     list_time = {}
-    #
-    #     Features.URL_consecutive_numbers('http://te2t-url.com/home.html', list_features, list_time)
-    #     self.assertEqual(list_features["consecutive_numbers"], 1, 'incorrect consecutive_numbers')
+    def test_URL_consecutive_numbers(self):
+        test_url = URLData('http://abc123-45659.com/home22.html', download_url=False)
 
-    
+        result = url_features.consecutive_numbers(test_url)
+
+        self.assertEqual(38, result, 'incorrect consecutive_numbers')
+
+
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
 

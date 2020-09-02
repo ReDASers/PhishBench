@@ -530,29 +530,6 @@ def URL_letter_occurrence(url, list_features, list_time):
         # list_features["letter_occurrence"]=letter_occurrence
 
 
-def URL_consecutive_numbers(url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["consecutive_numbers"] == "True":
-        start = time.time()
-        result = 0
-        if url:
-            try:
-                length = 0
-                for c in url:
-                    if c.isdigit():
-                        length += 1
-                    else:
-                        result += length * length
-                        length = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                result = -1
-        list_features["consecutive_numbers"] = result
-        end = time.time()
-        ex_time = end - start
-        list_time["consecutive_numbers"] = ex_time
-
-
 def URL_special_char_count(url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_RAW.value]["special_char_count"] == "True":
