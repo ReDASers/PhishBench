@@ -234,5 +234,5 @@ def special_char_count(url: URLData):
     """
     The number of @ or - charcters in the url
     """
-    return url.raw_url.count('a') + url.raw_url.count('-')
+    return url.raw_url.count('@') + url.raw_url.count('-')
 
