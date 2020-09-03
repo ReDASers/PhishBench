@@ -183,6 +183,9 @@ def _calc_char_dist(text):
 
 @register_feature(FeatureType.URL_RAW, 'domain_letter_occurrence')
 def domain_letter_occurrence(url: URLData):
+    """
+    The number of times each letter occurs in the domain
+    """
     counts = _calc_char_count(url.parsed_url.hostname)
     return {"domain_letter_occurrence_{}".format(character): value for
             value, character in zip(counts, string.ascii_lowercase)}
@@ -286,4 +289,3 @@ def double_slashes_in_path(url: URLData):
     """
     regex_2slashes = re.compile(r'//')
     return len(regex_2slashes.findall(url.parsed_url.path))
-

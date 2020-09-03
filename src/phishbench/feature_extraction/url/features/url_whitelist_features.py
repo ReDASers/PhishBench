@@ -1,3 +1,6 @@
+"""
+This module contains whitelist features
+"""
 import tldextract
 
 from ...reflection import FeatureType, register_feature

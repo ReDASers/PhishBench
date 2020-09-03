@@ -4,9 +4,14 @@ from phishbench.feature_extraction.url.features import website_features
 from phishbench.feature_extraction.url.features import website_html_features
 from tests import mock_objects
 
+# pylint: disable=missing-function-docstring
+# pylint: disable=too-many-public-methods
+
 
 class TestHTMLReflectionFeatures(unittest.TestCase):
-
+    """
+    Tests website_html_features
+    """
     def test_is_redirect_true(self):
         # https://bit.ly/2Ef4uAS captured on 8/30/2020
         # redirects to https://en.wikipedia.org/wiki/Eastman_Kodak_Co._v._Image_Technical_Services,_Inc.
