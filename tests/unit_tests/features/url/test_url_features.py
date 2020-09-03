@@ -179,7 +179,6 @@ class TestURLReflectionFeatures(unittest.TestCase):
         self.assertFalse(result)
 
     def test_URL_letter_occurrence(self):
-
         test_url = URLData('http://te2t-url.com/home.html', download_url=False)
 
         result = url_features.domain_letter_occurrence(test_url)
@@ -197,6 +196,27 @@ class TestURLReflectionFeatures(unittest.TestCase):
         test_url = URLData('http://te2t-url.com/index.html', download_url=False)
 
         result = url_features.has_hex_characters(test_url)
+
+        self.assertFalse(result)
+
+    def test_brand_in_url(self):
+        test_url = URLData('http://ff.com/microsoft.com//', download_url=False)
+
+        result = url_features.brand_in_url(test_url)
+
+        self.assertTrue(result)
+
+    def test_is_whitelisted_true(self):
+        test_url = URLData('http://microsoft.com/index.html', download_url=False)
+
+        result = url_features.is_whitelisted(test_url)
+
+        self.assertTrue(result)
+
+    def test_is_whitelisted_false(self):
+        test_url = URLData('http://ff.com/microsoft.com//', download_url=False)
+
+        result = url_features.is_whitelisted(test_url)
 
         self.assertFalse(result)
 
@@ -278,23 +298,3 @@ class TestURLFeatures(unittest.TestCase):
 
         self.assertEqual(list_features["Double_Slashes_Not_Beginning_Count"], 1,
                          'incorrect Double_Slashes_Not_Beginning_Count')
-
-    def test_URL_Brand_In_Url(self, config_mock):
-        config_mock['URL_Features']['Brand_In_URL'] = "True"
-        test_url = 'http://ff.com/microsoft.com//'
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Brand_In_Url(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Brand_In_URL"], 1, 'incorrect Brand_In_URL')
-
-    def test_URL_Is_Whitelisted(self, config_mock):
-        config_mock['URL_Features']['Is_Whitelisted'] = "True"
-        test_url = 'http://microsoft.com/microsoft.com//'
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Is_Whitelisted(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Is_Whitelisted"], 1, 'incorrect Is_Whitelisted')

@@ -659,34 +659,6 @@ def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
         list_time["Double_Slashes_Not_Beginning_Count"] = ex_time
 
 
-def URL_Brand_In_Url(url, list_features, list_time):
-    if phishbench_globals.config['URL_Features']['Brand_In_Url'] == "True":
-        start = time.time()
-        tokens = re.split('[^a-zA-Z]', url)
-        brands = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange', 'dhl',
-                  'dropbox', 'docusign', 'adobe', 'linkedin', 'apple', 'google', 'banquepopulaire', 'alibaba',
-                  'comcast', 'credit', 'agricole', 'yahoo', 'at', 'nbc', 'usaa', 'americanexpress', 'cibc', 'amazon',
-                  'ing', 'bt']
-        if any(token.lower() in brands for token in tokens):
-            list_features["Brand_In_URL"] = 1
-        else:
-            list_features["Brand_In_URL"] = 0
-
-
-def URL_Is_Whitelisted(url, list_features, list_time):
-    if phishbench_globals.config['URL_Features']['Is_Whitelisted'] == "True":
-        start = time.time()
-        domain = tldextract.extract(url).domain
-        whitelist = ['microsoft', 'paypal', 'netflix', 'bankofamerica', 'wellsfargo', 'facebook', 'chase', 'orange',
-                     'dhl', 'dropbox', 'docusign', 'adobe', 'linkedin', 'apple', 'google', 'banquepopulaire', 'alibaba',
-                     'comcast', 'credit', 'agricole', 'yahoo', 'at', 'nbc', 'usaa', 'americanexpress', 'cibc', 'amazon',
-                     'ing', 'bt']
-        if domain in whitelist:
-            list_features["Is_Whitelisted"] = 1
-        else:
-            list_features["Is_Whitelisted"] = 0
-
-
 # def URL_ foundURLProtocolAndPortDoNotMatch
 ############################ Network Features
 # def registar_id(whois_info, registrar_mapping)

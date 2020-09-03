@@ -178,10 +178,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_Double_Slashes_Not_Beginning_Count(raw_url, list_features, list_time)
 
-    Features.URL_Brand_In_Url(raw_url, list_features, list_time)
-
-    Features.URL_Is_Whitelisted(raw_url, list_features, list_time)
-
 
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
