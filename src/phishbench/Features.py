@@ -639,25 +639,6 @@ def URL_Has_WWW_in_Middle(url, list_features, list_time):
         list_time["Has_WWW_in_Middle"] = ex_time
 
 
-def URL_Has_Hex_Characters(url, list_features, list_time):
-    if phishbench_globals.config['URL_Features']['Has_Hex_Characters'] == "True":
-        start = time.time()
-        flag = 0
-        regex_hex = re.compile(r'%[1-9A-Z][1-9A-Z]')
-        if url:
-            try:
-                # parsed_url = urlparse(url)
-                # domain = '{uri.netloc}'.format(uri=parsed_url).lower()
-                flag = int((bool(re.findall(regex_hex, url))))
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                flag = -1
-        list_features["Has_Hex_Characters"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_Hex_Characters"] = ex_time
-
-
 def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
     if phishbench_globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count'] == "True":
         start = time.time()

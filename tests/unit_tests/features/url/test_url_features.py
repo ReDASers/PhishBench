@@ -187,6 +187,19 @@ class TestURLReflectionFeatures(unittest.TestCase):
         self.assertEqual(0, result['domain_letter_occurrence_h'])
         self.assertEqual(2, result['domain_letter_occurrence_t'])
 
+    def test_URL_has_hex_characters_true(self):
+        test_url = URLData('http://te2t-url.com/index.html?text=Hello+G%C3%BCnterasd', download_url=False)
+        result = url_features.has_hex_characters(test_url)
+
+        self.assertTrue(result)
+
+    def test_URL_has_hex_characters_false(self):
+        test_url = URLData('http://te2t-url.com/index.html', download_url=False)
+
+        result = url_features.has_hex_characters(test_url)
+
+        self.assertFalse(result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -254,16 +267,6 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Has_WWW_in_Middle(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Has_WWW_in_Middle"], 1, 'incorrect Has_WWW_in_Middle')
-
-    def test_URL_Has_Hex_Characters(self, config_mock):
-        config_mock['URL_Features']['Has_Hex_Characters'] = "True"
-        test_url = 'text=Hello+G%C3%BCnterasd'
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Has_Hex_Characters(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_Hex_Characters"], 1, 'incorrect Has_Hex_Characters')
 
     def test_URL_Double_Slashes_Not_Beginning_Count(self, config_mock):
         config_mock['URL_Features']['Double_Slashes_Not_Beginning_Count'] = "True"

@@ -267,3 +267,13 @@ def has_anchor_tag(url: URLData):
     """
     return '#' in url.raw_url
 # endregion
+
+
+@register_feature(FeatureType.URL_RAW, 'has_hex_characters')
+def has_hex_characters(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    regex_hex = re.compile(r'%[1-9A-Z][1-9A-Z]')
+    match = regex_hex.search(url.raw_url)
+    return match is not None

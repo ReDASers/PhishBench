@@ -176,8 +176,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_Has_WWW_in_Middle(raw_url, list_features, list_time)
 
-    Features.URL_Has_Hex_Characters(raw_url, list_features, list_time)
-
     Features.URL_Double_Slashes_Not_Beginning_Count(raw_url, list_features, list_time)
 
     Features.URL_Brand_In_Url(raw_url, list_features, list_time)
