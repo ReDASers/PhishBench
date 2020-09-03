@@ -4,7 +4,7 @@ from unittest.mock import patch
 import phishbench.feature_extraction.url.features as url_features
 from phishbench import Features
 from phishbench.input import URLData
-from .... import mock_objects
+from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
@@ -234,6 +234,21 @@ class TestURLReflectionFeatures(unittest.TestCase):
         result = url_features.double_slashes_in_path(test_url)
         self.assertEqual(2, result)
 
+    def test_has_www_in_middle_false(self):
+        test_url = URLData('http://www.google.com', download_url=False)
+        result = url_features.has_www_in_middle(test_url)
+        self.assertFalse(result)
+
+    def test_has_www_in_middle_domain(self):
+        test_url = URLData('http://www.google.com.www.test.com', download_url=False)
+        result = url_features.has_www_in_middle(test_url)
+        self.assertTrue(result)
+
+    def test_has_www_in_middle_path(self):
+        test_url = URLData('http://www.google.com/www.test.com', download_url=False)
+        result = url_features.has_www_in_middle(test_url)
+        self.assertTrue(result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -291,13 +306,3 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Protocol_Port_Match('http://te2t-url.com/home.html', list_features, list_time)
 
         self.assertEqual(list_features["Protocol_Port_Match"], 1, 'incorrect Protocol_Port_Match')
-
-    def test_URL_Has_www_in_Middle(self, config_mock):
-        config_mock['URL_Features']['Has_WWW_in_Middle'] = "True"
-        test_url = "http://httpwwwchase.com"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Has_WWW_in_Middle(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Has_WWW_in_Middle"], 1, 'incorrect Has_WWW_in_Middle')

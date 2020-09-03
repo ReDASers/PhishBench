@@ -289,3 +289,17 @@ def double_slashes_in_path(url: URLData):
     """
     regex_2slashes = re.compile(r'//')
     return len(regex_2slashes.findall(url.parsed_url.path))
+
+
+@register_feature(FeatureType.URL_RAW, 'has_www_in_middle')
+def has_www_in_middle(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    domain = url.parsed_url.hostname
+    if domain.startswith('www'):
+        new_domain = domain[3:]
+    else:
+        new_domain = domain
+    raw_url = url.raw_url.replace(domain, new_domain, 1)
+    return 'www' in raw_url

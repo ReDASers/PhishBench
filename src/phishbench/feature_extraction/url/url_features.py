@@ -174,8 +174,6 @@ def single_url_feature(raw_url, list_features, list_time):
 
     Features.URL_Protocol_Port_Match(raw_url, list_features, list_time)
 
-    Features.URL_Has_WWW_in_Middle(raw_url, list_features, list_time)
-
 
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')

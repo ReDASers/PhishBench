@@ -618,27 +618,6 @@ def URL_Protocol_Port_Match(url, list_features, list_time):
         ex_time = end - start
         list_time["Protocol_Port_Match"] = ex_time
 
-
-def URL_Has_WWW_in_Middle(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_WWW_in_Middle"] == "True":
-        start = time.time()
-        flag = 0
-        # regex_www=re.compile(r'www')
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url).lower()
-                if 'www' in domain and domain.startswith('www') == False:
-                    flag = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                flag = -1
-        list_features["Has_WWW_in_Middle"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_WWW_in_Middle"] = ex_time
-
-
 # def URL_ foundURLProtocolAndPortDoNotMatch
 ############################ Network Features
 # def registar_id(whois_info, registrar_mapping)
