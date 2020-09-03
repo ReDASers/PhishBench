@@ -639,26 +639,6 @@ def URL_Has_WWW_in_Middle(url, list_features, list_time):
         list_time["Has_WWW_in_Middle"] = ex_time
 
 
-def URL_Double_Slashes_Not_Beginning_Count(url, list_features, list_time):
-    if phishbench_globals.config['URL_Features']['Double_Slashes_Not_Beginning_Count'] == "True":
-        start = time.time()
-        flag = 0
-        regex_2slashes = re.compile(r'//')
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                path = '{uri.path}'.format(uri=parsed_url)
-                flag = int((bool(re.findall(regex_2slashes, path))))
-                list_features["Double_Slashes_Not_Beginning_Count"] = flag
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                flag = -1
-        list_features["Double_Slashes_Not_Beginning_Count"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Double_Slashes_Not_Beginning_Count"] = ex_time
-
-
 # def URL_ foundURLProtocolAndPortDoNotMatch
 ############################ Network Features
 # def registar_id(whois_info, registrar_mapping)

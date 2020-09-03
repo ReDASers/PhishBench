@@ -220,6 +220,12 @@ class TestURLReflectionFeatures(unittest.TestCase):
 
         self.assertFalse(result)
 
+    def test_double_slashes_in_path(self):
+        test_url = URLData('http://ff.com/s//sss//', download_url=False)
+
+        result = url_features.double_slashes_in_path(test_url)
+        self.assertEqual(2,result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -287,14 +293,3 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Has_WWW_in_Middle(test_url, list_features, list_time)
 
         self.assertEqual(list_features["Has_WWW_in_Middle"], 1, 'incorrect Has_WWW_in_Middle')
-
-    def test_URL_Double_Slashes_Not_Beginning_Count(self, config_mock):
-        config_mock['URL_Features']['Double_Slashes_Not_Beginning_Count'] = "True"
-        test_url = 'http://ff.com//s//sss//'
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Double_Slashes_Not_Beginning_Count(test_url, list_features, list_time)
-
-        self.assertEqual(list_features["Double_Slashes_Not_Beginning_Count"], 1,
-                         'incorrect Double_Slashes_Not_Beginning_Count')

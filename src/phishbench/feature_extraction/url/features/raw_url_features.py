@@ -277,3 +277,13 @@ def has_hex_characters(url: URLData):
     regex_hex = re.compile(r'%[1-9A-Z][1-9A-Z]')
     match = regex_hex.search(url.raw_url)
     return match is not None
+
+
+@register_feature(FeatureType.URL_RAW, 'double_slashes_in_path')
+def double_slashes_in_path(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    regex_2slashes = re.compile(r'//')
+    return len(regex_2slashes.findall(url.parsed_url.path))
+
