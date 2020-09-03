@@ -591,33 +591,6 @@ def URL_Longest_Domain_Token(url, list_features, list_time):
         ex_time = end - start
         list_time["Longest_Domain_Token"] = ex_time
 
-
-def URL_Protocol_Port_Match(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Protocol_Port_Match"] == "True":
-        start = time.time()
-        match = 1
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                scheme = '{uri.scheme}'.format(uri=parsed_url).lower()
-                port = '{uri.port}'.format(uri=parsed_url)
-                protocol_port_list = [('http', 8080), ('http', 80), ('https', 443), ('ftp', 20), ('tcp', 20),
-                                      ('scp', 20), ('ftp', 21), ('ssh', 22), ('telnet', 23), ('smtp', 25), ('dns', 53),
-                                      ("pop3", 110), ("sftp", 115), ("imap", 143), ("smtp", 465), ("rlogin", 513),
-                                      ("imap", 993), ("pop3", 995)]
-                if port != 'None' and ((scheme, int(port)) not in protocol_port_list):
-                    match = 0
-                list_features["Protocol_Port_Match"] = match
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                match = -1
-        else:
-            match = 0
-        list_features["Protocol_Port_Match"] = match
-        end = time.time()
-        ex_time = end - start
-        list_time["Protocol_Port_Match"] = ex_time
-
 # def URL_ foundURLProtocolAndPortDoNotMatch
 ############################ Network Features
 # def registar_id(whois_info, registrar_mapping)

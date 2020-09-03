@@ -249,6 +249,21 @@ class TestURLReflectionFeatures(unittest.TestCase):
         result = url_features.has_www_in_middle(test_url)
         self.assertTrue(result)
 
+    def test_port_protocol_match_no_port(self):
+        test_url = URLData('http://www.google.com/www.test.com', download_url=False)
+        result = url_features.protocol_port_match(test_url)
+        self.assertTrue(result)
+
+    def test_port_protocol_match(self):
+        test_url = URLData('https://www.google.com:443/abc', download_url=False)
+        result = url_features.protocol_port_match(test_url)
+        self.assertTrue(result)
+
+    def test_port_protocol_match_false(self):
+        test_url = URLData('https://www.google.com:8080/abc', download_url=False)
+        result = url_features.protocol_port_match(test_url)
+        self.assertFalse(result)
+
 
 @patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
 class TestURLFeatures(unittest.TestCase):
@@ -297,12 +312,3 @@ class TestURLFeatures(unittest.TestCase):
         Features.URL_Longest_Domain_Token('http://te2t-url.com/home.html', list_features, list_time)
 
         self.assertEqual(4, list_features["Longest_Domain_Token"], 'incorrect Longest_Domain_Token')
-
-    def test_URL_Protocol_Port_Match(self, config_mock):
-        config_mock['URL_Features']['Protocol_Port_Match'] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Protocol_Port_Match('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["Protocol_Port_Match"], 1, 'incorrect Protocol_Port_Match')

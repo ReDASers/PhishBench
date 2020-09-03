@@ -4,8 +4,8 @@ This module contains the built-in raw url features
 import re
 import string
 
-import scipy.stats
 import scipy.spatial
+import scipy.stats
 from tldextract import tldextract
 
 from ...reflection import FeatureType, register_feature
@@ -303,3 +303,34 @@ def has_www_in_middle(url: URLData):
         new_domain = domain
     raw_url = url.raw_url.replace(domain, new_domain, 1)
     return 'www' in raw_url
+
+
+_PROTOCOL_MAP = {'dns': 53,
+                'ftp': 21,
+                'http': 80,
+                'https': 443,
+                'imap': 993,
+                'pop3': 995,
+                'rlogin': 513,
+                'scp': 20,
+                'sftp': 115,
+                'smtp': 465,
+                'ssh': 22,
+                'tcp': 20,
+                'telnet': 23
+                }
+
+
+@register_feature(FeatureType.URL_RAW, 'protocol_port_match')
+def protocol_port_match(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+
+    port = url.parsed_url.port
+    if not port:
+        return True
+    protocol = url.parsed_url.scheme
+    if protocol in _PROTOCOL_MAP:
+        return port == _PROTOCOL_MAP[protocol]
+    return False
