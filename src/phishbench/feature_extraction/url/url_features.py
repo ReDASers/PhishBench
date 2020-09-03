@@ -164,16 +164,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
 def single_url_feature(raw_url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
 
-    Features.URL_consecutive_numbers(raw_url, list_features, list_time)
-
-    Features.URL_special_char_count(raw_url, list_features, list_time)
-
-    Features.URL_Top_level_domain(raw_url, list_features, list_time)
-
-    Features.URL_Has_More_than_3_dots(raw_url, list_features, list_time)
-
-    Features.URL_Has_anchor_tag(raw_url, list_features, list_time)
-
     Features.URL_Token_Count(raw_url, list_features, list_time)
 
     Features.URL_Average_Path_Token_Length(raw_url, list_features, list_time)
@@ -185,14 +175,6 @@ def single_url_feature(raw_url, list_features, list_time):
     Features.URL_Protocol_Port_Match(raw_url, list_features, list_time)
 
     Features.URL_Has_WWW_in_Middle(raw_url, list_features, list_time)
-
-    Features.URL_Has_Hex_Characters(raw_url, list_features, list_time)
-
-    Features.URL_Double_Slashes_Not_Beginning_Count(raw_url, list_features, list_time)
-
-    Features.URL_Brand_In_Url(raw_url, list_features, list_time)
-
-    Features.URL_Is_Whitelisted(raw_url, list_features, list_time)
 
 
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):

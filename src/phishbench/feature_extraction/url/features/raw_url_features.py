@@ -52,6 +52,15 @@ def special_pattern(url: URLData):
     return "?gws_rd=ssl" in url.raw_url
 
 
+@register_feature(FeatureType.URL_RAW, 'top_level_domain')
+def top_level_domain(url: URLData):
+    """
+    The top level domain of the url
+    """
+    tld = tldextract.extract(url.raw_url).suffix
+    return tld
+
+
 @register_feature(FeatureType.URL_RAW, 'is_common_tld')
 def is_common_tld(url: URLData):
     """
@@ -148,11 +157,7 @@ def digit_letter_ratio(url: URLData):
 # region Character Distribution
 
 
-_CHAR_DIST = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
-              .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
-
-
-def _calc_char_dist(text):
+def _calc_char_count(text):
     """
     Computes the character distribution of the English letters in a string
     Parameters
@@ -167,9 +172,28 @@ def _calc_char_dist(text):
     counts = [0] * 26
     for x in text:
         counts[int(ord(x) - ord('a'))] += 1
-    num_letters = len(text)
-    counts = [x/num_letters for x in counts]
     return counts
+
+
+def _calc_char_dist(text):
+    counts = _calc_char_count(text)
+    num_letters = sum(counts)
+    return [x/num_letters for x in counts]
+
+
+@register_feature(FeatureType.URL_RAW, 'domain_letter_occurrence')
+def domain_letter_occurrence(url: URLData):
+    """
+    The number of times each letter occurs in the domain
+    """
+    counts = _calc_char_count(url.parsed_url.hostname)
+    return {"domain_letter_occurrence_{}".format(character): value for
+            value, character in zip(counts, string.ascii_lowercase)}
+
+
+_ENGLISH_CHAR_DIST = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025,
+                      .02406, .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150,
+                      .01974, .00074]
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist')
@@ -188,7 +212,7 @@ def kolmogorov_shmirnov(url: URLData):
     The Kolmogorov_Shmirnov statistic between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
-    return scipy.stats.ks_2samp(url_char_distance, _CHAR_DIST)[0]
+    return scipy.stats.ks_2samp(url_char_distance, _ENGLISH_CHAR_DIST)[0]
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_kl_divergence')
@@ -197,7 +221,7 @@ def kullback_leibler(url: URLData):
         The Kullback_Leibler divergence between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
-    return scipy.stats.entropy(url_char_distance, _CHAR_DIST)
+    return scipy.stats.entropy(url_char_distance, _ENGLISH_CHAR_DIST)
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_euclidian_distance')
@@ -206,7 +230,62 @@ def euclidean_distance(url: URLData):
         The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
-    return scipy.spatial.distance.euclidean(url_char_distance, _CHAR_DIST)
+    return scipy.spatial.distance.euclidean(url_char_distance, _ENGLISH_CHAR_DIST)
 
 
 # endregion
+
+@register_feature(FeatureType.URL_RAW, 'consecutive_numbers')
+def consecutive_numbers(url: URLData):
+    """
+    The sum of squares of the length of substrings that are consecutive numbers
+    """
+    matches = re.findall(r'\d+', url.raw_url)
+    return sum((len(x)**2 for x in matches))
+
+
+@register_feature(FeatureType.URL_RAW, 'special_char_count')
+def special_char_count(url: URLData):
+    """
+    The number of @ or - charcters in the url
+    """
+    return url.raw_url.count('@') + url.raw_url.count('-')
+
+
+# region Devin's features
+
+@register_feature(FeatureType.URL_RAW, 'has_more_than_three_dots')
+def has_more_than_three_dots(url: URLData):
+    """
+    Whether the url without www. has more than three dots
+    """
+    clean_url = url.raw_url.replace('www.', '')
+    return clean_url.count('.') > 3
+
+
+@register_feature(FeatureType.URL_RAW, 'has_anchor_tag')
+def has_anchor_tag(url: URLData):
+    """
+    Whether the url has an anchor tag
+    """
+    return '#' in url.raw_url
+# endregion
+
+
+@register_feature(FeatureType.URL_RAW, 'has_hex_characters')
+def has_hex_characters(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    regex_hex = re.compile(r'%[1-9A-Z][1-9A-Z]')
+    match = regex_hex.search(url.raw_url)
+    return match is not None
+
+
+@register_feature(FeatureType.URL_RAW, 'double_slashes_in_path')
+def double_slashes_in_path(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    regex_2slashes = re.compile(r'//')
+    return len(regex_2slashes.findall(url.parsed_url.path))
