@@ -17,7 +17,11 @@ class TestNetworkFeatures(unittest.TestCase):
     def test_as_number(self):
         test_url = mock_objects.get_mock_urldata('microsoft')
         result = network_features.as_number(test_url)
-        print(test_url.ip_whois)
 
         self.assertEqual(16625, result)
-
+
+    def test_number_name_server(self):
+        test_url = mock_objects.get_mock_urldata('google')
+        result = network_features.number_name_server(test_url)
+
+        self.assertEqual(4, result)

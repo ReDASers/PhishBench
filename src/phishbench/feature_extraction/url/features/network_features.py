@@ -19,4 +19,11 @@ def as_number(url: URLData):
     ip_whois = url.ip_whois[0]
     if 'asn' in ip_whois:
         return int(ip_whois['asn'])
-    return -1
+    return -1
+
+
+@register_feature(FeatureType.URL_NETWORK, 'number_name_server')
+def number_name_server(url: URLData):
+    if 'NS' in url.dns_results:
+        return len(url.dns_results['NS'])
+    return 0
