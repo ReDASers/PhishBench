@@ -77,10 +77,6 @@ def url_features(url: URLData, corpus, alexa_data, features):
     dict_feature_values, dict_extraction_times = extract_features_from_single_url(features, url)
     phishbench_globals.logger.debug("rawurl: %s", str(url))
 
-    if settings.feature_type_enabled(FeatureType.URL_RAW):
-        single_url_feature(url.raw_url, dict_feature_values, dict_extraction_times)
-        phishbench_globals.logger.debug("url_features >>>>>> complete")
-
     if settings.feature_type_enabled(FeatureType.URL_NETWORK):
         single_network_features(url, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("network_features >>>>>> complete")
@@ -159,22 +155,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
-
-def single_url_feature(raw_url, list_features, list_time):
-    phishbench_globals.logger.debug("Extracting single url features from %s", raw_url)
-
-    Features.URL_Token_Count(raw_url, list_features, list_time)
-
-    Features.URL_Average_Path_Token_Length(raw_url, list_features, list_time)
-
-    Features.URL_Average_Domain_Token_Length(raw_url, list_features, list_time)
-
-    Features.URL_Longest_Domain_Token(raw_url, list_features, list_time)
-
-    Features.URL_Protocol_Port_Match(raw_url, list_features, list_time)
-
-    Features.URL_Has_WWW_in_Middle(raw_url, list_features, list_time)
 
 
 def single_url_html_features(url: URLData, alexa_data, list_features, list_time):

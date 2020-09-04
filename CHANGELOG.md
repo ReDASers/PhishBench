@@ -14,6 +14,9 @@
     * The HTTP headers are now stored in `website_headers` instead of `downloaded_website.headers`
     * Removed `downloaded_website.log`
     
+## Minor Changes
+* Refactored raw url features using reflection
+    
 ## Bug Fixes
 * Fixed looking up whois information with sub-domain urls
 * Fixed parsing urls without a scheme

@@ -4,8 +4,8 @@ This module contains the built-in raw url features
 import re
 import string
 
-import scipy.stats
 import scipy.spatial
+import scipy.stats
 from tldextract import tldextract
 
 from ...reflection import FeatureType, register_feature
@@ -154,12 +154,13 @@ def digit_letter_ratio(url: URLData):
     url_num_letters = sum(c.isalpha() for c in url.raw_url)
     return url_num_digits / url_num_letters
 
+
 # region Character Distribution
 
 
 def _calc_char_count(text):
     """
-    Computes the character distribution of the English letters in a string
+    Counts the occurrences of the English letters in a string
     Parameters
     ----------
     str
@@ -178,7 +179,7 @@ def _calc_char_count(text):
 def _calc_char_dist(text):
     counts = _calc_char_count(text)
     num_letters = sum(counts)
-    return [x/num_letters for x in counts]
+    return [x / num_letters for x in counts]
 
 
 @register_feature(FeatureType.URL_RAW, 'domain_letter_occurrence')
@@ -218,7 +219,7 @@ def kolmogorov_shmirnov(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'char_dist_kl_divergence')
 def kullback_leibler(url: URLData):
     """
-        The Kullback_Leibler divergence between the URL and the English character distribution
+    The Kullback_Leibler divergence between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
     return scipy.stats.entropy(url_char_distance, _ENGLISH_CHAR_DIST)
@@ -227,7 +228,7 @@ def kullback_leibler(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'char_dist_euclidian_distance')
 def euclidean_distance(url: URLData):
     """
-        The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
+    The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
     return scipy.spatial.distance.euclidean(url_char_distance, _ENGLISH_CHAR_DIST)
@@ -241,7 +242,7 @@ def consecutive_numbers(url: URLData):
     The sum of squares of the length of substrings that are consecutive numbers
     """
     matches = re.findall(r'\d+', url.raw_url)
-    return sum((len(x)**2 for x in matches))
+    return sum((len(x) ** 2 for x in matches))
 
 
 @register_feature(FeatureType.URL_RAW, 'special_char_count')
@@ -269,6 +270,8 @@ def has_anchor_tag(url: URLData):
     Whether the url has an anchor tag
     """
     return '#' in url.raw_url
+
+
 # endregion
 
 
@@ -289,3 +292,47 @@ def double_slashes_in_path(url: URLData):
     """
     regex_2slashes = re.compile(r'//')
     return len(regex_2slashes.findall(url.parsed_url.path))
+
+
+@register_feature(FeatureType.URL_RAW, 'has_www_in_middle')
+def has_www_in_middle(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    domain = url.parsed_url.hostname
+    if domain.startswith('www'):
+        new_domain = domain[3:]
+    else:
+        new_domain = domain
+    raw_url = url.raw_url.replace(domain, new_domain, 1)
+    return 'www' in raw_url
+
+
+_PROTOCOL_MAP = {'dns': 53,
+                 'ftp': 21,
+                 'http': 80,
+                 'https': 443,
+                 'imap': 993,
+                 'pop3': 995,
+                 'rlogin': 513,
+                 'scp': 20,
+                 'sftp': 115,
+                 'smtp': 465,
+                 'ssh': 22,
+                 'tcp': 20,
+                 'telnet': 23
+                 }
+
+
+@register_feature(FeatureType.URL_RAW, 'protocol_port_match')
+def protocol_port_match(url: URLData):
+    """
+    Whether or not there are escaped hex characters in the URL
+    """
+    port = url.parsed_url.port
+    if not port:
+        return True
+    protocol = url.parsed_url.scheme
+    if protocol in _PROTOCOL_MAP:
+        return port == _PROTOCOL_MAP[protocol]
+    return False

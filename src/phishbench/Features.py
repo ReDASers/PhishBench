@@ -11,6 +11,8 @@ from .Features_Support import *
 from .feature_extraction.reflection import FeatureType
 from .utils import phishbench_globals
 
+# pylint: skip-file
+
 
 ##### Email URL features
 def Email_Number_Url(url_All, list_features, list_time):
@@ -502,144 +504,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
         list_time['is_login'] = ex_time
 
 
-############################ URL features
-
-
-# PhishDef: URL Names Say It All
-TOKEN_DELIMITER_REGEX = re.compile(r'[/\?\.=_&\-\']+')
-
-
-def URL_Token_Count(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Token_Count"] == "True":
-        start = time.time()
-        count = 0
-        if url:
-            try:
-                tokens = TOKEN_DELIMITER_REGEX.split(url)
-                count = len(tokens)
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                count = -1
-        list_features["Token_Count"] = count
-        end = time.time()
-        ex_time = end - start
-        list_time["Token_Count"] = ex_time
-
-
-# Detecting Malicious URLs Using Lexical Analysis
-def URL_Average_Path_Token_Length(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Average_Path_Token_Length"] == "True":
-        start = time.time()
-        average_token_length = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                path = '{uri.path}'.format(uri=parsed_url)
-                list_tokens = TOKEN_DELIMITER_REGEX.split(path)
-                list_len_tokens = [0 for x in range(len(list_tokens))]
-                for token in list_tokens:
-                    list_len_tokens[list_tokens.index(token)] = len(token)
-                average_token_length = sum(list_len_tokens) / len(list_len_tokens)
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                average_token_length = -1
-        list_features["Average_Path_Token_Length"] = average_token_length
-        end = time.time()
-        ex_time = end - start
-        list_time["Average_Path_Token_Length"] = ex_time
-
-
-def URL_Average_Domain_Token_Length(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Average_Domain_Token_Length"] == "True":
-        start = time.time()
-        average_token_length = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url)
-                list_len_tokens = []
-                list_tokens = TOKEN_DELIMITER_REGEX.split(domain)
-                for token in list_tokens:
-                    list_len_tokens.append(len(token))
-                average_token_length = sum(list_len_tokens) / len(list_len_tokens)
-            except Exception  as e:
-                phishbench_globals.logger.warning("Exception: " + str(e))
-                average_token_length = -1
-        list_features["Average_Domain_Token_Length"] = average_token_length
-        end = time.time()
-        ex_time = end - start
-        list_time["Average_Domain_Token_Length"] = ex_time
-
-
-def URL_Longest_Domain_Token(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Longest_Domain_Token"] == "True":
-        start = time.time()
-        try:
-            if url == '':
-                longest_token_len = 0
-            else:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url)
-                list_tokens = TOKEN_DELIMITER_REGEX.split(domain)
-                list_len_tokens = [len(x) for x in list_tokens]
-                longest_token_len = max(list_len_tokens)
-        except Exception as e:
-            phishbench_globals.logger.warning("Exception: " + str(e))
-            longest_token_len = -1
-        list_features["Longest_Domain_Token"] = longest_token_len
-        end = time.time()
-        ex_time = end - start
-        list_time["Longest_Domain_Token"] = ex_time
-
-
-def URL_Protocol_Port_Match(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Protocol_Port_Match"] == "True":
-        start = time.time()
-        match = 1
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                scheme = '{uri.scheme}'.format(uri=parsed_url).lower()
-                port = '{uri.port}'.format(uri=parsed_url)
-                protocol_port_list = [('http', 8080), ('http', 80), ('https', 443), ('ftp', 20), ('tcp', 20),
-                                      ('scp', 20), ('ftp', 21), ('ssh', 22), ('telnet', 23), ('smtp', 25), ('dns', 53),
-                                      ("pop3", 110), ("sftp", 115), ("imap", 143), ("smtp", 465), ("rlogin", 513),
-                                      ("imap", 993), ("pop3", 995)]
-                if port != 'None' and ((scheme, int(port)) not in protocol_port_list):
-                    match = 0
-                list_features["Protocol_Port_Match"] = match
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                match = -1
-        else:
-            match = 0
-        list_features["Protocol_Port_Match"] = match
-        end = time.time()
-        ex_time = end - start
-        list_time["Protocol_Port_Match"] = ex_time
-
-
-def URL_Has_WWW_in_Middle(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_RAW.value]["Has_WWW_in_Middle"] == "True":
-        start = time.time()
-        flag = 0
-        # regex_www=re.compile(r'www')
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url).lower()
-                if 'www' in domain and domain.startswith('www') == False:
-                    flag = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                flag = -1
-        list_features["Has_WWW_in_Middle"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["Has_WWW_in_Middle"] = ex_time
-
-
-# def URL_ foundURLProtocolAndPortDoNotMatch
 ############################ Network Features
 # def registar_id(whois_info, registrar_mapping)
 #   registar_id = 0
