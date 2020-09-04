@@ -117,11 +117,7 @@ class URLData:
             The nameservers to use when looking up the DNS info. If nameservers are not provided, then PhishBench
             will use the system default nameservers.
         """
-        if self.downloaded_website:
-            final_parsed = urlparse(self.final_url)
-            lookup_url = final_parsed.hostname
-        else:
-            lookup_url = self.parsed_url.hostname
+        lookup_url = self.parsed_url.hostname
         resolver = dns.resolver.get_default_resolver()
         if nameservers:
             resolver.nameservers = nameservers
@@ -134,7 +130,7 @@ class URLData:
                 answers = resolver.query(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
-            except DNSException:
+            except DNSException as e:
                 pass
 
     def lookup_whois(self, nameservers: Optional[List[str]] = None):
