@@ -25,3 +25,12 @@ class TestNetworkFeatures(unittest.TestCase):
         result = network_features.number_name_server(test_url)
 
         self.assertEqual(4, result)
+
+    def test_expiration_date(self):
+        expected = datetime.datetime(2021, 5, 3, 4, 0).timestamp()
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        result = network_features.expiration_date(test_url)
+
+        self.assertEqual(expected, result)
+
+

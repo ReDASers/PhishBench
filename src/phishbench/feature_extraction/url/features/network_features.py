@@ -8,7 +8,6 @@ from ....input import URLData
 @register_feature(FeatureType.URL_NETWORK, 'creation_date')
 def creation_date(url: URLData):
     creation = url.domain_whois['creation_date']
-    print(creation)
     if isinstance(creation, list):
         return creation[0].timestamp()
     return -1
@@ -27,3 +26,11 @@ def number_name_server(url: URLData):
     if 'NS' in url.dns_results:
         return len(url.dns_results['NS'])
     return 0
+
+
+@register_feature(FeatureType.URL_NETWORK, 'expiration_date')
+def expiration_date(url: URLData):
+    date = url.domain_whois['expiration_date']
+    if isinstance(date, list):
+        return date[0].timestamp()
+    return -1

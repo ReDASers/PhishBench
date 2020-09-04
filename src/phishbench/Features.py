@@ -530,29 +530,7 @@ def HTML_Is_Login(html, url, list_features, list_time):
 # age of domain
 
 
-def Network_expiration_date(whois_info, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["expiration_date"] == "True":
-        start = time.time()
-        expiration_date = 0.0
-        if whois_info:
-            try:
-                if "expiration_date" in whois_info:
-                    dateTime = whois_info.get("expiration_date")
-                    if dateTime is not None:
-                        if type(dateTime) is list:
-                            expiration_date = dateTime[0].timestamp()
-                        elif type(dateTime) is str:
-                            expiration_date = 0.0
-                        else:
-                            expiration_date = dateTime.timestamp()
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                expiration_date = -1
-        list_features["expiration_date"] = expiration_date
-        end = time.time()
-        ex_time = end - start
-        list_time["expiration_date"] = ex_time
+
 
 
 def Network_updated_date(whois_info, list_features, list_time):
