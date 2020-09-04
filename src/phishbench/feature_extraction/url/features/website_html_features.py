@@ -1,3 +1,6 @@
+"""
+This module contains features related to the html of a website
+"""
 from bs4 import BeautifulSoup
 
 from ...reflection import FeatureType, register_feature
