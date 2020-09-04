@@ -11,6 +11,8 @@ from .Features_Support import *
 from .feature_extraction.reflection import FeatureType
 from .utils import phishbench_globals
 
+# pylint: skip-file
+
 
 ##### Email URL features
 def Email_Number_Url(url_All, list_features, list_time):
