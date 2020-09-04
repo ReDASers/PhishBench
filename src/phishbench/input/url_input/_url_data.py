@@ -91,10 +91,10 @@ class URLData:
         self.raw_url: str = url.strip()
         if not self.raw_url:
             raise ValueError("URL cannot be empty")
-        if not url.startswith("http"):
-            url = "http://" + url
         self.parsed_url: ParseResult = urlparse(url)
-
+        if not self.parsed_url.scheme:
+            # If urlparse doesn't see // at the start of the hostname, it assumes that the url is relative
+            self.parsed_url = urlparse('//' + url)
         self.downloaded_website: Optional[str] = None
         self.dns_results: Optional[Dict[str, List[str]]] = None
         self.ip_whois = None

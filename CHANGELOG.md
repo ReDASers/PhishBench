@@ -16,6 +16,7 @@
     
 ## Bug Fixes
 * Fixed looking up whois information with sub-domain urls
+* Fixed parsing urls without a scheme
 
 # v1.1.4
 
