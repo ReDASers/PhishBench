@@ -160,7 +160,7 @@ def digit_letter_ratio(url: URLData):
 
 def _calc_char_count(text):
     """
-    Computes the character distribution of the English letters in a string
+    Counts the occurrences of the English letters in a string
     Parameters
     ----------
     str
@@ -219,7 +219,7 @@ def kolmogorov_shmirnov(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'char_dist_kl_divergence')
 def kullback_leibler(url: URLData):
     """
-        The Kullback_Leibler divergence between the URL and the English character distribution
+    The Kullback_Leibler divergence between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
     return scipy.stats.entropy(url_char_distance, _ENGLISH_CHAR_DIST)
@@ -228,7 +228,7 @@ def kullback_leibler(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'char_dist_euclidian_distance')
 def euclidean_distance(url: URLData):
     """
-        The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
+    The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
     """
     url_char_distance = _calc_char_dist(url.raw_url)
     return scipy.spatial.distance.euclidean(url_char_distance, _ENGLISH_CHAR_DIST)
@@ -329,7 +329,6 @@ def protocol_port_match(url: URLData):
     """
     Whether or not there are escaped hex characters in the URL
     """
-
     port = url.parsed_url.port
     if not port:
         return True

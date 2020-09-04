@@ -7,11 +7,17 @@ from ....input import URLData
 
 @register_feature(FeatureType.URL_WEBSITE, 'is_redirect')
 def is_redirect(url: URLData):
+    """
+    Whether or not the URL redirects to different url
+    """
     return url.raw_url.strip() != url.final_url.strip()
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'website_content_type')
 def content_type_header(url: URLData):
+    """
+    The value of the Content-Type header
+    """
     content_type = url.website_headers['Content-Type']
     if not content_type:
         return "text/html"
@@ -22,6 +28,9 @@ def content_type_header(url: URLData):
 
 @register_feature(FeatureType.URL_WEBSITE, 'content_length')
 def content_length_header(url: URLData):
+    """
+    The value of the Content-Length header
+    """
     if'Content-Length' not in url.website_headers:
         return -1
     header_value = url.website_headers['Content-Length']
@@ -30,6 +39,9 @@ def content_length_header(url: URLData):
 
 @register_feature(FeatureType.URL_WEBSITE, 'x_powered_by')
 def x_powered_by_header(url: URLData):
+    """
+    The value of the X-Powered-By header
+    """
     if'X-Powered-By' not in url.website_headers:
         return ""
     return url.website_headers['X-Powered-By']
