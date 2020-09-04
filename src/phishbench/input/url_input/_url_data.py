@@ -91,10 +91,10 @@ class URLData:
         self.raw_url: str = url.strip()
         if not self.raw_url:
             raise ValueError("URL cannot be empty")
-        if not url.startswith("http"):
-            url = "http://" + url
         self.parsed_url: ParseResult = urlparse(url)
-
+        if not self.parsed_url.scheme:
+            # If urlparse doesn't see // at the start of the hostname, it assumes that the url is relative
+            self.parsed_url = urlparse('//' + url)
         self.downloaded_website: Optional[str] = None
         self.dns_results: Optional[Dict[str, List[str]]] = None
         self.ip_whois = None
@@ -202,11 +202,11 @@ class URLData:
 
 def _setup_request_headers():
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) '
-                       'AppleWebKit/537.11 (KHTML, like Gecko) '
-                       'Chrome/23.0.1271.64 Safari/537.11',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-         'Accept-Encoding': 'none',
-         'Accept-Language': 'en-US,en;q=0.8',
-         'Connection': 'keep-alive'}
+                             'AppleWebKit/537.11 (KHTML, like Gecko) '
+                             'Chrome/23.0.1271.64 Safari/537.11',
+               'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+               'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+               'Accept-Encoding': 'none',
+               'Accept-Language': 'en-US,en;q=0.8',
+               'Connection': 'keep-alive'}
     return headers
