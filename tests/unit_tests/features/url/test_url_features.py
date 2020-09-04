@@ -1,3 +1,6 @@
+"""
+Tests for raw url features
+"""
 import unittest
 
 import phishbench.feature_extraction.url.features as url_features
@@ -260,6 +263,17 @@ class TestURLReflectionFeatures(unittest.TestCase):
         test_url = URLData('https://www.google.com:8080/abc', download_url=False)
         result = url_features.protocol_port_match(test_url)
         self.assertFalse(result)
+
+    def test_port_protocol_match_unknown(self):
+        test_url = URLData('stratum+tcp://scrypt.LOCATION.nicehash.com:3333', download_url=False)
+        result = url_features.protocol_port_match(test_url)
+        self.assertFalse(result)
+
+
+class TestURLTokenFeatures(unittest.TestCase):
+    """
+    Tests url_token_features
+    """
 
     def test_token_count(self):
         test_url = URLData('http://te2t-url.com/home.html', download_url=False)
