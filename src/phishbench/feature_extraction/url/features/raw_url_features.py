@@ -154,6 +154,7 @@ def digit_letter_ratio(url: URLData):
     url_num_letters = sum(c.isalpha() for c in url.raw_url)
     return url_num_digits / url_num_letters
 
+
 # region Character Distribution
 
 
@@ -178,7 +179,7 @@ def _calc_char_count(text):
 def _calc_char_dist(text):
     counts = _calc_char_count(text)
     num_letters = sum(counts)
-    return [x/num_letters for x in counts]
+    return [x / num_letters for x in counts]
 
 
 @register_feature(FeatureType.URL_RAW, 'domain_letter_occurrence')
@@ -241,7 +242,7 @@ def consecutive_numbers(url: URLData):
     The sum of squares of the length of substrings that are consecutive numbers
     """
     matches = re.findall(r'\d+', url.raw_url)
-    return sum((len(x)**2 for x in matches))
+    return sum((len(x) ** 2 for x in matches))
 
 
 @register_feature(FeatureType.URL_RAW, 'special_char_count')
@@ -269,6 +270,8 @@ def has_anchor_tag(url: URLData):
     Whether the url has an anchor tag
     """
     return '#' in url.raw_url
+
+
 # endregion
 
 
@@ -306,19 +309,19 @@ def has_www_in_middle(url: URLData):
 
 
 _PROTOCOL_MAP = {'dns': 53,
-                'ftp': 21,
-                'http': 80,
-                'https': 443,
-                'imap': 993,
-                'pop3': 995,
-                'rlogin': 513,
-                'scp': 20,
-                'sftp': 115,
-                'smtp': 465,
-                'ssh': 22,
-                'tcp': 20,
-                'telnet': 23
-                }
+                 'ftp': 21,
+                 'http': 80,
+                 'https': 443,
+                 'imap': 993,
+                 'pop3': 995,
+                 'rlogin': 513,
+                 'scp': 20,
+                 'sftp': 115,
+                 'smtp': 465,
+                 'ssh': 22,
+                 'tcp': 20,
+                 'telnet': 23
+                 }
 
 
 @register_feature(FeatureType.URL_RAW, 'protocol_port_match')
