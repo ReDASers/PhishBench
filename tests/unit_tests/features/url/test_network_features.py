@@ -40,4 +40,10 @@ class TestNetworkFeatures(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_dns_ttl(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        result = network_features.dns_ttl(test_url)
+
+        self.assertGreater(result, 0)
+
 

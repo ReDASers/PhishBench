@@ -504,68 +504,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
         list_time['is_login'] = ex_time
 
 
-############################ Network Features
-# def registar_id(whois_info, registrar_mapping)
-#   registar_id = 0
-#  if 'registrar' in whois_info and whois_info['registrar'] in registrar_mapping:
-#     registar_id = registrar_mapping[whois_info['registrar']]
-# return registar_id
-
-
-# def country(whois_info, list_features, list_time):
-#    #global list_features
-#    if Globals.config["Features"]["country"] == "True":
-#        start=time.time()
-#        country = "N/A"
-#        try:
-#            if 'country' in whois_info:
-#                country = whois_info['country']
-#        except Exception as e:
-#            Globals.logger.warning("exception: " + str(e))
-#        list_features["country"]=country
-#        end=time.time()
-#        ex_time=end-start
-#        list_time["country"]=ex_time
-
-# age of domain
-
-
-def Network_dns_ttl(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["dns_ttl"] == "True":
-        start = time.time()
-        dns_ttl = 0
-        retry_count = 0
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = parsed_url.hostname
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                dns_ttl = -1
-            try:
-                while True:
-                    try:
-                        dns_complete_info = dns.resolver.query(domain, 'A')
-                        dns_ttl = dns_complete_info.rrset.ttl
-                    except dns.exception.Timeout:
-                        if retry_count > 3:
-                            break
-                        retry_count = retry_count + 1
-                        continue
-                    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers) as e:
-                        phishbench_globals.logger.warning("Exception: {}".format(e))
-                        dns_ttl = 0
-                        break
-                    break
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                dns_ttl = -1
-        list_features["dns_ttl"] = dns_ttl
-        end = time.time()
-        ex_time = end - start
-        list_time["dns_ttl"] = ex_time
-
-
 ############################ Javascript features
 def Javascript_number_of_exec(soup, list_features, list_time):
     # global list_features
