@@ -33,4 +33,11 @@ class TestNetworkFeatures(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_updated_date(self):
+        expected = datetime.datetime(2020, 5, 20, 19, 54, 16).timestamp()
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        result = network_features.updated_date(test_url)
+
+        self.assertEqual(expected, result)
+
 

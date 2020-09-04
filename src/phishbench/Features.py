@@ -530,65 +530,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
 # age of domain
 
 
-
-
-
-def Network_updated_date(whois_info, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["updated_date"] == "True":
-        start = time.time()
-        updated_date = 0.0
-        if whois_info:
-            try:
-                if "updated_date" in whois_info:
-                    update_date_field = whois_info["updated_date"]
-                    if update_date_field is not None:
-                        if type(update_date_field) is list:
-                            updated_date = update_date_field[0].timestamp()
-                        elif type(update_date_field) is datetime:
-                            updated_date = update_date_field.timestamp()
-                        else:
-                            updated_date = 0.0
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                updated_date = -1
-        list_features["updated_date"] = updated_date
-        # print("----Update_date: {}".format(updated_date))
-        end = time.time()
-        ex_time = end - start
-        list_time["updated_date"] = ex_time
-
-
-def Network_DNS_Info_Exists(url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["DNS_Info_Exists"] == "True":
-        start = time.time()
-        flag = 1
-        if url:
-            try:
-                parsed_url = urlparse(url)
-                domain = '{uri.hostname}'.format(uri=parsed_url)
-                resolver = dns.resolver.Resolver()
-                resolver.timeout = 3
-                resolver.lifetime = 3
-                try:
-                    dns_info = resolver.query(domain, 'A')
-                    flag = 1
-                except (
-                        dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers,
-                        dns.resolver.Timeout) as e:
-                    phishbench_globals.logger.warning("Exception: {}".format(e))
-                    flag = 0
-            except Exception as e:
-                phishbench_globals.logger.warning("Exception: {}".format(e))
-                flag = -1
-                phishbench_globals.logger.debug(list_features["DNS_Info_Exists"])
-        else:
-            flag = 0
-        list_features["DNS_Info_Exists"] = flag
-        end = time.time()
-        ex_time = end - start
-        list_time["DNS_Info_Exists"] = ex_time
-
-
 def Network_dns_ttl(url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_NETWORK.value]["dns_ttl"] == "True":
         start = time.time()

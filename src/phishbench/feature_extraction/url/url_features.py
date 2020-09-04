@@ -210,6 +210,4 @@ def single_javascript_features(soup, html, list_features, list_time):
 def single_network_features(url, list_features, list_time):
     phishbench_globals.logger.debug("Extracting network features from %s", url)
 
-    Features.Network_updated_date(url.domain_whois, list_features, list_time)
-
     Features.Network_dns_ttl(url.raw_url, list_features, list_time)

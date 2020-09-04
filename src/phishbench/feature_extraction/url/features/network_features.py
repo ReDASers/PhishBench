@@ -34,3 +34,11 @@ def expiration_date(url: URLData):
     if isinstance(date, list):
         return date[0].timestamp()
     return -1
+
+
+@register_feature(FeatureType.URL_NETWORK, 'updated_date')
+def updated_date(url: URLData):
+    date = url.domain_whois['updated_date']
+    if isinstance(date, list):
+        return date[0].timestamp()
+    return -1
