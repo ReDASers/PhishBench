@@ -1,10 +1,7 @@
 import unittest
-from unittest.mock import patch
 
 import phishbench.feature_extraction.url.features as url_features
-from phishbench import Features
 from phishbench.input import URLData
-from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
@@ -264,51 +261,32 @@ class TestURLReflectionFeatures(unittest.TestCase):
         result = url_features.protocol_port_match(test_url)
         self.assertFalse(result)
 
+    def test_token_count(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.token_count(test_url)
 
-@patch('phishbench.utils.phishbench_globals.config', new_callable=mock_objects.get_mock_config)
-class TestURLFeatures(unittest.TestCase):
-    # pylint: disable=invalid-name
-    def test_kolmogorov_shmirnov(self, config_mock):
-        pass
+        self.assertEqual(6, result)
 
-    def test_URL_Kullback_Leibler_Divergence(self, config_mock):
-        pass
+    def test_average_path_token_length(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.average_path_token_length(test_url)
 
-    def test_URL_english_frequency_distance(self, config_mock):
-        pass
+        self.assertEqual(4, result)
 
-    def test_URL_Token_Count(self, config_mock):
-        config_mock['URL_Features']['Token_Count'] = "True"
-        list_features = {}
-        list_time = {}
+    def test_average_path_token_length_no_path(self):
+        test_url = URLData('http://te2t-url.com', download_url=False)
+        result = url_features.average_path_token_length(test_url)
 
-        Features.URL_Token_Count('http://te2t-url.com/home.html', list_features, list_time)
+        self.assertEqual(0, result)
 
-        self.assertEqual(6, list_features["Token_Count"], 'incorrect Token_Count')
+    def test_average_domain_token_length(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.average_domain_token_length(test_url)
 
-    def test_URL_Average_Path_Token_Length(self, config_mock):
-        config_mock['URL_Features']['Average_Path_Token_Length'] = "True"
-        list_features = {}
-        list_time = {}
+        self.assertEqual(10 / 3, result)
 
-        Features.URL_Average_Path_Token_Length('http://te2t-url.com/home.html', list_features, list_time)
+    def test_longest_domain_token_length(self):
+        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
+        result = url_features.longest_domain_token_length(test_url)
 
-        self.assertEqual(list_features["Average_Path_Token_Length"], 8 / 3, 'incorrect Average_Path_Token_Length')
-
-    def test_URL_Average_Domain_Token_Length(self, config_mock):
-        config_mock['URL_Features']['Average_Domain_Token_Length'] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Average_Domain_Token_Length('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(list_features["Average_Domain_Token_Length"], 10 / 3, 'incorrect Average_Domain_Token_Length')
-
-    def test_URL_Longest_Domain_Token(self, config_mock):
-        config_mock['URL_Features']['Longest_Domain_Token'] = "True"
-        list_features = {}
-        list_time = {}
-
-        Features.URL_Longest_Domain_Token('http://te2t-url.com/home.html', list_features, list_time)
-
-        self.assertEqual(4, list_features["Longest_Domain_Token"], 'incorrect Longest_Domain_Token')
+        self.assertEqual(4, result)
