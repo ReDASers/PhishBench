@@ -530,31 +530,6 @@ def HTML_Is_Login(html, url, list_features, list_time):
 # age of domain
 
 
-def Network_creation_date(whois_info, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["creation_date"] == "True":
-        start = time.time()
-        creation_date = 0.0
-        if whois_info:
-            try:
-                if "creation_date" in whois_info:
-                    dateTime = whois_info.get("creation_date")
-                    if dateTime is not None:
-                        if type(dateTime) is list:
-                            creation_date = dateTime[0].timestamp()
-                        elif type(dateTime) is str:
-                            creation_date = datetime(year=1996, month=1, day=1).timestamp()
-                        else:
-                            creation_date = dateTime.timestamp()
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                creation_date = -1
-        list_features["creation_date"] = creation_date
-        end = time.time()
-        ex_time = end - start
-        list_time["creation_date"] = ex_time
-
-
 def Network_expiration_date(whois_info, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_NETWORK.value]["expiration_date"] == "True":
