@@ -214,8 +214,6 @@ def single_network_features(url, list_features, list_time):
 
     Features.Network_updated_date(url.domain_whois, list_features, list_time)
 
-    Features.Network_as_number(url.ip_whois, list_features, list_time)
-
     Features.Network_number_name_server(url.dns_results, list_features, list_time)
 
     Features.Network_dns_ttl(url.raw_url, list_features, list_time)

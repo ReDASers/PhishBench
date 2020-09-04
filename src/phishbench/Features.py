@@ -580,23 +580,6 @@ def Network_updated_date(whois_info, list_features, list_time):
         list_time["updated_date"] = ex_time
 
 
-def Network_as_number(IP_whois_list, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_NETWORK.value]["as_number"] == "True":
-        start = time.time()
-        as_number = 0
-        if IP_whois_list:
-            try:
-                if 'asn' in IP_whois_list:
-                    as_number = IP_whois_list['asn']
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                as_number = -1
-        list_features["as_number"] = as_number
-        end = time.time()
-        ex_time = end - start
-        list_time["as_number"] = ex_time
-
-
 def Network_number_name_server(dns_info, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_NETWORK.value]["number_name_server"] == "True":
         start = time.time()

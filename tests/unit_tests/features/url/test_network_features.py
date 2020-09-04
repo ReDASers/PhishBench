@@ -13,3 +13,11 @@ class TestNetworkFeatures(unittest.TestCase):
         result = network_features.creation_date(test_url)
 
         self.assertEqual(expected, result)
+
+    def test_as_number(self):
+        test_url = mock_objects.get_mock_urldata('microsoft')
+        result = network_features.as_number(test_url)
+        print(test_url.ip_whois)
+
+        self.assertEqual(16625, result)
+
