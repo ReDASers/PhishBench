@@ -1,5 +1,10 @@
 # Change Log
 
+# v1.2.1
+
+## Minor Changes
+* Refactored network features using reflection
+
 # v1.2.0
 
 ## Major Changes
