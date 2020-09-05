@@ -78,7 +78,7 @@ class URLDataTest(unittest.TestCase):
             "org": "Google LLC"
         }
         data = url_data.URLData(test_url, download_url=False)
-        data.lookup_whois()
+        data.lookup_whois(nameservers=['1.1.1.1'])
 
         whois_mock.assert_called_once_with('google.com')
         whois_info = data.domain_whois

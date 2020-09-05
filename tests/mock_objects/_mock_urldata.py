@@ -4,11 +4,11 @@ import pickle
 from phishbench.input import URLData
 
 
-def get_mock_urldata(filename) -> URLData:
+def get_mock_object(filename) -> URLData:
     if not filename.endswith('.pkl'):
         filename = filename + '.pkl'
     current_file_folder = pathlib.Path(__file__).parent.absolute()
-    test_file = os.path.join(current_file_folder, 'resources', 'mock_urls', filename)
+    test_file = os.path.join(current_file_folder, 'resources', 'mock_objects', filename)
     with open(test_file, 'rb') as f:
         result = pickle.load(f)
     return result
