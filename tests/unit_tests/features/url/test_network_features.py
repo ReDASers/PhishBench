@@ -1,3 +1,6 @@
+"""
+Tests for network features
+"""
 import datetime
 import unittest
 from unittest.mock import patch, MagicMock
@@ -7,6 +10,7 @@ from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
+# pylint: disable=missing-class-docstring
 
 class TestNetworkFeatures(unittest.TestCase):
 
