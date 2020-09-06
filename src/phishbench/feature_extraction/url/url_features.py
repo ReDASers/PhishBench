@@ -77,10 +77,6 @@ def url_features(url: URLData, corpus, alexa_data, features):
     dict_feature_values, dict_extraction_times = extract_features_from_single_url(features, url)
     phishbench_globals.logger.debug("rawurl: %s", str(url))
 
-    if settings.feature_type_enabled(FeatureType.URL_NETWORK):
-        single_network_features(url, dict_feature_values, dict_extraction_times)
-        phishbench_globals.logger.debug("network_features >>>>>> complete")
-
     if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
         single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
         phishbench_globals.logger.debug("html_features >>>>>> complete")
@@ -205,20 +201,3 @@ def single_javascript_features(soup, html, list_features, list_time):
     Features.Javascript_rightclick_disabled(html, list_features, list_time)
 
     Features.Javascript_number_of_total_suspicious_features(list_features, list_time)
-
-
-def single_network_features(url, list_features, list_time):
-    phishbench_globals.logger.debug("Extracting network features from %s", url)
-    Features.Network_creation_date(url.domain_whois, list_features, list_time)
-
-    Features.Network_expiration_date(url.domain_whois, list_features, list_time)
-
-    Features.Network_updated_date(url.domain_whois, list_features, list_time)
-
-    Features.Network_as_number(url.ip_whois, list_features, list_time)
-
-    Features.Network_number_name_server(url.dns_results, list_features, list_time)
-
-    Features.Network_dns_ttl(url.raw_url, list_features, list_time)
-
-    Features.Network_DNS_Info_Exists(url.raw_url, list_features, list_time)
