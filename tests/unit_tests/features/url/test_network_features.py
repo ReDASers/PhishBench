@@ -6,6 +6,8 @@ from phishbench.feature_extraction.url.features import network_features
 from tests import mock_objects
 
 
+# pylint: disable=missing-function-docstring
+
 class TestNetworkFeatures(unittest.TestCase):
 
     def test_creation_date(self):
