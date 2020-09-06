@@ -50,5 +50,3 @@ class TestNetworkFeatures(unittest.TestCase):
 
         dns_mock.assert_called_once_with('www.microsoft.com', 'A')
         self.assertEqual(13, result)
-
-

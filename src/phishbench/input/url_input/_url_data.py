@@ -130,7 +130,7 @@ class URLData:
                 answers = resolver.query(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
-            except DNSException as e:
+            except DNSException:
                 pass
 
     def lookup_whois(self, nameservers: Optional[List[str]] = None):
