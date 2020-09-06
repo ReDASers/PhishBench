@@ -1,10 +1,24 @@
+"""
+Arbitrary mock objects
+"""
+
 import os
 import pathlib
 import pickle
-from phishbench.input import URLData
 
 
-def get_mock_object(filename) -> URLData:
+def get_mock_object(filename):
+    """
+    Loads a pickled resource object from file.
+    Parameters
+    ----------
+    filename:
+        The filename of the object, with or without the .pkl extension
+
+    Returns
+    -------
+        The pickled object
+    """
     if not filename.endswith('.pkl'):
         filename = filename + '.pkl'
     current_file_folder = pathlib.Path(__file__).parent.absolute()

@@ -132,12 +132,12 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
 
     def test_hidden_input(self):
         test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
-        test_url.downloaded_website = mock_objects.get_html("test_1.html")
+        test_url.downloaded_website = mock_objects.get_webpage("test_1.html")
         result = website_html_features.number_of_hidden_input(test_url)
         self.assertEqual(1, result)
 
     def test_hidden_svg(self):
         test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
-        test_url.downloaded_website = mock_objects.get_html("test_1.html")
+        test_url.downloaded_website = mock_objects.get_webpage("test_1.html")
         result = website_html_features.number_of_hidden_svg(test_url)
         self.assertEqual(1, result)
