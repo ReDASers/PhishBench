@@ -6,9 +6,17 @@ The PhishBench platform extract features from emails and URLs, run classifiers, 
 
 PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
 
-To install, run
+To install the latest version, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git
+
+To install a specific version, run 
+
+    pip install git+https://github.com/ReDASers/Phishing-Detection.git@{ verion number }
+
+for an example, to install version 1.1.4, run 
+
+    pip install git+https://github.com/ReDASers/Phishing-Detection.git@1.1.4
 
 # How to run PhishBench
 
@@ -41,14 +49,14 @@ path_legitimate_testing = ../url_2019/legit
 path_phishing_testing = ../url_2019/blank
 ```
 
-Features, Classifiers, Evaluation Metrics, and Imbalanced Methods are toggled via a `True` or `False` like so:
+You can toggle features, classifiers, evaluation metrics, via a `True` or `False` like so:
 
 ```
 Confusion_matrix = True
 Cross_validation = False
 ```
 
-## Run PhishBench
+## Run PhishBench Basic Experiment
 ```
 usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
                   [-c]
