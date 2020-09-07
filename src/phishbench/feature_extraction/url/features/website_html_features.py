@@ -2,6 +2,7 @@
 This module contains features related to the html of a website
 """
 from bs4 import BeautifulSoup
+from tldextract import tldextract
 
 from ...reflection import FeatureType, register_feature
 from ....input import URLData
@@ -195,3 +196,56 @@ def number_of_hidden_svg(url: URLData):
     object_tags = soup.find_all('svg')
     hidden = [1 for tag in object_tags if tag.get('aria-hidden') == "true"]
     return len(hidden)
+
+
+_CONTENT_LIST = ['audio', 'embed', 'iframe', 'img', 'input', 'script', 'source', 'track', 'video']
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_external_content')
+def number_of_external_content(url: URLData):
+    """
+    The number of external contents
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    url_extracted = tldextract.extract(url.final_url)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
+    outbound_count = 0
+
+    tags = soup.find_all(_CONTENT_LIST)
+    for tag in tags:
+        src_address = tag.get('src')
+        if src_address is not None:
+            if src_address.startswith("//"):
+                src_address = "http:" + src_address
+            if src_address.lower().startswith(("https", "http")):
+                extracted = tldextract.extract(src_address)
+                link_domain = '{}.{}'.format(extracted.domain, extracted.suffix)
+                if link_domain != local_domain:
+                    outbound_count += 1
+    return outbound_count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_internal_content')
+def number_of_internal_content(url: URLData):
+    """
+    The number of internal contents
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    url_extracted = tldextract.extract(url.final_url)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
+    inbound_count = 0
+
+    tags = soup.find_all(_CONTENT_LIST)
+    for tag in tags:
+        src_address = tag.get('src')
+        if src_address is not None:
+            if src_address.startswith("//"):
+                src_address = "http:" + src_address
+            if src_address.lower().startswith(("https", "http")):
+                extracted = tldextract.extract(src_address)
+                filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+                if filtered_link == local_domain:
+                    inbound_count = inbound_count + 1
+            else:
+                inbound_count = inbound_count + 1
+    return inbound_count

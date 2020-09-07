@@ -146,3 +146,15 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         test_url.downloaded_website = mock_objects.get_webpage("test_1.html")
         result = website_html_features.number_of_hidden_svg(test_url)
         self.assertEqual(1, result)
+
+    def test_number_external_content(self):
+        test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
+        result = website_html_features.number_of_external_content(test_url)
+
+        self.assertEqual(3, result)
+
+    def test_number_internal_content(self):
+        test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
+        result = website_html_features.number_of_internal_content(test_url)
+
+        self.assertEqual(4, result)
