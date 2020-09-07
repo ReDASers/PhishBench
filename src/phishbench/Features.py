@@ -374,38 +374,6 @@ def HTML_inbound_count(soup, url, list_features, list_time):
         list_time["inbound_count"] = ex_time
 
 
-def HTML_outbound_count(soup, url, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["outbound_count"] == "True":
-        start = time.time()
-        outbound_count = 0
-        if soup:
-            try:
-                url_extracted = tldextract.extract(url)
-                local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
-                tags = soup.find_all(['audio', 'embed', 'iframe', 'img', 'input', 'script', 'source', 'track', 'video'])
-                for tag in tags:
-                    src_address = tag.get('src')
-                    if src_address != None:
-                        if src_address.lower().startswith(("https", "http")):
-                            extracted = tldextract.extract(src_address)
-                            filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
-                            if filtered_link != local_domain:
-                                outbound_count = outbound_count + 1
-                        elif src_address.startswith("//"):
-                            extracted = tldextract.extract("http:" + src_address)
-                            filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
-                            if filtered_link != local_domain:
-                                outbound_count = outbound_count + 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                outbound_count = -1
-        list_features["outbound_count"] = outbound_count
-        end = time.time()
-        ex_time = end - start
-        list_time["outbound_count"] = ex_time
-
-
 def HTML_inbound_href_count(soup, url, list_features, list_time):
     # global list_features
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["inbound_href_count"] == "True":
