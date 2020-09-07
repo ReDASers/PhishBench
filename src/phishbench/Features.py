@@ -356,13 +356,10 @@ def HTML_inbound_count(soup, url, list_features, list_time):
                 for tag in tags:
                     src_address = tag.get('src')
                     if src_address != None:
+                        if src_address.startswith("//"):
+                            src_address = "http:" + src_address
                         if src_address.lower().startswith(("https", "http")):
                             extracted = tldextract.extract(src_address)
-                            filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
-                            if filtered_link == local_domain:
-                                inbound_count = inbound_count + 1
-                        elif src_address.startswith("//"):
-                            extracted = tldextract.extract("http:" + src_address)
                             filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
                             if filtered_link == local_domain:
                                 inbound_count = inbound_count + 1
