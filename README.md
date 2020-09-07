@@ -6,9 +6,17 @@ The PhishBench platform extract features from emails and URLs, run classifiers, 
 
 PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
 
-To install, run
+To install the latest version, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git
+
+To install a specific version, run 
+
+    pip install git+https://github.com/ReDASers/Phishing-Detection.git@{ verion number }
+
+for an example, to install version 1.1.4, run 
+
+    pip install git+https://github.com/ReDASers/Phishing-Detection.git@1.1.4
 
 # How to run PhishBench
 
