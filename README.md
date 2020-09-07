@@ -4,7 +4,7 @@ The PhishBench platform extract features from emails and URLs, run classifiers, 
 
 # Installation
 
-PhishBench requires Python 3.7 to run. It does not currently work on Python 3.8. 
+PhishBench requires Python 3.7 to run. It has not been validated to work on Python 3.8. 
 
 To install the latest version, run
 
@@ -75,7 +75,14 @@ optional arguments:
                         Do not wait for user's confirmation
 ```
 
+## Use PhishBench as a library
+For more advance control, you can use PhishBench as a library. To do so, import `phishbench` and the desired modules in your script and call the `initialize` function.
 
+```python
+import phishbench
+
+phishbench.initalize('Config_File.ini')
+```
 
 # DESCRIPTION OF MODULES
 ## Features.py
