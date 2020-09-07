@@ -204,7 +204,7 @@ _CONTENT_LIST = ['audio', 'embed', 'iframe', 'img', 'input', 'script', 'source',
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_external_content')
 def number_of_external_content(url: URLData):
     """
-    The number of iframe of height or width 0
+    The number of external contents
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url)
@@ -224,3 +224,28 @@ def number_of_external_content(url: URLData):
                     outbound_count += 1
     return outbound_count
 
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_internal_content')
+def number_of_internal_content(url: URLData):
+    """
+    The number of internal contents
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    url_extracted = tldextract.extract(url)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
+    inbound_count = 0
+
+    tags = soup.find_all(_CONTENT_LIST)
+    for tag in tags:
+        src_address = tag.get('src')
+        if src_address is not None:
+            if src_address.startswith("//"):
+                src_address = "http:" + src_address
+            if src_address.lower().startswith(("https", "http")):
+                extracted = tldextract.extract(src_address)
+                filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+                if filtered_link == local_domain:
+                    inbound_count = inbound_count + 1
+            else:
+                inbound_count = inbound_count + 1
+    return inbound_count
