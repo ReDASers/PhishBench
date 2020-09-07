@@ -49,14 +49,14 @@ path_legitimate_testing = ../url_2019/legit
 path_phishing_testing = ../url_2019/blank
 ```
 
-Features, Classifiers, Evaluation Metrics, and Imbalanced Methods are toggled via a `True` or `False` like so:
+You can toggle features, classifiers, evaluation metrics, via a `True` or `False` like so:
 
 ```
 Confusion_matrix = True
 Cross_validation = False
 ```
 
-## Run PhishBench
+## Run PhishBench Basic Experiment
 ```
 usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
                   [-c]
