@@ -207,7 +207,7 @@ def number_of_external_content(url: URLData):
     The number of external contents
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-    url_extracted = tldextract.extract(url)
+    url_extracted = tldextract.extract(url.final_url)
     local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
     outbound_count = 0
 
@@ -231,7 +231,7 @@ def number_of_internal_content(url: URLData):
     The number of internal contents
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-    url_extracted = tldextract.extract(url)
+    url_extracted = tldextract.extract(url.final_url)
     local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
     inbound_count = 0
 
