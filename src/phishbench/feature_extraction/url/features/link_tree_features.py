@@ -1,3 +1,8 @@
+"""
+Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
+Using Machine Learning
+"""
+
 import statistics
 
 from bs4 import BeautifulSoup
@@ -14,6 +19,22 @@ def _extract_domain(url):
 
 @register_feature(FeatureType.URL_WEBSITE, 'link_tree_features')
 def link_tree_features(url: URLData):
+    """
+    Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
+    Using Machine Learning
+
+    Split the links into 30 sets as follows:
+    <a>, <link>, <script>, <video>, <img>,
+    <meta>: split all links by these six HTML tags
+    first, then divide again by five types: (i) any URL
+    contains current domain, (ii) social network links
+    (“Facebook,” “YouTube,” “Google,” “Twitter,”
+    “Instagram,” “Pinterest)”, (iii) other https links,
+    (iv) other http links, and (v) internal links.
+
+    Returns the size, mean length, and standard deviation of length of each set rounded to two decimal places
+    """
+    # pylint: too-many-locals
     domain = _extract_domain(url.final_url)
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
@@ -21,8 +42,7 @@ def link_tree_features(url: URLData):
     link_link = _tree_get_links(soup, 'link', 'href', '')
     img_link = _tree_get_links(soup, 'img', 'src', '')
     video_link = _tree_get_links(soup, 'video', 'src', '')
-    a_link = _tree_get_links(soup, 'a', 'src', '')
-    a_link += _tree_get_links(soup, 'a', 'href', '')
+    a_link = _tree_get_links(soup, 'a', 'src', '') + _tree_get_links(soup, 'a', 'href', '')
     meta_link = _tree_get_links(soup, 'meta', 'content', '/')
     script_link = _tree_get_links(soup, 'script', 'src', '')
 
@@ -51,17 +71,18 @@ def _tree_get_links(soup, tag, source, identifier):
             identifier in link.get(source)]
 
 
+SOCIAL_DOMAINS = ['google.com', 'facebook.com', 'twitter.com', 'pinterest.com', 'instagram.com']
+
+
 # Get size, mean, SD for a set of links
 def _extract_tree_features(links, domain):
-    # TODO could use a input file for the list, not hardcoded!
-    social_list = ['google.com', 'facebook.com', 'twitter.com', 'pinterest.com', 'instagram.com']
     features = []
     type_1 = type_2 = type_3 = type_4 = type_5 = []
     for link in links:
         link_domain = _extract_domain(link)
         if domain in link:
             type_1.append(link)
-        elif link_domain in social_list:
+        elif link_domain in SOCIAL_DOMAINS:
             type_2.append(link)
         elif link.startswith("https:"):
             type_3.append(link)
