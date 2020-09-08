@@ -249,3 +249,52 @@ def number_of_internal_content(url: URLData):
             else:
                 inbound_count = inbound_count + 1
     return inbound_count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_internal_links')
+def number_of_internal_links(url: URLData):
+    """
+    The number of links to content on the same domain
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    url_extracted = tldextract.extract(url.final_url)
+    local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
+    inbound_href_count = 0
+
+    tags = soup.find_all(['a', 'area', 'base', 'link'])
+    links = [tag.get('href') for tag in tags if tag.get('href') is not None]
+    for link in links:
+        if link.startswith("//"):
+            link = "http:" + link
+        if link.lower().startswith(("https", "http")):
+            extracted = tldextract.extract(link)
+            filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+            if filtered_link == local_domain:
+                inbound_href_count = inbound_href_count + 1
+        else:
+            inbound_href_count = inbound_href_count + 1
+    return inbound_href_count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_of_external_links')
+def number_of_external_links(url: URLData):
+    """
+    The number of links to content on a different domain
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    url_extracted = tldextract.extract(url.final_url)
+    local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
+    outbound_href_count = 0
+
+    tags = soup.find_all(['a', 'area', 'base', 'link'])
+    links = [tag.get('href') for tag in tags if tag.get('href') is not None]
+    for link in links:
+        if link.startswith("//"):
+            link = "http:" + link
+        if link is not None:
+            if link.lower().startswith(("https", "http")):
+                extracted = tldextract.extract(link)
+                filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+                if filtered_link != local_domain:
+                    outbound_href_count = outbound_href_count + 1
+    return outbound_href_count
