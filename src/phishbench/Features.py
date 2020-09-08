@@ -322,26 +322,6 @@ def add_features(list_features, features, tag):
 
 # END LTree features
 
-def HTML_number_suspicious_content(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["number_suspicious_content"] == "True":
-        start = time.time()
-        all_tags = soup.find_all()
-        number_suspicious_content = 0
-        if soup:
-            try:
-                for tag in all_tags:
-                    str_tag = str(tag)
-                    if len(str_tag) > 128 and (str_tag.count(' ') / len(str_tag) < 0.05):
-                        number_suspicious_content = number_suspicious_content + 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_suspicious_content = -1
-        list_features["number_suspicious_content"] = number_suspicious_content
-        end = time.time()
-        ex_time = end - start
-        list_time["number_suspicious_content"] = ex_time
-
 
 def HTML_Is_Login(html, url, list_features, list_time):
     if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["Is_Login"] == "True":

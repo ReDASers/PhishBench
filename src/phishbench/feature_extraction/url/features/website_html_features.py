@@ -298,3 +298,17 @@ def number_of_external_links(url: URLData):
                 if filtered_link != local_domain:
                     outbound_href_count = outbound_href_count + 1
     return outbound_href_count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'number_suspicious_content')
+def number_suspicious_content(url: URLData):
+    """
+    The number of links to content on a different domain
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    tags = [str(x) for x in soup.find_all()]
+    count = 0
+    for tag in tags:
+        if len(tag) > 128 and (tag.count(' ') / len(tag) < 0.05):
+            count += 1
+    return count
