@@ -164,4 +164,9 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_internal_links(test_url)
 
         self.assertEqual(321, result)
-
+
+    def test_number_external_links(self):
+        test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
+        result = website_html_features.number_of_external_links(test_url)
+
+        self.assertEqual(46, result)
