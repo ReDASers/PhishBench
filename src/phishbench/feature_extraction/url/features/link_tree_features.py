@@ -34,7 +34,7 @@ def link_tree_features(url: URLData):
 
     Returns the size, mean length, and standard deviation of length of each set rounded to two decimal places
     """
-    # pylint: too-many-locals
+    # pylint: disable=too-many-locals
     domain = _extract_domain(url.final_url)
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
