@@ -45,13 +45,10 @@ def link_tree_features(url: URLData):
 
 
 def _tree_get_links(soup, tag, source, identifier):
-    links = []
-    for link in soup.findAll(tag):
-        content = link.get(source)
-        if content is not None:
-            if identifier in content:
-                links.append(content)
-    return links
+    return [link.get(source) for
+            link in soup.findAll(tag) if
+            link.get(source) is not None and
+            identifier in link.get(source)]
 
 
 # Get size, mean, SD for a set of links
@@ -62,7 +59,7 @@ def _extract_tree_features(links, domain):
     type_1 = type_2 = type_3 = type_4 = type_5 = []
     for link in links:
         link_domain = _extract_domain(link)
-        if domain in link:
+        if domain == link_domain:
             type_1.append(link)
         elif link_domain in social_list:
             type_2.append(link)
@@ -84,9 +81,7 @@ def _extract_by_type(link_list):
     block_size = len(link_list)
     block_mean = 0
     block_std = 0
-    links_length = []
-    for link in link_list:
-        links_length.append(len(link))
+    links_length = [len(link) for link in link_list]
     if len(links_length) > 0:
         block_mean = round(statistics.mean(links_length), 2)
     if len(links_length) > 1:
@@ -94,13 +89,12 @@ def _extract_by_type(link_list):
     return [block_size, block_mean, block_std]
 
 
-def _add_features(list_features, features, tag):
+def _add_features(feature_dict: dict, features, tag):
     # features = [[3],[3],[3],[3],[3]], ..., [[],[],[],[],[]]
     # T1 - T5: 5 * 3
     name_list = ['size', 'mean', 'SD']
     for i, set_f in enumerate(features):
         # size mean, SD
-        name_1 = f"LTree_feature_{tag}_T{i}_"
         for name, value in zip(name_list, set_f):
-            feature_name = name_1 + name
-            list_features[feature_name] = value
+            feature_name = f"{tag}_T{i}_{name}"
+            feature_dict[feature_name] = value

@@ -7,11 +7,11 @@ from phishbench.input import URLData
 from phishbench.feature_extraction.url.features import link_tree_features
 from tests import mock_objects
 
-
 # pylint: disable=missing-function-docstring
 # pylint: disable=missing-class-docstring
 
-class TestNetworkFeatures(unittest.TestCase):
+
+class TestLinkTreeFeatures(unittest.TestCase):
 
     def test_ltree(self):
         url: URLData = mock_objects.get_mock_object("wikipedia_shortener_urldata")
