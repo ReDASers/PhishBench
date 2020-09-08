@@ -170,3 +170,9 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_of_external_links(test_url)
 
         self.assertEqual(46, result)
+
+    def test_number_suspicious_content(self):
+        test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
+        result = website_html_features.number_suspicious_content(test_url)
+
+        self.assertEqual(145, result)
