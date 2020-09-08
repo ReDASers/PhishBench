@@ -59,7 +59,7 @@ def _extract_tree_features(links, domain):
     type_1 = type_2 = type_3 = type_4 = type_5 = []
     for link in links:
         link_domain = _extract_domain(link)
-        if domain == link_domain:
+        if domain in link:
             type_1.append(link)
         elif link_domain in social_list:
             type_2.append(link)
