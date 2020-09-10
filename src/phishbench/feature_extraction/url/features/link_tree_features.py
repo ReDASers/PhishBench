@@ -2,7 +2,9 @@
 Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
 Using Machine Learning
 """
-
+import csv
+import os.path
+import pathlib
 import statistics
 
 from bs4 import BeautifulSoup
@@ -12,13 +14,31 @@ from ...reflection import FeatureType, register_feature
 from ....input import URLData
 
 
-def _extract_domain(url):
-    tld_extract = tldextract.extract(url)
-    return f'{tld_extract.domain}.{tld_extract.suffix}'
+@register_feature(FeatureType.URL_WEBSITE, 'link_ranked_matrix')
+def ranked_matrix(url: URLData):
+    domain = _extract_domain(url.final_url)
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    all_redirectable_links = []
+    links = _tree_get_links(soup, 'link', 'href', '')
+    links += _tree_get_links(soup, 'img', 'src', '')
+    links += _tree_get_links(soup, 'video', 'src', '')
+    links += _tree_get_links(soup, 'a', 'src', '')
+    links += _tree_get_links(soup, 'a', 'href', '')
+    links += _tree_get_links(soup, 'meta', 'content', '/')
+    links += _tree_get_links(soup, 'script', 'src', '')
+    for link in links:
+        if link.startswith("http"):
+            all_redirectable_links.append(link)
+    # extract features: size, mean, standard deviation
+    mean, sd = _extract_features_ranked_matrix(all_redirectable_links, domain)
+    return {
+        'mean': mean,
+        'sd': sd
+    }
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'link_tree_features')
-def link_tree_features(url: URLData):
+def link_tree(url: URLData):
     """
     Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
     Using Machine Learning
@@ -64,11 +84,61 @@ def link_tree_features(url: URLData):
     return features
 
 
+def _read_alexa():
+    file_folder = pathlib.Path(__file__).parent.absolute()
+    path = os.path.join(file_folder, 'alexa-top-1m.csv')
+    with open(path) as f:
+        reader = csv.DictReader(f, fieldnames=['rank', 'domain'])
+        return {row["domain"]: row['rank'] for row in reader}
+
+
+def _extract_domain(url):
+    tld_extract = tldextract.extract(url)
+    return f'{tld_extract.domain}.{tld_extract.suffix}'
+
+
 def _tree_get_links(soup, tag, source, identifier):
     return [link.get(source) for
             link in soup.findAll(tag) if
             link.get(source) is not None and
             identifier in link.get(source)]
+
+
+def _get_rank(domain, alexa_data):
+    if domain in alexa_data:
+        alexa_rank = int(alexa_data[domain])
+        if alexa_rank < 1000:
+            alexa_rank = 1
+        elif alexa_rank < 10000:
+            alexa_rank = 2
+        elif alexa_rank < 100000:
+            alexa_rank = 3
+        elif alexa_rank < 500000:
+            alexa_rank = 4
+        elif alexa_rank < 1000000:
+            alexa_rank = 5
+        elif alexa_rank < 5000000:
+            alexa_rank = 6
+        else:
+            alexa_rank = 7
+    else:
+        alexa_rank = 8
+
+    return alexa_rank
+
+
+def _extract_features_ranked_matrix(links, original_domain):
+    alexa_data = _read_alexa()
+    results = []
+    for link in links:
+        domain = link.split("//")[-1].split("/")[0]
+        if domain.count(".") > 1:
+            domain = domain.split(".")[-2] + "." + domain.split(".")[-1]
+            results.append(_get_rank(domain, alexa_data))
+    mean = sum(results) / len(results)
+    original_rank = _get_rank(original_domain, alexa_data)
+    sd = statistics.stdev(results, xbar=original_rank)
+    return mean, sd
 
 
 SOCIAL_DOMAINS = ['google.com', 'facebook.com', 'twitter.com', 'pinterest.com', 'instagram.com']

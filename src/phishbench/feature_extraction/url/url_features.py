@@ -9,7 +9,7 @@ from .. import settings
 from ..reflection import load_features, FeatureType
 from ... import Features
 from ... import dataset
-from ...Features_Support import Cleaning, read_alexa
+from ...Features_Support import Cleaning
 from ...input import url_input
 from ...input.url_input import URLData
 from ...utils import phishbench_globals
@@ -78,11 +78,11 @@ def url_features(url: URLData, corpus, alexa_data, features):
     phishbench_globals.logger.debug("rawurl: %s", str(url))
 
     if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
-        single_url_html_features(url, alexa_data, dict_feature_values, dict_extraction_times)
-        phishbench_globals.logger.debug("html_features >>>>>> complete")
+
         soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
         if settings.feature_type_enabled(FeatureType.URL_WEBSITE_JAVASCRIPT):
+
             single_javascript_features(soup, url.downloaded_website, dict_feature_values, dict_extraction_times)
             phishbench_globals.logger.debug("javascript features >>>>>> complete")
 
@@ -151,14 +151,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
-
-def single_url_html_features(url: URLData, alexa_data, list_features, list_time):
-    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-
-    phishbench_globals.logger.debug("Extracting single html features from %s", url.raw_url)
-
-    Features.HTML_ranked_matrix(soup, url.raw_url, alexa_data, list_features, list_time)
 
 
 def single_javascript_features(soup, html, list_features, list_time):
