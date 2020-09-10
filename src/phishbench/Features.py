@@ -1,15 +1,11 @@
 import statistics
 import time
-from datetime import datetime
-
-import dns.resolver
-import tldextract
-from lxml import html as lxml_html
 
 from . import Tfidf
 from .Features_Support import *
 from .feature_extraction.reflection import FeatureType
 from .utils import phishbench_globals
+
 
 # pylint: skip-file
 
