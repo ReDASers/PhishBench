@@ -176,3 +176,18 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
         result = website_html_features.number_suspicious_content(test_url)
 
         self.assertEqual(145, result)
+
+    def test_has_password_input(self):
+        test_url = mock_objects.get_mock_object('github_login_urldata')
+        result = website_html_features.has_password_input(test_url)
+
+        self.assertTrue(result)
+
+    def test_has_password_input_false(self):
+        """
+        Tests on a website without a password input. Also tests against input without a type attribute
+        """
+        test_url = mock_objects.get_mock_object('google_urldata')
+        result = website_html_features.has_password_input(test_url)
+
+        self.assertFalse(result)
