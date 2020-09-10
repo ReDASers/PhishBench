@@ -2,7 +2,9 @@
 Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
 Using Machine Learning
 """
-
+import csv
+import os.path
+import pathlib
 import statistics
 
 from bs4 import BeautifulSoup
@@ -12,13 +14,37 @@ from ...reflection import FeatureType, register_feature
 from ....input import URLData
 
 
-def _extract_domain(url):
-    tld_extract = tldextract.extract(url)
-    return f'{tld_extract.domain}.{tld_extract.suffix}'
+@register_feature(FeatureType.URL_WEBSITE, 'link_alexa_global_rank')
+def link_alexa_global_rank(url: URLData):
+    """
+    The mean and standard deviation of the global ranks normalized by ranges
+    <1,000, <10,000, <100,000, <500,000, <1,000,000, and unranked
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+
+    links = _tree_get_links(soup, 'link', 'href', '')
+    links += _tree_get_links(soup, 'img', 'src', '')
+    links += _tree_get_links(soup, 'video', 'src', '')
+    links += _tree_get_links(soup, 'a', 'src', '')
+    links += _tree_get_links(soup, 'a', 'href', '')
+    links += _tree_get_links(soup, 'meta', 'content', '/')
+    links += _tree_get_links(soup, 'script', 'src', '')
+    links = [link for link in links if link.startswith("http")]
+
+    _read_alexa()
+    ranks = [_get_rank(link) for link in links]
+    mean = sum(ranks) / len(ranks)
+    original_rank = _get_rank(url.final_url)
+    stdev = statistics.stdev(ranks, xbar=original_rank)
+
+    return {
+        'mean': mean,
+        'sd': stdev
+    }
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'link_tree_features')
-def link_tree_features(url: URLData):
+def link_tree(url: URLData):
     """
     Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
     Using Machine Learning
@@ -64,11 +90,44 @@ def link_tree_features(url: URLData):
     return features
 
 
+_ALEXA_DATA = None
+
+
+def _read_alexa():
+    # pylint: disable=global-statement
+    global _ALEXA_DATA
+    if _ALEXA_DATA is None:
+        file_folder = pathlib.Path(__file__).parent.absolute()
+        path = os.path.join(file_folder, 'alexa-top-1m.csv')
+        with open(path) as f:
+            reader = csv.DictReader(f, fieldnames=['rank', 'domain'])
+            _ALEXA_DATA = {row["domain"]: row['rank'] for row in reader}
+
+
+def _extract_domain(url):
+    tld_extract = tldextract.extract(url)
+    return f'{tld_extract.domain}.{tld_extract.suffix}'
+
+
 def _tree_get_links(soup, tag, source, identifier):
     return [link.get(source) for
             link in soup.findAll(tag) if
             link.get(source) is not None and
             identifier in link.get(source)]
+
+
+def _get_rank(url):
+    # thresholds = [1000, 10000, 100000, 500000, 1000000, 5000000]
+    # Alexa data only goes up to 1000000
+    thresholds = [1000, 10000, 100000, 500000]
+    domain = _extract_domain(url)
+    if domain in _ALEXA_DATA:
+        alexa_rank = int(_ALEXA_DATA[domain])
+        for i, threshold in enumerate(thresholds, 1):
+            if alexa_rank < threshold:
+                return i
+        return 7
+    return 8
 
 
 SOCIAL_DOMAINS = ['google.com', 'facebook.com', 'twitter.com', 'pinterest.com', 'instagram.com']
