@@ -13,6 +13,10 @@ from tests import mock_objects
 
 class TestLinkTreeFeatures(unittest.TestCase):
 
+    def test_extract_domain(self):
+        result = link_tree_features._extract_domain("abc.google.com/test")
+        self.assertEqual('google.com', result)
+
     def test_ltree(self):
         url: URLData = mock_objects.get_mock_object("wikipedia_shortener_urldata")
         expected = mock_objects.get_mock_object('wikipedia-Ltree')
@@ -26,7 +30,7 @@ class TestLinkTreeFeatures(unittest.TestCase):
 
         result = link_tree_features.ranked_matrix(url)
         expected = {
-            'mean': 5.45925925925926,
-            'sd': 3.182890273318344
+            'mean': 5.4411764705882355,
+            'sd': 3.178083992742128
         }
         self.assertDictEqual(expected, result)
