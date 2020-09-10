@@ -14,8 +14,12 @@ from ...reflection import FeatureType, register_feature
 from ....input import URLData
 
 
-@register_feature(FeatureType.URL_WEBSITE, 'link_ranked_matrix')
-def ranked_matrix(url: URLData):
+@register_feature(FeatureType.URL_WEBSITE, 'link_alexa_global_rank')
+def link_alexa_global_rank(url: URLData):
+    """
+    The mean and standard deviation of the global ranks normalized by ranges
+    <1,000, <10,000, <100,000, <500,000, <1,000,000, and unranked
+    """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
     links = _tree_get_links(soup, 'link', 'href', '')
@@ -31,11 +35,11 @@ def ranked_matrix(url: URLData):
     ranks = [_get_rank(link) for link in links]
     mean = sum(ranks) / len(ranks)
     original_rank = _get_rank(url.final_url)
-    sd = statistics.stdev(ranks, xbar=original_rank)
+    stdev = statistics.stdev(ranks, xbar=original_rank)
 
     return {
         'mean': mean,
-        'sd': sd
+        'sd': stdev
     }
 
 
@@ -90,6 +94,7 @@ _ALEXA_DATA = None
 
 
 def _read_alexa():
+    # pylint: disable=global-statement
     global _ALEXA_DATA
     if _ALEXA_DATA is None:
         file_folder = pathlib.Path(__file__).parent.absolute()
@@ -112,23 +117,16 @@ def _tree_get_links(soup, tag, source, identifier):
 
 
 def _get_rank(url):
+    # thresholds = [1000, 10000, 100000, 500000, 1000000, 5000000]
+    # Alexa data only goes up to 1000000
+    thresholds = [1000, 10000, 100000, 500000]
     domain = _extract_domain(url)
     if domain in _ALEXA_DATA:
         alexa_rank = int(_ALEXA_DATA[domain])
-        if alexa_rank < 1000:
-            return 1
-        elif alexa_rank < 10000:
-            return 2
-        elif alexa_rank < 100000:
-            return 3
-        elif alexa_rank < 500000:
-            return 4
-        elif alexa_rank < 1000000:
-            return 5
-        elif alexa_rank < 5000000:
-            return 6
-        else:
-            return 7
+        for i, threshold in enumerate(thresholds, 1):
+            if alexa_rank < threshold:
+                return i
+        return 7
     return 8
 
 
