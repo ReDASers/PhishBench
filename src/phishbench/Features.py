@@ -213,35 +213,6 @@ def get_rank(domain, alexa_data):
 # END - ranked_matrix
 
 
-def HTML_Is_Login(html, url, list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE.value]["Is_Login"] == "True":
-        start = time.time()
-        userfield = passfield = emailfield = None
-        _is_login = False
-        doc = lxml_html.document_fromstring(html, base_url=url)
-        try:
-            form_element = doc.xpath('//form')
-            if form_element:
-                form = _pick_form(form_element)
-            else:
-                return _is_login
-            for x in form.inputs:
-                if not isinstance(x, html.InputElement):
-                    continue
-                type_ = x.type
-                if type_ == 'password' and passfield is None:
-                    passfield = x.name
-                    _is_login = True
-                    break
-        except Exception as ex:
-            _is_login = False
-
-        list_features['is_login'] = _is_login
-        end = time.time()
-        ex_time = end - start
-        list_time['is_login'] = ex_time
-
-
 ############################ Javascript features
 def Javascript_number_of_exec(soup, list_features, list_time):
     # global list_features
