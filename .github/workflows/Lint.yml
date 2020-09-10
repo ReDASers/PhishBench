@@ -29,10 +29,9 @@ jobs:
 
     - name: Get file changes
       id: file_changes
-      uses: dorner/file-changes-action@v1.2.0
+      uses: dorner/file-changes-action@v1.2.2
       with:
         githubToken: ${{ github.token	}}
-        output: 'json'
 
     - name: Run Pylint
       id: lint
