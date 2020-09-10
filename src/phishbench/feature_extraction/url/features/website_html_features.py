@@ -312,3 +312,16 @@ def number_suspicious_content(url: URLData):
         if len(tag) > 128 and (tag.count(' ') / len(tag) < 0.05):
             count += 1
     return count
+
+
+@register_feature(FeatureType.URL_WEBSITE, 'has_password_input')
+def has_password_input(url: URLData):
+    """
+    Whether or not the website has an input element of type password
+    """
+    soup = BeautifulSoup(url.downloaded_website, "html5lib")
+    input_elements = soup.findAll("input")
+    for element in input_elements:
+        if element.get("type") == 'password':
+            return True
+    return False
