@@ -14,6 +14,7 @@ from tests import mock_objects
 class TestLinkTreeFeatures(unittest.TestCase):
 
     def test_extract_domain(self):
+        # pylint: disable=protected-access
         result = link_tree_features._extract_domain("abc.google.com/test")
         self.assertEqual('google.com', result)
 
