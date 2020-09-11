@@ -108,21 +108,8 @@ def Cleaning(dict1):
     phishbench_globals.logger.info("Finished cleaning")
 
 
-# list_id=list(range(1,len(list_features)+1))
-# dict_features=dict(zip(list_id,list_features))
-# print(list_features)
-# print(list_time)
-
 def Vectorization_Training(list_dict_features_train):
     vec = DictVectorizer()
     vec.fit(list_dict_features_train)
     sparse_matrix_features_train = vec.transform(list_dict_features_train)
     return sparse_matrix_features_train, vec
-
-
-# sys.setdefaultencoding('utf-8')
-
-# get filename from path
-def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
