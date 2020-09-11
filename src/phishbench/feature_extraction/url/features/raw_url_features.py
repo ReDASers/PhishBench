@@ -1,5 +1,8 @@
 """
-This module contains the built-in raw url features
+This module contains the built-in raw url features.
+
+References:
+    On the Character of Phishing URLs
 """
 import re
 import string
