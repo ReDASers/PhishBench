@@ -1,49 +1,19 @@
-import csv
 import ntpath
 import os
 import os.path
 import re
-import string
 from itertools import groupby
 from urllib.parse import urlparse
 
 import nltk
 import numpy as np
 from nltk.stem import PorterStemmer
-from scipy import stats
-from scipy.spatial import distance
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
 from .utils import phishbench_globals
 
 PAYLOAD_NOT_FOUND = False  # for filtering
-
-## list of function words: http://www.viviancook.uk/Words/StructureWordsList.htm
-FUNCTION_WORDS_LIST = ["a", "about", "above", "after", "again", "against", "ago", "ahead", "all", "almost", "almost",
-                       "along", "already", "also", "", "although", "always", "am", "among", "an", "and", "any", "are",
-                       "aren't", "around", "as", "at", "away", "backward", "backwards", "be", "because", "before",
-                       "behind", "below", "beneath", "beside", "between", "both", "but", "by", "can", "cannot", "can't",
-                       "cause", "'cos", "could", "couldn't", "'d", "had", "despite", "did", "didn't", "do", "does",
-                       "doesn't", "don't", "down", "during", "each", "either", "even", "ever", "every", "except", "for",
-                       "faw", "forward", "from", "frm", "had", "hadn't", "has", "hasn't", "have", "hv", "haven't", "he",
-                       "hi", "her", "here", "hers", "herself", "him", "hm", "himself", "his", "how", "however", "I",
-                       "if", "in", "inside", "inspite", "instead", "into", "is", "isn't", "it", "its", "itself", "just",
-                       "'ll", "will", "shall", "least", "less", "like", "'m", "them", "many", "may", "mayn't", "me",
-                       "might", "mightn't", "mine", "more", "most", "much", "must", "mustn't", "my", "myself", "near",
-                       "need", "needn't", "needs", "neither", "never", "no", "none", "nor", "not", "now", "of", "off",
-                       "often", "on", "once", "only", "onto", "or", "ought", "oughtn't", "our", "ours", "ourselves",
-                       "out", "outside", "over", "past", "perhaps", "quite", "'re", "rather", "'s", "", "seldom",
-                       "several", "shall", "shan't", "she", "should", "shouldn't", "since", "so", "some", "sometimes",
-                       "soon", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there",
-                       "therefore", "these", "they", "this", "those", "though", "", "through", "thus", "till", "to",
-                       "together", "too", "towards", "under", "unless", "until", "up", "upon", "us", "used", "usedn't",
-                       "usen't", "usually", "'ve", "very", "was", "wasn't", "we", "well", "were", "weren't", "what",
-                       "when", "where", "whether", "which", "while", "who", "whom", "whose", "why", "will", "with",
-                       "without", "won't", "would", "wouldn't", "yet", "you", "your", "yours", "yourself", "yourselves"]
-
-''' Returns frequency of function words. Source:  
-https://stackoverflow.com/questions/5819840/calculate-frequency-of-function-words'''
 
 
 def get_func_word_freq(words, funct_words):
@@ -52,23 +22,6 @@ def get_func_word_freq(words, funct_words):
     for key, value in fdist.iteritems():
         funct_freq[key] = value
     return funct_freq
-
-
-''' Read LIWC 2007 English dictionary and extract function words '''
-
-
-def load_liwc_funct():
-    funct_words = set()
-    data_file = open(liwc_dict_file, 'rb')
-    lines = data_file.readlines()
-    for line in lines:
-        row = line.rstrip().split("\t")
-        if '1' in row:
-            if row[0][-1:] == '*':
-                funct_words.add(row[0][:-1])
-            else:
-                funct_words.add(row[0])
-    return list(funct_words)
 
 
 ################# Vocabulary richness https://swizec.com/blog/measuring-vocabulary-richness-with-python/swizec/2528
@@ -97,106 +50,11 @@ def yule(entry):
         return 0
 
 
-################
-
-
-############################
-
-
-############################
-
 def read_corpus(path):
     # assumes a flat directory structure
     files = filter(lambda x: x.endswith('.txt'), os.listdir(path))
     paths = map(lambda x: os.path.join(path, x), files)
     return list(paths)
-
-
-############################
-
-
-
-def On_the_Character_of_Phishing_URLs(url):
-    #            a       b       c       d       e       f       g       h       i       j       k       l
-    # m     n       o       p       q       r       s       t       u       v       w       x        y       z
-    char_dist = [.08167, .01492, .02782, .04253, .12702, .02228, .02015, .06094, .06966, .00153, .00772, .04025, .02406,
-                 .06749, .07507, .01929, .00095, .05987, .06327, .09056, .02758, .00978, .02360, .00150, .01974, .00074]
-
-    count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
-
-    url_char_dist = []
-    for x in range(26):
-        url_char_dist.append(url.count(chr(x + ord('a'))) / (count(url, string.ascii_letters)))
-
-    # print(char_dist)
-    # print(url_char_dist)
-
-    # kolmogorov-shmirnov
-
-    ks = stats.ks_2samp(url_char_dist, char_dist)
-    # print("KS")
-    # print(ks)
-
-    # Kullback-Leibler Divergence
-
-    kl = stats.entropy(url_char_dist, char_dist)
-    # print("KL")
-    # print(kl)
-
-    # Euclidean dist
-
-    ed = distance.euclidean(url_char_dist, char_dist)
-    # print("ED")
-    # print(ed)
-
-    # Normalized Character Frequencies
-    # this is just url_char_dist
-
-    # Edit Distance
-    # To Do
-    edit_distance = 0
-
-    # Length of Domain
-    # done elsewhere
-
-    # @ and - symbols
-    # done elsewhere
-
-    ## punctuation
-    num_punct = count(url, string.punctuation)
-    # print("# punct")
-    # print(num_punct)
-
-    ## TLDs
-    tlds = ['.com', '.net', '.co.uk', '.jp', '.ru', '.org']  # add more?
-
-    # Target words
-    target_words = 0
-
-    # IP Addr
-
-    ## Suspicious words
-    suspicious_words = 0
-
-    return url_char_dist, ks[1], kl, ed, num_punct
-
-
-def Behind_Phishing_Modi_Operendi_Features(url):
-    url_length = len(url)
-    parsed_url = urlparse(url)
-    domain = '{uri.scheme}://{uri.hostname}/'.format(uri=parsed_url)
-    domain_length = len(domain)
-
-    lc_domain = domain.lower()
-
-    letter_occ = []
-    for x in range(26):
-        letter_occ.append(lc_domain.count(chr(x + ord('a'))))
-
-    # brands in url
-    brands = []
-
-    return url_length, domain_length, letter_occ
 
 
 def my_isIPAddr(url):

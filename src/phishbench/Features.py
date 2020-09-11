@@ -1,4 +1,3 @@
-import statistics
 import time
 
 from . import Tfidf
