@@ -26,22 +26,22 @@ def x_mailer(header: EmailHeader):
     return header.x_mailer
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'X_originating_hostname')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_originating_hostname')
 def x_originating_hostname(header: EmailHeader):
     return header.x_originating_hostname
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'X_originating_hostname')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_originating_ip')
 def x_originating_ip(header: EmailHeader):
     return header.x_originating_ip
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'X_virus_scanned')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_virus_scanned')
 def x_virus_scanned(header: EmailHeader):
     return header.x_virus_scanned
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'X_Spam_flag')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_Spam_flag')
 def x_spam_flag(header: EmailHeader):
     return header.x_spam_flag
 
@@ -51,27 +51,27 @@ def received_count(header: EmailHeader):
     return len(header.received)
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Authentication_Results_SPF_Pass')
+@register_feature(FeatureType.EMAIL_HEADER, 'authentication_results_spf_pass')
 def authentication_results_spf_pass(header: EmailHeader):
     return "spf=pass" in header.authentication_results
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Authentication_Results_DKIM_Pass')
+@register_feature(FeatureType.EMAIL_HEADER, 'authentication_results_dkim_pass')
 def authentication_results_dkim_pass(header: EmailHeader):
     return "dkim=pass" in header.authentication_results
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'X_Origininal_Authentication_results')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_original_authentication_results')
 def x_original_authentication_results(header: EmailHeader):
     return header.x_original_authentication_results
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Received_SPF')
+@register_feature(FeatureType.EMAIL_HEADER, 'received_spf')
 def received_spf(header: EmailHeader):
     return header.received_spf
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Dkim_Signature_Exists')
+@register_feature(FeatureType.EMAIL_HEADER, 'dkim_Signature_Exists')
 def dkim_signature_exists(header: EmailHeader):
     return header.dkim_signed
 
@@ -112,17 +112,17 @@ def blacklisted_words_subject(header: EmailHeader):
     return result_dict
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Number_Cc')
+@register_feature(FeatureType.EMAIL_HEADER, 'number_cc')
 def number_cc(header: EmailHeader):
     return len(header.cc)
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Number_BCC')
+@register_feature(FeatureType.EMAIL_HEADER, 'number_bcc')
 def number_bcc(header: EmailHeader):
     return len(header.bcc)
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'Number_to')
+@register_feature(FeatureType.EMAIL_HEADER, 'number_to')
 def number_to(header: EmailHeader):
     return len(header.to)
 
