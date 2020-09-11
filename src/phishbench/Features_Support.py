@@ -1,53 +1,14 @@
 import ntpath
 import os
 import os.path
-import re
-from itertools import groupby
-from urllib.parse import urlparse
 
-import nltk
 import numpy as np
-from nltk.stem import PorterStemmer
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
 from .utils import phishbench_globals
 
 PAYLOAD_NOT_FOUND = False  # for filtering
-
-
-def get_func_word_freq(words, funct_words):
-    fdist = nltk.FreqDist([funct_word for funct_word in funct_words if funct_word in words])
-    funct_freq = {}
-    for key, value in fdist.iteritems():
-        funct_freq[key] = value
-    return funct_freq
-
-
-################# Vocabulary richness https://swizec.com/blog/measuring-vocabulary-richness-with-python/swizec/2528
-def words(entry):
-    return filter(lambda w: len(w) > 0,
-                  [w.strip("0123456789!:,.?(){}[]") for w in entry.split()])
-
-
-def yule(entry):
-    # yule's I measure (the inverse of yule's K measure)
-    # higher number is higher diversity - richer vocabulary
-    d = {}
-    stemmer = PorterStemmer()
-    for w in words(entry):
-        w = stemmer.stem(w).lower()
-        try:
-            d[w] += 1
-        except KeyError:
-            d[w] = 1
-
-    M1 = float(len(d))
-    M2 = sum([len(list(g)) * (freq ** 2) for freq, g in groupby(sorted(d.values()))])
-    try:
-        return (M1 * M1) / (M2 - M1)
-    except ZeroDivisionError:
-        return 0
 
 
 def read_corpus(path):
@@ -57,50 +18,8 @@ def read_corpus(path):
     return list(paths)
 
 
-def my_isIPAddr(url):
-    parsed_url = urlparse(url)
-    domain = '{uri.hostname}'.format(uri=parsed_url)
-    if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
-        return False
-    return True
-
-
 ###########################
 ########################### Functions for features_url.py
-
-def dns_ip_retrieve(dns_input_file):
-    """
-    Reads the the dns information from the input file
-    dns_input_file: dump file created by the download_url.py
-    return: list of dns entries and ip addresses
-    """
-    dns_entry = {}
-    IPs = []
-    dns = True
-    for line in dns_input_file:
-        cleaned = line.strip().rstrip('\n')
-        if cleaned == '' or cleaned == 'DNS Lookup' or cleaned == 'IP':
-            pass
-        if dns:
-            if line.startswith("++++++"):
-                dns = False
-            else:
-                if line.split(" : ")[0] not in dns_entry:
-                    ids = []
-                    dns_entry[line.split(" : ")[0]] = ids
-
-                dns_entry[line.split(" : ")[0]].append(line.split(" : ")[1])
-        else:
-            IPs = [e for e in cleaned.split(',')]
-    return dns_entry, IPs
-
-
-def my_isIPAddr(url):
-    parsed_url = urlparse(url)
-    domain = '{uri.hostname}'.format(uri=parsed_url)
-    if re.match("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain) == None:
-        return 0
-    return 1
 
 
 def mean_scaling(Array_Features):
