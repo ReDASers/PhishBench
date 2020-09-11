@@ -345,36 +345,39 @@ def number_img_links(body: EmailBody):
     return len(soup.find_all('img'))
 
 
+# Source: http://www.viviancook.uk/Words/StructureWordsList.htm
+_FUNCTION_WORDS = {"a", "about", "above", "after", "again", "against", "ago", "ahead", "all", "almost",
+                   "almost", "along", "already", "also", "", "although", "always", "am", "among", "an",
+                   "and", "any", "are", "aren't", "around", "as", "at", "away", "backward", "backwards", "be",
+                   "because", "before", "behind", "below", "beneath", "beside", "between", "both", "but",
+                   "by", "can", "cannot", "can't", "cause", "'cos", "could", "couldn't", "'d", "had", "despite",
+                   "did", "didn't", "do", "does", "doesn't", "don't", "down", "during", "each", "either",
+                   "even", "ever", "every", "except", "for", "faw", "forward", "from", "frm", "had",
+                   "hadn't", "has", "hasn't", "have", "hv", "haven't", "he", "hi", "her", "here", "hers",
+                   "herself", "him", "hm", "himself", "his", "how", "however", "I", "if", "in", "inside",
+                   "inspite", "instead", "into", "is", "isn't", "it", "its", "itself", "just", "'ll", "will",
+                   "shall", "least", "less", "like", "'m", "them", "many", "may", "mayn't", "me", "might",
+                   "mightn't", "mine", "more", "most", "much", "must", "mustn't", "my", "myself", "near",
+                   "need", "needn't", "needs", "neither", "never", "no", "none", "nor", "not", "now", "of",
+                   "off", "often", "on", "once", "only", "onto", "or", "ought", "oughtn't", "our", "ours",
+                   "ourselves", "out", "outside", "over", "past", "perhaps", "quite", "'re", "rather", "'s", "",
+                   "seldom", "several", "shall", "shan't", "she", "should", "shouldn't", "since", "so", "some",
+                   "sometimes", "soon", "than", "that", "the", "their", "theirs", "them", "themselves", "then",
+                   "there", "therefore", "these", "they", "this", "those", "though", "", "through", "thus",
+                   "till", "to", "together", "too", "towards", "under", "unless", "until", "up", "upon", "us",
+                   "used", "usedn't", "usen't", "usually", "'ve", "very", "was", "wasn't", "we", "well", "were",
+                   "weren't", "what", "when", "where", "whether", "which", "while", "who", "whom", "whose",
+                   "why", "will", "with", "without", "won't", "would", "wouldn't", "yet", "you", "your",
+                   "yours", "yourself", "yourselves"}
+
+
 @register_feature(FeatureType.EMAIL_BODY, 'Function_Words_Count')
 def function_words_counts(body: EmailBody):
     if body.text is None:
         return 0
-    function_words_list = {"a", "about", "above", "after", "again", "against", "ago", "ahead", "all", "almost",
-                           "almost", "along", "already", "also", "", "although", "always", "am", "among", "an",
-                           "and", "any", "are", "aren't", "around", "as", "at", "away", "backward", "backwards", "be",
-                           "because", "before", "behind", "below", "beneath", "beside", "between", "both", "but",
-                           "by", "can", "cannot", "can't", "cause", "'cos", "could", "couldn't", "'d", "had", "despite",
-                           "did", "didn't", "do", "does", "doesn't", "don't", "down", "during", "each", "either",
-                           "even", "ever", "every", "except", "for", "faw", "forward", "from", "frm", "had",
-                           "hadn't", "has", "hasn't", "have", "hv", "haven't", "he", "hi", "her", "here", "hers",
-                           "herself", "him", "hm", "himself", "his", "how", "however", "I", "if", "in", "inside",
-                           "inspite", "instead", "into", "is", "isn't", "it", "its", "itself", "just", "'ll", "will",
-                           "shall", "least", "less", "like", "'m", "them", "many", "may", "mayn't", "me", "might",
-                           "mightn't", "mine", "more", "most", "much", "must", "mustn't", "my", "myself", "near",
-                           "need", "needn't", "needs", "neither", "never", "no", "none", "nor", "not", "now", "of",
-                           "off", "often", "on", "once", "only", "onto", "or", "ought", "oughtn't", "our", "ours",
-                           "ourselves", "out", "outside", "over", "past", "perhaps", "quite", "'re", "rather", "'s", "",
-                           "seldom", "several", "shall", "shan't", "she", "should", "shouldn't", "since", "so", "some",
-                           "sometimes", "soon", "than", "that", "the", "their", "theirs", "them", "themselves", "then",
-                           "there", "therefore", "these", "they", "this", "those", "though", "", "through", "thus",
-                           "till", "to", "together", "too", "towards", "under", "unless", "until", "up", "upon", "us",
-                           "used", "usedn't", "usen't", "usually", "'ve", "very", "was", "wasn't", "we", "well", "were",
-                           "weren't", "what", "when", "where", "whether", "which", "while", "who", "whom", "whose",
-                           "why", "will", "with", "without", "won't", "would", "wouldn't", "yet", "you", "your",
-                           "yours", "yourself", "yourselves"}
     function_words_count = 0
     for word in body.text.split(' '):
-        if word in function_words_list:
+        if word in _FUNCTION_WORDS:
             function_words_count = +1
     return function_words_count
 

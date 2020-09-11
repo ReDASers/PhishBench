@@ -2,6 +2,7 @@
 This module contains the built-in raw url features.
 
 References:
+    Behind Phishing: An Examination of Phisher Modi Operandi
     On the Character of Phishing URLs
 """
 import re
