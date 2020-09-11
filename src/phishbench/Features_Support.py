@@ -8,14 +8,7 @@ from sklearn.feature_extraction import DictVectorizer
 
 from .utils import phishbench_globals
 
-PAYLOAD_NOT_FOUND = False  # for filtering
 
-
-def read_corpus(path):
-    # assumes a flat directory structure
-    files = filter(lambda x: x.endswith('.txt'), os.listdir(path))
-    paths = map(lambda x: os.path.join(path, x), files)
-    return list(paths)
 
 
 ###########################
