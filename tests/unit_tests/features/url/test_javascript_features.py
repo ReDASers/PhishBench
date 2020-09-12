@@ -56,6 +56,3 @@ class TesJavaScriptReflectionFeatures(unittest.TestCase):
         test_url = mock_objects.get_mock_object('escape_urldata.pkl')
         result = javascript_features.number_of_iframes_in_script(test_url)
         self.assertEqual(2, result)
-
-
-
