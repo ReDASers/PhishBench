@@ -32,14 +32,14 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     files = enumerate_folder_files(folder_path)
     loaded_files = []
     emails_parsed = []
-    for f in tqdm(files):
+    for filename in tqdm(files):
         try:
-            msg = EmailMessage(read_email_from_file(f))
+            msg = EmailMessage(read_email_from_file(filename))
             emails_parsed.append(msg)
-            loaded_files.append(f)
+            loaded_files.append(filename)
         # pylint: disable=broad-except
         except Exception:
-            print("\n", f)
+            print(f"\nFailed to extract {filename}\n")
             traceback.print_exc()
 
     return emails_parsed, loaded_files
