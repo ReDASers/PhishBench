@@ -149,22 +149,6 @@ def extract_single_feature_url(feature: Callable, url: URLData):
 def single_javascript_features(soup, html, list_features, list_time):
     phishbench_globals.logger.debug("Extracting single javascript features")
 
-    Features.Javascript_number_of_exec(soup, list_features, list_time)
-
-    Features.Javascript_number_of_escape(soup, list_features, list_time)
-
-    Features.Javascript_number_of_eval(soup, list_features, list_time)
-
-    Features.Javascript_number_of_link(soup, list_features, list_time)
-
-    Features.Javascript_number_of_unescape(soup, list_features, list_time)
-
-    Features.Javascript_number_of_search(soup, list_features, list_time)
-
-    Features.Javascript_number_of_setTimeout(soup, list_features, list_time)
-
-    Features.Javascript_number_of_iframes_in_script(soup, list_features, list_time)
-
     Features.Javascript_number_of_event_attachment(soup, list_features, list_time)
 
     Features.Javascript_rightclick_disabled(html, list_features, list_time)
