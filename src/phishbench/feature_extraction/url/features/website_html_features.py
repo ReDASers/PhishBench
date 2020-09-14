@@ -303,7 +303,10 @@ def number_of_external_links(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_suspicious_content')
 def number_suspicious_content(url: URLData):
     """
-    The number of links to content on a different domain
+    The number of suspicious tags. A tag is considered suspicious if its length is greater than 128, and less than 5%
+    of it is spaces.
+
+    Reference: Prophiler: A Fast Filter for the Large-Scale Detection of Malicious Web Pages”
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     tags = [str(x) for x in soup.find_all()]
