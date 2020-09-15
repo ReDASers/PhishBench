@@ -151,5 +151,3 @@ def extract_single_feature_url(feature: Callable, url: URLData):
 
 def single_javascript_features(soup, dict_features, dict_time):
     phishbench_globals.logger.debug("Extracting single javascript features")
-
-    Features.Javascript_number_of_event_attachment(soup, dict_features, dict_time)
