@@ -42,7 +42,6 @@ def extract_labeled_dataset(legit_path, phish_path):
     bad_url_list.extend(bad_urls)
 
     features, corpus = extract_features_from_list_urls(legit_urls + phish_urls)
-    
     labels = ([0] * len(legit_urls)) + ([1] * len(phish_urls))
 
     return features, labels, corpus
