@@ -144,30 +144,6 @@ def Javascript_rightclick_disabled(html, list_features, list_time):
         list_time["rightclick_disabled"] = ex_time
 
 
-def Javascript_number_of_total_suspicious_features(list_features, list_time):
-    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value][
-        "number_of_total_suspicious_features"] == "True":
-        start = time.time()
-        number_of_total_suspicious_features = 0
-        try:
-            number_of_total_suspicious_features = list_features["number_of_exec"] + list_features["number_of_escape"] + \
-                                                  list_features["number_of_eval"] + list_features["number_of_link"] + \
-                                                  list_features["number_of_unescape"] + list_features[
-                                                      "number_of_search"] \
-                                                  + list_features["rightclick_disabled"] + list_features[
-                                                      "number_of_event_attachment"] + list_features[
-                                                      "number_of_iframes_in_script"] + list_features[
-                                                      "number_of_event_attachment"] + list_features[
-                                                      "number_of_setTimeout"]
-        except Exception as e:
-            phishbench_globals.logger.warning("exception: " + str(e))
-            number_of_total_suspicious_features = -1
-        list_features["number_of_total_suspicious_features"] = number_of_total_suspicious_features
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_total_suspicious_features"] = ex_time
-
-
 def Email_Body_tfidf_emails(list_time):
     if phishbench_globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
         start = time.time()

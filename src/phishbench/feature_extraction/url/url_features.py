@@ -152,5 +152,3 @@ def single_javascript_features(soup, html, list_features, list_time):
     Features.Javascript_number_of_event_attachment(soup, list_features, list_time)
 
     Features.Javascript_rightclick_disabled(html, list_features, list_time)
-
-    Features.Javascript_number_of_total_suspicious_features(list_features, list_time)
