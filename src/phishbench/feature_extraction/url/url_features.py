@@ -39,12 +39,12 @@ def extract_labeled_dataset(legit_path, phish_path):
     print("Extracting Features from {}".format(legit_path))
     legit_urls, bad_urls = url_input.read_dataset_url(legit_path, download_url_flag)
     bad_url_list.extend(bad_urls)
-    legit_features, legit_corpus = extract_url_features(legit_urls, bad_url_list)
+    legit_features, legit_corpus = extract_features_from_list_urls(legit_urls)
 
     print("Extracting Features from {}".format(phish_path))
     phish_urls, bad_urls = url_input.read_dataset_url(phish_path, download_url_flag)
     bad_url_list.extend(bad_urls)
-    phish_features, phish_corpus = extract_url_features(phish_urls, bad_url_list)
+    phish_features, phish_corpus = extract_features_from_list_urls(phish_urls)
 
     features = legit_features + phish_features
     labels = ([0] * len(legit_features)) + ([1] * len(phish_features))
@@ -53,31 +53,31 @@ def extract_labeled_dataset(legit_path, phish_path):
     return features, labels, corpus
 
 
-def extract_url_features(urls: List[URLData], bad_url_list):
+def extract_features_from_list_urls(urls: List[URLData]):
+    """
+    Extracts features from a list of URLs
+    Parameters
+    ----------
+    urls: List[URLData]
+        The urls to extract features from
+    Returns
+    -------
+    feature_list_dict: List[Dict[str]]
+        A list of dicts containing the extracted features
+    corpus:
+        A list of the downloaded websites
+    """
     features = load_features(filter_features='URL', internal_features=internal_features)
     feature_list_dict = list()
 
     corpus = []
     for url in tqdm(urls):
-        try:
-            feature_values, _ = url_features(url, corpus, features)
-            feature_list_dict.append(feature_values)
-        except Exception:
-            error_string = "Error extracting features from {}".format(url.raw_url)
-            phishbench_globals.logger.warning(error_string, exc_info=True)
-            bad_url_list.append(url.raw_url)
+        feature_values, _ = extract_features_from_single_url(features, url)
+        feature_list_dict.append(feature_values)
+        if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
+            soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+            corpus.append(str(soup))
     return feature_list_dict, corpus
-
-
-def url_features(url: URLData, corpus, features):
-    dict_feature_values, dict_extraction_times = extract_features_from_single_url(features, url)
-    phishbench_globals.logger.debug("rawurl: %s", str(url))
-
-    if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
-        soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-        corpus.append(str(soup))
-
-    return dict_feature_values, dict_extraction_times
 
 
 def extract_features_from_single_url(features: List[Callable], url: URLData) -> Tuple[Dict, Dict]:
