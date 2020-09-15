@@ -107,7 +107,7 @@ def number_of_iframes_in_script(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_attachment')
 def number_of_event_attachment(url: URLData):
     """
-    Whether or not the right click event has been modified.
+    Number of calls to `addEventListener` or `attachEvent`
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]
@@ -119,7 +119,7 @@ def number_of_event_attachment(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_dispatch')
 def number_of_event_dispatch(url: URLData):
     """
-    Whether or not the right click event has been modified.
+    Number of calls to `dispatchEvent` or `fireEvent`
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]
