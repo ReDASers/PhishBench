@@ -124,24 +124,6 @@ def Javascript_number_of_event_attachment(soup, list_features, list_time):
         list_time["number_of_event_attachment"] = ex_time
 
 
-def Javascript_rightclick_disabled(html, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["rightclick_disabled"] == "True":
-        start = time.time()
-        rightclick_disabled = 0
-        if html:
-            try:
-                rightclick_disabled = 0
-                # print(html.text.lower())
-                if 'addEventListener(\'contextmenu\'' in html.html.lower():
-                    rightclick_disabled = 1
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                rightclick_disabled = -1
-        list_features["rightclick_disabled"] = rightclick_disabled
-        end = time.time()
-        ex_time = end - start
-        list_time["rightclick_disabled"] = ex_time
 
 
 def Email_Body_tfidf_emails(list_time):

@@ -102,3 +102,12 @@ def number_of_iframes_in_script(url: URLData):
                if script.get("type") is None or script.get("type") == 'text/javascript']
     counts = [len(re.findall(r'iframe', str(script))) for script in scripts]
     return sum(counts)
+
+
+@register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'right_click_disabled')
+def right_click_disabled(url: URLData):
+    """
+    Whether or not the right click event has been modified.
+    """
+    text = re.sub(r'\s', '', url.downloaded_website)
+    return "addEventListener('contextmenu'" in text
