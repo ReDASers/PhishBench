@@ -34,21 +34,16 @@ def Extract_Features_Urls_Training():
 def extract_labeled_dataset(legit_path, phish_path):
     download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
                         settings.feature_type_enabled(FeatureType.URL_WEBSITE)
-    bad_url_list = []
 
-    print("Extracting Features from {}".format(legit_path))
-    legit_urls, bad_urls = url_input.read_dataset_url(legit_path, download_url_flag)
-    bad_url_list.extend(bad_urls)
-    legit_features, legit_corpus = extract_features_from_list_urls(legit_urls)
-
-    print("Extracting Features from {}".format(phish_path))
+    print("Loading URLs from {}".format(legit_path))
+    legit_urls, bad_url_list = url_input.read_dataset_url(legit_path, download_url_flag)
+    print("Loading URLs from {}".format(phish_path))
     phish_urls, bad_urls = url_input.read_dataset_url(phish_path, download_url_flag)
     bad_url_list.extend(bad_urls)
-    phish_features, phish_corpus = extract_features_from_list_urls(phish_urls)
 
-    features = legit_features + phish_features
-    labels = ([0] * len(legit_features)) + ([1] * len(phish_features))
-    corpus = legit_corpus + phish_corpus
+    features, corpus = extract_features_from_list_urls(legit_urls + phish_urls)
+    
+    labels = ([0] * len(legit_urls)) + ([1] * len(phish_urls))
 
     return features, labels, corpus
 
