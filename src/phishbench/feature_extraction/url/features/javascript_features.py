@@ -104,8 +104,8 @@ def number_of_iframes_in_script(url: URLData):
     return sum(counts)
 
 
-@register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'right_click_disabled')
-def right_click_disabled(url: URLData):
+@register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'right_click_modified')
+def right_click_modified(url: URLData):
     """
     Whether or not the right click event has been modified.
     """

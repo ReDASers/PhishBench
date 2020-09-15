@@ -57,7 +57,7 @@ class TesJavaScriptReflectionFeatures(unittest.TestCase):
         result = javascript_features.number_of_iframes_in_script(test_url)
         self.assertEqual(2, result)
 
-    def test_right_click_disabled(self):
+    def test_right_click_modified(self):
         test_url = mock_objects.get_mock_object('right_click_disabled.pkl')
-        result = javascript_features.right_click_disabled(test_url)
+        result = javascript_features.right_click_modified(test_url)
         self.assertTrue(result)
