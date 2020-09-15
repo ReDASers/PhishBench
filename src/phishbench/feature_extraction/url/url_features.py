@@ -1,3 +1,6 @@
+"""
+This module handles the extraction of url features
+"""
 import time
 from typing import List, Callable, Tuple, Dict
 
