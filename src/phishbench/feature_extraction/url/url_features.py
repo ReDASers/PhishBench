@@ -76,7 +76,7 @@ def url_features(url: URLData, corpus, features):
         soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
         if settings.feature_type_enabled(FeatureType.URL_WEBSITE_JAVASCRIPT):
-            single_javascript_features(soup, url.downloaded_website, dict_feature_values, dict_extraction_times)
+            single_javascript_features(soup, dict_feature_values, dict_extraction_times)
             phishbench_globals.logger.debug("javascript features >>>>>> complete")
 
         corpus.append(str(soup))
@@ -146,7 +146,7 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     return feature_value, ex_time
 
 
-def single_javascript_features(soup, html, list_features, list_time):
+def single_javascript_features(soup, dict_features, dict_time):
     phishbench_globals.logger.debug("Extracting single javascript features")
 
-    Features.Javascript_number_of_event_attachment(soup, list_features, list_time)
+    Features.Javascript_number_of_event_attachment(soup, dict_features, dict_time)
