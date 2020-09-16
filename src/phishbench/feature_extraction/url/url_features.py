@@ -140,6 +140,7 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     ex_time: float
         The time to extract the feature
     """
+    # pylint: disable=broad-except
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
