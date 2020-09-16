@@ -13,14 +13,24 @@ from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
 
 
-def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
+def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
     """
     Extracts features from a dataset of emails split in two folders
-    :param legit_dataset_folder:
-        The folder containing emails of the phishing class
-    :param phish_dataset_folder:
-        The folder containing emails of the legitimate class
-    :return:
+    Parameters
+    ----------
+    legit_dataset_folder: str
+        The folder containing phishing emails
+    phish_dataset_folder
+        The folder containing legitimate emails
+
+    Returns
+    -------
+    feature_values: List[Dict]]
+        The feature values in a list of dictionaries. Features are mapped `config_name` to value.
+    labels: List[int]
+        The class labels for the dataset
+    corpus List[str]:
+        The email bodies corresponding to each feature set
     """
     features = load_features(local_features, 'Email')
     print("Loaded {} features".format(len(features)))
@@ -31,12 +41,12 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
     print("Loading emails from {}".format(legit_dataset_folder))
     legit_emails, _ = email_input.read_dataset_email(legit_dataset_folder)
     print("Extracting features")
-    legit_features, legit_corpus = extract_email_features(legit_emails, features)
+    legit_features, legit_corpus = extract_features_list_email(legit_emails, features)
 
     print("Loading emails from {}".format(phish_dataset_folder))
     phish_emails, _ = email_input.read_dataset_email(phish_dataset_folder)
     print("Extracting features")
-    phish_features, phish_corpus = extract_email_features(phish_emails, features)
+    phish_features, phish_corpus = extract_features_list_email(phish_emails, features)
 
     feature_list_dict_train = legit_features + phish_features
     labels_train = [0] * len(legit_features) + [1] * len(phish_features)
@@ -45,27 +55,32 @@ def extract_labeled_dataset(legit_dataset_folder, phish_dataset_folder):
     return feature_list_dict_train, labels_train, corpus_train
 
 
-def extract_email_features(emails: List[EmailMessage], features: List[Callable]):
+def extract_features_list_email(emails: List[EmailMessage], features: List[Callable]):
     """
-    :param emails:
-        The dataset of emails
-    :param features:
-        A list of features to extract
-    :return:
-    List[Dict]:
-        The extracted features
-    List[str]:
-        The corpus of emails
+    Extracts features from a list of `EmailMessage` objects
+    Parameters
+    ----------
+    emails: List[EmailMessage]
+        The emails to extract features from
+    features: List
+        The features to extract
+
+    Returns
+    -------
+    feature_list_dict: List[Dict[str]]
+        A list of dicts containing the extracted features
+    corpus:
+        A list of the email texts
     """
-    feature_dict_list = list()
+    feature_list_dict = list()
 
     for email_msg in tqdm(emails):
         feature_values, _ = extract_features_from_single_email(features, email_msg)
-        feature_dict_list.append(feature_values)
+        feature_list_dict.append(feature_values)
 
     corpus = [msg.body.text for msg in emails]
 
-    return feature_dict_list, corpus
+    return feature_list_dict, corpus
 
 
 def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
@@ -117,6 +132,7 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     ex_time: float
         The time to extract the feature
     """
+    # pylint: disable=broad-except
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
