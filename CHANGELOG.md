@@ -1,9 +1,13 @@
 # Change Log
 
 # v1.2.1
+## Major changes
+* Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url_features`
 
 ## Minor Changes
-* Refactored network features using reflection
+* Refactored remaining URL/Website features using reflection
+* Made package name lowercase
+* Improved error message when PhishBench fails to load email
 
 # v1.2.0
 
