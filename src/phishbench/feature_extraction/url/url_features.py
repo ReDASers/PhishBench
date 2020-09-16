@@ -11,7 +11,7 @@ from . import features as internal_features
 from .. import settings
 from ..reflection import load_features, FeatureType
 from ... import dataset
-from ...Features_Support import Cleaning
+from ... import feature_preprocessing as preprocessing
 from ...input import url_input
 from ...input.url_input import URLData
 from ...utils import phishbench_globals
@@ -20,14 +20,14 @@ from ...utils import phishbench_globals
 def Extract_Features_Urls_Testing():
     features, labels, corpus = extract_labeled_dataset(dataset.test_legit_path(), dataset.test_phish_path())
     print("Cleaning features")
-    Cleaning(features)
+    preprocessing.clean_features(features)
     return features, labels, corpus
 
 
 def Extract_Features_Urls_Training():
     features, labels, corpus = extract_labeled_dataset(dataset.train_legit_path(), dataset.train_phish_path())
     print("Cleaning features")
-    Cleaning(features)
+    preprocessing.clean_features(features)
     return features, labels, corpus
 
 

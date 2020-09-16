@@ -13,9 +13,10 @@ import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.dataset as dataset
 import phishbench.evaluation as evaluation
-from phishbench.feature_extraction import settings as extraction_settings
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
+import phishbench.feature_preprocessing as preprocessing
+from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
 
@@ -225,7 +226,7 @@ def extract_email_train_features(email_train_dir, run_tfidf):
     phish_path = dataset.train_phish_path()
 
     feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
-    Features_Support.Cleaning(feature_list_dict_train)
+    preprocessing.clean_features(feature_list_dict_train)
 
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):
@@ -279,7 +280,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     print("Extracting Test Set")
     phishbench_globals.logger.info('Extracting Test Set')
     feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
-    Features_Support.Cleaning(feature_list_dict_test)
+    preprocessing.clean_features(feature_list_dict_test)
 
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):

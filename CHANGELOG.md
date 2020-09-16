@@ -7,6 +7,7 @@
 # v1.2.1
 ## Major changes
 * Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url`
+* Added `phishbench.preproccessing` module to replace `FeatureSupport`
 
 ## Minor Changes
 * Refactored remaining URL/Website features using reflection
