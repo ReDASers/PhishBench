@@ -32,6 +32,23 @@ def Extract_Features_Urls_Training():
 
 
 def extract_labeled_dataset(legit_path, phish_path):
+    """
+    Extract features from a labeled dataset split by files
+    Parameters
+    ----------
+    legit_path:
+        The path of the folder/file containing the legitimate urls
+    phish_path
+        The path of the folder/file containing the phishing urls
+    Returns
+    -------
+    features: List[Dict]
+        A list of dicts containing the extracted features
+    labels: List[int]
+        A list of labels. 0 is legitimate and 1 is phishing
+    corpus: List[str]
+        A list of the downloaded websites
+    """
     download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
                         settings.feature_type_enabled(FeatureType.URL_WEBSITE)
 
