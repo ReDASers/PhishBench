@@ -10,7 +10,6 @@ from tqdm import tqdm
 from . import features as internal_features
 from .. import settings
 from ..reflection import load_features, FeatureType
-from ... import Features
 from ... import dataset
 from ...Features_Support import Cleaning
 from ...input import url_input
