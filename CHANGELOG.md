@@ -1,4 +1,5 @@
 # Change Log
+# v1.2.2
 
 # v1.2.1
 ## Major changes
