@@ -3,7 +3,7 @@ This module contains the core code for evaluating classifiers
 """
 import inspect
 import itertools
-from typing import List, Callable
+from typing import List, Dict
 
 from scipy.sparse import issparse
 import pandas as pd
@@ -11,11 +11,11 @@ import pandas as pd
 from . import settings
 from ..classification.core import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
-from .reflection import MetricType
+from .reflection import MetricType, Metric
 from . import metrics as internal_metrics
 
 
-def load_metrics_from_module(source, filter_metrics=True):
+def load_metrics_from_module(source, filter_metrics=True) -> List[Metric]:
     """
     Loads metrics from a module
     Parameters
@@ -36,7 +36,7 @@ def load_metrics_from_module(source, filter_metrics=True):
     return metrics
 
 
-def load_metrics(filter_metrics=True) -> List[Callable]:
+def load_metrics(filter_metrics=True) -> List[Metric]:
     """
     Loads all metrics
 
@@ -44,6 +44,7 @@ def load_metrics(filter_metrics=True) -> List[Callable]:
     ----------
     filter_metrics: Union[str, None]
         Whether or not to filter the metrics
+
     Returns
     -------
         A list of feature functions
@@ -55,7 +56,7 @@ def load_metrics(filter_metrics=True) -> List[Callable]:
     return metrics
 
 
-def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
+def evaluate_classifier(classifier: BaseClassifier, x_test, y_test) -> Dict[str, float]:
     """
     Evaluates a single classifier
     Parameters
@@ -73,7 +74,7 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
     """
     if issparse(x_test):
         x_test = x_test.toarray()
-    metric_funcs: List[Callable] = load_metrics()
+    metric_funcs: List[Metric] = load_metrics()
     y_pred = classifier.predict(x_test)
     y_prob = classifier.predict_proba(x_test)
     metrics = {}
@@ -85,7 +86,7 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test):
     return metrics
 
 
-def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verbose=1):
+def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verbose=1) -> pd.DataFrame:
     """
     Evaluates a set of classifiers
     Parameters
@@ -99,6 +100,7 @@ def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verb
     verbose: bool
         Whether or not to print progress to stdout.
         `0` prints nothing. `1` prints the classifiers being trained
+
     Returns
     -------
     A pandas `DataFrame` containing the metrics of the classifiers

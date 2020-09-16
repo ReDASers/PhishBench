@@ -9,6 +9,17 @@ class MetricType(Enum):
     CLUSTER = 2
 
 
+class Metric:
+    config_name: str
+    metric_type: MetricType
+
+    def __init__(self):
+        raise SyntaxError('This is a stub for type hinting and should not be instantiated.')
+
+    def __call__(self, y_test, y_pred) -> float:
+        return 0
+
+
 def register_metric(metric_type: MetricType, config_name: str):
     def wrapped(function):
         @wraps(function)
