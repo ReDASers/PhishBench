@@ -61,3 +61,13 @@ class TesJavaScriptReflectionFeatures(unittest.TestCase):
         test_url = mock_objects.get_mock_object('right_click_disabled.pkl')
         result = javascript_features.right_click_modified(test_url)
         self.assertTrue(result)
+
+    def test_number_of_event_attachment(self):
+        test_url = mock_objects.get_mock_object('events_urldata.pkl')
+        result = javascript_features.number_of_event_attachment(test_url)
+        self.assertEqual(3, result)
+
+    def test_number_of_event_dispatch(self):
+        test_url = mock_objects.get_mock_object('events_urldata.pkl')
+        result = javascript_features.number_of_event_dispatch(test_url)
+        self.assertEqual(3, result)

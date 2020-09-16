@@ -98,34 +98,6 @@ def Email_URL_Number_link_sec_port(url_All, list_features, list_time):
         list_time["Number_link_sec_port"] = ex_time
 
 
-############################ Javascript features
-
-
-def Javascript_number_of_event_attachment(soup, list_features, list_time):
-    # global list_features
-    if phishbench_globals.config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]["number_of_event_attachment"] == "True":
-        start = time.time()
-        number_of_event_attachment = 0
-        if soup:
-            try:
-                scripts = soup.find_all('script')
-                for script in scripts:
-                    if script.get("type") is None or script.get("type") == 'text/javascript':
-                        script_text = str(script)
-                        number_of_event_attachment = number_of_event_attachment + len(re.findall(
-                            "(?:addEventListener|attachEvent|dispatchEvent|fireEvent)\('(?:error|load|beforeunload|unload)'",
-                            script_text.replace(" ", "")))
-            except Exception as e:
-                phishbench_globals.logger.warning("exception: " + str(e))
-                number_of_event_attachment = -1
-        list_features["number_of_event_attachment"] = number_of_event_attachment
-        end = time.time()
-        ex_time = end - start
-        list_time["number_of_event_attachment"] = ex_time
-
-
-
-
 def Email_Body_tfidf_emails(list_time):
     if phishbench_globals.config["Email_Body_Features"]["tfidf_emails"] == "True":
         start = time.time()

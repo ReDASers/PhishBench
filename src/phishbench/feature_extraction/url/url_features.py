@@ -10,7 +10,6 @@ from tqdm import tqdm
 from . import features as internal_features
 from .. import settings
 from ..reflection import load_features, FeatureType
-from ... import Features
 from ... import dataset
 from ...Features_Support import Cleaning
 from ...input import url_input
@@ -75,13 +74,7 @@ def url_features(url: URLData, corpus, features):
     phishbench_globals.logger.debug("rawurl: %s", str(url))
 
     if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
-
         soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-
-        if settings.feature_type_enabled(FeatureType.URL_WEBSITE_JAVASCRIPT):
-            single_javascript_features(soup, dict_feature_values, dict_extraction_times)
-            phishbench_globals.logger.debug("javascript features >>>>>> complete")
-
         corpus.append(str(soup))
 
     return dict_feature_values, dict_extraction_times
@@ -147,9 +140,3 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
-
-def single_javascript_features(soup, dict_features, dict_time):
-    phishbench_globals.logger.debug("Extracting single javascript features")
-
-    Features.Javascript_number_of_event_attachment(soup, dict_features, dict_time)

@@ -104,6 +104,30 @@ def number_of_iframes_in_script(url: URLData):
     return sum(counts)
 
 
+@register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_attachment')
+def number_of_event_attachment(url: URLData):
+    """
+    Number of calls to `addEventListener` or `attachEvent`
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]
+    event_regex = re.compile(r'\.(?:addEventListener|attachEvent)\(')
+    counts = [len(event_regex.findall(script)) for script in scripts]
+    return sum(counts)
+
+
+@register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_dispatch')
+def number_of_event_dispatch(url: URLData):
+    """
+    Number of calls to `dispatchEvent` or `fireEvent`
+    """
+    soup = BeautifulSoup(url.downloaded_website, 'html5lib')
+    scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]
+    event_regex = re.compile(r'\.(?:dispatchEvent|fireEvent)\(')
+    counts = [len(event_regex.findall(script)) for script in scripts]
+    return sum(counts)
+
+
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'right_click_modified')
 def right_click_modified(url: URLData):
     """
