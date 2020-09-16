@@ -40,6 +40,7 @@ def extract_labeled_dataset(legit_path, phish_path):
         The path of the folder/file containing the legitimate urls
     phish_path
         The path of the folder/file containing the phishing urls
+
     Returns
     -------
     features: List[Dict]
@@ -71,6 +72,7 @@ def extract_features_from_list_urls(urls: List[URLData]):
     ----------
     urls: List[URLData]
         The urls to extract features from
+
     Returns
     -------
     feature_list_dict: List[Dict[str]]
@@ -93,13 +95,13 @@ def extract_features_from_list_urls(urls: List[URLData]):
 
 def extract_features_from_single_url(features: List[Callable], url: URLData) -> Tuple[Dict, Dict]:
     """
-    Extracts multiple features from a single email
+    Extracts multiple features from a single url
     Parameters
     ----------
     features: List
         The features to extract
     url: URLData
-        The email to extract the features from
+        The url to extract the features from
 
     Returns
     -------
@@ -125,13 +127,13 @@ def extract_features_from_single_url(features: List[Callable], url: URLData) -> 
 
 def extract_single_feature_url(feature: Callable, url: URLData):
     """
-    Extracts a single feature from a single email
+    Extracts a single feature from a single url
     Parameters
     ----------
     feature
         The feature to extract
     url: URLData
-        The email to extract the feature from
+        The url to extract the feature from
 
     Returns
     -------

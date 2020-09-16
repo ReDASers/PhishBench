@@ -1,9 +1,12 @@
 # Change Log
 # v1.2.2
 
+## Major changes 
+* Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
+
 # v1.2.1
 ## Major changes
-* Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url_features`
+* Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url`
 
 ## Minor Changes
 * Refactored remaining URL/Website features using reflection
