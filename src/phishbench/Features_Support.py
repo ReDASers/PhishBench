@@ -1,7 +1,3 @@
-import ntpath
-import os
-import os.path
-
 import numpy as np
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
@@ -9,10 +5,7 @@ from sklearn.feature_extraction import DictVectorizer
 from .utils import phishbench_globals
 
 
-
-
-###########################
-########################### Functions for features_url.py
+# Functions for features_url.py
 
 
 def mean_scaling(Array_Features):
@@ -90,22 +83,6 @@ def Preprocessing(X):
     else:
         return X
     # return scaler, scaled_Array_Features, mean_Array_Features, min_Array_Features #, max_Array_Features
-
-
-def Cleaning(dict1):
-    phishbench_globals.logger.info("Performing Cleaning on dict of len %d", len(dict1))
-    count = 0
-    for item in dict1:
-        # print(item)
-        for key in item.keys():
-            # print(item[key])
-            # if item[key] == "None" or item[key] == "N/A" or item[key] == "Nan" :
-            if item[key] in ["None", "N/A", "NaN", None]:
-                original = item[key]
-                item[key] = -1
-                count += 1
-                phishbench_globals.logger.debug("Value of {} changed from {} to {}".format(key, original, item[key]))
-    phishbench_globals.logger.info("Finished cleaning")
 
 
 def Vectorization_Training(list_dict_features_train):
