@@ -8,8 +8,8 @@ from phishbench.feature_extraction.url.features import link_tree_features
 from tests import mock_objects
 
 # pylint: disable=missing-function-docstring
-# pylint: disable=missing-class-docstring
-
+# pylint: disable=no-value-for-parameter
+# pylint: disable=too-many-public-methods
 
 class TestLinkTreeFeatures(unittest.TestCase):
 

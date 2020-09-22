@@ -10,7 +10,8 @@ from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
-# pylint: disable=missing-class-docstring
+# pylint: disable=no-value-for-parameter
+# pylint: disable=too-many-public-methods
 
 class TestNetworkFeatures(unittest.TestCase):
 

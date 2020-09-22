@@ -10,8 +10,8 @@ from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
+# pylint: disable=no-value-for-parameter
 # pylint: disable=too-many-public-methods
-
 
 class TestURLReflectionFeatures(unittest.TestCase):
     """
