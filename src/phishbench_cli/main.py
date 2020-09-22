@@ -275,7 +275,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
         os.makedirs(email_test_dir)
 
     legit_path = pb_input.settings.test_legit_path()
-    phish_path = pb_input.test_phish_path()
+    phish_path = pb_input.settings.test_phish_path()
 
     print("Extracting Test Set")
     phishbench_globals.logger.info('Extracting Test Set')
