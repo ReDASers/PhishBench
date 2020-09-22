@@ -6,8 +6,6 @@ import unittest
 import phishbench.feature_extraction.url.features as url_features
 from phishbench.input import URLData
 
-from tests import mock_objects
-
 
 # pylint: disable=missing-function-docstring
 # pylint: disable=no-value-for-parameter
@@ -202,20 +200,6 @@ class TestURLReflectionFeatures(unittest.TestCase):
     def test_http_middle_of_url_true_false(self):
         test_url = URLData("http://www.google.com", download_url=False)
         self.assertFalse(url_features.http_in_middle().extract(test_url))
-
-    def test_num_punctuation(self):
-        test_url = URLData('http://te2t-url.com/home.html', download_url=False)
-        result = url_features.num_punctuation().extract(test_url)
-        self.assertEqual(7, result, 'incorrect num_punctuation')
-
-    def test_has_at_symbol_true(self):
-        test_url = URLData("http://tech.www.google.com/index.html@http", download_url=False)
-
-        self.assertTrue(url_features.has_at_symbol().extract(test_url))
-
-    def test_has_at_symbol_false(self):
-        test_url = URLData("http://tech.www.google.com/index.html", download_url=False)
-        self.assertFalse(url_features.has_at_symbol().extract(test_url))
 
     def test_null_in_domain_true(self):
         test_url = URLData('http://www.nulltest.com/test', download_url=False)
