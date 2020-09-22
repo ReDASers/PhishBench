@@ -11,11 +11,11 @@ import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
-import phishbench.dataset as dataset
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url.url_features as legacy_url
 import phishbench.feature_preprocessing as preprocessing
+import phishbench.input as pb_input
 from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
@@ -222,8 +222,8 @@ def extract_email_train_features(email_train_dir, run_tfidf):
         os.makedirs(email_train_dir)
     print("Extracting Train Set")
     phishbench_globals.logger.info("Extracting Train Set")
-    legit_path = dataset.train_legit_path()
-    phish_path = dataset.train_phish_path()
+    legit_path = pb_input.settings.train_legit_path()
+    phish_path = pb_input.settings.train_phish_path()
 
     feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
     preprocessing.clean_features(feature_list_dict_train)
@@ -274,8 +274,8 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
     if not os.path.isdir(email_test_dir):
         os.makedirs(email_test_dir)
 
-    legit_path = dataset.test_legit_path()
-    phish_path = dataset.test_phish_path()
+    legit_path = pb_input.settings.test_legit_path()
+    phish_path = pb_input.test_phish_path()
 
     print("Extracting Test Set")
     phishbench_globals.logger.info('Extracting Test Set')
