@@ -2,14 +2,14 @@
 This module handles the extraction of url features
 """
 import time
-from typing import List, Callable, Tuple, Dict
+from typing import List, Tuple, Dict
 
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from . import features as internal_features
 from .. import settings
-from ..reflection import load_features, FeatureType
+from ..reflection import load_features, FeatureClass, FeatureType
 from ... import dataset
 from ... import feature_preprocessing as preprocessing
 from ...input import url_input
@@ -80,25 +80,27 @@ def extract_features_from_list_urls(urls: List[URLData]):
     corpus:
         A list of the downloaded websites
     """
-    features = load_features(filter_features='URL', internal_features=internal_features)
-    feature_list_dict = list()
 
-    corpus = []
+    features = [feature() for feature in load_features(filter_features='URL', internal_features=internal_features)]
+
+    feature_list_dict = list()
+    corpus = list()
     for url in tqdm(urls):
         feature_values, _ = extract_features_from_single_url(features, url)
         feature_list_dict.append(feature_values)
         if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
             soup = BeautifulSoup(url.downloaded_website, 'html5lib')
             corpus.append(str(soup))
+
     return feature_list_dict, corpus
 
 
-def extract_features_from_single_url(features: List[Callable], url: URLData) -> Tuple[Dict, Dict]:
+def extract_features_from_single_url(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single url
     Parameters
     ----------
-    features: List
+    features: List[FeatureClass]
         The features to extract
     url: URLData
         The url to extract the features from
@@ -125,7 +127,7 @@ def extract_features_from_single_url(features: List[Callable], url: URLData) -> 
     return dict_feature_values, dict_feature_times
 
 
-def extract_single_feature_url(feature: Callable, url: URLData):
+def extract_single_feature_url(feature: FeatureClass, url: URLData):
     """
     Extracts a single feature from a single url
     Parameters
@@ -146,7 +148,7 @@ def extract_single_feature_url(feature: Callable, url: URLData):
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
-        feature_value = feature(url)
+        feature_value = feature.extract(url)
     except Exception:
         error_string = "Error extracting {}".format(feature.config_name)
         phishbench_globals.logger.warning(error_string, exc_info=True)
