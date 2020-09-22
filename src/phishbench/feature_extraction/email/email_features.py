@@ -16,12 +16,13 @@ from ...utils import phishbench_globals
 def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
     """
     Extracts features from a dataset of emails split in two folders
+
     Parameters
     ----------
     legit_dataset_folder: str
-        The folder containing phishing emails
-    phish_dataset_folder
         The folder containing legitimate emails
+    phish_dataset_folder
+        The folder containing phishing emails
 
     Returns
     -------
@@ -58,6 +59,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
 def extract_features_list_email(emails: List[EmailMessage], features: List[Callable]):
     """
     Extracts features from a list of `EmailMessage` objects
+
     Parameters
     ----------
     emails: List[EmailMessage]
@@ -86,6 +88,7 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Calla
 def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single email
+
     Parameters
     ----------
     features: List
@@ -118,6 +121,7 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
 def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     """
     Extracts a single feature from a single email
+
     Parameters
     ----------
     feature
@@ -149,7 +153,6 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
