@@ -2,12 +2,12 @@
 This module contains code for email feature extraction.
 """
 import time
-from typing import List, Callable, Dict, Tuple
+from typing import List, Dict, Tuple
 
 from tqdm import tqdm
 
 from . import features as local_features
-from ..reflection import FeatureType, load_features
+from ..reflection import FeatureClass, FeatureType, load_features
 from ...input import email_input
 from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
@@ -33,7 +33,8 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     corpus List[str]:
         The email bodies corresponding to each feature set
     """
-    features = load_features(local_features, 'Email')
+
+    features = [feature() for feature in load_features(local_features, 'Email')]
     print("Loaded {} features".format(len(features)))
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
@@ -41,22 +42,19 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
 
     print("Loading emails from {}".format(legit_dataset_folder))
     legit_emails, _ = email_input.read_dataset_email(legit_dataset_folder)
-    print("Extracting features")
-    legit_features, legit_corpus = extract_features_list_email(legit_emails, features)
-
     print("Loading emails from {}".format(phish_dataset_folder))
     phish_emails, _ = email_input.read_dataset_email(phish_dataset_folder)
+
+    emails = legit_emails + phish_emails
+    labels = [0] * len(legit_emails) + [1] * len(phish_emails)
+
     print("Extracting features")
-    phish_features, phish_corpus = extract_features_list_email(phish_emails, features)
+    feature_values, corpus = extract_features_list_email(emails, features)
 
-    feature_list_dict_train = legit_features + phish_features
-    labels_train = [0] * len(legit_features) + [1] * len(phish_features)
-    corpus_train = legit_corpus + phish_corpus
-
-    return feature_list_dict_train, labels_train, corpus_train
+    return feature_values, labels, corpus
 
 
-def extract_features_list_email(emails: List[EmailMessage], features: List[Callable]):
+def extract_features_list_email(emails: List[EmailMessage], features: List[FeatureClass]):
     """
     Extracts features from a list of `EmailMessage` objects
 
@@ -85,7 +83,7 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Calla
     return feature_list_dict, corpus
 
 
-def extract_features_from_single_email(features: List[Callable], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
+def extract_features_from_single_email(features: List[FeatureClass], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single email
 
@@ -118,13 +116,13 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
     return dict_feature_values, dict_feature_times
 
 
-def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
+def extract_single_feature_email(feature: FeatureClass, email_msg: EmailMessage):
     """
     Extracts a single feature from a single email
 
     Parameters
     ----------
-    feature
+    feature: FeatureClass
         The feature to extract
     email_msg: EmailMessage
         The email to extract the feature from
@@ -141,9 +139,9 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     start = time.process_time()
     try:
         if feature.feature_type == FeatureType.EMAIL_BODY:
-            feature_value = feature(email_msg.body)
+            feature_value = feature.extract(email_msg.body)
         elif email_msg.header is not None:
-            feature_value = feature(email_msg.header)
+            feature_value = feature.extract(email_msg.header)
         else:
             raise ValueError('Email Message must have a header!')
     except Exception:
