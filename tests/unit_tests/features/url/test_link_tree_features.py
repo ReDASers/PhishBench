@@ -8,17 +8,22 @@ from phishbench.feature_extraction.url.features import link_tree_features
 from tests import mock_objects
 
 # pylint: disable=missing-function-docstring
+# pylint: disable=no-member
 # pylint: disable=no-value-for-parameter
 # pylint: disable=too-many-public-methods
 
+
 class TestLinkTreeFeatures(unittest.TestCase):
+    """
+    Tests link-tree features
+    """
 
     def test_extract_domain(self):
         # pylint: disable=protected-access
         result = link_tree_features._extract_domain("abc.google.com/test")
         self.assertEqual('google.com', result)
 
-    def test_ltree(self):
+    def test_link_tree(self):
         url: URLData = mock_objects.get_mock_object("wikipedia_shortener_urldata")
         expected = mock_objects.get_mock_object('wikipedia-Ltree')
 

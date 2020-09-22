@@ -9,8 +9,8 @@ from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
-# pylint: disable=no-value-for-parameter
 # pylint: disable=no-member
+# pylint: disable=no-value-for-parameter
 # pylint: disable=too-many-public-methods
 
 class TestHTMLReflectionFeatures(unittest.TestCase):

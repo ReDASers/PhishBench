@@ -10,10 +10,14 @@ from tests import mock_objects
 
 
 # pylint: disable=missing-function-docstring
+# pylint: disable=no-member
 # pylint: disable=no-value-for-parameter
 # pylint: disable=too-many-public-methods
 
 class TestNetworkFeatures(unittest.TestCase):
+    """
+    Tests network features
+    """
 
     def test_creation_date(self):
         expected = datetime.datetime(1991, 5, 2, 4, 0).timestamp()
