@@ -1,14 +1,57 @@
+"""
+Models for feature reflection
+"""
 from enum import Enum, unique
 
 
 @unique
 class FeatureType(Enum):
+    """
+    The types of features that can be extracted
+    """
     EMAIL_BODY = 'Email_Body_Features'
     EMAIL_HEADER = 'Email_Header_Features'
     URL_RAW = 'URL_Features'
     URL_NETWORK = 'URL_Network_Features'
     URL_WEBSITE = 'URL_HTML_Features'
     URL_WEBSITE_JAVASCRIPT = 'URL_Javascript_Features'
+
+
+class FeatureClass:
+    """
+    A type hint stub for features
+    """
+    config_name: str
+    feature_type: FeatureType
+
+    def __init__(self):
+        raise SyntaxError('This is a stub for type hinting and should not be instantiated.')
+
+    def fit(self, corpus, labels):
+        """
+        Fits the feature extractor onto the corpus
+
+        Parameters
+        ----------
+        corpus: List
+            The dataset corpus
+        labels: List
+            The labels for the dataset
+        """
+
+    def extract(self, x):
+        """
+        Extracts the feature
+
+        Parameters
+        ----------
+        x:
+            The data point to extract the feature from
+
+        Returns
+        -------
+            The feature value extracted from `x`
+        """
 
 
 class FeatureMC(type):
