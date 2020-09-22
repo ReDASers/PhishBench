@@ -19,9 +19,9 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     Parameters
     ----------
     legit_dataset_folder: str
-        The folder containing phishing emails
-    phish_dataset_folder
         The folder containing legitimate emails
+    phish_dataset_folder
+        The folder containing phishing emails
 
     Returns
     -------
