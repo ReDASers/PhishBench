@@ -121,7 +121,7 @@ def extract_features_from_single_email(features: List[Callable], email_msg: Emai
 def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     """
     Extracts a single feature from a single email
-    
+
     Parameters
     ----------
     feature
@@ -153,7 +153,6 @@ def extract_single_feature_email(feature: Callable, email_msg: EmailMessage):
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time
-
 
 # def get_url(body):
 #     url_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', flags=re.IGNORECASE | re.MULTILINE)
