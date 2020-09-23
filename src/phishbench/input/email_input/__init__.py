@@ -1,5 +1,5 @@
 """
-
+Handles email input
 """
 from .email_input import read_dataset_email
 from .email_input import read_email_from_file
