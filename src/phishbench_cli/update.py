@@ -3,6 +3,7 @@ The PhishBench Config Generator
 
 This script generates PhishBench configuration files.
 """
+# pylint: disable=missing-function-docstring
 import argparse
 import configparser
 import inspect
