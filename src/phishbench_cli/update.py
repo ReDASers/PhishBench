@@ -29,14 +29,11 @@ def make_config(list_features, list_imbalanced_dataset):
     config[input_settings.DATASET_PATH_SECTION] = input_settings.DEFAULT_SETTINGS
 
     config['Extraction'] = {}
-    extraction_section = config['Extraction']
-    extraction_section["Feature Extraction"] = "True"
-    extraction_section["Training Dataset"] = "True"
-    extraction_section["Testing Dataset"] = "True"
+    config['Extraction']["Training Dataset"] = "True"
+    config['Extraction']["Testing Dataset"] = "True"
 
     config['Features Export'] = {}
-    features_format_section = config['Features Export']
-    features_format_section['csv'] = "True"
+    config['Features Export']['csv'] = "True"
 
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
@@ -72,11 +69,7 @@ def make_config(list_features, list_imbalanced_dataset):
     }
 
     config["Summary"] = {}
-    summary_section = config["Summary"]
-    summary_section["Path"] = "summary.txt"
-
-    config["Support Files"] = {}
-    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
+    config["Summary"]["Path"] = "summary.txt"
 
     config[extraction_settings.EMAIL_TYPE_SECTION] = \
         extraction_settings.EMAIL_TYPE_SETTINGS

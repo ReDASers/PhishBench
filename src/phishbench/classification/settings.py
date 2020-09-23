@@ -7,7 +7,6 @@ CLASSIFICATION_SECTION = 'Classification'
 CLASSIFIERS_SECTION = 'Classifiers'
 
 DEFAULT_SETTINGS = {
-    "Run Classifiers": "True",
     "param search": "True",
     # "Rounds": "1",
     "load models": "False",
