@@ -1,12 +1,16 @@
+"""
+Handles user interaction with PhishBench
+"""
 import sys
 
 from phishbench.classification import settings as classification_setings
 from phishbench.utils.phishbench_globals import config
-from phishbench import dataset
+from phishbench.input import settings as input_settings
 
 
 def query_yes_no(question, default="yes"):
-    """Ask a yes/no question via raw_input() and return their answer.
+    """
+    Ask a yes/no question via raw_input() and return their answer.
     "question" is a string that is presented to the user.
     "default" is the presumed answer if the user just hits <Enter>.
         It must be "yes" (the default), "no" or None (meaning
@@ -29,14 +33,23 @@ def query_yes_no(question, default="yes"):
         choice = input().lower()
         if default is not None and choice == '':
             return valid[default]
-        elif choice in valid:
+        if choice in valid:
             return valid[choice]
-        else:
-            sys.stdout.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+        sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
 
 def confirmation(ignore_confirmation=False):
+    """
+    Displays settings and propts user for confirmation.
+    Parameters
+    ----------
+    ignore_confirmation:
+        Whether to automatically return `True`
+
+    Returns
+    -------
+    `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
+    """
     print("##### Review of Options:")
     if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
         print("Running Email Mode")
@@ -44,10 +57,10 @@ def confirmation(ignore_confirmation=False):
         print("Running URL Mode")
 
     print("###Paths to datasets:")
-    print("Legitimate Dataset (Training): {}".format(dataset.train_legit_path()))
-    print("Phishing Dataset (Training):: {}".format(dataset.train_phish_path()))
-    print("Legitimate Dataset (Testing): {}".format(dataset.test_legit_path()))
-    print("Phishing Dataset (Testing): {}".format(dataset.test_phish_path()))
+    print("Legitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
+    print("Phishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
+    print("Legitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
+    print("Phishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
 
     if config["Extraction"]["feature extraction"] == "True":
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
