@@ -5,6 +5,12 @@
 * Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
 * Reflection Extraction v2
 * Moved `dataset.settings` to `input.settings`
+* Updated Configuration Files
+    * Module toggles moved to `phishbench` section
+    * Changed `Email or URL` to `Mode` setting 
+
+## Minor changes 
+* Updated user interaction
 
 # v1.2.1
 ## Major changes
