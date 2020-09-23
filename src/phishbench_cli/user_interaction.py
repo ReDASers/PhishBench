@@ -3,9 +3,10 @@ Handles user interaction with PhishBench
 """
 import sys
 
+import phishbench.settings
 from phishbench.classification import settings as classification_setings
-from phishbench.utils.phishbench_globals import config
 from phishbench.input import settings as input_settings
+from phishbench.utils.phishbench_globals import config
 
 
 def query_yes_no(question, default="yes"):
@@ -51,10 +52,7 @@ def confirmation(ignore_confirmation=False):
     `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
     """
     print("##### Review of Options:")
-    if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        print("Running Email Mode")
-    elif config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        print("Running URL Mode")
+    print("Mode: {}".format(phishbench.settings.mode()))
 
     print("###Paths to datasets:")
     print("Legitimate Dataset (Training): {}".format(input_settings.train_legit_path()))

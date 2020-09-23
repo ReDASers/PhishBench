@@ -11,6 +11,7 @@ import phishbench.Features as Features
 import phishbench.classification as classification
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.input.settings as input_settings
+import phishbench.settings
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
@@ -24,12 +25,8 @@ def make_config(list_features, list_imbalanced_dataset):
     # pylint: disable=too-many-locals
     config = configparser.ConfigParser()
 
+    config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS
     config[input_settings.DATASET_PATH_SECTION] = input_settings.DEFAULT_SETTINGS
-
-    config['Email or URL feature Extraction'] = {}
-    proccess_section = config['Email or URL feature Extraction']
-    proccess_section["extract_features_emails"] = "False"
-    proccess_section["extract_features_urls"] = "True"
 
     config['Extraction'] = {}
     extraction_section = config['Extraction']
