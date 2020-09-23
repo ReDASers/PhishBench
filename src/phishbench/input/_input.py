@@ -1,3 +1,6 @@
+"""
+Contains implementations of input library functions
+"""
 from typing import Union, List, Tuple
 
 from . import email_input
@@ -7,9 +10,9 @@ from .. import settings as pb_settings
 
 
 def read_train_set(download_url: bool) -> Tuple[
-    Union[List[url_input.URLData], List[email_input.EmailMessage]],
-    List[int]
-]:
+        Union[List[url_input.URLData], List[email_input.EmailMessage]],
+        List[int]
+        ]:
     """
     Reads in the training set
 
@@ -39,9 +42,9 @@ def read_train_set(download_url: bool) -> Tuple[
 
 
 def read_test_set(download_url: bool) -> Tuple[
-    Union[List[url_input.URLData], List[email_input.EmailMessage]],
-    List[int]
-]:
+        Union[List[url_input.URLData], List[email_input.EmailMessage]],
+        List[int]
+    ]:
     """
     Reads in the test set
 
