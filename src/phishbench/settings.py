@@ -15,3 +15,10 @@ def mode():
     if mode_str.lower().startswith('email'):
         return 'Email'
     raise ValueError('Mode must either be email or url')
+
+
+def feature_extraction() -> bool:
+    """
+    Whether or not to extract features
+    """
+    return phishbench_globals.config[PB_SECTION].getboolean('feature extraction')

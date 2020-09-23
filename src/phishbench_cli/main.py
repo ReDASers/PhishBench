@@ -406,7 +406,7 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 
 
 def run_phishbench():
-    if phishbench_globals.config["Extraction"].getboolean("Feature Extraction"):
+    if phishbench.settings.feature_extraction():
         if phishbench.settings.mode() == 'Email':
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
         else:
