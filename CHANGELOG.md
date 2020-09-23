@@ -3,11 +3,14 @@
 
 ## Major changes 
 * Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
+* Reflection Extraction v2
+* Moved `dataset.settings` to `input.settings`
 
 # v1.2.1
 ## Major changes
 * Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url`
 * Added `phishbench.preproccessing` module to replace `FeatureSupport`
+* Added type stub for metrics
 
 ## Minor Changes
 * Refactored remaining URL/Website features using reflection
