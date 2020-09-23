@@ -65,7 +65,8 @@ def confirmation(ignore_confirmation=False):
     else:
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
 
-    print("\nFeature Selection: {}".format(config['Feature Selection']['select best features']))
+    if phishbench.settings.feature_selection():
+        print("\nPerforming Feature selection")
 
     if phishbench.settings.classification():
         print("\nRunning classifiers")

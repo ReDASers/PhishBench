@@ -44,7 +44,6 @@ def make_config():
 
     config["Feature Selection"] = {}
     feature_selection_section = config["Feature Selection"]
-    feature_selection_section["select best features"] = "True"
     feature_selection_section["Number of Best Features"] = "80"
     feature_selection_section["Recursive Feature Elimination"] = "False"
     feature_selection_section["Information Gain"] = "True"

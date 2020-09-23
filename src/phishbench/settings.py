@@ -9,6 +9,7 @@ PB_SECTION = 'PhishBench'
 DEFAULT_SETTINGS = {
     'Mode': 'URL ; Options are "URL" or "Email"',
     'feature extraction': 'True',
+    'feature selection': 'True',
     'classification': 'True'
 }
 
@@ -30,6 +31,13 @@ def feature_extraction() -> bool:
     Whether or not to extract features
     """
     return phishbench_globals.config[PB_SECTION].getboolean('feature extraction')
+
+
+def feature_selection() -> bool:
+    """
+    Whether or not to perform feature selection
+    """
+    return phishbench_globals.config[PB_SECTION].getboolean('feature selection')
 
 
 def classification() -> bool:

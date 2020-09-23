@@ -415,7 +415,7 @@ def run_phishbench():
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
 
     # Feature Selection
-    if phishbench_globals.config["Feature Selection"].getboolean("select best features"):
+    if phishbench.settings.feature_selection():
         ranking_dir = os.path.join(phishbench_globals.args.output_input_dir, "Feature_Ranking")
         if not os.path.exists(ranking_dir):
             os.makedirs(ranking_dir)
