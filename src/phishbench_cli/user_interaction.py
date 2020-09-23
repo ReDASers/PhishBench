@@ -51,19 +51,17 @@ def confirmation(ignore_confirmation=False):
     -------
     `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
     """
-    print("##### Review of Options:")
-    print("Mode: {}".format(phishbench.settings.mode()))
 
-    print("###Paths to datasets:")
-    print("Legitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
-    print("Phishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
-    print("Legitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
-    print("Phishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
+    print("PhishBench is running in {} mode.\n".format(phishbench.settings.mode()))
 
-    if config["Extraction"]["feature extraction"] == "True":
-        print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
-        print("\nFeature Extraction for Training Data: {}".format(config["Extraction"]["training dataset"]))
-        print("\nFeature Extraction for Testing Data: {}".format(config["Extraction"]["testing dataset"]))
+    if phishbench.settings.feature_extraction():
+        print("Performing feature extraction with")
+        if config["Extraction"].getboolean("training dataset"):
+            print("\tLegitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
+            print("\tPhishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
+        if config["Extraction"].getboolean("testing dataset"):
+            print("\tLegitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
+            print("\tPhishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
     else:
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
 
