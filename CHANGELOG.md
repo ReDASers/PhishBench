@@ -13,6 +13,9 @@
 ## Minor changes 
 * Updated user interaction
 
+## Bug fixes
+* Fixed non-breaking bug in `export_features_to_csv`
+
 # v1.2.1
 ## Major changes
 * Renamed `extract_url_features` `extract_features_from_list_urls` in `feature_extraction.url`
