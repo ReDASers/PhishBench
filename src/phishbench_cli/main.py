@@ -64,22 +64,25 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
     if not os.path.exists(url_train_dir):
         os.makedirs(url_train_dir)
 
-    feature_list_dict_train, y_train, corpus_train = legacy_url.Extract_Features_Urls_Training()
+    urls, labels = pb_input.read_train_set(extraction_settings.download_url_flag())
+    feature_list_dict, corpus = legacy_url.extract_features_from_list_urls(urls)
+    print("Cleaning features")
+    preprocessing.clean_features(feature_list_dict)
 
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(url_train_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_train, y_train, out_path)
+        export_features_to_csv(feature_list_dict, labels, out_path)
 
     # Transform the list of dictionaries into a sparse matrix
-    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict)
 
     joblib.dump(x_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
     # Add tfidf if the user marked it as True
     if run_tfidf:
         phishbench_globals.logger.info("Extracting TFIDF features for training websites ###### ######")
-        tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus_train)
+        tfidf_train, tfidf_vectorizer = Tfidf.tfidf_training(corpus)
         joblib.dump(tfidf_train, os.path.join(url_train_dir, "tfidf_features.pkl"))
         x_train = hstack([x_train, tfidf_train])
     else:
@@ -87,7 +90,7 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
 
     x_train = Features_Support.Preprocessing(x_train)
 
-    return x_train, y_train, vectorizer, tfidf_vectorizer
+    return x_train, labels, vectorizer, tfidf_vectorizer
 
 
 def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=None):
@@ -110,7 +113,11 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     y_test
         A list containing the dataset labels
     """
-    feature_list_dict_test, y_test, corpus_test = legacy_url.Extract_Features_Urls_Testing()
+
+    urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
+    feature_list_dict, corpus = legacy_url.extract_features_from_list_urls(urls)
+    print("Cleaning features")
+    preprocessing.clean_features(feature_list_dict)
 
     if not os.path.exists(url_test_dir):
         os.makedirs(url_test_dir)
@@ -118,15 +125,15 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):
         out_path = os.path.join(url_test_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_test, y_test, out_path)
+        export_features_to_csv(feature_list_dict, labels, out_path)
 
-    x_test = vectorizer.transform(feature_list_dict_test)
+    x_test = vectorizer.transform(feature_list_dict)
 
     joblib.dump(x_test, os.path.join(url_test_dir, "X_test_unprocessed.pkl"))
 
     if tfidf_vectorizer:
         phishbench_globals.logger.info("Extracting TFIDF features for testing websites ######")
-        tfidf_test = Tfidf.tfidf_testing(corpus_test, tfidf_vectorizer)
+        tfidf_test = Tfidf.tfidf_testing(corpus, tfidf_vectorizer)
         joblib.dump(tfidf_test, os.path.join(url_test_dir, "tfidf_features.pkl"))
         x_test = hstack([x_test, tfidf_test])
 
@@ -137,7 +144,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
 
     phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
 
-    return x_test, y_test
+    return x_test, labels
 
 
 def extract_url_features():
