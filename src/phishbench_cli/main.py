@@ -36,7 +36,7 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
     """
     df = pd.DataFrame(features)
     df['is_phish'] = y
-    df.to_csv(file_path, index=None)
+    df.to_csv(file_path, index=False)
 
 
 def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
