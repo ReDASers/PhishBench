@@ -9,7 +9,7 @@ DEFAULT_SETTINGS = {
 
 
 def mode():
-    mode_str = phishbench_globals.config[PB_SECTION].strip().get('Mode')
+    mode_str = phishbench_globals.config[PB_SECTION].get('Mode').strip()
     if mode_str.lower().startswith('url'):
         return 'URL'
     if mode_str.lower().startswith('email'):
