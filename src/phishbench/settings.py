@@ -1,14 +1,21 @@
+"""
+This module contains core settings for phishbench
+"""
 from .utils import phishbench_globals
 
-PB_SECTION = 'PhishBench Sections'
+PB_SECTION = 'PhishBench'
 
 
 DEFAULT_SETTINGS = {
-    'Mode': 'URL ; Options are "URL" or "Email"'
+    'Mode': 'URL ; Options are "URL" or "Email"',
+    'feature extraction': 'True'
 }
 
 
-def mode():
+def mode() -> str:
+    """
+    Gets the mode PhishBench is in
+    """
     mode_str = phishbench_globals.config[PB_SECTION].get('Mode').strip()
     if mode_str.lower().startswith('url'):
         return 'URL'
