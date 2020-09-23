@@ -8,6 +8,7 @@
 * Updated Configuration Files
     * Module toggles moved to `phishbench` section
     * Changed `Email or URL` to `Mode` setting 
+* Added `input.read_train_set` and `input.read_test_set` functions
 
 ## Minor changes 
 * Updated user interaction
