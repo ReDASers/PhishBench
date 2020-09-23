@@ -21,6 +21,7 @@ from phishbench.feature_extraction.url import features as internal_url_features
 
 
 def make_config(list_features, list_imbalanced_dataset):
+    # pylint: disable=too-many-locals
     config = configparser.ConfigParser()
 
     config[input_settings.DATASET_PATH_SECTION] = input_settings.DEFAULT_SETTINGS

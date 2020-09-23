@@ -35,9 +35,7 @@ def query_yes_no(question, default="yes"):
             return valid[default]
         if choice in valid:
             return valid[choice]
-        else:
-            sys.stdout.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+        sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
 
 def confirmation(ignore_confirmation=False):
