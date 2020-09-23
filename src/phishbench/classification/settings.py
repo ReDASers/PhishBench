@@ -1,10 +1,12 @@
+"""
+Settings for the classification module
+"""
 from ..utils import phishbench_globals
 
 CLASSIFICATION_SECTION = 'Classification'
 CLASSIFIERS_SECTION = 'Classifiers'
 
 DEFAULT_SETTINGS = {
-    "Run Classifiers": "True",
     "param search": "True",
     # "Rounds": "1",
     "load models": "False",
@@ -13,27 +15,46 @@ DEFAULT_SETTINGS = {
 }
 
 
-def load_models():
+def load_models() -> bool:
+    """
+    Whether or not to load the models from disk
+    """
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("load models")
 
 
-def save_models():
+def save_models() -> bool:
+    """
+    Whether or not to save the models to disk
+    """
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("save models")
 
 
-def run_classifiers():
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
-
-
-def param_search():
+def param_search() -> bool:
+    """
+    Whether or not to perform parameter search
+    """
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("param search")
 
 
-def weighted_training():
+def weighted_training() -> bool:
+    """
+    Whether or not to perform weighted training
+    """
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
 
 
-def is_enabled(classifier: type):
+def is_enabled(classifier: type) -> bool:
+    """
+    Whether or not a classifier is enabled
+    Parameters
+    ----------
+    classifier:
+        The classifier class to check
+
+    Returns
+    -------
+        Whether or not the classifier is enabled
+    """
     return phishbench_globals.config[CLASSIFIERS_SECTION].getboolean(classifier.__name__)
 
 # def num_rounds() -> int:

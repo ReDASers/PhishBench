@@ -7,6 +7,7 @@ import pandas as pd
 from scipy.sparse import hstack
 
 import phishbench
+import phishbench.settings
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
@@ -362,7 +363,7 @@ def extract_email_features():
 
 
 def get_config():
-    if phishbench_globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
+    if phishbench.settings.mode() == 'Email':
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
         run_tfidf = extraction_settings.extract_body_enabled() and \
@@ -405,8 +406,8 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 
 
 def run_phishbench():
-    if phishbench_globals.config["Extraction"].getboolean("Feature Extraction"):
-        if phishbench_globals.config["Email or URL feature Extraction"].getboolean("extract_features_emails"):
+    if phishbench.settings.feature_extraction():
+        if phishbench.settings.mode() == 'Email':
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
         else:
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
@@ -414,7 +415,7 @@ def run_phishbench():
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
 
     # Feature Selection
-    if phishbench_globals.config["Feature Selection"].getboolean("select best features"):
+    if phishbench.settings.feature_selection():
         ranking_dir = os.path.join(phishbench_globals.args.output_input_dir, "Feature_Ranking")
         if not os.path.exists(ranking_dir):
             os.makedirs(ranking_dir)
@@ -431,7 +432,7 @@ def run_phishbench():
             phishbench_globals.logger.info("X_test Shape: %s", x_test.shape)
             joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
 
-    if classification.settings.run_classifiers():
+    if phishbench.settings.classification():
         run_classifiers(x_train, y_train, x_test, y_test)
 
 

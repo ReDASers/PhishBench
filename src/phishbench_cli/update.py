@@ -3,14 +3,15 @@ The PhishBench Config Generator
 
 This script generates PhishBench configuration files.
 """
+# pylint: disable=missing-function-docstring
 import argparse
 import configparser
 import inspect
 
-import phishbench.Features as Features
 import phishbench.classification as classification
 import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.input.settings as input_settings
+import phishbench.settings
 from phishbench.classification.core import load_classifiers
 from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
@@ -20,26 +21,19 @@ from phishbench.feature_extraction.reflection import load_features, FeatureType
 from phishbench.feature_extraction.url import features as internal_url_features
 
 
-def make_config(list_features, list_imbalanced_dataset):
-    # pylint: disable=too-many-locals
+def make_config():
+    list_imbalanced_dataset = update_list()
     config = configparser.ConfigParser()
 
+    config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS
     config[input_settings.DATASET_PATH_SECTION] = input_settings.DEFAULT_SETTINGS
 
-    config['Email or URL feature Extraction'] = {}
-    proccess_section = config['Email or URL feature Extraction']
-    proccess_section["extract_features_emails"] = "False"
-    proccess_section["extract_features_urls"] = "True"
-
     config['Extraction'] = {}
-    extraction_section = config['Extraction']
-    extraction_section["Feature Extraction"] = "True"
-    extraction_section["Training Dataset"] = "True"
-    extraction_section["Testing Dataset"] = "True"
+    config['Extraction']["Training Dataset"] = "True"
+    config['Extraction']["Testing Dataset"] = "True"
 
     config['Features Export'] = {}
-    features_format_section = config['Features Export']
-    features_format_section['csv'] = "True"
+    config['Features Export']['csv'] = "True"
 
     config['Preprocessing'] = {}
     preprocessing_section = config['Preprocessing']
@@ -50,7 +44,6 @@ def make_config(list_features, list_imbalanced_dataset):
 
     config["Feature Selection"] = {}
     feature_selection_section = config["Feature Selection"]
-    feature_selection_section["select best features"] = "True"
     feature_selection_section["Number of Best Features"] = "80"
     feature_selection_section["Recursive Feature Elimination"] = "False"
     feature_selection_section["Information Gain"] = "True"
@@ -75,11 +68,7 @@ def make_config(list_features, list_imbalanced_dataset):
     }
 
     config["Summary"] = {}
-    summary_section = config["Summary"]
-    summary_section["Path"] = "summary.txt"
-
-    config["Support Files"] = {}
-    config["Support Files"]["path_alexa_data"] = "\\path_to_alexa\\top-1m.csv"
+    config["Summary"]["Path"] = "summary.txt"
 
     config[extraction_settings.EMAIL_TYPE_SECTION] = \
         extraction_settings.EMAIL_TYPE_SETTINGS
@@ -96,42 +85,18 @@ def make_config(list_features, list_imbalanced_dataset):
             feature.feature_type == feature_type
         }
 
-    c_url_features = config['URL_Features']
-    for feature in list_features:
-        if feature.startswith("URL_"):
-            c_url_features[feature.replace('URL_', '')] = "True"
-
-    c_html_features = config[FeatureType.URL_WEBSITE.value]
-    for feature in list_features:
-        if feature.startswith("HTML_"):
-            c_html_features[feature.replace('HTML_', '')] = "True"
-
-    c_network_features = config[FeatureType.URL_NETWORK.value]
-    for feature in list_features:
-        if feature.startswith("Network_"):
-            c_network_features[feature.replace('Network_', '')] = "True"
-
-    javascript_features_section = config[FeatureType.URL_WEBSITE_JAVASCRIPT.value]
-    for feature in list_features:
-        if feature.startswith("Javascript_"):
-            javascript_features_section[feature.replace('Javascript_', '')] = "True"
     return config
 
 
 def update_list():
-    list_features = []
     list_imbalanced_dataset = []
-    for member in dir(Features):
-        element = getattr(Features, member)
-        if inspect.isfunction(element):
-            list_features.append(member)
 
     for member in dir(Imbalanced_Dataset):
         element = getattr(Imbalanced_Dataset, member)
         if inspect.isfunction(element):
             list_imbalanced_dataset.append(member)
 
-    return list_features, list_imbalanced_dataset
+    return list_imbalanced_dataset
 
 
 def main():
@@ -142,9 +107,8 @@ def main():
                         type=str, default='Config_file.ini')
     args = parser.parse_args()
 
-    list_features, list_imbalanced_dataset = update_list()
-    config = make_config(list_features, list_imbalanced_dataset)
     print("Generating PhishBench Config")
+    config = make_config()
 
     print("Saving to ", args.config_file)
     with open(args.config_file, 'w') as configfile:

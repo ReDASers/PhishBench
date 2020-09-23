@@ -3,9 +3,10 @@ Handles user interaction with PhishBench
 """
 import sys
 
+import phishbench.settings
 from phishbench.classification import settings as classification_setings
-from phishbench.utils.phishbench_globals import config
 from phishbench.input import settings as input_settings
+from phishbench.utils.phishbench_globals import config
 
 
 def query_yes_no(question, default="yes"):
@@ -50,27 +51,29 @@ def confirmation(ignore_confirmation=False):
     -------
     `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
     """
-    print("##### Review of Options:")
-    if config["Email or URL feature Extraction"]["extract_features_emails"] == "True":
-        print("Running Email Mode")
-    elif config["Email or URL feature Extraction"]["extract_features_urls"] == "True":
-        print("Running URL Mode")
 
-    print("###Paths to datasets:")
-    print("Legitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
-    print("Phishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
-    print("Legitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
-    print("Phishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
+    print("PhishBench is running in {} mode.\n".format(phishbench.settings.mode()))
 
-    if config["Extraction"]["feature extraction"] == "True":
-        print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
-        print("\nFeature Extraction for Training Data: {}".format(config["Extraction"]["training dataset"]))
-        print("\nFeature Extraction for Testing Data: {}".format(config["Extraction"]["testing dataset"]))
+    if phishbench.settings.feature_extraction():
+        print("Performing feature extraction with")
+        if config["Extraction"].getboolean("training dataset"):
+            print("\tLegitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
+            print("\tPhishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
+        if config["Extraction"].getboolean("testing dataset"):
+            print("\tLegitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
+            print("\tPhishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
     else:
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
 
-    print("\nFeature Selection: {}".format(config['Feature Selection']['select best features']))
-    print("\nRun the classifiers: {}".format(classification_setings.run_classifiers()))
+    if phishbench.settings.feature_selection():
+        print("\nPerforming Feature selection")
+
+    if phishbench.settings.classification():
+        print("\nRunning classifiers")
+        classification_section = config[classification_setings.CLASSIFIERS_SECTION]
+        for classifier in classification_section.keys():
+            if classification_section.getboolean(classifier):
+                print(f'\t{classifier}')
     print("\n")
     if ignore_confirmation:
         return True
