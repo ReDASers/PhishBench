@@ -21,10 +21,6 @@ def save_models():
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("save models")
 
 
-def run_classifiers():
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("Run Classifiers")
-
-
 def param_search():
     return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("param search")
 

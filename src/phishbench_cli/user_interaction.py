@@ -66,7 +66,7 @@ def confirmation(ignore_confirmation=False):
         print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
 
     print("\nFeature Selection: {}".format(config['Feature Selection']['select best features']))
-    print("\nRun the classifiers: {}".format(classification_setings.run_classifiers()))
+    print("\nRun the classifiers: {}".format(phishbench.settings.classification()))
     print("\n")
     if ignore_confirmation:
         return True

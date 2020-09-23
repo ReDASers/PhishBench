@@ -432,7 +432,7 @@ def run_phishbench():
             phishbench_globals.logger.info("X_test Shape: %s", x_test.shape)
             joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
 
-    if classification.settings.run_classifiers():
+    if phishbench.settings.classification():
         run_classifiers(x_train, y_train, x_test, y_test)
 
 
