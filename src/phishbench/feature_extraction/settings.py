@@ -1,3 +1,6 @@
+"""
+Settings for feature extraction
+"""
 from .reflection import FeatureType
 from ..utils import phishbench_globals
 
@@ -47,4 +50,3 @@ def download_url_flag() -> bool:
     Whether or not PhishBench needs to download urls
     """
     return feature_type_enabled(FeatureType.URL_NETWORK) or feature_type_enabled(FeatureType.URL_WEBSITE)
-
