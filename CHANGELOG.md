@@ -9,6 +9,8 @@
     * Module toggles moved to `phishbench` section
     * Changed `Email or URL` to `Mode` setting 
 * Added `input.read_train_set` and `input.read_test_set` functions
+* Removed legacy `Extract_Feature_URL_Testing` and `Extract_Features_URL_Training` functions
+    * These functions just wrapped `extract_labeled_dataset`
 
 ## Minor changes 
 * Updated user interaction

@@ -10,27 +10,9 @@ from tqdm import tqdm
 from . import features as internal_features
 from .. import settings
 from ..reflection import load_features, FeatureClass, FeatureType
-from ... import feature_preprocessing as preprocessing
 from ...input import url_input
-from ...input import settings as input_settings
 from ...input.url_input import URLData
 from ...utils import phishbench_globals
-
-
-def Extract_Features_Urls_Testing():
-    features, labels, corpus = extract_labeled_dataset(
-        input_settings.test_legit_path(), input_settings.test_phish_path())
-    print("Cleaning features")
-    preprocessing.clean_features(features)
-    return features, labels, corpus
-
-
-def Extract_Features_Urls_Training():
-    features, labels, corpus = extract_labeled_dataset(
-        input_settings.train_legit_path(), input_settings.train_phish_path())
-    print("Cleaning features")
-    preprocessing.clean_features(features)
-    return features, labels, corpus
 
 
 def extract_labeled_dataset(legit_path, phish_path):
