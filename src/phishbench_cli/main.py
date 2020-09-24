@@ -7,16 +7,16 @@ import pandas as pd
 from scipy.sparse import hstack
 
 import phishbench
-import phishbench.settings
 import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
-import phishbench.feature_extraction.url.url_features as legacy_url
+import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
+import phishbench.settings
 from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
@@ -65,7 +65,7 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
         os.makedirs(url_train_dir)
 
     urls, labels = pb_input.read_train_set(extraction_settings.download_url_flag())
-    feature_list_dict, corpus = legacy_url.extract_features_from_list_urls(urls)
+    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 
@@ -115,7 +115,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     """
 
     urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
-    feature_list_dict, corpus = legacy_url.extract_features_from_list_urls(urls)
+    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 
