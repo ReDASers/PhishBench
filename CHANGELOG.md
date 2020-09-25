@@ -4,6 +4,7 @@
 ## Major changes 
 * Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
 * Reflection Extraction v2
+   * Features can now be implemented as a class with a `fit` and `extract` function
 * Moved `dataset.settings` to `input.settings`
 * Updated Configuration Files
     * Module toggles moved to `phishbench` section
