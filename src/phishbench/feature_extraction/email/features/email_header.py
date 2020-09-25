@@ -8,16 +8,25 @@ from ....input.email_input.models import EmailHeader
 
 @register_feature(FeatureType.EMAIL_HEADER, 'mime_version')
 def mime_version(header: EmailHeader):
+    """
+    The MIME version
+    """
     return header.mime_version
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'header_file_size')
 def size_in_bytes(header: EmailHeader):
+    """
+    The size of the header in bytes
+    """
     return sys.getsizeof(header.header.encode("utf-8"))
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'return_path')
 def return_path(header: EmailHeader):
+    """
+    The return path of the email
+    """
     return header.return_path
 
 
@@ -53,11 +62,17 @@ def received_count(header: EmailHeader):
 
 @register_feature(FeatureType.EMAIL_HEADER, 'authentication_results_spf_pass')
 def authentication_results_spf_pass(header: EmailHeader):
+    """
+    Whether or not `spf=pass` is in the authentication results
+    """
     return "spf=pass" in header.authentication_results
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'authentication_results_dkim_pass')
 def authentication_results_dkim_pass(header: EmailHeader):
+    """
+    Whether or not `dkim=` is in the authentication results
+    """
     return "dkim=pass" in header.authentication_results
 
 
@@ -78,6 +93,10 @@ def dkim_signature_exists(header: EmailHeader):
 
 @register_feature(FeatureType.EMAIL_HEADER, 'compare_sender_domain_message_id_domain')
 def compare_sender_domain_message_id_domain(header: EmailHeader):
+    """
+    Whether or not hte domain for the sender address and the message id is the same
+
+    """
     if header.message_id is not None and '@' in header.message_id:
         message_id_domain = header.message_id.split("@")[1]
     else:
@@ -91,6 +110,9 @@ def compare_sender_domain_message_id_domain(header: EmailHeader):
 
 @register_feature(FeatureType.EMAIL_HEADER, 'compare_sender_return')
 def compare_sender_return(header: EmailHeader):
+    """
+    Whether or not the return path and the sender address are the same
+    """
     return header.sender_email_address == header.return_path
 
 
@@ -114,16 +136,25 @@ def blacklisted_words_subject(header: EmailHeader):
 
 @register_feature(FeatureType.EMAIL_HEADER, 'number_cc')
 def number_cc(header: EmailHeader):
+    """
+    Number of addresses in the CC field
+    """
     return len(header.cc)
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'number_bcc')
 def number_bcc(header: EmailHeader):
+    """
+    Number of addresses in the BCC field
+    """
     return len(header.bcc)
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'number_to')
 def number_to(header: EmailHeader):
+    """
+    Number of addresses in the to field
+    """
     return len(header.to)
 
 
