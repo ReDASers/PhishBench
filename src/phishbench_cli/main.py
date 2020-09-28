@@ -75,7 +75,8 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
         export_features_to_csv(feature_list_dict, labels, out_path)
 
     # Transform the list of dictionaries into a sparse matrix
-    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict)
+    vectorizer = preprocessing.Vectorizer()
+    x_train = vectorizer.fit_transform(feature_list_dict)
 
     joblib.dump(x_train, os.path.join(url_train_dir, "X_train_unprocessed.pkl"))
 
@@ -241,8 +242,9 @@ def extract_email_train_features(email_train_dir, run_tfidf):
         out_path = os.path.join(email_train_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
-    x_train, vectorizer = Features_Support.Vectorization_Training(feature_list_dict_train)
+    # Transform the list of dictionaries into a sparse matrix
+    vectorizer = preprocessing.Vectorizer()
+    x_train = vectorizer.fit_transform(feature_list_dict_train)
 
     joblib.dump(x_train, os.path.join(email_train_dir, "X_train_unprocessed.pkl"))
 
@@ -295,7 +297,7 @@ def extract_email_test_features(email_test_dir, vectorizer=None, tfidf_vectorize
         out_path = os.path.join(email_test_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
+    # Transform the list of dictionaries into a sparse matrix
     x_test = vectorizer.transform(feature_list_dict_test)
 
     # Add tfidf if the user marked it as True
