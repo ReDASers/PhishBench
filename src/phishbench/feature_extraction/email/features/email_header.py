@@ -97,7 +97,7 @@ def authentication_results_dkim_pass(header: EmailHeader):
     return "dkim=pass" in header.authentication_results
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'x_original_authentication_results')
+@register_feature(FeatureType.EMAIL_HEADER, 'has_x_original_authentication_results')
 def x_original_authentication_results(header: EmailHeader):
     """
     Whether or not the email has the X-Original-Authentication-Results header
@@ -105,7 +105,7 @@ def x_original_authentication_results(header: EmailHeader):
     return header.x_original_authentication_results
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'received_spf')
+@register_feature(FeatureType.EMAIL_HEADER, 'has_received_spf')
 def received_spf(header: EmailHeader):
     """
     Whether or not the email has the Recieved-SPF header
@@ -113,7 +113,7 @@ def received_spf(header: EmailHeader):
     return header.received_spf
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'dkim_signature_exists')
+@register_feature(FeatureType.EMAIL_HEADER, 'has_dkim_signature')
 def dkim_signature_exists(header: EmailHeader):
     """
     Whether or not the email has the DKIM-Signature header
