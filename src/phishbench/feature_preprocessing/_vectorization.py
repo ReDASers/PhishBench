@@ -1,26 +1,12 @@
 """
 Contains feature vectorization code
 """
-from typing import List, Dict, Iterable
+from typing import List, Dict
+from collections import OrderedDict
 
 from sklearn.feature_extraction import DictVectorizer
 import numpy as np
-
-def _prod(vals: Iterable):
-    """
-    Returns the product of all values in an iterable
-    Parameters
-    ----------
-    vals: Iterable
-        The iterable to reduce
-    Returns
-    -------
-        The product of all values in `vals`
-    """
-    result = 1
-    for x in vals:
-        result *= x
-    return result
+from scipy.sparse import hstack, vstack
 
 
 def split_dict(raw: Dict):
@@ -39,10 +25,10 @@ def split_dict(raw: Dict):
     vector_features = dict()
     for key, value in raw.items():
         if hasattr(value, 'shape'):
-            size = _prod(value.shape)
-            value = np.reshape(size)
-        elif hasattr(value, '__len__'):
-            size = len(value)
+            if len(value.shape) == 1:
+                size = value.shape[0]
+            else:
+                size = value.shape[1]
         else:
             size = 1
 
@@ -54,13 +40,79 @@ def split_dict(raw: Dict):
 
 
 class Vectorizer:
+    """
+    A custom vectorizer for Phishbench features.
+    This class supports scalar, numpy array, and scipy sparse array feature values.
+
+    Attributes
+    ----------
+    scalar_vectorizer: DictVectorizer
+        The vectorizer used for scalar features
+    array_feature_indicies:
+        The feature indecies for the vector features
+    """
 
     def __init__(self):
-        self.vectorizer = DictVectorizer()
-        self.array_features = dict()
+        """
+        Constructs a new Vectorizer
+        """
+        self.scalar_vectorizer = DictVectorizer()
+        self.array_feature_indicies = OrderedDict()
 
     def fit_transform(self, features: List[Dict]):
-        split = map(split_dict, features)
+        """
+        Fits a training set to this dict Vectorizer and returns the vectorized features
+        Parameters
+        ----------
+        features: List[Dict]
+            The raw feature values
+        Returns
+        -------
+        A `scipy.sparse` matrix of vectorized features
+        """
+        split = list(map(split_dict, features))
         scalar_features = [x[0] for x in split]
         vector_features = [x[1] for x in split]
-        x = self.vectorizer.fit_transform(scalar_features) 
+        x = self.scalar_vectorizer.fit_transform(scalar_features)
+        if len(vector_features) == 0:
+            return x
+        for key in vector_features[0].keys():
+            values = [features[key] for features in vector_features]
+            if isinstance(values[0], np.ndarray):
+                x_key = np.array(values)
+            else:
+                # is scipy sparse
+                x_key = vstack(values)
+            self.array_feature_indicies[key] = (x.shape[1], x.shape[1] + x_key.shape[1])
+            x = hstack([x, x_key])
+        return x
+
+    def transform(self, features: List[Dict]):
+        """
+        Transforms a dataset of features
+        Parameters
+        ----------
+        features: List[Dict]
+            The raw feature values
+        Returns
+        -------
+        A `scipy.sparse` matrix of vectorized features
+        """
+        split = list(map(split_dict, features))
+        scalar_features = [x[0] for x in split]
+        vector_features = [x[1] for x in split]
+        x = self.scalar_vectorizer.fit_transform(scalar_features)
+        if len(self.array_feature_indicies) == 0:
+            return x
+        for key in self.array_feature_indicies.keys():
+            values = [features[key] for features in vector_features]
+            if isinstance(values[0], np.ndarray):
+                x_key = np.array(values)
+            else:
+                # is scipy sparse
+                x_key = vstack(values)
+            self.array_feature_indicies[key] = (x.shape[1], x.shape[1] + x_key.shape[1])
+            x = hstack([x, x_key])
+        return x
+
+
