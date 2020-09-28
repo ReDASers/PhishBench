@@ -1,12 +1,12 @@
 """
 Contains feature vectorization code
 """
-from typing import List, Dict
 from collections import OrderedDict
+from typing import List, Dict
 
-from sklearn.feature_extraction import DictVectorizer
 import numpy as np
 from scipy.sparse import hstack, vstack
+from sklearn.feature_extraction import DictVectorizer
 
 
 def split_dict(raw: Dict):
@@ -114,5 +114,3 @@ class Vectorizer:
             self.array_feature_indicies[key] = (x.shape[1], x.shape[1] + x_key.shape[1])
             x = hstack([x, x_key])
         return x
-
-
