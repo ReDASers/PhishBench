@@ -136,7 +136,7 @@ def extract_single_feature_url(feature: FeatureClass, url: URLData):
     except Exception:
         error_string = "Error extracting {}".format(feature.config_name)
         phishbench_globals.logger.warning(error_string, exc_info=True)
-        feature_value = -1
+        feature_value = feature.default_value
     end = time.process_time()
     ex_time = end - start
     return feature_value, ex_time

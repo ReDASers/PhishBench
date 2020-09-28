@@ -1,6 +1,7 @@
 """
 Models for feature reflection
 """
+from typing import Any
 from enum import Enum, unique
 
 
@@ -23,6 +24,7 @@ class FeatureClass:
     """
     config_name: str
     feature_type: FeatureType
+    default_value: Any
 
     def __init__(self):
         raise SyntaxError('This is a stub for type hinting and should not be instantiated.')
@@ -59,6 +61,8 @@ class FeatureMC(type):
     The metaclass for Feature Classes
     """
     def __new__(cls, name, bases, attrs):
+        if 'default_value' not in attrs:
+            raise SyntaxError("features must have a default value")
         if not isinstance(attrs['feature_type'], FeatureType):
             raise SyntaxError("feature_type must have be an instance of FeatureType")
         if not isinstance(attrs['config_name'], str):
@@ -80,7 +84,7 @@ def _do_nothing(self, x, y):
     pass
 
 
-def register_feature(feature_type: FeatureType, config_name: str):
+def register_feature(feature_type: FeatureType, config_name: str, default_value=-1):
     """
     Registers a feature for use in Phishbench
     Parameters
@@ -89,7 +93,8 @@ def register_feature(feature_type: FeatureType, config_name: str):
         The type of feature
     config_name
         The name of the feature in the config file
-
+    default_value
+        The value to use if there is an error
     """
     def register_feature_decorator(feature_function):
         def extract(self, x):
@@ -100,6 +105,7 @@ def register_feature(feature_type: FeatureType, config_name: str):
         attrs['feature_type'] = feature_type
         attrs['extract'] = extract
         attrs['fit'] = _do_nothing
+        attrs['default_value'] = default_value
         feature_class = FeatureMC(config_name, (), attrs)
         return feature_class
 
