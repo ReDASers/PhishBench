@@ -15,6 +15,7 @@
 
 ## Minor changes 
 * Updated user interaction
+* Renamed `x_original_authentication_results`, `received_spf`, and `dkim_signature` to `has_{}` for clarity
 
 ## Bug fixes
 * Fixed non-breaking bug in `export_features_to_csv`
