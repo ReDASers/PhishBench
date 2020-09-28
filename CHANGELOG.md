@@ -5,6 +5,9 @@
 * Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
 * Reflection Extraction v2
    * Features can now be implemented as a class with a `fit` and `extract` function
+   * Fixed default values for multi-valued features
+* Added `feature_preproccessing.Vectorizer`
+   * Supports `numpy.ndarray` and `scipy.sparse` valued features 
 * Moved `dataset.settings` to `input.settings`
 * Updated Configuration Files
     * Module toggles moved to `phishbench` section
