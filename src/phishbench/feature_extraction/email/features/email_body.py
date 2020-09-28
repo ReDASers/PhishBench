@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from textstat import textstat
 
 from . import helpers
-from ...reflection import register_feature, FeatureType, FeatureMC
+from ...reflection import register_feature, FeatureType
 from ....input.email_input.models import EmailBody
 
 
