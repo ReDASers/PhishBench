@@ -1,10 +1,10 @@
 import numpy as np
 from sklearn import preprocessing
-from sklearn.feature_extraction import DictVectorizer
 
 from .utils import phishbench_globals
 
 
+# pylint: skip-file
 # Functions for features_url.py
 
 
@@ -83,10 +83,3 @@ def Preprocessing(X):
     else:
         return X
     # return scaler, scaled_Array_Features, mean_Array_Features, min_Array_Features #, max_Array_Features
-
-
-def Vectorization_Training(list_dict_features_train):
-    vec = DictVectorizer()
-    vec.fit(list_dict_features_train)
-    sparse_matrix_features_train = vec.transform(list_dict_features_train)
-    return sparse_matrix_features_train, vec
