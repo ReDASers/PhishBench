@@ -2,7 +2,7 @@
 This module contains code for email feature extraction.
 """
 import time
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 
 from tqdm import tqdm
 
@@ -27,7 +27,8 @@ def create_new_features() -> List[FeatureClass]:
     return features
 
 
-def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
+def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str,
+                            features: Optional[List[FeatureClass]] = None):
     """
     Extracts features from a dataset of emails split in two folders
 
@@ -37,19 +38,21 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         The folder containing legitimate emails
     phish_dataset_folder: str
         The folder containing phishing emails
+    features: Optional[List[FeatureClass]]
+        A list of feature objects or `None`. If `None`, then this function will load and instantiate new instances of
+        the features
 
     Returns
     -------
-    feature_values: List[Dict]]
+    feature_values: List[Dict]
         The feature values in a list of dictionaries. Features are mapped `config_name` to value.
     labels: List[int]
         The class labels for the dataset
-    corpus List[str]:
+    corpus: List[str]:
         The email bodies corresponding to each feature set
+    features: List[FeatureClass]
+        The feature instances used.
     """
-
-    features = create_new_features()
-
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
                                    legit_dataset_folder, phish_dataset_folder)
 
@@ -60,9 +63,13 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     labels = [0] * len(legit_emails) + [1] * len(phish_emails)
 
     print("Extracting features")
+    if features is None:
+        features = create_new_features()
+        for feature in features:
+            feature.fit(emails, labels)
     feature_values, corpus = extract_features_list_email(emails, features)
 
-    return feature_values, labels, corpus
+    return feature_values, labels, corpus, features
 
 
 def extract_features_list_email(emails: List[EmailMessage], features: List[FeatureClass]):
@@ -83,6 +90,8 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Featu
     corpus:
         A list of the email texts
     """
+    if features is None:
+        features = create_new_features()
     feature_list_dict = list()
 
     for email_msg in tqdm(emails):
@@ -118,7 +127,7 @@ def extract_features_from_single_email(features: List[FeatureClass], email_msg: 
     for feature in features:
         result, ex_time = extract_single_feature_email(feature, email_msg)
         if isinstance(result, dict):
-            temp_dict = {feature.config_name + "." + key: value for key, value in result.items()}
+            temp_dict = {"{}.{}".format(feature.config_name, key): value for key, value in result.items()}
             dict_feature_values.update(temp_dict)
         else:
             dict_feature_values[feature.config_name] = result
