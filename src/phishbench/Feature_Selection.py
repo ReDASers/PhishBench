@@ -60,7 +60,8 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
         if math.isnan(res[key]):
             res[key] = 0
     sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
-    with open(os.path.join(feature_ranking_folder, report_name), 'w') as f:
+    report_name = os.path.join(feature_ranking_folder, report_name)
+    with open(report_name, 'w', errors="ignore") as f:
         for (key, value) in sorted_d:
             f.write("{}: {}\n".format(key, value))
 
