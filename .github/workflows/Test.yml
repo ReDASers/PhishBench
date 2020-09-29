@@ -53,8 +53,7 @@ jobs:
 
     steps:
     - name: Install whois
-      run: |
-        sudo apt-get install whois
+      run: sudo apt-get install whois
       if: runner.os == 'Linux'
 
     - name: Test whois
@@ -75,12 +74,10 @@ jobs:
         pip install -r requirements.txt
         
     - name: Install phishbench
-      run: | 
-        pip install .
+      run: pip install .
 
     - name: Test Generate Config
-      run: |
-        make-phishbench-config -f Test.ini
+      run: make-phishbench-config -f Test.ini
       working-directory: tests/integration tests/make-config
 
     - name: Upload Config
@@ -91,8 +88,7 @@ jobs:
         if-no-files-found: error
 
     - name: URL 1-Step test
-      run: |
-        phishbench -f Test_B_1.ini -c
+      run: phishbench -f Test_B_1.ini -c
       working-directory: tests/integration tests/url_one_step
     
     - name: URL 2-Step test
@@ -102,13 +98,11 @@ jobs:
       working-directory: tests/integration tests/url_two_step
 
     - name: URL TF-IDF test
-        run: |
-          phishbench -f Config_File.ini -c
-        working-directory: tests/integration tests/website_tfidf
+      run: phishbench -f Config_File.ini -c
+      working-directory: tests/integration tests/website_tfidf
 
     - name: Email 1-Step test
-      run: |
-        phishbench -f Test_A.ini -c
+      run: phishbench -f Test_A.ini -c
       working-directory: tests/integration tests/email_extraction
 
     
