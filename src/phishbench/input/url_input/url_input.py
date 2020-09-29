@@ -6,6 +6,8 @@ from io import TextIOBase
 from typing import Tuple
 from typing import Union, List
 
+from tqdm import tqdm
+
 from ._url_data import URLData
 from ..input_utils import enumerate_folder_files, remove_duplicates
 from ...utils import phishbench_globals
@@ -13,7 +15,7 @@ from ...utils import phishbench_globals
 
 def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> Tuple[List[URLData], List[str]]:
     """
-    Reads in a dataset of URLs from dataset_path
+    Reads in a dataset of URLs from a file or a folder of files
     Parameters
     ----------
     dataset_path: str
@@ -30,6 +32,7 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
     if not dataset_path:
         raise ValueError("dataset_path must be provided!")
 
+    print(f"Loading URLs from {dataset_path}")
     if os.path.isdir(dataset_path):
         corpus_files = enumerate_folder_files(dataset_path)
     elif os.path.exists(dataset_path):
@@ -47,7 +50,7 @@ def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = T
 
     urls = []
     bad_url_list = []
-    for raw_url in raw_urls:
+    for raw_url in tqdm(raw_urls):
         try:
             url_obj = URLData(raw_url, download_url)
             urls.append(url_obj)
