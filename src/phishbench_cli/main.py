@@ -17,7 +17,7 @@ import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
 import phishbench.settings
 from phishbench.feature_extraction import settings as extraction_settings
-from phishbench.feature_extraction.reflection import FeatureClass
+from phishbench.feature_extraction.reflection import FeatureClass, FeatureType
 from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
 
@@ -354,26 +354,33 @@ def extract_email_features():
 
 
 def get_config():
+    tfidf_vec = None
     if phishbench.settings.mode() == 'Email':
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
-        run_tfidf = extraction_settings.extract_body_enabled() and \
-                    phishbench_globals.config["Email_Body_Features"].getboolean("tfidf_emails")
+        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
+                    phishbench_globals.config[FeatureType.EMAIL_BODY].getboolean("email_body_tfidf")
+        if run_tfidf:
+            tfidf_vec = os.path.join(train_dir, "features", "email_body_tfidf.pkl")
     else:
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Testing")
-        run_tfidf = phishbench_globals.config["URL_Feature_Types"].getboolean("HTML") and \
-                    phishbench_globals.config["HTML_Features"].getboolean("tfidf_websites")
-    return train_dir, test_dir, run_tfidf
+        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
+                    phishbench_globals.config[FeatureType.URL_WEBSITE].getboolean("website_tfidf")
+        if run_tfidf:
+            tfidf_vec = os.path.join(train_dir, "features", "website_tfidf.pkl")
+    return train_dir, test_dir, tfidf_vec
 
 
 def load_dataset():
-    train_dir, test_dir, run_tfidf = get_config()
+    train_dir, test_dir, tfidf_vec = get_config()
+    print(tfidf_vec)
     x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
     y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
     vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
-    if run_tfidf:
-        tfidf_vectorizer = joblib.load(os.path.join(train_dir, "tfidf_vectorizer.pkl"))
+    vectorizer = vectorizer.scalar_vectorizer
+    if tfidf_vec:
+        tfidf_vectorizer = joblib.load(tfidf_vec)
     else:
         tfidf_vectorizer = None
     if os.path.exists(os.path.join(test_dir, "X_test.pkl")):
