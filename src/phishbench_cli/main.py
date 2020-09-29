@@ -18,6 +18,7 @@ import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
 import phishbench.settings
 from phishbench.feature_extraction import settings as extraction_settings
+from phishbench.feature_extraction.reflection import FeatureClass
 from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
 
@@ -39,7 +40,7 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
     df.to_csv(file_path, index=False)
 
 
-def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
+def extract_url_train_features(url_train_dir: str, features: List[FeatureClass], run_tfidf: bool):
     """
     Extracts features from the URL training dataset
 
@@ -47,6 +48,8 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
     ----------
     url_train_dir : str
         The location of the url training dataset
+    features:
+        The features to extract
     run_tfidf : bool
         Whether or not to run TF-IDF
     Returns
@@ -65,7 +68,7 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
         os.makedirs(url_train_dir)
 
     urls, labels = pb_input.read_train_set(extraction_settings.download_url_flag())
-    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls)
+    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls, features)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 
@@ -93,13 +96,15 @@ def extract_url_train_features(url_train_dir: str, run_tfidf: bool):
     return x_train, labels, vectorizer, tfidf_vectorizer
 
 
-def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=None):
+def extract_url_features_test(url_test_dir: str, features: List[FeatureClass], vectorizer, tfidf_vectorizer=None):
     """
     Extracts features from the URL testing dataset
     Parameters
     ----------
     url_test_dir : str
         The folder containing the test url dataset
+    features:
+        The features to extract
     vectorizer :
         The vectorizer used to vectorize the training dataset
     tfidf_vectorizer :
@@ -115,7 +120,7 @@ def extract_url_features_test(url_test_dir: str, vectorizer, tfidf_vectorizer=No
     """
 
     urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
-    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls)
+    feature_list_dict, corpus = url_extraction.extract_features_from_list_urls(urls, features)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 
@@ -171,8 +176,10 @@ def extract_url_features():
     run_tfidf = phishbench_globals.config["URL_Feature_Types"].getboolean("HTML") and \
                 phishbench_globals.config["HTML_Features"].getboolean("tfidf_websites")
 
+    features = url_extraction.create_new_features()
+
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir, run_tfidf)
+        x_train, y_train, vectorizer, tfidf_vectorizer = extract_url_train_features(url_train_dir, features, run_tfidf)
 
         # dump features and labels and vectorizers
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
@@ -194,7 +201,7 @@ def extract_url_features():
 
     if phishbench_globals.config["Extraction"].getboolean("Testing Dataset"):
 
-        x_test, y_test = extract_url_features_test(url_test_dir, vectorizer, tfidf_vectorizer)
+        x_test, y_test = extract_url_features_test(url_test_dir, features, vectorizer, tfidf_vectorizer)
 
         joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))

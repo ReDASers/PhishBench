@@ -15,14 +15,28 @@ from ...input.url_input import URLData
 from ...utils import phishbench_globals
 
 
-def extract_labeled_dataset(legit_path, phish_path):
+def create_new_features() -> List[FeatureClass]:
+    """
+    Gets URL features
+
+    Returns
+    -------
+    features:
+        A list of instantiated features
+    """
+    features = [x() for x in load_features(internal_features, 'URL')]
+    print("Loaded {} features".format(len(features)))
+    return features
+
+
+def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
     """
     Extract features from a labeled dataset split by files
     Parameters
     ----------
-    legit_path:
+    legit_dataset_folder: str
         The path of the folder/file containing the legitimate urls
-    phish_path
+    phish_dataset_folder: str
         The path of the folder/file containing the phishing urls
 
     Returns
@@ -37,26 +51,35 @@ def extract_labeled_dataset(legit_path, phish_path):
     download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
                         settings.feature_type_enabled(FeatureType.URL_WEBSITE)
 
-    print("Loading URLs from {}".format(legit_path))
-    legit_urls, bad_url_list = url_input.read_dataset_url(legit_path, download_url_flag)
-    print("Loading URLs from {}".format(phish_path))
-    phish_urls, bad_urls = url_input.read_dataset_url(phish_path, download_url_flag)
+    features = create_new_features()
+
+    phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
+                                   legit_dataset_folder, phish_dataset_folder)
+
+    print("Loading URLs from {}".format(legit_dataset_folder))
+    legit_urls, bad_url_list = url_input.read_dataset_url(legit_dataset_folder, download_url_flag)
+    print("Loading URLs from {}".format(phish_dataset_folder))
+    phish_urls, bad_urls = url_input.read_dataset_url(phish_dataset_folder, download_url_flag)
     bad_url_list.extend(bad_urls)
 
-    features, corpus = extract_features_from_list_urls(legit_urls + phish_urls)
-    labels = ([0] * len(legit_urls)) + ([1] * len(phish_urls))
+    urls = legit_urls + phish_urls
+    labels = [0] * len(legit_urls) + [1] * len(phish_urls)
 
-    return features, labels, corpus
+    print("Extracting features")
+    feature_values, corpus = extract_features_from_list_urls(urls, features)
+
+    return feature_values, labels, corpus
 
 
-def extract_features_from_list_urls(urls: List[URLData]):
+def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
     """
     Extracts features from a list of URLs
     Parameters
     ----------
     urls: List[URLData]
         The urls to extract features from
-
+    features: List[FeatureClass]
+        The features to extract
     Returns
     -------
     feature_list_dict: List[Dict[str]]
@@ -64,8 +87,6 @@ def extract_features_from_list_urls(urls: List[URLData]):
     corpus:
         A list of the downloaded websites
     """
-
-    features = [feature() for feature in load_features(filter_features='URL', internal_features=internal_features)]
 
     feature_list_dict = list()
     corpus = list()

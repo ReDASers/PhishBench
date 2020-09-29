@@ -13,6 +13,20 @@ from ...input.email_input.models import EmailMessage
 from ...utils import phishbench_globals
 
 
+def create_new_features() -> List[FeatureClass]:
+    """
+    Gets Email features
+
+    Returns
+    -------
+    features:
+        A list of instantiated features
+    """
+    features = [x() for x in load_features(local_features, 'Email')]
+    print("Loaded {} features".format(len(features)))
+    return features
+
+
 def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
     """
     Extracts features from a dataset of emails split in two folders
@@ -21,7 +35,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     ----------
     legit_dataset_folder: str
         The folder containing legitimate emails
-    phish_dataset_folder
+    phish_dataset_folder: str
         The folder containing phishing emails
 
     Returns
@@ -34,8 +48,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         The email bodies corresponding to each feature set
     """
 
-    features = [feature() for feature in load_features(local_features, 'Email')]
-    print("Loaded {} features".format(len(features)))
+    features = create_new_features()
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
                                    legit_dataset_folder, phish_dataset_folder)
@@ -62,7 +75,7 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Featu
     ----------
     emails: List[EmailMessage]
         The emails to extract features from
-    features: List
+    features: List[FeatureClass]
         The features to extract
 
     Returns
