@@ -12,11 +12,13 @@ import phishbench.Features_Support as Features_Support
 import phishbench.Tfidf as Tfidf
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
+import phishbench.feature_extraction.email.features
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
 import phishbench.settings
+from phishbench.feature_extraction.reflection import load_features
 from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.feature_extraction.reflection import FeatureClass
 from phishbench.utils import phishbench_globals
@@ -175,6 +177,7 @@ def extract_url_features():
     """
     url_train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Training")
     url_test_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Testing")
+
     run_tfidf = phishbench_globals.config["URL_Feature_Types"].getboolean("HTML") and \
                 phishbench_globals.config["HTML_Features"].getboolean("tfidf_websites")
 
@@ -235,14 +238,16 @@ def extract_email_train_features(pickle_dir, run_tfidf):
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    if not os.path.exists(pickle_dir):
+    if not os.path.isdir(pickle_dir):
         os.makedirs(pickle_dir)
+
     print("Extracting Train Set")
     phishbench_globals.logger.info("Extracting Train Set")
     legit_path = pb_input.settings.train_legit_path()
     phish_path = pb_input.settings.train_phish_path()
 
-    feature_list_dict_train, y_train, corpus_train = email_extraction.extract_labeled_dataset(legit_path, phish_path)
+    feature_list_dict_train, y_train, corpus_train, features = \
+        email_extraction.extract_labeled_dataset(legit_path, phish_path)
     preprocessing.clean_features(feature_list_dict_train)
 
     # Export features to csv
@@ -265,16 +270,18 @@ def extract_email_train_features(pickle_dir, run_tfidf):
 
     x_train = Features_Support.Preprocessing(x_train)
 
-    return x_train, y_train, vectorizer, tfidf_vectorizer
+    return x_train, y_train, vectorizer, tfidf_vectorizer, features
 
 
-def extract_email_test_features(pickle_dir, vectorizer=None, tfidf_vectorizer=None):
+def extract_email_test_features(pickle_dir, features, vectorizer=None, tfidf_vectorizer=None):
     """
     Extracts features from the email testing dataset
     Parameters
     ----------
     pickle_dir : str
         The folder to output pickles to
+    features:
+        The features to extract
     vectorizer :
         The vectorizer used to vectorize the training dataset
     tfidf_vectorizer :
@@ -296,7 +303,8 @@ def extract_email_test_features(pickle_dir, vectorizer=None, tfidf_vectorizer=No
 
     print("Extracting Test Set")
     phishbench_globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, corpus_test = email_extraction.extract_labeled_dataset(legit_path, phish_path)
+    feature_list_dict_test, y_test, corpus_test, _ = \
+        email_extraction.extract_labeled_dataset(legit_path, phish_path, features)
     preprocessing.clean_features(feature_list_dict_test)
 
     # Export features to csv
@@ -350,12 +358,18 @@ def extract_email_features():
                 and phishbench_globals.config["Email_Body_Features"].getboolean("tfidf_emails")
 
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, tfidf_vectorizer = extract_email_train_features(email_train_dir, run_tfidf)
+        x_train, y_train, vectorizer, tfidf_vectorizer, features = \
+            extract_email_train_features(email_train_dir, run_tfidf)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
         joblib.dump(y_train, os.path.join(email_train_dir, "y_train.pkl"))
         joblib.dump(vectorizer, os.path.join(email_train_dir, "vectorizer.pkl"))
+        if not os.path.isdir(os.path.join(email_train_dir, "features")):
+            os.makedirs(os.path.join(email_train_dir, "features"))
+        for feature in features:
+            path = os.path.join(email_train_dir, "features", f"{feature.config_name}.pkl")
+            feature.save_state(path)
         if tfidf_vectorizer:
             joblib.dump(tfidf_vectorizer, os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
         phishbench_globals.logger.info("Feature Extraction for training dataset: Done!")
@@ -363,13 +377,17 @@ def extract_email_features():
         x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
+        features = load_features(phishbench.feature_extraction.email.features)
+        for feature in features:
+            path = os.path.join(email_train_dir, "features", f"{feature.config_name}.pkl")
+            feature.load_state(path)
         if run_tfidf:
             tfidf_vectorizer = joblib.load(os.path.join(email_train_dir, "tfidf_vectorizer.pkl"))
         else:
             tfidf_vectorizer = None
 
     if phishbench_globals.config["Extraction"]["Testing Dataset"] == "True":
-        x_test, y_test = extract_email_test_features(email_test_dir, vectorizer, tfidf_vectorizer)
+        x_test, y_test = extract_email_test_features(email_test_dir, features, vectorizer, tfidf_vectorizer)
         joblib.dump(x_test, os.path.join(email_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
     else:
