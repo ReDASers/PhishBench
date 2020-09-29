@@ -1,0 +1,155 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 24 May
+ 2016 13:40:15 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 24 May 2016
+ 13:40:13 -0400
+Received: from [10.87.0.111] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 932417124;
+ Tue, 24 May 2016 12:40:14 -0500
+X-Note-AR-ScanTimeLocal: 5/24/2016 12:40:25 PM
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Primary: comers@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @bounce.bluestatedigital.com ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: United States->PRIVATE->United States->
+X-Note-Sending-IP: 66.151.182.17
+X-Note-Reverse-DNS: mta-sample2.bluestatedigital.com
+X-Note-Return-Path: contribution@bounce.bluestatedigital.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G276 G277 G278 G279 G283 G284 G295 G407 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from mta-sample2.bluestatedigital.com ([66.151.182.17] verified)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 140698458;
+ Tue, 24 May 2016 12:40:25 -0500
+Received: from dnc.queue.bluestatedigital.com
+ (openvpnas1.colo.bluestatedigital.com [10.0.180.1])	by
+ mta-sample2.bluestatedigital.com (Postfix) with ESMTP id 3rDjNY0DTkzTQxk;
+	Tue, 24 May 2016 13:40:13 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bounce.bluestatedigital.com; s=bsdkey; t=1464111613;
+	bh=r8bMW1+2En8xEdrAAn0pCKpX//BmjRXs0oLsgFY7WkA=;
+	h=Date:To:From:Subject:Message-ID:MIME-Version:Content-Type;
+	b=fLRdGUj4Tgw1r9sDvXRT6ir61wvSrmKh8cm/f/EUkC2qtj3aitT7JdEvp4tKDtqTD
+	 13IpxsyoDIbcfg8EFS1XB/lkyrmAz2AhFAs+Dnq6ao+NFDDVb3B3a6apa1dakeUARw
+	 dOz4XOLTJpDehTrFE/3TO2WyQ//8lS5mEyidUBWk=
+Received: from phpmailer ([208.69.4.254]) 	by dnc.queue.bluestatedigital.com
+ with HTTP (PHPMailer);	Tue, 24 May 2016 13:40:12 -0400
+Date: Tue, 24 May 2016 13:40:12 -0400
+To: <kaplanj@dnc.org>, <comers@dnc.org>, <zallen@tipahconsulting.com>,
+	<parrishd@dnc.org>
+From: Contribution <postmaster@finance.democrats.org>
+Subject: Contribution: NY435a - POTUS New York - 10k / Judith McGrath / 20,000.00 USD
+Message-ID: <b67cf71ca1d0fd6e6eb72a7d940911df@dnc.queue.bluestatedigital.com>
+X-Mailer: PHPMailer [version 1.71-blue_mailer]
+X-blue_mailer-http_host: finance.democrats.org
+X-blue_mailer-history_ids: 30220024 30220025 30220026 30220027
+Content-Type: multipart/alternative;
+	boundary="b1_b67cf71ca1d0fd6e6eb72a7d940911df"
+Return-Path: contribution@bounce.bluestatedigital.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--b1_b67cf71ca1d0fd6e6eb72a7d940911df
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+CONTRIBUTION DATA
+-----------------
+                      Page: NY435a - POTUS New York - 10k
+                      Type: One-time
+         Number of Tickets: 2
+             Ticket Amount: $20,000.00
+               Ticket Info: %%TicketInfo%%
+Additional Contribution Amount: 0
+              Total Amount: $20,000.00
+                First Name: Judith
+                 Last Name: McGrath
+                   Address: 15 West 89th Street
+                            New York, NY 10024
+                     Phone: 2127991695
+                     Email: judy@mcgrathj.com
+                  Employer: Austrinauts Wanted, Sony Music
+          Employer Address: 
+                            ,  
+                Occupation: CEO
+              Payment Type: American Express
+                 Account #: 4009
+             Transaction #: %%TransactionId%%
+                 User Id #: %%UserId%%
+          Contribution Key: IIKCv-G2iYD7noyss0
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: "Additional Information")
+Fundraiser code (optional): 
+Who encouraged you to make this contribution?: 
+Guest name(s), if contributing for multiple tickets: Michael Corbett
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Tue, 24 May 2016 13:39:37 -0400
+           Status: Under Review
+Client IP Address: 208.69.4.254
+   Client Browser: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0
+
+
+--b1_b67cf71ca1d0fd6e6eb72a7d940911df
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><pre>
+CONTRIBUTION DATA
+-----------------
+                      Page: NY435a - POTUS New York - 10k
+                      Type: One-time
+         Number of Tickets: 2
+             Ticket Amount: $20,000.00
+               Ticket Info: 2 x <strong>Guest</strong> Tickets.
+Additional Contribution Amount: 0
+              Total Amount: $20,000.00
+                First Name: Judith
+                 Last Name: McGrath
+                   Address: 15 West 89th Street
+                            New York, NY 10024
+                     Phone: 2127991695
+                     Email: judy@mcgrathj.com
+                  Employer: Austrinauts Wanted, Sony Music
+          Employer Address: 
+                            ,  
+                Occupation: CEO
+              Payment Type: American Express
+                 Account #: 4009
+             Transaction #: 15768527
+                 User Id #: 
+          Contribution Key: IIKCv-G2iYD7noyss0
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: &quot;Additional Information&quot;)
+Fundraiser code (optional): 
+Who encouraged you to make this contribution?: 
+Guest name(s), if contributing for multiple tickets: Michael Corbett
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Tue, 24 May 2016 13:39:37 -0400
+           Status: Under Review
+Client IP Address: 208.69.4.254
+   Client Browser: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0
+
+</pre>
+
+
+
+--b1_b67cf71ca1d0fd6e6eb72a7d940911df--

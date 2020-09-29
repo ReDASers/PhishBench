@@ -103,7 +103,13 @@ jobs:
 
     - name: Email 1-Step test
       run: phishbench -f Test_A.ini -c
-      working-directory: tests/integration tests/email_extraction
+      working-directory: tests/integration tests/email_one_step
+
+    - name: Email 2-Step test
+      run: |
+        phishbench -f Test_A.ini -c
+        phishbench -f Test_B.ini -c
+      working-directory: tests/integration tests/email_two_step
 
     
 
