@@ -52,7 +52,7 @@ def confirmation(ignore_confirmation=False):
     `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
     """
 
-    print("PhishBench is running in {} mode.\n".format(phishbench.settings.mode()))
+    print("\nPhishBench is running in {} mode.\n".format(phishbench.settings.mode()))
 
     if phishbench.settings.feature_extraction():
         print("Performing feature extraction with")
@@ -63,7 +63,7 @@ def confirmation(ignore_confirmation=False):
             print("\tLegitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
             print("\tPhishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
     else:
-        print("\nRun the Feature Extraction: {}".format(config["Extraction"]["feature extraction"]))
+        print("Loading features from disk")
 
     if phishbench.settings.feature_selection():
         print("\nPerforming Feature selection")
