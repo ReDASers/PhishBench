@@ -48,8 +48,6 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         The feature values in a list of dictionaries. Features are mapped `config_name` to value.
     labels: List[int]
         The class labels for the dataset
-    corpus: List[str]:
-        The email bodies corresponding to each feature set
     features: List[FeatureClass]
         The feature instances used.
     """
@@ -67,9 +65,9 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         features = create_new_features()
         for feature in features:
             feature.fit(emails, labels)
-    feature_values, corpus = extract_features_list_email(emails, features)
+    feature_values = extract_features_list_email(emails, features)
 
-    return feature_values, labels, corpus, features
+    return feature_values, labels, features
 
 
 def extract_features_list_email(emails: List[EmailMessage], features: List[FeatureClass]):
@@ -98,9 +96,7 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Featu
         feature_values, _ = extract_features_from_single_email(features, email_msg)
         feature_list_dict.append(feature_values)
 
-    corpus = [msg.body.text for msg in emails]
-
-    return feature_list_dict, corpus
+    return feature_list_dict
 
 
 def extract_features_from_single_email(features: List[FeatureClass], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
