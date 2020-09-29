@@ -93,20 +93,13 @@ jobs:
     - name: URL 1-Step test
       run: |
         phishbench -f Test_B_1.ini -c
-      working-directory: tests/integration tests/url_extraction
-
-    - name: Cleanup
-      run: |
-        Remove-Item Data_Dump -Recurse
-        Remove-Item phishbench.log
-        Remove-Item summary.txt
-      working-directory: tests/integration tests/url_extraction
+      working-directory: tests/integration tests/url_one_step
     
     - name: URL 2-Step test
       run: |
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
-      working-directory: tests/integration tests/url_extraction
+      working-directory: tests/integration tests/url_two_step
 
     - name: Email 1-Step test
       run: |
