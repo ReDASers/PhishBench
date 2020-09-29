@@ -25,7 +25,9 @@ def split_dict(raw: Dict):
     vector_features = dict()
     for key, value in raw.items():
         if hasattr(value, 'shape'):
-            if len(value.shape) == 1:
+            if len(value.shape) == 0:
+                size = 1
+            elif len(value.shape) == 1:
                 size = value.shape[0]
             else:
                 size = value.shape[1]
