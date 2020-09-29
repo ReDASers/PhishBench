@@ -29,7 +29,7 @@ class EmailBodyTfidf(metaclass=FeatureMC):
 
         Parameters
         ----------
-        corpus: List[EmailMessage}
+        corpus: List[EmailMessage]
             The training corpus
         labels:
             Ignored
