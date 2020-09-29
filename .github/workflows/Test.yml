@@ -44,11 +44,13 @@ jobs:
   
   Integration-Tests:
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         # os: [windows-latest, ubuntu-latest]
         os: [Windows, Linux]
       fail-fast: false
+
     steps:
     - name: Install whois
       run: |
@@ -78,35 +80,31 @@ jobs:
 
     - name: Test Generate Config
       run: |
-        cd "tests/integration tests/make-config"
         make-phishbench-config -f Test.ini
-        if(-Not (Test-Path Test.ini)){
-            Get-ChildItem 
-            exit 1
-        }
+      working-directory: tests/integration tests/make-config
 
-    - name: Run URL 1-Step test
+    - name: Upload Config
+      uses: actions/upload-artifact@v2
+      with:
+        name: Generated Config
+        path: tests/integration tests/make-config/Test.ini
+        if-no-files-found: error
+
+    - name: URL 1-Step test
       run: |
-        cd "tests/integration tests/url_extraction"
         phishbench -f Test_B_1.ini -c
-
-    - name: Cleanup
-      run: |
-        cd "tests/integration tests/url_extraction"
-        rm -r Data_Dump
-        rm phishbench.log
-        rm summary.txt
+      working-directory: tests/integration tests/url_one_step
     
-    - name: Run URL 2-Step test
+    - name: URL 2-Step test
       run: |
-        cd "tests/integration tests/url_extraction"
         phishbench -f Test_A_1.ini -c
         phishbench -f Test_A_2.ini -c
+      working-directory: tests/integration tests/url_two_step
 
-    - name: Run Email 1-Step test
+    - name: Email 1-Step test
       run: |
-        cd "tests/integration tests/email_extraction"
         phishbench -f Test_A.ini -c
+      working-directory: tests/integration tests/email_extraction
 
     
 
