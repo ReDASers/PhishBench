@@ -103,7 +103,7 @@ class Vectorizer:
         split = list(map(split_dict, features))
         scalar_features = [x[0] for x in split]
         vector_features = [x[1] for x in split]
-        x = self.scalar_vectorizer.fit_transform(scalar_features)
+        x = self.scalar_vectorizer.transform(scalar_features)
         if len(self.array_feature_indicies) == 0:
             return x
         for key in self.array_feature_indicies.keys():
