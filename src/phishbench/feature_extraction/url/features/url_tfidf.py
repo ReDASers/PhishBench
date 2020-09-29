@@ -1,55 +1,57 @@
 """
-Contains the Email Body TF-IDF extractor
+Contains the Website TF-IDF extractor
 """
 from typing import List
 import pickle
 
 import scipy.sparse
+from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from ...reflection import FeatureMC, FeatureType
-from ....input import EmailMessage, EmailBody
+from ....input import URLData
 
 
-class EmailBodyTfidf(metaclass=FeatureMC):
+class WebsiteTfidf(metaclass=FeatureMC):
     """
-    TF-IDF world-level vectors of the email bodies
+    TF-IDF world-level vectors of the downloaded websites
     """
-    config_name = 'email_body_tfidf'
-    feature_type = FeatureType.EMAIL_BODY
+    config_name = 'website_tfidf'
+    feature_type = FeatureType.URL_WEBSITE
     default_value = None
 
     def __init__(self):
         self.tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 1),
                                                 min_df=0, stop_words='english', sublinear_tf=True)
 
-    def fit(self, corpus: List[EmailMessage], labels):
+    def fit(self, corpus: List[URLData], labels):
         """
         Fits the TF-IDF feature
 
         Parameters
         ----------
-        corpus: List[EmailMessage]
+        corpus: List[URLData]
             The training corpus
         labels:
             Ignored
         """
         # pylint: disable=unused-argument
-        bodies = [msg.body.text for msg in corpus]
-        self.tfidf_vectorizer.fit(bodies)
+
+        websites = [str(BeautifulSoup(url.downloaded_website, 'html5lib')) for url in corpus]
+        self.tfidf_vectorizer.fit(websites)
         vocab_size = len(self.tfidf_vectorizer.vocabulary_)
         self.default_value = scipy.sparse.csr_matrix((1, vocab_size))
 
-    def extract(self, body: EmailBody):
+    def extract(self, url: URLData):
         """
         Extracts a TF-IDF vector
 
         Parameters
         ----------
-        body: EmailBody
-            The `EmailBody` to extract the vector from
+        url: URLData
+            The `URLData` to extract the vector from
         """
-        x = [body.text]
+        x = [str(BeautifulSoup(url.downloaded_website, 'html5lib'))]
         return self.tfidf_vectorizer.transform(x)
 
     def load_state(self, filename):
