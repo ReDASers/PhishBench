@@ -53,9 +53,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
                                    legit_dataset_folder, phish_dataset_folder)
 
-    print("Loading emails from {}".format(legit_dataset_folder))
     legit_emails, _ = email_input.read_dataset_email(legit_dataset_folder)
-    print("Loading emails from {}".format(phish_dataset_folder))
     phish_emails, _ = email_input.read_dataset_email(phish_dataset_folder)
 
     emails = legit_emails + phish_emails
