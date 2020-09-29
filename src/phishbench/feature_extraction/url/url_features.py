@@ -15,6 +15,19 @@ from ...input.url_input import URLData
 from ...utils import phishbench_globals
 
 
+def create_new_features() -> List[FeatureClass]:
+    """
+    Gets URL features
+    Returns
+    -------
+    features:
+        A list of instantiated features
+    """
+    features = [x() for x in load_features(internal_features, 'URL')]
+    print("Loaded {} features".format(len(features)))
+    return features
+
+
 def extract_labeled_dataset(legit_path, phish_path):
     """
     Extract features from a labeled dataset split by files
@@ -64,9 +77,8 @@ def extract_features_from_list_urls(urls: List[URLData]):
     corpus:
         A list of the downloaded websites
     """
-
-    features = [feature() for feature in load_features(filter_features='URL', internal_features=internal_features)]
-
+    features = create_new_features()
+    
     feature_list_dict = list()
     corpus = list()
     for url in tqdm(urls):
