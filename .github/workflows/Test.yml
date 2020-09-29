@@ -95,13 +95,14 @@ jobs:
       run: |
         cd "tests/integration tests/url_extraction"
         phishbench -f Test_B_1.ini -c
+        Remove-Item Data_Dump -Recurse
+        Remove-Item phishbench.log
+        Remove-Item summary.txt
 
     - name: Cleanup
       run: |
         cd "tests/integration tests/url_extraction"
-        rm -r Data_Dump
-        rm phishbench.log
-        rm summary.txt
+
     
     - name: Run URL 2-Step test
       run: |
