@@ -80,16 +80,14 @@ jobs:
       run: |
         cd "tests/integration tests/make-config"
         make-phishbench-config -f Test.ini
-        if(-Not (Test-Path Test.ini)){
-            Get-ChildItem 
-            exit 1
-        }
 
     - name: Upload Config
       uses: actions/upload-artifact@v2
       with:
         name: Generated Config.ini
         path: tests/integration tests/make-config/Test.ini
+        if-no-files-found: error
+
 
     - name: Run URL 1-Step test
       run: |
