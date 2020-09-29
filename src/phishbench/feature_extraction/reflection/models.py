@@ -55,6 +55,16 @@ class FeatureClass:
             The feature value extracted from `x`
         """
 
+    def load_state(self, filename):
+        """
+        Loads the feature state from a file
+        """
+
+    def save_state(self, filename):
+        """
+        Saves the feature state to a file
+        """
+
 
 class FeatureMC(type):
     """
@@ -68,9 +78,13 @@ class FeatureMC(type):
         if not isinstance(attrs['config_name'], str):
             raise SyntaxError("config_name must have be a string")
 
-        if not attrs['fit'].__code__.co_argcount == 3:
+        if attrs['fit'] is not _do_nothing and attrs['fit'].__code__.co_argcount != 3:
             raise SyntaxError("fit must have signature fit(self, corpus, label)")
         if not attrs['extract'].__code__.co_argcount == 2:
+            raise SyntaxError("extract must have signature fit(self, x)")
+        if attrs['save_state'] is not _do_nothing and attrs['save_state'].__code__.co_argcount != 2:
+            raise SyntaxError("extract must have signature fit(self, x)")
+        if attrs['load_state'] is not _do_nothing and attrs['load_state'].__code__.co_argcount != 2:
             raise SyntaxError("extract must have signature fit(self, x)")
 
         x = type.__new__(cls, name, bases, attrs)
@@ -79,7 +93,7 @@ class FeatureMC(type):
         return x
 
 
-def _do_nothing(self, x, y):
+def _do_nothing(self, *args):
     # pylint: disable=unused-argument
     pass
 
@@ -105,6 +119,8 @@ def register_feature(feature_type: FeatureType, config_name: str, default_value=
         attrs['feature_type'] = feature_type
         attrs['extract'] = extract
         attrs['fit'] = _do_nothing
+        attrs['save_state'] = _do_nothing
+        attrs['load_state'] = _do_nothing
         attrs['default_value'] = default_value
         feature_class = FeatureMC(config_name, (), attrs)
         return feature_class
