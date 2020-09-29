@@ -1,0 +1,118 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 24 May
+ 2016 12:30:47 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 24 May 2016
+ 12:30:46 -0400
+Received: from [10.87.0.112] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 932210424
+ for KaplanJ@dnc.org; Tue, 24 May 2016 11:30:46 -0500
+X-Note-AR-ScanTimeLocal: 5/24/2016 11:30:46 AM
+X-Policy: dnc.org
+X-Primary: kaplanj@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-Virus-Scan: V-
+X-Note: SPF: IP:173.203.187.124 DOM:conlonandco.com ADDR:avery@conlonandco.com
+X-Note: SPF: None
+X-Note-SnifferID: 0
+X-Note: TCH-CT/SI:0-90/SG:2 5/24/2016 11:30:35 AM
+X-GBUdb-Analysis: 0, 173.203.187.124, Ugly c=0.62245 p=-0.909524 Source Normal
+X-Signature-Violations: 0-0-0-4111-c
+X-Note-419: 15.6255 ms. Fail:0 Chk:1324 of 1324 total
+X-Note: SCH-CT/SI:0-1324/SG:1 5/24/2016 11:30:37 AM
+X-Note: Spam Tests Failed: 
+X-Country-Path: PRIVATE->United States->United States->LOCAL->LOCAL->United States->
+X-Note-Sending-IP: 173.203.187.124
+X-Note-Reverse-DNS: smtp124.iad3a.emailsrvr.com
+X-Note-Return-Path: avery@conlonandco.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G276 G277 G278 G279 G283 G284 G407 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: VALID
+X-Note: Headers Injected
+Received: from smtp124.iad3a.emailsrvr.com ([173.203.187.124] verified)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 140244634
+ for KaplanJ@dnc.org; Tue, 24 May 2016 11:30:46 -0500
+Received: from smtp32.relay.iad3a.emailsrvr.com (localhost.localdomain
+ [127.0.0.1])	by smtp32.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+ 251D938046C	for <KaplanJ@dnc.org>; Tue, 24 May 2016 12:30:46 -0400 (EDT)
+X-SMTPDoctor-Processed: csmtpprox beta
+Received: from smtp32.relay.iad3a.emailsrvr.com (localhost.localdomain
+ [127.0.0.1])	by smtp32.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+ 23023380481	for <KaplanJ@dnc.org>; Tue, 24 May 2016 12:30:46 -0400 (EDT)
+Received: from smtp192.mex02.mlsrvr.com (smtp192.mex02.mlsrvr.com
+ [204.232.137.43])	by smtp32.relay.iad3a.emailsrvr.com (SMTP Server) with
+ ESMTPS id 14D5838046C	for <KaplanJ@dnc.org>; Tue, 24 May 2016 12:30:46 -0400
+ (EDT)
+X-Sender-Id: avery@conlonandco.com
+Received: from smtp192.mex02.mlsrvr.com (smtp192.mex02.mlsrvr.com
+ [204.232.137.43])	(using TLSv1 with cipher AES128-SHA)	by 0.0.0.0:25
+ (trex/5.5.4);	Tue, 24 May 2016 12:30:46 -0400
+Received: from IAD2MBX09.mex02.mlsrvr.com ([172.23.11.66]) by
+ IAD2HUB05.mex02.mlsrvr.com ([172.23.10.69]) with mapi; Tue, 24 May 2016
+ 12:30:46 -0400
+From: Avery Connelly <avery@conlonandco.com>
+To: "Kaplan, Jordan" <KaplanJ@dnc.org>
+Date: Tue, 24 May 2016 12:30:37 -0400
+Subject: RE: Pictures
+Thread-Topic: Pictures
+Thread-Index: AdG1MPKnI5E0CioZTyOyjcVx62gguAApkXSBAAjt1QD//71VxA==
+Message-ID: <AE3E1BBAECBF6A40A80958E1C0DD9C058EB835A6FC@IAD2MBX09.mex02.mlsrvr.com>
+References: <1120550CA6F471439D28D50497179C2631CF264C0B@IAD2MBX09.mex02.mlsrvr.com>
+ <AE3E1BBAECBF6A40A80958E1C0DD9C058EB835A6FB@IAD2MBX09.mex02.mlsrvr.com>,<FD42AB78-B5BE-45A2-A6E9-E62D792C7464@dnc.org>
+In-Reply-To: <FD42AB78-B5BE-45A2-A6E9-E62D792C7464@dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Return-Path: avery@conlonandco.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+No worries was just making sure ;) Thanks!
+________________________________________
+From: Kaplan, Jordan [KaplanJ@dnc.org]
+Sent: Tuesday, May 24, 2016 11:29 AM
+To: Avery Connelly
+Subject: Re: Pictures
+
+Sorry for the delay - I got it.
+
+thank you.
+
+Jordan Kaplan
+National Finance Director
+Democratic National Committee
+(202) 488-5002 (o) | (312) 339-0224 (c)
+kaplanj@dnc.org<mailto:kaplanj@dnc.org>
+
+[cid:7BCD23E6-0564-4E15-B583-94A0A78B7690]
+
+On May 24, 2016, at 12:13 PM, Avery Connelly <avery@conlonandco.com<mailto:=
+avery@conlonandco.com>> wrote:
+
+Jordan,
+Checking in to make sure you got my email below.  Please let me know if the=
+re is anything else I can do.
+Thanks,
+A
+________________________________________
+From: Avery Connelly
+Sent: Monday, May 23, 2016 3:23 PM
+To: Kaplan, Jordan
+Subject: Pictures
+
+Hi there Jordan,
+I wanted to pass along these pictures.  I believe this is what you're looki=
+ng for?
+
+Please let me know if I can help with anything else.
+Thanks!
+A
+

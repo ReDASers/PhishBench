@@ -1,0 +1,184 @@
+ wsykespg@ebay.com  Fri Jun 17 16:15:17 2005
+Return-Path: <wsykespg@ebay.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id 3D295536E22
+	for <username@login.domain.com>; Fri, 17 Jun 2005 16:15:17 -0400 (EDT)
+Received: from mail2.domain.com (mail2.domain.com [192.168.3.4])
+	by mail1.domain.com (Postfix) with ESMTP id 2BCBE85AA6F
+	for <username@domain.com>; Fri, 17 Jun 2005 16:15:16 -0400 (EDT)
+Received: from smtp1.nix.paypal.com (S0106000c6ebcc574.wp.shawcable.net [24.79.216.169])
+	by mail2.domain.com (Postfix) with ESMTP id A99031836A6
+	for <username@domain.com>; Fri, 17 Jun 2005 16:15:15 -0400 (EDT)
+Message-ID: <c28101c454c0$0f8e35ef$cac22d59@wvgso01>
+From: "Bernadine W. Sykes" <wsykespg@ebay.com>
+To: username@domain.com
+Subject: =?ISO-8859-1?b?RWJheSBBY2NvdW50IFJldmlldyAgICA0bA==?=
+Date: Thu, 17 Jun 2004 23:09:00 +0000
+MIME-Version: 1.0
+X-Sender: <wsykespg@ebay.com>
+Sender: <wsykespg@ebay.com>
+Reply-To: "Bernadine W. Sykes" <wsykespg@ebay.com>
+In-Reply-To: <497901c45084$35c2ac83$8d9a7681@sfxd313>
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook, Build 10.0.2616
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1409
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: 8bit
+Status: O
+X-Status: 
+X-Keywords:                  
+X-UID: 9
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+
+</td></tr> 
+</table> 
+</form></td> 
+</tr> 
+</table> 
+<br> 
+
+
+<div id=message> 
+<table cellpadding=0 cellspacing=0 border=0 width="100%""><tr><td> 
+
+
+<table cellSpacing="0" cellPadding="0" width="600" align="center" 
+border="0"> 
+  <tbody> 
+    <tr> 
+      <td><A target="_blank" 
+href="http://www.ebay.com"    ><IMG 
+src="http://pics.ebaystatic.com/aw/pics/navbar/eBayLogoTM.gif"border=0></A></td> 
+    </tr> 
+    <tr> 
+      <td> </td> 
+    </tr> 
+    <tr> 
+      <td><font color="#000000" size="3" face="Arial, Helvetica, 
+sans-serif"><strong>***Urgent Safeharbor 
+Department Notice***</strong></font></td> 
+    </tr> 
+    <tr> 
+      <td> </td> 
+    </tr> 
+  </tbody> 
+</table> 
+<table cellSpacing="0" cellPadding="5" width="600" align="center" 
+border="0"> 
+  <tbody> 
+    <tr> 
+      <td height="259" vAlign="top"> <p>              <font size="2" 
+face="Arial, Helvetica, 
+sans-serif"><strong>eBay Fraud Mediation Request</strong><br> 
+            <font size="1" face="Verdana, Arial, Helvetica, 
+sans-serif">Date: Tue, 7 Jun 
+2005</font></font></p> 
+        <p><font size="2" face="Arial, Helvetica, sans-serif">You have 
+recieved this email because you or 
+someone had used your account to make fake bids at eBay. For security 
+purposes, we are required to open 
+an investigation into this matter. </font></p> 
+        <p><font size="2" face="Arial, Helvetica, sans-serif">          THE 
+FRAUD ALERT ID CODE 
+CONTAINED IN THIS MESSAGE WILL BE ATTACHED IN 
+          OUR FRAUD MEDIATION REQUEST FORM, IN ORDER TO VERIFY YOUR EBAY 
+ACCOUNT 
+REGISTRATION INFORMATIONS.</font></p> 
+        <p><font size="2" face="Arial, Helvetica, sans-serif"><strong>Fraud 
+Alert ID CODE: 
+00937614</strong><br> 
+            <font size="1" face="Verdana, Arial, Helvetica, 
+sans-serif">(Please save this Fraud Alert ID Code 
+for your reference.</font>)<br> 
+          <br> 
+          To help speed up this process, 
+          please access the following form to complete the verification of 
+your eBay account registration 
+informations:</font></p> 
+        <p><strong><font size="2" face="Arial, Helvetica, sans-serif"><a href="http://80.253.192.38/ebay/">http://scgi.ebay.com/verify_id­=ebay 
+&fraud alert id code=00937614</a></font></stro­ng></p> 
+        <table width="100%"  border="0" cellspacing="0" cellpadding="0"> 
+          <tr> 
+            <td><p><font size="1">.</font></p>            </td> 
+          </tr> 
+          <tr> 
+            <td><table width="100%"  border="0"> 
+              <tr> 
+                <td bgcolor="#E6E6FF"><font size="2" face="Arial, Helvetica, 
+sans-serif"><strong>Please Note: 
+</strong><br> 
+                  If we do not receive the appropriate eBay account 
+verification within 48 hours, then we will 
+assume this eBay account is fraudulent and will be suspended. <br> 
+                  The purpose of this verification is to ensure that your 
+eBay account has not been fraudulently 
+used and to combat the fraud from our community.</font></td> 
+              </tr> 
+            </table></td> 
+          </tr> 
+        </table> 
+        <p><font size="2" face="Arial, Helvetica, sans-serif"><font 
+color="#000000">We appreciate your 
+support and understanding, as we work together to keep eBay a safe place to 
+trade.</font></font><font 
+color="#000000" size="2" face="Arial, Helvetica, sans-serif"><BR> 
+          <BR> 
+  Thank you for your patience in this matter.</font></p> 
+        <p align="left"><font color="#000000" size="2" face="Arial, 
+Helvetica, sans-serif">Regards, 
+Safeharbor Department (Trust and Safety Department)<br> 
+  eBay Inc.</font><font size="2" face="Arial, Helvetica, sans-serif"><br> 
+          <br> 
+          <font color="#999999" size="1"> Please do not reply to this e-mail 
+            as this is only a notification. Mail sent to this address cannot 
+be 
+      answered. </font></font></p>        </td> 
+    </tr> 
+    <tr> 
+      <td align="middle" ><p align="center"><font color="#000000" size="1" 
+face="Arial, 
+Helvetica, sans-serif"><Br> 
+          <br> 
+          Copyright © 2005 eBay Inc. All Rights Reserved. Designated 
+trademarks and brands are the 
+property of their respective owners. eBay and the eBay logo are trademarks 
+of eBay Inc. eBay is located at 
+2145 Hamilton Avenue, San Jose, CA 95125. </font><br> 
+        </p> 
+      </td> 
+    </tr> 
+  </tbody> 
+</table> 
+
+
+</td></tr></table> 
+</div> 
+
+
+</td></tr></table> 
+
+
+</td></tr></table> 
+</div> 
+
+
+</td></tr></table> 
+
+
+</td></tr></table> 
+</div> 
+</body>
+</html>
