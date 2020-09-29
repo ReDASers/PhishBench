@@ -90,15 +90,11 @@ def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureC
     """
 
     feature_list_dict = list()
-    corpus = list()
     for url in tqdm(urls):
         feature_values, _ = extract_features_from_single_url(features, url)
         feature_list_dict.append(feature_values)
-        if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
-            soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-            corpus.append(str(soup))
 
-    return feature_list_dict, corpus
+    return feature_list_dict
 
 
 def extract_features_from_single_url(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
