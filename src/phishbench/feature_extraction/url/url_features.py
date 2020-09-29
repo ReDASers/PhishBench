@@ -18,7 +18,7 @@ from ...utils import phishbench_globals
 def create_new_features() -> List[FeatureClass]:
     """
     Gets URL features
-    
+
     Returns
     -------
     features:
