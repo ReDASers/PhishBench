@@ -359,14 +359,14 @@ def get_config():
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
-                    phishbench_globals.config[FeatureType.EMAIL_BODY].getboolean("email_body_tfidf")
+                    phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
         if run_tfidf:
             tfidf_vec = os.path.join(train_dir, "features", "email_body_tfidf.pkl")
     else:
         train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Training")
         test_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs_Testing")
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
-                    phishbench_globals.config[FeatureType.URL_WEBSITE].getboolean("website_tfidf")
+                    phishbench_globals.config[FeatureType.URL_WEBSITE.value].getboolean("website_tfidf")
         if run_tfidf:
             tfidf_vec = os.path.join(train_dir, "features", "website_tfidf.pkl")
     return train_dir, test_dir, tfidf_vec
