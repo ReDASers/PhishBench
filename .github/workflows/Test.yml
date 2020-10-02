@@ -98,7 +98,7 @@ jobs:
       working-directory: tests/integration tests/url_two_step
 
     - name: URL TF-IDF test
-      run: phishbench -f Config_File.ini -c
+      run: phishbench -f URL_TFIDF.ini -c
       working-directory: tests/integration tests/website_tfidf
 
     - name: Email 1-Step test
