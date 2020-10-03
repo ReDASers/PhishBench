@@ -26,14 +26,14 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
 
     # RFE
     if phishbench_globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
-        selection_model = RFE(LinearSVC(), num_features, verbose=2, step=0.005)
+        selection_model = RFE(LinearSVC(), n_features_to_select=num_features, verbose=2, step=0.005)
         selection_model.fit(features, target)
         res = dict(zip(features_list, selection_model.ranking_))
         report_name = "Feature_ranking_rfe.txt"
 
     # Chi-2
     elif phishbench_globals.config["Feature Selection"]["Chi-2"] == "True":
-        selection_model = sklearn.feature_selection.SelectKBest(chi2, num_features)
+        selection_model = sklearn.feature_selection.SelectKBest(chi2, k=num_features)
         selection_model.fit(features, target)
         res = dict(zip(features_list, selection_model.scores_))
         report_name = "Feature_ranking_chi2.txt"
