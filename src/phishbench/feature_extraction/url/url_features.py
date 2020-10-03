@@ -4,7 +4,6 @@ This module handles the extraction of url features
 import time
 from typing import List, Tuple, Dict
 
-from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from . import features as internal_features
