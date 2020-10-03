@@ -1,9 +1,10 @@
 """
 This module contains feature cleaning code
 """
+from typing import List, Dict
+
 import numpy as np
 import scipy.sparse
-from typing import List, Dict
 
 from ..utils import phishbench_globals
 
