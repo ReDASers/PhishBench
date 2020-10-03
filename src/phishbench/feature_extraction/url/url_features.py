@@ -66,9 +66,9 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     labels = [0] * len(legit_urls) + [1] * len(phish_urls)
 
     print("Extracting features")
-    feature_values, corpus = extract_features_from_list_urls(urls, features)
+    feature_values = extract_features_from_list_urls(urls, features)
 
-    return feature_values, labels, corpus
+    return feature_values, labels
 
 
 def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
