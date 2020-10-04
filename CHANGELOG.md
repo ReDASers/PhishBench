@@ -2,7 +2,6 @@
 # v1.3.0
 
 ## Major changes 
-* Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
 * Reflection Extraction v2
    * Features can now be implemented as a class with a `fit` and `extract` function
    * Fixed default values for multi-valued features
