@@ -1,7 +1,7 @@
 import os
 import sys
-from typing import List, Dict
 from types import ModuleType
+from typing import List, Dict
 
 import joblib
 import pandas as pd
@@ -11,8 +11,8 @@ import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
-import phishbench.feature_extraction.email.features
 import phishbench.feature_extraction.email as email_extraction
+import phishbench.feature_extraction.email.features
 import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
@@ -23,14 +23,14 @@ from phishbench.utils import phishbench_globals
 from phishbench_cli import user_interaction
 
 
-def export_features_to_csv(features: List[Dict], y: List, file_path: str):
+def export_features_to_csv(features: List[Dict], y: List[int], file_path: str):
     """
     Exports raw features to csv
     Parameters
     ----------
     features : List[Dict]
         A list of dicts with each dict containing the features of a single data point
-    y : List
+    y : List[int]
         The labels for each datapoint. This should have the same length as features
     file_path : str
         The file to save the csv to
@@ -40,7 +40,9 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
     df.to_csv(file_path, index=False)
 
 
-def extract_train_features(pickle_dir, features, extraction_module: ModuleType):
+def extract_train_features(pickle_dir: str,
+                           features: List[FeatureClass],
+                           extraction_module: ModuleType):
     """
     Extracts features from the training dataset
 
@@ -96,9 +98,12 @@ def extract_train_features(pickle_dir, features, extraction_module: ModuleType):
     return x_train, y_train, vectorizer
 
 
-def extract_test_features(pickle_dir, features, vectorizer, extraction_module):
+def extract_test_features(pickle_dir: str,
+                          vectorizer: preprocessing.Vectorizer,
+                          features: List[FeatureClass],
+                          extraction_module: ModuleType):
     """
-    Extracts features from the email testing dataset
+    Extracts features from the testing dataset
 
     Parameters
     ----------
@@ -138,7 +143,7 @@ def extract_test_features(pickle_dir, features, vectorizer, extraction_module):
         out_path = os.path.join(pickle_dir, 'features.csv')
         export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
+    # Transform the list of dictionaries into a sparse matrix
     x_test = vectorizer.transform(feature_list_dict_test)
 
     # Use Min_Max_scaling for pre-processing the feature matrix
@@ -195,7 +200,7 @@ def extract_url_features():
             feature.load_state(path)
 
     if phishbench_globals.config["Extraction"].getboolean("Testing Dataset"):
-        x_test, y_test = extract_test_features(url_test_dir, features, vectorizer, url_extraction)
+        x_test, y_test = extract_test_features(url_test_dir, vectorizer, features, url_extraction)
 
         joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
@@ -259,7 +264,7 @@ def extract_email_features():
             feature.load_state(path)
 
     if phishbench_globals.config["Extraction"]["Testing Dataset"] == "True":
-        x_test, y_test = extract_test_features(email_test_dir, features, vectorizer, email_extraction)
+        x_test, y_test = extract_test_features(email_test_dir, vectorizer, features, email_extraction)
         joblib.dump(x_test, os.path.join(email_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
     else:
