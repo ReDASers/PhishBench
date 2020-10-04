@@ -151,10 +151,15 @@ def extract_test_features(pickle_dir: str,
     return x_test, y_test
 
 
-def extract_url_features():
+def extract_features(extraction_module: ModuleType):
     """
-    Extracts features from a URL dataset. If PhishBench is configured to only extract features from a test dataset,
-    this function will automatically load pre-extracted training data from disk.
+    Extracts features. If PhishBench is configured to only extract features from a test dataset, this function will
+    load pre-extracted training data from disk.
+
+    Parameters
+    ----------
+    extraction_module: ModuleType
+        Either `email_extraction` or `url_extraction`
 
     Returns
     -------
@@ -171,37 +176,42 @@ def extract_url_features():
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs")
+    pickle_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
 
-    features = url_extraction.create_new_features()
+    if not hasattr(extraction_module, 'extract_features_list'):
+        raise ValueError('extraction_module must be an extraction module')
+    if not hasattr(extraction_module, 'create_new_features'):
+        raise ValueError('extraction_module must be an extraction module')
+
+    features = extraction_module.create_new_features()
 
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer = extract_train_features(train_dir, features, url_extraction)
+        x_train, y_train, vectorizer = extract_train_features(pickle_dir, features, extraction_module)
 
         # dump features and labels and vectorizers
-        joblib.dump(x_train, os.path.join(train_dir, "X_train.pkl"))
-        joblib.dump(y_train, os.path.join(train_dir, "y_train.pkl"))
-        joblib.dump(vectorizer, os.path.join(train_dir, "vectorizer.pkl"))
-        if not os.path.isdir(os.path.join(train_dir, "features")):
-            os.makedirs(os.path.join(train_dir, "features"))
+        joblib.dump(x_train, os.path.join(pickle_dir, "X_train.pkl"))
+        joblib.dump(y_train, os.path.join(pickle_dir, "y_train.pkl"))
+        joblib.dump(vectorizer, os.path.join(pickle_dir, "vectorizer.pkl"))
+        if not os.path.isdir(os.path.join(pickle_dir, "features")):
+            os.makedirs(os.path.join(pickle_dir, "features"))
         for feature in features:
-            path = os.path.join(train_dir, "features", f"{feature.config_name}.pkl")
+            path = os.path.join(pickle_dir, "features", f"{feature.config_name}.pkl")
             feature.save_state(path)
         phishbench_globals.logger.info("Feature Extraction for training dataset: Done!")
     else:
         # if training was done in another instance of the platform then load the necessary files
-        x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
-        y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
-        vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
+        x_train = joblib.load(os.path.join(pickle_dir, "X_train.pkl"))
+        y_train = joblib.load(os.path.join(pickle_dir, "y_train.pkl"))
+        vectorizer = joblib.load(os.path.join(pickle_dir, "vectorizer.pkl"))
         for feature in features:
-            path = os.path.join(train_dir, "features", f"{feature.config_name}.pkl")
+            path = os.path.join(pickle_dir, "features", f"{feature.config_name}.pkl")
             feature.load_state(path)
 
     if phishbench_globals.config["Extraction"].getboolean("Testing Dataset"):
-        x_test, y_test = extract_test_features(train_dir, vectorizer, features, url_extraction)
+        x_test, y_test = extract_test_features(pickle_dir, vectorizer, features, extraction_module)
 
-        joblib.dump(x_test, os.path.join(train_dir, "X_test.pkl"))
-        joblib.dump(y_test, os.path.join(train_dir, "y_test.pkl"))
+        joblib.dump(x_test, os.path.join(pickle_dir, "X_test.pkl"))
+        joblib.dump(y_test, os.path.join(pickle_dir, "y_test.pkl"))
         phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
     else:
         x_test = None
@@ -215,76 +225,15 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
 
 
-def extract_email_features():
-    """
-    Extracts features from a email dataset. If PhishBench is configured to only extract features from a test dataset,
-    this function will automatically load pre-extracted training data from disk.
-
-    Returns
-    -------
-    X_train:
-        A scipy sparse matrix containing the extracted features
-    y_train:
-        A list containing the labels for the extracted dataset
-    x_test:
-        A scipy sparse matrix containing the extracted features
-    y_test
-        A list containing the dataset labels
-    vectorizer:
-        The sklearn vectorizer for the features
-    tfidf_vectorizer:
-        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
-    """
-    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails")
-
-    features = email_extraction.create_new_features()
-
-    if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer = extract_train_features(train_dir, features, email_extraction)
-
-        # Save features for training dataset
-        joblib.dump(x_train, os.path.join(train_dir, "X_train.pkl"))
-        joblib.dump(y_train, os.path.join(train_dir, "y_train.pkl"))
-        joblib.dump(vectorizer, os.path.join(train_dir, "vectorizer.pkl"))
-        if not os.path.isdir(os.path.join(train_dir, "features")):
-            os.makedirs(os.path.join(train_dir, "features"))
-        for feature in features:
-            path = os.path.join(train_dir, "features", f"{feature.config_name}.pkl")
-            feature.save_state(path)
-        phishbench_globals.logger.info("Feature Extraction for training dataset: Done!")
-    else:
-        x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
-        y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
-        vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
-        for feature in features:
-            path = os.path.join(train_dir, "features", f"{feature.config_name}.pkl")
-            feature.load_state(path)
-
-    if phishbench_globals.config["Extraction"]["Testing Dataset"] == "True":
-        x_test, y_test = extract_test_features(train_dir, vectorizer, features, email_extraction)
-        joblib.dump(x_test, os.path.join(train_dir, "X_test.pkl"))
-        joblib.dump(y_test, os.path.join(train_dir, "y_test.pkl"))
-    else:
-        x_test = None
-        y_test = None
-
-    tfidf_vectorizer = None
-    for feature in features:
-        if hasattr(feature, 'tfidf_vectorizer'):
-            tfidf_vectorizer = feature.tfidf_vectorizer
-    return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
-
-
 def get_config():
     tfidf_vec = None
+    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
     if phishbench.settings.mode() == 'Email':
-        train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails")
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
                     phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
         if run_tfidf:
             tfidf_vec = os.path.join(train_dir, "features", "email_body_tfidf.pkl")
     else:
-        train_dir = os.path.join(phishbench_globals.args.output_input_dir, "URLs")
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
                     phishbench_globals.config[FeatureType.URL_WEBSITE.value].getboolean("website_tfidf")
         if run_tfidf:
@@ -326,9 +275,9 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 def run_phishbench():
     if phishbench.settings.feature_extraction():
         if phishbench.settings.mode() == 'Email':
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_email_features()
+            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(email_extraction)
         else:
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_url_features()
+            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(url_extraction)
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
 
