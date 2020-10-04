@@ -2,7 +2,7 @@
 This module handles the extraction of url features
 """
 import time
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 
 from tqdm import tqdm
 
