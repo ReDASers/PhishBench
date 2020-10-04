@@ -67,7 +67,7 @@ def extract_train_features(pickle_dir, features, extraction_module: ModuleType):
     if not hasattr(extraction_module, 'extract_features_list'):
         raise ValueError('extraction_module must be an extraction module')
 
-    print("Extracting Train Set")
+    print("Loading Train Set")
     phishbench_globals.logger.info("Extracting Train Set")
 
     emails, y_train = pb_input.read_train_set(extraction_settings.download_url_flag())
@@ -96,18 +96,20 @@ def extract_train_features(pickle_dir, features, extraction_module: ModuleType):
     return x_train, y_train, vectorizer
 
 
-def extract_url_features_test(output_dir: str, features: List[FeatureClass], vectorizer: preprocessing.Vectorizer):
+def extract_test_features(pickle_dir, features, vectorizer, extraction_module):
     """
-    Extracts features from the URL testing dataset
+    Extracts features from the email testing dataset
 
     Parameters
     ----------
-    output_dir : str
-        The folder to output pickles
+    pickle_dir : str
+        The folder to output pickles to
     features:
         The features to extract
     vectorizer :
         The vectorizer used to vectorize the training dataset
+    extraction_module: ModuleType
+        Either `email_extraction` or `url_extraction`
 
     Returns
     -------
@@ -116,32 +118,33 @@ def extract_url_features_test(output_dir: str, features: List[FeatureClass], vec
     y_test
         A list containing the dataset labels
     """
-    if not os.path.isdir(output_dir):
-        os.makedirs(output_dir)
 
-    urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
+    if not os.path.isdir(pickle_dir):
+        os.makedirs(pickle_dir)
+    if not hasattr(extraction_module, 'extract_features_list'):
+        raise ValueError('extraction_module must be an extraction module')
+
+    print("Loading Test Set")
+    emails, y_test = pb_input.read_test_set(extraction_settings.download_url_flag())
 
     print("Extracting Features")
-    feature_list_dict = url_extraction.extract_features_list(urls, features)
-    print("Cleaning features")
-    preprocessing.clean_features(feature_list_dict)
+    feature_list_dict_test = extraction_module.extract_features_list(emails, features)
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    print("Cleaning features")
+    preprocessing.clean_features(feature_list_dict_test)
 
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(output_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict, labels, out_path)
+        out_path = os.path.join(pickle_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_test, y_test, out_path)
 
-    x_test = vectorizer.transform(feature_list_dict)
+    # Tranform the list of dictionaries into a sparse matrix
+    x_test = vectorizer.transform(feature_list_dict_test)
 
-    joblib.dump(x_test, os.path.join(output_dir, "X_test_unprocessed.pkl"))
-
-    # Use Min_Max_scaling for prepocessing the feature matrix
+    # Use Min_Max_scaling for pre-processing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
 
-    return x_test, labels
+    return x_test, y_test
 
 
 def extract_url_features():
@@ -192,7 +195,7 @@ def extract_url_features():
             feature.load_state(path)
 
     if phishbench_globals.config["Extraction"].getboolean("Testing Dataset"):
-        x_test, y_test = extract_url_features_test(url_test_dir, features, vectorizer)
+        x_test, y_test = extract_test_features(url_test_dir, features, vectorizer, url_extraction)
 
         joblib.dump(x_test, os.path.join(url_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(url_test_dir, "y_test.pkl"))
@@ -207,53 +210,6 @@ def extract_url_features():
             tfidf_vectorizer = feature.tfidf_vectorizer
 
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
-
-
-def extract_email_test_features(pickle_dir, features, vectorizer=None):
-    """
-    Extracts features from the email testing dataset
-
-    Parameters
-    ----------
-    pickle_dir : str
-        The folder to output pickles to
-    features:
-        The features to extract
-    vectorizer :
-        The vectorizer used to vectorize the training dataset
-
-    Returns
-    -------
-    x_test:
-        A scipy sparse matrix containing the extracted features
-    y_test
-        A list containing the dataset labels
-    """
-
-    if not os.path.isdir(pickle_dir):
-        os.makedirs(pickle_dir)
-
-    print("Extracting Test Set")
-    emails, y_test = pb_input.read_test_set(extraction_settings.download_url_flag())
-
-    print("Extracting Features")
-    feature_list_dict_test = email_extraction.extract_features_list(emails, features)
-
-    print("Cleaning features")
-    preprocessing.clean_features(feature_list_dict_test)
-
-    # Export features to csv
-    if phishbench_globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(pickle_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_test, y_test, out_path)
-
-    # Tranform the list of dictionaries into a sparse matrix
-    x_test = vectorizer.transform(feature_list_dict_test)
-
-    # Use Min_Max_scaling for pre-processing the feature matrix
-    x_test = Features_Support.Preprocessing(x_test)
-
-    return x_test, y_test
 
 
 def extract_email_features():
@@ -303,7 +259,7 @@ def extract_email_features():
             feature.load_state(path)
 
     if phishbench_globals.config["Extraction"]["Testing Dataset"] == "True":
-        x_test, y_test = extract_email_test_features(email_test_dir, features, vectorizer)
+        x_test, y_test = extract_test_features(email_test_dir, features, vectorizer, email_extraction)
         joblib.dump(x_test, os.path.join(email_test_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(email_test_dir, "y_test.pkl"))
     else:
