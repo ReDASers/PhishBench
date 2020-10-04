@@ -85,8 +85,6 @@ def extract_features_list_email(emails: List[EmailMessage], features: List[Featu
     -------
     feature_list_dict: List[Dict[str]]
         A list of dicts containing the extracted features
-    corpus:
-        A list of the email texts
     """
     if features is None:
         features = create_new_features()

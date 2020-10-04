@@ -91,8 +91,6 @@ def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureC
     -------
     feature_list_dict: List[Dict[str]]
         A list of dicts containing the extracted features
-    corpus:
-        A list of the downloaded websites
     """
 
     feature_list_dict = list()
