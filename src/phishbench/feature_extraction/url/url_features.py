@@ -69,7 +69,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     if features is None:
         features = create_new_features()
         for feature in features:
-            feature.fit(emails, labels)
+            feature.fit(urls, labels)
 
     print("Extracting features")
     feature_values = extract_features_from_list_urls(urls, features)
