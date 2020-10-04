@@ -2,7 +2,7 @@
 This module handles the extraction of url features
 """
 import time
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 
 from tqdm import tqdm
 
@@ -28,7 +28,8 @@ def create_new_features() -> List[FeatureClass]:
     return features
 
 
-def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str):
+def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str,
+                            features: Optional[List[FeatureClass]] = None):
     """
     Extract features from a labeled dataset split by files
     Parameters
@@ -37,6 +38,9 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         The path of the folder/file containing the legitimate urls
     phish_dataset_folder: str
         The path of the folder/file containing the phishing urls
+    features: Optional[List[FeatureClass]]
+        A list of feature objects or `None`. If `None`, then this function will load and instantiate new instances of
+        the features
 
     Returns
     -------
@@ -44,13 +48,11 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         A list of dicts containing the extracted features
     labels: List[int]
         A list of labels. 0 is legitimate and 1 is phishing
-    corpus: List[str]
-        A list of the downloaded websites
+    features: List[FeatureClass]
+        The feature instances used.
     """
     download_url_flag = settings.feature_type_enabled(FeatureType.URL_NETWORK) or \
                         settings.feature_type_enabled(FeatureType.URL_WEBSITE)
-
-    features = create_new_features()
 
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
                                    legit_dataset_folder, phish_dataset_folder)
@@ -64,10 +66,15 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     urls = legit_urls + phish_urls
     labels = [0] * len(legit_urls) + [1] * len(phish_urls)
 
+    if features is None:
+        features = create_new_features()
+        for feature in features:
+            feature.fit(urls, labels)
+
     print("Extracting features")
     feature_values = extract_features_from_list_urls(urls, features)
 
-    return feature_values, labels
+    return feature_values, labels, features
 
 
 def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
