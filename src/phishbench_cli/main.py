@@ -1,6 +1,7 @@
 import os
 import sys
 from typing import List, Dict
+from types import ModuleType
 
 import joblib
 import pandas as pd
@@ -39,51 +40,60 @@ def export_features_to_csv(features: List[Dict], y: List, file_path: str):
     df.to_csv(file_path, index=False)
 
 
-def extract_url_train_features(output_dir: str, features: List[FeatureClass]):
+def extract_train_features(pickle_dir, features, extraction_module: ModuleType):
     """
-    Extracts features from the URL training dataset
+    Extracts features from the training dataset
 
     Parameters
     ----------
-    output_dir : str
-        The folder to output pickles
+    pickle_dir : str
+        The folder to output pickles to
     features:
         The features to extract
+    extraction_module: ModuleType
+        Either `email_extraction` or `url_extraction`
+
     Returns
     -------
     X_train:
         A scipy sparse matrix containing the extracted features
     y_train:
         A list containing the labels for the extracted dataset
-    vectorizer: preprocessing.Vectorizer
-        The `Vectorizer` for the features
+    vectorizer:
+        The sklearn vectorizer for the features
     """
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    if not os.path.isdir(pickle_dir):
+        os.makedirs(pickle_dir)
+    if not hasattr(extraction_module, 'extract_features_list'):
+        raise ValueError('extraction_module must be an extraction module')
 
-    urls, labels = pb_input.read_train_set(extraction_settings.download_url_flag())
+    print("Extracting Train Set")
+    phishbench_globals.logger.info("Extracting Train Set")
+
+    emails, y_train = pb_input.read_train_set(extraction_settings.download_url_flag())
 
     print("Extracting Features")
     for feature in features:
-        feature.fit(urls, labels)
-    feature_list_dict = url_extraction.extract_features_list(urls, features)
+        feature.fit(emails, y_train)
+    feature_list_dict_train = extraction_module.extract_features_list(emails, features)
+
     print("Cleaning features")
-    preprocessing.clean_features(feature_list_dict)
+    preprocessing.clean_features(feature_list_dict_train)
 
     # Export features to csv
     if phishbench_globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(output_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict, labels, out_path)
+        out_path = os.path.join(pickle_dir, 'features.csv')
+        export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
-    # Transform the list of dictionaries into a sparse matrix
+    # Tranform the list of dictionaries into a sparse matrix
     vectorizer = preprocessing.Vectorizer()
-    x_train = vectorizer.fit_transform(feature_list_dict)
+    x_train = vectorizer.fit_transform(feature_list_dict_train)
 
-    joblib.dump(x_train, os.path.join(output_dir, "X_train_unprocessed.pkl"))
+    joblib.dump(x_train, os.path.join(pickle_dir, "X_train_unprocessed.pkl"))
 
     x_train = Features_Support.Preprocessing(x_train)
-
-    return x_train, labels, vectorizer
+    print(x_train.shape)
+    return x_train, y_train, vectorizer
 
 
 def extract_url_features_test(output_dir: str, features: List[FeatureClass], vectorizer: preprocessing.Vectorizer):
@@ -160,7 +170,7 @@ def extract_url_features():
     features = url_extraction.create_new_features()
 
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer = extract_url_train_features(url_train_dir, features)
+        x_train, y_train, vectorizer = extract_train_features(url_train_dir, features, url_extraction)
 
         # dump features and labels and vectorizers
         joblib.dump(x_train, os.path.join(url_train_dir, "X_train.pkl"))
@@ -197,58 +207,6 @@ def extract_url_features():
             tfidf_vectorizer = feature.tfidf_vectorizer
 
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
-
-
-def extract_email_train_features(pickle_dir, features):
-    """
-    Extracts features from the email training dataset
-
-    Parameters
-    ----------
-    pickle_dir : str
-        The folder to output pickles to
-    features:
-        The features to extract
-
-    Returns
-    -------
-    X_train:
-        A scipy sparse matrix containing the extracted features
-    y_train:
-        A list containing the labels for the extracted dataset
-    vectorizer:
-        The sklearn vectorizer for the features
-    """
-    if not os.path.isdir(pickle_dir):
-        os.makedirs(pickle_dir)
-
-    print("Extracting Train Set")
-    phishbench_globals.logger.info("Extracting Train Set")
-
-    emails, y_train = pb_input.read_train_set(extraction_settings.download_url_flag())
-
-    print("Extracting Features")
-    for feature in features:
-        feature.fit(emails, y_train)
-    feature_list_dict_train = email_extraction.extract_features_list(emails, features)
-
-    print("Cleaning features")
-    preprocessing.clean_features(feature_list_dict_train)
-
-    # Export features to csv
-    if phishbench_globals.config['Features Export'].getboolean('csv'):
-        out_path = os.path.join(pickle_dir, 'features.csv')
-        export_features_to_csv(feature_list_dict_train, y_train, out_path)
-
-    # Tranform the list of dictionaries into a sparse matrix
-    vectorizer = preprocessing.Vectorizer()
-    x_train = vectorizer.fit_transform(feature_list_dict_train)
-
-    joblib.dump(x_train, os.path.join(pickle_dir, "X_train_unprocessed.pkl"))
-
-    x_train = Features_Support.Preprocessing(x_train)
-    print(x_train.shape)
-    return x_train, y_train, vectorizer
 
 
 def extract_email_test_features(pickle_dir, features, vectorizer=None):
@@ -324,7 +282,7 @@ def extract_email_features():
     features = email_extraction.create_new_features()
 
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer = extract_email_train_features(email_train_dir, features)
+        x_train, y_train, vectorizer = extract_train_features(email_train_dir, features, email_extraction)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
