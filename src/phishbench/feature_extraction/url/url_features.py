@@ -72,12 +72,12 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
             feature.fit(urls, labels)
 
     print("Extracting features")
-    feature_values = extract_features_from_list_urls(urls, features)
+    feature_values = extract_features_list(urls, features)
 
     return feature_values, labels, features
 
 
-def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
+def extract_features_list(urls: List[URLData], features: List[FeatureClass]):
     """
     Extracts features from a list of URLs
 
@@ -91,19 +91,17 @@ def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureC
     -------
     feature_list_dict: List[Dict[str]]
         A list of dicts containing the extracted features
-    corpus:
-        A list of the downloaded websites
     """
 
     feature_list_dict = list()
     for url in tqdm(urls):
-        feature_values, _ = extract_features_from_single_url(features, url)
+        feature_values, _ = extract_features_from_single(features, url)
         feature_list_dict.append(feature_values)
 
     return feature_list_dict
 
 
-def extract_features_from_single_url(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
+def extract_features_from_single(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single url
     Parameters
