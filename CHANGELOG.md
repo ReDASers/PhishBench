@@ -1,5 +1,5 @@
 # Change Log
-# v1.2.2
+# v1.3.0
 
 ## Major changes 
 * Renamed `extract_email_features` to `extract_features_list_email` in `feature_extraction.email`
@@ -15,6 +15,7 @@
 * Added `input.read_train_set` and `input.read_test_set` functions
 * Removed legacy `Extract_Feature_URL_Testing` and `Extract_Features_URL_Training` functions
     * These functions just wrapped `extract_labeled_dataset`
+* Standardized `feature_extraction.email` and `feature_extraction.url` API
 
 ## Minor changes 
 * Updated user interaction
