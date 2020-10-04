@@ -25,13 +25,14 @@ from phishbench_cli import user_interaction
 def export_features_to_csv(features: List[Dict], y: List[int], file_path: str):
     """
     Exports raw features to csv
+
     Parameters
     ----------
     features : List[Dict]
         A list of dicts with each dict containing the features of a single data point
-    y : List[int]
+    y: List[int]
         The labels for each datapoint. This should have the same length as features
-    file_path : str
+    file_path: str
         The file to save the csv to
     """
     df = pd.DataFrame(features)
@@ -56,7 +57,7 @@ def extract_train_features(pickle_dir: str,
 
     Returns
     -------
-    X_train:
+    x_train:
         A scipy sparse matrix containing the extracted features
     y_train:
         A list containing the labels for the extracted dataset
@@ -106,11 +107,11 @@ def extract_test_features(pickle_dir: str,
 
     Parameters
     ----------
-    pickle_dir : str
+    pickle_dir: str
         The folder to output pickles to
     features:
         The features to extract
-    vectorizer :
+    vectorizer: List[FeatureClass]
         The vectorizer used to vectorize the training dataset
     extraction_module: ModuleType
         Either `email_extraction` or `url_extraction`
@@ -119,7 +120,7 @@ def extract_test_features(pickle_dir: str,
     -------
     x_test:
         A scipy sparse matrix containing the extracted features
-    y_test
+    y_test:
         A list containing the dataset labels
     """
 
@@ -163,13 +164,13 @@ def extract_features(extraction_module: ModuleType):
 
     Returns
     -------
-    X_train:
+    x_train:
         A scipy sparse matrix containing the extracted features
     y_train:
         A list containing the labels for the extracted dataset
     x_test:
         A scipy sparse matrix containing the extracted features
-    y_test
+    y_test:
         A list containing the dataset labels
     vectorizer:
         The sklearn vectorizer for the features
@@ -225,25 +226,46 @@ def extract_features(extraction_module: ModuleType):
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
 
 
-def get_config():
-    tfidf_vec = None
+def get_tfidf_path():
+    """
+    Gets the path to the tfidf_vectorizer
+    """
     train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
     if phishbench.settings.mode() == 'Email':
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
                     phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
         if run_tfidf:
-            tfidf_vec = os.path.join(train_dir, "features", "email_body_tfidf.pkl")
+            return os.path.join(train_dir, "features", "email_body_tfidf.pkl")
     else:
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
                     phishbench_globals.config[FeatureType.URL_WEBSITE.value].getboolean("website_tfidf")
         if run_tfidf:
-            tfidf_vec = os.path.join(train_dir, "features", "website_tfidf.pkl")
-    return train_dir, tfidf_vec
+            return os.path.join(train_dir, "features", "website_tfidf.pkl")
+    return None
 
 
-def load_dataset():
-    train_dir, tfidf_vec = get_config()
-    print(tfidf_vec)
+def load_features_from_disk():
+    """
+    Loads pre-extracted features from disk
+
+    Returns
+    -------
+    X_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test:
+        A list containing the dataset labels
+    vectorizer:
+        The sklearn vectorizer for the features
+    tfidf_vectorizer:
+        The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
+    """
+    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
+    tfidf_vec = get_tfidf_path()
+
     x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
     y_train = joblib.load(os.path.join(train_dir, "y_train.pkl"))
     vectorizer = joblib.load(os.path.join(train_dir, "vectorizer.pkl"))
@@ -262,6 +284,21 @@ def load_dataset():
 
 
 def run_classifiers(x_train, y_train, x_test, y_test):
+    """
+    Runs and evaluates the classifiers
+
+    Parameters
+    ----------
+    x_train:
+        A scipy sparse matrix containing the extracted features
+    y_train:
+        A list containing the labels for the extracted dataset
+    x_test:
+        A scipy sparse matrix containing the extracted features
+    y_test:
+        A list containing the dataset labels
+
+    """
     folder = os.path.join(phishbench_globals.args.output_input_dir, "Classifiers")
     print("Training Classifiers")
 
@@ -273,13 +310,16 @@ def run_classifiers(x_train, y_train, x_test, y_test):
 
 
 def run_phishbench():
+    """
+    Runs the PhishBench basic experiment
+    """
     if phishbench.settings.feature_extraction():
         if phishbench.settings.mode() == 'Email':
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(email_extraction)
         else:
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(url_extraction)
     else:
-        x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_dataset()
+        x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_features_from_disk()
 
     # Feature Selection
     if phishbench.settings.feature_selection():
