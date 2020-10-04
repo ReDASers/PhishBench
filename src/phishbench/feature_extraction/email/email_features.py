@@ -65,12 +65,12 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
         features = create_new_features()
         for feature in features:
             feature.fit(emails, labels)
-    feature_values = extract_features_list_email(emails, features)
+    feature_values = extract_features_list(emails, features)
 
     return feature_values, labels, features
 
 
-def extract_features_list_email(emails: List[EmailMessage], features: List[FeatureClass]):
+def extract_features_list(emails: List[EmailMessage], features: List[FeatureClass]):
     """
     Extracts features from a list of `EmailMessage` objects
 
