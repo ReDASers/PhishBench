@@ -12,7 +12,6 @@ import phishbench.Features_Support as Features_Support
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
-import phishbench.feature_extraction.email.features
 import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
 import phishbench.input as pb_input
@@ -210,7 +209,7 @@ def extract_url_features():
 
     tfidf_vectorizer = None
     for feature in features:
-        if isinstance(feature, url_extraction.url_features.internal_features.WebsiteTfidf):
+        if hasattr(feature, 'tfidf_vectorizer'):
             tfidf_vectorizer = feature.tfidf_vectorizer
 
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
@@ -271,7 +270,7 @@ def extract_email_features():
 
     tfidf_vectorizer = None
     for feature in features:
-        if isinstance(feature, email_extraction.features.EmailBodyTfidf):
+        if hasattr(feature, 'tfidf_vectorizer'):
             tfidf_vectorizer = feature.tfidf_vectorizer
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
 
