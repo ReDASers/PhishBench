@@ -106,6 +106,8 @@ def extract_url_features_test(output_dir: str, features: List[FeatureClass], vec
     y_test
         A list containing the dataset labels
     """
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
 
     urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
 
@@ -128,8 +130,6 @@ def extract_url_features_test(output_dir: str, features: List[FeatureClass], vec
 
     # Use Min_Max_scaling for prepocessing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
-
-    phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, labels
 
@@ -227,10 +227,12 @@ def extract_email_train_features(pickle_dir, features):
 
     emails, y_train = pb_input.read_train_set(extraction_settings.download_url_flag())
 
+    print("Extracting Features")
     for feature in features:
         feature.fit(emails, y_train)
     feature_list_dict_train = email_extraction.extract_features_list(emails, features)
 
+    print("Cleaning features")
     preprocessing.clean_features(feature_list_dict_train)
 
     # Export features to csv
@@ -273,13 +275,13 @@ def extract_email_test_features(pickle_dir, features, vectorizer=None):
     if not os.path.isdir(pickle_dir):
         os.makedirs(pickle_dir)
 
-    legit_path = pb_input.settings.test_legit_path()
-    phish_path = pb_input.settings.test_phish_path()
-
     print("Extracting Test Set")
-    phishbench_globals.logger.info('Extracting Test Set')
-    feature_list_dict_test, y_test, _ = email_extraction.extract_labeled_dataset(legit_path, phish_path, features)
+    emails, y_test = pb_input.read_test_set(extraction_settings.download_url_flag())
 
+    print("Extracting Features")
+    feature_list_dict_test = email_extraction.extract_features_list(emails, features)
+
+    print("Cleaning features")
     preprocessing.clean_features(feature_list_dict_test)
 
     # Export features to csv
@@ -292,8 +294,6 @@ def extract_email_test_features(pickle_dir, features, vectorizer=None):
 
     # Use Min_Max_scaling for pre-processing the feature matrix
     x_test = Features_Support.Preprocessing(x_test)
-
-    phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
 
     return x_test, y_test
 
