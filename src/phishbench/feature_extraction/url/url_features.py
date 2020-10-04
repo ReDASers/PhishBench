@@ -95,13 +95,13 @@ def extract_features_list(urls: List[URLData], features: List[FeatureClass]):
 
     feature_list_dict = list()
     for url in tqdm(urls):
-        feature_values, _ = extract_features_from_single_url(features, url)
+        feature_values, _ = extract_features_from_single(features, url)
         feature_list_dict.append(feature_values)
 
     return feature_list_dict
 
 
-def extract_features_from_single_url(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
+def extract_features_from_single(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single url
     Parameters

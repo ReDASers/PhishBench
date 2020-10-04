@@ -91,13 +91,13 @@ def extract_features_list(emails: List[EmailMessage], features: List[FeatureClas
     feature_list_dict = list()
 
     for email_msg in tqdm(emails):
-        feature_values, _ = extract_features_from_single_email(features, email_msg)
+        feature_values, _ = extract_features_from_single(features, email_msg)
         feature_list_dict.append(feature_values)
 
     return feature_list_dict
 
 
-def extract_features_from_single_email(features: List[FeatureClass], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
+def extract_features_from_single(features: List[FeatureClass], email_msg: EmailMessage) -> Tuple[Dict, Dict]:
     """
     Extracts multiple features from a single email
 
