@@ -4,7 +4,6 @@ This module handles the extraction of url features
 import time
 from typing import List, Tuple, Dict
 
-from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from . import features as internal_features
@@ -66,14 +65,15 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     labels = [0] * len(legit_urls) + [1] * len(phish_urls)
 
     print("Extracting features")
-    feature_values, corpus = extract_features_from_list_urls(urls, features)
+    feature_values = extract_features_from_list_urls(urls, features)
 
-    return feature_values, labels, corpus
+    return feature_values, labels
 
 
 def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
     """
     Extracts features from a list of URLs
+
     Parameters
     ----------
     urls: List[URLData]
@@ -89,15 +89,11 @@ def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureC
     """
 
     feature_list_dict = list()
-    corpus = list()
     for url in tqdm(urls):
         feature_values, _ = extract_features_from_single_url(features, url)
         feature_list_dict.append(feature_values)
-        if settings.feature_type_enabled(FeatureType.URL_WEBSITE):
-            soup = BeautifulSoup(url.downloaded_website, 'html5lib')
-            corpus.append(str(soup))
 
-    return feature_list_dict, corpus
+    return feature_list_dict
 
 
 def extract_features_from_single_url(features: List[FeatureClass], url: URLData) -> Tuple[Dict, Dict]:
