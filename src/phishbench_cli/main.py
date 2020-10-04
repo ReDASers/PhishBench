@@ -66,7 +66,7 @@ def extract_url_train_features(output_dir: str, features: List[FeatureClass]):
     print("Extracting Features")
     for feature in features:
         feature.fit(urls, labels)
-    feature_list_dict = url_extraction.extract_features_from_list_urls(urls, features)
+    feature_list_dict = url_extraction.extract_features_list(urls, features)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 
@@ -110,7 +110,7 @@ def extract_url_features_test(output_dir: str, features: List[FeatureClass], vec
     urls, labels = pb_input.read_test_set(extraction_settings.download_url_flag())
 
     print("Extracting Features")
-    feature_list_dict = url_extraction.extract_features_from_list_urls(urls, features)
+    feature_list_dict = url_extraction.extract_features_list(urls, features)
     print("Cleaning features")
     preprocessing.clean_features(feature_list_dict)
 

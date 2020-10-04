@@ -72,12 +72,12 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
             feature.fit(urls, labels)
 
     print("Extracting features")
-    feature_values = extract_features_from_list_urls(urls, features)
+    feature_values = extract_features_list(urls, features)
 
     return feature_values, labels, features
 
 
-def extract_features_from_list_urls(urls: List[URLData], features: List[FeatureClass]):
+def extract_features_list(urls: List[URLData], features: List[FeatureClass]):
     """
     Extracts features from a list of URLs
 
