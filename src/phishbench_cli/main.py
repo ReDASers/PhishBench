@@ -199,7 +199,7 @@ def extract_url_features():
     return x_train, y_train, x_test, y_test, vectorizer.scalar_vectorizer, tfidf_vectorizer
 
 
-def extract_email_train_features(pickle_dir):
+def extract_email_train_features(pickle_dir, features):
     """
     Extracts features from the email training dataset
 
@@ -207,6 +207,9 @@ def extract_email_train_features(pickle_dir):
     ----------
     pickle_dir : str
         The folder to output pickles to
+    features:
+        The features to extract
+
     Returns
     -------
     X_train:
@@ -215,18 +218,18 @@ def extract_email_train_features(pickle_dir):
         A list containing the labels for the extracted dataset
     vectorizer:
         The sklearn vectorizer for the features
-    features:
-        The features loaded during training
     """
     if not os.path.isdir(pickle_dir):
         os.makedirs(pickle_dir)
 
     print("Extracting Train Set")
     phishbench_globals.logger.info("Extracting Train Set")
-    legit_path = pb_input.settings.train_legit_path()
-    phish_path = pb_input.settings.train_phish_path()
 
-    feature_list_dict_train, y_train, features = email_extraction.extract_labeled_dataset(legit_path, phish_path)
+    emails, y_train = pb_input.read_train_set(extraction_settings.download_url_flag())
+
+    for feature in features:
+        feature.fit(emails, y_train)
+    feature_list_dict_train = email_extraction.extract_features_list(emails, features)
 
     preprocessing.clean_features(feature_list_dict_train)
 
@@ -243,7 +246,7 @@ def extract_email_train_features(pickle_dir):
 
     x_train = Features_Support.Preprocessing(x_train)
     print(x_train.shape)
-    return x_train, y_train, vectorizer, features
+    return x_train, y_train, vectorizer
 
 
 def extract_email_test_features(pickle_dir, features, vectorizer=None):
@@ -299,6 +302,7 @@ def extract_email_features():
     """
     Extracts features from a email dataset. If PhishBench is configured to only extract features from a test dataset,
     this function will automatically load pre-extracted training data from disk.
+
     Returns
     -------
     X_train:
@@ -317,8 +321,10 @@ def extract_email_features():
     email_train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Training")
     email_test_dir = os.path.join(phishbench_globals.args.output_input_dir, "Emails_Testing")
 
+    features = email_extraction.create_new_features()
+
     if phishbench_globals.config["Extraction"].getboolean("Training Dataset"):
-        x_train, y_train, vectorizer, features = extract_email_train_features(email_train_dir)
+        x_train, y_train, vectorizer = extract_email_train_features(email_train_dir, features)
 
         # Save features for training dataset
         joblib.dump(x_train, os.path.join(email_train_dir, "X_train.pkl"))
@@ -334,7 +340,6 @@ def extract_email_features():
         x_train = joblib.load(os.path.join(email_train_dir, "X_train.pkl"))
         y_train = joblib.load(os.path.join(email_train_dir, "y_train.pkl"))
         vectorizer = joblib.load(os.path.join(email_train_dir, "vectorizer.pkl"))
-        features = email_extraction.create_new_features()
         for feature in features:
             path = os.path.join(email_train_dir, "features", f"{feature.config_name}.pkl")
             feature.load_state(path)
