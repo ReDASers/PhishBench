@@ -89,7 +89,7 @@ class TestEmailHeader(unittest.TestCase):
     def test_return_path(self):
         msg = get_binary_email("HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
-        self.assertEqual("user@domain.com", header.return_path)
+        self.assertEqual("return@domain.com", header.return_path)
 
     def test_return_path_bracket(self):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
@@ -178,6 +178,17 @@ class TestEmailHeader(unittest.TestCase):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual("Microsoft Outlook 16.0", header.x_mailer)
+
+    def test_x_spam_flag(self):
+        msg = get_binary_email("HeaderTests/Test Email 2.txt")
+        msg['X-Spam-Flag'] = 'YES'
+        header = EmailHeader(msg)
+        self.assertTrue(header.x_spam_flag)
+
+    def test_x_spam_flag_missing(self):
+        msg = get_binary_email("HeaderTests/Test Email 2.txt")
+        header = EmailHeader(msg)
+        self.assertFalse(header.x_spam_flag)
 
     def test_dkim_signed(self):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")

@@ -46,7 +46,7 @@ Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Return-Path: user@domain.com
+Return-Path: return@domain.com
 Status: RO
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
