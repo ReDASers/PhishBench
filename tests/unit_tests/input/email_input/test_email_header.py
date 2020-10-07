@@ -1,12 +1,20 @@
+"""
+Tests handling of email headers
+"""
 import unittest
 from unittest.mock import patch
 
 from phishbench.input.email_input.models import EmailHeader
 from phishbench.input.email_input.models._header import parse_address_list
-from tests.sample_emails.utils import get_binary_email
+from tests.sample_emails.utils import get_binary_email  # pylint: disable=import-error, no-name-in-module
 
 
 class TestEmailHeader(unittest.TestCase):
+    """
+    Tests `models.EmailHeader`
+    """
+    # pylint: disable=missing-function-docstring
+    # pylint: disable=too-many-public-methods
 
     def test_parse_address_list_none(self):
         result = parse_address_list(None)
@@ -48,7 +56,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(8, date.minute)
         self.assertEqual(50, date.second)
 
-    def test_X_priority(self):
+    def test_x_priority(self):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
 
         header = EmailHeader(msg)
@@ -56,7 +64,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertEqual(1, header.x_priority)
 
     @patch('phishbench.utils.phishbench_globals.logger.debug')
-    def test_X_priority_error(self, l_mock):
+    def test_x_priority_error(self, l_mock):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
         del msg['X-Priority']
         msg['X-Priority'] = "BAD"
@@ -66,7 +74,7 @@ class TestEmailHeader(unittest.TestCase):
         self.assertIsNone(header.x_priority)
         l_mock.assert_called()
 
-    def test_X_priority_null(self):
+    def test_x_priority_null(self):
         msg = get_binary_email("HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
         self.assertIsNone(header.x_priority)
@@ -89,7 +97,7 @@ class TestEmailHeader(unittest.TestCase):
     def test_return_path(self):
         msg = get_binary_email("HeaderTests/Test Email 1.txt")
         header = EmailHeader(msg)
-        self.assertEqual("user@domain.com", header.return_path)
+        self.assertEqual("return@domain.com", header.return_path)
 
     def test_return_path_bracket(self):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
@@ -178,6 +186,17 @@ class TestEmailHeader(unittest.TestCase):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")
         header = EmailHeader(msg)
         self.assertEqual("Microsoft Outlook 16.0", header.x_mailer)
+
+    def test_x_spam_flag(self):
+        msg = get_binary_email("HeaderTests/Test Email 2.txt")
+        msg['X-Spam-Flag'] = 'YES'
+        header = EmailHeader(msg)
+        self.assertTrue(header.x_spam_flag)
+
+    def test_x_spam_flag_missing(self):
+        msg = get_binary_email("HeaderTests/Test Email 2.txt")
+        header = EmailHeader(msg)
+        self.assertFalse(header.x_spam_flag)
 
     def test_dkim_signed(self):
         msg = get_binary_email("HeaderTests/Test Email 2.txt")

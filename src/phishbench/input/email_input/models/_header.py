@@ -225,7 +225,7 @@ class EmailHeader:
             self.x_original_authentication_results = False
 
         # X-Spam_flag
-        if msg["X-Spam_flag"]:
+        if msg["X-Spam-flag"]:
             self.x_spam_flag = True
         else:
             self.x_spam_flag = False
