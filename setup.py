@@ -16,6 +16,6 @@ setup(name='phishbench',
       url='https://github.com/ReDASers/Phishing-Detection',
       packages=find_packages("src"),
       package_dir={"": "src"},
-      package_data={"": ["chromedriver"]},
+      package_data={"": ["alexa-top-1m.csv"]},
       install_requires=reqs,
       entry_points=entry_points)
