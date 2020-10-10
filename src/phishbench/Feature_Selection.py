@@ -1,13 +1,7 @@
 import math
 import os
 
-import numpy as np
-import sklearn
-from sklearn.feature_selection import RFE
-from sklearn.feature_selection import chi2
-from sklearn.svm import LinearSVC
-from sklearn.tree import DecisionTreeClassifier
-
+from .feature_preprocessing.feature_selection import chi_squared, gini, information_gain, rfe
 from .utils import phishbench_globals
 
 
@@ -26,44 +20,33 @@ def Feature_Ranking(features, target, num_features, vectorizer, vectorizer_tfidf
 
     # RFE
     if phishbench_globals.config["Feature Selection"]["Recursive Feature Elimination"] == "True":
-        selection_model = RFE(LinearSVC(), n_features_to_select=num_features, verbose=2, step=0.005)
-        selection_model.fit(features, target)
-        res = dict(zip(features_list, selection_model.ranking_))
+        selection_model, ranking = rfe(features, target, num_features)
         report_name = "Feature_ranking_rfe.txt"
 
     # Chi-2
     elif phishbench_globals.config["Feature Selection"]["Chi-2"] == "True":
-        selection_model = sklearn.feature_selection.SelectKBest(chi2, k=num_features)
-        selection_model.fit(features, target)
-        res = dict(zip(features_list, selection_model.scores_))
+        selection_model, ranking = chi_squared(features, target, num_features)
         report_name = "Feature_ranking_chi2.txt"
 
     # Information Gain
     elif phishbench_globals.config["Feature Selection"]["Information Gain"] == "True":
-        selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='entropy'),
-                                                                    threshold=-np.inf, max_features=num_features)
-        selection_model.fit(features, target)
-        # dump Feature Selection in a file
-        res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
+        selection_model, ranking = information_gain(features, target, num_features)
         report_name = "Feature_ranking_IG.txt"
 
     # Gini
     elif phishbench_globals.config["Feature Selection"]["Gini"] == "True":
-        selection_model = sklearn.feature_selection.SelectFromModel(DecisionTreeClassifier(criterion='gini'),
-                                                                    threshold=-np.inf,
-                                                                    max_features=num_features)
-        selection_model.fit(features, target)
-        res = dict(zip(features_list, selection_model.estimator_.feature_importances_))
+        selection_model, ranking = gini(features, target, num_features)
         report_name = "Feature_ranking_Gini.txt"
+    else:
+        raise RuntimeError("At least one feature selection method must be enabled.")
 
-    for key, value in res.items():
-        if math.isnan(res[key]):
-            res[key] = 0
-    sorted_d = sorted(res.items(), key=lambda x: x[1], reverse=True)
+    ranking = [0 if math.isnan(x) else x for x in ranking]
+    res = sorted(zip(features_list, ranking), key=lambda x: x[1], reverse=True)
+
     report_name = os.path.join(feature_ranking_folder, report_name)
     with open(report_name, 'w', errors="ignore") as f:
-        for (key, value) in sorted_d:
-            f.write("{}: {}\n".format(key, value))
+        for feature_name, rank in res:
+            f.write(f"{feature_name}: {rank}\n")
 
     # create new feature set with the best k features
     features = selection_model.transform(features)
