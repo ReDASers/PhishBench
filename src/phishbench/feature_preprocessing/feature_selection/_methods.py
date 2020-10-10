@@ -1,5 +1,5 @@
 """
-Contains feature selection methods
+Feature selection methods
 """
 from sklearn.feature_selection import RFE, SelectKBest, SelectFromModel
 from sklearn.feature_selection import chi2
