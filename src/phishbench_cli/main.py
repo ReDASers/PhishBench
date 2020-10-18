@@ -14,6 +14,8 @@ import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
+import phishbench.feature_preprocessing.feature_selection
+import phishbench.feature_preprocessing.feature_selection.settings
 import phishbench.input as pb_input
 import phishbench.settings
 from phishbench.feature_extraction import settings as extraction_settings
@@ -326,10 +328,9 @@ def run_phishbench():
         ranking_dir = os.path.join(phishbench_globals.output_dir, "Feature_Ranking")
         if not os.path.exists(ranking_dir):
             os.makedirs(ranking_dir)
-        # k: Number of Best features
-        num_best_features = int(phishbench_globals.config["Feature Selection"]["number of best features"])
-        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features,
-                                                                     vectorizer, tfidf_vectorizer)
+
+        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, vectorizer, tfidf_vectorizer)
+
         # Dump model
         joblib.dump(selection_model, os.path.join(ranking_dir, "selection.pkl"))
         joblib.dump(x_train, os.path.join(ranking_dir, "X_train_processed_best_features.pkl"))
