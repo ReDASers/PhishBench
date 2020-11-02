@@ -12,7 +12,8 @@ import logging
 args = None
 config = configparser.ConfigParser()
 logger: logging.Logger = logging.getLogger('root')
-summary = None
+summary: Optional[TextIOBase] = None
+output_dir = ""
 
 
 def setup_parser():
@@ -28,6 +29,7 @@ def setup_parser():
                         type=str, default="PhishBench Output")
     parser.add_argument("-c", "--ignore_confirmation", help="Do not wait for user's confirmation", action="store_true")
     args = parser.parse_args()
+    output_dir = args.output_input_dir
 
 
 def setup_logger(filename='phishbench.log'):
@@ -73,8 +75,12 @@ def initialize(config_file):
     global config
     global summary
 
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
+
     config.read(config_file)
-    summary = open(config["Summary"]["Path"], 'w')
+    summary_path = os.path.join(output_dir, config["Summary"]["Path"])
+    summary = open(summary_path, 'w')
     setup_logger()
 
 
