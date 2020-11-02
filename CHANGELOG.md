@@ -1,4 +1,11 @@
 # Change Log
+
+# Unreleased
+
+## Minor changes
+* Changed default output folder to `PhishBench Output` 
+* Moved log and summary to output folder
+
 # v1.3.0
 
 ## Major changes 

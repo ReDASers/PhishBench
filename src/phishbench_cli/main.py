@@ -177,7 +177,7 @@ def extract_features(extraction_module: ModuleType):
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    pickle_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
+    pickle_dir = os.path.join(phishbench_globals.output_dir, "Features")
 
     if not hasattr(extraction_module, 'extract_features_list'):
         raise ValueError('extraction_module must be an extraction module')
@@ -230,7 +230,7 @@ def get_tfidf_path():
     """
     Gets the path to the tfidf_vectorizer
     """
-    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
+    train_dir = os.path.join(phishbench_globals.output_dir, "Features")
     if phishbench.settings.mode() == 'Email':
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
                     phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
@@ -263,7 +263,7 @@ def load_features_from_disk():
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    train_dir = os.path.join(phishbench_globals.args.output_input_dir, "Features")
+    train_dir = os.path.join(phishbench_globals.output_dir, "Features")
     tfidf_vec = get_tfidf_path()
 
     x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
@@ -299,7 +299,7 @@ def run_classifiers(x_train, y_train, x_test, y_test):
         A list containing the dataset labels
 
     """
-    folder = os.path.join(phishbench_globals.args.output_input_dir, "Classifiers")
+    folder = os.path.join(phishbench_globals.output_dir, "Classifiers")
     print("Training Classifiers")
 
     classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
@@ -323,7 +323,7 @@ def run_phishbench():
 
     # Feature Selection
     if phishbench.settings.feature_selection():
-        ranking_dir = os.path.join(phishbench_globals.args.output_input_dir, "Feature_Ranking")
+        ranking_dir = os.path.join(phishbench_globals.output_dir, "Feature_Ranking")
         if not os.path.exists(ranking_dir):
             os.makedirs(ranking_dir)
         # k: Number of Best features
@@ -345,7 +345,7 @@ def run_phishbench():
 
 def main():
     # execute only if run as a script
-    phishbench_globals.setup_parser()
+    phishbench_globals.parse_args()
     if phishbench_globals.args.version:
         print("PhishBench ", phishbench.__version__)
         sys.exit(0)
