@@ -57,7 +57,8 @@ def setup_logger(filename='phishbench.log'):
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
 
-    file_handler = logging.FileHandler(filename)
+    log_path = os.path.join(output_dir, filename)
+    file_handler = logging.FileHandler(log_path)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
