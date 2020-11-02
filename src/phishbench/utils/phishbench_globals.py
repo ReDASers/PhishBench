@@ -24,7 +24,8 @@ def setup_parser():
     parser.add_argument("--version", help="Display the PhishBench version number and exit", action="store_true")
     parser.add_argument("-f", "--config_file", help="The config file to use", type=str, default='Default_Config.ini')
     parser.add_argument("-v", "--verbose", help="Increase output verbosity", action="store_true")
-    parser.add_argument("-o", "--output_input_dir", help="Output/input directory", type=str, default="Data_Dump")
+    parser.add_argument("-o", "--output_input_dir", help="Output/input directory",
+                        type=str, default="PhishBench Output")
     parser.add_argument("-c", "--ignore_confirmation", help="Do not wait for user's confirmation", action="store_true")
     args = parser.parse_args()
 
