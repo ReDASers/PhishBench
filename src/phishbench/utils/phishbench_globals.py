@@ -4,6 +4,9 @@ This module contains the global configuration for PhishBench
 import argparse
 import configparser
 import logging
+import os
+from io import TextIOBase
+from typing import Optional
 
 # pylint: disable=global-statement
 # pylint: disable=invalid-name
@@ -16,11 +19,12 @@ summary: Optional[TextIOBase] = None
 output_dir = ""
 
 
-def setup_parser():
+def parse_args():
     """
     Sets up the argument parser
     """
     global args
+    global output_dir
     parser = argparse.ArgumentParser(description='PhishBench Basic Experiment Script')
     parser.add_argument("--version", help="Display the PhishBench version number and exit", action="store_true")
     parser.add_argument("-f", "--config_file", help="The config file to use", type=str, default='Default_Config.ini')
