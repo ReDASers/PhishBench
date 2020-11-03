@@ -7,13 +7,14 @@ import joblib
 import pandas as pd
 
 import phishbench
-import phishbench.Feature_Selection as Feature_Selection
 import phishbench.Features_Support as Features_Support
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
 import phishbench.feature_extraction.url as url_extraction
 import phishbench.feature_preprocessing as preprocessing
+import phishbench.feature_preprocessing.feature_selection
+import phishbench.feature_preprocessing.feature_selection.settings
 import phishbench.input as pb_input
 import phishbench.settings
 from phishbench.feature_extraction import settings as extraction_settings
@@ -283,7 +284,7 @@ def load_features_from_disk():
     return x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test
 
 
-def run_classifiers(x_train, y_train, x_test, y_test):
+def run_classifiers(x_train, y_train, x_test, y_test, folder):
     """
     Runs and evaluates the classifiers
 
@@ -298,15 +299,13 @@ def run_classifiers(x_train, y_train, x_test, y_test):
     y_test:
         A list containing the dataset labels
 
+    Returns
+    -------
     """
-    folder = os.path.join(phishbench_globals.output_dir, "Classifiers")
-    print("Training Classifiers")
-
     classifiers = classification.train_classifiers(x_train, y_train, io_dir=folder)
     classifier_performances = evaluation.evaluate_classifiers(classifiers, x_test, y_test)
 
-    print(classifier_performances)
-    classifier_performances.to_csv(os.path.join(folder, "performance.csv"), index=False)
+    return classifier_performances
 
 
 def run_phishbench():
@@ -321,26 +320,35 @@ def run_phishbench():
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_features_from_disk()
 
+    feature_dict = {
+        "Full Features": (x_train, x_test)
+    }
     # Feature Selection
     if phishbench.settings.feature_selection():
-        ranking_dir = os.path.join(phishbench_globals.output_dir, "Feature_Ranking")
-        if not os.path.exists(ranking_dir):
-            os.makedirs(ranking_dir)
-        # k: Number of Best features
-        num_best_features = int(phishbench_globals.config["Feature Selection"]["number of best features"])
-        x_train, selection_model = Feature_Selection.Feature_Ranking(x_train, y_train, num_best_features,
-                                                                     vectorizer, tfidf_vectorizer)
-        # Dump model
-        joblib.dump(selection_model, os.path.join(ranking_dir, "selection.pkl"))
-        joblib.dump(x_train, os.path.join(ranking_dir, "X_train_processed_best_features.pkl"))
-
-        if x_test is not None:
-            x_test = selection_model.transform(x_test)
-            phishbench_globals.logger.info("X_test Shape: %s", x_test.shape)
-            joblib.dump(x_test, os.path.join(ranking_dir, "X_test_processed_best_features.pkl"))
+        if tfidf_vectorizer:
+            feature_names = (vectorizer.get_feature_names()) + (tfidf_vectorizer.get_feature_names())
+        else:
+            feature_names = (vectorizer.get_feature_names())
+        features_select = preprocessing.feature_selection.\
+            run_feature_extraction(x_train, x_test, y_train, feature_names)
+        feature_dict.update(features_select)
 
     if phishbench.settings.classification():
-        run_classifiers(x_train, y_train, x_test, y_test)
+        classification_dir = os.path.join(phishbench_globals.output_dir, "Classifiers")
+        classifier_performances = pd.DataFrame()
+        for method_name, features in feature_dict.items():
+            folder = os.path.join(classification_dir, method_name)
+            method_performances = run_classifiers(features[0], y_train, features[1], y_test, folder)
+            method_performances['Feature Set'] = method_name
+            classifier_performances = classifier_performances.append(method_performances)
+
+        columns: List = classifier_performances.columns.tolist()
+        columns.remove("Feature Set")
+        columns.insert(0, "Feature Set")
+        classifier_performances = classifier_performances.reindex(columns=columns)
+        print(classifier_performances)
+        out_csv = os.path.join(classification_dir, "performance.csv")
+        classifier_performances.to_csv(out_csv, index=False)
 
 
 def main():

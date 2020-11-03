@@ -19,6 +19,7 @@ from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.feature_extraction.email import features as internal_email_features
 from phishbench.feature_extraction.reflection import load_features, FeatureType
 from phishbench.feature_extraction.url import features as internal_url_features
+from phishbench.feature_preprocessing.feature_selection import settings as selection_settings
 
 
 def make_config():
@@ -42,14 +43,8 @@ def make_config():
     # preprocessing_section['abs_scaler']= "True"
     # preprocessing_section['normalize']= "True"
 
-    config["Feature Selection"] = {}
-    feature_selection_section = config["Feature Selection"]
-    feature_selection_section["Number of Best Features"] = "80"
-    feature_selection_section["Recursive Feature Elimination"] = "False"
-    feature_selection_section["Information Gain"] = "True"
-    feature_selection_section["Gini"] = "False"
-    feature_selection_section["Chi-2"] = "False"
-    feature_selection_section["with Tfidf"] = "False"
+    config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
+    config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
     config['Imbalanced Datasets'] = {}
     imbalanced_section = config['Imbalanced Datasets']
