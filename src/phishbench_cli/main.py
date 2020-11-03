@@ -325,8 +325,12 @@ def run_phishbench():
     }
     # Feature Selection
     if phishbench.settings.feature_selection():
-        features_select = preprocessing.feature_selection.run_feature_extraction(x_train, x_test, y_train,
-                                                                                 vectorizer, tfidf_vectorizer)
+        if tfidf_vectorizer:
+            feature_names = (vectorizer.get_feature_names()) + (tfidf_vectorizer.get_feature_names())
+        else:
+            feature_names = (vectorizer.get_feature_names())
+        features_select = preprocessing.feature_selection.\
+            run_feature_extraction(x_train, x_test, y_train, feature_names)
         feature_dict.update(features_select)
 
     if phishbench.settings.classification():
