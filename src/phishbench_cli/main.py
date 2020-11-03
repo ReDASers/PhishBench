@@ -338,7 +338,7 @@ def run_phishbench():
         classifier_performances = pd.DataFrame()
         for method_name, features in feature_dict.items():
             folder = os.path.join(classification_dir, method_name)
-            method_performances = run_classifiers(x_train, y_train, x_test, y_test, folder)
+            method_performances = run_classifiers(features[0], y_train, features[1], y_test, folder)
             method_performances['Feature Set'] = method_name
             classifier_performances = classifier_performances.append(method_performances)
 
