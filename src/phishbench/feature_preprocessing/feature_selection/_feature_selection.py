@@ -36,8 +36,7 @@ def transform_features(selection_model, x_train, x_test, output_dir):
         x_test_selection = selection_model.transform(x_test)
         joblib.dump(x_test_selection, os.path.join(output_dir, "best_features_test.pkl"))
         return [x_train_selection, x_test_selection]
-    else:
-        return [x_train_selection]
+    return [x_train_selection]
 
 
 def run_feature_extraction(x_train, x_test, y_train, feature_names):
