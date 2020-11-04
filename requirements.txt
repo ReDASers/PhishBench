@@ -12,12 +12,12 @@ python_whois==0.7.3
 lxml==4.5.1
 nltk==3.5
 langdetect==1.0.8
-beautifulsoup4==4.9.1
+beautifulsoup4==4.9.3
 dnspython==1.16.0
 DocumentFeatureSelection==1.5
 imbalanced-learn==0.7.0
 scikit_learn==0.23.1
-xgboost==1.1.1
+xgboost==1.2.1
 # Versions required by tensorflow
 numpy==1.18.5
 scipy==1.4.1
