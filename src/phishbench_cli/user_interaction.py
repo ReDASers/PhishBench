@@ -7,6 +7,9 @@ import phishbench.settings
 from phishbench.classification import settings as classification_setings
 from phishbench.input import settings as input_settings
 from phishbench.utils.phishbench_globals import config
+from phishbench import __version__
+from phishbench.feature_preprocessing import feature_selection
+import phishbench.feature_preprocessing.feature_selection.settings
 
 
 def query_yes_no(question, default="yes"):
@@ -52,21 +55,24 @@ def confirmation(ignore_confirmation=False):
     `True` if `ignore_confirmation` is `True` or the user confirms that the settings are correct. `False` otherwise.
     """
 
-    print("\nPhishBench is running in {} mode.\n".format(phishbench.settings.mode()))
+    print(f"\nPhishBench {__version__} is running in {phishbench.settings.mode()} mode.\n")
 
     if phishbench.settings.feature_extraction():
         print("Performing feature extraction with")
         if config["Extraction"].getboolean("training dataset"):
-            print("\tLegitimate Dataset (Training): {}".format(input_settings.train_legit_path()))
-            print("\tPhishing Dataset (Training):: {}".format(input_settings.train_phish_path()))
+            print(f"\tLegitimate Dataset (Training): {input_settings.train_legit_path()}")
+            print(f"\tPhishing Dataset (Training):: {input_settings.train_phish_path()}")
         if config["Extraction"].getboolean("testing dataset"):
-            print("\tLegitimate Dataset (Testing): {}".format(input_settings.test_legit_path()))
-            print("\tPhishing Dataset (Testing): {}".format(input_settings.test_phish_path()))
+            print(f"\tLegitimate Dataset (Testing): {input_settings.test_legit_path()}")
+            print(f"\tPhishing Dataset (Testing): {input_settings.test_phish_path()}")
     else:
         print("Loading features from disk")
 
     if phishbench.settings.feature_selection():
-        print("\nPerforming Feature selection")
+        print("\nPerforming Feature selection with methods:")
+        for method in feature_selection.METHODS:
+            if feature_selection.settings.method_enabled(method):
+                print(f"\t{method}")
 
     if phishbench.settings.classification():
         print("\nRunning classifiers")
