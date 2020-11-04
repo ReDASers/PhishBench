@@ -52,7 +52,7 @@ class TestNetworkFeatures(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
-    @patch('dns.resolver.query')
+    @patch('dns.resolver.resolve')
     def test_dns_ttl(self, dns_mock: MagicMock):
         test_url = mock_objects.get_mock_object('microsoft_urldata')
         dns_mock.return_value = mock_objects.get_mock_object('microsoft_dns_query')
@@ -60,4 +60,4 @@ class TestNetworkFeatures(unittest.TestCase):
         result = network_features.dns_ttl().extract(test_url)
 
         dns_mock.assert_called_once_with('www.microsoft.com', 'A')
-        self.assertEqual(13, result)
+        self.assertEqual(5, result)
