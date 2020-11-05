@@ -9,6 +9,7 @@ PB_SECTION = 'PhishBench'
 DEFAULT_SETTINGS = {
     'Mode': 'URL ; Options are "URL" or "Email"',
     'feature extraction': 'True',
+    'dataset balancing': 'True',
     'feature selection': 'True',
     'classification': 'True'
 }
@@ -31,6 +32,13 @@ def feature_extraction() -> bool:
     Whether or not to extract features
     """
     return phishbench_globals.config[PB_SECTION].getboolean('feature extraction')
+
+
+def dataset_balancing() -> bool:
+    """
+    Whether or not to balance the dataset
+    """
+    return phishbench_globals.config[PB_SECTION].getboolean('dataset balancing')
 
 
 def feature_selection() -> bool:
