@@ -8,7 +8,7 @@ from phishbench.classification import settings as classification_setings
 from phishbench.input import settings as input_settings
 from phishbench.utils.phishbench_globals import config
 from phishbench import __version__
-from phishbench.feature_preprocessing import feature_selection
+from phishbench.feature_preprocessing import feature_selection, sampling
 import phishbench.feature_preprocessing.feature_selection.settings
 
 
@@ -68,16 +68,22 @@ def confirmation(ignore_confirmation=False):
     else:
         print("Loading features from disk")
 
+    if phishbench.settings.dataset_balancing():
+        print("\nBalancing dataset with:")
+        for method in sampling.METHODS:
+            if sampling.settings.method_enabled(method):
+                print(f"\t{method}")
+
     if phishbench.settings.feature_selection():
-        print("\nPerforming Feature selection with methods:")
+        print("\nSelecting features with:")
         for method in feature_selection.METHODS:
             if feature_selection.settings.method_enabled(method):
                 print(f"\t{method}")
 
     if phishbench.settings.classification():
-        print("\nRunning classifiers")
+        print("\nRunning classifiers:")
         classification_section = config[classification_setings.CLASSIFIERS_SECTION]
-        for classifier in classification_section.keys():
+        for classifier in classification_section:
             if classification_section.getboolean(classifier):
                 print(f'\t{classifier}')
     print("\n")
