@@ -6,10 +6,9 @@ This script generates PhishBench configuration files.
 # pylint: disable=missing-function-docstring
 import argparse
 import configparser
-import inspect
 
 import phishbench.classification as classification
-import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.feature_preprocessing.sampling as sampling
 import phishbench.input.settings as input_settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
@@ -22,8 +21,15 @@ from phishbench.feature_extraction.url import features as internal_url_features
 from phishbench.feature_preprocessing.feature_selection import settings as selection_settings
 
 
-def make_config():
-    list_imbalanced_dataset = update_list()
+def make_config() -> configparser.ConfigParser:
+    """
+    Constructs a default config, which can be be written to a file using the `write` function
+
+    Returns
+    =======
+    config
+        A `configparser.ConfigParser` object with default PhishBench settings.
+    """
     config = configparser.ConfigParser()
 
     config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS
@@ -46,11 +52,7 @@ def make_config():
     config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
-    config['Imbalanced Datasets'] = {}
-    imbalanced_section = config['Imbalanced Datasets']
-    imbalanced_section["load_imbalanced_dataset"] = "False"
-    for imbalanced in list_imbalanced_dataset:
-        imbalanced_section[imbalanced] = "True"
+    config[sampling.settings.SAMPLING_SECTION] = sampling.settings.DEFAULT_SAMPLING_SETTINGS
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
@@ -81,17 +83,6 @@ def make_config():
         }
 
     return config
-
-
-def update_list():
-    list_imbalanced_dataset = []
-
-    for member in dir(Imbalanced_Dataset):
-        element = getattr(Imbalanced_Dataset, member)
-        if inspect.isfunction(element):
-            list_imbalanced_dataset.append(member)
-
-    return list_imbalanced_dataset
 
 
 def main():
