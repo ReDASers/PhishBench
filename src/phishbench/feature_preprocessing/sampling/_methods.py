@@ -2,6 +2,8 @@
 Implementations for feature sampling methods
 """
 import imblearn.under_sampling as under_sampling
+import imblearn.over_sampling as over_sampling
+import imblearn.combine as combine
 
 
 def condensed_nearest_neighbor(features, labels):
@@ -54,14 +56,44 @@ def tomek_links(features, labels):
     return sampler.fit_sample(features, labels)
 
 
+def adasyn(features, labels):
+    sampler = over_sampling.ADASYN()
+    return sampler.fit_sample(features, labels)
+
+
+def random_oversampling(features, labels):
+    sampler = over_sampling.RandomOverSampler()
+    return sampler.fit_sample(features, labels)
+
+
+def smote(features, labels):
+    sampler = over_sampling.SMOTE()
+    return sampler.fit_sample(features, labels)
+
+
+def borderline_smote(features, labels):
+    sampler = over_sampling.BorderlineSMOTE()
+    return sampler.fit_sample(features, labels)
+
+
+def smote_enn(features, labels):
+    sampler = combine.SMOTEENN()
+    return sampler.fit_sample(features, labels)
+
+
 METHODS = {
     'condensed nearest neighbor': condensed_nearest_neighbor,
     'edited nearest neighbor': edited_nearest_neighbor,
     'repeated edited nearest neighbor': repeated_edited_nearest_neighbor,
     'all knn': all_knn,
-    'instance_hardness_threshold': instance_hardness_threshold,
+    'instance hardness threshold': instance_hardness_threshold,
     'near miss': near_miss,
-    'neighborhood_cleaning_rule': neighborhood_cleaning_rule,
+    'neighborhood cleaning rule': neighborhood_cleaning_rule,
     'random undersampling': random_undersampling,
-    'tomek_links': tomek_links
+    'tomek links': tomek_links,
+    'adasyn': adasyn,
+    'random oversampling': random_oversampling,
+    'SMOTE': smote,
+    'borderline SMOTE': borderline_smote,
+    'smote and enn': smote_enn
 }
