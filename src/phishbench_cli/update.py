@@ -9,7 +9,7 @@ import configparser
 import inspect
 
 import phishbench.classification as classification
-import phishbench.dataset.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.feature_preprocessing.sampling.Imbalanced_Dataset as Imbalanced_Dataset
 import phishbench.input.settings as input_settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
