@@ -127,7 +127,7 @@ class URLData:
         self.dns_results = {}
         for query_type in DNS_QUERY_TYPES:
             try:
-                answers = resolver.query(lookup_url, query_type)
+                answers = resolver.resolve(lookup_url, query_type)
                 responses = [a.to_text() for a in answers]
                 self.dns_results[query_type] = responses
             except DNSException:

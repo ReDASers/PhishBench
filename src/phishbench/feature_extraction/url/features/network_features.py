@@ -70,7 +70,7 @@ def dns_ttl(url: URLData):
     retry_count = 3
     while retry_count > 0:
         try:
-            dns_complete_info = dns.resolver.query(domain, 'A')
+            dns_complete_info = dns.resolver.resolve(domain, 'A')
             return dns_complete_info.rrset.ttl
         except dns.exception.Timeout:
             retry_count -= 1
