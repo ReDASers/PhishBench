@@ -3,7 +3,7 @@ import imblearn.over_sampling
 import imblearn.under_sampling
 from sklearn.datasets import load_svmlight_file
 
-from ..utils import phishbench_globals
+from ...utils import phishbench_globals
 
 
 ############### imbalanced learning
