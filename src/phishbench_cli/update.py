@@ -21,7 +21,15 @@ from phishbench.feature_extraction.url import features as internal_url_features
 from phishbench.feature_preprocessing.feature_selection import settings as selection_settings
 
 
-def make_config():
+def make_config() -> configparser.ConfigParser:
+    """
+    Constructs a default config, which can be be written to a file using the `write` function
+
+    Returns
+    =======
+    config
+        A `configparser.ConfigParser` object with default PhishBench settings.
+    """
     config = configparser.ConfigParser()
 
     config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS

@@ -17,7 +17,7 @@ DEFAULT_SETTINGS = {
 
 def mode() -> str:
     """
-    Gets the mode PhishBench is in
+    PhishBench's current mode
     """
     mode_str = phishbench_globals.config[PB_SECTION].get('Mode').strip()
     if mode_str.lower().startswith('url'):
