@@ -6,7 +6,6 @@ This script generates PhishBench configuration files.
 # pylint: disable=missing-function-docstring
 import argparse
 import configparser
-import inspect
 
 import phishbench.classification as classification
 import phishbench.feature_preprocessing.sampling as sampling
@@ -23,7 +22,6 @@ from phishbench.feature_preprocessing.feature_selection import settings as selec
 
 
 def make_config():
-    list_imbalanced_dataset = update_list()
     config = configparser.ConfigParser()
 
     config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS
@@ -47,11 +45,6 @@ def make_config():
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
     config[sampling.settings.SAMPLING_SECTION] = sampling.settings.DEFAULT_SAMPLING_SETTINGS
-
-    config['Imbalanced Datasets'] = {}
-    config['Imbalanced Datasets']["load_imbalanced_dataset"] = "False"
-    for imbalanced in list_imbalanced_dataset:
-        config['Imbalanced Datasets'][imbalanced] = "True"
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
@@ -82,17 +75,6 @@ def make_config():
         }
 
     return config
-
-
-def update_list():
-    list_imbalanced_dataset = []
-
-    for member in dir(sampling.Imbalanced_Dataset):
-        element = getattr(sampling.Imbalanced_Dataset, member)
-        if inspect.isfunction(element):
-            list_imbalanced_dataset.append(member)
-
-    return list_imbalanced_dataset
 
 
 def main():
