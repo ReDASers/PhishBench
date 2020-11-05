@@ -9,7 +9,7 @@ import configparser
 import inspect
 
 import phishbench.classification as classification
-import phishbench.feature_preprocessing.sampling.Imbalanced_Dataset as Imbalanced_Dataset
+import phishbench.feature_preprocessing.sampling as sampling
 import phishbench.input.settings as input_settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
@@ -86,8 +86,8 @@ def make_config():
 def update_list():
     list_imbalanced_dataset = []
 
-    for member in dir(Imbalanced_Dataset):
-        element = getattr(Imbalanced_Dataset, member)
+    for member in dir(sampling.Imbalanced_Dataset):
+        element = getattr(sampling.Imbalanced_Dataset, member)
         if inspect.isfunction(element):
             list_imbalanced_dataset.append(member)
 
