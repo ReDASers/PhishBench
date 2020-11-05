@@ -338,9 +338,10 @@ def run_phishbench():
         y_train_dict[balancing_method] = y_train
         # Feature Selection
         if phishbench.settings.feature_selection():
+            output_dir = os.path.join(phishbench_globals.output_dir, "Feature Selection", balancing_method)
             # x_test should be the same no matter the sampling method
             x_train_dict, x_test_dict = preprocessing.feature_selection.\
-                run_feature_extraction(x_train, x_test, y_train, feature_names)
+                run_feature_extraction(x_train, x_test, y_train, feature_names, output_dir)
         else:
             x_train_dict = {
                 'None': x_train

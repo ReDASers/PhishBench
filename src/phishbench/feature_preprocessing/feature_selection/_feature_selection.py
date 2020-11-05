@@ -41,7 +41,7 @@ def transform_features(selection_model, x_train, x_test, output_dir):
     return x_train_selection, None
 
 
-def run_feature_extraction(x_train, x_test, y_train, feature_names):
+def run_feature_extraction(x_train, x_test, y_train, feature_names, output_dir):
     """
     Runs the enabled feature selection algorithms
 
@@ -55,6 +55,8 @@ def run_feature_extraction(x_train, x_test, y_train, feature_names):
         The training set labels
     feature_names
         The names of the features
+    output_dir
+        The folder to output to
 
     Returns
     -------
@@ -73,7 +75,7 @@ def run_feature_extraction(x_train, x_test, y_train, feature_names):
     }
     enabled_methods = {name: f for name, f in METHODS.items() if settings.method_enabled(name)}
     for method_name, method in enabled_methods.items():
-        method_dir = os.path.join(phishbench_globals.output_dir, "Feature Selection", method_name)
+        method_dir = os.path.join(output_dir, method_name)
         if not os.path.exists(method_dir):
             os.makedirs(method_dir)
 
