@@ -61,7 +61,7 @@ def confirmation(ignore_confirmation=False):
         print("Performing feature extraction with")
         if config["Extraction"].getboolean("training dataset"):
             print(f"\tLegitimate Dataset (Training): {input_settings.train_legit_path()}")
-            print(f"\tPhishing Dataset (Training):: {input_settings.train_phish_path()}")
+            print(f"\tPhishing Dataset (Training): {input_settings.train_phish_path()}")
         if config["Extraction"].getboolean("testing dataset"):
             print(f"\tLegitimate Dataset (Testing): {input_settings.test_legit_path()}")
             print(f"\tPhishing Dataset (Testing): {input_settings.test_phish_path()}")
