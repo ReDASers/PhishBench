@@ -328,7 +328,7 @@ def run_phishbench():
         'None': (x_train, y_train)
     }
     if phishbench.settings.dataset_balancing():
-        train_samples.update(preprocessing.sampling.run_sampling(x_train, y_train))
+        train_samples.update(preprocessing.balancing.run_sampling(x_train, y_train))
 
     x_train_dict2 = {}
     x_test_dict2 = {}
