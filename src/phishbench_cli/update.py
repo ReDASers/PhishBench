@@ -46,11 +46,12 @@ def make_config():
     config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
+    config[sampling.settings.SAMPLING_SECTION] = sampling.settings.DEFAULT_SAMPLING_SETTINGS
+
     config['Imbalanced Datasets'] = {}
-    imbalanced_section = config['Imbalanced Datasets']
-    imbalanced_section["load_imbalanced_dataset"] = "False"
+    config['Imbalanced Datasets']["load_imbalanced_dataset"] = "False"
     for imbalanced in list_imbalanced_dataset:
-        imbalanced_section[imbalanced] = "True"
+        config['Imbalanced Datasets'][imbalanced] = "True"
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
