@@ -30,8 +30,9 @@ def run_sampling(x_train, y_train):
         method_dir = os.path.join(phishbench_globals.output_dir, "Sampling", method_name)
         if not os.path.exists(method_dir):
             os.makedirs(method_dir)
-
-        feature_dict[method_name] = method(x_train, y_train)
+        result = method(x_train, y_train)
+        if result is not None:
+            feature_dict[method_name] = result
         joblib.dump(feature_dict[method_name], os.path.join(method_dir, f"{method_name} features.pkl"))
 
     return feature_dict

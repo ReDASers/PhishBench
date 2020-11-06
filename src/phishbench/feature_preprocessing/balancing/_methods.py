@@ -245,7 +245,12 @@ def adasyn(features, labels):
         The labels of the sampled dataset
     """
     sampler = over_sampling.ADASYN()
-    return sampler.fit_sample(features, labels)
+    try:
+        return sampler.fit_sample(features, labels)
+    except RuntimeError as e:
+        # Not any neighbors belong to the majority class
+        print(e)
+        return None
 
 
 def random_oversampling(features, labels):
