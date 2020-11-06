@@ -2,6 +2,9 @@
 
 # Unreleased
 
+## Major changes
+* Refactored dataset balancing methods into the `phishbench.feature_preprocessing.balancing` package.
+
 ## Minor changes
 * Changed default output folder to `PhishBench Output` 
 * Moved log and summary to output folder
