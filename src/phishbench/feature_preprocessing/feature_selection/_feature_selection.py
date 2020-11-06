@@ -8,7 +8,6 @@ import joblib
 
 from . import settings
 from ._methods import METHODS
-from ...utils import phishbench_globals
 
 
 def transform_features(selection_model, x_train, x_test, output_dir):
@@ -27,19 +26,21 @@ def transform_features(selection_model, x_train, x_test, output_dir):
 
     Returns
     -------
-    features:
-        A list [ transformed training features, transformed test features ]
+    x_train_selection:
+        The selected features from x_train
+    x_test_selection:
+        The selected features from x_test. `None` if `x_test` is `None`
     """
     x_train_selection = selection_model.transform(x_train)
     joblib.dump(x_train_selection, os.path.join(output_dir, "best_features_train.pkl"))
     if x_test is not None:
         x_test_selection = selection_model.transform(x_test)
         joblib.dump(x_test_selection, os.path.join(output_dir, "best_features_test.pkl"))
-        return [x_train_selection, x_test_selection]
-    return [x_train_selection]
+        return x_train_selection, x_test_selection
+    return x_train_selection, None
 
 
-def run_feature_extraction(x_train, x_test, y_train, feature_names):
+def run_feature_extraction(x_train, x_test, y_train, feature_names, output_dir):
     """
     Runs the enabled feature selection algorithms
 
@@ -53,18 +54,27 @@ def run_feature_extraction(x_train, x_test, y_train, feature_names):
         The training set labels
     feature_names
         The names of the features
+    output_dir
+        The folder to output to
 
     Returns
     -------
-    feature_dict
-        A dictionary containing the selected features from both the train set and the test set.
+    x_train_dict:
+        A dictionary mapping the method name to the selected features from x_train
+    x_test_dict:
+        A dictionary mapping the method name to the selected features from x_test
     """
     num_features = min(settings.num_features(), x_train.shape[1])
 
-    feature_dict = {}
+    x_train_dict = {
+        'None': x_train
+    }
+    x_test_dict = {
+        'None': x_test
+    }
     enabled_methods = {name: f for name, f in METHODS.items() if settings.method_enabled(name)}
     for method_name, method in enabled_methods.items():
-        method_dir = os.path.join(phishbench_globals.output_dir, "Feature Selection", method_name)
+        method_dir = os.path.join(output_dir, method_name)
         if not os.path.exists(method_dir):
             os.makedirs(method_dir)
 
@@ -81,6 +91,9 @@ def run_feature_extraction(x_train, x_test, y_train, feature_names):
         joblib.dump(selection_model, os.path.join(method_dir, "selection_model.pkl"))
 
         # Transform features
-        feature_dict[method_name] = transform_features(selection_model, x_train, x_test, method_dir)
+        x_train_selection, x_test_selection = transform_features(selection_model, x_train, x_test, method_dir)
+        x_train_dict[method_name] = x_train_selection
+        if x_test_selection is not None:
+            x_test_dict[method_name] = x_test_selection
 
-    return feature_dict
+    return x_train_dict, x_test_dict

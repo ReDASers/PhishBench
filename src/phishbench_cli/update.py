@@ -8,7 +8,7 @@ import argparse
 import configparser
 
 import phishbench.classification as classification
-import phishbench.feature_preprocessing.sampling as sampling
+import phishbench.feature_preprocessing.balancing as balancing
 import phishbench.input.settings as input_settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
@@ -52,7 +52,7 @@ def make_config() -> configparser.ConfigParser:
     config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
-    config[sampling.settings.SAMPLING_SECTION] = sampling.settings.DEFAULT_SAMPLING_SETTINGS
+    config[balancing.settings.SAMPLING_SECTION] = balancing.settings.DEFAULT_SAMPLING_SETTINGS
 
     config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
 
