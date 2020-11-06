@@ -8,7 +8,6 @@ import joblib
 
 from . import settings
 from ._methods import METHODS
-from ...utils import phishbench_globals
 
 
 def transform_features(selection_model, x_train, x_test, output_dir):

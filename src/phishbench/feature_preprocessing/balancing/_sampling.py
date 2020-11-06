@@ -1,3 +1,6 @@
+"""
+Implements dataset balancing
+"""
 import os
 
 import joblib

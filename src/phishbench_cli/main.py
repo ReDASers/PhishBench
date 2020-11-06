@@ -1,3 +1,6 @@
+"""
+The main script for the PhishBench basic experiment
+"""
 import os
 import sys
 from types import ModuleType
@@ -283,6 +286,56 @@ def load_features_from_disk():
     return x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test
 
 
+def get_feature_selection_dicts(train_samples: Dict, x_test, feature_names):
+    """
+    Performs feature selection on the datasets produced by balancing
+
+    Parameters
+    ==========
+
+    train_samples:
+        The training sets produced by each balancing method
+    x_test:
+        The test set features
+    feature_names:
+        The name of the features
+
+    Returns
+    =======
+
+    x_train_dict2:
+        A two-layer dict containing the selected features from the train sets
+        Hierarchy: balancing method -> feature selection method -> features
+    x_test_dict2
+        A two-layer dict containing the selected features the test set
+        Hierarchy: balancing method -> feature selection method -> features
+    y_train_dict:
+        A dict mapping balancing methods to training set labels
+    """
+    x_train_dict2 = {}
+    x_test_dict2 = {}
+    y_train_dict = {}
+    for balancing_method in train_samples:
+        x_train, y_train = train_samples[balancing_method]
+        y_train_dict[balancing_method] = y_train
+        # Feature Selection
+        if phishbench.settings.feature_selection():
+            output_dir = os.path.join(phishbench_globals.output_dir, "Feature Selection", balancing_method)
+            # x_test should be the same no matter the sampling method
+            x_train_dict, x_test_dict = preprocessing.feature_selection. \
+                run_feature_extraction(x_train, x_test, y_train, feature_names, output_dir)
+        else:
+            x_train_dict = {
+                'None': x_train
+            }
+            x_test_dict = {
+                'None': x_test
+            }
+        x_train_dict2[balancing_method] = x_train_dict
+        x_test_dict2[balancing_method] = x_test_dict
+    return x_train_dict2, x_test_dict2, y_train_dict
+
+
 def run_classifiers(x_train, y_train, x_test, y_test, folder):
     """
     Runs and evaluates the classifiers
@@ -311,6 +364,7 @@ def run_phishbench():
     """
     Runs the PhishBench basic experiment
     """
+    # Pylint disable=too-many-locals
     if phishbench.settings.feature_extraction():
         if phishbench.settings.mode() == 'Email':
             x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(email_extraction)
@@ -330,40 +384,16 @@ def run_phishbench():
     if phishbench.settings.dataset_balancing():
         train_samples.update(preprocessing.balancing.run_sampling(x_train, y_train))
 
-    x_train_dict2 = {}
-    x_test_dict2 = {}
-    y_train_dict = {}
-    for balancing_method in train_samples:
-        x_train, y_train = train_samples[balancing_method]
-        y_train_dict[balancing_method] = y_train
-        # Feature Selection
-        if phishbench.settings.feature_selection():
-            output_dir = os.path.join(phishbench_globals.output_dir, "Feature Selection", balancing_method)
-            # x_test should be the same no matter the sampling method
-            x_train_dict, x_test_dict = preprocessing.feature_selection.\
-                run_feature_extraction(x_train, x_test, y_train, feature_names, output_dir)
-        else:
-            x_train_dict = {
-                'None': x_train
-            }
-            x_test_dict = {
-                'None': x_test
-            }
-        x_train_dict2[balancing_method] = x_train_dict
-        x_test_dict2[balancing_method] = x_test_dict
-
-    for key in x_train_dict2:
-        print(key)
-        print(x_train_dict2[key].keys())
+    x_train_dict2, x_test_dict2, y_train_dict = get_feature_selection_dicts(train_samples, x_test, feature_names)
 
     if phishbench.settings.classification():
         classification_dir = os.path.join(phishbench_globals.output_dir, "Classifiers")
         classifier_performances = pd.DataFrame()
-        for balancing_method in x_train_dict2.keys():
+        for balancing_method in x_train_dict2:
             x_train_dict = x_train_dict2[balancing_method]
             x_test_dict = x_test_dict2[balancing_method]
             y_train = y_train_dict[balancing_method]
-            for selection_method in x_train_dict.keys():
+            for selection_method in x_train_dict:
                 x_train = x_train_dict[selection_method]
                 x_test = x_test_dict[selection_method]
                 folder = os.path.join(classification_dir, balancing_method, selection_method)
@@ -384,6 +414,7 @@ def run_phishbench():
 
 
 def main():
+    # pylint: disable=missing-function-docstring
     # execute only if run as a script
     phishbench_globals.parse_args()
     if phishbench_globals.args.version:
