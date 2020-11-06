@@ -33,6 +33,6 @@ def run_sampling(x_train, y_train):
         result = method(x_train, y_train)
         if result is not None:
             feature_dict[method_name] = result
-        joblib.dump(feature_dict[method_name], os.path.join(method_dir, f"{method_name} features.pkl"))
+            joblib.dump(result, os.path.join(method_dir, f"{method_name} features.pkl"))
 
     return feature_dict
