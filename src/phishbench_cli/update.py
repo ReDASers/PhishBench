@@ -8,7 +8,7 @@ import argparse
 import configparser
 
 import phishbench.classification as classification
-import phishbench.feature_preprocessing.balancing as sampling
+import phishbench.feature_preprocessing.balancing as balancing
 import phishbench.input.settings as input_settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
