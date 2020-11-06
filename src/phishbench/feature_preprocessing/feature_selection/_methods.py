@@ -13,7 +13,7 @@ def rfe(x, y, num_features: int):
     """
     Recursive Feature Extraction
     """
-    selection_model = RFE(LinearSVC(), n_features_to_select=num_features, verbose=2, step=0.005)
+    selection_model = RFE(LinearSVC(), n_features_to_select=num_features, step=0.005)
     selection_model.fit(x, y)
     return selection_model, selection_model.ranking_
 
