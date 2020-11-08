@@ -8,14 +8,19 @@ import argparse
 import configparser
 
 import phishbench.classification as classification
-import phishbench.feature_preprocessing.settings as preprocessing_settings
-import phishbench.feature_preprocessing.balancing as balancing
-import phishbench.input.settings as input_settings
+import phishbench.evaluation as evaluation
+import phishbench.evaluation.settings
+import phishbench.feature_extraction as extraction
+import phishbench.feature_extraction.settings
+import phishbench.feature_preprocessing as preprocessing
+import phishbench.feature_preprocessing.balancing
+import phishbench.feature_preprocessing.balancing.settings
+import phishbench.feature_preprocessing.settings
+import phishbench.input as pb_input
+import phishbench.input.settings
 import phishbench.settings
 from phishbench.classification.core import load_classifiers
-from phishbench.evaluation import settings as evaluation_settings
 from phishbench.evaluation.core import load_metrics
-from phishbench.feature_extraction import settings as extraction_settings
 from phishbench.feature_extraction.email import features as internal_email_features
 from phishbench.feature_extraction.reflection import load_features, FeatureType
 from phishbench.feature_extraction.url import features as internal_url_features
@@ -34,7 +39,7 @@ def make_config() -> configparser.ConfigParser:
     config = configparser.ConfigParser()
 
     config[phishbench.settings.PB_SECTION] = phishbench.settings.DEFAULT_SETTINGS
-    config[input_settings.DATASET_PATH_SECTION] = input_settings.DEFAULT_SETTINGS
+    config[pb_input.settings.DATASET_PATH_SECTION] = pb_input.settings.DEFAULT_SETTINGS
 
     config['Extraction'] = {}
     config['Extraction']["Training Dataset"] = "True"
@@ -43,30 +48,30 @@ def make_config() -> configparser.ConfigParser:
     config['Features Export'] = {}
     config['Features Export']['csv'] = "True"
 
-    config[preprocessing_settings.SECTION_NAME] = preprocessing_settings.DEFAULTS
+    config[preprocessing.settings.SECTION_NAME] = preprocessing.settings.DEFAULTS
 
     config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
 
-    config[balancing.settings.SAMPLING_SECTION] = balancing.settings.DEFAULT_SAMPLING_SETTINGS
+    config[preprocessing.balancing.settings.SECTION] = preprocessing.balancing.settings.DEFAULT_SETTINGS
 
-    config[classification.settings.CLASSIFICATION_SECTION] = classification.settings.DEFAULT_SETTINGS
+    config[classification.settings.SECTION] = classification.settings.DEFAULT_SETTINGS
 
     config[classification.settings.CLASSIFIERS_SECTION] = {
         x.__name__: "True" for x in load_classifiers(filter_classifiers=False)
     }
 
-    config[evaluation_settings.EVALUATION_SECTION] = {
+    config[evaluation.settings.SECTION] = {
         x.config_name: "True" for x in load_metrics(filter_metrics=False)
     }
 
     config["Summary"] = {}
     config["Summary"]["Path"] = "summary.txt"
 
-    config[extraction_settings.EMAIL_TYPE_SECTION] = \
-        extraction_settings.EMAIL_TYPE_SETTINGS
+    config[extraction.settings.EMAIL_TYPE_SECTION] = \
+        extraction.settings.EMAIL_TYPE_SETTINGS
 
-    config[extraction_settings.URL_TYPE_SECTION] = extraction_settings.URL_TYPE_SETTINGS
+    config[extraction.settings.URL_TYPE_SECTION] = extraction.settings.URL_TYPE_SETTINGS
 
     internal_features = [internal_email_features, internal_url_features]
     reflection_features = load_features(internal_features=internal_features, filter_features=None)

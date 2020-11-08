@@ -3,7 +3,7 @@ Settings for the classification module
 """
 from ..utils import phishbench_globals
 
-CLASSIFICATION_SECTION = 'Classification'
+SECTION = 'Classification'
 CLASSIFIERS_SECTION = 'Classifiers'
 
 DEFAULT_SETTINGS = {
@@ -19,28 +19,28 @@ def load_models() -> bool:
     """
     Whether or not to load the models from disk
     """
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("load models")
+    return phishbench_globals.config[SECTION].getboolean("load models")
 
 
 def save_models() -> bool:
     """
     Whether or not to save the models to disk
     """
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("save models")
+    return phishbench_globals.config[SECTION].getboolean("save models")
 
 
 def param_search() -> bool:
     """
     Whether or not to perform parameter search
     """
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("param search")
+    return phishbench_globals.config[SECTION].getboolean("param search")
 
 
 def weighted_training() -> bool:
     """
     Whether or not to perform weighted training
     """
-    return phishbench_globals.config[CLASSIFICATION_SECTION].getboolean("weighted")
+    return phishbench_globals.config[SECTION].getboolean("weighted")
 
 
 def is_enabled(classifier: type) -> bool:

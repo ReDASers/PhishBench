@@ -5,9 +5,9 @@ Settings for the sampling class
 from ._methods import METHODS
 from ...utils import phishbench_globals
 
-SAMPLING_SECTION = "Dataset Balancing"
+SECTION = "Dataset Balancing"
 
-DEFAULT_SAMPLING_SETTINGS = {
+DEFAULT_SETTINGS = {
     name: "True" for name in METHODS
 }
 
@@ -21,6 +21,6 @@ def method_enabled(method: str) -> bool:
     method: str
         The name of the method to check
     """
-    if method not in phishbench_globals.config[SAMPLING_SECTION]:
+    if method not in phishbench_globals.config[SECTION]:
         return False
-    return phishbench_globals.config[SAMPLING_SECTION].getboolean(method)
+    return phishbench_globals.config[SECTION].getboolean(method)
