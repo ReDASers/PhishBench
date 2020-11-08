@@ -37,6 +37,8 @@ def process_vectorized_features(x_train, y_train, x_test, feature_names, output_
         A dict mapping balancing methods to training set labels
     """
     if settings.min_max_scaling():
+        x_train = x_train.toarray()
+        x_test = x_test.toarray()
         scaler = MinMaxScaler()
         x_train = scaler.fit_transform(x_train)
         x_test = scaler.transform(x_test)
