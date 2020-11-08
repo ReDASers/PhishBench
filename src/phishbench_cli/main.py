@@ -10,7 +10,6 @@ import joblib
 import pandas as pd
 
 import phishbench
-import phishbench.Features_Support as Features_Support
 import phishbench.classification as classification
 import phishbench.evaluation as evaluation
 import phishbench.feature_extraction.email as email_extraction
