@@ -8,6 +8,7 @@ import argparse
 import configparser
 
 import phishbench.classification as classification
+import phishbench.feature_preprocessing.settings as preprocessing_settings
 import phishbench.feature_preprocessing.balancing as balancing
 import phishbench.input.settings as input_settings
 import phishbench.settings
@@ -42,12 +43,7 @@ def make_config() -> configparser.ConfigParser:
     config['Features Export'] = {}
     config['Features Export']['csv'] = "True"
 
-    config['Preprocessing'] = {}
-    preprocessing_section = config['Preprocessing']
-    # preprocessing_section['mean_scaling']= "True"
-    preprocessing_section['min_max_scaling'] = "True"
-    # preprocessing_section['abs_scaler']= "True"
-    # preprocessing_section['normalize']= "True"
+    config[preprocessing_settings.SECTION_NAME] = preprocessing_settings.DEFAULTS
 
     config[selection_settings.FEATURE_SELECTION_SECTION] = selection_settings.DEFAULT_FEATURE_SELECTION_SETTINGS
     config[selection_settings.SELECTION_METHODS_SECTION] = selection_settings.DEFAULT_METHODS_SETTINGS
