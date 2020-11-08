@@ -12,7 +12,7 @@ class MetricType(Enum):
 class Metric:
     """
     A type hint stub for metrics
-    """ 
+    """
     config_name: str
     metric_type: MetricType
 

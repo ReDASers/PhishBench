@@ -8,4 +8,3 @@ class EmailMessage:
         self.raw_message = msg
         self.body: EmailBody = EmailBody(msg)
         self.header: EmailHeader = EmailHeader(msg)
-
