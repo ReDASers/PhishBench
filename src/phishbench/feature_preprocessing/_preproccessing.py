@@ -14,11 +14,11 @@ def process_vectorized_features(x_train, y_train, x_test, feature_names, output_
     Parameters
     ==========
     x_train:
-        A numpy array containing the vectorized training set features
+        A scipy sparse array containing the vectorized training set features
     y_train:
         A numpy array containing the vectorized training set labels
     x_test:
-        A numpy array containing the test set features
+        A scipy sparse array containing the test set features
     feature_names:
         The names of the vectorized features
     output_dir:
@@ -46,8 +46,11 @@ def process_vectorized_features(x_train, y_train, x_test, feature_names, output_
     train_samples = {
         'None': (x_train, y_train)
     }
+    sampling_dir = os.path.join(output_dir, "Sampling")
+    if not os.path.isdir(sampling_dir):
+        os.mkdir(sampling_dir)
     if settings.dataset_balancing():
-        train_samples.update(balancing.run_sampling(x_train, y_train))
+        train_samples.update(balancing.run_sampling(x_train, y_train, sampling_dir))
 
     x_train_dict2 = {}
     x_test_dict2 = {}
