@@ -116,6 +116,4 @@ summary.txt
 .idea/
 .PhishBench Output/
 
-tests/integration tests/url_extraction/Data_Dump/
-tests/integration tests/url_extraction/phishbench.log
-tests/integration tests/url_extraction/summary.txt
+tests/integration tests/*/PhishBench Output/
