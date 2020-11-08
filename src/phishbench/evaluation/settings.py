@@ -1,3 +1,6 @@
+"""
+Settings for the evaluation module
+"""
 from ..utils import phishbench_globals
 
 SECTION = 'Evaluation Metrics'
