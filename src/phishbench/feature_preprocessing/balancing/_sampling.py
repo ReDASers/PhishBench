@@ -7,7 +7,6 @@ import joblib
 
 from . import settings
 from ._methods import METHODS
-from ...utils import phishbench_globals
 
 
 def run_sampling(x_train, y_train, output_dir):
