@@ -90,7 +90,7 @@ def extract_train_features(pickle_dir: str,
         out_path = os.path.join(pickle_dir, 'train_features.csv')
         export_features_to_csv(feature_list_dict_train, y_train, out_path)
 
-    # Tranform the list of dictionaries into a sparse matrix
+    # Transform the list of dictionaries into a sparse matrix
     vectorizer = preprocessing.Vectorizer()
     x_train = vectorizer.fit_transform(feature_list_dict_train)
 
