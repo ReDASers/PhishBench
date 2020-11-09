@@ -104,7 +104,7 @@ jobs:
       working-directory: tests/integration tests/website_tfidf
 
     - name: Email 1-Step test
-      run: phishbench -f Test_A.ini -c
+      run: phishbench -f Test.ini -c
       working-directory: tests/integration tests/email_one_step
 
     - name: Email 2-Step test
