@@ -5,6 +5,7 @@ from typing import List, Dict
 
 import numpy as np
 import scipy.sparse
+from tqdm import tqdm
 
 from ..utils import phishbench_globals
 
@@ -18,7 +19,7 @@ def clean_features(feature_values: List[Dict]):
         The extracted features to clean
     """
     phishbench_globals.logger.debug('Cleaning')
-    for feature_dict in feature_values:
+    for feature_dict in tqdm(feature_values):
         for key, value in feature_dict.items():
             if isinstance(value, np.ndarray) or scipy.sparse.issparse(value):
                 continue
