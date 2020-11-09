@@ -94,8 +94,6 @@ def extract_train_features(pickle_dir: str,
     vectorizer = preprocessing.Vectorizer()
     x_train = vectorizer.fit_transform(feature_list_dict_train)
 
-    joblib.dump(x_train, os.path.join(pickle_dir, "X_train_unprocessed.pkl"))
-
     return x_train, y_train, vectorizer
 
 
