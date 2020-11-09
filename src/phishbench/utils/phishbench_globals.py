@@ -18,6 +18,7 @@ logger: logging.Logger = logging.getLogger('root')
 summary: Optional[TextIOBase] = None
 output_dir = ""
 
+
 def parse_args():
     """
     Sets up the argument parser
