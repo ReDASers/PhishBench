@@ -1,0 +1,1213 @@
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ dnchubcas2.dnc.org ([::1]) with mapi id 14.03.0224.002; Mon, 16 May 2016
+ 17:20:30 -0400
+From: "Reif, Eric" <ReifE@dnc.org>
+To: "Freundlich, Christina" <FreundlichC@dnc.org>, "Lykins, Tyler"
+	<LykinsT@dnc.org>, EMail-Vetting_D <EMail-Vetting_D@dnc.org>
+Subject: Re: For approval: coordinated campaign volunteer recruitment emails
+Thread-Topic: For approval: coordinated campaign volunteer recruitment emails
+Thread-Index: AQHRr7Sn049R9R6KbUmM0uwmVSI+fp+8CmgAgAAGcjCAAAFDAA==
+Date: Mon, 16 May 2016 14:20:29 -0700
+Message-ID: <D35FB125.82483%reife@dnc.org>
+References: <D35F9C77.823B4%reife@dnc.org>
+ <43E561D4C6A49F49A0F418A69CF41BE26EA2AD8F@dncdag1.dnc.org>
+ <AAEA4E36C4D7A2449432CA66AA1738995461C769@dncdag1.dnc.org>
+In-Reply-To: <AAEA4E36C4D7A2449432CA66AA1738995461C769@dncdag1.dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: dnchubcas2.dnc.org
+X-MS-Has-Attach:
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative; boundary="_000_D35FB12582483reifedncorg_"
+MIME-Version: 1.0
+
+--_000_D35FB12582483reifedncorg_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Ours have also been [State] Victory [Year] in previous cycles. But this is =
+the naming/branding that all of the coordinated campaigns have agreed to an=
+d started to use.
+
+From: "Freundlich, Christina" <FreundlichC@dnc.org<mailto:FreundlichC@dnc.o=
+rg>>
+Date: Monday, May 16, 2016 at 5:16 PM
+To: "Lykins, Tyler" <LykinsT@dnc.org<mailto:LykinsT@dnc.org>>, Eric Reif <r=
+eife@dnc.org<mailto:reife@dnc.org>>, EMail-Vetting_D <EMail-Vetting_D@dnc.o=
+rg<mailto:EMail-Vetting_D@dnc.org>>
+Subject: RE: For approval: coordinated campaign volunteer recruitment email=
+s
+
+Curious, where did the =93Victory 2016=94 branding come from?
+
+That is what Republicans have called their coordinated campaigns in years p=
+ast.
+
+From: Lykins, Tyler
+Sent: Monday, May 16, 2016 5:08 PM
+To: Reif, Eric; EMail-Vetting_D
+Subject: RE: For approval: coordinated campaign volunteer recruitment email=
+s
+
+Great
+
+From: Reif, Eric
+Sent: Monday, May 16, 2016 4:51 PM
+To: EMail-Vetting_D
+Subject: For approval: coordinated campaign volunteer recruitment emails
+
+Hi all =97 This week, we=92re going to start supporting volunteer recruitme=
+nt for battleground state coordinated campaigns. Below are a few templates =
+that we=92ll use for :
+
+  *   General volunteer recruitment
+  *   Canvasses and phone banks
+  *   Office openings
+  *   Internship/Fellowship recruitment
+Each send using these template will link to pages on a new Victory 2016 sit=
+e we are building for the coordinated campaigns (e.g. http://victory2016.de=
+mocrats.org/page/s/volunteer-to-elect-florida-democrats) unless otherwise c=
+leared with legal.
+
+Please let me know if there are any questions or edits with these.
+
+Thanks,
+Eric
+
+=3D=3D General volunteer recruitment =3D=3D
+
+=97v1(SK)=97
+Sender: State Directors
+Subject:
+
+
+It=92s pretty simple, NAME(really): The more people vote, the more Democrat=
+s win elections.
+
+So between this moment and November 8th, our top priority is to make sure w=
+e knock on every door in communities all across STATE to make sure our neig=
+hbors know about every race on the ballot, are registered to vote, and are =
+ready to get out and support Democrats. <LINK>NAME, can you help?<LINK>
+
+Up and down the ballot, we can beat Republicans and elect Democrats if we w=
+ork together -- <LINK>so I=92m asking you to make a commitment and voluntee=
+r to help us keep STATE and our country moving forward.</LINK>
+
+Sign up today, and a member of our State Victory Team will touch base and l=
+et you know how you can start making a difference:
+
+LINK
+
+We=92re glad you=92re on the team, NAME!
+
+STATE DIRECTOR
+
+=97 v2 =97
+Sender: State Directors
+Subject:
+
+Friend =97
+
+Something really special is happening right here in STATE.
+
+All across our state, folks like you are coming together to make phone call=
+s, knock on doors, and talk to their neighbors about just how important it =
+is for us to elect Democrats in November.
+
+The work that we're doing right now is how we'll win on Election Day -- and=
+ NAME(because this is so important), I think you should be a part of it.
+Sign up to volunteer for Democrats today, and an organizer will get in touc=
+h to let you know how you can make a difference:
+
+LINK
+
+Thanks so much.
+
+STATE DIRECTOR
+
+=3D=3D Canvass/Phone bank =3D=3D
+
+=97vX(SK)=97
+Sender: STATE FD/FO
+Subject:
+
+Friend --
+
+Our right to vote is one of the most important duties and liberties we have=
+ as Americans -- so whenever we get the chance to help our neighbors here i=
+n STATE make their voices heard, we need to take advantage of it.
+
+And we really need to make the most out of every hour in every day if we=92=
+re going to reach every potential supporter. So we=92re looking for folks l=
+ike you from all across STATE to come out and help us reach every potential=
+ supporter so we can beat Republicans up and down the ballot.
+
+So, NAME, add your name to sign up for a canvassing/phone banking shift in =
+your neighborhood this weekend:
+
+LINK
+
+[ALT FOR SPECIFIC EVENTS: We=92re hosting a State Victory 2016 canvass/phon=
+e bank in your neighborhood.
+
+<LINK>Can you make it? Here are the details:</LINK>
+
+EVENT BLOCK
+
+]
+
+Thanks for standing with STATE Democrats!
+
+STATE FD/FO
+
+=97v2(EJB)--
+Sender: STATE FD/FO
+Subject:
+
+Friend =97
+
+Committed Democrats like you understand that every election is important, b=
+ut this November, the stakes are as high as they=92ve ever been.
+
+STATE Democrats like you are going to be such an important part of the work=
+ we do over the next six months. NAME, we=92re counting on folks like you t=
+o come together to make phone calls, knock on doors, and talk to their neig=
+hbors about just how important it is for us stand together and elect Democr=
+ats in November.
+
+<LINK>Can you join us to phone bank/canvass in CITY on DATE?</LINK>
+
+Here are the details?
+
+EVENT BLOCK
+
+We=92ve seen STATE do it before, and this time, we need to dig even deeper =
+and work even harder this year =97 and I hope you=92ll be part of it.
+
+So sign up today to join us in CITY on DATE:
+
+LINK
+
+It=92s going to take each and every one of us coming together to win this N=
+ovember, and our work starts right now. Thanks so much doing your part, NAM=
+E.
+
+STATE FD/FO
+
+=3D=3D office opening =3D=3D
+
+=97v1(RAE)=97
+Sender: STATE RFD
+Subject:
+
+Friend =96
+
+I=92m so excited to announce that STATE Victory 2016 =97 our state=92s offi=
+cial campaign to elect Democrats up and down the ticket in November =97 is =
+setting up shop in your area!
+
+<LINK>We=92re holding an official opening event for our new office in CITY =
+at TIME on DATE. Can you join us?</LINK>
+
+Here are the details:
+
+EVENT BLOCK
+
+Our office will be open to all the great grassroots supporters like you who=
+ are ready to make phone calls, knock on doors, and make connections with f=
+olks in your community so they are just as fired up and ready as you are to=
+ put Democrats in Congress and the White House this year.
+
+So let us know you=92ll join us at our new city office to meet the STATE Vi=
+ctory 2016 team members who=92ll be fighting with you!
+
+LINK
+
+We can=92t wait to meet you in person, NAME(STATE Democrat).
+
+STATE RFD
+
+
+=3D=3D fellow/intern recruitment =3D=3D
+=97v1=97
+Sender: STATE ORGANIZING DIRECTOR
+Subject:
+
+Hey there, NAME =97
+
+It=92s an exciting time to be a STATE Democrat! With Donald Trump at the to=
+p of the Republican ticket, we=92ve got a great opportunity to turn/keep ou=
+r state blue and elect Democrats up and down the ticket in November.
+
+But it=92s going to take a lot of hard work to get there. So we=92re lookin=
+g for energetic, hardworking folks to join STATE Victory 2016 =97 the offic=
+ial campaign to support every Democratic candidate in 2016 =97 as Summer Or=
+ganizing Fellow/Interns.
+
+<link>If that sounds like you, click here to learn more and apply today!</l=
+ink>
+
+Know someone who might be a good fit? Forward this email and encourage them=
+ to apply before DEADLINE:
+
+LINK
+
+Thanks for everything you=92re doing to support Democrats.
+
+STATE ORGANIZING DIRECTOR
+
+--_000_D35FB12582483reifedncorg_
+Content-Type: text/html; charset="Windows-1252"
+Content-ID: <8717D5137C5FF44F93E55FF803E6F6DE@dnc.org>
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+</head>
+<body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-lin=
+e-break: after-white-space; color: rgb(0, 0, 0); font-size: 14px; font-fami=
+ly: Calibri, sans-serif;">
+<div>Ours have also been [State] Victory [Year] in previous cycles. But thi=
+s is the naming/branding that all of the coordinated campaigns have agreed =
+to and started to use.&nbsp;</div>
+<div><br>
+</div>
+<span id=3D"OLK_SRC_BODY_SECTION">
+<div style=3D"font-family:Calibri; font-size:11pt; text-align:left; color:b=
+lack; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM:=
+ 0in; PADDING-LEFT: 0in; PADDING-RIGHT: 0in; BORDER-TOP: #b5c4df 1pt solid;=
+ BORDER-RIGHT: medium none; PADDING-TOP: 3pt">
+<span style=3D"font-weight:bold">From: </span>&quot;Freundlich, Christina&q=
+uot; &lt;<a href=3D"mailto:FreundlichC@dnc.org">FreundlichC@dnc.org</a>&gt;=
+<br>
+<span style=3D"font-weight:bold">Date: </span>Monday, May 16, 2016 at 5:16 =
+PM<br>
+<span style=3D"font-weight:bold">To: </span>&quot;Lykins, Tyler&quot; &lt;<=
+a href=3D"mailto:LykinsT@dnc.org">LykinsT@dnc.org</a>&gt;, Eric Reif &lt;<a=
+ href=3D"mailto:reife@dnc.org">reife@dnc.org</a>&gt;, EMail-Vetting_D &lt;<=
+a href=3D"mailto:EMail-Vetting_D@dnc.org">EMail-Vetting_D@dnc.org</a>&gt;<b=
+r>
+<span style=3D"font-weight:bold">Subject: </span>RE: For approval: coordina=
+ted campaign volunteer recruitment emails<br>
+</div>
+<div><br>
+</div>
+<div xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micro=
+soft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" x=
+mlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:/=
+/www.w3.org/TR/REC-html40">
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-priority:99;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.EmailStyle17
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+/* List Definitions */
+@list l0
+	{mso-list-id:1423069136;
+	mso-list-template-ids:798512782;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l0:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level7
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level8
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level9
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l1
+	{mso-list-id:1442609474;
+	mso-list-template-ids:1420990174;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level7
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level8
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level9
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+<div lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);">Curious, where did the =93Victory 2=
+016=94 branding come from?<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);">That is what Republicans have calle=
+d their coordinated campaigns in years past. &nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size: 10pt; font-family: Taho=
+ma, sans-serif;">From:</span></b><span style=3D"font-size: 10pt; font-famil=
+y: Tahoma, sans-serif;"> Lykins, Tyler
+<br>
+<b>Sent:</b> Monday, May 16, 2016 5:08 PM<br>
+<b>To:</b> Reif, Eric; EMail-Vetting_D<br>
+<b>Subject:</b> RE: For approval: coordinated campaign volunteer recruitmen=
+t emails<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);">Great
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 11pt; font-family: Calibri=
+, sans-serif; color: rgb(31, 73, 125);"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size: 10pt; font-family: Taho=
+ma, sans-serif;">From:</span></b><span style=3D"font-size: 10pt; font-famil=
+y: Tahoma, sans-serif;"> Reif, Eric
+<br>
+<b>Sent:</b> Monday, May 16, 2016 4:51 PM<br>
+<b>To:</b> EMail-Vetting_D<br>
+<b>Subject:</b> For approval: coordinated campaign volunteer recruitment em=
+ails<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Hi all =97 This week, we=92re going to start=
+ supporting volunteer recruitment for battleground state coordinated campai=
+gns. Below are a few templates that we=92ll
+ use for :<o:p></o:p></span></p>
+</div>
+<ul type=3D"disc">
+<li class=3D"MsoNormal" style=3D"color:black;mso-margin-top-alt:auto;mso-ma=
+rgin-bottom-alt:auto;mso-list:l0 level1 lfo3">
+<span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif;">Genera=
+l volunteer recruitment<o:p></o:p></span></li><li class=3D"MsoNormal" style=
+=3D"color:black;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-list=
+:l0 level1 lfo3">
+<span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif;">Canvas=
+ses and phone banks<o:p></o:p></span></li><li class=3D"MsoNormal" style=3D"=
+color:black;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-list:l0 =
+level1 lfo3">
+<span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif;">Office=
+ openings<o:p></o:p></span></li><li class=3D"MsoNormal" style=3D"color:blac=
+k;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-list:l0 level1 lfo=
+3">
+<span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif;">Intern=
+ship/Fellowship recruitment<o:p></o:p></span></li></ul>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Each send using these template will link to =
+pages on a new Victory 2016 site we are building for the coordinated campai=
+gns (e.g.&nbsp;<a href=3D"http://victory2016.democrats.org/page/s/volunteer=
+-to-elect-florida-democrats">http://victory2016.democrats.org/page/s/volunt=
+eer-to-elect-florida-democrats</a>)
+ unless otherwise cleared with legal.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Please let me know if there are any question=
+s or edits with these.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: rgb(31, 73, 125);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif; =
+color: black;"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Thanks,<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Eric<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=3D=3D General volunteer recruitment =3D=3D&=
+nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=97v1(SK)=97<o:p></o:p></span></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Sender: State Directors<o:p></o:p></span></p=
+>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Subject:&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">It=92s pretty simple, NAME(really): The more=
+ people vote, the more Democrats win elections.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">So between this moment and November 8th, our=
+ top priority is to make sure we knock on every door in communities all acr=
+oss STATE to make sure our neighbors
+ know about every race on the ballot, are registered to vote, and are ready=
+ to get out and support Democrats. &lt;LINK&gt;NAME, can you help?&lt;LINK&=
+gt;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Up and down the ballot, we can beat Republic=
+ans and elect Democrats if we work together -- &lt;LINK&gt;so I=92m asking =
+you to make a commitment and volunteer to help
+ us keep STATE and our country moving forward.&lt;/LINK&gt;&nbsp;<o:p></o:p=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Sign up today, and a member of our State Vic=
+tory Team will touch base and let you know how you can start making a diffe=
+rence:<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">LINK<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">We=92re glad you=92re on the team, NAME!<o:p=
+></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">STATE DIRECTOR<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=97 v2 =97&nbsp;<o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Sender: State Directors<o:p></o:p></span></p=
+>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Subject:<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Friend =97&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Something really special is happening right =
+here in STATE.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">All across our state, folks like you are com=
+ing together to make phone calls, knock on doors, and talk to their neighbo=
+rs about just how important it is for
+ us to elect Democrats in November.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">The work that we're doing right now is how w=
+e'll win on Election Day -- and NAME(because this is so important), I think=
+ you should be a part of it.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Sign up to volunteer for Democrats today, an=
+d an organizer will get in touch to let you know how you can make a differe=
+nce:&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">LINK<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Thanks so much.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">STATE DIRECTOR<o:p></o:p></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=3D=3D Canvass/Phone bank =3D=3D&nbsp;<o:p><=
+/o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=97vX(SK)=97<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Sender: STATE FD/FO<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Subject:<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Friend --<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Our right to vote is one of the most importa=
+nt duties and liberties we have as Americans -- so whenever we get the chan=
+ce to help our neighbors here in STATE
+ make their voices heard, we need to take advantage of it.<o:p></o:p></span=
+></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">And we really need to make the most out of e=
+very hour in every day if we=92re going to reach every potential supporter.=
+ So we=92re looking for folks like you from
+ all across STATE to come out and help us reach every potential supporter s=
+o we can beat Republicans up and down the ballot.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">So, NAME, add your name to sign up for a can=
+vassing/phone banking shift in your neighborhood this weekend:<o:p></o:p></=
+span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">LINK<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">[ALT FOR SPECIFIC EVENTS: We=92re hosting a =
+State Victory 2016 canvass/phone bank in your neighborhood.<o:p></o:p></spa=
+n></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">&lt;LINK&gt;Can you make it? Here are the de=
+tails:&lt;/LINK&gt;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">EVENT BLOCK<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">]<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Thanks for standing with STATE Democrats!<o:=
+p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">STATE FD/FO<o:p></o:p></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: rgb(69, 69, 69);">=97v2(EJB)--</span><span style=3D"font-size: 10.5pt; =
+font-family: Calibri, sans-serif; color: black;"><o:p></o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: rgb(69, 69, 69);">Sender: STATE FD/FO<o:p></o:p></sp=
+an></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: rgb(69, 69, 69);">Subject:<o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Friend&nbsp;=97&nbsp;</span><span style=3D"color:black"><o:p></=
+o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Committed Democrats like you understand that&nbsp;<i>every</i>&=
+nbsp;election is important, but this November, the stakes are as high as th=
+ey=92ve ever been.</span><span style=3D"font-size: 10.5pt; font-family: Cal=
+ibri, sans-serif; color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">STATE Democrats like you are going to be such an important part=
+ of the work we do over the next six months. NAME, we=92re counting on&nbsp=
+;folks like you to come together to make phone
+ calls, knock on doors, and talk to their neighbors about just how importan=
+t it is for us stand together and elect Democrats in November.&nbsp;</span>=
+<span style=3D"font-size: 10.5pt; font-family: Calibri, sans-serif; color: =
+black;"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">&lt;LINK&gt;Can you join us to phone bank/ca=
+nvass in CITY on DATE?&lt;/LINK&gt;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">Here are the details?<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">EVENT BLOCK<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">We=92ve seen STATE do it before, and this time, we need to dig =
+even deeper and work even harder this year&nbsp;=97 and&nbsp;I hope you=92l=
+l be part of it.&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">So sign up today to join us in CITY on DATE:<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size: 13.5pt; font-family: Calib=
+ri, sans-serif; color: black;">&nbsp;</span><span style=3D"font-family: Cal=
+ibri, sans-serif; color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">LINK<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">It=92s going to take each and every one of us coming together t=
+o win this November, and our work starts right now.&nbsp;Thanks so much doi=
+ng your part, NAME.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">STATE FD/FO&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;">=3D=3D office opening =3D=3D&nbsp;<o:p></o:p=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size: 10.5pt; font-family: Calib=
+ri, sans-serif; color: black;"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">=97v1(RAE)=97</span><span style=3D"font-family: Cambria, serif;=
+ color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Sender: STATE RFD</span><span style=3D"font-family: Cambria, se=
+rif; color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Subject:</span><span style=3D"font-family: Cambria, serif; colo=
+r: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Friend =96</span><span style=3D"font-family: Cambria, serif; co=
+lor: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">I=92m so excited to anno=
+unce that STATE Victory 2016 =97 our state=92s official campaign to elect D=
+emocrats up and down the ticket in November =97 is setting up shop in your =
+area!<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&lt;LINK&gt;We=92re holding an official opening event for our n=
+ew office in CITY at TIME on DATE. Can you join us?&lt;/LINK&gt;</span><spa=
+n style=3D"font-family: Cambria, serif; color: black;"><o:p></o:p></span></=
+p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Here are the details:</span><span style=3D"font-family: Cambria=
+, serif; color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">EVENT BLOCK</span><span style=3D"font-family: Cambria, serif; c=
+olor: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">Our office will be open to all the great grassroots supporters =
+like you who are ready to make phone calls, knock on doors, and make connec=
+tions with folks in your community so
+ they are just as fired up and ready as you are to put Democrats in Congres=
+s and the White House this year.</span><span style=3D"font-family: Cambria,=
+ serif; color: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">So let us know you=92ll join us at our new city office to meet =
+the STATE Victory 2016 team members who=92ll be fighting with you!</span><s=
+pan style=3D"font-family: Cambria, serif; color: black;"><o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Cambria, serif; color: b=
+lack;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">LINK</span><span style=3D"font-family: Cambria, serif; color: b=
+lack;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">We can=92t wait to meet you in person, NAME(STATE Democrat).</s=
+pan><span style=3D"font-family: Cambria, serif; color: black;"><o:p></o:p><=
+/span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">&nbsp;</span><span style=3D"font-family: Cambria, serif; color:=
+ black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Calibri, sans-serif; col=
+or: black;">STATE RFD</span><span style=3D"font-family: Cambria, serif; col=
+or: black;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Cambria, serif; color: b=
+lack;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family: Cambria, serif; color: b=
+lack;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">=3D=3D fellow/intern rec=
+ruitment =3D=3D&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">=97v1=97&nbsp;<o:p></o:p=
+></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">Sender: STATE ORGANIZING=
+ DIRECTOR<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">Subject:&nbsp;<o:p></o:p=
+></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">Hey there, NAME =97&nbsp=
+;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">It=92s an exciting time =
+to be a STATE Democrat! With Donald Trump at the top of the Republican tick=
+et, we=92ve got a great opportunity to turn/keep our state blue and elect D=
+emocrats up and down the ticket in November.&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">But it=92s going to take=
+ a lot of hard work to get there. So we=92re looking for energetic, hardwor=
+king folks to join STATE Victory 2016 =97 the official campaign to support =
+every Democratic candidate in 2016 =97 as Summer
+ Organizing Fellow/Interns.&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">&lt;link&gt;If that soun=
+ds like you, click here to learn more and apply today!&lt;/link&gt;<o:p></o=
+:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">Know someone who might b=
+e a good fit? Forward this email and encourage them to apply before DEADLIN=
+E:<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">LINK<o:p></o:p></span></=
+p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">Thanks for everything yo=
+u=92re doing to support Democrats.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:black"><o:p>&nbsp;</o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:black">STATE ORGANIZING DIRECTO=
+R<o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</div>
+</span>
+</body>
+</html>
+
+--_000_D35FB12582483reifedncorg_--

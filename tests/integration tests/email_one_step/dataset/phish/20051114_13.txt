@@ -1,0 +1,182 @@
+ nobody@zim.zimpromotions.com  Sun Jun 19 11:18:29 2005
+Return-Path: <nobody@zim.zimpromotions.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id 90B32536E25
+	for <username@login.domain.com>; Sun, 19 Jun 2005 11:18:29 -0400 (EDT)
+Received: from zim.zimpromotions.com (freshzive.net [67.18.167.138])
+	by mail1.domain.com (Postfix) with ESMTP id 4FA1585A90A
+	for <username@domain.com>; Sun, 19 Jun 2005 11:18:29 -0400 (EDT)
+Received: from nobody by zim.zimpromotions.com with local (Exim 4.51)
+	id 1Dk1Z3-0005gi-IQ
+	for username@domain.com; Sun, 19 Jun 2005 10:18:25 -0500
+To: username@domain.com
+Subject: System maintenance: update your Federal Credit Union
+From: NCUA <acc-validity@ncua.gov>
+Reply-To: no-reply@ncua.gov
+MIME-Version: 1.0
+Content-Type: text/html
+Content-Transfer-Encoding: 8bit
+Message-Id: <E1Dk1Z3-0005gi-IQ@zim.zimpromotions.com>
+Date: Sun, 19 Jun 2005 10:18:25 -0500
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - zim.zimpromotions.com
+X-AntiAbuse: Original Domain - domain.com
+X-AntiAbuse: Originator/Caller UID/GID - [99 99] / [47 12]
+X-AntiAbuse: Sender Address Domain - zim.zimpromotions.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+X-UID: 14
+
+<HTML>
+<HEAD>
+<META content="MSHTML 6.00.2900.2627" name=GENERATOR></HEAD>
+<BODY vLink=#ff0000 aLink=#0000ff link=#ff0000 bgColor=#ffffff leftMargin=0
+topMargin=0 marginwidth="0" marginheight="0">
+<table
+background="http://www.ncua.gov/images/prop/bannerStabwide2.jpg"
+border=0 cellpadding=0 cellspacing=0 width="600" align="left">
+  <TR>
+    <TD vAlign=top width="18%">
+  <TR>
+    <TD><A href="http://www.ncua.gov/index.html"><IMG height=98
+      alt="NCUA Seal" src="http://www.ncua.gov/images/prop/blueseal98.gif" width=100
+      align=left border=0></A></TD>
+    <TD width="550">
+      <H2>National Credit Union Administration </H2></TD></TR>
+  <TR class=Outline>
+    <TD colSpan=2>
+      <DIV class=OutlineArea align=right><A name=TopBar></A><A
+      href="http://www.ncua.gov/#SiteNavigation"><IMG height=8
+      alt="Skip to Site Navigation" src="primapaginafcu_files/invisible.gif"
+      width=8 border=0></A><A href="http://www.ncua.gov/#PageNavigation"><IMG
+      height=8 alt="Skip to Page Navigation" 
+      src="primapaginafcu_files/invisible.gif" width=8 border=0></A>
+      <A href="http://www.ncua.gov/CreditUnionResources/index.htm">Resources for
+      Credit Unions </A>| <A 
+      href="http://www.ncua.gov/ConsumerInformation/index.htm">Resources for 
+      Consumers</A> | <A href="http://www.ncua.gov/indexnews.html">News </A>| <A 
+      href="http://search.ncua.gov/">Search</A></DIV></TD></TR></TBODY></TABLE>
+      <br clear="all">
+      <hr width="600" style="height: 1px" color="#00000" align="left">
+      <TABLE cellSpacing=0 cellPadding=0 width=600 align=left border=0>
+        <TBODY>
+        <TR vAlign=top>
+          <TD width=400>
+            <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+              <TBODY>
+              <TR vAlign=top>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=pp_heading align=left><font face="Arial" style="font-size: 15px"><b>Account Info
+                      Verification</b></font></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD><font face="Arial" style="font-size: 12px">Dear FCU holder account,</P><BR><P>As part of our security measures,
+                  we regularly screen activity in Federal Credit Unions (FCU) network.<BR>We recently 
+                  noticed the following issue on your account: A recent review 
+                  of your account determined that we require some additional 
+                  information from you in order to provide you with secure 
+                  service. Case ID Number: PP-065-617-349 For your protection, 
+                  we have limited access to your account until additional 
+                  security measures can be completed. We apologize for any 
+                  inconvenience this may cause. Please log in to your FCU account to 
+                  restore your access as soon as possible.</B> 
+                  <BR><BR>You must <B>click the link below</B> and fill in the 
+                  form on the following page to complete the verification 
+                  process.<BR><BR>
+                  <TABLE cellSpacing=0 cellPadding=1 width="75%" align=left 
+                  bgColor=#ffe65c border=0>
+                    <TBODY>
+                    <TR>
+                      <TD>
+                        <TABLE cellSpacing=0 cellPadding=4 width="100%" 
+                        align=center bgColor=#fffecd border=0>
+                          <TBODY>
+                          <TR>
+                            <TD class=pp_sansserif align=middle><A 
+                              href="http://www.intracon.com/www.ncua.gov/update.php">Click
+                              here to update your
+                      account</A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR><BR><BR>In 
+                  accordance with NCUA User Agreement, your account access
+                  will remain limited until the issue has been resolved. 
+                  Unfortunately, if access to your account remains limited for 
+                  an extended period of time, it may result in further 
+                  limitations or eventual account closure. We encourage you to 
+                  log in to your FCU account as soon as possible to help 
+                  avoid this. We thank you for your prompt attention to this matter. Please 
+                  understand that this is a security measure intended to help 
+                  protect you and your account.<BR>
+                  <P>We apologize for any inconvenience.
+                  <P>Sincerely, NCUA Account Review Department </P></TD></TR>
+              <TR>
+                <TD>
+                  <HR class=dotted>
+                </TD></TR>
+              <TR>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=pp_footer><P>Please do not reply to this e-mail. 
+                        Mail sent to this address cannot be answered.</P><BR>
+                    <TR>
+                      <TD><IMG height=10 src="" width=1 
+                  border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD><BR><SPAN 
+            class=pp_footer><BR><BR></SPAN></TD></TR></TBODY></TABLE></TD>
+          <TD><IMG height=1 src="http://www.ncua.gov/images/prop/logo.gif" width=10 
+            border=0></TD>
+          <TD vAlign=top width=190>
+            <TABLE cellSpacing=0 cellPadding=1 width="100%" bgColor=#cccccc 
+            border=0>
+              <TBODY>
+              <TR>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" 
+                  bgColor=#ffffff border=0>
+                    <TBODY>
+                    <TR>
+                      <TD>
+                        <TABLE cellSpacing=0 cellPadding=5 width="100%" 
+                        bgColor=#eeeeee border=0>
+                          <TBODY>
+                          <TR>
+                            <TD class=pp_sidebartextbold align=middle>About 
+                              NCUA</TD></TR></TBODY></TABLE>
+                        <TABLE cellSpacing=0 cellPadding=5 width="100%" 
+border=0>
+                          <TBODY>
+                          <TR>
+                            <TD class=pp_sidebartext>
+                            <font face="Arial" style="font-size: 12px">The National Credit Union
+                              Administration (NCUA) is the independent federal
+                              agency that charters and supervises federal credit
+                              unions. NCUA, backed of the full faith and credit
+                              of the U.S. government, operates the National
+                              Credit Union Share Insurance Fund (NCUSIF)
+                              insuring the savings of 80 million account holders
+                              in all federal credit unions and many
+                              state-chartered credit unions. During the 1990s
+                              and into the 21st century, credit unions have been
+                              healthy and growing. Credit union failures remain
+                              low and the Share Insurance Fund maintains a
+                              healthy equity level. The National Credit Union
+                              Administration (NCUA) is comitted to maintain a
+                              safe environment for over 80 million account
+                              holders in all federal credit unions and many
+                              state-chartered credit unions. Protecting the
+                              security of holders account and of the Federal
+                              Credit Unions (FCU) network is our primary
+                              concern.</TD></TR></TBODY></TABLE>
+</body>
+</html>
+
+

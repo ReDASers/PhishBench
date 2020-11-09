@@ -249,7 +249,9 @@ def adasyn(features, labels):
         return sampler.fit_sample(features, labels)
     except RuntimeError as e:
         # Not any neighbors belong to the majority class
-        print(e)
+        print("ADASYN:", e)
+    except ValueError as e:
+        print("ADASYN:", e)
         return None
 
 

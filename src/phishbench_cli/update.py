@@ -44,6 +44,7 @@ def make_config() -> configparser.ConfigParser:
     config['Extraction'] = {}
     config['Extraction']["Training Dataset"] = "True"
     config['Extraction']["Testing Dataset"] = "True"
+    config['Extraction']["Split Dataset"] = "False"
 
     config['Features Export'] = {}
     config['Features Export']['csv'] = "True"

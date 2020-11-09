@@ -1,0 +1,87 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by DNCHUBCAS1.dnc.org
+ (192.168.185.12) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 3 May
+ 2016 13:02:15 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 3 May 2016
+ 13:02:10 -0400
+Received: from [10.87.0.110] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 893913905
+ for kaplanj@dnc.org; Tue, 03 May 2016 12:02:16 -0500
+X-Note-AR-ScanTimeLocal: 5/3/2016 12:02:14 PM
+X-Policy: dnc.org
+X-Primary: kaplanj@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @customercare.expedia.com ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: United States->
+X-Note-Sending-IP: 216.251.112.210
+X-Note-Reverse-DNS: mx.expedia.com
+X-Note-Return-Path: prvs=924e9f7a9=teamagents@customercare.expedia.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G282 G283 G294 G406 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from [216.251.112.210] (HELO mx.expedia.com)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 139714440
+ for kaplanj@dnc.org; Tue, 03 May 2016 12:02:14 -0500
+Message-ID: <9b1e43$1hdppd@mx.expedia.com>
+From: <teamagents@customercare.expedia.com>
+To: <kaplanj@dnc.org>
+Date: Tue, 3 May 2016 10:02:00 -0700
+Subject: =?iso-8859-15?Q?Hotel=A0receipt=A0for=A0Jordan=A0Kaplan=A0-=A0Los=A0Angeles,=A0CA,=A05/3/2016=A0-=A0(Itin#=A023733083588)?=
+Content-Type: text/plain; charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+Return-Path: prvs=924e9f7a9=teamagents@customercare.expedia.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+Hotel expense receipt: Your Egencia hotel receipt will be available online =
+in 24 hours. The Egencia receipt covers your room costs for the entire stay=
+. The hotel will only provide a receipt for additional fees or incidental r=
+oom charges incurred during your stay. You should submit both receipts with=
+ your expense report.
+
+Payment confirmation: This email is confirmation of payment for your hotel =
+stay. Your room reservation is paid in full and is guaranteed for late arri=
+val.=20
+
+Reservation details:
+	Traveler:  Jordan Kaplan
+	Hotel:  W Los Angeles - West Beverly Hills
+	Itinerary number:  23733083588=09
+	View/Print receipt:  https://www.egencia.com/pub/agent.dll?qscr=3Ditnr&iti=
+d=3D37330835&updt=3D1&gpid=3DA6E927B536E6
+	View itinerary:  https://www.egencia.com/pub/agent.dll?qscr=3Dopen&itid=3D=
+37330835&updt=3D1&gpid=3DA6E927B536E6
+
+Payment details:
+	Payment card:  AmericanExpress XXXXXXXXXXXX2117
+	Amount charged:  USD 525.32
+	Date of charge:  5/3/2016
+
+Cancellation policy:
+If your plans change, you must cancel or change your hotel reservation in a=
+dvance in accordance with the Egencia and hotel cancellation policies to av=
+oid a no-show charge. Please refer to your online itinerary for more detail=
+s.
+
+Customer support:
+If you have questions about your reservation, fill out our itinerary assist=
+ance form. We'll respond within 4 hours: https://www.egencia.com/pub/agent.=
+dll?qscr=3Dfbak
+For immediate assistance, call our customer support center at +1 (800) 997-=
+6494 or +1 (702) 939-2532.
+
+Thank you for choosing Egencia.
+https://www.egencia.com
+
+
+
+

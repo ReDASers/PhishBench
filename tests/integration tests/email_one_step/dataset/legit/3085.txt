@@ -1,0 +1,61 @@
+Received: from DNCDAG1.dnc.org ([fe80::f85f:3b98:e405:6ebe]) by
+ DNCHUBCAS1.dnc.org ([fe80::ac16:e03c:a689:8203%11]) with mapi id
+ 14.03.0224.002; Tue, 17 May 2016 16:57:30 -0400
+From: "Comer, Scott" <ComerS@dnc.org>
+To: Finance_D <Finance_D@dnc.org>
+Subject: Chair's Call Time
+Thread-Topic: Chair's Call Time
+Thread-Index: AdGwfrmlEBiYyX9wS6+FE8kwdL8Hzg==
+Date: Tue, 17 May 2016 13:57:29 -0700
+Message-ID: <33309EAD-3789-442E-98CE-0C25E5E87204@dnc.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DNCHUBCAS1.dnc.org
+X-MS-Has-Attach:
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator:
+Content-Type: multipart/alternative;
+	boundary="_000_33309EAD3789442E98CE0C25E5E87204dncorg_"
+MIME-Version: 1.0
+
+--_000_33309EAD3789442E98CE0C25E5E87204dncorg_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+UGxlYXNlIHNlZSBiZWxvdyBmb3IgdGhpcyB3ZWVrJ3MgY2FsbCB0aW1lLg0KDQo1LzE5LCAxMWFt
+LTEycG08eC1hcHBsZS1kYXRhLWRldGVjdG9yczovLzA+DQo1LzIwLCAxMGFtLTExYW08eC1hcHBs
+ZS1kYXRhLWRldGVjdG9yczovLzE+DQoNClRoYW5rcywNClNjb3R0DQoNClNlbnQgZnJvbSBteSBp
+UGhvbmUNCg==
+
+--_000_33309EAD3789442E98CE0C25E5E87204dncorg_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <F84EC2BB5DCD314AA014DAD97C9799F7@dnc.org>
+Content-Transfer-Encoding: base64
+
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5IGRpcj0iYXV0byI+DQo8
+ZGl2PlBsZWFzZSBzZWUgYmVsb3cgZm9yIHRoaXMgd2VlaydzIGNhbGwgdGltZS4mbmJzcDs8L2Rp
+dj4NCjxkaXYgaWQ9IkFwcGxlTWFpbFNpZ25hdHVyZSI+PGJyPg0KPC9kaXY+DQo8ZGl2IGlkPSJB
+cHBsZU1haWxTaWduYXR1cmUiPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1hcmdpbjog
+MGluIDBpbiAwLjAwMDFwdDsiPjxmb250IGNvbG9yPSIjMDAwMDAwIj48c3BhbiBzdHlsZT0iYmFj
+a2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwKTsiPjxhIGRpcj0ibHRyIiBocmVm
+PSJ4LWFwcGxlLWRhdGEtZGV0ZWN0b3JzOi8vMCIgeC1hcHBsZS1kYXRhLWRldGVjdG9ycz0idHJ1
+ZSIgeC1hcHBsZS1kYXRhLWRldGVjdG9ycy10eXBlPSJjYWxlbmRhci1ldmVudCIgeC1hcHBsZS1k
+YXRhLWRldGVjdG9ycy1yZXN1bHQ9IjAiPjUvMTksDQogMTFhbS0xMnBtPC9hPjxvOnA+PC9vOnA+
+PC9zcGFuPjwvZm9udD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibWFyZ2luOiAw
+aW4gMGluIDAuMDAwMXB0OyI+PGZvbnQgY29sb3I9IiMwMDAwMDAiIHN0eWxlPSJiYWNrZ3JvdW5k
+LWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDApOyI+PGEgZGlyPSJsdHIiIGhyZWY9IngtYXBw
+bGUtZGF0YS1kZXRlY3RvcnM6Ly8xIiB4LWFwcGxlLWRhdGEtZGV0ZWN0b3JzPSJ0cnVlIiB4LWFw
+cGxlLWRhdGEtZGV0ZWN0b3JzLXR5cGU9ImNhbGVuZGFyLWV2ZW50IiB4LWFwcGxlLWRhdGEtZGV0
+ZWN0b3JzLXJlc3VsdD0iMSIgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUs
+IDI1NSwgMCk7Ij41LzIwLA0KIDEwYW0tMTFhbTwvYT48L2ZvbnQ+PC9wPg0KPHAgY2xhc3M9Ik1z
+b05vcm1hbCIgc3R5bGU9Im1hcmdpbjogMGluIDBpbiAwLjAwMDFwdDsiPjxicj4NCjwvcD4NCjxw
+IGNsYXNzPSJNc29Ob3JtYWwiIHN0eWxlPSJtYXJnaW46IDBpbiAwaW4gMC4wMDAxcHQ7Ij5UaGFu
+a3MsPC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1hcmdpbjogMGluIDBpbiAwLjAw
+MDFwdDsiPlNjb3R0PC9wPg0KPGJyPg0KU2VudCBmcm9tIG15IGlQaG9uZTwvZGl2Pg0KPC9ib2R5
+Pg0KPC9odG1sPg0K
+
+--_000_33309EAD3789442E98CE0C25E5E87204dncorg_--

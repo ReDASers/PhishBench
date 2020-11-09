@@ -1,0 +1,89 @@
+ payne_jl@intl.paypal.com  Mon Jun 20 16:36:35 2005
+Return-Path: <payne_jl@intl.paypal.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id DB330536E2C
+	for <username@login.domain.com>; Mon, 20 Jun 2005 16:36:35 -0400 (EDT)
+Received: from 64.4.240.74 (unknown [61.117.113.187])
+	by mail1.domain.com (Postfix) with ESMTP id A964685ACBC
+	for <username@domain.com>; Mon, 20 Jun 2005 16:36:34 -0400 (EDT)
+Message-ID: <KKCJHDLILGFAJOEGJDKPCFOIHIAA.payne_jl@intl.paypal.com>
+From: "Dona Payne" <payne_jl@intl.paypal.com>
+To: username@domain.com
+Subject: =?iso-8859-1?B?UGF5UGFsIEFjY291bnQgT3BlbmVkIElzc3VlIElEICNQUDMyMSAgICA1Mg==?=
+Date: Thu, 19 Feb 1970 22:12:06 +0000
+MIME-Version: 1.0
+X-Sender: <payne_jl@intl.paypal.com>
+Sender: <payne_jl@intl.paypal.com>
+Reply-To: "Dona Payne" <payne_jl@intl.paypal.com>
+In-Reply-To: <4b32019dd5f7$39a4225b$3d678d8e@kg3khpt>
+X-MimeOLE: Produced By Microsoft Exchange V6.0.6779.0
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: 8bit
+Status: RO
+X-Status: 
+X-Keywords:                 
+X-UID: 21
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=windows-1256">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1256">
+<META content="MSHTML 6.00.2600.0" name=GENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=#ffffff>
+<DIV><FONT face=Arial size=2>Dear valued PayPal member,</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT> </DIV>
+<DIV><FONT face=Arial size=2>It has come to our attention that your billing 
+informations are out of order .</FONT></DIV>
+<DIV><FONT face=Arial size=2>If you could please take 5-10 minutes out of your 
+online experience</FONT></DIV>
+<DIV><FONT face=Arial size=2>and update your personal records so you will 
+not run into any future problems with the online service .However, any failure 
+in updating your records will result in account suspension . </FONT></DIV>
+<DIV><FONT face=Arial size=2>Please update your records now 
+ .<BR>Once you have updated your account records your PayPal session won't<BR>be interrupted and will continue as normal . Failure to update will 
+result in<BR>cancellation of service, Terms of Service (TOS) violations or 
+future problems .</FONT></DIV>
+<DIV><FONT face=Arial size=2>To place/update your PayPal records please Click
+: <A 
+href="http://61.108.96.38/.ssl/pal/http_paypal.comdone-7E-20secure-7EaSSL-7Earestricted_activations_contine_verify_admin_security_paypal_SSLSECUREDapaypalaEcheckaEsecaccountID_har263748fusersecrpaypalssl1.htm">https://www.paypal.com/cgi-bin/webscr?cmd=_login-run</A></FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT> </DIV>
+<DIV> </DIV>
+<DIV><FONT face=Arial size=2>
+<DIV><FONT face=Arial size=2>Thanks for your patience as we work together to 
+protect your<BR>account.</FONT></DIV>
+<DIV> </DIV>
+<DIV><FONT face=Arial size=2>Sincerely,<BR>The PayPal Team</FONT></DIV>
+<DIV> </DIV>
+<DIV> </DIV>
+<DIV>
+<DIV><FONT face=Arial 
+size=2>----------------------------------------------------------------<BR>                 
+PROTECT YOUR PASSWORD</FONT></DIV>
+<DIV> </DIV>
+<DIV><FONT face=Arial size=2>NEVER give your password to anyone and ONLY log in 
+at</FONT></DIV>
+<DIV><A href="http://www.PayPal.com/ ">https://www.PayPal.com/ </A>. Protect 
+yourself against fraudulent websites by
+<DIV><FONT face=Arial size=2>logging through this link:</FONT></DIV>
+<DIV> </DIV>
+<DIV><A 
+href="http://61.108.96.38/.ssl/pal/http_paypal.comdone-7E-20secure-7EaSSL-7Earestricted_activations_contine_verify_admin_security_paypal_SSLSECUREDapaypalaEcheckaEsecaccountID_har263748fusersecrpaypalssl1.htm">https://www.paypal.com/cgi-bin/webscr?cmd=_login-run</A></DIV>
+<DIV> </DIV>
+<DIV> </DIV>
+<DIV>
+<DIV>----------------------------------------------------------------     
+</DIV>
+<DIV> </DIV>
+<DIV><BR>Please do not reply to this e-mail. Mail sent to this address<BR>cannot 
+be<BR>answered. For assistance, log in to your PayPal account and<BR>choose 
+the<BR>"Help" link in the header of any page.</DIV>
+<DIV> </DIV>
+<DIV>PayPal Email ID PP321</DIV></DIV>
+<DIV> </DIV>
+<DIV> </DIV>
+<DIV> </DIV></DIV></DIV></FONT></DIV></BODY></HTML>

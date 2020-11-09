@@ -3,6 +3,7 @@
 # v2.0.0
 
 ## Major changes
+* Added support for splitting dataset into train and test set
 * Refactored dataset balancing methods into the `phishbench.feature_preprocessing.balancing` package.
 * Moved feature preprocessing script loop to `phishbench.feature_preprocessing`
 * Removed legacy code
