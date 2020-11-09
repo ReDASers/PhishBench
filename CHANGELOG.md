@@ -1,9 +1,11 @@
 # Change Log
 
-# Unreleased
+# v2.0.0
 
 ## Major changes
 * Refactored dataset balancing methods into the `phishbench.feature_preprocessing.balancing` package.
+* Moved feature preprocessing script loop to `phishbench.feature_preprocessing`
+* Removed legacy code
 
 ## Minor changes
 * Changed default output folder to `PhishBench Output` 
