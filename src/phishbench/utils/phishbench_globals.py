@@ -56,6 +56,9 @@ def setup_logger(filename='phishbench.log'):
         console_handler.setLevel(logging.CRITICAL)
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
+    if not args.verbose:
+        os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+        logging.getLogger('tensorflow').setLevel(logging.FATAL)
 
     log_path = os.path.join(output_dir, filename)
     file_handler = logging.FileHandler(log_path)
