@@ -8,6 +8,7 @@ from typing import List, Dict
 
 import joblib
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 import phishbench
 import phishbench.classification as classification
@@ -211,6 +212,8 @@ def extract_features(extraction_module: ModuleType):
         joblib.dump(x_test, os.path.join(pickle_dir, "X_test.pkl"))
         joblib.dump(y_test, os.path.join(pickle_dir, "y_test.pkl"))
         phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
+    elif phishbench_globals.config["Extraction"].getboolean('split dataset'):
+        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train)
     else:
         x_test = None
         y_test = None
