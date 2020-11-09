@@ -1,3 +1,6 @@
+"""
+Contains code to run preprocessing
+"""
 import os
 
 from sklearn.preprocessing import MinMaxScaler

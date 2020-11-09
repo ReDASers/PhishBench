@@ -1,3 +1,6 @@
+"""
+Settings for the preprocessing module
+"""
 from ..utils import phishbench_globals
 
 SECTION_NAME = "Preprocessing"
