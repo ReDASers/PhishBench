@@ -78,7 +78,6 @@ def make_config() -> configparser.ConfigParser:
     reflection_features = load_features(internal_features=internal_features, filter_features=None)
 
     for feature_type in FeatureType:
-        print(feature_type.value)
         config[feature_type.value] = {
             feature.config_name: "True" for feature in reflection_features if
             feature.feature_type == feature_type
