@@ -12,6 +12,7 @@
 * Changed default output folder to `PhishBench Output` 
 * Moved log and summary to output folder
 * Updated user interaction
+* Switched base classifier for RFE from `LinearSVC` to `RandomForestClassifier`
 
 ## Bug Fixes 
 * Fixed Issue #213
