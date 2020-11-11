@@ -66,9 +66,6 @@ def make_config() -> configparser.ConfigParser:
         x.config_name: "True" for x in load_metrics(filter_metrics=False)
     }
 
-    config["Summary"] = {}
-    config["Summary"]["Path"] = "summary.txt"
-
     config[extraction.settings.EMAIL_TYPE_SECTION] = \
         extraction.settings.EMAIL_TYPE_SETTINGS
 
