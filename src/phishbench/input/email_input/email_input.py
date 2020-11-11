@@ -4,6 +4,7 @@ This module contains the implementations for email input functions
 import email
 import traceback
 from email.message import Message
+from email.header import Header
 from typing import List, Tuple
 
 import chardet
@@ -67,6 +68,9 @@ def read_email_from_file(file_path: str) -> Message:
         binary_data = f.read()
         msg = email.message_from_bytes(binary_data)
     try:
+        for header in msg:
+            if isinstance(msg[header], Header):
+                raise KeyError(f"Failed to parse {header}")
         for part in msg.walk():
             if not part.is_multipart():
                 str(part)
