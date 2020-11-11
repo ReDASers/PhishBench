@@ -212,9 +212,10 @@ def extract_features(extraction_module: ModuleType):
         joblib.dump(y_test, os.path.join(pickle_dir, "y_test.pkl"))
         phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
     elif phishbench_globals.config["Extraction"].getboolean('split dataset'):
+        n_classes = len(np.unique(y_train))
         while True:
-            x_train_a, x_test, y_train_a, y_test = train_test_split(x_train, y_train)
-            if len(np.unique(y_train_a)) == len(np.unique(y_train)):
+            x_train_a, x_test, y_train_a, y_test = train_test_split(x_train, y_train, random_state=None)
+            if len(np.unique(y_train_a)) == n_classes:
                 break
         x_train = x_train_a
         y_train = y_train_a
