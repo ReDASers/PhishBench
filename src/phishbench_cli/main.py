@@ -173,7 +173,7 @@ def extract_features(extraction_module: ModuleType):
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    pickle_dir = os.path.join(phishbench_globals.output_dir, "Features")
+    pickle_dir = os.path.join(phishbench.settings.output_dir(), "Features")
 
     if not hasattr(extraction_module, 'extract_features_list'):
         raise ValueError('extraction_module must be an extraction module')
@@ -228,7 +228,7 @@ def get_tfidf_path():
     """
     Gets the path to the tfidf_vectorizer
     """
-    train_dir = os.path.join(phishbench_globals.output_dir, "Features")
+    train_dir = os.path.join(phishbench.settings.output_dir(), "Features")
     if phishbench.settings.mode() == 'Email':
         run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
                     phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
@@ -261,7 +261,7 @@ def load_features_from_disk():
     tfidf_vectorizer:
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
-    train_dir = os.path.join(phishbench_globals.output_dir, "Features")
+    train_dir = os.path.join(phishbench.settings.output_dir(), "Features")
     tfidf_vec = get_tfidf_path()
 
     x_train = joblib.load(os.path.join(train_dir, "X_train.pkl"))
@@ -325,10 +325,10 @@ def run_phishbench():
 
     if phishbench.settings.preprocessing():
         x_train_dict2, x_test_dict2, y_train_dict = preprocessing.process_vectorized_features(
-            x_train, y_train, x_test, feature_names, phishbench_globals.output_dir)
+            x_train, y_train, x_test, feature_names, phishbench.settings.output_dir())
 
     if phishbench.settings.classification():
-        classification_dir = os.path.join(phishbench_globals.output_dir, "Classifiers")
+        classification_dir = os.path.join(phishbench.settings.output_dir(), "Classifiers")
         classifier_performances = pd.DataFrame()
         for balancing_method in x_train_dict2:
             x_train_dict = x_train_dict2[balancing_method]
@@ -357,12 +357,12 @@ def run_phishbench():
 def main():
     # pylint: disable=missing-function-docstring
     # execute only if run as a script
-    phishbench_globals.parse_args()
-    if phishbench_globals.args.version:
+    args = phishbench_globals.parse_args()
+    if args.version:
         print("PhishBench ", phishbench.__version__)
         sys.exit(0)
-    phishbench_globals.initialize(phishbench_globals.args.config_file)
-    answer = user_interaction.confirmation(phishbench_globals.args.ignore_confirmation)
+    phishbench_globals.initialize(args.config_file, args.output_input_dir, args.verbose)
+    answer = user_interaction.confirmation(args.ignore_confirmation)
     original = sys.stdout
     if answer:
         phishbench_globals.logger.debug("Running......")
