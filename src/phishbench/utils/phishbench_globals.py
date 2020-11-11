@@ -66,7 +66,7 @@ def setup_logger(path, verbose=False):
         logger.setLevel(logging.INFO)
 
 
-def initialize(config_file, output_dir: str, verbose: bool=False):
+def initialize(config_file, output_dir: str = "PhishBench Output", verbose: bool = False):
     """
     Initialize PhishBench with a configuration file.
     Parameters

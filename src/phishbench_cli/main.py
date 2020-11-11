@@ -7,6 +7,7 @@ from types import ModuleType
 from typing import List, Dict
 
 import joblib
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -211,7 +212,13 @@ def extract_features(extraction_module: ModuleType):
         joblib.dump(y_test, os.path.join(pickle_dir, "y_test.pkl"))
         phishbench_globals.logger.info("Feature Extraction for testing dataset: Done!")
     elif phishbench_globals.config["Extraction"].getboolean('split dataset'):
-        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train)
+        n_classes = len(np.unique(y_train))
+        while True:
+            x_train_a, x_test, y_train_a, y_test = train_test_split(x_train, y_train, random_state=None)
+            if len(np.unique(y_train_a)) == n_classes:
+                break
+        x_train = x_train_a
+        y_train = y_train_a
     else:
         x_test = None
         y_test = None
