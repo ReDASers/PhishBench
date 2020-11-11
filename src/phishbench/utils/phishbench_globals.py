@@ -15,7 +15,6 @@ from typing import Optional
 args = None
 config = configparser.ConfigParser()
 logger: logging.Logger = logging.getLogger('root')
-summary: Optional[TextIOBase] = None
 output_dir = ""
 
 
@@ -81,19 +80,12 @@ def initialize(config_file):
     """
     global args
     global config
-    global summary
 
     if not os.path.isdir(output_dir):
         os.mkdir(output_dir)
-
     config.read(config_file)
-    summary_path = os.path.join(output_dir, config["Summary"]["Path"])
-    summary = open(summary_path, 'w')
     setup_logger()
 
 
 def destroy_globals():
-    global summary
-    if summary:
-        summary.close()
-    summary = None
+    pass
