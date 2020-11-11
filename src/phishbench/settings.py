@@ -12,6 +12,11 @@ DEFAULT_SETTINGS = {
     'preprocessing': 'True',
     'classification': 'True'
 }
+_output_dir = ""
+
+
+def output_dir():
+    return _output_dir
 
 
 def mode() -> str:
