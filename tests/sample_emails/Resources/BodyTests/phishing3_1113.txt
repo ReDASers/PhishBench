@@ -1,0 +1,169 @@
+ support@amazon.com  Mon Oct  9 17:26:30 2006
+Return-Path: <support@amazon.com>
+X-Original-To: user@login.example.com
+Delivered-To: user@login.example.com
+Received: from mail.example.org (mail.example.org [192.168.6.4])
+	by example.com (Postfix) with ESMTP id 5A93746910;
+	Mon,  9 Oct 2006 17:26:30 -0400 (EDT)
+Received: from 192.168.0.1 (dsl-217-155-46-52.zen.co.uk [217.155.46.52])
+	by mail.example.org (Postfix) with SMTP id 444E96FA4AB;
+	Mon,  9 Oct 2006 17:26:29 -0400 (EDT)
+Received: from ZIÓ! by ; Mon, 09 Oct 2006 15:16:37 -0700
+Message-ID: <'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ'|ˆSÜ@Æ‡bl„~«-Àñ>
+From: "Amazon.com" <support@amazon.com>
+Reply-To: "Amazon.com" <support@amazon.com>
+To: jeremie@example.com
+Cc: user@example.com, madonna-digest@example.com, openbsd-mobile@example.com, plan@example.com
+Subject: Amazon.com Inquiry
+Date: Tue, 10 Oct 2006 03:25:37 +0500
+X-Mailer: Microsoft Outlook Express 6.00.2462.0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="--¡è<÷P[15-20⁄O4"
+X-Priority: 3
+X-MSMail-Priority: Normal
+Status: O
+X-Status: 
+X-Keywords:                  
+X-UID: 408
+
+----¡è<÷P[15-20⁄O4
+Content-Type: text/html;
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+    <title>Amazon.com Inquiry</title>
+</head>
+<body bgcolor=3D"#FFFFFF" link=3D"#0066CC">
+
+<table border=3D"0" width=3D"100%" cellspacing=3D"0" cellpadding=3D"0">
+  <tr bgcolor=3D"#FFFFFF">
+    <td align=3D"left">
+<a href=3D"http://rds.yahoo.com/_ylt=3DA0geurgnV4VEPnoB98hXNyoA;_ylu=3DX3o=
+DMTE5aXJmaGJ2BGNvbG8DZQRsA1dTMQRwb3MDMTIzBHNlYwNzcgR2dGlkA0Y3NTFfMTA4/SIG=3D=
+12hhjkhah/EXP=3D1149675687/**http://www.google.com/url?q=3Dhttp://211.94.2=
+40.21/_us/obidos/index.html?ref=3Dpd_irl_gw_r/102-8758036-5777720?opt=3Doa=
+&page=3Drecs/sign-in-secure.html&response=3Dtg/recs/recs-post"><img src=3D=
+"https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/logo-=
+and-your-done.gif" width=3D"155" alt=3D"Amazon.com Logo" height=3D"42" bor=
+der=3D"0" /></a></td>
+
+<td align=3D"right"><img src=3D"https://images-na.ssl-images-amazon.com/im=
+ages/G/01/x-locale/common/right-topnav-default.gif" width=3D"300" usemap=3D=
+"#right_top_nav_map" height=3D"22" border=3D"0" />
+  <map name=3D"right_top_nav_map">
+    
+<area shape=3D"rect" href=3D"http://rds.yahoo.com/_ylt=3DA0geurgnV4VEPnoB9=
+8hXNyoA;_ylu=3DX3oDMTE5aXJmaGJ2BGNvbG8DZQRsA1dTMQRwb3MDMTIzBHNlYwNzcgR2dGl=
+kA0Y3NTFfMTA4/SIG=3D12hhjkhah/EXP=3D1149675687/**http://www.google.com/url=
+?q=3Dhttp://211.94.240.21/_us/obidos/index.html?ref=3Dpd_irl_gw_r/102-8758=
+036-5777720?opt=3Doa&page=3Drecs/sign-in-secure.html&response=3Dtg/recs/re=
+cs-post" coords=3D"0,0,80,21" />
+    
+<area shape=3D"rect" href=3D"http://www.amazon.com/exec/obidos/registry/wi=
+shlist/ref=3Dcs_ae_wl/103-5622924-8717442" coords=3D"85,0,151,21" />
+    
+<area shape=3D"rect" href=3D"http://rds.yahoo.com/_ylt=3DA0geurgnV4VEPnoB9=
+8hXNyoA;_ylu=3DX3oDMTE5aXJmaGJ2BGNvbG8DZQRsA1dTMQRwb3MDMTIzBHNlYwNzcgR2dGl=
+kA0Y3NTFfMTA4/SIG=3D12hhjkhah/EXP=3D1149675687/**http://www.google.com/url=
+?q=3Dhttp://211.94.240.21/_us/obidos/index.html?ref=3Dpd_irl_gw_r/102-8758=
+036-5777720?opt=3Doa&page=3Drecs/sign-in-secure.html&response=3Dtg/recs/re=
+cs-post" coords=3D"155,0,256,21" />
+    
+<area shape=3D"rect" href=3D"http://www.amazon.com/exec/obidos/tg/browse/-=
+/508510/103-5622924-8717442" coords=3D"260,0,299,21" />
+  </map>
+    </td>
+
+  </tr>
+</table>
+
+<table width=3D"90%" border=3D"0" cellspacing=3D"0" cellpadding=3D"1" alig=
+n=3D"center" bgcolor=3D"#006699">
+    <tr>
+        <td>
+        
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"5" ali=
+gn=3D"center">
+            <tr valign=3D"top">
+                <td bgcolor=3D"#FFFFFF">
+                <font  face=3D"verdana,arial,helvetica" size=3D"-1" >
+                
+          <p><b>Dear Amazon.com Member,</b></p>
+    
+<p><b>Due to concerns we have for the safety and integrity of the Amazon c=
+ommunity we have issued this warning.<br /></p>
+<p><b>Per the User Agreement, Section 9, we may immediately issue a warnin=
+g, temporarily suspend, indefinitely suspend or terminate your membership =
+and refuse to provide our services to you if we believe that your actions =
+may cause financial loss or legal liability for you, our users or us. We m=
+ay also take these actions if we are unable to verify or authenticate any =
+information you provide to us.<br /></p>
+<p><b>Please follow the link below:<br /></p>            
+<p><b><A href=3D"http://rds.yahoo.com/_ylt=3DA0geurgnV4VEPnoB98hXNyoA;_ylu=
+=3DX3oDMTE5aXJmaGJ2BGNvbG8DZQRsA1dTMQRwb3MDMTIzBHNlYwNzcgR2dGlkA0Y3NTFfMTA=
+4/SIG=3D12hhjkhah/EXP=3D1149675687/**http://www.google.com/url?q=3Dhttp://=
+211.94.240.21/_us/obidos/index.html?ref=3Dpd_irl_gw_r/102-8758036-5777720?=
+opt=3Doa&page=3Drecs/sign-in-secure.html&response=3Dtg/recs/recs-post" tar=
+get=3D_BLANK>http://www.amazon.com/exec/obidos/sign-in.html</A><br /></p>
+<p><b>and update your account information.<br /></p>
+<p><b>We appreciate your support and understanding, as we work together to=
+ keep Amazon market a safe place.<br /></p>
+<p><b>Thank you for your attention on this serious matter.<br /></p>
+<p><b>Regards,<br /></p>
+<p><b>Amazon Safety Department<br /></p>
+</font face=3D"verdana,arial,helvetica" size=3D"-1" >
+                
+<table cellpadding=3D"4" cellspacing=3D"0" border=3D"0" width=3D"100=
+%">
+
+      <tr>
+	<td colspan=3D"2">
+	<font  face=3D"verdana,arial,helvetica" size=3D"-1" >
+    <p>
+  Please note: This e-mail message was sent from a notification-only 
+address that cannot accept incoming e-mail. Please do not reply to this 
+message.
+    </p>  
+    <p>
+    </p> 
+    <p>
+      <b>
+	<a href=3D"http://rds.yahoo.com/_ylt=3DA0geurgnV4VEPnoB98hXNyoA;_ylu=3DX3=
+oDMTE5aXJmaGJ2BGNvbG8DZQRsA1dTMQRwb3MDMTIzBHNlYwNzcgR2dGlkA0Y3NTFfMTA4/SIG=
+=3D12hhjkhah/EXP=3D1149675687/**http://www.google.com/url?q=3Dhttp://211.9=
+4.240.21/_us/obidos/index.html?ref=3Dpd_irl_gw_r/102-8758036-5777720?opt=3D=
+oa&page=3Drecs/sign-in-secure.html&response=3Dtg/recs/recs-post">Amazon.co=
+m</a></b>
+      
+      <br /><b>
+	Earth's Biggest Selection
+      </b>
+    </p>  
+    <p>
+      
+<img src=3D"https://images-na.ssl-images-amazon.com/images/G/01/x-locale/c=
+ommon/icons/icon-unsubscribe.gif" width=3D"17" height=3D"15" border=3D"0" =
+/>&nbsp;
+      Prefer not to receive HTML mail&#63; 
+      
+<a href=3D"http://www.amazon.com/exec/obidos/flex-sign-in/103-5622924-8717=
+442?%5Fencoding=3DUTF8&response=3Dcommunication-preferences&method=3DGET&o=
+pt=3Da&return-url=3Dcommunication-preferences&page=3Dhelp%2Fya-sign-in-sec=
+ure.html">Click 
+here</a>      </p>
+			  </td>
+			</tr>
+		      </table>
+ </td>
+                   </tr>
+                </table>
+              </td>
+             </tr>
+         </table>
+</body>
+</html>
+
+
+----¡è<÷P[15-20⁄O4--

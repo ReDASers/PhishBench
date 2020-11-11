@@ -13,6 +13,9 @@
 * Moved log and summary to output folder
 * Updated user interaction
 
+## Bug Fixes 
+* Fixed Issue #213
+
 # v1.3.0
 
 ## Major changes 
