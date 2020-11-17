@@ -1,19 +1,18 @@
 """
 Feature selection methods
 """
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import RFE, SelectKBest, SelectFromModel
 from sklearn.feature_selection import chi2
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.svm import LinearSVC
-
-import numpy as np
 
 
 def rfe(x, y, num_features: int):
     """
     Recursive Feature Extraction
     """
-    selection_model = RFE(LinearSVC(), n_features_to_select=num_features, step=0.005)
+    selection_model = RFE(RandomForestClassifier(), n_features_to_select=num_features, step=0.005)
     selection_model.fit(x, y)
     return selection_model, selection_model.ranking_
 
