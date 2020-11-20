@@ -12,7 +12,7 @@ from ..utils import phishbench_globals
 
 def clean_features(feature_values: List[Dict]):
     """
-    Cleans features for training
+    Cleans features for training, replacing all `None` values with `-1`
     Parameters
     ----------
     feature_values: List[Dict]
