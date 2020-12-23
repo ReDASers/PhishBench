@@ -58,11 +58,11 @@ jobs:
       run: phishbench -f Test.ini -c
       working-directory: tests/integration tests/url_one_step
     
-    - name: URL 2-Step test
-      run: |
-        phishbench -f Test_A_1.ini -c
-        phishbench -f Test_A_2.ini -c
-      working-directory: tests/integration tests/url_two_step
+    # - name: URL 2-Step test
+    #   run: |
+    #     phishbench -f Test_A_1.ini -c
+    #     phishbench -f Test_A_2.ini -c
+    #   working-directory: tests/integration tests/url_two_step
 
     - name: URL TF-IDF test
       run: phishbench -f URL_TFIDF.ini -c
