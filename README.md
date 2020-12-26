@@ -1,6 +1,7 @@
 The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
 
-![Test](https://github.com/ReDASers/Phishing-Detection/workflows/Test/badge.svg)
+![Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/Integration%20Test/badge.svg)
+![Unit Test](https://github.com/ReDASers/Phishing-Detection/workflows/Unit%20Test/badge.svg)
 
 # Installation
 
