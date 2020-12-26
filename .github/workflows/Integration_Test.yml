@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # os: [windows-latest, ubuntu-latest]
-        os: [Windows, Linux]
+        os: [windows-latest, Linux]
       fail-fast: false
 
     steps:
@@ -28,10 +28,11 @@ jobs:
     
     - uses: actions/checkout@v2
 
-    # - name: Set up Python 3.7
-    #   uses: actions/setup-python@v1
-    #   with:
-    #     python-version: 3.7
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+      if: runner.os == 'windows-latest'
     
     - name: Update Pip
       run: |
@@ -40,8 +41,6 @@ jobs:
     - name: Install phishbench
       run: |
         pip install .
-        pip uninstall tensorflow -y
-        pip install tensorflow-cpu==2.3.1
 
     # - name: Test Generate Config
     #   run: |
