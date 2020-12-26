@@ -5,7 +5,7 @@ The PhishBench platform extract features from emails and URLs, run classifiers, 
 
 # Installation
 
-PhishBench requires Python 3.7 to run. It has not been validated to work on Python 3.8. 
+PhishBench requires Python 3.8 to run.
 
 To install the latest version, run
 
