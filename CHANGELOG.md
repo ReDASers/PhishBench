@@ -1,5 +1,13 @@
 # Change Log
 
+## Major changes 
+
+* Added features from *Visualizing and Interpreting RNN Models in URL-based Phishing Detection*
+
+## Minor changes
+
+* Bumped Tensorflow version to 2.4.0
+
 # v2.0.0
 
 ## Major changes
