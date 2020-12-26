@@ -44,22 +44,22 @@ jobs:
         pip install -r requirements.txt
         pip install .
 
-    # - name: Test Generate Config
-    #   run: |
-    #     make-phishbench-config -f Test.ini
-    #     Test-Path Test.ini
-    #   working-directory: tests/integration tests/make-config
+    - name: Test Generate Config
+      run: |
+        make-phishbench-config -f Test.ini
+        Test-Path Test.ini
+      working-directory: tests/integration tests/make-config
 
-    # - name: Upload Config
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: Generated Config
-    #     path: tests/integration tests/make-config/Test.ini
-    #     if-no-files-found: error
+    - name: Upload Config
+      uses: actions/upload-artifact@v2
+      with:
+        name: Generated Config
+        path: tests/integration tests/make-config/Test.ini
+        if-no-files-found: error
 
-    # - name: URL 1-Step test
-    #   run: phishbench -f Test.ini -c
-    #   working-directory: tests/integration tests/url_one_step
+    - name: URL 1-Step test
+      run: phishbench -f Test.ini -c
+      working-directory: tests/integration tests/url_one_step
     
     - name: URL 2-Step test
       run: |
@@ -67,18 +67,16 @@ jobs:
         phishbench -f Test_A_2.ini -c
       working-directory: tests/integration tests/url_two_step
 
-    # - name: URL TF-IDF test
-    #   run: phishbench -f URL_TFIDF.ini -c
-    #   working-directory: tests/integration tests/website_tfidf
+    - name: URL TF-IDF test
+      run: phishbench -f URL_TFIDF.ini -c
+      working-directory: tests/integration tests/website_tfidf
 
-    # - name: Email 1-Step test
-    #   run: phishbench -f Test.ini -c
-    #   working-directory: tests/integration tests/email_one_step
+    - name: Email 1-Step test
+      run: phishbench -f Test.ini -c
+      working-directory: tests/integration tests/email_one_step
 
     - name: Email 2-Step test
       run: |
         phishbench -f Test_A.ini -c
-      # run: |
-      #   phishbench -f Test_A.ini -c
-      #   phishbench -f Test_B.ini -c
+        phishbench -f Test_B.ini -c
       working-directory: tests/integration tests/email_two_step
