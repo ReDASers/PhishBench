@@ -33,15 +33,15 @@ jobs:
     #   with:
     #     python-version: 3.7
     
-    - name: Install dependencies
+    - name: Update Pip
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip uninstall tensorflow -y
-        pip install tensorflow-cpu==2.3.1
         
     - name: Install phishbench
-      run: pip install .
+      run: |
+        pip install .
+        pip uninstall tensorflow -y
+        pip install tensorflow-cpu==2.3.1
 
     # - name: Test Generate Config
     #   run: |
