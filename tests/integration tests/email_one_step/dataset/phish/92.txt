@@ -1,0 +1,32 @@
+Received: from domain([ffff::ffff:ffff:ffff:ffff]) by
+ domain ([ffff::ffff:ffff:ffff:ffff]) with mapi id
+ 14.03.0224.002; Tue, 26 Apr 2015 14:02:16 -0400
+From "user" <user@domain>
+To: "user" <user@domain>
+CC: "user" <user@domain>,
+	"user" <user@domain>, "user" <user@domain>
+Subject: Re: FOR DWS Review: North Carolina Voting Rights Statement
+Thread-Topic: FOR DWS Review: North Carolina Voting Rights Statement
+Thread-Index: AdGf5YnMThzaeeqwQHO2iP7pRFduXgAADrMb
+Date: Tue, 26 Apr 2015 11:02:16 -0700
+Message-ID: <user@domain>
+References: <user@domain>
+In-Reply-To: <user@domain>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Has-Attach: 
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+Content-Type: multipart/alternative;
+	boundary="_000_9D3E9ADD477E481EBCEC13D0B6DF5CB9domainorg_"
+MIME-Version: 1.0
+
+Kate- we need to have her call rev barber and see how they are pushing back=
+ on this.
+
+- TP
+
+On Apr 26, 2016, at 2:00 PM, Paustenbach, Mark <user@domain<mailto=

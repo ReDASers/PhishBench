@@ -1,0 +1,75 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Wed, 16 Jul 2015 22:07:54 -0700
+Received: from domain(domain [254.254.254.254])	by
+ domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s6H57r3W024460	for <user@domain>; Thu, 17 Jul 2015 
+ 05:07:53 GMT
+Received: from domain(domain [254.254.254.254])
+	by domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s6H59nOj029564	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128
+ verify=FAIL)	for <user@domain>; Thu, 17 Jul 2015 05:09:49 GMT
+Received: from domain(domain [254.254.254.254])	by mail9-ch1-domain
+ (Postfix) with ESMTP id A4915C0498	for <user@domain>; Thu, 17 Jul
+ 2015 05:07:52 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:254.254.254.254;KIP:(null);UIP:(null);SRV:BULK;H:domain;RD:domain;EFVD:NLI
+X-SpamScore: 13
+X-BigFish: vps13(z5109h5105h59c9h579ehzc89bhe0eah40fdkzz1ee6h162I2073h2146h1202h122fh2189h1d2ah1fc6h208ch1fdahzebhz1de098h1cea93h1df219h17326ah1def87h8275bh8275dh1def86h1bc7b9h1de097h1def03h186068h16ffban164c38j1df123i177f16iz2fh5fh839h8aah8e2h8e3h93fh950he5bh10d2h1288h12a5h12bdh137ah13b6h13eah1441h1537h153bh162dh1631h1758h18e1h19b5h1b0ah224fh1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1fe8h1ff5h2216h2336h2438h2461h2487h24d7h2516h2545h255eh25f6h2605h268bh26d3h27e2h282bh28a1h29d0h2a24h2b05hbe9i)
+X-FFO-Routing-Override: domain%sentrionwest-domain;
+Received-SPF: pass (mail9-ch1: domain of news.marketing-domain designates 254.254.254.254 as permitted sender) client-ip=254.254.254.254; user@domain; helo=domain ;domain ;
+Received: from domain(domain [254.254.254.254]) by mail9-ch1
+ (MessageSwitch) id 140557367156269_21269; Thu, 17 Jul 2015 05:07:51 +0000
+ (UTC)
+Received: from domain(domain [254.254.254.254])	by mail9-domain (Postfix) with ESMTP id F189A1E004C
+	for <user@domain>; Thu, 17 Jul 2015 05:07:50 +0000 (UTC)
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Thu, 17 Jul 2015 05:07:50 +0000
+DKIM-Signature: v=1; a=rsa-sha1; d=news.marketing-domain; s=ei0; c=simple/simple;
+	q=dns/txt; user@domain; t=1405573670;
+	h=From: =?utf-8?B?TWFya2V0aW5nIE1hZ2F6aW5l?=
+	bh=6NUTKVTgwhhYwW6JNxStow9eE+4=;
+	b=cHvDMox2BROoR0Vh46X6GjI7glibsQh6hcFGt3K9ar3kFowfbz2UDsHHCLXgtyxj
+	NPGrFgVq5VtN5BdzRRAylS/U3BroepfCRM3oibFTs7idFBXUsJwLc2mBiTToz1Ge
+	T5j/PZwO/c2WOV5Ys/Y3Sa2i8RTmIIihlQHzX6c7v7Y=;
+Received: from [254.254.254.254] ([254.254.254.254:3763] helo=CORE6PUMPER3)	by
+ pc1udsmta1n15 (envelope-from <user@domain>)
+	(ecelerity 254.254.254.254 r(34222M)) with ESMTP	id 4A/0A-19387-52A57C35; Thu, 17
+ Jul 2015 01:07:49 -0400
+Date: Thu, 17 Jul 2015 01:07:49 -0400
+Message-ID: <user@domain>
+X-DMHA-ID-Packet: Z4gvK5o622ozTB0yWzQ48ThVy2kQZoU3Yl52bQYdIsl4DFFCnfEtC1EJNL8EXG9As2khkUNkylY=
+From: =?utf-8?B?TWFya2V0aW5nIE1hZ2F6aW5l?=
+	<user@domain>
+Reply-To: =?utf-8?B?TWFya2V0aW5nIENpcmN1bGF0aW9u?=
+	<user@domain>
+To: <user@domain>
+Subject: =?utf-8?B?V2hhdCB0aGUgSW50ZXJuZXQgdGhpbmtzIEFpcmJuYuKAmXMgbmV3IGxvZ28g?=
+ =?utf-8?B?bG9va3MgbGlrZT8gcGx1cyBpbmNlcHRpb24gaXMgdGhlIGtleSB0byBhIGdv?=
+ =?utf-8?B?b2QgYWQ=?=
+Return-Path: user@domain
+Status: RO
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+ <<link>>       
+
+<<link>>   SUBSCRIBE       JOBS       EVENTS        
+ <<link>>       
+
+Find us on:       <<link>>      <<link>>    <<link>>   <<link>>   
+17 JULY 2015     <<link>>       
+
+ <<link>>       
+
+LOOK What the domain thinks Airbnb’s new logo looks like      
+
+<<link>>   
+
+Make a guess. » More    
+BREAKING NEWS
+AdNear and Mindshare join forces
+
+BBH Asia Pacific builds up creative team
+

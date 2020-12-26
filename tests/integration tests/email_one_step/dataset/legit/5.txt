@@ -1,0 +1,30 @@
+Received: from domain([ffff::ffff:ffff:ffff:ffff]) by
+ domain ([ffff::ffff:ffff:ffff:ffff]) with mapi id
+ 14.03.0224.002; Thu, 19 May 2015 12:00:39 -0400
+From "user" <user@domain>
+To: "user" <user@domain>
+Subject: EVENT: Trump and Clinton video remarks to Latino leaders in CA on
+ 5/20
+Thread-Topic: EVENT: Trump and Clinton video remarks to Latino leaders in CA
+ on 5/20
+Thread-Index: AdGx55LnXJ61FUvQT+yem7LyCImZfg==
+Date: Thu, 19 May 2015 09:00:39 -0700
+Message-ID: <user@domain>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+x-originating-ip: [254.254.254.254]
+Content-Type: multipart/alternative;
+	boundary="_000_7DFD0CE61D45CD47B2E623A47D444C904D369AFEdomaindag1domainorg_"
+MIME-Version: 1.0
+
+Video remarks by Trump &amp; Clinton will be played to 1,200 Latino leaders in California Fri, event organizers say. 1st reported by @bpolitics.
+
+Original Tweet: <<link>>
+

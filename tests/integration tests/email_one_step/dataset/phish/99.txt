@@ -1,0 +1,59 @@
+From "user" <user@domain>
+To: "User"
+Subject: Oscars: Will Christopher Nolan Finally Land a Director Nomination?
+Date: Fri, 7 Nov 2015 17:14:04 -0500
+Message-ID: <user@domain>
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQEmvUZ3BVWI3Y/e2qQqL1o3kv5oDw==
+Content-Language: en-us
+x-ms-exchange-organization-authsource: domain
+x-ms-exchange-organization-authmechanism: 10
+x-ms-exchange-organization-authas: Internal
+x-forefront-antispam-report: CIP:254.254.254.254;CTRY:US;SRV:BULK;EFV:NLI;SFV:SKN;SFS:;DIR:INB;SFP:;SCL:-1;SRVR:BL2FFO11HUB046;H:mx-domain;FPR:;LANG:en;
+dkim-signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; t=1415398444;	s=sailthru; d=variety.com;	h=Date:From "user" <user@domain>
+x-eopattributedmessage: 0
+x-microsoft-antispam: BCL:6;PCL:0;RULEID:(82001)(120001);SRVR:BL2FFO11HUB046;
+x-exchange-antispam-report-test: UriScan:;
+List-Unsubscribe: <user@domain>
+x-info: user@domain
+x-iadb-ip-reverse: 254.254.254.254
+x-rpcampaign: stcoy3310015
+x-iadb-url: <<link>>
+x-tm-id: 20141107221404.3310015.1932
+x-iadb-ip: 254.254.254.254
+x-unsubscribe-web: <<link>>
+Status: RO
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+This year’s best director race is all about the Oscar virgins. Most of the contenders in the run...
+
+​
+
+Awards Report
+
+Friday, November 7, 2014
+
+​
+
+Oscars: Will Christopher Nolan Finally Land a Director Nomination?
+
+This year’s best director race is all about the Oscar virgins. Most of the contenders in the running — starting with frontrunner Richard Linklater (“...
+
+Full Story
+
+Subscribe to Variety Today!
+
+This email was sent to user@domain by Variety. To ensure delivery to your inbox (and not your spam folder), please add user@domain to your address book. If you prefer not to continue receiving email communications, please unsubscribe here instead of replying to this email.
+
+To update your profile and customize what email alerts and newsletters you receive, please click here.
+
+Having trouble reading this email? View the web version here.
+
+Copyright © 2014 Variety Media, LLC, a subsidiary of Penske Business Media.
+1​1​1​7​5 Santa Monica Blvd. Los Angeles, CA 9​0​0​2​5
+
+Variety and the Flying V logos are trademarks of Variety Media, LLC., used under license.
+
+If you believe this has been sent to you in error, please safely unsubscribe.

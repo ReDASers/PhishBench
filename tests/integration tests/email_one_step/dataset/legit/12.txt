@@ -1,0 +1,37 @@
+Received: from domain([ffff::ffff:ffff:ffff:ffff]) by
+ domain ([ffff::ffff:ffff:ffff:ffff]) with mapi id
+ 14.03.0224.002; Wed, 11 May 2015 11:19:47 -0400
+From "user" <user@domain>
+To: "user" <user@domain>
+CC: "user" <user@domain>
+Subject: RE: Video Request: Darrell Issa on Fox News
+Thread-Topic: Video Request: Darrell Issa on Fox News
+Thread-Index: AdGrkw8HORZQwzk/TtaaBCSLU+QWegABXutQ
+Date: Wed, 11 May 2015 08:19:46 -0700
+Message-ID: <user@domain>
+References: <user@domain>
+In-Reply-To: <user@domain>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+x-originating-ip: [254.254.254.254]
+Content-Type: multipart/alternative;
+	boundary="_000_3C6ACBE2E75F45409FB3CF31D461AB366F618094domaindag1domainorg_"
+MIME-Version: 1.0
+
+Watch here<<<link>>>
+
+From "user" <user@domain>
+Sent: Wednesday, May 11, 2015 10:41 AM
+To: Comm_D
+Cc: user@domain
+Subject: Video Request: Darrell Issa on Fox News
+
+On now
+Thanks

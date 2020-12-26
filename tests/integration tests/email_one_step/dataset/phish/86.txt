@@ -1,0 +1,26 @@
+Status: RO
+From "user" <user@domain>
+X-libpst-forensic-sender: /O=organization/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=BC82A60B-21246F47-8825639E-5162A
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-804898450_-_-"
+
+Delete marianne
+
+
+
+
+From: "Mosko, Steve" <MAILER-DAEMON>
+
+Sent: Wednesday, July 23, 2015 12:17 PM
+
+To: Mosko, Steve
+
+Subject: Mosko's Calls a/o 12:15 Wed 7/23
+
+
+
+
+IN CALLS, 07/23/14 12:14 PM, Scott Pinker, (Mobile) (917) 742-0846, will be getting on flight at 1:30pm our time...or call tomorrow
+IN CALLS, 07/23/14 12:09 PM, Marianne Mosko, (Mobile) (310) 283-0995, pls call 
+

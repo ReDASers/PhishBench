@@ -1,0 +1,64 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Wed, 16 Apr 2015 12:09:22 -0700
+Received: from domain(domain [254.254.254.254])	by
+ domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s3GJ9M4B006126	for <user@domain>; Wed, 16 Apr 2015 
+ 19:09:22 GMT
+Received: from domain(domain [254.254.254.254])	by domain
+ (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id s3GJAVgO024031
+	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128 verify=FAIL)	for
+ <user@domain>; Wed, 16 Apr 2015 19:10:31 GMT
+Received: from domain(domain [254.254.254.254])	by
+ mail198-va3-domain (Postfix) with ESMTP id 00CB84603B0	for
+ <user@domain>; Wed, 16 Apr 2015 19:08:40 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:254.254.254.254;KIP:(null);UIP:(null);IPV:NLI;H:omp.notices.rei.com;RD:omp.notices.rei.com;EFVD:NLI
+X-SpamScore: -14
+X-BigFish: vps-14(zze0eah77f5hzz1f42h2148h1ee6h1de0h1fdahe00W2073h2146h1202h1e76h2189h1d1ah1d2ah1fc6h208chzz8275ch1de098h17326ah8275bh1bc7b9h8275dh1de097h186068h172c6ch1ce121iz2fheh5eh5fh839h93fh950hd25h107ah10d2h1288h12a5h137ah13b6h13eah1441h1537h153bh162dh1631h1758h18e1h1946h19b5h1b0ah224fh1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e1dh1fe8h1ff5h2216h2336h2438h2461h2487h24d7h2516h2545h255dh25f6h2605h268bh26d3h1155h)
+X-FFO-Routing-Override: domain%sentrionwest-domain;
+Received-SPF: pass (mail198-va3: domain of domain designates 254.254.254.254 as permitted sender) client-ip=254.254.254.254; user@domain; helo=omp.notices.rei.com ;domain ;
+Received: from domain(domain [254.254.254.254]) by mail198-va3
+ (MessageSwitch) id 1397675317142912_11104; Wed, 16 Apr 2015 19:08:37 +0000
+ (UTC)
+Received: from domain(domain [254.254.254.254])	by
+ mail198-domain (Postfix) with ESMTP id 1A7A8320167	for
+ <user@domain>; Wed, 16 Apr 2015 19:08:37 +0000 (UTC)
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server id 254.254.254.254; Wed, 16 Apr 2015 
+ 19:08:34 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=rei; d=notices.rei.com;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:To:From "user" <user@domain>
+ bh=oow9TTAg3/esu+ucLiIrJ3uqV5g=;
+ b=rldN7H7sjf+uW/QAvq8NFocGnyzVmDVd1K47g59zfc38LTyUsWs9772PPPzGGztJ0my6zqlgmfJh
+   iThTItKMC+Pyoph6O95rCWVJL/OMawi8fGYrwjE7h6os3l4e9DJm7Qhur4cRtY2tnLaxja8gOXtZ
+   powon+yzX1lC/ZQh+V8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=rei; d=notices.rei.com;
+ b=kI4vt/STYJMMait6tfXUJLe6tYveXxbLaw1ei0Mveu0kB0Mw6dDh06WlSqTX0gHJQI2wwZiOXOUa
+   QjuRW4ZMH5obHZk+PrcKUBFa1FUiOF4AnCN3q9AR9kMJsXdqYuxW1ASR1/5Sb6cvFMtmGyXxt2/b
+   QjH0btxGy2Vpstu5hXA=;
+Received: by omp.notices.rei.com id h9ralm1607gq for
+ <user@domain>; Wed, 16 Apr 2015 12:09:15 -0700 (envelope-from
+ <user@domain>)
+Date: Wed, 16 Apr 2015 12:09:15 -0700
+To: <user@domain>
+From "user" <user@domain>
+Reply-To: "user" <user@domain>
+Subject: Member Exclusive: Get a $20 Bonus Card When You Spend $100
+List-Unsubscribe: <user@domain>
+X-sgxh1: HuPXiHkJHtxkiLQkhgPQJhu
+X-rext: 4.interact5.EpZdmRVK5W-Pgh9H4kUwf6lz_ybulKUJpkQ970
+X-cid: rei.10019549
+Message-ID: <user@domain>
+Return-Path: user@domain
+Status: RO
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+Now is a Great Time to Get New Gear   |   View with Images 
+
+ <<link>>     
+REI®
+
+        FREE SHIPPING on your order of $50 or more. 
+
