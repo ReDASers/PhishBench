@@ -1,0 +1,59 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Thu, 24 Apr 2015 18:32:08 -0700
+Received: from domain(domain [254.254.254.254])	by
+ domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s3P1W724032212	for <user@domain>; Fri, 25 Apr 2015 
+ 01:32:08 GMT
+Received: from domain(domain [254.254.254.254])
+	by domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s3P1XdC4006592	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128
+ verify=FAIL)	for <user@domain>; Fri, 25 Apr 2015 01:33:40 GMT
+Received: from domain(domain [254.254.254.254])	by mail80-co9-domain
+ (Postfix) with ESMTP id 19524360451	for <user@domain>; Fri, 25
+ Apr 2015 01:31:01 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:254.254.254.254;KIP:(null);UIP:(null);IPV:NLI;H:domain;RD:domain;EFVD:NLI
+X-SpamScore: -6
+X-BigFish: vps-6(zzc89bhc85fhe0eah758I77f5hfd3Izz1f42h2148h1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah1fc6h208chzz8275ch1de098h1def03h17326ah16fI1def87h8275bh1bc7b9h8275dh1def86h1de097h186068h172c6ch1ce121iz2fh11bfMeh839hc60hc61hd24h107ah1288h12a5h137ah13eah1441h1504h1537h153bh158dh162dh1631h1758h18e1h1946h19b5h1b0ah1bceh224fh1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e1dh1fe8h1ff5h20f0h2216h2336h2438h2461h2487h24d7h2516h2545h25f6h2605h268bh26d3h2673i1155h)
+X-FFO-Routing-Override: domain%sentrionwest-domain;
+Received-SPF: pass (mail80-co9: domain of domain designates 254.254.254.254 as permitted sender) client-ip=254.254.254.254; user@domain; helo=domain ;domain ;
+Received: from domain(domain [254.254.254.254]) by mail80-co9
+ (MessageSwitch) id 1398389458937870_18547; Fri, 25 Apr 2015 01:30:58 +0000
+ (UTC)
+Received: from domain(domain [254.254.254.254])	by
+ mail80-domain (Postfix) with ESMTP id D72D940050	for
+ <user@domain>; Fri, 25 Apr 2015 01:30:58 +0000 (UTC)
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Fri, 25 Apr 2015 01:30:58 +0000
+Received: by domain id hb6th6163hsv for
+ <user@domain>; Thu, 24 Apr 2015 19:32:03 -0600 (envelope-from
+ <user@domain>)
+From "user" <user@domain>
+To: <user@domain>
+Subject: A Closer Look At Hawaii, Direct From Our Guests
+Date: Thu, 24 Apr 2015 19:32:03 -0600
+List-Unsubscribe: <user@domain>
+x-job: 6183894_244483
+Message-ID: <user@domain>
+Return-Path: 
+ user@domain
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+If you cannot read this message correctly, please click here. 
+
+Please add user@domain to your address book to make sure you don't miss any additional offers. 
+
+lr_logo         
+
+ <<link>>
+ Get the Inside Scoop   
+
+Amy,
+
+Ever wonder what it's like to stay in one of our Hawaiian villas?
+
+Here's a closer look, direct from Luxur
+

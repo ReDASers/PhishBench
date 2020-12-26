@@ -1,0 +1,39 @@
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server id 254.254.254.254; Thu, 19 May 2015 
+ 20:05:51 -0400
+Received: from domain(domain [254.254.254.254])	by domain
+ (Postfix) with ESMTP id C32B0242DC;	Thu, 19 May 2015 20:05:47 -0400 (EDT)
+X-Original-To: user@domain
+Delivered-To: user@domain
+Received: from domain(domain [254.254.254.254])	by
+ domain (Postfix) with ESMTP id 1765523F0F	for
+ <user@domain>; Thu, 19 May 2015 20:05:46 -0400 (EDT)
+Received: from domain([ffff::ffff:ffff:ffff:ffff]) by
+	domain ([ffff::ffff:ffff:ffff:ffff]) with mapi id 14.03.0224.002; Thu, 19 May 2015 
+	20:05:49 -0400
+From "user" <user@domain>
+To: "user" <user@domain>
+Subject: Trump: Leave It To Me
+Thread-Topic: Trump: Leave It To Me
+Thread-Index: AdGyKuW8wJ6mH4a3Te6B+IqR/BNOEA==
+Date: Fri, 20 May 2015 00:05:49 +0000
+Message-ID: <user@domain>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [254.254.254.254]
+X-BeenThere: user@domain
+X-Mailman-Version: 2.1.12
+Precedence: list
+Reply-To: <user@domain>
+Content-Type: multipart/mixed;
+	boundary="===============6516006321811064903=="
+Sender: <user@domain>
+Errors-To: user@domain
+Return-Path: user@domain
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+To be automatically unsubscribed from this list, please email: user@domain

@@ -1,0 +1,58 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Tue, 20 Jan 2015 11:20:33 +0100
+Received: from domain(domain [254.254.254.254])	by
+ domain (Postfix) with ESMTP id 8F3CF60021	for
+ <user@domain>; Tue, 20 Jan 2015 10:00:27 +0000 (GMT)
+Received: by domain (Postfix)	id 7D1AA2BC226; Tue, 20 Jan 2015 
+ 11:20:33 +0100 (CET)
+Delivered-To: user@domain
+Received: from domain(domain [254.254.254.254])	(using TLSv1 with cipher
+ AES256-SHA (256/256 bits))	(No client certificate requested)	by
+ domain (Postfix) with ESMTPSA id 62CE02BC0F1;	Tue, 20 Jan 2015 
+ 11:20:33 +0100 (CET)
+From "user" <user@domain>
+To: "user" <user@domain>
+CC: "user" <user@domain>,
+	"user" <user@domain>, "user" <user@domain>, "user" <user@domain>
+References: <user@domain>
+In-Reply-To: <user@domain>
+Subject: R: Invoices Balance
+Date: Tue, 20 Jan 2015 11:20:31 +0100
+Message-ID: <user@domain>
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdAxn7D8iqHJYbivT1O11SQ7vjGIvgC+tX0A
+Content-Language: it
+Return-Path: user@domain
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 10
+Status: RO
+X-libpst-forensic-sender: /O=domain/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=EMAD SHEHATA450
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-861515099_-_-"
+
+Dear Mesfer, trust this e-mail find you well. Please let us know about the invoice balance as detailed here from our Financial Controller.Your prompt response will be really appreciate. Best regards  Emad Shehata
+Key Account Manager
+
+organization
+Milan Singapore Washington DC
+domain
+
+email: user@domain
+mobile: +39 3357939078
+phone: +39 0229060603     Da: Simonetta Gallucci [mailto:user@domain] 
+Inviato: venerdì 16 gennaio 2015 16:19
+A: 'Mesfer S. Al Mesfer'
+Cc: user@domain; 'Giancarlo Russo'; 'Elisabetta Ciceri'; 'Marco Bettini'; 'Emad Shehata'
+Oggetto: Invoices Balance Dear Mesfer,  as anticipated by our Account Manager Emad I write to request you an update about our invoices balance.  Here below a short recap of the situation:  Invoice No. AmountCollected amountBalance157/2012€ 370.500,00€ 351.975,00€ 18.525,00045/2013€ 28.500,00€ 18.525,00€ 9.975,00048/2013€ 39.000,00€ 33.150,00€ 5.850,00 From an accounting point of view, the income of eur 18.525,00 received on Jan. 21st 2015 should be allocated to balance our invoice No. 157/2012, instead of considering it as an advanced payment for the invoice No. 045/2013.  It means that for us the invoice No. 045/2013 is totally due and it remains also a balance to receive for the invoice No. 048/2013 (eur. 5.850); expected total amount is eur 34.350. If it was applied a withhold tax, we need to receive as soon as possible the related certificate; otherwise we consider the pending balance abovementioned.  I kindly request you to give me a feedback about this matter by next Wednesday, in order to solve it.Best regards,  Simonetta Gallucci 
+Financial Controller 
+
+organization
+Milan Singapore Washington DC
+domain
+
+email: user@domain 
+mobile: +39 3939310619
+phone: +39 0229060603 

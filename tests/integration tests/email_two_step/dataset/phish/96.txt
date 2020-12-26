@@ -1,0 +1,101 @@
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server (TLS) id 254.254.254.254; Mon, 2 May
+ 2015 15:30:51 -0400
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server id 254.254.254.254; Mon, 2 May 2015 
+ 15:30:48 -0400
+Received: from [254.254.254.254] (HELO domain)  by
+ domain (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 891917658
+ for user@domain; Mon, 02 May 2015 14:30:52 -0500
+X-Note-AR-ScanTimeLocal: 5/2/2016 2:30:51 PM
+X-Policy: domain
+X-Primary: user@domain
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-Virus-Scan: V-
+X-Note: SPF: IP:254.254.254.254 DOM:merkley.senate.gov ADDR:user@domain
+X-Note: SPF: Pass
+X-Note: ICH-CT/SI:0-3096/SG:4 5/2/2016 2:30:43 PM
+X-Note-SnifferID: 0
+X-Note: TCH-CT/SI:0-938/SG:14 5/2/2016 2:30:43 PM
+X-GBUdb-Analysis: 0, 254.254.254.254, Ugly c=0.593131 p=-0.683544 Source Normal
+X-Signature-Violations: 0-0-0-21089-c
+X-Note-419: 0 ms. Fail:0 Chk:1324 of 1324 total
+X-Note: SCH-CT/SI:0-1324/SG:1 5/2/2016 2:30:45 PM
+X-Note: Spam Tests Failed: 
+X-Country-Path: ->->United States->United States->
+X-Note-Sending-IP: 254.254.254.254
+X-Note-Reverse-DNS: p-ess-domain
+X-Note-Return-Path: user@domain
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G282 G283 G406 G418 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: VALID
+X-Note: Headers Injected
+Received: from domain([254.254.254.254] verified)  by
+ domain (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 138336773
+ for user@domain; Mon, 02 May 2015 14:30:51 -0500
+Return-Path: <user@domain>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=domain;
+	s=senate-msb1604; t=1462217448;
+	bh=EKiH0um9lI9ioQFNX9WJYqTlx3ycnTE5YmsDvkc850E=;
+	h=From "user" <user@domain>
+	b=llJeeDNUp/1IKFhR22KGyoRKC36TqgRTAZCS5g+ROYImA/5bBBG/4HbjVR3lzFhXB
+	 NiicZJoSDvGgSNXvfq4R/zJcfCHQ8+fezc3Naotm6IVtqwMi5BcsECC+c3JXGwAlvw
+	 6JrtapsFjL9b8FrZi328etJQrtY07jP5UYrNlq2I=
+Authentication-Results: p-ess-domain x-tls.subject="/CN=P-ESS-SEN-EX16"; auth=fail (cipher=AES256-SHA)
+Received: from [254.254.254.254] ([254.254.254.254:16353]
+ helo=P-ESS-SEN-EX16.senate.ussenate.us)	by p-ess-domain
+ (envelope-from <user@domain>)	(ecelerity 254.254.254.25428
+ r(Core:254.254.254.254)) with ESMTPS (cipher=AES256-SHA	subject="/CN=P-ESS-SEN-EX16")
+ 	id 1C/3F-22882-8EAA7275; Mon, 02 May 2015 15:30:48 -0400
+Received: from domain(254.254.254.254) by
+ P-ESS-SEN-EX16.senate.ussenate.us (254.254.254.254) with Microsoft SMTP Server
+ (TLS) id 15.0.1130.7; Mon, 2 May 2015 15:30:48 -0400
+Received: from domain([ffff::ffff:ffff:ffff:ffff])
+ by P-ESS-SEN-EX14.senate.ussenate.us ([ffff::ffff:ffff:ffff:ffff]) with
+ mapi id 15.00.1130.005; Mon, 2 May 2015 15:30:47 -0400
+From "user" <user@domain>
+To: "user" <user@domain>
+Subject: Following up
+Thread-Topic: Following up
+Thread-Index: AdGkqNvrpvn3EFmkQU6eX6Jd0icMEg==
+Date: Mon, 2 May 2015 19:30:47 +0000
+Message-ID: <user@domain>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [254.254.254.254]
+Content-Type: multipart/related;
+	boundary="_007_048f98837b6d4b67875caf88e64fbf37PESSSENEX14senateussena_";
+	type="multipart/alternative"
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+Hi User,
+It was great meeting you this weekend. I wanted to follow up with you and s=
+ee if you might be free to grab coffee and chat sometime.
+
+Thanks and I look forward to catching up.
+Best,
+Ray
+_______________________________________________
+Raymond F. Zaccaro
+Communications Director
+Office of Senator Jeff Merkley
+313 Hart Senate Office Bldg.
+Washington, DC 20510 | (202) 224.3753
+user@domain<user@domain>
+[<<link>>:ANd9GcRP2L8_F-3t_-RakEV5cDTJR6zNgGzo6=
+Ownb-bFTUWNc8cGBQGsZg]<<<link>>>          [<<link>>
+domain/wp-content/uploads/2011/03/twitter_icons_256.png]=
+ <<<link>>>           [<<link>>
+wp-content/uploads/2010/04/email-icon1-150x150.jpg] <<<link>>
+gov/newsletter/>           [YouTube] <<<link>>
+domain/iqClickTrk.aspx?&cid=3Dquorum_merkley-iq&crop=3D14341.6838385.6160440=
+.7034769&redirect=3D<<link>>>
+

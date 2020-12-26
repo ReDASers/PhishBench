@@ -1,0 +1,94 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Tue, 27 May 2015 06:09:08 -0700
+Received: from domain(domain [254.254.254.254])	by
+ domain (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+ ESMTP id s4RD970t013321	for <user@domain>; Tue, 27 May 2015 
+ 13:09:07 GMT
+Received: from domain(domain [254.254.254.254])	by domain
+ (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id s4RDAjlX029515
+	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128 verify=FAIL)	for
+ <user@domain>; Tue, 27 May 2015 13:10:45 GMT
+Received: from domain(domain [254.254.254.254])	by mail90-va3-domain
+ (Postfix) with ESMTP id E92421E0188	for <user@domain>; Tue, 27
+ May 2015 13:09:06 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:254.254.254.254;KIP:(null);UIP:(null);IPV:NLI;H:mx-about-domain;RD:mx-about-domain;EFVD:NLI
+X-SpamScore: 10
+X-BigFish: vps10(z579eh34f1m55a8kzc89bh758Ic857hc545Idbb0izz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah1fc6hzz8275ch1d7338h1de098h1def03h17326ah1def87h8275bh1bc7b9h8275dh1defc1h1def86h1de097h186068h172c6ch1ce120h1a691ciz2fheh5fh839he5bh1288h12a5h137ah139eh13eah1441h14ddh1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1b0ah1bceh224fh1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e1dh1e23h1fe8h1ff5h20f0h2218h2216h226dh24afh2327h2336h2438h2461h2487h24d7h2516h2545h2565h25f6h2605h268bh26d3h27e2h282bh28a1h214ai24c8i)
+X-FFO-Routing-Override: domain%sentrionwest-domain;
+Received-SPF: pass (mail90-va3: domain of domain designates 254.254.254.254 as permitted sender) client-ip=254.254.254.254; user@domain; helo=mx-about-domain ;domain ;
+Received: from domain(domain [254.254.254.254]) by mail90-va3
+ (MessageSwitch) id 1401196143575232_10870; Tue, 27 May 2015 13:09:03 +0000
+ (UTC)
+Received: from domain(domain [254.254.254.254])	by
+ mail90-domain (Postfix) with ESMTP id 621552C0060	for
+ <user@domain>; Tue, 27 May 2015 13:09:03 +0000 (UTC)
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Tue, 27 May 2015 13:08:54 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; s=mt; d=domain;
+ h=Date:From "user" <user@domain>
+ bh=lpN/lcRC1xvmOfEMBFCyg1jHrxk=;
+ b=lJ8NTIhrpIsKljpMlh99oUh5IlWBfR5sFEE+o5gSwkIUt/Wvny8FOChGpoL76RWTuj9DOsQAttOH
+   KJhZA9OCIka91yJMk66HKN8t5PHrWRUpVPcVViKuOR/GJFH+fDdq1B5gGZzKIN3c6XZwCrIvgxMk
+   pxOB4V2jtgrEiKClUzQ=
+Received: from domain(254.254.254.254) by
+ mx-about-domain id hgi7741qqbs1 for <user@domain>; Tue,
+ 27 May 2015 09:09:06 -0400 (envelope-from <user@domain>)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; t=1401196124;
+	s=sailthru; d=variety.com;
+	h=Date:From "user" <user@domain>
+	bh=m8QfzhcNF7mT8cRSYsFq+r+CufCkx+f4jclw0N1n03Q=;
+	b=H33h9+yxJLP6eBtMuu22T/OdFfCfgDYdhjjMJJOsUq2Za3qXNFVCdRzIkwfd/+b0
+	1FUgc0tND8s9ASJigKvOAfYmkadCO24tgCvBr9O22pX7z8VsPaWhBUgEYoEoAhdpgbn
+	Kqauie23UxtarsW3xt6s1XcxqUgscm/xKP5olNuI=
+Date: Tue, 27 May 2015 09:08:44 -0400
+From "user" <user@domain>
+To: <user@domain>
+Message-ID: <user@domain>
+Subject: 'Mad Men' Q&A with Matthew Weiner: 'Life and Death Are Bigger than
+ Money'
+Precedence: bulk
+X-TM-ID: 20140527130844.2688189.18739
+X-Info: Message sent by domain customer Variety
+X-Info: We do not domain unsolicited commercial email
+X-Info: Please report abuse by forwarding complete headers to
+X-Info: user@domain
+X-Mailer: domain
+X-JMailer: nyp1-p-p4137-prd-jma-02.sailthru.pvt
+X-IADB-IP: 254.254.254.254
+X-IADB-IP-REVERSE: 254.254.254.254
+X-IADB-URL: <<link>>
+X-Unsubscribe-Web: <<link>>
+List-Unsubscribe: <user@domain>
+X-rpcampaign: stcoy2688189
+Return-Path: user@domain
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+Matthew Weiner spent most of Memorial Day in his office writing the final-finale of “Mad Men,” t... 
+
+​ 
+
+Variety         
+
+Breaking News   
+
+Tuesday, May 27, 2015   
+
+​ 
+
+<<link>> 
+
+        'Mad Men' Q&A with Matthew Weiner: 'Life and Death Are Bigger than Money'               
+
+        Matthew Weiner spent most of Memorial Day in his office writing the final-finale of “Mad Men,” the day, as fans parsed the state ...            
+        Full Story              
+
+
+
+
+Check out the redesigned Variety411      <<link>>         
+This email was sent to user@domain by Variety. To ensure delivery to your inbox (and no
+

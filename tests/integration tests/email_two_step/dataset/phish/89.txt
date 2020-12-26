@@ -1,0 +1,46 @@
+From "user" <user@domain>
+To: "User"
+Subject: Get a sleek and powerful PC for only $299
+Date: Wed, 8 Oct 2015 19:25:46 -0400
+Message-ID: <user@domain>
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQJTlV81+9lViP9rdSC8g6kJhobx2A==
+Content-Language: en-us
+x-ms-exchange-organization-authas: Internal
+x-ms-exchange-organization-authsource: domain
+x-ms-exchange-organization-authmechanism: 10
+x-forefront-antispam-report: CIP:254.254.254.254;CTRY:US;IPV:NLI;EFV:NLI;SFV:NSPM;SFS:(438002)(22564002)(189002)(199003)(3905003)(77096002)(107046002)(98436002)(229853001)(92726001)(110136001)(19627405001)(106466001)(106796001)(567944001)(102836001)(87836001)(19618635001)(85852003)(31696002)(47976999)(99396003)(19580395003)(54356999)(15395725005)(15975445006)(50986999)(31966008)(36036004)(21056001)(575784001)(512874002)(80022003)(146001)(76482002)(946001)(4396001)(85306004)(15202345003)(19617315012)(104016003)(44976005)(64706001)(31686004)(33646002)(110456001)(20776003)(2351001)(120916001)(84326002)(15187005004)(92566001)(19273905006)(71186001)(18206015026)(55176004)(46102003)(101616003)(956001)(107886001)(19300405004)(42186005)(7059025)(82556003)(16953001)(562404015)(90702002)(563064011)(18926415006);DIR:INB;SFP:;SCL:1;SRVR:BY2FFO11HUB002;H:mta22.microsoftstoreemail.com;FPR:;MLV:sfv;PTR:mta22.microsoftstoreemail.com;MX:1;A:0;LANG:en;
+dkim-signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=102420140131; d=domain; h=From "user" <user@domain>
+received-spf: Pass (domain: domain of domain designates 254.254.254.254 as permitted sender) receiver=domain; client-ip=254.254.254.254; helo=mta22.microsoftstoreemail.com;
+domainkey-signature: a=rsa-sha1; c=nofws; q=dns; s=200608; d=microsoftstoreemail.com; b=oCwuoQumCHcOqX36gKlSPYkWDk7kQUsSR5WiZou59KLApXJLfg1WigbA5XjHSkhdzrBF5WZS2A+A   WE5IQ+XYbEHC2uU11jRiVHxkQmCZxwEiFVGZcxkha2/rg2D+4TPvGo4GJCDehJoD96Z2o8+02H7g   +BKPMrtUBMCcCTZUO8c=;
+authentication-results: spf=pass (sender IP is 254.254.254.254) user@domain; 
+x-microsoft-antispam: BCL:3;PCL:0;RULEID:(50001);SRVR:BY2FFO11HUB002;
+x-eopattributedmessage: 0
+List-Unsubscribe: <user@domain>
+x-job: 10359607_3103690
+x-domain: domain
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1369549809_-_-"
+
+Check out the HP Stream 14
+
+ View in a browser
+
+Your Microsoft Retail Store Westfield Century City
+Hours, events, and more
+
+By subscribing, you voluntarily authorize Microsoft to send you advertisements or telemarketing messages using an automated telephone dialing system to the mobile phone number you have provided to Microsoft. You are not required to agree to this in order to buy products from Microsoft. You'll get up to 10 messages per month. Message and data rates may apply. Reply STOP to 29502 to end all messages. Reply HELP to any message or text HELP to 29502 to receive help. View the full terms and conditions. 
+
+Apps from Windows Store; vary by market.
+
+Share your enthusiasm and join our team. View all careers at the Microsoft retail store.
+
+Microsoft respects your privacy. Please view our online Privacy Statement.
+
+If you would prefer not to receive future promotional emails from Microsoft and its family of companies please click here to unsubscribe. These settings will not affect any newsletters you've requested or any mandatory service communications that are considered part of certain Microsoft services.
+
+To set your contact preferences domain the Promotional Communications Manager.
+
+Microsoft Corporation, One Microsoft Way, Redmond, WA, 98052, USA
+

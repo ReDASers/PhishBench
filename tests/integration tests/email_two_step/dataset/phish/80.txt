@@ -1,0 +1,48 @@
+Received: from domain(254.254.254.254) by
+ domain (254.254.254.254) with Microsoft SMTP Server id
+ 254.254.254.254; Wed, 11 Feb 2015 11:48:50 +0100
+Received: from domain(domain [254.254.254.254])	by
+ domain (Postfix) with ESMTP id DCCA760063;	Wed, 11 Feb 2015 
+ 10:27:56 +0000 (GMT)
+Received: by domain (Postfix)	id A6AD12BC0F1; Wed, 11 Feb 2015 
+ 11:48:50 +0100 (CET)
+Delivered-To: user@domain
+Received: from domain(domain [254.254.254.254])	(using TLSv1 with cipher
+ AES256-SHA (256/256 bits))	(No client certificate requested)	by
+ domain (Postfix) with ESMTPSA id 940572BC0DD;	Wed, 11 Feb 2015 
+ 11:48:50 +0100 (CET)
+From "user" <user@domain>
+To: "user" <user@domain>
+CC: <user@domain>
+References: <user@domain> <user@domain> <user@domain> <user@domain> <user@domain> <user@domain>
+In-Reply-To: <user@domain>
+Subject: R: E Rabe GOES
+Date: Wed, 11 Feb 2015 11:48:50 +0100
+Message-ID: <user@domain>
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdBEd5Lkh4SShKnVSTmQbPo0ndE7KABcKqPQ
+Content-Language: it
+Return-Path: user@domain
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 10
+Status: RO
+X-libpst-forensic-sender: /O=domain/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=LUCIA RANA9CB
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-1252371169_-_-"
+
+Sorry Eric, may you let me know the missing info about your GEP card? Thanks a lot!Lucia Da: Lucia [mailto:user@domain] 
+Inviato: lunedì 9 febbraio 2015 15:49
+A: Eric Rabe
+Cc: user@domain
+Oggetto: Re: E Rabe GOES Hi Eric,Could a center- Town hotel be fine for all your stay in London?Regarding your Gep Card, the agency needs to know which air company it is associated to, may you give me this info?Thanks a lot!Lucia 
+Inviato da iPad
+Il giorno 05/feb/2015, alle ore 20:25, "user" <user@domain> ha scritto:Working on a couple of clubs that I might stay in through arrangements here in the US.  But I’d be interested in what you and the travel agent might recommend. Thanks for the offer of help, Eric   Eric Rabe_________________________________________________________tel: 215-839-6639mobile: 215-913-4761Skype: user@domain     On Feb 5, 2015, at 11:58 AM, "user" <user@domain> wrote: Hi Eric, did you decide something about your hotel in London, during your stop from Dubai?Should you need any help, feel free to ask. Lucia Da: Eric Rabe [mailto:user@domain] 
+Inviato: giovedì 5 febbraio 2015 15:00
+A: Lucia Rana
+Cc: user@domain
+Oggetto: Re: E Rabe GOES Thanks so much, and have a good rest of your day. Eric Rabe_________________________________________________________tel: 215-839-6639mobile: 215-913-4761Skype: user@domain     On Feb 5, 2015, at 4:15 AM, "user" <user@domain> wrote: Dear Eric, thanks for the info, I inform the travel agency asap.VISA is not required for entering UAE and Singapore, only passport it. Best regards,Lucia Da: Eric Rabe [mailto:user@domain] 
+Inviato: mercoledì 4 febbraio 2015 23:50
+A: Lucia Rana
+Oggetto: E Rabe GOES Hi, Lucia, I am now a member of the Global Entry Program, a US government program to allow me to more quickly enter and leave the USA.   Please advise our travel agent that when making reservations for me, they should use my membership number when buying tickets for flights:                    Rabe: Global Entry program Membership #985038824 I’m not quite sure how this works from Italy, but here, there is generally a place to enter that number when buying tickets online: Also — Do you know whether a visa is required for the UAE or for Singapore? Many thanks, Eric    

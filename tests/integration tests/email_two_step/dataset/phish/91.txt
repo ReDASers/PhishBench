@@ -1,0 +1,25 @@
+From "user" <user@domain>
+To: <user@domain>
+Subject: Logo BlackBerry
+Date: Fri, 1 Feb 2015 15:05:04 +0200
+Organization: organization
+Message-ID: <user@domain>
+X-Mailer: Microsoft Outlook 15.0
+Thread-Index: AQLVT4ZSwjR5yzP9pbri1NuDqAOF6Q==
+Content-Language: it
+X-OlkEid: 000000007D2091DA92D3914ABB4C05769578F479070034AD76187591974DBF6C4F76951C873A0100040000000000A96A85A9D2A04643865EB2097E3CF3A3000000004F5C0000C508A6F6DF0CD341956A40818102170E
+Status: RO
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="--boundary-LibPST-iamunique-615933390_-_-"
+
+In allegato. --
+Alessandro Scarafile
+Field Application Engineer
+
+organization
+Milan Singapore Washington DC
+domain
+
+email: user@domain: +39 3386906194 
+phone: +39 0229060603 

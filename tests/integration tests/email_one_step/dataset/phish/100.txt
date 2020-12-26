@@ -1,0 +1,89 @@
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server (TLS) id 254.254.254.254; Fri, 6 May
+ 2015 14:51:15 -0400
+Received: from domain(254.254.254.254) by domain
+ (254.254.254.254) with Microsoft SMTP Server id 254.254.254.254; Fri, 6 May 2015 
+ 14:51:14 -0400
+Received: from [254.254.254.254] (HELO domain)  by
+ domain (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 901244598;
+ Fri, 06 May 2015 13:51:18 -0500
+X-Note-AR-ScanTimeLocal: 5/6/2016 1:51:18 PM
+X-Policy: domain
+X-Policy: domain
+X-Policy: domain
+X-Primary: user@domain
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-Virus-Scan: V-
+X-Note: SPF: IP:254.254.254.254 DOM:gmail.com ADDR:user@domain
+X-Note: SPF: Pass
+X-Note-SnifferID: 0
+X-Note: TCH-CT/SI:0-116/SG:2 5/6/2016 1:50:37 PM
+X-GBUdb-Analysis: Unknown
+X-Signature-Violations: 0-0-0-2884-c
+X-Note-419: 0 ms. Fail:0 Chk:1324 of 1324 total
+X-Note: SCH-CT/SI:0-1324/SG:1 5/6/2016 1:50:58 PM
+X-Note: Spam Tests Failed: 
+X-Country-Path: ->->United States->
+X-Note-Sending-IP: 254.254.254.254
+X-Note-Reverse-DNS: mail-qg0-domain
+X-Note-Return-Path: user@domain
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G276 G277 G278 G279 G283 G284 G407 G675 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: VALID
+X-Note: Headers Injected
+Received: from domain([254.254.254.254] verified)  by
+ domain (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 139272150;
+ Fri, 06 May 2015 13:51:17 -0500
+Received: by domain with SMTP id f92so60999684qgf.0;
+        Fri, 06 May 2015 11:51:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=From "user" <user@domain>
+         :to;
+        bh=Cjf9yYnC+Co6MYsj23LWZ7oG8GCj2kUSbERzhIfvbT0=;
+        b=u8fmU1NWjhJHF1rBvt7B40/U8SrgoWOEqPK+wkmYY1b/RTlvD4rsN1v5U6t7i388cx
+         6ETt9m9nhph+pYkcgLGeGthgFijbNgrcK6ciBoPRu9ujTXT66g6XeEvgw4BOH1ZjBjD/
+         v8GFRR+QECqPb0kgjkR4sfaVL+BQWOaz7K6Uy2lxfbq7eGRznf43NtjE84ZP6ZvPoyUA
+         ugZJDL9zcVgrWpFXQmk2fZPFE3skQ2LdQjYx8wXqfNrHwIPdjUyAc8CDokY75F9VEmcC
+         /QIP0dm0ue6y/81eYsGETVUjvqrjM4U/a0OW2jT4nFNWOEu6VX+LTOBMS4ZcpJcvhSOG
+         mpzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20130820;
+        h=x-gm-message-state:From "user" <user@domain>
+         :subject:message-id:date:to;
+        bh=Cjf9yYnC+Co6MYsj23LWZ7oG8GCj2kUSbERzhIfvbT0=;
+        b=TYsOr2//7+E6807RcU7FQgu54To377xBIfxfoMW3TEjExJWO3FRSx0DK9JNoeq3cVH
+         RLuNHy0l7JnsJ30GuUFfbAE6BABfTauAEnIFzAVWMHhvRR5k5iO3CsvL1quRWAG8eZIR
+         C/obJUuiLPoOtO49yy4dpU0C20+WtWNx+hxWTFUxN8CWMRXFltJxo/odYsN48YdkCf5n
+         CpkWceouQJZFkTNjMwh0wEmhEHLQwMNqaZL8q0D/2KXp5nKsl+ew/JJuYlGdzWQvbGjT
+         B0T9ZYpOmM6Jp823MgyyGRHCdcBkhUhnnUprE7aOymLt1Vhb2CUMSL6X2zrPACaPb9Uy
+         R8DA==
+X-Gm-Message-State: AOPr4FWLjzt7NihIDHdSFXXUN9/plsEgNher04OSKoF7SII68VQ7UcX862CqJVYWqILFQg==
+X-Received: by domain with SMTP id q107mr21302338qgd.61.1462560674443;
+        Fri, 06 May 2015 11:51:14 -0700 (PDT)
+Return-Path: <user@domain>
+Received: from ?IPv6:2604:2000:8082:e400:53a:f550:3775:b5e8?
+ ([ffff::ffff:ffff:ffff:ffff])        by domain with
+ ESMTPSA id x6sm6294916qka.16.2254.254.254.254.51.12        (version=TLSv1/SSLv3
+ cipher=OTHER);        Fri, 06 May 2015 11:51:13 -0700 (PDT)
+From "user" <user@domain>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Subject: Thank you
+Message-ID: <user@domain>
+Date: Fri, 6 May 2015 14:51:12 -0400
+To: "user" <user@domain>
+X-Mailer: iPhone Mail (13E234)
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: domain
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+Just got your get well package. Thanks a lot. 
+
+At home recovering. Doing much better. I'll be back at work on Monday. 
+
+Tell everyone thank you. Miss you guys.
