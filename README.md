@@ -1,13 +1,13 @@
-The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
+The PhishBench platform extracts features from emails and URLs, run classifiers, and evaluates them using evaluation metrics.
 
 ![Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/Integration%20Test/badge.svg)
 ![Unit Test](https://github.com/ReDASers/Phishing-Detection/workflows/Unit%20Test/badge.svg)
 
 # Installation
 
-PhishBench requires Python 3.8 to run.
+PhishBench works on Python 3.7 and 3.8.
 
-To install the latest version, run
+To install the latest version on `master`, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git
 
@@ -19,11 +19,19 @@ For an example, to install version 1.1.4, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git@1.1.4
 
-# How to run PhishBench
+# How to run a PhishBench Basic Experiment 
 
+The PhishBench Basic experiment perfoms an experiment with the following workflow:
+
+1. Load the dataset
+2. Extract features
+3. Pre-process features
+4. Train classifiers on a training set
+5. Evaluate the trained classifiers on a held-out test set
 
 ## Make a config file
-First create a config file by running `make-phishbench-config`
+
+First create a config file by running the `make-phishbench-config` command. 
 
 ```
 usage: make-phishbench-config [-h] [-v] [-f CONFIG_FILE]
@@ -36,7 +44,6 @@ optional arguments:
   -f CONFIG_FILE, --config_file CONFIG_FILE
                         The name of the config file to generate.
 ```
-
 
 This will create a starter configuration file that dictates the execution of PhishBench. Then edit the config file to specify your settings.
 
@@ -57,7 +64,7 @@ Confusion_matrix = True
 Cross_validation = False
 ```
 
-## Run PhishBench Basic Experiment
+## Run Experiment
 ```
 usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
                   [-c]
@@ -76,8 +83,8 @@ optional arguments:
                         Do not wait for user's confirmation
 ```
 
-## Use PhishBench as a library
-For more advance control, you can use PhishBench as a library. To do so, import `phishbench` and the desired modules in your script and call the `initialize` function.
+# Use PhishBench as a library
+For experiments which deviate from the basic experiment workflow, you can also use PhishBench as a library. To do so, import `phishbench` and the desired modules in your script and call the `initialize` function.
 
 ```python
 import phishbench
