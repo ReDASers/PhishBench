@@ -50,13 +50,6 @@ jobs:
         Test-Path Test.ini
       working-directory: tests/integration tests/make-config
 
-    - name: Upload Config
-      uses: actions/upload-artifact@v2
-      with:
-        name: Generated Config
-        path: tests/integration tests/make-config/Test.ini
-        if-no-files-found: error
-
     - name: URL 1-Step test
       run: phishbench -f Test.ini -c
       working-directory: tests/integration tests/url_one_step
@@ -80,3 +73,12 @@ jobs:
         phishbench -f Test_A.ini -c
         phishbench -f Test_B.ini -c
       working-directory: tests/integration tests/email_two_step
+    
+    - name: Upload Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Integration Test ${{github.run_id}} - ${{runner.os}} Results
+        path: |
+            tests/integration tests/make-config/Test.ini
+            tests/integration tests/*/PhishBench Output/phishbench.log
+        if-no-files-found: error
