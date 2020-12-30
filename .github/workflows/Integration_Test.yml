@@ -77,8 +77,8 @@ jobs:
     - name: Upload Results
       uses: actions/upload-artifact@v2
       with:
-        name: Generated Config
+        name: Integration Test ${{github.run_id}} Results
         path: |
             tests/integration tests/make-config/Test.ini
-            tests/integration tests/*/*/PhishBench Output/phishbench.log
+            tests/integration tests/*/PhishBench Output/phishbench.log
         if-no-files-found: error
