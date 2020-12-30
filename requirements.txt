@@ -21,7 +21,6 @@ nltk==3.5
 langdetect==1.0.8
 beautifulsoup4==4.9.3
 dnspython==2.0.0
-DocumentFeatureSelection==1.5
 imbalanced-learn==0.7.0
 scikit_learn==0.23.1
 xgboost==1.2.1
