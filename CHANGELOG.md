@@ -6,10 +6,11 @@
 
 ## Minor changes
 
-* Cleaned up Dependencies
+* Updated Dependencies
     * Bumped Tensorflow version to 2.4.0
     * Removed DocumentFeatureSelection as a dependency 
     * Bumped tqdm version to 4.55.0
+    * Bumped xgboost version to 1.3.1
 
 # v2.0.0
 
