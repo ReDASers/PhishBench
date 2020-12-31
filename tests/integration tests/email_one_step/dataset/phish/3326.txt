@@ -1,0 +1,162 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Mon, 25 Apr
+ 2016 10:20:08 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Mon, 25 Apr 2016
+ 10:20:06 -0400
+Received: from [10.87.0.112] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 878012716;
+ Mon, 25 Apr 2016 09:20:09 -0500
+X-Note-AR-ScanTimeLocal: 4/25/2016 9:20:09 AM
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Primary: comers@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/19/2016 8:05:20 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @bounce.bluestatedigital.com ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: France->PRIVATE->United States->
+X-Note-Sending-IP: 66.151.182.17
+X-Note-Reverse-DNS: mta-sample2.bluestatedigital.com
+X-Note-Return-Path: contribution@bounce.bluestatedigital.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G282 G283 G294 G404 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from mta-sample2.bluestatedigital.com ([66.151.182.17] verified)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 134721074;
+ Mon, 25 Apr 2016 09:20:09 -0500
+Received: from dnc.queue.bluestatedigital.com
+ (openvpnas1.colo.bluestatedigital.com [10.0.180.1])	by
+ mta-sample2.bluestatedigital.com (Postfix) with ESMTP id 3qtpK314JdzTQrX;
+	Mon, 25 Apr 2016 10:20:07 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bounce.bluestatedigital.com; s=bsdkey; t=1461594007;
+	bh=1mYWRPP3nba/0rMzYIyqJELD2Xwsegleo6JHgIafNpw=;
+	h=Date:To:From:Subject:Message-ID:MIME-Version:Content-Type;
+	b=AhXaj6j5xIcYghvvlxzvNjB/KgutuoOdDZ+MmbVMg6WOtVWrh3q1fm2sMYpNVVcXD
+	 L/9rPx+4leh3E6ZIEVQK50vjvw/LGsDewCkGxquqc5NRhmlcRlIhXpu5NpmI/z49vk
+	 QjFpmPQWp/jZkhAADR5nvcgjgAGe1vQrM5pDe4ms=
+Received: from phpmailer ([86.217.42.62]) 	by dnc.queue.bluestatedigital.com
+ with HTTP (PHPMailer);	Mon, 25 Apr 2016 10:20:07 -0400
+Date: Mon, 25 Apr 2016 10:20:07 -0400
+To: <kaplanj@dnc.org>, <rauscherr@dnc.org>, <comers@dnc.org>
+From: Contribution <postmaster@finance.democrats.org>
+Subject: Contribution: FR003 - Paris Concert / Meredith Gowan Le Goff / 250.00 USD
+Message-ID: <4edf5bcceb09a234de8cfc7226eda6cf@dnc.queue.bluestatedigital.com>
+X-Mailer: PHPMailer [version 1.71-blue_mailer]
+X-blue_mailer-http_host: finance.democrats.org
+X-blue_mailer-history_ids: 29685209 29685210 29685211
+Content-Type: multipart/alternative;
+	boundary="b1_4edf5bcceb09a234de8cfc7226eda6cf"
+Return-Path: contribution@bounce.bluestatedigital.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--b1_4edf5bcceb09a234de8cfc7226eda6cf
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+CONTRIBUTION DATA
+-----------------
+                      Page: FR003 - Paris Concert
+                      Type: One-time
+         Number of Tickets: 1
+             Ticket Amount: $250.00
+               Ticket Info: %%TicketInfo%%
+Additional Contribution Amount: 0
+              Total Amount: $250.00
+                First Name: Meredith
+                 Last Name: Gowan Le Goff
+                   Address: 1629 Acadia Court
+                            Jackson, MS 39211
+                            US
+                     Phone: 6019403540
+                     Email: meredithgowanlegoff@gmail.com
+                  Employer: self
+          Employer Address: 
+                            ,  
+                            GB
+                Occupation: lawyer
+              Payment Type: MasterCard
+                 Account #: 5870
+             Transaction #: %%TransactionId%%
+                 User Id #: %%UserId%%
+          Contribution Key: IHQzM_S8_4G7xLIE7O
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: "U.S. Passport #")
+Fundraiser code (optional): 
+Who encouraged you to make this contribution?: 
+Guest Name(S), If Contributing For Multiple Tickets: 
+           U.S. Passport #: 441818047
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Mon, 25 Apr 2016 10:20:06 -0400
+           Status: Under Review
+Client IP Address: 86.217.42.62
+   Client Browser: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17
+
+
+--b1_4edf5bcceb09a234de8cfc7226eda6cf
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><pre>
+CONTRIBUTION DATA
+-----------------
+                      Page: FR003 - Paris Concert
+                      Type: One-time
+         Number of Tickets: 1
+             Ticket Amount: $250.00
+               Ticket Info: 1 x <strong>Guest</strong> Tickets.
+Additional Contribution Amount: 0
+              Total Amount: $250.00
+                First Name: Meredith
+                 Last Name: Gowan Le Goff
+                   Address: 1629 Acadia Court
+                            Jackson, MS 39211
+                            US
+                     Phone: 6019403540
+                     Email: meredithgowanlegoff@gmail.com
+                  Employer: self
+          Employer Address: 
+                            ,  
+                            GB
+                Occupation: lawyer
+              Payment Type: MasterCard
+                 Account #: 5870
+             Transaction #: 15589196
+                 User Id #: 
+          Contribution Key: IHQzM_S8_4G7xLIE7O
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: &quot;U.S. Passport #&quot;)
+Fundraiser code (optional): 
+Who encouraged you to make this contribution?: 
+Guest Name(S), If Contributing For Multiple Tickets: 
+           U.S. Passport #: 441818047
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Mon, 25 Apr 2016 10:20:06 -0400
+           Status: Under Review
+Client IP Address: 86.217.42.62
+   Client Browser: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17
+
+</pre>
+
+
+
+--b1_4edf5bcceb09a234de8cfc7226eda6cf--

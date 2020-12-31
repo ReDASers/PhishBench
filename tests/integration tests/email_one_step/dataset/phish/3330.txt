@@ -1,0 +1,156 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 26 Apr
+ 2016 10:49:25 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 26 Apr 2016
+ 10:49:20 -0400
+Received: from [10.87.0.110] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 880342894;
+ Tue, 26 Apr 2016 09:49:26 -0500
+X-Note-AR-ScanTimeLocal: 4/26/2016 9:49:26 AM
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Policy: dnc.org
+X-Primary: comers@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: ALLOWED SENDER FOUND
+X-ALLOW: ADMIN: @bounce.bluestatedigital.com ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: Canada->PRIVATE->United States->
+X-Note-Sending-IP: 66.151.182.17
+X-Note-Reverse-DNS: mta-sample2.bluestatedigital.com
+X-Note-Return-Path: contribution@bounce.bluestatedigital.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G275 G276 G277 G278 G282 G283 G294 G406 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDSENDER
+X-Note: Headers Injected
+Received: from [66.151.182.17] (HELO mta-sample2.bluestatedigital.com)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTPS id 138300366;
+ Tue, 26 Apr 2016 09:49:26 -0500
+Received: from dnc.queue.bluestatedigital.com
+ (openvpnas1.colo.bluestatedigital.com [10.0.180.1])	by
+ mta-sample2.bluestatedigital.com (Postfix) with ESMTP id 3qvQwM4s67zTQw3;
+	Tue, 26 Apr 2016 10:49:23 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bounce.bluestatedigital.com; s=bsdkey; t=1461682163;
+	bh=RTx3C5Sd+Eyxx3m7M6jf5XwkJamF7awEym1dW80goiU=;
+	h=Date:To:From:Subject:Message-ID:MIME-Version:Content-Type;
+	b=GKjZjd2jM6YkmBbdf1ItDgsM8jtUkCWOTFgf38gGnKW+8+klASfIoXLTAqJ9yhSGL
+	 xh/fbI+9GPDNE/d8H5dKgc3bpjt2LfZiXafMsNH5tcdQF11gi4I/4PmvNf89J1OF0I
+	 782AidkGo54yG5HumBmkxaa4NRkhaI4ZtOcAiFWY=
+Received: from phpmailer ([70.29.102.133]) 	by dnc.queue.bluestatedigital.com
+ with HTTP (PHPMailer);	Tue, 26 Apr 2016 10:49:23 -0400
+Date: Tue, 26 Apr 2016 10:49:23 -0400
+To: <comers@dnc.org>, <kaplanj@dnc.org>, <rauscherr@dnc.org>
+From: Contribution <postmaster@my.democrats.org>
+Subject: Contribution: Donate to help Democrats (new abroad) / Dunay Suleiman Wood / 10.00 USD
+Message-ID: <7d8d1435b149cb5be8541feddc3e23d0@dnc.queue.bluestatedigital.com>
+X-Mailer: PHPMailer [version 1.71-blue_mailer]
+X-blue_mailer-http_host: my.democrats.org
+X-blue_mailer-history_ids: 29690445 29690446 29690447
+Content-Type: multipart/alternative;
+	boundary="b1_7d8d1435b149cb5be8541feddc3e23d0"
+Return-Path: contribution@bounce.bluestatedigital.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--b1_7d8d1435b149cb5be8541feddc3e23d0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+CONTRIBUTION DATA
+-----------------
+            Page: Donate to help Democrats (new abroad)
+            Type: One-time
+    Total Amount: $10.00
+      First Name: Dunay
+       Last Name: Suleiman Wood
+         Address: 119 Henderson Avenue
+                  Thornhill, Ontario L3T2L3
+                  CA
+           Phone: 90457718368
+           Email: dunay@sympatico.ca
+        Employer: self employed
+Employer Address: 
+                  ,  
+                  US
+      Occupation: Puppeteer
+    Payment Type: Visa
+       Account #: 0015
+   Transaction #: %%TransactionId%%
+       User Id #: %%UserId%%
+Contribution Key: IHSzXba124aUl225Iw
+
+COMPLIANCE DATA
+------------------------------
+Check this box to confirm that the following statements are true and accurate:  I am a United States citizen or a permanent resident alien.  This contribution is not made from the general treasury funds of a corporation, labor organization or national bank. This contribution is not made from the treasury of an entity or person who is a federal contractor. This contribution is not made from the funds of a federally registered foreign agent. I am not a minor under the age of 16. The funds I am donating are not being provided to me by another person or entity for the purpose of making this contribution.: 1
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: "Additional Information")
+Please enter your US Passport # or Green card # below: 530820378
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Tue, 26 Apr 2016 10:47:57 -0400
+           Status: Under Review
+Client IP Address: 70.29.102.133
+   Client Browser: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+
+
+--b1_7d8d1435b149cb5be8541feddc3e23d0
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><pre>
+CONTRIBUTION DATA
+-----------------
+            Page: Donate to help Democrats (new abroad)
+            Type: One-time
+    Total Amount: $10.00
+      First Name: Dunay
+       Last Name: Suleiman Wood
+         Address: 119 Henderson Avenue
+                  Thornhill, Ontario L3T2L3
+                  CA
+           Phone: 90457718368
+           Email: dunay@sympatico.ca
+        Employer: self employed
+Employer Address: 
+                  ,  
+                  US
+      Occupation: Puppeteer
+    Payment Type: Visa
+       Account #: 0015
+   Transaction #: 15600218
+       User Id #: 
+Contribution Key: IHSzXba124aUl225Iw
+
+COMPLIANCE DATA
+------------------------------
+Check this box to confirm that the following statements are true and accurate:  I am a United States citizen or a permanent resident alien.  This contribution is not made from the general treasury funds of a corporation, labor organization or national bank. This contribution is not made from the treasury of an entity or person who is a federal contractor. This contribution is not made from the funds of a federally registered foreign agent. I am not a minor under the age of 16. The funds I am donating are not being provided to me by another person or entity for the purpose of making this contribution.: 1
+
+CUSTOM FIELD DATA
+------------------------------
+(Section header: &quot;Additional Information&quot;)
+Please enter your US Passport # or Green card # below: 530820378
+
+GENERAL INFORMATION
+-------------------
+      Submit Date: Tue, 26 Apr 2016 10:47:57 -0400
+           Status: Under Review
+Client IP Address: 70.29.102.133
+   Client Browser: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+
+</pre>
+
+
+
+--b1_7d8d1435b149cb5be8541feddc3e23d0--
