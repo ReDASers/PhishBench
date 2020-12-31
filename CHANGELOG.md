@@ -6,7 +6,10 @@
 
 ## Minor changes
 
-* Bumped Tensorflow version to 2.4.0
+* Cleaned up Dependencies
+    * Bumped Tensorflow version to 2.4.0
+    * Removed DocumentFeatureSelection as a dependency 
+    * Bumped tqdm version to 4.55.0
 
 # v2.0.0
 
@@ -21,6 +24,7 @@
 * Moved log and summary to output folder
 * Updated user interaction
 * Switched base classifier for RFE from `LinearSVC` to `RandomForestClassifier`
+
 
 ## Bug Fixes 
 * Fixed Issue #213
