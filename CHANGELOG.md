@@ -11,6 +11,7 @@
     * Removed DocumentFeatureSelection as a dependency 
     * Bumped tqdm version to 4.55.0
     * Bumped xgboost version to 1.3.1
+    * Bumped sklearn version to 0.24.0
 
 # v2.0.0
 
