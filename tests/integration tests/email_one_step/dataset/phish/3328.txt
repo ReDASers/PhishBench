@@ -1,0 +1,715 @@
+Received: from dncedge1.dnc.org (192.168.185.10) by dnchubcas2.dnc.org
+ (192.168.185.16) with Microsoft SMTP Server (TLS) id 14.3.224.2; Tue, 10 May
+ 2016 18:05:32 -0400
+Received: from server555.appriver.com (8.19.118.102) by dncwebmail.dnc.org
+ (192.168.10.221) with Microsoft SMTP Server id 14.3.224.2; Tue, 10 May 2016
+ 18:05:27 -0400
+Received: from [10.87.0.113] (HELO inbound.appriver.com)  by
+ server555.appriver.com (CommuniGate Pro SMTP 6.0.4)  with ESMTP id 907889638
+ for kaplanj@dnc.org; Tue, 10 May 2016 17:05:34 -0500
+X-Note-AR-ScanTimeLocal: 5/10/2016 5:05:29 PM
+X-Policy: dnc.org
+X-Primary: kaplanj@dnc.org
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note: SecureTide Build: 4/25/2016 6:59:12 PM UTC
+X-ALLOW: 72.3.212.195 ALLOWED
+X-Virus-Scan: V-
+X-Note: Spam Tests Failed: 
+X-Country-Path: PRIVATE->United States->
+X-Note-Sending-IP: 72.3.212.195
+X-Note-Reverse-DNS: outbound.appriver.com
+X-Note-Return-Path: notice@appriver.com
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G8 G276 G277 G278 G279 G283 G284 G294 G407 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: ALLOWEDIP
+X-Note: Headers Injected
+Received: from [72.3.212.195] (HELO outbound.appriver.com)  by
+ inbound.appriver.com (CommuniGate Pro SMTP 6.1.7)  with ESMTP id 137851154
+ for kaplanj@dnc.org; Tue, 10 May 2016 17:05:29 -0500
+Received: from [10.242.231.127] (HELO server551sql)  by outbound.appriver.com
+ (CommuniGate Pro SMTP 6.1.2)  with ESMTP id 32469867 for kaplanj@dnc.org;
+ Tue, 10 May 2016 17:05:29 -0500
+From: AppRiver SpamLab <notice@appriver.com>
+To: <kaplanj@dnc.org>
+Date: Tue, 10 May 2016 17:05:29 -0500
+Subject: Held Spam Report for 5/9/2016
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Message-ID: <auto-000032469867@outbound.appriver.com>
+X-WatchGuard-AntiVirus: part scanned. clean action=allow
+Return-Path: notice@appriver.com
+X-MS-Exchange-Organization-AVStamp-Mailbox: MSFTFF;1;0;0 0 0
+X-MS-Exchange-Organization-AuthSource: dncedge1.dnc.org
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0">
+    <title>Held Spam Report for January 29, 2014</title>
+
+    <style type=3D"text/css">
+        /*=3D=3D=3D
+           Keeping body font-size in the style tag because Outlook (mso)
+           does not seem to recognize the inline font-size.
+        =3D=3D=3D*/
+        body {
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width: 481px) {
+            .content {
+                -ms-border-radius: 0 !important;
+                -moz-border-radius: 0 !important;
+                -webkit-border-radius: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .txt-container div {
+                padding: 0 5px !important;
+            }
+
+            .email-title {
+                font-size: 20px !important;
+            }
+
+            .data-wrap td {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            .data-wrap h3 {
+                padding: 0 5px !important;
+            }
+        }
+
+        @media only screen and (max-width: 421px) {
+            .header td {
+                display: block;
+                text-align: center !important;
+            }
+
+                .header td h2 {
+                    text-align: center !important;
+                }
+        }
+    </style>
+</head>
+
+<body style=3D"color:#333333;font-family:Helvetica, Arial, sans-serif;paddi=
+ng-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin-top:0;margi=
+n-bottom:0;margin-right:0;margin-left:0;text-align:left;background-color:#e=
+eeeee;font-size:14px;">
+
+    <!--[if (gte mso 9)|(IE)]>
+        <table width=3D"800" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0" style=3D"border-collapse:collapse;" >
+            <tr>
+                <td style=3D"color:#333333;font-family:Helvetica, Arial, sa=
+ns-serif;font-size:14px;font-weight:normal;padding-top:0;padding-bottom:0;p=
+adding-right:0;padding-left:0;margin-top:0;margin-bottom:0;margin-right:0;m=
+argin-left:0;text-align:left;" >
+    <![endif]-->
+
+    <table class=3D"content" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0" style=3D"border-collapse:collapse;background-color:#fff=
+fff;width:100%;max-width:800px;min-width:480px;-webkit-border-bottom-right-=
+radius:10px;-moz-border-bottom-right-radius:10px;-ms-border-bottom-right-ra=
+dius:10px;border-bottom-right-radius:10px;-webkit-border-bottom-left-radius=
+:10px;-moz-border-bottom-left-radius:10px;-ms-border-bottom-left-radius:10p=
+x;border-bottom-left-radius:10px;">
+        <tr>
+            <td style=3D"color:#333333;font-family:Helvetica, Arial, sans-s=
+erif;font-weight:normal;padding-top:0;padding-bottom:0;padding-right:0;padd=
+ing-left:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-a=
+lign:left;">
+                <table class=3D"header" style=3D"width:100%;border-collapse=
+:collapse;border-bottom-width:1px;border-bottom-style:solid;border-bottom-c=
+olor:#dddddd;">
+                    <tr>
+                        <td style=3D"vertical-align:middle;color:#333333;fo=
+nt-family:Helvetica, Arial, sans-serif;font-weight:normal;margin-top:0;marg=
+in-bottom:0;margin-right:0;margin-left:0;padding-top:10px;padding-bottom:10=
+px;padding-right:10px;padding-left:10px;">
+                            <h2 class=3D"color-brand email-title" style=3D"=
+font-family:Helvetica, Arial, sans-serif;padding-top:0;padding-bottom:0;pad=
+ding-right:0;padding-left:0;margin-top:0;margin-bottom:0;margin-right:0;mar=
+gin-left:0;font-weight:bold;font-size:24px;color:#0053a0;">
+															Daily Held Spam Report
+														</h2>
+                            <a href=3D"#" style=3D"color:#666666;font-weigh=
+t:bold;pointer-events:none;text-decoration:none;">kaplanj@dnc.org</a><br>
+                            <span style=3D"color:#999999;">Monday, May 9, 2=
+016</span>
+                        </td>
+                        <td style=3D"color:#333333;font-family:Helvetica, A=
+rial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;margin-rig=
+ht:0;margin-left:0;text-align:right;padding-top:10px;padding-bottom:10px;pa=
+dding-right:10px;padding-left:10px;">
+													<img src=3D"https://cp.appriver.com/Uploads/Branding/appriver/=
+appriver_main.png" alt=3D"AppRiver" width=3D"214" height=3D"55">
+						                        </td>
+                    </tr>
+                </table>
+
+                <table class=3D"data-wrap" style=3D"width:100%;border-colla=
+pse:collapse;">
+                    <tr>
+                        <td style=3D"color:#333333;font-family:Helvetica, A=
+rial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;margin-rig=
+ht:0;margin-left:0;text-align:left;padding-top:10px;padding-bottom:10px;pad=
+ding-right:10px;padding-left:10px;">
+
+                            <table class=3D"quarantine-link-container" alig=
+n=3D"center" style=3D"border-collapse:collapse;margin-bottom:20px;">
+                                <tr>
+                                    <td style=3D"text-align:center;font-fam=
+ily:Helvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bot=
+tom:0;margin-right:0;margin-left:0;padding-top:10px;padding-bottom:10px;pad=
+ding-right:10px;padding-left:10px;">
+                                        <a href=3D"https://cp.appriver.com/=
+services/spamlab/hmr/PrepareHMRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9=
+jedEZP1p9GaxsuDJoVx0%3d&amp;et=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzR=
+J15eseCkmqAdwR2LgWycaoYEMLIqbDd%2b8AqpU%3d&amp;date=3D5%2f9%2f2016&amp;t=3D=
+sh" style=3D"color:#2768a1;font-size:12px;font-weight:bold;line-height:30px=
+;text-decoration:none;">View, Search, Sort Report</a> |
+										<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareHM=
+RAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;et=
+=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqbD=
+d%2b8AqpU%3d&amp;t=3Dso" style=3D"color:#2768a1;font-size:12px;font-weight:=
+bold;line-height:30px;text-decoration:none;">Request Current Report</a> |
+										<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareHM=
+RAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;et=
+=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqbD=
+d%2b8AqpU%3d&amp;t=3Dus" style=3D"color:#2768a1;font-size:12px;font-weight:=
+bold;line-height:30px;text-decoration:none;">Change Report Settings</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h3 style=3D"color:#333333;font-family:Helvetic=
+a, Arial, sans-serif;padding-top:0;padding-bottom:0;padding-right:0;padding=
+-left:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-alig=
+n:left;font-weight:bold;font-size:18px;">Spam: 11</h3>
+
+                            <table class=3D"data" style=3D"border-collapse:=
+collapse;border-top-width:1px;border-top-style:solid;border-top-color:#dddd=
+dd;width:100%;margin-bottom:20px;">
+								<!-- Loop -->
+																																	=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DweRB9w0odH0pjkBbNB%2fAT7xcOT7RGdN%2baZrpKAg7b4EJ=
+tCGPJ6cpxF3zoI2LKLaJWONwxhCEPkbVFLFICGpBAZgre%2fRuLexB6ErJRyMRzj5y6EaPiYKx2=
+pjCDPklaHxNtBp7lojodf0%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-size:13px=
+;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DweRB9w0odH0pjkBbNB%2fAT7xcOT7RGdN%2baZrpKAg7b4EJ=
+tCGPJ6cpxF3zoI2LKLaJWONwxhCEPkbVFLFICGpBAZgre%2fRuLexB6ErJRyMRzj5y6EaPiYKx2=
+pjCDPklaHxNtBp7lojodf0%3d&amp;t=3Dre" style=3D"color:#2768a1;font-size:13px=
+;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">hrevents@hr-trainingevents.com</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">Last Chance! Screening &amp; Interviewing Applicants: What's l=
+egal, What's Not, 5/16 Webinar</span><br>
+												7:51p from <strong>United States</strong> (9.18 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DLDJNJ4lwQsMOfLSejbevsFRNWsneoAt9zYWWAPUfqvNRN0%2=
+fsQ%2fGuQ3WJ%2bj2osgyZnzd4QpUoy9UZeQ%2fDRl14meyAhhBSA5Lxc3HegkFajMjiYXGV0%2=
+biMsTH2svTqD6%2bLDCmGlWi%2bieY%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DLDJNJ4lwQsMOfLSejbevsFRNWsneoAt9zYWWAPUfqvNRN0%2=
+fsQ%2fGuQ3WJ%2bj2osgyZnzd4QpUoy9UZeQ%2fDRl14meyAhhBSA5Lxc3HegkFajMjiYXGV0%2=
+biMsTH2svTqD6%2bLDCmGlWi%2bieY%3d&amp;t=3Dre" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">no-reply@nonprofitwebadvisor.com</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">WED! DOL Proposed Revisions to Overtime Rules: Analysis of Lik=
+ely Exempt Threshold Change, More!</span><br>
+												3:10p from <strong>United States</strong> (35.61 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DL2h4yjd2bbWtCc%2f0x05IPYYBTSb55%2bIJhGrS2KZr73FN=
+dHz%2bYcf2O6A0eYWGjq8RMi3EtnNzBLzcTOYIRGRdR84cuufyC%2bEdD53JlTsHiH5PxXXvpgT=
+%2fY%2bEM7CG5GLyNNs%2f34BZpSZw%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DL2h4yjd2bbWtCc%2f0x05IPYYBTSb55%2bIJhGrS2KZr73FN=
+dHz%2bYcf2O6A0eYWGjq8RMi3EtnNzBLzcTOYIRGRdR84cuufyC%2bEdD53JlTsHiH5PxXXvpgT=
+%2fY%2bEM7CG5GLyNNs%2f34BZpSZw%3d&amp;t=3Dre" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">no-reply@financialofficerwebadvisor.com<=
+/a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">NEXT WEEK! Insurance Concerns in Commercial Contracts: Address=
+ing Unique Risk Profiles for Your Deal</span><br>
+												1:21p from <strong>United States</strong> (43.94 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DDtWzgS%2bIrWEPiuMouuhl8SBh1i%2fbLeH25tdeHqkndpVd=
+8KR646LBXNe%2bRpPT5aotSgEA6J1GwNaGS0Liy5PkcAtsAC23aMoAzv1sUqvDHSLthyrzFetjV=
+46JY%2f78%2fpkcse3DHMXc%2boM%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-siz=
+e:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DDtWzgS%2bIrWEPiuMouuhl8SBh1i%2fbLeH25tdeHqkndpVd=
+8KR646LBXNe%2bRpPT5aotSgEA6J1GwNaGS0Liy5PkcAtsAC23aMoAzv1sUqvDHSLthyrzFetjV=
+46JY%2f78%2fpkcse3DHMXc%2boM%3d&amp;t=3Dre" style=3D"color:#2768a1;font-siz=
+e:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">no-reply@nonprofitwebadvisor.com</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">THURSDAY! Essential Skills for New &amp; Experienced Superviso=
+rs: How to Make the Leap. Register NOW!</span><br>
+												1:16p from <strong>United States</strong> (34.48 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DWRawo8Rymc6XMvqe4MnAzAufglLfkOjvDqLKzYoBK0tfeL7z=
+KtNFaKBkGp5zQc0xrXlk185CvQXUfvjpMVwxEHxZy7i18nxH1GxoAjvVUNKsRJ347NWz%2f7i77=
+DpUSY0w9zqDLjvj7Z0%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-size:13px;fon=
+t-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DWRawo8Rymc6XMvqe4MnAzAufglLfkOjvDqLKzYoBK0tfeL7z=
+KtNFaKBkGp5zQc0xrXlk185CvQXUfvjpMVwxEHxZy7i18nxH1GxoAjvVUNKsRJ347NWz%2f7i77=
+DpUSY0w9zqDLjvj7Z0%3d&amp;t=3Dre" style=3D"color:#2768a1;font-size:13px;fon=
+t-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">reports@exec-reports.net</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">Disciplining Employees: The Right Way to Do It</span><br>
+												10:56a from <strong>United States</strong> (9.78 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DioSGWNnowBg0aRLhvvlZyrQrLw9JmAZdo9qVO1tXI9n9gpfb=
+n8N8n0zhtABwn1tqqqdr73vVK1fKKjBWwK817TGGM0NVbioG87t%2biPioGjZiDw5QT7jpayaPg=
+O5Tp%2bWgU2uYgJ0LhjU%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-size:13px;f=
+ont-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DioSGWNnowBg0aRLhvvlZyrQrLw9JmAZdo9qVO1tXI9n9gpfb=
+n8N8n0zhtABwn1tqqqdr73vVK1fKKjBWwK817TGGM0NVbioG87t%2biPioGjZiDw5QT7jpayaPg=
+O5Tp%2bWgU2uYgJ0LhjU%3d&amp;t=3Dre" style=3D"color:#2768a1;font-size:13px;f=
+ont-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">conferences@rply.b21pubs.com</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">Last chance to register: Succession Planning webinar</span><br=
+>
+												10:25a from <strong>United States</strong> (28.95 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DOtnBnlrORe8qkJrk8pZfGtewh3aQAm%2fdA8C4OK51pYaZ6l=
+2mJHRtx09I6GAu5MXAMq7zwFAW7YZ8fcQAFiqPHLdBcHtEGd70VGUwMd4KlaJY%2f13q%2byANa=
+BOe0g3aNHIK5IztPMPy2M4%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-size:13px=
+;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3DOtnBnlrORe8qkJrk8pZfGtewh3aQAm%2fdA8C4OK51pYaZ6l=
+2mJHRtx09I6GAu5MXAMq7zwFAW7YZ8fcQAFiqPHLdBcHtEGd70VGUwMd4KlaJY%2f13q%2byANa=
+BOe0g3aNHIK5IztPMPy2M4%3d&amp;t=3Dre" style=3D"color:#2768a1;font-size:13px=
+;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">tixulpe@upc.ro</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">You have UNREAD MESSAGES from Corenda Doten</span><br>
+												9:46a from <strong>Romania</strong> (1.9 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3D3aH4jLfQoGeDMbrH1tvZLkV%2bh0Kug9yQHKKFUWHWOYkyYK=
+tJ6cqrYTvZu%2f9Il%2fGsIXzAYhEKrC9uOyBweG9XHfwJIklLALMlp2zAh1Tn9ou%2bXYvd516=
+3hCsGFzTd%2bMANCj0%2fk5hi%2b4o%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3D3aH4jLfQoGeDMbrH1tvZLkV%2bh0Kug9yQHKKFUWHWOYkyYK=
+tJ6cqrYTvZu%2f9Il%2fGsIXzAYhEKrC9uOyBweG9XHfwJIklLALMlp2zAh1Tn9ou%2bXYvd516=
+3hCsGFzTd%2bMANCj0%2fk5hi%2b4o%3d&amp;t=3Dre" style=3D"color:#2768a1;font-s=
+ize:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">nyyuqejy@viettel.com.vn</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">Read your MESSAGE from naughty Mrs. Florencia Watterson</span>=
+<br>
+												9:24a from <strong>Viet Nam</strong> (2.29 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Da4phi8Qxi8Y7N21414q4O%2b9gYbFbDM%2b%2fibc8jRIzyS=
+naLnCE73E1JD9N0%2frS4KYNoBZHbzxEsY0LogNGBs1G%2fyO5%2fkGPtEQ1bYGMpmjCK6HSnLL=
+nLXcJn%2f4ETh%2fnP7D95%2feS9Q22y4E%3d&amp;t=3Dvm" style=3D"color:#2768a1;fo=
+nt-size:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Da4phi8Qxi8Y7N21414q4O%2b9gYbFbDM%2b%2fibc8jRIzyS=
+naLnCE73E1JD9N0%2frS4KYNoBZHbzxEsY0LogNGBs1G%2fyO5%2fkGPtEQ1bYGMpmjCK6HSnLL=
+nLXcJn%2f4ETh%2fnP7D95%2feS9Q22y4E%3d&amp;t=3Dre" style=3D"color:#2768a1;fo=
+nt-size:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">no-reply@nonprofitwebadvisor.com</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">WEDNESDAY! Procurement Rules Under the Supercircular/Omni-Circ=
+ular: Key Requirements. Register NOW!</span><br>
+												8:09a from <strong>United States</strong> (33.61 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Do9%2bdvrH0empo7G2vLjXZJT4xn45WnGWd%2bqQOoBbeTLEc=
+iw%2fL4TGrb0%2bQTYX6qtS%2fNgIw1%2buh35TsvZfdQ5YSkO8gXacSL0RaF%2btgYlhLwD1Ly=
+xy1UtuZsUgtPlHGGv9eP%2bRJcD7yXts%3d&amp;t=3Dvm" style=3D"color:#2768a1;font=
+-size:13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Do9%2bdvrH0empo7G2vLjXZJT4xn45WnGWd%2bqQOoBbeTLEc=
+iw%2fL4TGrb0%2bQTYX6qtS%2fNgIw1%2buh35TsvZfdQ5YSkO8gXacSL0RaF%2btgYlhLwD1Ly=
+xy1UtuZsUgtPlHGGv9eP%2bRJcD7yXts%3d&amp;t=3Dre" style=3D"color:#2768a1;font=
+-size:13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">drugs-affordable10@vdc.com.vn</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">We're More Than Just Your Local Webstore, We're Your Friends- =
+Kaplanj.</span><br>
+												4:07a from <strong>Viet Nam</strong> (31.03 KB)
+											</div>
+										</td>
+									</tr>
+																									=09
+									<tr class=3D"row-odd">
+										<td class=3D"lnk-container" style=3D"width:120px;text-align:cente=
+r;color:#333333;font-family:Helvetica, Arial, sans-serif;font-weight:normal=
+;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;border-bottom-wi=
+dth:1px;border-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5=
+px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-right-width=
+:1px;border-right-style:solid;border-right-color:#dddddd;background-color:#=
+F9F9F9;">
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Diq837iPZbhQZS1Eg6YX40CRKHniV4o2pVCqIl2H%2bxo1sa%=
+2fUsSOYD9nMCC1ObFBEAvGqZeWmzOeVuxk8LgTLl4I9z8GBWfcbjybFJDHd2UL%2beafi6dl5%2=
+fVjde53%2fgQpaOka9OqnIgyCY%3d&amp;t=3Dvm" style=3D"color:#2768a1;font-size:=
+13px;font-weight:bold;line-height:25px;">View</a> |
+											<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareH=
+MRAccess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;e=
+t=3DmiTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqb=
+Dd%2b8AqpU%3d&amp;emidfs=3Diq837iPZbhQZS1Eg6YX40CRKHniV4o2pVCqIl2H%2bxo1sa%=
+2fUsSOYD9nMCC1ObFBEAvGqZeWmzOeVuxk8LgTLl4I9z8GBWfcbjybFJDHd2UL%2beafi6dl5%2=
+fVjde53%2fgQpaOka9OqnIgyCY%3d&amp;t=3Dre" style=3D"color:#2768a1;font-size:=
+13px;font-weight:bold;line-height:25px;">Release</a>
+										</td>
+										<td class=3D"txt-container" style=3D"color:#333333;font-family:He=
+lvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-bottom:0;=
+margin-right:0;margin-left:0;text-align:left;border-bottom-width:1px;border=
+-bottom-style:solid;border-bottom-color:#dddddd;padding-top:5px;padding-bot=
+tom:5px;padding-right:5px;padding-left:5px;background-color:#F9F9F9;">
+											<div>
+												<a href=3D"#" style=3D"color:#2768a1;font-weight:bold;text-deco=
+ration:none;pointer-events: none;">reports@exec-reports.net</a><br>
+												<span style=3D"color:#333333;font-family:Helvetica, Arial, sans=
+-serif;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin=
+-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-align:left;font-st=
+yle:italic;">Common Grammatical Errors That Make You Look Dumb</span><br>
+												3:40a from <strong>United States</strong> (9.3 KB)
+											</div>
+										</td>
+									</tr>
+								                            </table>
+
+                            <br>
+
+                            <h3 style=3D"color:#333333;font-family:Helvetic=
+a, Arial, sans-serif;padding-top:0;padding-bottom:0;padding-right:0;padding=
+-left:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-alig=
+n:left;font-weight:bold;font-size:18px;">Virus: 0</h3>
+
+                            <table class=3D"data" style=3D"border-collapse:=
+collapse;border-top-width:1px;border-top-style:solid;border-top-color:#dddd=
+dd;width:100%;margin-bottom:20px;">
+														                            </table>
+
+                            <br>
+
+                            <h3 style=3D"color:#333333;font-family:Helvetic=
+a, Arial, sans-serif;padding-top:0;padding-bottom:0;padding-right:0;padding=
+-left:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;text-alig=
+n:left;font-weight:bold;font-size:18px;">Outbound: 0</h3>
+
+                            <table class=3D"data" style=3D"border-collapse:=
+collapse;border-top-width:1px;border-top-style:solid;border-top-color:#dddd=
+dd;width:100%;margin-bottom:20px;">
+														                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class=3D"footer" style=3D"border-collapse:collapse;f=
+ont-size:11px;width:100%;">
+                    <tr>
+                        <td style=3D"text-align:center;color:#333333;font-f=
+amily:Helvetica, Arial, sans-serif;font-weight:normal;margin-top:0;margin-b=
+ottom:0;margin-right:0;margin-left:0;padding-top:10px;padding-bottom:10px;p=
+adding-right:10px;padding-left:10px;">
+
+                            <span class=3D"color-muted" style=3D"color:#999=
+999;">Copyright &copy;2003-2016=20
+															AppRiver, All Rights Reserved
+							</span>
+                            <br>
+							<a href=3D"https://cp.appriver.com/services/spamlab/hmr/PrepareHMRAc=
+cess.aspx?ex=3DU%2bnlYWYsuFC1RVy43qKlS%2b9jedEZP1p9GaxsuDJoVx0%3d&amp;et=3D=
+miTlrTqWZM%2b5CFX68sgnKs4tIJHuO%2fcjkgZmzRJ15eseCkmqAdwR2LgWycaoYEMLIqbDd%2=
+b8AqpU%3d&amp;t=3Dun" class=3D"color-brand" style=3D"color:#0053a0;text-dec=
+oration:none;">Unsubscribe</a>
+                        </td>
+                    </tr>
+                </table>
+
+				<br>
+
+            </td>
+        </tr>
+    </table>
+
+    <!--[if (gte mso 9)|(IE)]>
+                </td>
+            </tr>
+    </table>
+    <![endif]-->
+
+</body>
+</html>
+
+
