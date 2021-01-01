@@ -12,6 +12,9 @@
     * Bumped tqdm version to 4.55.0
     * Bumped xgboost version to 1.3.1
     * Bumped sklearn version to 0.24.0
+    * Bumped tldextract version to 3.1.0
+    * Bumped chardet version to 4.0.0
+    * Bumped requests to 2.25.1
 
 # v2.0.0
 
