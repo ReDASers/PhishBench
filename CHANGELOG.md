@@ -15,6 +15,10 @@
     * Bumped tldextract version to 3.1.0
     * Bumped chardet version to 4.0.0
     * Bumped requests to 2.25.1
+    
+## Bug Fixes
+
+* Fixed crash due to single-class sample
 
 # v2.0.0
 
