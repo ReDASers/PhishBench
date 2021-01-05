@@ -149,15 +149,10 @@ def extract_test_features(pickle_dir: str,
     return x_test, y_test
 
 
-def extract_features(extraction_module: ModuleType):
+def extract_features():
     """
     Extracts features. If PhishBench is configured to only extract features from a test dataset, this function will
     load pre-extracted training data from disk.
-
-    Parameters
-    ----------
-    extraction_module: ModuleType
-        Either `email_extraction` or `url_extraction`
 
     Returns
     -------
@@ -175,6 +170,11 @@ def extract_features(extraction_module: ModuleType):
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
     pickle_dir = os.path.join(phishbench.settings.output_dir(), "Features")
+
+    if phishbench.settings.mode() == 'Email':
+        extraction_module = email_extraction
+    else:
+        extraction_module = url_extraction
 
     if not hasattr(extraction_module, 'extract_features_list'):
         raise ValueError('extraction_module must be an extraction module')
@@ -318,10 +318,7 @@ def run_phishbench():
     """
     # Pylint disable=too-many-locals
     if phishbench.settings.feature_extraction():
-        if phishbench.settings.mode() == 'Email':
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(email_extraction)
-        else:
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(url_extraction)
+        x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features()
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_features_from_disk()
 
