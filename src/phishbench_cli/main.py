@@ -236,16 +236,11 @@ def get_tfidf_path():
     Gets the path to the tfidf_vectorizer
     """
     train_dir = os.path.join(phishbench.settings.output_dir(), "Features")
-    if phishbench.settings.mode() == 'Email':
-        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
-                    phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
-        if run_tfidf:
-            return os.path.join(train_dir, "features", "email_body_tfidf.pkl")
-    else:
-        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
-                    phishbench_globals.config[FeatureType.URL_WEBSITE.value].getboolean("website_tfidf")
-        if run_tfidf:
-            return os.path.join(train_dir, "features", "website_tfidf.pkl")
+    if phishbench.settings.mode() == 'Email' and extraction_settings.\
+            feature_enabled(FeatureType.EMAIL_BODY, "email_body_tfidf"):
+        return os.path.join(train_dir, "features", "email_body_tfidf.pkl")
+    elif extraction_settings.feature_enabled(FeatureType.URL_WEBSITE, "website_tfidf"):
+        return os.path.join(train_dir, "features", "website_tfidf.pkl")
     return None
 
 

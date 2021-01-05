@@ -31,6 +31,20 @@ def feature_type_enabled(feature_type: FeatureType) -> bool:
     return phishbench_globals.config[URL_TYPE_SECTION].getboolean(feature_type.value)
 
 
+def feature_enabled(feature_type: FeatureType, feature_name: str) -> bool:
+    """
+    Whether or not a feature is enabled
+
+    Parameters
+    ----------
+    feature_type: FeatureType
+        The feature type to check
+    feature_name: str
+        The feature type to check
+    """
+    return feature_type_enabled(feature_type) and phishbench_globals.config[feature_type.value].getboolean(feature_name)
+
+
 def download_url_flag() -> bool:
     """
     Whether or not PhishBench needs to download urls
