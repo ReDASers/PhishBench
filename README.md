@@ -21,7 +21,7 @@ For an example, to install version 1.1.4, run
 
 # How to run a PhishBench Basic Experiment 
 
-The PhishBench Basic experiment perfoms an experiment with the following workflow:
+The PhishBench Basic experiment script perfoms an experiment with the following workflow:
 
 1. Load the dataset
 2. Extract features
@@ -31,7 +31,7 @@ The PhishBench Basic experiment perfoms an experiment with the following workflo
 
 ## Make a config file
 
-First create a config file by running the `make-phishbench-config` command. 
+The basic experiment is controlled by a configuration file. To create a starter config file, run the `make-phishbench-config` command. 
 
 ```
 usage: make-phishbench-config [-h] [-v] [-f CONFIG_FILE]
@@ -45,7 +45,23 @@ optional arguments:
                         The name of the config file to generate.
 ```
 
-This will create a starter configuration file that dictates the execution of PhishBench. Then edit the config file to specify your settings.
+Example:
+
+```
+make-phishbench-config -f Test.ini
+```
+
+
+### Anatomy of a config file
+
+The PhishBench Configuration File is an `ini` file defined according to the Python [ConfigParser](https://docs.python.org/3/library/configparser.html) specification. This section will describe the config file's sections and how to edit them.
+
+#### [PhishBench]
+
+The section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
+
+ `feature extraction` extracts features from the dataset, `preprocessing` pre-proccesses the features, and `classification` trains and evaluates classifiers. 
+
 
 If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
 
