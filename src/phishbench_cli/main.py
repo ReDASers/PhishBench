@@ -149,15 +149,10 @@ def extract_test_features(pickle_dir: str,
     return x_test, y_test
 
 
-def extract_features(extraction_module: ModuleType):
+def extract_features():
     """
     Extracts features. If PhishBench is configured to only extract features from a test dataset, this function will
     load pre-extracted training data from disk.
-
-    Parameters
-    ----------
-    extraction_module: ModuleType
-        Either `email_extraction` or `url_extraction`
 
     Returns
     -------
@@ -175,6 +170,11 @@ def extract_features(extraction_module: ModuleType):
         The TF-IDF vectorizer used to generate TFIDF vectors. None if TF-IDF is not run
     """
     pickle_dir = os.path.join(phishbench.settings.output_dir(), "Features")
+
+    if phishbench.settings.mode() == 'Email':
+        extraction_module = email_extraction
+    else:
+        extraction_module = url_extraction
 
     if not hasattr(extraction_module, 'extract_features_list'):
         raise ValueError('extraction_module must be an extraction module')
@@ -236,16 +236,11 @@ def get_tfidf_path():
     Gets the path to the tfidf_vectorizer
     """
     train_dir = os.path.join(phishbench.settings.output_dir(), "Features")
-    if phishbench.settings.mode() == 'Email':
-        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.EMAIL_BODY) and \
-                    phishbench_globals.config[FeatureType.EMAIL_BODY.value].getboolean("email_body_tfidf")
-        if run_tfidf:
-            return os.path.join(train_dir, "features", "email_body_tfidf.pkl")
-    else:
-        run_tfidf = extraction_settings.feature_type_enabled(FeatureType.URL_WEBSITE) and \
-                    phishbench_globals.config[FeatureType.URL_WEBSITE.value].getboolean("website_tfidf")
-        if run_tfidf:
-            return os.path.join(train_dir, "features", "website_tfidf.pkl")
+    if phishbench.settings.mode() == 'Email' and extraction_settings.\
+            feature_enabled(FeatureType.EMAIL_BODY, "email_body_tfidf"):
+        return os.path.join(train_dir, "features", "email_body_tfidf.pkl")
+    elif extraction_settings.feature_enabled(FeatureType.URL_WEBSITE, "website_tfidf"):
+        return os.path.join(train_dir, "features", "website_tfidf.pkl")
     return None
 
 
@@ -318,10 +313,7 @@ def run_phishbench():
     """
     # Pylint disable=too-many-locals
     if phishbench.settings.feature_extraction():
-        if phishbench.settings.mode() == 'Email':
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(email_extraction)
-        else:
-            x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features(url_extraction)
+        x_train, y_train, x_test, y_test, vectorizer, tfidf_vectorizer = extract_features()
     else:
         x_train, y_train, vectorizer, tfidf_vectorizer, x_test, y_test = load_features_from_disk()
 

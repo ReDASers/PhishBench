@@ -31,18 +31,18 @@ def feature_type_enabled(feature_type: FeatureType) -> bool:
     return phishbench_globals.config[URL_TYPE_SECTION].getboolean(feature_type.value)
 
 
-def extract_body_enabled():
+def feature_enabled(feature_type: FeatureType, feature_name: str) -> bool:
     """
-    Whether or not to extract email body features
-    """
-    return feature_type_enabled(FeatureType.EMAIL_BODY)
+    Whether or not a feature is enabled
 
-
-def extract_header_enabled() -> bool:
+    Parameters
+    ----------
+    feature_type: FeatureType
+        The feature type to check
+    feature_name: str
+        The feature type to check
     """
-    Whether or not to extract header features
-    """
-    return feature_type_enabled(FeatureType.EMAIL_HEADER)
+    return feature_type_enabled(feature_type) and phishbench_globals.config[feature_type.value].getboolean(feature_name)
 
 
 def download_url_flag() -> bool:

@@ -29,6 +29,7 @@
 * Moved log and summary to output folder
 * Updated user interaction
 * Switched base classifier for RFE from `LinearSVC` to `RandomForestClassifier`
+* Added `feature_enabled` to `feature_extraction.settings`
 
 
 ## Bug Fixes 
