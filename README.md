@@ -15,7 +15,7 @@ To install a specific version, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git@{ verion number }
 
-for an example, to install version 1.1.4, run 
+For an example, to install version 1.1.4, run 
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git@1.1.4
 
