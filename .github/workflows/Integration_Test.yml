@@ -1,9 +1,10 @@
 name: Integration Test
 
-on: push
-      paths-ignore:
-      - 'README.md'
-      - 'CHANGELOG.md'
+on: 
+  push:
+    paths-ignore:
+    - 'README.md'
+    - 'CHANGELOG.md'
 
 defaults:
     run: 
