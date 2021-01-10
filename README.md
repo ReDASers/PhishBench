@@ -54,31 +54,31 @@ make-phishbench-config -f Test.ini
 
 ### Anatomy of a config file
 
-The PhishBench Configuration File is an `ini` file defined according to the Python [ConfigParser](https://docs.python.org/3/library/configparser.html) specification. This section will describe the config file's sections and how to edit them.
-
-#### [PhishBench]
-
-The section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
-
- `feature extraction` extracts features from the dataset, `preprocessing` pre-proccesses the features, and `classification` trains and evaluates classifiers. 
-
-
-If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
-
-```
-[Dataset Path]
-path_legitimate_training = sample_dataset/legit/
-path_phishing_training = sample_dataset/phish/
-path_legitimate_testing = ../url_2019/legit
-path_phishing_testing = ../url_2019/blank
-```
-
-You can toggle features, classifiers, evaluation metrics, via a `True` or `False` like so:
+The PhishBench Configuration File is an `ini` file defined according to the Python [ConfigParser](https://docs.python.org/3/library/configparser.html) specification. In general, most settings are binary features which can be toggled via a `True` or `False` like so:
 
 ```
 Confusion_matrix = True
 Cross_validation = False
 ```
+
+#### [PhishBench]
+
+This section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
+
+ `feature extraction` extracts features from the dataset, `preprocessing` pre-proccesses the features, and `classification` trains and evaluates classifiers. 
+
+If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
+
+#### [Dataset Path]
+This section contains the paths of the dataset to be used. If your dataset is not split into a train and test set, then leave the test set blank and elable the `split dataset` option in the `Extraction` section. 
+
+In **URL** mode, the datset can either be a text file or folder of text files with one URL per line.  
+
+In **Email** mode, the datset should be a folder of eamils, with one file per email. 
+
+#### [Extraction]
+
+This section contains the settings for the feature extraction module. 
 
 ## Run Experiment
 ```
