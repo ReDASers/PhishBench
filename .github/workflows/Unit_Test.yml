@@ -1,9 +1,9 @@
 name: Unit Test
 
 on: push
-    paths-ignore:
-    - 'README.md'
-    - 'CHANGELOG.md'
+      paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG.md'
 
 defaults:
     run: 
