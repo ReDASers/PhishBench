@@ -1,13 +1,13 @@
-The PhishBench platform extract features from emails and URLs, run classifiers, and returns the results using different evaluation metrics.
+The PhishBench platform extracts features from emails and URLs, run classifiers, and evaluates them using evaluation metrics.
 
 ![Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/Integration%20Test/badge.svg)
 ![Unit Test](https://github.com/ReDASers/Phishing-Detection/workflows/Unit%20Test/badge.svg)
 
 # Installation
 
-PhishBench requires Python 3.8 to run.
+PhishBench works on Python 3.7 and 3.8.
 
-To install the latest version, run
+To install the latest version on `master`, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git
 
@@ -19,11 +19,19 @@ For an example, to install version 1.1.4, run
 
     pip install git+https://github.com/ReDASers/Phishing-Detection.git@1.1.4
 
-# How to run PhishBench
+# How to run a PhishBench Basic Experiment 
 
+The PhishBench Basic experiment script perfoms an experiment with the following workflow:
+
+1. Load the dataset
+2. Extract features
+3. Pre-process features
+4. Train classifiers on a training set
+5. Evaluate the trained classifiers on a held-out test set
 
 ## Make a config file
-First create a config file by running `make-phishbench-config`
+
+The basic experiment is controlled by a configuration file. To create a starter config file, run the `make-phishbench-config` command. 
 
 ```
 usage: make-phishbench-config [-h] [-v] [-f CONFIG_FILE]
@@ -37,27 +45,103 @@ optional arguments:
                         The name of the config file to generate.
 ```
 
-
-This will create a starter configuration file that dictates the execution of PhishBench. Then edit the config file to specify your settings.
-
-If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
+Example:
 
 ```
-[Dataset Path]
-path_legitimate_training = sample_dataset/legit/
-path_phishing_training = sample_dataset/phish/
-path_legitimate_testing = ../url_2019/legit
-path_phishing_testing = ../url_2019/blank
+make-phishbench-config -f Test.ini
 ```
 
-You can toggle features, classifiers, evaluation metrics, via a `True` or `False` like so:
+
+### Anatomy of a config file
+
+The PhishBench Configuration File is an `ini` file defined according to the Python [ConfigParser](https://docs.python.org/3/library/configparser.html) specification. In general, most settings are binary features which can be toggled via a `True` or `False` like so:
 
 ```
 Confusion_matrix = True
 Cross_validation = False
 ```
 
-## Run PhishBench Basic Experiment
+#### The `PhishBench` Section
+
+This section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
+
+ `feature extraction` extracts features from the dataset, `preprocessing` pre-proccesses the features, and `classification` trains and evaluates classifiers. 
+
+If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
+
+#### The `Dataset Path` Section
+This section contains the paths of the dataset to be used. If your dataset is not split into a train and test set, then leave the test set blank and elable the `split dataset` option in the `Extraction` section. 
+
+In **URL** mode, the datset can either be a text file or folder of text files with one URL per line.  
+
+In **Email** mode, the datset should be a folder of eamils, with one file per email. 
+
+#### The `Extraction` Section
+
+This section controls the Basic Experiment Script's datasets.
+
+The `training dataset` setting controls the Basic Experiment Script's training set. If `True`, then PhishBench extracts features from the raw dataset at `path_legit_train` and `path_phish_train`. Otherwise, it will attempt to load a pre-extracted dataset from `OUTPUT_INPUT_DIR`.
+
+The `testing dataset` setting controls the Basic Experiment Script's testing set. If `True`, then PhishBench extracts features from the raw datset at `path_legit_test` and `path_phish_test`. Otherwise, its behavior will be determined by the `split dataset` setting. If the `split dataset` setting is `True`, then PhishBench will split the training set 75/25 into a train-test split. 
+
+#### The `Features Export` Section
+
+This sections the formats PhishBench will output the extracted features in. Currently, only `csv` is supported.
+
+#### The `Preprocessing` Section
+
+This section contains toggles for the preprocessing pipeline steps.
+
+#### The `Feature Selection` Section
+
+This section contains settings for feature selection. 
+
+The `number of best features` setting is the number of features to select. 
+
+The `with tfidf` setting specifies whether to select Tf-IDF features. 
+
+#### The `Feature Selection Methods` Section
+
+This section contains toggles for the feature selection methods.
+
+#### The `Dataset Balancing` Section
+
+This section contains toggles for the dataset balancing methods
+
+#### The `Classification` Section
+
+This section controls the behavior of the classification module. The internal logic is as follows: 
+
+```python
+if classification_settings.load_models():
+    classifier.load_model()
+elif classification_settings.weighted_training():
+    classifier.fit_weighted(x_train, y_train)
+elif classification_settings.param_search():
+    classifier.param_search(x_train, y_train)
+else:
+    classifier.fit(x_train, y_train)
+```
+
+#### The `Classifiers` Section
+
+This section contains toggles for the built-in and user-implemented classifiers.
+
+#### The `Evaluation Metrics` Section
+
+This section contains toggles for the built-in and user-implemented evaluation metrics.
+
+#### The Feature Sections
+
+The rest of the configuration file contains toggles for the built-in and user-implemented features. The `Email_Feature_Types` or `URL_Feature_Types` sections contain toggles for the respective types, and toggles for individual features sectioned by type. 
+
+PhishBench will extract a feature if the following conditions are met: 
+
+1. The feature type matches the mode
+2. The feature's type is enabled. 
+3. The feature is enabled. 
+
+## Run Experiment
 ```
 usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
                   [-c]
@@ -76,8 +160,8 @@ optional arguments:
                         Do not wait for user's confirmation
 ```
 
-## Use PhishBench as a library
-For more advance control, you can use PhishBench as a library. To do so, import `phishbench` and the desired modules in your script and call the `initialize` function.
+# Use PhishBench as a library
+For experiments which deviate from the basic experiment workflow, you can also use PhishBench as a library. To do so, import `phishbench` and the desired modules in your script and call the `initialize` function.
 
 ```python
 import phishbench
