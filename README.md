@@ -61,7 +61,7 @@ Confusion_matrix = True
 Cross_validation = False
 ```
 
-#### [PhishBench]
+#### The `PhishBench` Section
 
 This section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
 
@@ -69,14 +69,14 @@ This section contains the highest-level settings for the basic experiment. The `
 
 If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
 
-#### [Dataset Path]
+#### The `Dataset Path` Section
 This section contains the paths of the dataset to be used. If your dataset is not split into a train and test set, then leave the test set blank and elable the `split dataset` option in the `Extraction` section. 
 
 In **URL** mode, the datset can either be a text file or folder of text files with one URL per line.  
 
 In **Email** mode, the datset should be a folder of eamils, with one file per email. 
 
-#### [Extraction]
+#### The `Extraction` Section
 
 This section contains the settings for the feature extraction module. 
 
