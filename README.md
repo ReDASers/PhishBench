@@ -78,7 +78,68 @@ In **Email** mode, the datset should be a folder of eamils, with one file per em
 
 #### The `Extraction` Section
 
-This section contains the settings for the feature extraction module. 
+This section controls the Basic Experiment Script's datasets.
+
+The `training dataset` setting controls the Basic Experiment Script's training set. If `True`, then PhishBench extracts features from the raw dataset at `path_legit_train` and `path_phish_train`. Otherwise, it will attempt to load a pre-extracted dataset from `OUTPUT_INPUT_DIR`.
+
+The `testing dataset` setting controls the Basic Experiment Script's testing set. If `True`, then PhishBench extracts features from the raw datset at `path_legit_test` and `path_phish_test`. Otherwise, its behavior will be determined by the `split dataset` setting. If the `split dataset` setting is `True`, then PhishBench will split the training set 75/25 into a train-test split. 
+
+#### The `Features Export` Section
+
+This sections the formats PhishBench will output the extracted features in. Currently, only `csv` is supported.
+
+#### The `Preprocessing` Section
+
+This section contains toggles for the preprocessing pipeline steps.
+
+#### The `Feature Selection` Section
+
+This section contains settings for feature selection. 
+
+The `number of best features` setting is the number of features to select. 
+
+The `with tfidf` setting specifies whether to select Tf-IDF features. 
+
+#### The `Feature Selection Methods` Section
+
+This section contains toggles for the feature selection methods.
+
+#### The `Dataset Balancing` Section
+
+This section contains toggles for the dataset balancing methods
+
+#### The `Classification` Section
+
+This section controls the behavior of the classification module. The internal logic is as follows: 
+
+```python
+if classification_settings.load_models():
+    classifier.load_model()
+elif classification_settings.weighted_training():
+    classifier.fit_weighted(x_train, y_train)
+elif classification_settings.param_search():
+    classifier.param_search(x_train, y_train)
+else:
+    classifier.fit(x_train, y_train)
+```
+
+#### The `Classifiers` Section
+
+This section contains toggles for the built-in and user-implemented classifiers.
+
+#### The `Evaluation Metrics` Section
+
+This section contains toggles for the built-in and user-implemented evaluation metrics.
+
+#### The Feature Sections
+
+The rest of the configuration file contains toggles for the built-in and user-implemented features. The `Email_Feature_Types` or `URL_Feature_Types` sections contain toggles for the respective types, and toggles for individual features sectioned by type. 
+
+PhishBench will extract a feature if the following conditions are met: 
+
+1. The feature type matches the mode
+2. The feature's type is enabled. 
+3. The feature is enabled. 
 
 ## Run Experiment
 ```
