@@ -4,41 +4,70 @@ import joblib
 
 
 class BaseClassifier:
-
+    """
+    The base class for PhishBench Classifiers. Your custom classifiers should subclass this class.
+    """
     def __init__(self, io_dir, save_file):
+        """
+        Initializes the BaseClassifier
+
+        Parameters
+        ----------
+        io_dir: str
+            The folder to save this classifier to.
+        save_file:
+            The file to save this classifier to
+        """
         self.io_dir = io_dir
         self.model_path: str = os.path.join(self.io_dir, save_file)
         self.clf = None
 
     def fit(self, x, y):
         """
-        Trains the classifier. If being used as a wrapper for a scikit-learn style classifier, then implementations of
-        this function should store the trained underlying classifier in `self.clf`. Other implementations should
+        Trains the classifier.
+
+        If being used as a wrapper for a scikit-learn style classifier, then implementations of
+        this function can simply store the trained underlying classifier in `self.clf`. Other implementations should
         also override predict and predict_proba
+
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
             Training vectors, where n is the number of samples and f is the number of features.
         y: array-like of shape (n)
             Target values, with 0 being legitimate and 1 being phishing
-        Returns
-        -------
-            None
         """
 
     def fit_weighted(self, x, y):
+        """
+        Trains the classifier using weighted training. If this method is not implemented, PhishBench will issue a
+        warning to stdout and default to unweighted training.
+
+        If being used as a wrapper for a scikit-learn style classifier, then implementations of
+        this function can simply store the trained underlying classifier in `self.clf`. Other implementations should
+        also override predict and predict_proba
+
+        Parameters
+        ----------
+        x: array-like or sparse matrix of shape (n,f)
+            Training vectors, where n is the number of samples and f is the number of features.
+        y: array-like of shape (n)
+            Target values, with 0 being legitimate and 1 being phishing
+        """
         print("{} does not support weighted training. Performing regular training.".format(self.name))
         self.fit(x, y)
 
     def param_search(self, x, y):
         """
         Performs parameter search to find the best parameters.
+
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
             Training vectors, where n is the number of samples and f is the number of features.
         y: array-like of shape (n)
             Target values, with 0 being legitimate and 1 being phishing
+
         Returns
         -------
         dict:
@@ -49,10 +78,13 @@ class BaseClassifier:
 
     def predict(self, x):
         """
+        Generates a batch of classifications for the given input
+
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
             Test vectors, where n is the number of samples and f is the number of features
+
         Returns
         -------
         array-like of shape (n)
@@ -63,10 +95,13 @@ class BaseClassifier:
 
     def predict_proba(self, x):
         """
+        Generates a batch of probabilistic predictions for the given input
+
         Parameters
         ----------
         x: array-like or sparse matrix of shape (n,f)
             Test vectors, where n is the number of samples and f is the number of features
+
         Returns
         -------
         array-like of shape (n)
@@ -78,18 +113,12 @@ class BaseClassifier:
     def load_model(self):
         """
         Loads the model from `self.io_dir`
-        Returns
-        -------
-            None
         """
         self.clf = joblib.load(self.model_path)
 
     def save_model(self):
         """
         Saves the model to `self.io_dir`
-        Returns
-        -------
-            None
         """
         assert self.clf is not None, "Classifier must be trained first"
         joblib.dump(self.clf, self.model_path)
