@@ -311,9 +311,9 @@ def num_on_mouse_over(body: EmailBody) -> int:
 
 
 BODY_WORD_BLACKLIST = ["urgent", "account", "closing", "act now", "click here", "limited", "suspension",
-                           "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm",
-                           "customer", "client", "suspend", "restrict", "verify", "login", "ssn", 'username', 'click',
-                           'log', 'inconvenient', 'alert', 'paypal']
+                       "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm",
+                       "customer", "client", "suspend", "restrict", "verify", "login", "ssn", 'username', 'click',
+                       'log', 'inconvenient', 'alert', 'paypal']
 
 _DEFAULT_BLACKLIST = {key: 0 for key in BODY_WORD_BLACKLIST}
 
@@ -330,6 +330,7 @@ def blacklisted_words_body(body: EmailBody):
         word_count = len(re.findall(word, body.text, re.IGNORECASE))
         blacklist_body_count[word] = word_count
     return blacklist_body_count
+
 
 @register_feature(FeatureType.EMAIL_BODY, 'Number_Of_Scripts')
 def number_scripts(body: EmailBody):
