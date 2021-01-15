@@ -2,7 +2,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
 
-from ..base_classifier import BaseClassifier
+from .._base_classifier import BaseClassifier
 
 
 class Boosting(BaseClassifier):

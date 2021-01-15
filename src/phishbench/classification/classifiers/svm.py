@@ -1,7 +1,7 @@
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.svm import SVC
 
-from ..base_classifier import BaseClassifier
+from .._base_classifier import BaseClassifier
 
 
 class SVM(BaseClassifier):

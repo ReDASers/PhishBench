@@ -2,14 +2,14 @@
 This module contains an implementation of the extreme learning machine algorithm.
 """
 import numpy as np
-from scipy.special import expit # pylint: disable=no-name-in-module
+from scipy.special import expit  # pylint: disable=no-name-in-module
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.exceptions import NotFittedError
 from sklearn.model_selection import GridSearchCV
 from sklearn.utils.validation import check_X_y, check_array
 from sklearn_extensions.extreme_learning_machines import ELMRegressor
 
-from ..base_classifier import BaseClassifier
+from .._base_classifier import BaseClassifier
 
 
 def _relu(x):

@@ -9,7 +9,7 @@ from scipy.sparse import issparse
 import pandas as pd
 
 from . import settings
-from ..classification.core import BaseClassifier
+from ..classification import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
 from .reflection import MetricType, Metric
 from . import metrics as internal_metrics

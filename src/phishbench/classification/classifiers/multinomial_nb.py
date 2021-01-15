@@ -1,7 +1,7 @@
 from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import MultinomialNB
 
-from ..base_classifier import BaseClassifier
+from .._base_classifier import BaseClassifier
 
 
 class MultinomialNaiveBayes(BaseClassifier):
