@@ -5,7 +5,7 @@ from types import ModuleType
 
 from scipy.sparse import issparse
 
-from . import classifiers as internal_classifiers
+
 from . import settings as classification_settings
 from ._base_classifier import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
@@ -24,6 +24,7 @@ def load_classifiers(filter_classifiers=True):
     -------
         A list of classifiers
     """
+    from . import classifiers as internal_classifiers
     modules = load_local_modules()
     modules.append(internal_classifiers)
     loaded_classifiers = [load_classifiers_from_module(module, filter_classifiers) for module in modules]
