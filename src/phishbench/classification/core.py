@@ -1,6 +1,7 @@
 import itertools
 import os
 from typing import List
+from types import ModuleType
 
 from scipy.sparse import issparse
 
@@ -29,7 +30,7 @@ def load_classifiers(filter_classifiers=True):
     return loaded
 
 
-def load_classifiers_from_module(source, filter_classifiers=True) -> List[type]:
+def load_classifiers_from_module(source: ModuleType, filter_classifiers=True) -> List[type]:
     """
     Loads classifiers from a module
     Parameters
@@ -52,20 +53,22 @@ def load_classifiers_from_module(source, filter_classifiers=True) -> List[type]:
     return module_classifiers
 
 
-def train_classifiers(x_train, y_train, io_dir, verbose=1):
+def train_classifiers(x_train, y_train, io_dir: str, verbose=1):
     """
     Train classifiers on the provided data
+
     Parameters
     ----------
-    x_train
+    x_train: array-like or sparse matrix of shape (n,f)
         The training features
-    y_train
+    y_train: array-like of shape (n)
         The training labels
-    io_dir
+    io_dir: str
         The folder to interact with
-    verbose
+    verbose: int
         Whether or not to print progress info to stdout.
         `0` prints nothing. `1` prints the classifiers being trained
+
     Returns
     -------
         A list of trained classifiers
