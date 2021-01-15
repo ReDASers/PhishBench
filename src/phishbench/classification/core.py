@@ -18,7 +18,7 @@ def load_classifiers(filter_classifiers=True):
     Parameters
     ----------
     filter_classifiers : bool
-        Whether or not to use the config to filter the classifiers
+        Whether or not to use the config to filter the classifiers using the configuration file
 
     Returns
     -------
@@ -58,7 +58,7 @@ def load_classifiers_from_module(source: ModuleType, filter_classifiers=True) ->
 
 def train_classifiers(x_train, y_train, io_dir: str, verbose=1):
     """
-    Train classifiers on the provided data
+    Train classifiers on the provided data according to the configuration file.
 
     Parameters
     ----------
