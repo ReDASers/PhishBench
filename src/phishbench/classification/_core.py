@@ -24,6 +24,7 @@ def load_classifiers(filter_classifiers=True):
     -------
         A list of classifiers
     """
+    # pylint: disable=import-outside-toplevel
     from . import classifiers as internal_classifiers
     modules = load_local_modules()
     modules.append(internal_classifiers)
