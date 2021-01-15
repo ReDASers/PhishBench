@@ -14,9 +14,10 @@ from ..utils.reflection_utils import load_local_modules
 def load_classifiers(filter_classifiers=True):
     """
     Loads internal classifiers and classifiers from the working directory
+
     Parameters
     ----------
-    filter_classifiers: bool
+    filter_classifiers : bool
         Whether or not to use the config to filter the classifiers
 
     Returns
@@ -33,12 +34,14 @@ def load_classifiers(filter_classifiers=True):
 def load_classifiers_from_module(source: ModuleType, filter_classifiers=True) -> List[type]:
     """
     Loads classifiers from a module
+
     Parameters
     ----------
-    source
+    source : A python module
         The module to load the classifiers from
-    filter_classifiers
+    filter_classifiers : bool
         Whether or not to use the config to filter the classifiers
+
     Returns
     -------
         A list of classifiers
@@ -59,13 +62,13 @@ def train_classifiers(x_train, y_train, io_dir: str, verbose=1):
 
     Parameters
     ----------
-    x_train: array-like or sparse matrix of shape (n,f)
-        The training features
-    y_train: array-like of shape (n)
-        The training labels
-    io_dir: str
+    x_train : array-like or sparse matrix of shape (n,f)
+        The training feature vectors
+    y_train : array-like of shape (n)
+        The training label vector
+    io_dir : str
         The folder to interact with
-    verbose: int
+    verbose : int
         Whether or not to print progress info to stdout.
         `0` prints nothing. `1` prints the classifiers being trained
 
