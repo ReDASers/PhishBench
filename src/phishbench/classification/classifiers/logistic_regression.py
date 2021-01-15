@@ -1,7 +1,7 @@
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression as LR
 
-from ..base_classifier import BaseClassifier
+from .._base_classifier import BaseClassifier
 
 
 class LogisticRegression(BaseClassifier):

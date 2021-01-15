@@ -19,7 +19,7 @@ import phishbench.feature_preprocessing.settings
 import phishbench.input as pb_input
 import phishbench.input.settings
 import phishbench.settings
-from phishbench.classification.core import load_classifiers
+from phishbench.classification import load_classifiers
 from phishbench.evaluation.core import load_metrics
 from phishbench.feature_extraction.email import features as internal_email_features
 from phishbench.feature_extraction.reflection import load_features, FeatureType
