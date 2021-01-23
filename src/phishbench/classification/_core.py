@@ -7,11 +7,11 @@ from scipy.sparse import issparse
 
 
 from . import settings as classification_settings
-from ._base_classifier import BaseClassifier
+from . import BaseClassifier
 from ..utils.reflection_utils import load_local_modules
 
 
-def load_classifiers(filter_classifiers=True):
+def load_classifiers(filter_classifiers=True) -> List[type]:
     """
     Loads internal classifiers and classifiers from the working directory
 
@@ -22,7 +22,8 @@ def load_classifiers(filter_classifiers=True):
 
     Returns
     -------
-        A list of classifiers
+    A list of superclasses of :py:class:`BaseClassifier`
+        The loaded classifiers
     """
     # pylint: disable=import-outside-toplevel
     from . import classifiers as internal_classifiers
@@ -33,20 +34,21 @@ def load_classifiers(filter_classifiers=True):
     return loaded
 
 
-def load_classifiers_from_module(source: ModuleType, filter_classifiers=True) -> List[type]:
+def load_classifiers_from_module(source: ModuleType, filter_classifiers: bool = True) -> List[type]:
     """
     Loads classifiers from a module
 
     Parameters
     ----------
-    source : A python module
+    source
         The module to load the classifiers from
-    filter_classifiers : bool
+    filter_classifiers
         Whether or not to use the config to filter the classifiers
 
     Returns
     -------
-        A list of classifiers
+    A list of superclasses of :py:class:`BaseClassifier`
+        The loaded classifiers
     """
     module_classifiers: List[type] = list()
     for attr_name in dir(source):
@@ -58,9 +60,9 @@ def load_classifiers_from_module(source: ModuleType, filter_classifiers=True) ->
     return module_classifiers
 
 
-def train_classifiers(x_train, y_train, io_dir: str, verbose=1):
+def train_classifiers(x_train, y_train, io_dir: str, verbose=1) -> List[BaseClassifier]:
     """
-    Train classifiers on the provided data according to the configuration file.
+    Train classifiers on the provided dataset according to the configuration file.
 
     Parameters
     ----------
@@ -76,7 +78,8 @@ def train_classifiers(x_train, y_train, io_dir: str, verbose=1):
 
     Returns
     -------
-        A list of trained classifiers
+    A list of :py:class:`BaseClassifier` objects
+        The trained classifiers
     """
     if issparse(x_train):
         x_train = x_train.toarray()
