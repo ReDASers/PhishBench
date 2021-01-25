@@ -11,5 +11,15 @@ phishbench.input
 Email Input
 -----------------
 
+.. automodule:: phishbench.input.email_input
+.. currentmodule:: phishbench.input.email_input
+
+.. autofunction:: read_dataset_email
+
 URL Input
 -----------------
+
+.. automodule:: phishbench.input.url_input
+.. currentmodule:: phishbench.input.url_input
+
+.. autofunction:: read_dataset_url
