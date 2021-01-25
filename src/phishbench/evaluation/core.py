@@ -18,6 +18,7 @@ from . import metrics as internal_metrics
 def load_metrics_from_module(source, filter_metrics=True) -> List[Metric]:
     """
     Loads metrics from a module
+
     Parameters
     ----------
     source: ModuleType
@@ -59,18 +60,20 @@ def load_metrics(filter_metrics=True) -> List[Metric]:
 def evaluate_classifier(classifier: BaseClassifier, x_test, y_test) -> Dict[str, float]:
     """
     Evaluates a single classifier
+
     Parameters
     ----------
     classifier
         The classifier to evaluate.
-    x_test
+    x_test: array-like of shape (n_samples, n_features)
         The test features to evaluate with
-    y_test
+    y_test: array-like of shape (n_samples)
         The test labels to evaluate with
 
     Returns
     -------
-        A dictionary containing the name of the metric and the corresponding scores
+    Dict[str, float]
+        A dictionary mapping name of the metric to the corresponding score.
     """
     if issparse(x_test):
         x_test = x_test.toarray()
@@ -89,21 +92,23 @@ def evaluate_classifier(classifier: BaseClassifier, x_test, y_test) -> Dict[str,
 def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verbose=1) -> pd.DataFrame:
     """
     Evaluates a set of classifiers
+
     Parameters
     ----------
     classifiers
         The classifiers to evaluate
-    x_test
-        The test features to evaluate with
-    y_test
-        The test labels to evaluate with
+    x_test: array-like of shape (n_samples, n_features)
+        The feature vectors of the test set.
+    y_test: array-like of shape (n_samples)
+        The labels of the test set with 0 being legitimate and 1 being phishing
     verbose: bool
         Whether or not to print progress to stdout.
         `0` prints nothing. `1` prints the classifiers being trained
 
     Returns
     -------
-    A pandas `DataFrame` containing the metrics of the classifiers
+    A pandas `DataFrame`
+         The metrics of the classifiers. 
     """
     performance_list_dict = []
     for classifier in classifiers:
