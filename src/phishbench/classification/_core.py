@@ -22,7 +22,7 @@ def load_classifiers(filter_classifiers=True) -> List[type]:
 
     Returns
     -------
-    A list of superclasses of :py:class:`BaseClassifier`
+    A list of subclasses of :py:class:`BaseClassifier`
         The loaded classifiers
     """
     # pylint: disable=import-outside-toplevel
@@ -47,7 +47,7 @@ def load_classifiers_from_module(source: ModuleType, filter_classifiers: bool = 
 
     Returns
     -------
-    A list of superclasses of :py:class:`BaseClassifier`
+    A list of subclasses of :py:class:`BaseClassifier`
         The loaded classifiers
     """
     module_classifiers: List[type] = list()
