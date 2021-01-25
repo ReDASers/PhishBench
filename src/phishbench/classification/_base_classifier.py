@@ -1,3 +1,4 @@
+# pylint: disable=missing-module-docstring
 import os
 
 import joblib
@@ -32,9 +33,9 @@ class BaseClassifier:
 
         Parameters
         ----------
-        x : array-like or sparse matrix of shape (n,f)
-            Training feature vectors, where n is the number of samples and f is the number of features.
-        y : array-like of shape (n)
+        x : array-like or sparse matrix of shape (n_samples, n_features)
+            Training feature vectors
+        y : array-like of shape (n_samples)
             Target values, with 0 being legitimate and 1 being phishing
         """
 
@@ -49,23 +50,23 @@ class BaseClassifier:
 
         Parameters
         ----------
-        x : array-like or sparse matrix of shape (n,f)
-            Training feature vectors, where n is the number of samples and f is the number of features.
-        y : array-like of shape (n)
+        x : array-like or sparse matrix of shape (n_samples, n_features)
+            Training feature vectors
+        y : array-like of shape (n_samples)
             Target values, with 0 being legitimate and 1 being phishing
         """
         print("{} does not support weighted training. Performing regular training.".format(self.name))
         self.fit(x, y)
 
-    def param_search(self, x, y):
+    def param_search(self, x, y) -> dict:
         """
         Performs parameter search to find the best parameters.
 
         Parameters
         ----------
-        x : array-like or sparse matrix of shape (n,f)
-            Training feature vectors, where n is the number of samples and f is the number of features.
-        y : array-like of shape (n)
+        x : array-like or sparse matrix of shape (n_samples, n_features)
+            Training feature vectors
+        y : array-like of shape (n_samples)
             Target values, with 0 being legitimate and 1 being phishing
 
         Returns
@@ -82,12 +83,12 @@ class BaseClassifier:
 
         Parameters
         ----------
-        x : array-like or sparse matrix of shape (n,f)
-            Test vectors, where n is the number of samples and f is the number of features
+        x : array-like or sparse matrix of shape (n_samples, n_features)
+            The samples to generate predictions for
 
         Returns
         -------
-        array-like of shape (n)
+        array-like of shape (n_samples)
             The predicted class values
         """
         assert self.clf is not None, "Classifier must be trained first"
@@ -99,13 +100,13 @@ class BaseClassifier:
 
         Parameters
         ----------
-        x : array-like or sparse matrix of shape (n,f)
-            Test vectors, where n is the number of samples and f is the number of features
+        x : array-like or sparse matrix of shape (n_samples, n_features)
+            The samples to generate probabilities for
 
         Returns
         -------
-        array-like of shape (n)
-            The probability of each test vector being phish
+        array-like of shape (n_samples)
+            The probability of each test sample being phish
         """
         assert self.clf is not None, "Classifier must be trained first"
         return self.clf.predict_proba(x)[:, 1]

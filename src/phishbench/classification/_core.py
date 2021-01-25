@@ -22,7 +22,7 @@ def load_classifiers(filter_classifiers=True) -> List[type]:
 
     Returns
     -------
-    A list of superclasses of :py:class:`BaseClassifier`
+    A list of subclasses of :py:class:`BaseClassifier`
         The loaded classifiers
     """
     # pylint: disable=import-outside-toplevel
@@ -47,7 +47,7 @@ def load_classifiers_from_module(source: ModuleType, filter_classifiers: bool = 
 
     Returns
     -------
-    A list of superclasses of :py:class:`BaseClassifier`
+    A list of subclasses of :py:class:`BaseClassifier`
         The loaded classifiers
     """
     module_classifiers: List[type] = list()
@@ -66,9 +66,9 @@ def train_classifiers(x_train, y_train, io_dir: str, verbose=1) -> List[BaseClas
 
     Parameters
     ----------
-    x_train : array-like or sparse matrix of shape (n,f)
+    x_train : array-like or sparse matrix of shape (n_samples, n_features)
         The training feature vectors
-    y_train : array-like of shape (n)
+    y_train : array-like of shape (n_samples)
         The training label vector
     io_dir : str
         The folder to interact with
