@@ -16,18 +16,22 @@ from ...utils import phishbench_globals
 def read_dataset_url(dataset_path: str, download_url: bool, remove_dup: bool = True) -> Tuple[List[URLData], List[str]]:
     """
     Reads in a dataset of URLs from a file or a folder of files
+
     Parameters
     ----------
-    dataset_path: str
+    dataset_path
         The location of the dataset to read from. This can either be a folder or a file.
-    download_url: bool
+    download_url
         Whether or not to download the websites pointed to by the URLs
     remove_dup
         Whether or not to remove duplicates.
+
     Returns
     -------
     urls: List[URLData]
         A list of URLData objects representing the dataset
+    bad_url_list: List[str]
+        The URLs that failed to extract.
     """
     if not dataset_path:
         raise ValueError("dataset_path must be provided!")
