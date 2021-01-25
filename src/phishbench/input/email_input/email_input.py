@@ -17,6 +17,7 @@ from ..input_utils import enumerate_folder_files
 def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]:
     """
     Reads a folder of emails
+
     Parameters
     ----------
     folder_path : str

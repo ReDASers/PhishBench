@@ -14,19 +14,18 @@ def read_train_set(download_url: bool = False) -> Tuple[
         List[int]
         ]:
     """
-    Reads in the training set
+    Reads in the training set according to the configuration file.
 
     Parameters
     ----------
     download_url: bool
-        URL mode: whether or not to download the websites pointed to by the URLs
-        Email Mode: Ignored
+        When loading a URL dataset, whether or not to download the websites pointed to by the URLs. Ignored when
+        loading a Email dataset.
+
     Returns
     -------
-    data: Union[List[URLData], List[EmailMessage]]
+    data: A list of `URLData` or `EmailMessage` objects
         The read-in data.
-        URl mode: A list of `URLDatas`
-        Email Mode: A list of EmailMessages
     labels: List[int]
         A list of labels. `0` is legitimate and `1` is phish
     """
@@ -46,19 +45,18 @@ def read_test_set(download_url: bool = False) -> Tuple[
         List[int]
         ]:
     """
-    Reads in the test set
+    Reads in the test set according to the configuration file.
 
     Parameters
     ----------
     download_url: bool
-        URL mode: whether or not to download the websites pointed to by the URLs
-        Email Mode: Ignored
+        When loading a URL dataset, whether or not to download the websites pointed to by the URLs. Ignored when
+        loading a Email dataset.
+
     Returns
     -------
-    data: Union[List[URLData], List[EmailMessage]]
+    data: URl mode: - A list of `URLData` or `EmailMessage` objects
         The read-in data.
-        URl mode: A list of `URLDatas`
-        Email Mode: A list of EmailMessages
     labels: List[int]
         A list of labels. `0` is legitimate and `1` is phish
     """

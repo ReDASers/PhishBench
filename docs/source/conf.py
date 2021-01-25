@@ -13,6 +13,7 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+# pylint: skip-file
 
 import phishbench
 
@@ -59,3 +60,4 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 autodoc_typehints = 'description'
+autodoc_member_order = 'bysource'
