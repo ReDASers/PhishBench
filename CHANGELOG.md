@@ -15,7 +15,7 @@
     * Bumped tldextract version to 3.1.0
     * Bumped chardet version to 4.0.0
     * Bumped requests to 2.25.1
-* `phishbench.initialize` throws a  `FileNotFoundError` instead of a `KeyError` when provided a non-existent config file.
+* Added input validation for `phishbench.initialize` 
 
     
 ## Bug Fixes
