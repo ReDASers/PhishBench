@@ -66,7 +66,7 @@ def setup_logger(path, verbose=False):
         logger.setLevel(logging.INFO)
 
 
-def initialize(config_file, output_dir: str = "PhishBench Output", verbose: bool = False):
+def initialize(config_file: str, output_dir: str = "PhishBench Output", verbose: bool = False):
     """
     Initialize PhishBench with a configuration file.
     Parameters
@@ -74,11 +74,16 @@ def initialize(config_file, output_dir: str = "PhishBench Output", verbose: bool
     config_file: str
         The path of the configuration file to initialize PhishBench with
     output_dir: str
-        Where to output to
+        The folder to output and load results from
     verbose:
         Whether or not PhishBench should be in verbose mode
     """
     global config
+
+    if config_file is None:
+        raise TypeError("config_file cannot be None")
+    if output_dir is None:
+        raise TypeError("output_dir cannot be None")
 
     if not os.path.isfile(config_file):
         raise FileNotFoundError(f"The config file {config_file} does not exist.")
