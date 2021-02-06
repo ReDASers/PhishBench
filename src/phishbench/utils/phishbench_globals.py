@@ -80,6 +80,9 @@ def initialize(config_file, output_dir: str = "PhishBench Output", verbose: bool
     """
     global config
 
+    if not os.path.isfile(config_file):
+        raise FileNotFoundError(f"The config file {config_file} does not exist.")
+
     settings._output_dir = output_dir
     if not os.path.isdir(output_dir):
         os.mkdir(output_dir)
