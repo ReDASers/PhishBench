@@ -21,6 +21,8 @@
 ## Bug Fixes
 
 * Fixed crash due to single-class sample
+* Fixed bug decoding certain HTML emails
+* Fixed Issue #291
 
 # v2.0.0
 
