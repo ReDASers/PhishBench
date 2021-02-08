@@ -98,6 +98,10 @@ def clean_html(raw_html: str):
     cleaner.forms = False
     cleaner.processing_instructions = False
 
+    # Handles Issue 291 by removing XML declaration if present.
+    if raw_html.startswith('<?'):
+        raw_html = raw_html[raw_html.find('?>') + 2:]
+
     cleaned = cleaner.clean_html(raw_html)
     return cleaned
 
