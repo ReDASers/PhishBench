@@ -100,9 +100,9 @@ This section contains toggles for the preprocessing pipeline steps.
 
 This section contains settings for feature selection. 
 
-The `number of best features` setting is the number of features to select. 
+* The `number of best features` setting is the number of features to select. 
 
-The `with tfidf` setting specifies whether to select Tf-IDF features. 
+* The `with tfidf` setting specifies whether to select Tf-IDF features. 
 
 #### The `Feature Selection Methods` Section
 
@@ -146,6 +146,9 @@ PhishBench will extract a feature if the following conditions are met:
 3. The feature is enabled. 
 
 ## Run Experiment
+
+Once you have your configuration file, you can us the `phishbench` command to run the basic experiment. 
+
 ```
 usage: phishbench [-h] [--version] [-f CONFIG_FILE] [-v] [-o OUTPUT_INPUT_DIR]
                   [-c]
