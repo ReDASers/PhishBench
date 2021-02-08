@@ -1,0 +1,120 @@
+From jose@monkey.org Sun May 29 23:18:28 2016 +0000
+Return-Path: jewel_harper@daytonastate.edu
+Delivered-To: jose@monkey.org
+X-FDA: 71569645896.14.chess10_8426c9a87661c
+X-Spam-Summary: 10,1,0,9961b951d4e4715d,d41d8cd98f00b204,jewel_harper@daytonastate.edu,,RULES_HIT:41:72:152:355:375:379:387:543:581:962:967:973:983:988:989:1021:1189:1208:1216:1224:1256:1260:1263:1311:1313:1314:1345:1381:1430:1431:1433:1434:1436:1437:1513:1515:1516:1517:1521:1535:1543:1568:1571:1588:1589:1592:1593:1594:1711:1714:1730:1747:1777:1792:2194:2198:2199:2200:2393:2525:2527:2543:2560:2563:2682:2685:2859:2890:2894:2911:2915:2916:2919:2924:2926:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3148:3623:3867:3868:3870:3873:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4042:4425:5007:6117:6119:6261:6669:6674:6678:6688:6996:6997:7903:8603:9025:9072:9165:9388:9392:9908:10004:10049:10346:11473:11657:11658:11914:12043:12219:12555:12740:12955:12958:13141:13230:13374:14093:14096:14181:14721:21062:21067:21433:30001:30003:30020:30022:30037:30045:30051:30054:30069:30070:30074,0,RBL:199.30.179.20:@daytonastate.edu:.lbl8.mailshell.net-62.16.55.100 64.201.201.201,Ca
+X-HE-Tag: chess10_8426c9a87661c
+X-Filterd-Recvd-Size: 5955
+Received: from ca3psmtp.brightspace.com (ca3psmtp.brightspace.com [199.30.179.20])
+	by imf26.b.hostedemail.com (Postfix) with ESMTP
+	for <jose@monkey.org>; Sun, 29 May 2016 23:18:27 +0000 (UTC)
+Received: by ca3psmtp002a.ca3.int.d2l (Postfix, from userid 1003)
+	id A9D501B64; Sun, 29 May 2016 23:18:20 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	ca3psmtp002a.ca3.int.d2l
+X-Spam-Level: ******
+X-Spam-Status: No, score=6.3 required=8.0 tests=ALL_TRUSTED,HTML_MESSAGE,
+	MIME_HTML_ONLY,MISSING_HEADERS,REPLYTO_WITHOUT_TO_CC,SPF_SOFTFAIL
+	autolearn=no autolearn_force=no version=3.4.0
+Received-SPF: softfail (daytonastate.edu: Sender is not authorized by default to use 'jewel_harper@daytonastate.edu' in 'mfrom' identity, however domain is not currently prepared for false failures (mechanism '~all' matched)) receiver=ca3psmtp002a.ca3.int.d2l; identity=mailfrom; envelope-from="jewel_harper@daytonastate.edu"; helo=CA3F1PMAIL001.ca3.int.d2l; client-ip=172.22.24.27
+DMARC-Filter: OpenDMARC Filter v1.3.1 ca3psmtp002a.ca3.int.d2l 0DABF1D5D
+Authentication-Results: ca3psmtp002a.ca3.int.d2l; dmarc=none header.from=daytonastate.edu
+Received: from CA3F1PMAIL001.ca3.int.d2l (CA3F1PMAIL001.ca3.int.d2l [172.22.24.27])
+	by ca3psmtp002a.ca3.int.d2l (Postfix) with ESMTP id 0DABF1D5D
+	for <jose@monkey.org>; Sun, 29 May 2016 23:17:52 +0000 (UTC)
+Received: from ca3pdefaultsmtp ([172.22.67.30]) by CA3F1PMAIL001.ca3.int.d2l with Microsoft SMTPSVC(7.5.7601.21911);
+	 Sun, 29 May 2016 19:17:58 -0400
+Reply-To: jewel_harper@falconmail.daytonastate.edu
+From: jewel_harper@daytonastate.edu
+Message-ID: <eaba74a645ed42c1b82d835a3c61f79f@daytonastate.edu>
+Date: Sun, 29 May 2016 19:17:59 -0400
+X-Priority: 3
+Subject: Notice Unusual sign-in activity
+MIME-Version: 1.0
+Content-type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-OriginalArrivalTime: 29 May 2016 23:17:58.0809 (UTC) FILETIME=[56B78890:01D1BA00]
+X-Virus-Scanned: clamav-milter 0.98.7 at ca3psmtp002a.ca3.int.d2l
+X-Virus-Status: Clean
+Status: O
+X-Status: 
+X-Keywords:                  
+X-UID: 259
+
+<?xml version=3D"1=2E0" encoding=3D"utf-8"?><!DOCTYPE html PUBLIC "-//W=
+3C//DTD XHTML 1=2E0 Transitional//EN" "http://www=2Ew3=2Eorg/TR/xhtml1/=
+DTD/xhtml1-transitional=2Edtd"><html xmlns=3D"http://www=2Ew3=2Eorg/199=
+9/xhtml" lang=3D"en" xml:lang=3D"en"><head>=09<title>Notice Unusual sig=
+n-in activity</title>=09<meta http-equiv=3D"Content-Type" content=3D"te=
+xt/html; charset=3Dutf-8"/></head><body><p><br /><br /></p>
+<table dir=3D"ltr" style=3D"font-style: normal; font-variant: normal; f=
+ont-weight: normal; letter-spacing: normal; text-align: start; text-ind=
+ent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;=
+ line-height: 21=2E3px; color: #444444; font-family: Calibri, sans-seri=
+f; font-size: 15px;">
+<tbody style=3D"line-height: 21=2E3px;">
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI Light','Segoe UI','Helvetica Neue M=
+edium',Arial,sans-serif; margin: 0px; line-height: 58=2E22px; padding: =
+0px; font-size: 41px; color: #2672ec;"><span style=3D"color: #783f04;">=
+Unusual sign-in activity</span></td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 25px 0px 0px; font-siz=
+e: 14px; color: #2a2a2a;">We detected something unusual about a recent =
+sign-in to your account&nbsp;To help keep you safe, we required an extr=
+a security challenge=2E</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 25px 0px 0px; font-siz=
+e: 14px; color: #2a2a2a;">Sign-in details:</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 6px 0px 0px; font-size=
+: 14px; color: #2a2a2a;">Country/region: United States</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 6px 0px 0px; font-size=
+: 14px; color: #2a2a2a;">IP address: 64=2E132=2E66=2E194</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 6px 0px 0px; font-size=
+: 14px; color: #2a2a2a;">Date: 05/29/2016 17:15PM&nbsp;</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 25px 0px 0px; font-siz=
+e: 14px; color: #2a2a2a;">If this was you, then you can safely ignore t=
+his email=2E</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 25px 0px 0px; font-siz=
+e: 14px; color: #2a2a2a;">If you're not sure this was you, a malicious =
+user might have your password=2E Please review your recent activity and=
+ we'll help you take corrective action=2E</td>
+</tr>
+<tr style=3D"line-height: 21=2E3px;">
+<td style=3D"font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-seri=
+f; margin: 0px; line-height: 19=2E88px; padding: 25px 0px 0px; font-siz=
+e: 14px; color: #2a2a2a;">
+<table style=3D"line-height: 19=2E88px;" border=3D"0" cellspacing=3D"0"=
+>
+<tbody style=3D"line-height: 19=2E88px;">
+<tr style=3D"line-height: 19=2E88px;">
+<td style=3D"font-family: arial, sans-serif; margin: 0px; line-height: =
+19=2E88px; padding: 5px 20px; min-width: 50px; background-color: #2672e=
+c;" bgcolor=3D"#2672ec"><a href=3D"http://unusualsign-inactivity=2Ejimd=
+o=2Ecom/" target=3D"_blank">Verify Account Details</a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table></body></html>

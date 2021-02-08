@@ -134,3 +134,11 @@ class TestEmailBody(unittest.TestCase):
 
         expected = 'Ok. I am here til 6. Just let me know. No stress.'
         self.assertEqual(body.text.strip(), expected)
+
+    def test_issue_291(self):
+        msg = utils.get_email_text('BodyTests/Nazario_2016 (260).txt')
+        body = EmailBody(msg)
+
+        with open(utils.get_relative_path('BodyTests/Nazario_2016 (260).html')) as f:
+            expected = f.read()
+        self.assertEqual(body.html, expected)
