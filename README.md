@@ -63,30 +63,34 @@ Cross_validation = False
 
 #### The `PhishBench` Section
 
-This section contains the highest-level settings for the basic experiment. The `mode` parameter specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. and toggles for each part of the pipeline.
+This section contains the highest-level settings for the basic experiment and toggles for each part of the pipeline. 
 
- `feature extraction` extracts features from the dataset, `preprocessing` pre-proccesses the features, and `classification` trains and evaluates classifiers. 
+* The `mode` setting specifies what type of data PhishBench will be operating with. The options are `URL` or `Email`. 
+* The `feature extraction` setting toggles feature extraction from the dataset
+* The `preprocessing` setting toggles pre-proccesses the features
+* The `classification` setting toggles training and evaluation of classifiers. 
 
-If you are extracting features from a dataset, you must specify the location of the dataset via either a relative path to the current directory or an absolute path. 
+ 
 
-#### The `Dataset Path` Section
-This section contains the paths of the dataset to be used. If your dataset is not split into a train and test set, then leave the test set blank and elable the `split dataset` option in the `Extraction` section. 
+#### The `Dataset Path` Sections
+This section contains the paths of the dataset to be used. You can specify a path using either a relative path to the current directory or an absolute path. 
 
-In **URL** mode, the datset can either be a text file or folder of text files with one URL per line.  
+* In **URL** mode, the subsets can either be a text file or folder of text files with one URL per line.  
 
-In **Email** mode, the datset should be a folder of eamils, with one file per email. 
+* In **Email** mode, the subsets should be folders of eamils, with one file per email. 
 
 #### The `Extraction` Section
+This section controls the behavior of the input and feature extraction modules. 
 
-This section controls the Basic Experiment Script's datasets.
+* The `training dataset` setting controls the Basic Experiment Script's training set. If `True`, then PhishBench extracts features from the raw dataset at `path_legit_train` and `path_phish_train`. Otherwise, it will attempt to load a pre-extracted dataset from `OUTPUT_INPUT_DIR`.
 
-The `training dataset` setting controls the Basic Experiment Script's training set. If `True`, then PhishBench extracts features from the raw dataset at `path_legit_train` and `path_phish_train`. Otherwise, it will attempt to load a pre-extracted dataset from `OUTPUT_INPUT_DIR`.
+* The `testing dataset` setting controls the Basic Experiment Script's testing set. If `True`, then PhishBench extracts features from the raw datset at `path_legit_test` and `path_phish_test`. Otherwise, its behavior will be determined by the `split dataset` setting. 
 
-The `testing dataset` setting controls the Basic Experiment Script's testing set. If `True`, then PhishBench extracts features from the raw datset at `path_legit_test` and `path_phish_test`. Otherwise, its behavior will be determined by the `split dataset` setting. If the `split dataset` setting is `True`, then PhishBench will split the training set 75/25 into a train-test split. 
+* If the `split dataset` setting is `True`, then PhishBench will randomly split the training set into a 75/25 train-test split. 
 
 #### The `Features Export` Section
 
-This sections the formats PhishBench will output the extracted features in. Currently, only `csv` is supported.
+This sections specifies the formats PhishBench will output the extracted features in. Currently, only `csv` is supported.
 
 #### The `Preprocessing` Section
 
