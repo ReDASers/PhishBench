@@ -55,7 +55,7 @@ def __decode_payload(part, payload, charset):
     except LookupError:
         raw_data = part.get_payload()
         if isinstance(raw_data, str):
-            return payload, charset
+            return raw_data, charset
         return __detect_charset(payload)
 
     return None, None
