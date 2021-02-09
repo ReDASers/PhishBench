@@ -55,7 +55,7 @@ def __decode_payload(part, payload, charset):
     except LookupError:
         raw_data = part.get_payload()
         if isinstance(raw_data, str):
-            return payload, charset
+            return raw_data, charset
         return __detect_charset(payload)
 
     return None, None
@@ -97,6 +97,10 @@ def clean_html(raw_html: str):
     cleaner.frames = False
     cleaner.forms = False
     cleaner.processing_instructions = False
+
+    # Handles Issue 291 by removing XML declaration if present.
+    if raw_html.startswith('<?'):
+        raw_html = raw_html[raw_html.find('?>') + 2:]
 
     cleaned = cleaner.clean_html(raw_html)
     return cleaned
