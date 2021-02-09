@@ -1,5 +1,7 @@
 # Change Log
 
+# v2.0.1
+
 ## Major changes 
 
 * Added features from *Visualizing and Interpreting RNN Models in URL-based Phishing Detection*
