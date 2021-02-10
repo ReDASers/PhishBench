@@ -102,6 +102,7 @@ def clean_html(raw_html: str):
 class EmailBody:
     """
     A class representing the body of an email.
+
     Attributes
     ----------
     text : str
