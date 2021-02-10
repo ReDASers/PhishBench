@@ -55,6 +55,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
 def read_email_from_file(file_path: str) -> EmailMessage:
     """
     Reads a email from a file
+
     Parameters
     ----------
     file_path: str
@@ -63,7 +64,7 @@ def read_email_from_file(file_path: str) -> EmailMessage:
     Returns
     -------
     msg: EmailMessage
-        A Message object representing the email.
+        The parsed email
     """
     with open(file_path, 'rb') as f:
         binary_data = f.read()

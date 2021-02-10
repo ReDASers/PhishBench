@@ -15,6 +15,7 @@ Email Input
 .. currentmodule:: phishbench.input.email_input
 
 .. autofunction:: read_dataset_email
+.. autofunction:: read_email_from_file
 
 URL Input
 -----------------
