@@ -3,7 +3,6 @@ This module contains the implementations for email input functions
 """
 import email
 import traceback
-from email.message import Message
 from email.header import Header
 from typing import List, Tuple
 
