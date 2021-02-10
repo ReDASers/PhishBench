@@ -74,6 +74,7 @@ def decode_text_part(part):
 
 def clean_html(raw_html: str):
     assert isinstance(raw_html, str)
+    # pylint: disable=no-name-in-module
     cleaner = Cleaner()
     # We only want to remove javascript and style
     cleaner.javascript = True
