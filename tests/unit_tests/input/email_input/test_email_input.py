@@ -10,5 +10,5 @@ class TestRawInput(unittest.TestCase):
         # Testcase for Issue #213
         filepath = utils.get_relative_path('BodyTests/phishing3_1113.txt')
         msg = read_email_from_file(filepath)
-        for header in msg:
-            self.assertIsInstance(msg[header], str)
+        for header in msg.raw_message:
+            self.assertIsInstance(msg.raw_message[header], str)

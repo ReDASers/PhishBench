@@ -41,7 +41,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     emails_parsed = []
     for filename in tqdm(files):
         try:
-            msg = EmailMessage(read_email_from_file(filename))
+            msg = read_email_from_file(filename)
             emails_parsed.append(msg)
             loaded_files.append(filename)
         # pylint: disable=broad-except
@@ -52,7 +52,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     return emails_parsed, loaded_files
 
 
-def read_email_from_file(file_path: str) -> Message:
+def read_email_from_file(file_path: str) -> EmailMessage:
     """
     Reads a email from a file
     Parameters
@@ -62,7 +62,7 @@ def read_email_from_file(file_path: str) -> Message:
 
     Returns
     -------
-    msg: email.message.Message
+    msg: EmailMessage
         A Message object representing the email.
     """
     with open(file_path, 'rb') as f:
@@ -87,4 +87,4 @@ def read_email_from_file(file_path: str) -> Message:
             msg = email.message_from_string(text)
     except UnicodeError:
         pass
-    return msg
+    return EmailMessage(msg)
