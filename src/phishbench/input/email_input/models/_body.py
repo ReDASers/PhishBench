@@ -37,50 +37,43 @@ def __detect_charset(payload: bytes):
     if encoding:
         charset = encoding.lower()
         try:
-            payload = payload.decode(encoding=charset).strip()
+            payload.decode(encoding=charset).strip()
         except UnicodeError:
-            return None, None
-        return payload, charset
-    return None, None
-
-
-def __decode_payload(part, payload, charset):
-    try:
-        payload = payload.decode(charset).strip()
-        return payload, charset
-    except UnicodeError:
-        raw_data = part.get_payload()
-        if isinstance(raw_data, str):
-            return payload, charset
-    except LookupError:
-        raw_data = part.get_payload()
-        if isinstance(raw_data, str):
-            return raw_data, charset
-        return __detect_charset(payload)
-
-    return None, None
+            return None
+        return charset
+    return None
 
 
 def decode_text_part(part):
     payload = part.get_payload(decode=True)
-
     if len(payload) == 0:
         return None, None
 
     charset = get_charset(part)
-
     if charset is None:
-        return __detect_charset(payload)
+        charset = __detect_charset(payload)
 
     if isinstance(payload, str):
         # Payload has already been decoded
         payload = payload.strip()
         return payload, charset
 
-    return __decode_payload(part, payload, charset)
+    try:
+        payload = payload.decode(charset).strip()
+        return payload, charset
+    except (UnicodeError, LookupError):
+        payload = part.get_payload()
+        if isinstance(payload, str):
+            return payload, charset
+        charset = __detect_charset(payload)
+        if charset is not None:
+            payload = payload.decode(encoding=charset).strip()
+            return payload, charset
+    return None, None
 
 
 def clean_html(raw_html: str):
+    assert isinstance(raw_html, str)
     cleaner = Cleaner()
     # We only want to remove javascript and style
     cleaner.javascript = True
