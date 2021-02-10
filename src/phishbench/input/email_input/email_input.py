@@ -3,7 +3,6 @@ This module contains the implementations for email input functions
 """
 import email
 import traceback
-from email.message import Message
 from email.header import Header
 from typing import List, Tuple
 
@@ -41,7 +40,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     emails_parsed = []
     for filename in tqdm(files):
         try:
-            msg = EmailMessage(read_email_from_file(filename))
+            msg = read_email_from_file(filename)
             emails_parsed.append(msg)
             loaded_files.append(filename)
         # pylint: disable=broad-except
@@ -52,9 +51,10 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
     return emails_parsed, loaded_files
 
 
-def read_email_from_file(file_path: str) -> Message:
+def read_email_from_file(file_path: str) -> EmailMessage:
     """
     Reads a email from a file
+
     Parameters
     ----------
     file_path: str
@@ -62,8 +62,8 @@ def read_email_from_file(file_path: str) -> Message:
 
     Returns
     -------
-    msg: email.message.Message
-        A Message object representing the email.
+    msg: EmailMessage
+        The parsed email
     """
     with open(file_path, 'rb') as f:
         binary_data = f.read()
@@ -87,4 +87,4 @@ def read_email_from_file(file_path: str) -> Message:
             msg = email.message_from_string(text)
     except UnicodeError:
         pass
-    return msg
+    return EmailMessage(msg)
