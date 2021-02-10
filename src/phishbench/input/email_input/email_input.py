@@ -46,7 +46,7 @@ def read_dataset_email(folder_path: str) -> Tuple[List[EmailMessage], List[str]]
             loaded_files.append(filename)
         # pylint: disable=broad-except
         except Exception:
-            print(f"\nFailed to extract {filename}\n")
+            print(f"\nFailed to parse {filename}\n")
             traceback.print_exc()
 
     return emails_parsed, loaded_files
