@@ -61,7 +61,12 @@ def decode_text_part(part):
     try:
         payload = payload.decode(charset).strip()
         return payload, charset
-    except (UnicodeError, LookupError):
+    except UnicodeError:
+        payload = payload.decode(charset, errors='replace').strip()
+        return payload, charset
+    except (LookupError, TypeError):
+        # TypeError - charset is None
+        # LookupError - unknown charset
         payload = part.get_payload()
         if isinstance(payload, str):
             return payload, charset
