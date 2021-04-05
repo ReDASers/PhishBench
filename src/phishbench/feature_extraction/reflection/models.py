@@ -123,6 +123,7 @@ def register_feature(feature_type: FeatureType, config_name: str, default_value=
         attrs['load_state'] = _do_nothing
         attrs['default_value'] = default_value
         feature_class = FeatureMC(config_name, (), attrs)
+        feature_class.__doc__ = feature_function.__doc__
         return feature_class
 
     return register_feature_decorator
