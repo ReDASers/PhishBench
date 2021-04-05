@@ -9,7 +9,10 @@ Built-In features
 =================
 
 URL Features
-******************
+------------
+
+URL Features
+~~~~~~~~~~~~
 
 ``average_domain_token_length``
 
