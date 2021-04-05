@@ -1,4 +1,4 @@
-phishbench.feature_preprocessing
+``phishbench.feature_preprocessing``
 ======================================
 
 .. automodule:: phishbench.feature_preprocessing

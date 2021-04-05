@@ -1,4 +1,4 @@
-phishbench.classification
+``phishbench.classification``
 ======================================
 
 .. automodule:: phishbench.classification
