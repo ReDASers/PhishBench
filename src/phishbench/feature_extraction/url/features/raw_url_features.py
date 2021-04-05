@@ -27,7 +27,7 @@ def domain_length(url: URLData):
 
 
 @register_feature(FeatureType.URL_RAW, 'number_of_digits')
-def num_digits(url: URLData):
+def number_of_digits(url: URLData):
     """
     The number of digits in the url
     """
@@ -35,7 +35,7 @@ def num_digits(url: URLData):
 
 
 @register_feature(FeatureType.URL_RAW, 'number_of_dots')
-def num_dots(url: URLData):
+def number_of_dots(url: URLData):
     """
     The number of times the `.` character occurs in the url
     """
@@ -214,7 +214,7 @@ def char_dist(url: URLData):
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_kolmogorov_shmirnov')
-def kolmogorov_shmirnov(url: URLData):
+def char_dist_kolmogorov_shmirnov(url: URLData):
     """
     The Kolmogorov_Shmirnov statistic between the URL and the English character distribution
     """
@@ -223,7 +223,7 @@ def kolmogorov_shmirnov(url: URLData):
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_kl_divergence')
-def kullback_leibler(url: URLData):
+def char_dist_kl_divergence(url: URLData):
     """
     The Kullback_Leibler divergence between the URL and the English character distribution
     """
@@ -232,7 +232,7 @@ def kullback_leibler(url: URLData):
 
 
 @register_feature(FeatureType.URL_RAW, 'char_dist_euclidian_distance')
-def euclidean_distance(url: URLData):
+def char_dist_euclidian_distance(url: URLData):
     """
     The Euclidean distance (L2 norm of u-v) between the URL and the English character distribution
     """
