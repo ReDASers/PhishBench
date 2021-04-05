@@ -1,4 +1,4 @@
-phishbench.evaluation
+``phishbench.evaluation``
 ======================================
 
 .. automodule:: phishbench.evaluation

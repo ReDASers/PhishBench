@@ -1,4 +1,4 @@
-phishbench.input
+``phishbench.input``
 ======================================
 
 .. automodule:: phishbench.input
