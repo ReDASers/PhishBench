@@ -2,8 +2,10 @@
 This module contains the built-in raw url features.
 
 References:
-    Behind Phishing: An Examination of Phisher Modi Operandi
-    On the Character of Phishing URLs
+    McGrath, D. Kevin, and Minaxi Gupta. (2008) "Behind Phishing: 
+        An Examination of Phisher Modi Operandi"
+
+    Verma, Rakesh, and Keith Dyer. (2015) "On the Character of Phishing URLs"
 """
 import re
 import string
