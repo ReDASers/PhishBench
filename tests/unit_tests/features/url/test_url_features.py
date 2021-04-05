@@ -54,25 +54,25 @@ class TestURLReflectionFeatures(unittest.TestCase):
 
     def test_number_of_digits(self):
         url = URLData('http://te2t-url.com/home.html', download_url=False)
-        result = url_features.num_digits().extract(url)
+        result = url_features.number_of_digits().extract(url)
 
         self.assertEqual(result, 1, 'incorrect number_of_digits')
 
     def test_number_of_digits3(self):
         url = URLData('http://te2t-url.com/home42.html', download_url=False)
-        result = url_features.num_digits().extract(url)
+        result = url_features.number_of_digits().extract(url)
 
         self.assertEqual(result, 3, 'incorrect number_of_digits')
 
     def test_number_of_dots(self):
         url = URLData('http://te2t-url.com/home.html', download_url=False)
-        result = url_features.num_dots().extract(url)
+        result = url_features.number_of_dots().extract(url)
 
         self.assertEqual(result, 2, 'incorrect number_of_dots')
 
     def test_number_of_dots3(self):
         url = URLData('http://test.te2t-url.com/home.html', download_url=False)
-        result = url_features.num_dots().extract(url)
+        result = url_features.number_of_dots().extract(url)
 
         self.assertEqual(result, 3, 'incorrect number_of_dots')
 
