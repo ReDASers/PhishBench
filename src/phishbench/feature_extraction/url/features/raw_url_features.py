@@ -303,7 +303,7 @@ def double_slashes_in_path(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'has_www_in_middle')
 def has_www_in_middle(url: URLData):
     """
-    Whether or not there are escaped hex characters in the URL
+    Whether or not there the string "www" in the middle of the domain.
     """
     domain = url.parsed_url.hostname
     if domain.startswith('www'):
