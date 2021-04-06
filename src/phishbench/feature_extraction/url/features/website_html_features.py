@@ -81,7 +81,7 @@ def number_of_img(url: URLData):
 
 
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_scripts')
-def number_of_script(url: URLData):
+def number_of_scripts(url: URLData):
     """
     The number of script tags
     """
