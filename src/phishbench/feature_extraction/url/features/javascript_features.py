@@ -11,7 +11,7 @@ from ....input.url_input import URLData
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_exec')
 def number_of_exec(url: URLData):
     """
-    Number of `exec` calls in the embedded javascript
+    Number of ``exec`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -23,7 +23,7 @@ def number_of_exec(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_escape')
 def number_of_escape(url: URLData):
     """
-    Number of `escape` calls in the embedded javascript
+    Number of ``escape`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -35,7 +35,7 @@ def number_of_escape(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_eval')
 def number_of_eval(url: URLData):
     """
-    Number of `eval` calls in the embedded javascript
+    Number of ``eval`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -47,7 +47,7 @@ def number_of_eval(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_link')
 def number_of_link(url: URLData):
     """
-    Number of `link` calls in the embedded javascript
+    Number of ``link`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -59,7 +59,7 @@ def number_of_link(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_unescape')
 def number_of_unescape(url: URLData):
     """
-    Number of `unescape` calls in the embedded javascript
+    Number of ``unescape`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -71,7 +71,7 @@ def number_of_unescape(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_search')
 def number_of_search(url: URLData):
     """
-    Number of `search` calls in the embedded javascript
+    Number of ``search`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -83,7 +83,7 @@ def number_of_search(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_set_timeout')
 def number_of_set_timeout(url: URLData):
     """
-    Number of `setTimeout` calls in the embedded javascript
+    Number of ``setTimeout`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -95,7 +95,7 @@ def number_of_set_timeout(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_iframes_in_script')
 def number_of_iframes_in_script(url: URLData):
     """
-    Number of times the token `iframe` shows up in embedded javascript
+    Number of times the token ``iframe`` shows up in embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [script for script in soup.find_all('script')
@@ -107,7 +107,7 @@ def number_of_iframes_in_script(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_attachment')
 def number_of_event_attachment(url: URLData):
     """
-    Number of calls to `addEventListener` or `attachEvent`
+    Number of ``addEventListener`` or ``attachEvent`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]
@@ -119,7 +119,7 @@ def number_of_event_attachment(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE_JAVASCRIPT, 'number_of_event_dispatch')
 def number_of_event_dispatch(url: URLData):
     """
-    Number of calls to `dispatchEvent` or `fireEvent`
+    Number of ``dispatchEvent`` or ``fireEvent`` calls in the embedded javascript
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     scripts = [re.sub(r'\s', '', str(script)) for script in soup.find_all('script')]

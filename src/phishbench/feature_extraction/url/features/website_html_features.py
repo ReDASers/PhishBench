@@ -306,7 +306,11 @@ def number_suspicious_content(url: URLData):
     The number of suspicious tags. A tag is considered suspicious if its length is greater than 128, and less than 5%
     of it is spaces.
 
-    Reference: Prophiler: A Fast Filter for the Large-Scale Detection of Malicious Web Pages”
+    Reference
+    ----------
+
+    Canali et al. (2011) Prophiler: a fast filter for the large-scale detection of malicious web pages:
+    A Fast Filter for the Large-Scale Detection of Malicious Web Pages”
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     tags = [str(x) for x in soup.find_all()]
