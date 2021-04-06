@@ -130,7 +130,7 @@ class TestHTMLReflectionFeatures(unittest.TestCase):
     def test_number_of_scripts(self):
         test_url = mock_objects.get_mock_object('wikipedia_shortener_urldata')
 
-        result = website_html_features.number_of_script().extract(test_url)
+        result = website_html_features.number_of_scripts().extract(test_url)
         self.assertEqual(6, result)
 
     def test_number_of_anchor(self):
