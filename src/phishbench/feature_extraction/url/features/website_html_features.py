@@ -11,7 +11,7 @@ from ....input import URLData
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_tags')
 def number_of_tags(url: URLData):
     """
-    The number of tags
+    The total number of tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all())
@@ -20,7 +20,7 @@ def number_of_tags(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_head')
 def number_of_head(url: URLData):
     """
-    The number of head tags
+    The number of ``head`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('head'))
@@ -29,7 +29,7 @@ def number_of_head(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_html')
 def number_of_html(url: URLData):
     """
-    The number of html tags
+    The number of ``html`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('html'))
@@ -38,7 +38,7 @@ def number_of_html(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_body')
 def number_of_body(url: URLData):
     """
-    The number of body tags
+    The number of ``body`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('body'))
@@ -47,7 +47,7 @@ def number_of_body(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_title')
 def number_of_title(url: URLData):
     """
-    The number of title tags
+    The number of ``title`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('title'))
@@ -56,7 +56,7 @@ def number_of_title(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_iframe')
 def number_of_iframe(url: URLData):
     """
-    The number of iframe tags
+    The number of ``iframe`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('iframe'))
@@ -65,7 +65,7 @@ def number_of_iframe(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_input')
 def number_of_input(url: URLData):
     """
-    The number of input tags
+    The number of ``input`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('input'))
@@ -74,7 +74,7 @@ def number_of_input(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_img')
 def number_of_img(url: URLData):
     """
-    The number of img tags
+    The number of ``img`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('img'))
@@ -83,7 +83,7 @@ def number_of_img(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_scripts')
 def number_of_scripts(url: URLData):
     """
-    The number of script tags
+    The number of ``script`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('script'))
@@ -92,7 +92,7 @@ def number_of_scripts(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_anchor')
 def number_of_anchor(url: URLData):
     """
-    The number of anchor (<a>) tags
+    The number of anchor (``a``) tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('a'))
@@ -101,7 +101,7 @@ def number_of_anchor(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_embed')
 def number_of_embed(url: URLData):
     """
-    The number of embed tags
+    The number of ``embed`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('embed'))
@@ -110,7 +110,7 @@ def number_of_embed(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_object_tags')
 def number_object_tags(url: URLData):
     """
-    The number of object tags
+    The number of ``object`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('object'))
@@ -119,7 +119,7 @@ def number_object_tags(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_video')
 def number_of_video(url: URLData):
     """
-    The number of video tags
+    The number of ``video`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('video'))
@@ -128,7 +128,7 @@ def number_of_video(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_audio')
 def number_of_audio(url: URLData):
     """
-    The number of audio tags
+    The number of ``audio`` tags
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     return len(soup.find_all('audio'))
@@ -165,7 +165,7 @@ def number_of_hidden_div(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_input')
 def number_of_hidden_input(url: URLData):
     """
-    The number of hidden input fields
+    The number of hidden ``input`` fields
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     object_tags = soup.find_all('input')
@@ -176,7 +176,7 @@ def number_of_hidden_input(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_iframe')
 def number_of_hidden_iframe(url: URLData):
     """
-    The number of iframe of height or width 0
+    The number of iframes with a height or width of 0
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     object_tags = soup.find_all('iframe')
@@ -190,7 +190,7 @@ def number_of_hidden_iframe(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_hidden_svg')
 def number_of_hidden_svg(url: URLData):
     """
-    The number of iframe of height or width 0
+    The number of svgs of height or width 0
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     object_tags = soup.find_all('svg')
@@ -204,7 +204,8 @@ _CONTENT_LIST = ['audio', 'embed', 'iframe', 'img', 'input', 'script', 'source',
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_external_content')
 def number_of_external_content(url: URLData):
     """
-    The number of external contents
+    The number of content tags hosted on external domains. A content tag is defined as any of the following tags:
+    ``audio``, ``embed``, ``iframe``, ``img``, ``input``, ``script``, ``source``, ``track``, ``video``
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
@@ -228,7 +229,9 @@ def number_of_external_content(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_internal_content')
 def number_of_internal_content(url: URLData):
     """
-    The number of internal contents
+    The number of content tags hosted on the same domain.
+    A content tag is defined as any of the following tags: ``audio``, ``embed``, ``iframe``, ``img``, ``input``,
+    ``script``, ``source``, ``track``, ``video``
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
@@ -254,7 +257,7 @@ def number_of_internal_content(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_internal_links')
 def number_of_internal_links(url: URLData):
     """
-    The number of links to content on the same domain
+    The number of links to the same domain
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
@@ -279,7 +282,7 @@ def number_of_internal_links(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'number_of_external_links')
 def number_of_external_links(url: URLData):
     """
-    The number of links to content on a different domain
+    The number of links to a different domain
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
