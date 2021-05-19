@@ -290,6 +290,11 @@ HTML Features
 
     .. automodule:: phishbench.feature_extraction.url.features.number_of_external_links
 
+``number_of_external_content``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.url.features.number_of_external_content
+
 ``number_of_head``
 ###############################
 
