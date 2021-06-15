@@ -175,3 +175,27 @@ import phishbench
 
 phishbench.initalize('Config_File.ini')
 ```
+
+# Citation
+
+```
+@inproceedings{
+    10.1145/3372297.3420017,
+    author = {Zeng, Victor and Zhou, Xin and Baki, Shahryar and Verma, Rakesh M.},
+    title = {PhishBench 2.0: A Versatile and Extendable Benchmarking Framework for Phishing},
+    year = {2020},
+    isbn = {9781450370899},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3372297.3420017},
+    doi = {10.1145/3372297.3420017},
+    abstract = {We describe version 2.0 of our benchmarking framework, PhishBench. With the addition of the ability to dynamically load features, metrics, and classifiers, our new and improved framework allows researchers to rapidly evaluate new features and methods for machine-learning based phishing detection. Researchers can compare under identical circumstances their contributions with numerous built-in features, ranking methods, and classifiers used in the literature with the right evaluation metrics. We will demonstrate PhishBench 2.0 and compare it against at least two other automated ML systems.},
+    booktitle = {Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security},
+    pages = {2077–2079},
+    numpages = {3},
+    keywords = {machine learning, phishing, automatic framework, benchmarking},
+    location = {Virtual Event, USA},
+    series = {CCS '20}
+}
+
+```
