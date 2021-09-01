@@ -7,7 +7,7 @@ html5lib==1.1
 
 chardet==4.0.0
 tldextract==3.1.0
-pandas==1.1.4
+pandas>=1.0.0
 requests==2.25.1
 joblib>=0.17.0
 sklearn_extensions==0.0.2
