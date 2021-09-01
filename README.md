@@ -21,7 +21,7 @@ For an example, to install version 1.1.4, run
 
 # How to run a PhishBench Basic Experiment 
 
-The PhishBench Basic experiment script perfoms an experiment with the following workflow:
+The PhishBench Basic experiment script performs an experiment with the following workflow:
 
 1. Load the dataset
 2. Extract features
