@@ -25,9 +25,9 @@ class TestBalancing(unittest.TestCase):
         self.assertIsInstance(features, np.ndarray)
         self.assertIsInstance(labels, np.ndarray)
 
-    def test_repeated_edited_nearest_neighbor(self):
+    def test_edited_nearest_neighbor(self):
         data = load_breast_cancer()
-        features, labels = methods.condensed_nearest_neighbor(data.data, data.target)
+        features, labels = methods.edited_nearest_neighbor(data.data, data.target)
         self.assertIsInstance(features, np.ndarray)
         self.assertIsInstance(labels, np.ndarray)
 
