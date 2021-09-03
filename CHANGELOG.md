@@ -4,6 +4,16 @@
 
 * `phishbenh.input.email_input.read_email_from_file` now returns an `EmailMessage` instead of a raw `Message` object.
 
+## Minor Changes
+
+* Updated Dependencies
+    * Bumped tldextract version to 3.1.1
+    * Changed dnspython version to max-version pin
+    * Bumped sklearn to 0.24.2
+    * Bumped nltk to >=3.6
+    * Bumped textstat to 0.7.2
+    * Bumped tldextract to 3.1.2
+
 ## Bug Fixes
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
 * PhishBench no longer displays dataset balancing and feature selection options if preprocessing is disabled.
