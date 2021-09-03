@@ -33,13 +33,10 @@ def link_alexa_global_rank(url: URLData):
 
     _read_alexa()
     ranks = [_get_rank(link) for link in links]
-    mean = sum(ranks) / len(ranks)
-    original_rank = _get_rank(url.final_url)
-    stdev = statistics.stdev(ranks, xbar=original_rank)
 
     return {
-        'mean': mean,
-        'sd': stdev
+        'mean': sum(ranks) / len(ranks),
+        'sd': statistics.stdev(ranks)
     }
 
 

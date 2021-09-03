@@ -4,6 +4,9 @@
 
 * `phishbenh.input.email_input.read_email_from_file` now returns an `EmailMessage` instead of a raw `Message` object.
 
+## Bug Fixes
+* Fixed bug calculating standard deviation in `link_alexa_global_rank`
+
 # v2.0.1
 
 ## Major changes 
