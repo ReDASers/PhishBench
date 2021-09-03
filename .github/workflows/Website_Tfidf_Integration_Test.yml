@@ -1,0 +1,61 @@
+name: Website TF-IDF Integration Test
+
+on: 
+  push:
+    paths-ignore:
+    - 'README.md'
+    - 'CHANGELOG.md'
+    - 'docs/**'
+
+defaults:
+    run: 
+        shell: pwsh
+
+jobs:
+  Integration-Tests:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        # os: [windows-latest, ubuntu-latest]
+        os: [Windows, Linux]
+      fail-fast: false
+
+    steps:
+    - name: Install whois
+      run: sudo apt-get install whois
+      if: runner.os == 'Linux'
+
+    - name: Test whois
+      run: |
+        whois google.com
+      if: runner.os == 'Linux'
+    
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+      if: runner.os == 'windows-latest'
+    
+    - name: Update Pip
+      run: |
+        python -m pip install --upgrade pip
+        pip install wheel
+        
+    - name: Install phishbench
+      run: |
+        pip install -r requirements.txt
+        pip install .
+
+    - name: URL TF-IDF test
+      run: phishbench -f URL_TFIDF.ini -c
+      working-directory: tests/integration tests/website_tfidf
+    
+    - name: Upload Logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: Website TF-IDF Integration Test ${{github.run_id}} - ${{runner.os}} Log
+        path: tests/integration tests/*/PhishBench Output/phishbench.log
+        if-no-files-found: error
