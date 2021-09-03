@@ -46,7 +46,7 @@ jobs:
         $output = $output.Replace("`r","%0D").Replace("`n","%0A")
         Write-Output "::set-output name=output::$output"
 
-    - uses: thollander/actions-comment-pull-request@master
+    - uses: thollander/actions-comment-pull-request@main
       with:
         GITHUB_TOKEN: ${{ github.token	}}
         message: |
