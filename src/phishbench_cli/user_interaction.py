@@ -9,7 +9,7 @@ from phishbench.input import settings as input_settings
 from phishbench.utils.phishbench_globals import config
 from phishbench import __version__
 import phishbench.feature_preprocessing as preprocessing
-from phishbench.feature_preprocessing import feature_selection, balancing, settings
+from phishbench.feature_preprocessing import feature_selection, balancing
 import phishbench.feature_preprocessing.feature_selection.settings
 
 
