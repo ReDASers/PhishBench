@@ -6,6 +6,7 @@
 
 ## Bug Fixes
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
+* PhishBench no longer displays dataset balancing and feature selection options if preprocessing is disabled.
 
 # v2.0.1
 
