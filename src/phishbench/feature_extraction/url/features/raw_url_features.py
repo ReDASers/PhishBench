@@ -70,7 +70,7 @@ def top_level_domain(url: URLData):
 @register_feature(FeatureType.URL_RAW, 'is_common_tld')
 def is_common_tld(url: URLData):
     """
-    Whether or not the tld is one of: .com, .net, .org, .edu, .mil, .gov, .co, .biz", .info, .me
+    Whether or not the tld is one of: .com, .net, .org, .edu, .mil, .gov, .co, .biz, .info, .me
     """
     common_tld_list = ["com", "net", "org", "edu", "mil", "gov", "co", "biz", "info", "me"]
     tld = tldextract.extract(url.raw_url).suffix

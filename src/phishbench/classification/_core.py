@@ -73,8 +73,10 @@ def train_classifiers(x_train, y_train, io_dir: str, verbose=1) -> List[BaseClas
     io_dir : str
         The folder to interact with
     verbose : int
-        Whether or not to print progress info to stdout.
-        `0` prints nothing. `1` prints the classifiers being trained
+        The level of verbosity in its output to stdout.
+
+            * ``0`` prints nothing.
+            * ``1`` prints the classifiers being trained
 
     Returns
     -------

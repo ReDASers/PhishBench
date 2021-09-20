@@ -100,10 +100,12 @@ def evaluate_classifiers(classifiers: List[BaseClassifier], x_test, y_test, verb
     x_test: array-like of shape (n_samples, n_features)
         The feature vectors of the test set.
     y_test: array-like of shape (n_samples)
-        The labels of the test set with 0 being legitimate and 1 being phishing
+        The labels of the test set with ``0`` being legitimate and ``1`` being phishing
     verbose: bool
         Whether or not to print progress to stdout.
-        `0` prints nothing. `1` prints the classifiers being trained
+
+            * ``0`` prints nothing.
+            * ``1`` prints the classifiers being trained
 
     Returns
     -------
