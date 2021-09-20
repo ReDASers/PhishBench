@@ -43,19 +43,32 @@ def link_alexa_global_rank(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'link_tree_features')
 def link_tree(url: URLData):
     """
-    Link-Tree features from Phishing Sites Detection from a Web Developer’s Perspective
-    Using Machine Learning
-
     Split the links into 30 sets as follows:
-    <a>, <link>, <script>, <video>, <img>,
-    <meta>: split all links by these six HTML tags
-    first, then divide again by five types: (i) any URL
-    contains current domain, (ii) social network links
-    (“Facebook,” “YouTube,” “Google,” “Twitter,”
-    “Instagram,” “Pinterest)”, (iii) other https links,
-    (iv) other http links, and (v) internal links.
+    Splits all links in the page by the following HTML tags:
+
+        #. <a>
+        #. <link>
+        #. <script>
+        #. <video>
+        #. <img>
+        #. <meta>
+
+    Then divide into the following categories:
+
+        #. social network links (Facebook, YouTube, Google, Twitter, Instagram, Pinterest)
+        #. other https links,
+        #. other http links,
+        #. contains current domain,
+        #. internal links.
+        #. any URL
 
     Returns the size, mean length, and standard deviation of length of each set rounded to two decimal places
+
+    Reference
+    ----------
+
+    Zhou, Xin, and Rakesh Verma. "Phishing sites detection from a web developer’s perspective using machine learning."
+    Proceedings of the 53rd Hawaii International Conference on System Sciences. 2020.
     """
     # pylint: disable=too-many-locals
     domain = _extract_domain(url.final_url)
