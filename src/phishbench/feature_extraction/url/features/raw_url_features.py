@@ -194,7 +194,7 @@ def domain_letter_occurrence(url: URLData):
     The number of times each letter occurs in the domain
     """
     counts = _calc_char_count(url.parsed_url.hostname)
-    return {"domain_letter_occurrence_{}".format(character): value for
+    return {f"domain_letter_occurrence_{character}": value for
             value, character in zip(counts, string.ascii_lowercase)}
 
 
@@ -209,7 +209,7 @@ def char_dist(url: URLData):
     The character distribution of the url
     """
     url_char_distance = _calc_char_dist(url.raw_url)
-    return {"char_distribution_{}".format(character): value for
+    return {f"char_distribution_{character}": value for
             value, character in zip(url_char_distance, string.ascii_lowercase)}
 
 
