@@ -13,6 +13,7 @@
     * Bumped nltk to >=3.6
     * Bumped textstat to 0.7.2
     * Bumped tldextract to 3.1.2
+    * Bumped BeautifulSoup to >=4.10.0
 
 ## Bug Fixes
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
