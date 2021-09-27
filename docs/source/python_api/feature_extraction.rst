@@ -438,6 +438,15 @@ Javascript Features
 
     .. automodule:: phishbench.feature_extraction.url.features.right_click_modified
 
+Email Features
+----------------
+
+Header Features
+~~~~~~~~~~~~~~~~~
+
+Body Features
+~~~~~~~~~~~~~~~~~
+
 References
 ------------
 
