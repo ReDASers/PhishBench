@@ -263,7 +263,7 @@ HTML Features
 ``link_tree_features``
 ###############################
 
-    .. automodule:: phishbench.feature_extraction.url.features.link_tree_features
+    .. automodule:: phishbench.feature_extraction.url.features.link_tree
 
 ``number_of_anchor``
 ###############################

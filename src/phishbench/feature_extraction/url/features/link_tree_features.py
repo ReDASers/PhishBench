@@ -17,8 +17,20 @@ from ....input import URLData
 @register_feature(FeatureType.URL_WEBSITE, 'link_alexa_global_rank')
 def link_alexa_global_rank(url: URLData):
     """
-    The mean and standard deviation of the global ranks normalized by ranges
-    <1,000, <10,000, <100,000, <500,000, <1,000,000, and unranked
+    The mean and standard deviation of the global alexa ranks of the links on the website bucketed into the ranges
+
+        #. <1,000,
+        #. <10,000
+        #. <100,000
+        #. <500,000
+        #. <1,000,000
+        #. unranked
+
+    Reference
+    ----------
+
+    Zhou, Xin, and Rakesh Verma. "*Phishing sites detection from a web developer’s perspective using machine learning.*"
+    Proceedings of the 53rd Hawaii International Conference on System Sciences. 2020.
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
 
@@ -43,18 +55,16 @@ def link_alexa_global_rank(url: URLData):
 @register_feature(FeatureType.URL_WEBSITE, 'link_tree_features')
 def link_tree(url: URLData):
     """
-    Split the links into 30 sets as follows:
-    Splits all links in the page by the following HTML tags:
+    Partitions the links on the page into 36 sets as follows:
 
+    #. Splits all links in the page by the following HTML tags:
         #. <a>
         #. <link>
         #. <script>
         #. <video>
         #. <img>
         #. <meta>
-
-    Then divide into the following categories:
-
+    #. Then divide into the following categories:
         #. social network links (Facebook, YouTube, Google, Twitter, Instagram, Pinterest)
         #. other https links,
         #. other http links,
@@ -62,12 +72,12 @@ def link_tree(url: URLData):
         #. internal links.
         #. any URL
 
-    Returns the size, mean length, and standard deviation of length of each set rounded to two decimal places
+    Returns the size, mean length, and length standard deviation of each set
 
     Reference
     ----------
 
-    Zhou, Xin, and Rakesh Verma. "Phishing sites detection from a web developer’s perspective using machine learning."
+    Zhou, Xin, and Rakesh Verma. "*Phishing sites detection from a web developer’s perspective using machine learning.*"
     Proceedings of the 53rd Hawaii International Conference on System Sciences. 2020.
     """
     # pylint: disable=too-many-locals
@@ -109,7 +119,7 @@ def _read_alexa():
     if _ALEXA_DATA is None:
         file_folder = pathlib.Path(__file__).parent.absolute()
         path = os.path.join(file_folder, 'alexa-top-1m.csv')
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             reader = csv.DictReader(f, fieldnames=['rank', 'domain'])
             _ALEXA_DATA = {row["domain"]: row['rank'] for row in reader}
 
