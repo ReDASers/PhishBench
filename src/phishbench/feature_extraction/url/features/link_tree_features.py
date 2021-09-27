@@ -18,7 +18,7 @@ from ....input import URLData
 def link_alexa_global_rank(url: URLData):
     """
     The mean and standard deviation of the global alexa ranks of the links on the website bucketed into the ranges
-    
+
         #. <1,000,
         #. <10,000
         #. <100,000
@@ -119,7 +119,7 @@ def _read_alexa():
     if _ALEXA_DATA is None:
         file_folder = pathlib.Path(__file__).parent.absolute()
         path = os.path.join(file_folder, 'alexa-top-1m.csv')
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             reader = csv.DictReader(f, fieldnames=['rank', 'domain'])
             _ALEXA_DATA = {row["domain"]: row['rank'] for row in reader}
 
