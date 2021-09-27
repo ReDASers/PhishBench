@@ -64,8 +64,8 @@ def read_test_set(download_url: bool = False) -> Tuple[
         legit, _ = url_input.read_dataset_url(settings.test_legit_path(), download_url)
         phish, _ = url_input.read_dataset_url(settings.test_phish_path(), download_url)
     else:
-        legit = email_input.read_dataset_email(settings.test_legit_path())
-        phish = email_input.read_dataset_email(settings.test_phish_path())
+        legit, _ = email_input.read_dataset_email(settings.test_legit_path())
+        phish, _ = email_input.read_dataset_email(settings.test_phish_path())
     data = legit + phish
     labels = [0] * len(legit) + [1] * len(phish)
     return data, labels

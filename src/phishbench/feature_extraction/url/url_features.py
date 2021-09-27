@@ -24,7 +24,7 @@ def create_new_features() -> List[FeatureClass]:
         A list of instantiated features
     """
     features = [x() for x in load_features(internal_features, 'URL')]
-    print("Loaded {} features".format(len(features)))
+    print(f"Loaded {len(features)} features")
     return features
 
 
@@ -57,9 +57,9 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
     phishbench_globals.logger.info("Extracting email features. Legit: %s Phish: %s",
                                    legit_dataset_folder, phish_dataset_folder)
 
-    print("Loading URLs from {}".format(legit_dataset_folder))
+    print(f"Loading URLs from {legit_dataset_folder}")
     legit_urls, bad_url_list = url_input.read_dataset_url(legit_dataset_folder, download_url_flag)
-    print("Loading URLs from {}".format(phish_dataset_folder))
+    print(f"Loading URLs from {phish_dataset_folder}")
     phish_urls, bad_urls = url_input.read_dataset_url(phish_dataset_folder, download_url_flag)
     bad_url_list.extend(bad_urls)
 
@@ -93,7 +93,7 @@ def extract_features_list(urls: List[URLData], features: List[FeatureClass]):
         A list of dicts containing the extracted features
     """
 
-    feature_list_dict = list()
+    feature_list_dict = []
     for url in tqdm(urls):
         feature_values, _ = extract_features_from_single(features, url)
         feature_list_dict.append(feature_values)
@@ -118,8 +118,12 @@ def extract_features_from_single(features: List[FeatureClass], url: URLData) -> 
     extraction_times: Dict
         The time it took to extract each feature
     """
-    dict_feature_values = dict()
-    dict_feature_times = dict()
+    # pylint: disable=duplicate-code
+    if not isinstance(url, URLData):
+        raise TypeError("url must be an URLData object")
+
+    dict_feature_values = {}
+    dict_feature_times = {}
 
     for feature in features:
         result, ex_time = extract_single_feature_url(feature, url)
@@ -151,13 +155,16 @@ def extract_single_feature_url(feature: FeatureClass, url: URLData):
         The time to extract the feature
     """
     # pylint: disable=broad-except
+    # pylint: disable=duplicate-code
+    if not isinstance(url, URLData):
+        raise TypeError("url must be an URLData object")
+
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
     try:
         feature_value = feature.extract(url)
     except Exception:
-        error_string = "Error extracting {}".format(feature.config_name)
-        phishbench_globals.logger.warning(error_string, exc_info=True)
+        phishbench_globals.logger.warning("Error extracting %s", feature.config_name, exc_info=True)
         feature_value = feature.default_value
     end = time.process_time()
     ex_time = end - start

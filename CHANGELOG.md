@@ -16,10 +16,13 @@
     * Bumped BeautifulSoup to >=4.10.0
     * Relaxed Scipy to scipy>=1.4.1
     * Bumped TensorFlow to 2.6.0
+* Added type checks to `feature_extraction.url.extract_features_from_single`
+* Added type checks to `feature_extraction.email.extract_features_from_single`
 
 ## Bug Fixes
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
 * PhishBench no longer displays dataset balancing and feature selection options if preprocessing is disabled.
+* Fixed bug reading email test set.
 
 # v2.0.1
 
