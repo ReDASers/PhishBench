@@ -1,0 +1,25 @@
+name: Build Documentation
+
+on: 
+  push:
+    paths-ignore:
+    - 'README.md'
+    - 'CHANGELOG.md'
+
+jobs:
+  Lint:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs/"
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: DocumentationHTML
+        path: docs/_build/html/        
