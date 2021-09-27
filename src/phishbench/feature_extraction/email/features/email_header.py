@@ -98,7 +98,7 @@ def authentication_results_dkim_pass(header: EmailHeader):
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'has_x_original_authentication_results')
-def x_original_authentication_results(header: EmailHeader):
+def has_x_original_authentication_results(header: EmailHeader):
     """
     Whether or not the email has the X-Original-Authentication-Results header
     """
@@ -149,15 +149,41 @@ def compare_sender_return(header: EmailHeader):
 @register_feature(FeatureType.EMAIL_HEADER, 'blacklisted_words_subject')
 def blacklisted_words_subject(header: EmailHeader):
     """
-    Number of times the blacklisted words in `["urgent", "account", "closing", "act now", "click here", "limitied",
-    "suspension", "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm", "customer",
-    "client", "Suspend", "restrict", "verify", "login", "ssn", 'username','click', 'log', 'inconvenien', 'alert',
-    'paypal']` appear in the subject.
+    Number of times the following words/phrases appear in the subject:
+
+        * urgent
+        * account
+        * closing
+        * act now
+        * click here
+        * limited
+        * suspension
+        * your account
+        * verify your account
+        * agree
+        * bank
+        * dear
+        * update
+        * confirm
+        * customer
+        * client
+        * suspend
+        * restrict
+        * verify
+        * login
+        * ssn
+        * username
+        * click
+        * log
+        * inconvenient
+        * alert
+        * paypal
+        
     """
-    blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limitied", "suspension",
+    blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limited", "suspension",
                          "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm",
-                         "customer", "client", "Suspend", "restrict", "verify", "login", "ssn", 'username',
-                         'click', 'log', 'inconvenien', 'alert', 'paypal']
+                         "customer", "client", "suspend", "restrict", "verify", "login", "ssn", 'username',
+                         'click', 'log', 'inconvenient', 'alert', 'paypal']
     result_dict = {}
     if header.subject is None:
         for word in blacklist_subject:

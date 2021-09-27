@@ -491,17 +491,17 @@ Header Features
     .. automodule:: phishbench.feature_extraction.email.features.received_count
 
 ``authentication_results_spf_pass``
-###############################
+##########################################
 
     .. automodule:: phishbench.feature_extraction.email.features.authentication_results_spf_pass
 
 ``authentication_results_dkim_pass``
-###############################
+#############################################
 
     .. automodule:: phishbench.feature_extraction.email.features.authentication_results_dkim_pass
 
 ``has_x_original_authentication_results``
-###############################
+#############################################
 
     .. automodule:: phishbench.feature_extraction.email.features.has_x_original_authentication_results
 
@@ -516,7 +516,7 @@ Header Features
     .. automodule:: phishbench.feature_extraction.email.features.has_dkim_signature
 
 ``compare_sender_domain_message_id_domain``
-###############################
+#############################################
 
     .. automodule:: phishbench.feature_extraction.email.features.compare_sender_domain_message_id_domain
 
@@ -551,12 +551,12 @@ Header Features
     .. automodule:: phishbench.feature_extraction.email.features.number_of_words_subject
 
 ``number_of_characters_subject``
-###############################
+##################################
 
     .. automodule:: phishbench.feature_extraction.email.features.number_of_characters_subject
 
 ``number_of_special_characters_subject``
-###############################
+#########################################
 
     .. automodule:: phishbench.feature_extraction.email.features.number_of_special_characters_subject
 
