@@ -30,11 +30,11 @@ jobs:
         pip install -r requirements.txt
         pip install .
 
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
+    - name: Install Documentation Requirements
+      run: pip install -r requirements.txt
+      working-directory: docs
         
     - uses: actions/upload-artifact@v2
       with:
         name: DocumentationHTML
-        path: docs/_build/html/
+        path: docs/build
