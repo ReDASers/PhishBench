@@ -122,7 +122,6 @@ def extract_features_from_single(features: List[FeatureClass], email_msg: EmailM
     if not isinstance(email_msg, EmailMessage):
         raise TypeError("email_msg must be an EmailMessage object")
 
-    
     dict_feature_values = {}
     dict_feature_times = {}
 
@@ -170,7 +169,7 @@ def extract_single_feature_email(feature: FeatureClass, email_msg: EmailMessage)
         else:
             raise ValueError('Email Message must have a header!')
     except Exception:
-        phishbench_globals.logger.warning(f"Error extracting {feature.config_name}", exc_info=True)
+        phishbench_globals.logger.warning("Error extracting %s", feature.config_name, exc_info=True)
         feature_value = feature.default_value
     end = time.process_time()
     ex_time = end - start
