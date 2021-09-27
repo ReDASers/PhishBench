@@ -33,6 +33,10 @@ jobs:
     - name: Install Documentation Requirements
       run: pip install -r requirements.txt
       working-directory: docs
+
+    - name: Build Docmentation
+      run: make html
+      working-directory: docs
         
     - uses: actions/upload-artifact@v2
       with:
