@@ -18,6 +18,7 @@
     * Bumped TensorFlow to 2.6.0
 * Added type checks to `feature_extraction.url.extract_features_from_single`
 * Added type checks to `feature_extraction.email.extract_features_from_single`
+* Optimized feature cleaning performance
 
 ## Bug Fixes
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
