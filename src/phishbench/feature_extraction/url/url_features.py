@@ -118,6 +118,9 @@ def extract_features_from_single(features: List[FeatureClass], url: URLData) -> 
     extraction_times: Dict
         The time it took to extract each feature
     """
+    if not isinstance(url, URLData):
+        raise TypeError("url must be an URLData object")
+
     dict_feature_values = dict()
     dict_feature_times = dict()
 
@@ -150,6 +153,9 @@ def extract_single_feature_url(feature: FeatureClass, url: URLData):
     ex_time: float
         The time to extract the feature
     """
+    if not isinstance(url, URLData):
+        raise TypeError("url must be an URLData object")
+
     # pylint: disable=broad-except
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()

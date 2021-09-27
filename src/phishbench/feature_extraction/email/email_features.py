@@ -86,6 +86,9 @@ def extract_features_list(emails: List[EmailMessage], features: List[FeatureClas
     feature_list_dict: List[Dict[str]]
         A list of dicts containing the extracted features
     """
+    if not isinstance(emails, List):
+        raise TypeError("emails must be an EmailMessage object")
+
     if features is None:
         features = create_new_features()
     feature_list_dict = list()
@@ -115,6 +118,9 @@ def extract_features_from_single(features: List[FeatureClass], email_msg: EmailM
     extraction_times: Dict
         The time it took to extract each feature
     """
+    if not isinstance(email_msg, EmailMessage):
+        raise TypeError("email_msg must be an EmailMessage object")
+
     dict_feature_values = dict()
     dict_feature_times = dict()
 
@@ -148,6 +154,9 @@ def extract_single_feature_email(feature: FeatureClass, email_msg: EmailMessage)
     ex_time: float
         The time to extract the feature
     """
+    if not isinstance(email_msg, EmailMessage):
+        raise TypeError("email_msg must be an EmailMessage object")
+
     # pylint: disable=broad-except
     phishbench_globals.logger.debug(feature.config_name)
     start = time.process_time()
