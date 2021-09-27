@@ -178,7 +178,7 @@ def blacklisted_words_subject(header: EmailHeader):
         * inconvenient
         * alert
         * paypal
-        
+
     """
     blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limited", "suspension",
                          "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm",
