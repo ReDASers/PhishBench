@@ -65,7 +65,7 @@ def x_virus_scanned(header: EmailHeader):
     return header.x_virus_scanned
 
 
-@register_feature(FeatureType.EMAIL_HEADER, 'x_Spam_flag')
+@register_feature(FeatureType.EMAIL_HEADER, 'x_spam_flag')
 def x_spam_flag(header: EmailHeader):
     """
     Whether or not the x-spam-flag header is in the email
@@ -98,7 +98,7 @@ def authentication_results_dkim_pass(header: EmailHeader):
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'has_x_original_authentication_results')
-def x_original_authentication_results(header: EmailHeader):
+def has_x_original_authentication_results(header: EmailHeader):
     """
     Whether or not the email has the X-Original-Authentication-Results header
     """
@@ -106,7 +106,7 @@ def x_original_authentication_results(header: EmailHeader):
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'has_received_spf')
-def received_spf(header: EmailHeader):
+def has_received_spf(header: EmailHeader):
     """
     Whether or not the email has the Recieved-SPF header
     """
@@ -114,7 +114,7 @@ def received_spf(header: EmailHeader):
 
 
 @register_feature(FeatureType.EMAIL_HEADER, 'has_dkim_signature')
-def dkim_signature_exists(header: EmailHeader):
+def has_dkim_signature(header: EmailHeader):
     """
     Whether or not the email has the DKIM-Signature header
     """
@@ -124,7 +124,7 @@ def dkim_signature_exists(header: EmailHeader):
 @register_feature(FeatureType.EMAIL_HEADER, 'compare_sender_domain_message_id_domain')
 def compare_sender_domain_message_id_domain(header: EmailHeader):
     """
-    Whether or not hte domain for the sender address and the message id is the same
+    Whether or not the domain for the sender address and the message id is the same
 
     """
     if header.message_id is not None and '@' in header.message_id:
@@ -149,15 +149,41 @@ def compare_sender_return(header: EmailHeader):
 @register_feature(FeatureType.EMAIL_HEADER, 'blacklisted_words_subject')
 def blacklisted_words_subject(header: EmailHeader):
     """
-    Number of times the blacklisted words in `["urgent", "account", "closing", "act now", "click here", "limitied",
-    "suspension", "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm", "customer",
-    "client", "Suspend", "restrict", "verify", "login", "ssn", 'username','click', 'log', 'inconvenien', 'alert',
-    'paypal']` appear in the subject.
+    Number of times the following words/phrases appear in the subject:
+
+        * urgent
+        * account
+        * closing
+        * act now
+        * click here
+        * limited
+        * suspension
+        * your account
+        * verify your account
+        * agree
+        * bank
+        * dear
+        * update
+        * confirm
+        * customer
+        * client
+        * suspend
+        * restrict
+        * verify
+        * login
+        * ssn
+        * username
+        * click
+        * log
+        * inconvenient
+        * alert
+        * paypal
+
     """
-    blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limitied", "suspension",
+    blacklist_subject = ["urgent", "account", "closing", "act now", "click here", "limited", "suspension",
                          "your account", "verify your account", "agree", 'bank', 'dear', "update", "confirm",
-                         "customer", "client", "Suspend", "restrict", "verify", "login", "ssn", 'username',
-                         'click', 'log', 'inconvenien', 'alert', 'paypal']
+                         "customer", "client", "suspend", "restrict", "verify", "login", "ssn", 'username',
+                         'click', 'log', 'inconvenient', 'alert', 'paypal']
     result_dict = {}
     if header.subject is None:
         for word in blacklist_subject:

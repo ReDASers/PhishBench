@@ -438,6 +438,146 @@ Javascript Features
 
     .. automodule:: phishbench.feature_extraction.url.features.right_click_modified
 
+Email Features
+----------------
+
+Header Features
+~~~~~~~~~~~~~~~~~
+
+``mime_version``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.mime_version
+
+``header_file_size``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.size_in_bytes
+
+``return_path``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.return_path
+
+
+``X-mailer``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.x_mailer
+
+``x_originating_hostname``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.x_originating_hostname
+
+``x_originating_ip``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.x_originating_ip
+
+``x_virus_scanned``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.x_virus_scanned
+
+``x_spam_flag``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.x_spam_flag
+
+``received_count``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.received_count
+
+``authentication_results_spf_pass``
+##########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.authentication_results_spf_pass
+
+``authentication_results_dkim_pass``
+#############################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.authentication_results_dkim_pass
+
+``has_x_original_authentication_results``
+#############################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.has_x_original_authentication_results
+
+``has_received_spf``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.has_received_spf
+
+``has_dkim_signature``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.has_dkim_signature
+
+``compare_sender_domain_message_id_domain``
+#############################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.compare_sender_domain_message_id_domain
+
+``compare_sender_return``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.compare_sender_return
+
+``blacklisted_words_subject``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.blacklisted_words_subject
+
+``number_cc``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_cc
+
+``number_bcc``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_bcc
+
+``number_to``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_to
+
+``number_of_words_subject``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_words_subject
+
+``number_of_characters_subject``
+##################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_characters_subject
+
+``number_of_special_characters_subject``
+#########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_special_characters_subject
+
+``is_forward``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.fwd_in_subject
+
+``is_reply``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.is_reply
+
+``vocab_richness_subject``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.vocab_richness_subject
+
+Body Features
+~~~~~~~~~~~~~~~~~
+
 References
 ------------
 
