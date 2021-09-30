@@ -12,13 +12,13 @@ class XGBoost(BaseClassifier):
 
     def fit(self, x, y):
         self.clf = XGBClassifier(use_label_encoder=False)
-        self.clf.fit(x, y)
+        self.clf.fit(x, y, eval_metric="logloss")
 
     def fit_weighted(self, x, y):
         self.clf = XGBClassifier(use_label_encoder=False)
 
         weights = compute_sample_weight('balanced', y=y)
-        self.clf.fit(x, y, sample_weight=weights)
+        self.clf.fit(x, y, sample_weight=weights, eval_metric="logloss")
 
     def param_search(self, x, y):
         param_grid = {
@@ -27,5 +27,5 @@ class XGBoost(BaseClassifier):
         }
         base = XGBClassifier(use_label_encoder=False)
         clf = GridSearchCV(base, param_grid, n_jobs=-1, pre_dispatch='2*n_jobs')
-        self.clf = clf.fit(x, y).best_estimator_
+        self.clf = clf.fit(x, y, eval_metric="logloss").best_estimator_
         return self.clf.get_params()
