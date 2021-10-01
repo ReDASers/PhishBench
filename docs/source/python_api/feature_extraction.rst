@@ -811,7 +811,7 @@ Body Features
 ``flesh_read_score``
 ###########################################
 
-    .. automodule:: phishbench.feature_extraction.email.features.number_img_links
+    .. automodule:: phishbench.feature_extraction.email.features.flesh_read_score
 
 ``smog_index``
 ###########################################
