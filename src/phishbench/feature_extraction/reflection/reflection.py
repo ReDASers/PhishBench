@@ -17,7 +17,7 @@ def _check_feature(feature: FeatureMC) -> bool:
     Checks whether or not a feature is enabled.
     Parameters
     ----------
-    feature: Callable
+    feature: FeatureMC
         The feature to check
 
     Returns
