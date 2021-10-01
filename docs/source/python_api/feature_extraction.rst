@@ -4,13 +4,37 @@
 .. automodule:: phishbench.feature_extraction
 .. currentmodule:: phishbench.feature_extraction
 
+User-Defined Features
+**********************
+
 .. autodecorator:: phishbench.feature_extraction.reflection.register_feature
 
 .. autoenum:: phishbench.feature_extraction.reflection.FeatureType
 
 .. autoclass:: phishbench.feature_extraction.reflection.FeatureMC
 
+Feature Loading & Extraction
+*******************************
+
 .. autofunction:: phishbench.feature_extraction.reflection.load_features
+
+URL Feature Extraction
+------------------------
+
+.. autofunction:: phishbench.feature_extraction.url.extract_features_from_single
+
+.. autofunction:: phishbench.feature_extraction.url.extract_features_list
+
+.. autofunction:: phishbench.feature_extraction.url.extract_labeled_dataset
+
+Email Feature Extraction
+--------------------------
+
+.. autofunction:: phishbench.feature_extraction.email.extract_features_from_single
+
+.. autofunction:: phishbench.feature_extraction.email.extract_features_list
+
+.. autofunction:: phishbench.feature_extraction.email.extract_labeled_dataset
 
 
 Built-In features

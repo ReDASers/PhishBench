@@ -24,7 +24,7 @@ copyright = '2021, ReDAS Lab'
 author = 'ReDAS Lab'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.0'
+release = phishbench.__version__
 
 
 # -- General configuration ---------------------------------------------------
