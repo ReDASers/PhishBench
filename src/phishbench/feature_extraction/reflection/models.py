@@ -101,6 +101,7 @@ def _do_nothing(self, *args):
 def register_feature(feature_type: FeatureType, config_name: str, default_value=-1):
     """
     Registers a feature for use in Phishbench
+
     Parameters
     ----------
     feature_type: FeatureType

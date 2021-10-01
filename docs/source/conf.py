@@ -36,7 +36,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     # 'numpydoc',
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'enum_tools.autoenum'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,3 +62,4 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 autodoc_typehints = 'description'
 autodoc_member_order = 'bysource'
+# add_module_names = False

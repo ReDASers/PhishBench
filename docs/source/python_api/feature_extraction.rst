@@ -4,6 +4,14 @@
 .. automodule:: phishbench.feature_extraction
 .. currentmodule:: phishbench.feature_extraction
 
+.. autodecorator:: phishbench.feature_extraction.reflection.register_feature
+
+.. autoenum:: phishbench.feature_extraction.reflection.FeatureType
+
+.. autoclass:: phishbench.feature_extraction.reflection.FeatureMC
+
+.. autofunction:: phishbench.feature_extraction.reflection.load_features
+
 
 Built-In features
 *******************
