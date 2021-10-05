@@ -30,19 +30,23 @@ def _check_feature(feature: FeatureMC) -> bool:
     return phishbench_globals.config[feature_type.value].getboolean(feature.config_name)
 
 
-def load_features(internal_features=None, filter_features=None) -> List[FeatureMC]:
+def load_features(internal_features=None, feature_filter=None) -> List[FeatureMC]:
     """
-    Loads all features
+    Searches for python modules in the current directory and loads features from any modules it finds.
 
     Parameters
     ----------
     internal_features: Union[ModuleType, List]
         The module or a list of modules to load internal features from
-    filter_features: Union[str, None]
-        Whether or not to filter the features
+    feature_filter: Union[str, None]
+        The filter to use when loading features. Allowed values are:
+
+            * ``"Email"`` - Only include email types that are enabled in the configuration.
+            * ``"URL"`` - Only include URL types that are enabled in the configuration.
+            * ``None`` - Don't filter features.
     Returns
     -------
-        A list of feature functions
+        A list of features.
     """
     modules = load_local_modules()
     if internal_features:
@@ -50,7 +54,7 @@ def load_features(internal_features=None, filter_features=None) -> List[FeatureM
             modules.append(internal_features)
         else:
             modules.extend(internal_features)
-    loaded_features = [load_features_from_module(module, filter_features) for module in modules]
+    loaded_features = [load_features_from_module(module, feature_filter) for module in modules]
     features = list(itertools.chain.from_iterable(loaded_features))
     return features
 
@@ -58,12 +62,13 @@ def load_features(internal_features=None, filter_features=None) -> List[FeatureM
 def load_features_from_module(features_module, filter_features=None) -> List[FeatureMC]:
     """
     Loads features from a module
+
     Parameters
     ----------
     features_module: ModuleType
         The module to import features from
     filter_features: Union[str, None]
-        Whether or not to load features based on `phishbench.utils.phishbench_globals.config`
+        Whether or not to filter out features according to the current configuration
 
     Returns
     -------

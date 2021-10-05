@@ -72,7 +72,7 @@ def make_config() -> configparser.ConfigParser:
     config[extraction.settings.URL_TYPE_SECTION] = extraction.settings.URL_TYPE_SETTINGS
 
     internal_features = [internal_email_features, internal_url_features]
-    reflection_features = load_features(internal_features=internal_features, filter_features=None)
+    reflection_features = load_features(internal_features=internal_features, feature_filter=None)
 
     for feature_type in FeatureType:
         config[feature_type.value] = {

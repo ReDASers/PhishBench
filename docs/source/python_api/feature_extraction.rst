@@ -18,6 +18,8 @@ Feature Loading & Extraction
 
 .. autofunction:: phishbench.feature_extraction.reflection.load_features
 
+.. autofunction:: phishbench.feature_extraction.reflection.load_features_from_module
+
 URL Feature Extraction
 ------------------------
 
