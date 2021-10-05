@@ -13,6 +13,9 @@ from ....input.email_input.models import EmailBody
 
 @register_feature(FeatureType.EMAIL_BODY, 'is_html')
 def is_html(body: EmailBody):
+    """
+    Whether or not the email has a HTML body
+    """
     return body.is_html
 
 
