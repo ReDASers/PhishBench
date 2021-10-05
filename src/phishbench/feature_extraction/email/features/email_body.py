@@ -12,7 +12,10 @@ from ....input.email_input.models import EmailBody
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'is_html')
-def test_html(body: EmailBody):
+def is_html(body: EmailBody):
+    """
+    Whether or not the email has a HTML body
+    """
     return body.is_html
 
 
@@ -95,7 +98,7 @@ def num_content_disposition(body: EmailBody):
     return len(body.content_disposition_list)
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_content_disposition_unique')
+@register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_disposition')
 def num_unique_content_disposition(body: EmailBody):
     return len(set(body.content_disposition_list))
 
@@ -118,14 +121,14 @@ def num_content_type_charset_us_ascii(body: EmailBody):
     return body.charset_list.count("us_ascii")
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_charset_utf8')
-def num_content_type_charset_utf_8(body: EmailBody):
-    return body.charset_list.count("utf_8")
-
-
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_utf7')
 def num_content_type_charset_utf_7(body: EmailBody):
     return body.charset_list.count("utf_7")
+
+
+@register_feature(FeatureType.EMAIL_BODY, 'num_charset_utf8')
+def num_content_type_charset_utf_8(body: EmailBody):
+    return body.charset_list.count("utf_8")
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_gb2312')
@@ -172,7 +175,7 @@ def num_content_transfer_encoding(body: EmailBody):
     return len(body.content_transfer_encoding_list)
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_unique')
+@register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_transfer_encoding')
 def num_unique_content_transfer_encoding(body: EmailBody):
     return len(set(body.content_transfer_encoding_list))
 
@@ -192,7 +195,7 @@ def num_content_transfer_encoding_binary(body: EmailBody):
     return body.content_transfer_encoding_list.count('binary')
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_printable_content_transfer_encoding_quoted')
+@register_feature(FeatureType.EMAIL_BODY, 'num_content_transfer_encoding_quoted_printable')
 def num_content_transfer_encoding_quoted_printable(body: EmailBody):
     return body.content_transfer_encoding_list.count('quoted-printable')
 
@@ -221,6 +224,13 @@ def number_of_special_characters_body(body: EmailBody) -> int:
     return 0
 
 
+@register_feature(FeatureType.EMAIL_BODY, 'number_unique_chars_body')
+def number_unique_chars_body(body: EmailBody):
+    if body.text is None:
+        return 0
+    return len(set(body.text)) - 1
+
+
 @register_feature(FeatureType.EMAIL_BODY, 'vocab_richness_body')
 def vocab_richness_body(body: EmailBody):
     if body.text is None:
@@ -233,13 +243,6 @@ def number_of_html_tags_body(body: EmailBody):
     if body.text is None:
         return 0
     return len(re.findall(r'<.*>', body.text))
-
-
-@register_feature(FeatureType.EMAIL_BODY, 'number_unique_chars_body')
-def number_unique_chars_body(body: EmailBody):
-    if body.text is None:
-        return 0
-    return len(set(body.text)) - 1
 
 
 @register_feature(FeatureType.EMAIL_BODY, 'greetings_body')
@@ -332,7 +335,7 @@ def blacklisted_words_body(body: EmailBody):
     return blacklist_body_count
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'Number_Of_Scripts')
+@register_feature(FeatureType.EMAIL_BODY, 'number_of_scripts')
 def number_scripts(body: EmailBody):
     if not body.is_html:
         return 0
@@ -340,7 +343,7 @@ def number_scripts(body: EmailBody):
     return len(soup.find_all('script'))
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'Number_Of_Img_Links')
+@register_feature(FeatureType.EMAIL_BODY, 'number_of_img_links')
 def number_img_links(body: EmailBody):
     if not body.is_html:
         return 0
@@ -374,7 +377,7 @@ _FUNCTION_WORDS = {"a", "about", "above", "after", "again", "against", "ago", "a
                    "yours", "yourself", "yourselves"}
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'Function_Words_Count')
+@register_feature(FeatureType.EMAIL_BODY, 'function_words_count')
 def function_words_counts(body: EmailBody):
     if body.text is None:
         return 0

@@ -4,9 +4,43 @@
 .. automodule:: phishbench.feature_extraction
 .. currentmodule:: phishbench.feature_extraction
 
+User-Defined Features
+**********************
+
+.. autodecorator:: phishbench.feature_extraction.reflection.register_feature
+
+.. autoenum:: phishbench.feature_extraction.reflection.FeatureType
+
+.. autoclass:: phishbench.feature_extraction.reflection.FeatureMC
+
+Feature Loading & Extraction
+*******************************
+
+.. autofunction:: phishbench.feature_extraction.reflection.load_features
+
+.. autofunction:: phishbench.feature_extraction.reflection.load_features_from_module
+
+URL Feature Extraction
+------------------------
+
+.. autofunction:: phishbench.feature_extraction.url.extract_features_from_single
+
+.. autofunction:: phishbench.feature_extraction.url.extract_features_list
+
+.. autofunction:: phishbench.feature_extraction.url.extract_labeled_dataset
+
+Email Feature Extraction
+--------------------------
+
+.. autofunction:: phishbench.feature_extraction.email.extract_features_from_single
+
+.. autofunction:: phishbench.feature_extraction.email.extract_features_list
+
+.. autofunction:: phishbench.feature_extraction.email.extract_labeled_dataset
+
 
 Built-In features
------------------
+*******************
 
 URL Features
 ------------
@@ -578,9 +612,291 @@ Header Features
 Body Features
 ~~~~~~~~~~~~~~~~~
 
+``is_html``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.is_html
+
+``num_content_type``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type
+
+``num_unique_content_type``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_unique_content_type
+
+``num_content_type_text_plain``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_text_plain
+
+``num_content_type_text_html``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_text_html
+
+``num_content_type_multipart_mixed``
+############################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_mixed
+
+``num_content_type_multipart_encrypted``
+############################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_encrypted
+
+``num_content_type_form_data``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_form_data
+
+``num_content_type_multipart_byterange``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_byterange
+
+``num_content_type_multipart_parallel``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_parallel
+
+``num_content_type_multipart_report``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_report
+
+``num_content_type_multipart_alternative``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_alternative
+
+``num_content_type_multipart_signed``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_signed
+
+``num_content_type_multipart_x_mix_replaced``
+####################################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_multipart_x_mixed_replaced
+
+``num_content_disposition``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_disposition
+
+``num_unique_content_disposition``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_unique_content_disposition
+
+``num_charset``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_charset
+
+``num_charset_utf7``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_charset_utf_7
+
+``num_charset_utf8``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_charset_utf_8
+
+``num_charset_gb2312``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_type_charset_gb2312
+
+``num_charset_shift_js``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.email_header_num_content_type_charset_shift_jis
+
+``num_charset_koi``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.email_header_num_content_type_charset_koi
+
+``num_unique_attachment``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_attachment
+
+``num_unique_attachment_filetypes``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_unique_attachment_filetypes
+
+``num_content_transfer_encoding``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_transfer_encoding
+
+``num_unique_content_transfer_encoding``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_unique_content_transfer_encoding
+
+``num_content_transfer_encoding_7bit``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_transfer_encoding_7bit
+
+``num_content_transfer_encoding_8bit``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_transfer_encoding_8bit
+
+``num_content_transfer_encoding_binary``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_transfer_encoding_binary
+
+``num_content_transfer_encoding_quoted_printable``
+#######################################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_content_transfer_encoding_quoted_printable
+
+``num_words_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_words
+
+``num_unique_words_in_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_unique_words_body
+
+``number_of_characters_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_characters_body
+
+``number_unique_chars_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_unique_chars_body
+
+``number_of_special_characters_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_of_special_characters_body
+
+``vocab_richness_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.vocab_richness_body
+
+``greetings_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.greetings_body
+
+``hidden_text``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.hidden_text
+
+``num_href_tag``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_href_tag
+
+``num_end_tag``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_end_tag
+
+``num_open_tag``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_open_tag
+
+``num_on_mouse_over``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.num_on_mouse_over
+
+``blacklisted_words_body``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.blacklisted_words_body
+
+``number_of_scripts``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_scripts
+
+``number_of_img_links``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.number_img_links
+
+``function_words_count``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.function_words_counts
+
+``flesh_read_score``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.flesh_read_score
+
+``smog_index``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.smog_index
+
+``flesh_kincaid_score``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.flesh_kincaid_score
+
+``coleman_liau_index``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.coleman_liau_index
+
+``automated_readability_index``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.automated_readability_index
+
+``dale_chall_readability_score``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.dale_chall_readability_score
+
+``difficult_words``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.difficult_words
+
+``linsear_score``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.linsear_score
+
+``gunning_fog``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.gunning_fog
+
+``text_standard``
+###########################################
+
+    .. automodule:: phishbench.feature_extraction.email.features.text_standard
+
 References
 ------------
 
-McGrath, D. Kevin, and Minaxi Gupta. (2008) "Behind Phishing: An Examination of Phisher Modi Operandi"
+McGrath, D. Kevin, and Minaxi Gupta. (2008) "*Behind Phishing: An Examination of Phisher Modi Operandi*"
 
-Verma, Rakesh, and Keith Dyer. (2015) "On the Character of Phishing URLs"
+Rakesh Verma and Keith Dyer. 2015. On the Character of Phishing URLs: Accurate and Robust Statistical Learning Classifiers. In Proceedings of the 5th ACM Conference on Data and Application Security and Privacy (CODASPY '15). Association for Computing Machinery, New York, NY, USA, 111–122. DOI:https://doi.org/10.1145/2699026.2699115
+
+A. Das, S. Baki, A. El Aassal, R. Verma and A. Dunbar, "SoK: A Comprehensive Reexamination of Phishing Research From the Security Perspective," in *IEEE Communications Surveys & Tutorials*, vol. 22, no. 1, pp. 671-708, Firstquarter 2020, doi: 10.1109/COMST.2019.2957750.

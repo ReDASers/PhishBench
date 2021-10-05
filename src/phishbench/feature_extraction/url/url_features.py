@@ -32,6 +32,7 @@ def extract_labeled_dataset(legit_dataset_folder: str, phish_dataset_folder: str
                             features: Optional[List[FeatureClass]] = None):
     """
     Extract features from a labeled dataset split by files
+
     Parameters
     ----------
     legit_dataset_folder: str

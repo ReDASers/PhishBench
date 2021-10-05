@@ -101,6 +101,7 @@ def _do_nothing(self, *args):
 def register_feature(feature_type: FeatureType, config_name: str, default_value=-1):
     """
     Registers a feature for use in Phishbench
+
     Parameters
     ----------
     feature_type: FeatureType
@@ -114,14 +115,15 @@ def register_feature(feature_type: FeatureType, config_name: str, default_value=
         def extract(self, x):
             # pylint: disable=unused-argument
             return feature_function(x)
-        attrs = dict()
-        attrs['config_name'] = config_name
-        attrs['feature_type'] = feature_type
-        attrs['extract'] = extract
-        attrs['fit'] = _do_nothing
-        attrs['save_state'] = _do_nothing
-        attrs['load_state'] = _do_nothing
-        attrs['default_value'] = default_value
+        attrs = {
+            'config_name': config_name,
+            'feature_type': feature_type,
+            'extract': extract,
+            'fit': _do_nothing,
+            'save_state': _do_nothing,
+            'load_state': _do_nothing,
+            'default_value': default_value
+        }
         feature_class = FeatureMC(config_name, (), attrs)
         feature_class.__doc__ = feature_function.__doc__
         return feature_class
