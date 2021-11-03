@@ -15,7 +15,7 @@ To install the latest version on `master`, run
 
 To install a specific version, run 
 
-    pip install git+https://github.com/ReDASers/Phishing-Detection.git@{ verion number }
+    pip install git+https://github.com/ReDASers/Phishing-Detection.git@{ version number }
 
 For an example, to install version 1.1.4, run 
 
