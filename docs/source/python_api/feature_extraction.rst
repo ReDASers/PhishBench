@@ -228,6 +228,26 @@ URL Features
 
     .. automodule:: phishbench.feature_extraction.url.features.url_length
 
+``hisc_whole``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.url.features.hisc_whole
+
+``hisc_host``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.url.features.hisc_host
+
+``hisc_path``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.url.features.hisc_path
+
+``hisc_query``
+###############################
+
+    .. automodule:: phishbench.feature_extraction.url.features.hisc_query
+
 Network Features
 ~~~~~~~~~~~~~~~~~~
 
