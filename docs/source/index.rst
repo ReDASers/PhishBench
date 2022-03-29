@@ -6,6 +6,13 @@
 PhishBench |release|
 ======================================
 
+PhishBench is a extendable framework for benchmarking phishing detection systems designed to let researchers easily
+evaluate new features and classification approaches by comparing their effectiveness against existing methods from the
+literature. It offers evaluation metrics and methods suitable for imbalanced datasets and includes a rich variety of
+algorithms for detection or classification problems. It includes 250 features gleaned from the phishing
+detection literature published since 2010, and allows users to easily define new features for testing.
+
+
 .. toctree::
    :glob:
    :maxdepth: 2
