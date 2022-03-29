@@ -1,1 +1,1 @@
-nose[coverage]
+nose2[coverage]
