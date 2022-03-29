@@ -1,11 +1,11 @@
 """
-Features from Visualizing and Interpreting RNN Models 
+Features from Visualizing and Interpreting RNN Models
 in URL-based Phishing Detection
 
 https://dl.acm.org/doi/pdf/10.1145/3381991.3395602
 """
 
-from phishbench.feature_extraction.reflection import * 
+from phishbench.feature_extraction.reflection import FeatureType, register_feature
 from phishbench.input import URLData
 
 
@@ -24,6 +24,9 @@ def hisc_whole(url: URLData):
     return sum([x in HISC_WHOLE for x in url.raw_url])
 
 
+HISC_HOST = r'XznGR%rmNM=DIZc:'
+
+
 @register_feature(FeatureType.URL_RAW, 'hisc_host')
 def hisc_host(url: URLData):
     """
@@ -37,8 +40,10 @@ def hisc_host(url: URLData):
     """
     if url.parsed_url.hostname is None:
         return 0
-    HISC_HOST = r'XznGR%rmNM=DIZc:'
     return sum([x in HISC_HOST for x in url.parsed_url.hostname])
+
+
+HISC_PATH = r'Y{x+]p!=}#[|:h'
 
 
 @register_feature(FeatureType.URL_RAW, 'hisc_path')
@@ -50,10 +55,13 @@ def hisc_path(url: URLData):
     ----------
 
     Tao Feng and Chuan Yue. 2020. `Visualizing and Interpreting RNN Models in URL-based Phishing Detection.
-    <https://doi.org/10.1145/3381991.3395602>`_
+    <https://doi.org/10.1145/3381991.3395602>`
     """
-    HISC_PATH = r'Y{x+]p!=}#[|:h'
+    
     return sum([x in HISC_PATH for x in url.parsed_url.path])
+
+
+HISC_QS = r'5)-x+]M=}D#[?|\'(h˜}'
 
 
 @register_feature(FeatureType.URL_RAW, 'hisc_query')
@@ -67,5 +75,5 @@ def hisc_query(url: URLData):
     Tao Feng and Chuan Yue. 2020. `Visualizing and Interpreting RNN Models in URL-based Phishing Detection.
     <https://doi.org/10.1145/3381991.3395602>`_
     """
-    HISC_QS = r'5)-x+]M=}D#[?|\'(h˜}'
+    
     return sum([x in HISC_QS for x in url.parsed_url.query])
