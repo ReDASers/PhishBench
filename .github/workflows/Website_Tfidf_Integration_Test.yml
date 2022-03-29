@@ -17,27 +17,26 @@ jobs:
 
     strategy:
       matrix:
-        # os: [windows-latest, ubuntu-latest]
-        os: [Windows, Linux]
+        os: [windows-latest, ubuntu-latest]
+        # os: [Windows, Linux]
       fail-fast: false
 
     steps:
-    - name: Install whois
-      run: sudo apt-get install whois
-      if: runner.os == 'Linux'
+    # - name: Install whois
+    #   run: sudo apt-get install whois
+    #   if: runner.os == 'Linux'
 
-    - name: Test whois
-      run: |
-        whois google.com
-      if: runner.os == 'Linux'
+    # - name: Test whois
+    #   run: |
+    #     whois google.com
+    #   if: runner.os == 'Linux'
     
     - uses: actions/checkout@v2
 
     - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v3
       with:
         python-version: 3.7
-      if: runner.os == 'windows-latest'
     
     - name: Update Pip
       run: |

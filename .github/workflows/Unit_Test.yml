@@ -16,21 +16,21 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        #os: [windows-latest, ubuntu-latest]
-        os: [Windows, Linux]
+        os: [windows-latest, ubuntu-latest]
+        # os: [Windows, Linux]
       fail-fast: false
 
     steps:
 
-      - name: Install whois
-        run: |
-          sudo apt-get install whois
-        if: runner.os == 'Linux'
+      # - name: Install whois
+      #   run: |
+      #     sudo apt-get install whois
+      #   if: runner.os == 'Linux'
 
-      - name: Test whois
-        run: |
-          whois google.com
-        if: runner.os == 'Linux'
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.7
 
       - uses: actions/checkout@v2
     
@@ -39,8 +39,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Nose
-        run: pip install --ignore-installed nose2[coverage_plugin]
+      - name: Install Test Dependencies
+        run: pip install -r tests/requirements.txt
 
       - name: Test with Nose
         run: nose2 --with-coverage
