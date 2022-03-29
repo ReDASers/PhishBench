@@ -24,6 +24,7 @@
 * Fixed bug calculating standard deviation in `link_alexa_global_rank`
 * PhishBench no longer displays dataset balancing and feature selection options if preprocessing is disabled.
 * Fixed bug reading email test set.
+* Added missing `rnn_features` import.
 
 # v2.0.1
 
