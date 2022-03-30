@@ -1,5 +1,7 @@
 # Change Log
 
+# v2.0.2
+
 ## Major changes
 
 * `phishbenh.input.email_input.read_email_from_file` now returns an `EmailMessage` instead of a raw `Message` object.
