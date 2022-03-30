@@ -15,7 +15,8 @@
     * Bumped tldextract to 3.1.2
     * Bumped BeautifulSoup to >=4.10.0
     * Relaxed Scipy to scipy>=1.4.1
-    * Bumped TensorFlow to 2.6.0
+    * Bumped TensorFlow to 2.6.3
+    * Bumped lxml to 4.6.5
 * Added type checks to `feature_extraction.url.extract_features_from_single`
 * Added type checks to `feature_extraction.email.extract_features_from_single`
 * Renamed `num_unique_attachment` to `num_attachment`
