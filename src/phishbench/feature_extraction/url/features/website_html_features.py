@@ -312,8 +312,8 @@ def number_suspicious_content(url: URLData):
     Reference
     ----------
 
-    Canali et al. (2011) Prophiler: a fast filter for the large-scale detection of malicious web pages:
-    A Fast Filter for the Large-Scale Detection of Malicious Web Pages”
+    Canali et al. (2011) `Prophiler: a fast filter for the large-scale detection of malicious web pages:
+    A Fast Filter for the Large-Scale Detection of Malicious Web Pages <https://doi.org/10.1145/1963405.1963436>`_
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     tags = [str(x) for x in soup.find_all()]
