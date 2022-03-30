@@ -261,7 +261,7 @@ def number_of_internal_links(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
-    local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
     inbound_href_count = 0
 
     tags = soup.find_all(['a', 'area', 'base', 'link'])
