@@ -220,7 +220,7 @@ def number_of_external_content(url: URLData):
                 src_address = "http:" + src_address
             if src_address.lower().startswith(("https", "http")):
                 extracted = tldextract.extract(src_address)
-                link_domain = '{}.{}'.format(extracted.domain, extracted.suffix)
+                link_domain = f'{extracted.domain}.{extracted.suffix}'
                 if link_domain != local_domain:
                     outbound_count += 1
     return outbound_count
@@ -246,7 +246,7 @@ def number_of_internal_content(url: URLData):
                 src_address = "http:" + src_address
             if src_address.lower().startswith(("https", "http")):
                 extracted = tldextract.extract(src_address)
-                filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+                filtered_link = f'{extracted.domain}.{extracted.suffix}'
                 if filtered_link == local_domain:
                     inbound_count = inbound_count + 1
             else:
@@ -261,7 +261,7 @@ def number_of_internal_links(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
-    local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
     inbound_href_count = 0
 
     tags = soup.find_all(['a', 'area', 'base', 'link'])
@@ -271,7 +271,7 @@ def number_of_internal_links(url: URLData):
             link = "http:" + link
         if link.lower().startswith(("https", "http")):
             extracted = tldextract.extract(link)
-            filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+            filtered_link = f'{extracted.domain}.{extracted.suffix}'
             if filtered_link == local_domain:
                 inbound_href_count = inbound_href_count + 1
         else:
@@ -286,7 +286,7 @@ def number_of_external_links(url: URLData):
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     url_extracted = tldextract.extract(url.final_url)
-    local_domain = '{}.{}'.format(url_extracted.domain, url_extracted.suffix)
+    local_domain = f'{url_extracted.domain}.{url_extracted.suffix}'
     outbound_href_count = 0
 
     tags = soup.find_all(['a', 'area', 'base', 'link'])
@@ -297,7 +297,7 @@ def number_of_external_links(url: URLData):
         if link is not None:
             if link.lower().startswith(("https", "http")):
                 extracted = tldextract.extract(link)
-                filtered_link = '{}.{}'.format(extracted.domain, extracted.suffix)
+                filtered_link = f'{extracted.domain}.{extracted.suffix}'
                 if filtered_link != local_domain:
                     outbound_href_count = outbound_href_count + 1
     return outbound_href_count
@@ -312,8 +312,8 @@ def number_suspicious_content(url: URLData):
     Reference
     ----------
 
-    Canali et al. (2011) Prophiler: a fast filter for the large-scale detection of malicious web pages:
-    A Fast Filter for the Large-Scale Detection of Malicious Web Pages”
+    Canali et al. (2011) `Prophiler: a fast filter for the large-scale detection of malicious web pages:
+    A Fast Filter for the Large-Scale Detection of Malicious Web Pages <https://doi.org/10.1145/1963405.1963436>`_
     """
     soup = BeautifulSoup(url.downloaded_website, 'html5lib')
     tags = [str(x) for x in soup.find_all()]

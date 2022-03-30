@@ -24,7 +24,7 @@ def is_html(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type')
 def num_content_type(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type`.
+    The number of parts that declare a ``Content-Type``.
     """
     return len(body.content_type_list)
 
@@ -32,7 +32,7 @@ def num_content_type(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_type')
 def num_unique_content_type(body: EmailBody):
     """
-    The number of unique `Content-Type` values.
+    The number of unique ``Content-Type`` values.
     """
     return len(set(body.content_type_list))
 
@@ -40,7 +40,7 @@ def num_unique_content_type(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_text_plain')
 def num_content_type_text_plain(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `text/plain`.
+    The number of parts that declare a ``Content-Type`` value of ``text/plain``.
     """
     return body.content_type_list.count("text/plain")
 
@@ -48,7 +48,7 @@ def num_content_type_text_plain(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_text_html')
 def num_content_type_text_html(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `text/html`.
+    The number of parts that declare a ``Content-Type`` value of ``text/html``.
     """
     return body.content_type_list.count("text/html")
 
@@ -56,7 +56,7 @@ def num_content_type_text_html(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_mixed')
 def num_content_type_multipart_mixed(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/mixed`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/mixed``.
     """
     return body.content_type_list.count("multipart/mixed")
 
@@ -64,7 +64,7 @@ def num_content_type_multipart_mixed(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_encrypted')
 def num_content_type_multipart_encrypted(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/encrypted`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/encrypted``.
     """
     return body.content_type_list.count("multipart/encrypted")
 
@@ -72,7 +72,7 @@ def num_content_type_multipart_encrypted(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_form_data')
 def num_content_type_multipart_form_data(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/form-data`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/form-data``.
     """
     return body.content_type_list.count("multipart/form-data")
 
@@ -80,7 +80,7 @@ def num_content_type_multipart_form_data(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_byterange')
 def num_content_type_multipart_byterange(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/byterange`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/byterange``.
     """
     return body.content_type_list.count("multipart/byterange")
 
@@ -88,7 +88,7 @@ def num_content_type_multipart_byterange(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_parallel')
 def num_content_type_multipart_parallel(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/parallel`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/parallel``.
     """
     return body.content_type_list.count("multipart/parallel")
 
@@ -96,7 +96,7 @@ def num_content_type_multipart_parallel(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_report')
 def num_content_type_multipart_report(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/report`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/report``.
     """
     return body.content_type_list.count("multipart/report")
 
@@ -104,7 +104,7 @@ def num_content_type_multipart_report(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_alternative')
 def num_content_type_multipart_alternative(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/alternative`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/alternative``.
     """
     return body.content_type_list.count("multipart/alternative")
 
@@ -112,7 +112,7 @@ def num_content_type_multipart_alternative(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_digest')
 def num_content_type_multipart_digest(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/digest`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/digest``.
     """
     return body.content_type_list.count("multipart/digest")
 
@@ -120,7 +120,7 @@ def num_content_type_multipart_digest(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_signed')
 def num_content_type_multipart_signed(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/signed`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/signed``.
     """
     return body.content_type_list.count("multipart/signed")
 
@@ -128,7 +128,7 @@ def num_content_type_multipart_signed(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_type_multipart_x_mix_replaced')
 def num_content_type_multipart_x_mixed_replaced(body: EmailBody):
     """
-    The number of parts that declare a `Content-Type` value of `multipart/x-mixed-replaced`.
+    The number of parts that declare a ``Content-Type`` value of ``multipart/x-mixed-replaced``.
     """
     return body.content_type_list.count("multipart/x-mixed-replaced")
 
@@ -138,7 +138,7 @@ def num_content_type_multipart_x_mixed_replaced(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_content_disposition')
 def num_content_disposition(body: EmailBody):
     """
-    The number of parts that declare a `Content-Disposition`.
+    The number of parts that declare a ``Content-Disposition``.
     """
     return len(body.content_disposition_list)
 
@@ -146,7 +146,7 @@ def num_content_disposition(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_unique_content_disposition')
 def num_unique_content_disposition(body: EmailBody):
     """
-    The number of different `Content-Dispositions` types used.
+    The number of different ``Content-Dispositions`` types used.
     """
     return len(set(body.content_disposition_list))
 
@@ -173,7 +173,7 @@ def num_unique_charset(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_us_ascii')
 def num_content_type_charset_us_ascii(body: EmailBody):
     """
-    The number of parts using the `us_ascii` charset.
+    The number of parts using the ``us_ascii`` charset.
     """
     return body.charset_list.count("us_ascii")
 
@@ -181,7 +181,7 @@ def num_content_type_charset_us_ascii(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_utf7')
 def num_content_type_charset_utf_7(body: EmailBody):
     """
-    The number of parts using the `utf-7` charset.
+    The number of parts using the ``utf-7`` charset.
     """
     return body.charset_list.count("utf_7")
 
@@ -189,7 +189,7 @@ def num_content_type_charset_utf_7(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_utf8')
 def num_content_type_charset_utf_8(body: EmailBody):
     """
-    The number of parts using the `utf-8` charset.
+    The number of parts using the ``utf-8`` charset.
     """
     return body.charset_list.count("utf_8")
 
@@ -197,7 +197,7 @@ def num_content_type_charset_utf_8(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_gb2312')
 def num_content_type_charset_gb2312(body: EmailBody):
     """
-    The number of parts using the `gb2312` charset.
+    The number of parts using the ``gb2312`` charset.
     """
     return body.charset_list.count("gb2312")
 
@@ -205,7 +205,7 @@ def num_content_type_charset_gb2312(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_shift_js')
 def email_header_num_content_type_charset_shift_jis(body: EmailBody):
     """
-    The number of parts using the `shift-jis` charset.
+    The number of parts using the ``shift-jis`` charset.
     """
     return body.charset_list.count("shift_jis")
 
@@ -213,7 +213,7 @@ def email_header_num_content_type_charset_shift_jis(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_koi')
 def email_header_num_content_type_charset_koi(body: EmailBody):
     """
-    The number of parts using the `koi` charset.
+    The number of parts using the ``koi`` charset.
     """
     return body.charset_list.count("koi")
 
@@ -221,7 +221,7 @@ def email_header_num_content_type_charset_koi(body: EmailBody):
 @register_feature(FeatureType.EMAIL_BODY, 'num_charset_iso2022-jp')
 def email_header_num_content_type_charset_iso2022_jp(body: EmailBody):
     """
-    The number of parts using the `iso2022-jp` charset.
+    The number of parts using the ``iso2022-jp`` charset.
     """
     return body.charset_list.count("iso2022-jp")
 
@@ -231,7 +231,7 @@ def email_header_num_content_type_charset_iso2022_jp(body: EmailBody):
 # region Attachments
 
 
-@register_feature(FeatureType.EMAIL_BODY, 'num_unique_attachment')
+@register_feature(FeatureType.EMAIL_BODY, 'num_attachment')
 def num_attachment(body: EmailBody):
     """
     The number of attachments
@@ -310,7 +310,7 @@ def number_of_characters_body(body: EmailBody) -> int:
 @register_feature(FeatureType.EMAIL_BODY, 'number_of_special_characters_body')
 def number_of_special_characters_body(body: EmailBody) -> int:
     """
-    The number of characters matching the regex `_|[^\w\s]`.
+    The number of characters matching the regex ``_|[^\w\s]``.
     """
     if body.text:
         len(re.findall(r'_|[^\w\s]', body.text))
@@ -319,6 +319,9 @@ def number_of_special_characters_body(body: EmailBody) -> int:
 
 @register_feature(FeatureType.EMAIL_BODY, 'number_unique_chars_body')
 def number_unique_chars_body(body: EmailBody):
+    """
+    The number of unique characters in the body.
+    """
     if body.text is None:
         return 0
     return len(set(body.text)) - 1
@@ -326,6 +329,9 @@ def number_unique_chars_body(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'vocab_richness_body')
 def vocab_richness_body(body: EmailBody):
+    """
+    The vocabulary richness of the body, as measured by the inverse of Yule's K measure.
+    """
     if body.text is None:
         return 0
     return helpers.yule(body.text)
@@ -333,6 +339,9 @@ def vocab_richness_body(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'number_of_html_tags_body')
 def number_of_html_tags_body(body: EmailBody):
+    """
+    The number of html tags in the body.
+    """
     if body.text is None:
         return 0
     return len(re.findall(r'<.*>', body.text))
@@ -340,6 +349,9 @@ def number_of_html_tags_body(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'greetings_body')
 def greetings_body(body: EmailBody):
+    """
+    Whether or not the string "Dear User" is in the text.
+    """
     if body.text is None:
         return False
     dear_user = re.compile(r'Dear User', flags=re.IGNORECASE)
@@ -348,20 +360,25 @@ def greetings_body(body: EmailBody):
 
 @register_feature(FeatureType.EMAIL_BODY, 'hidden_text')
 def hidden_text(body: EmailBody):
+    """
+    Whether or not the email contains hidden text.
+    """
     if body.text is None:
         return False
     regex_font_color = re.compile(r'<font +color="#FFFFF[0-9A-F]"', flags=re.DOTALL)
     return regex_font_color.search(body.text) is not None
 
 
+# Regex from https://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
+HTML_REGEX = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>", flags=re.MULTILINE)
+
+
 @register_feature(FeatureType.EMAIL_BODY, 'num_href_tag')
 def num_href_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
-    ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
-                                 flags=re.MULTILINE)
     count = 0
-    for match in re.finditer(ultimate_regexp, body.text):
+    for match in re.finditer(HTML_REGEX, body.text):
         if repr(match.group()).startswith("'<a"):
             count += 1
     return count
@@ -371,10 +388,8 @@ def num_href_tag(body: EmailBody) -> int:
 def num_end_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
-    ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
-                                 flags=re.MULTILINE)
     count = 0
-    for match in re.finditer(ultimate_regexp, body.text):
+    for match in re.finditer(HTML_REGEX, body.text):
         if repr(match.group()).startswith("'</"):
             count += 1
     return count
@@ -384,10 +399,9 @@ def num_end_tag(body: EmailBody) -> int:
 def num_open_tag(body: EmailBody) -> int:
     if body.text is None:
         return 0
-    ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
-                                 flags=re.MULTILINE)
     count = 0
-    for match in re.finditer(ultimate_regexp, body.text):
+
+    for match in re.finditer(HTML_REGEX, body.text):
         if not repr(match.group()).startswith("'</"):
             count += 1
     return count
@@ -397,10 +411,9 @@ def num_open_tag(body: EmailBody) -> int:
 def num_on_mouse_over(body: EmailBody) -> int:
     if body.text is None:
         return 0
-    ultimate_regexp = re.compile(r"(?i)</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>",
-                                 flags=re.MULTILINE)
+
     count = 0
-    for match in re.finditer(ultimate_regexp, body.text):
+    for match in re.finditer(HTML_REGEX, body.text):
         if repr(match.group()).startswith("'<a onmouseover"):
             count += 1
     return count
@@ -472,6 +485,9 @@ _FUNCTION_WORDS = {"a", "about", "above", "after", "again", "against", "ago", "a
 
 @register_feature(FeatureType.EMAIL_BODY, 'function_words_count')
 def function_words_counts(body: EmailBody):
+    """
+    The number of `function words <http://www.viviancook.uk/Words/StructureWordsList.htm>`_ in the body.
+    """
     if body.text is None:
         return 0
     function_words_count = 0
