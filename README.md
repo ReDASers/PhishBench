@@ -4,7 +4,8 @@ The PhishBench platform extracts features from emails and URLs, run classifiers,
 ![URL Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/URL%20Integration%20Test/badge.svg)
 ![Email Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/Email%20Integration%20Test/badge.svg)
 ![Website TF-IDF Integration Test](https://github.com/ReDASers/Phishing-Detection/workflows/Website%20TF-IDF%20Integration%20Test/badge.svg)
-![Documentation Status](https://readthedocs.org/projects/phishbench/badge/?version=latest)
+[![Documentation Status](https://readthedocs.org/projects/phishbench/badge/?version=latest)](https://phishbench.readthedocs.io/en/latest/?badge=latest)
+
 
 
 # Installation
