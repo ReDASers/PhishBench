@@ -13,7 +13,7 @@ pandas>=1.0.0
 requests>=2.25.1
 joblib>=0.17.0
 sklearn_extensions==0.0.2
-tensorflow==2.6.4
+tensorflow==2.7.2
 textstat==0.7.2
 ipwhois==1.2.0
 tqdm>=4.55.0
