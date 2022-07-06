@@ -18,7 +18,7 @@ textstat==0.7.2
 ipwhois==1.2.0
 tqdm>=4.55.0
 python_whois==0.7.3
-lxml==4.6.5
+lxml==4.9.1
 nltk>=3.6
 langdetect>=1.0.8
 scipy>=1.4.1
