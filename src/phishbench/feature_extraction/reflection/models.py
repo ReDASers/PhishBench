@@ -1,7 +1,7 @@
 """
 Models for feature reflection
 """
-from typing import Any
+from typing import Any, Callable
 from enum import Enum, unique
 
 
@@ -111,7 +111,7 @@ def register_feature(feature_type: FeatureType, config_name: str, default_value=
     default_value
         The value to use if there is an error
     """
-    def register_feature_decorator(feature_function):
+    def register_feature_decorator(feature_function: Callable):
         def extract(self, x):
             # pylint: disable=unused-argument
             return feature_function(x)
