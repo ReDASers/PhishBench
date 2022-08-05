@@ -13,6 +13,8 @@ User-Defined Features
 
 .. autoclass:: phishbench.feature_extraction.reflection.FeatureMC
 
+.. autoclass:: phishbench.feature_extraction.reflection.FeatureClass
+
 Feature Loading & Extraction
 *******************************
 
